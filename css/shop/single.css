@@ -1,0 +1,11 @@
+.single-product .product .related {
+  padding: 0;
+  border: none;
+  margin: 100px auto 80px;
+}
+.single-product .product .related h2 {
+  margin: 0 auto;
+}
+.single-product .product .related .products {
+  width: 100%;
+}

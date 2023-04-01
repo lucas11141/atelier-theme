@@ -1,0 +1,19 @@
+.discover__atelier {
+  display: flex;
+  padding: 300px 0 100px;
+}
+.discover__atelier .discover__atelier__content {
+  max-width: 520px;
+}
+.discover__atelier .discover__atelier__content p {
+  padding-top: 25px;
+}
+.discover__atelier .discover__atelier__content .shop__button__list {
+  margin-top: 50px;
+}
+.discover__atelier .discover__atelier__content .button.--color-main {
+  margin-top: 50px;
+}
+.discover__atelier .discover__atelier__image {
+  margin-top: -40px;
+}

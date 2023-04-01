@@ -1,0 +1,33 @@
+// Atelier entdecken Block
+.discover__atelier {
+    display: flex;
+    .discover__atelier__content {
+        max-width: 520px;
+        p {
+            padding-top: 25px;
+        }
+        .shop__button__list {
+            margin-top: 50px;
+        }
+        .button.--color-main {
+            margin-top: 50px;
+        }
+    }
+    .discover__atelier__image {
+        margin-top: -40px;
+        position: relative;
+        &::after {
+            content: "";
+            display: block;
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+            border: solid 5px $accent;
+            opacity: 0.2;
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            z-index: -1;
+        }
+    }
+}

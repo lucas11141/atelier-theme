@@ -1,0 +1,425 @@
+/*------------------------------------*\
+    NAV.SCSS
+\*------------------------------------*/
+.open-nav {
+	display: none;
+}
+.nav {	
+	@include flex-row();
+	align-items: center;
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		@include flex-row();
+		align-items: center;
+		column-gap: 16px;
+
+		// Header Bar List Item
+		li.level-0 {
+			display: block;
+			position: relative;
+
+			// Hover box extension
+			&::after {
+				content: "";
+				display: block;
+				height: calc(100% + 30px);
+				width: calc(100% + 20px);
+				pointer-events: none;
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+
+			&:has(.sub-menu)::before {
+				content: '';
+				height: 100vh;
+				width: 100vw;
+				pointer-events: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: -1;
+			}
+			&:hover::before {
+				background-color: rgba(black, 50%);
+			}
+
+			.menu-item-description {
+				display: none;
+			}
+
+			// Header menu link
+			a {
+				display: block;
+				color: $main;
+				font-size: 15px;
+				font-weight: 800;
+				line-height: 1em;
+				text-transform: uppercase;
+				padding: 10px 0;
+				border-radius: 40px;
+				transition: ease-in-out 200ms;
+				position: relative;
+				cursor: pointer;
+				position: relative;
+				z-index: 1;
+				&::before {
+					content: "";
+					display: block;
+					height: 3px;
+					width: 0;
+					background-color: $accent;
+					position: absolute;
+					bottom: 0;
+					left: 50%;
+					transform: translateX(-50%);
+					transition: ease-in-out 200ms;
+				}
+			}
+
+			// Dropdown menu
+			&:not(:hover) {
+				.sub-menu {
+					display: none;
+				}
+			}
+			.sub-menu {
+				width: 100vw;
+				padding: calc(var(--header-bar-height) + 80px) calc((100vw - #{$screen}) / 2) 80px;
+				@include flex-row();
+				flex-wrap: wrap;
+				justify-content: flex-start;
+				gap: 50px $gap;
+				background-color: $main;
+				border-bottom: solid 5px $accent;
+				position: fixed;
+				top: var(--header-bar-height);
+				top: 0;
+				left: 0;
+				z-index: -1;
+				@include transition();
+
+				// Paper structure
+				&::after {
+					content: '';
+					@extend .paper-structure;
+					background-image: url(img/elements/paper_structure_500x.jpg);
+				}
+
+				&::before {
+					content: '';
+					display: block;
+					height: calc(var(--header-bar-height) + 1px);
+					width: 100%;
+					background-color: white;
+					border-bottom-left-radius: 30px;
+					border-bottom-right-radius: 30px;
+					box-shadow: 0px 0px 20px rgba(black, 10%);
+					pointer-events: none;
+					position: absolute;
+					left: 0;
+					top: 0;
+					z-index: 1;
+				}
+
+				li::before {
+					pointer-events: all;
+				}
+				li {
+					@include flex-item-width(3, $gap);
+					padding: 0;
+					* {
+						white-space: normal;
+						color: white;
+					}
+					&::before,
+					&::after {
+						content: unset;
+					}
+					a {
+						padding: 0 0 18px;
+						font-size: 20px;
+						position: relative;
+						&:first-child {
+							@include font-gooddog();
+							@include fluid-type(22px, 24px);
+						}
+						.menu-item-description {
+							font-size: 14px;
+							text-transform: none;
+						}
+						&::before {
+							content: unset;
+						}
+						&::after {
+							content: '';
+							display: block;
+							height: 3px;
+							width: 50px;
+							background-color: $accent;
+							position: absolute;
+							left: 0;
+							bottom: 0;
+						}
+						&:hover {
+							opacity: 60%;
+						}
+					}
+					.sub-menu {
+						transform: translateY(0);
+						opacity: 100%;
+						// pointer-events: all !important;
+						border-bottom: none;
+					}
+					.sub-menu {
+						margin-top: 35px;
+						padding: 0;
+						height: unset;
+						width: unset;
+						@include flex-column();
+						gap: 8px;
+						background-color: transparent;
+						background-image: none;
+						position: static;
+						&::before {
+							content: unset;
+						}
+						&::after {
+							content: unset;
+						}
+						li {
+							width: 100%;
+							max-width: unset;
+						}
+						li {
+							a {
+								// width: min-content;
+								padding: 6px 0;
+								font-family: $main-font;
+								font-size: 16px;
+								font-weight: 600;
+								text-transform: none;
+								line-height: 1.2em;
+								&::before {
+									display: none;
+									bottom: -7px;
+									left: 0;
+									transform: none;
+								}
+								&::after {
+									content: unset;
+								}
+								&:hover {
+									&::before {
+										width: 100%;
+									}
+									opacity: 60%;
+								}
+							}
+						}
+						.menu-item-description {
+							display: none;
+						}
+					}
+				}
+			}
+
+			// 
+			&:hover a,
+			a:hover, 
+			&.current_page_item > a, 
+			&.current_page_item ul li a:hover  {
+				&::before {
+					width: 100%;
+				}
+			}
+		}
+
+		&:hover {
+			li::after {
+				pointer-events: all !important;
+			}
+		}
+	}
+}
+@media only screen and (max-width: $desktop) {
+	.nav {
+		display: none;
+		&:last-of-type {
+			@include flex-row();
+			gap: 15px;
+			.nav__account__link,
+			.nav__cart__link {
+				margin: 0;
+				padding: 0;
+				height: 27px;
+				width: 27px;
+				min-width: 27px;
+				img {
+					height: 22px;
+					width: unset;
+				}
+			}
+			.nav__account__link {
+				justify-content: center;
+				background-color: transparent;
+				border: none;
+				border-radius: 0px;
+				span {
+					display: none;
+				}
+				&:hover {
+					background-size: 0;
+				}
+			}
+			ul {
+				display: none;
+			}
+		}
+	}
+}
+
+
+
+
+/* ---- Navigation ----*/
+.nav__account__link {
+    @include flex-row();
+    align-items: center;
+    column-gap: 8px;
+    padding: 8px 12px 8px 15px;
+    border-radius: 8px;
+    background-color: $lightgray;
+    span {
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: none;
+    }
+    img {
+        height: 18px;
+    }
+}
+.nav__cart__link {
+    display: block;
+    height: 25px;
+    min-width: 25px;
+    margin-left: 15px;
+	margin-right: 6px;
+    position: relative;
+	@include transition();
+    .nav__cart__quantity {
+        height: 18px;
+        width: 20px;
+		border-radius: 20px;
+        background-color: $main;
+		position: absolute;
+		top: -6px;
+		right: -8px;
+		z-index: 1;
+		@include transition();
+        span {
+			color: white;
+            font-size: 11px;
+            font-weight: 700;
+			letter-spacing: 0.6px;
+            position: absolute;
+            left: 52%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+			@include transition();
+        }
+    }
+    .nav__cart__icon {
+        height: 18px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+	& + ul {
+		margin-left: 10px;
+	}
+	&:hover {
+		transform: scale(1.1);
+	}
+}
+.header-bar.--color-white .nav__cart__link {
+	.nav__cart__quantity {
+		background-color: white;
+		span {
+			color: $main;
+		}
+	}
+}
+.nav,
+.dropdown__nav {
+	ul {
+		li.nav__toggle__site {
+			padding: 0;
+			&::after {
+				content: unset;
+			}
+			a {
+				@extend .button;
+				@include button-config($accent, white);
+				@include flex-row();
+				padding: 11px 28px 11px 19px;
+				align-items: center;
+				column-gap: 6px;
+				border-radius: 8px;
+				font-size: 12px;
+				font-weight: 800;
+				color: white;
+				text-transform: uppercase;
+				position: relative;
+				&::before {
+					content: unset;
+				}
+				&::after {
+					content: '';
+					width: 7px;
+					height: 20px;
+					background-image: url(img/elements/arrow_right_white.svg);
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center;
+					position: absolute;
+					left: calc(100% - 16px);
+					top: 49%;
+					transform: translate(-50%,-50%);
+				}
+			}
+			@media only screen and (max-width: $desktop) {
+				margin: 0;
+				a {
+					padding: 19px 30px 19px 22px;
+					background-position-x: calc(100% - 18px);
+				}
+			}
+		}
+	}
+}
+
+
+
+
+.menu-item {
+    &.--underline-blue > a::before {
+        background-color: $course-kinder !important;
+    }
+    &.--underline-red > a::before {
+    
+        background-color: $workshop-erwachsene !important;
+    }
+    &.--underline-pink > a::before {
+    
+        background-color: $kunstevent !important;
+    }
+    &.--underline-yellow > a::before {
+        background-color: $ferienprogramm !important;
+    }
+}

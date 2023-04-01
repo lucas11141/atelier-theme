@@ -1,0 +1,153 @@
+.media-text {
+    min-height: 550px;
+    @include flex-row();
+    justify-content: flex-start;
+    align-items: stretch;
+    &__text {
+        padding: 80px 240px 80px $outer-gap;
+        @include flex-column();
+        justify-content: center;
+        background-color: $main;
+        position: relative;
+        *:not(h5) {
+            color: white !important;
+        }
+        p + p {
+            padding-top: 15px;
+        }
+        &, .paper {
+            border-radius: 0 30px 30px 0;
+        }
+        &__content {
+            width: 600px;
+            max-width: 40vw;
+            h5, h2 {
+                padding-top: 0;
+            }
+            .tag + h2,
+            h5 + h2 {
+                padding-top: 15px;
+            }
+        }
+    }
+    &__media {
+        max-width: 750px;
+        margin: 50px 0 50px -160px;
+        flex: auto;
+        background-color: $main;
+        border-radius: 30px;
+        border: solid 4px white;
+        z-index: 1;
+        position: relative;
+        overflow: hidden;
+        img,
+        video {
+            width: 100%;
+            height: 100%;
+            @include pos-center();
+            object-fit: cover;
+            border-radius: 30px;
+        }
+    }
+    &__product {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: white;
+        background-image: url(img/icons/icon_pricetag_main.svg);
+        background-repeat: no-repeat;
+        background-position: calc(50% + 1px) calc(50% + 1px);
+        background-size: 25px;
+        position: absolute;
+        bottom: 25px;
+        left: 25px;
+        .product__content {
+            width: 360px;
+            max-width: calc(100vw - #{$gap} - 35px);
+            border-radius: 15px;
+            background-color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            @include transition();
+            .woocommerce-loop-product__title:hover {
+                text-decoration: underline;
+            }
+        }
+        &:hover {
+            .product__content {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1920px) {
+    .media-text {
+        &__media {
+            max-width: unset;
+            border-radius: 25px 0 0 25px;
+            border-right: none;
+            overflow: hidden;
+            img,
+            video {
+                border-radius: 21px 0 0 21px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: $screen-outer) {
+    .media-text {
+        &__text {
+            padding-left: $gap;
+        }
+    }
+}
+@media only screen and (max-width: $desktop) {
+    .media-text {
+        flex-direction: column;
+        &__text {
+            margin-right: $gap;
+            padding: 55px 40px 150px 40px;
+            &__content {
+                max-width: unset;
+                width: 100%;
+            }
+        }
+        &__media {
+            margin: -100px 0 0 $gap;
+        }
+        &__product {
+            bottom: 15px;
+            left: 15px;
+        }
+    }
+}
+@media only screen and (max-width: $tablet) {
+    .media-text {
+        &__text {
+            padding: 45px $gap 150px $gap;
+            &__content {
+                max-width: unset;
+                width: 100%;
+            }
+        }
+        &__media {
+            margin: -100px 0 0 $gap;
+            height: 300px;
+        }
+        &__product {
+            .product__content {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+        &:has(.media-text__product) {
+            .media-text__media {
+                height: 380px;
+            }
+        }
+    }
+}

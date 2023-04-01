@@ -1,0 +1,92 @@
+.testimonials {
+    padding: 400px 0 320px;
+    .wrapper {
+        @include flex-row();
+        justify-content: space-between;
+        align-items: stretch;
+        column-gap: 70px;
+    }
+    .testimonials__content {
+        margin: -400px 0 -320px;
+        width: 560px;
+        max-width: 55vw;
+        .button {
+            margin-top: 50px;
+            width: 100%;
+            padding: 25px 0;
+            border-radius: 13px;
+            img {
+                height: 11px;
+                width: 7px;
+            }
+        }
+    }
+    .testimonials__sticky {
+        flex: auto;
+        div {
+            width: 100%;
+            position: sticky;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        img {
+            min-width: 720px;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        h2 {
+            padding: 0;
+            width: max-content;
+            transform: translate(30px, -315px);
+            position: relative;
+            z-index: 1;
+        }
+    }
+    @media only screen and (max-width: $screen) {
+        .wrapper {
+            column-gap: 40px;
+        }
+        .testimonials__sticky {
+            h2 {
+                transform: translate(20px, -315px);
+            }
+        }
+    }
+    @media only screen and (max-width: $tablet) {
+        overflow: hidden;
+        padding: 0;
+        .wrapper {
+            flex-direction: column-reverse;
+            row-gap: 30px;
+        }
+        .testimonials__content {
+            margin: 0;
+            width: 100%;
+            max-width: unset;
+        }
+        .testimonials__sticky {
+            width: 100%;
+            div {
+                position: relative;
+                transform: none;
+            }
+            img {
+                width: 430px;
+                min-width: 430px;
+                position: absolute;
+                top: 0px;
+                left: 90px;
+                z-index: -1;
+                transform: none;
+            }
+            h2 {
+                margin-bottom: 20px;
+                position: static;
+                transform: none;
+            }
+        }
+    }
+}

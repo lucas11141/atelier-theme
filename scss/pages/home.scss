@@ -1,0 +1,917 @@
+.home {
+
+    #main {
+        padding-top: 0;
+    }
+
+
+    // .parallax_wrapper {
+    //     height: 100vh;
+    //     overflow-x: hidden;
+    //     overflow-y: auto;
+    //     perspective: 100px; 
+    //     perspective-origin: top;
+    //     .parallax_group {
+    //         position: relative;
+    //         transform-style: preserve-3d;
+    //         .parallax_layer {
+    //             position: absolute;
+    //             inset: 0;
+    //             // 1 + ((Z transform value * -1) / perspective)
+    //             transform: translateZ(20px) translateY(-90px) scale(0.8);
+    //             transform: none;
+    //         }
+    //     }
+    // }
+    
+
+
+    // /* Home Landing */
+    // .landing {
+    //     height: 100vh;
+    //     max-height: 950px;
+    //     width: 100vw;
+    //     margin-bottom: 80px;
+    //     background-image: url(/img/banner.webp);
+    //     background-color: $main;
+    //     background-size: cover;
+    //     position: relative;
+    //     .landing-content {
+    //         height: 850px;
+    //         width: 100vw;
+    //         background-image: url(/img/landing_background.webp);
+    //         background-position: bottom center;
+    //         background-size: cover;
+    //         padding-top: 1px;
+    //         padding-bottom: calc(100px + 2vw);
+    //         z-index: 1;
+    //         position: relative;
+    //         display: flex;
+    //         flex-direction: column;
+    //         flex-wrap: nowrap;
+    //         align-items: center;
+    //         justify-content: center;
+
+    //         .landing-navigation {
+    //             width: 1000vw;
+    //             max-width: 88vw;
+    //             margin: 50px auto 65px;
+    //             position: relative;
+                
+    //             .nav-logo {
+    //                 height: 110px;
+    //                 top: 50%;
+    //                 transform: translate(-50%, -50%);
+    //             }
+    //             .nav-logo {
+    //                 position: absolute;
+    //                 height: 110px;
+    //                 top: 50%;
+    //                 left: 50%;
+    //                 transform: translate(-50%, -50%);
+    //             }
+    //             .nav-content {
+    //                 margin: 45px auto;
+        
+    //                 .nav-links {
+    //                     &.left {
+    //                         margin-left: -8px;
+                            
+    //                         a {
+    //                             margin-right: 20px;
+    //                         }
+    //                     }
+    //                     &.right {
+    //                         margin-right: -8px;
+                            
+    //                         a {
+    //                             margin-left: 20px;
+    //                         }
+    //                     }
+    //                     .nav-link {
+    //                         font-size: 18px;
+    //                         font-weight: 700;
+    //                         padding: 12px 20px;
+    //                         border-radius: 50px;
+    //                     }
+    //                 }
+    //                 .landing-nav-burger {
+    //                     height: 18px;
+    //                 }
+    //             }
+    //         }
+    //         .landing-quote {
+    //             width: 850px;
+    //             max-width: 88vw;
+    //             display: flex;
+    //             flex-direction: column;
+    //             align-items: center;
+                
+    //             p {
+    //                 font-family: gautreaux, sans-serif;
+    //                 font-weight: 700;
+    //                 font-size: 31px;
+    //                 letter-spacing: 0.04em;
+    //                 line-height: 39px;
+    //                 text-align: center;
+    //                 color: white;
+    //                 -webkit-text-stroke: 0.6px white;
+                    
+    //                 span {
+    //                     color: $accent;
+    //                     font-size: 35px;
+    //                     -webkit-text-stroke: 1px $accent;
+    //                     font-style: italic;
+    //                 }
+    //             }
+    //             img {
+    //                 height: 25px;
+    //                 margin-top: 16px;
+    //             }
+    //         }
+    //         .landing-divide {
+    //             height: 2px;
+    //             min-height: 2px;
+    //             width: 400px;
+    //             max-width: 88vw;
+    //             margin: 50px auto;
+    //             background-color: white;
+    //             opacity: 0.1;
+    //             border-radius: 2px;
+    //         }
+    //         .landing-text {
+    //             width: 1000px;
+    //             max-width: 88vw;
+    //             margin: 0 auto;
+    //             position: relative;
+    //             display: flex;
+    //             flex-direction: column;
+    //             flex-wrap: nowrap;
+    //             align-items: center;
+    //             justify-content: center;
+    //             h1, h2 {
+    //                 font-family: proxima-soft, sans-serif;
+    //                 font-weight: 800;
+    //                 text-transform: uppercase;
+    //                 font-style: italic;
+    //                 text-align: center;
+    //                 margin: 0px;
+    //             }
+    //             h2 {
+    //                 font-size: 35px;
+    //                 color: $accent;
+    //             }
+    //             h1 {
+    //                 font-size: 70px;
+    //                 color: white;
+    //                 margin-top: -5px;
+    //             }
+    //             .two-buttons-vertical {
+    //                 margin-top: 45px;
+    //                 align-items: center;
+    //             }
+    //         }
+    //         .scroll-animation {
+    //             position: absolute;
+    //             bottom: -80px;
+    //             left: 50%;
+    //             transform: translateX(-50%);
+    //             height: 40px;
+    //             width: 26px;
+    //             border-radius: 13px;
+    //             background-color: transparent;
+    //             border: solid 4px $main;
+    //             box-sizing: border-box;
+                
+    //             &::before {
+    //                 content: "";
+    //                 display: block;
+    //                 height: 10px;
+    //                 width: 4px;
+    //                 border-radius: 4px;
+    //                 background-color: $main;
+    //                 position: absolute;
+    //                 top: 4px;
+    //                 left: 50%;
+    //                 transform: translateX(-50%);
+    //                 animation: scroll cubic-bezier(0.6, 0, 0.34, 1) 3s infinite;
+    //                 opacity: 0;
+    //             }
+    //             &::after {
+    //                 content: "scroll";
+    //                 display: block;
+    //                 font-family: proxima-soft, sans-serif;
+    //                 font-weight: 900;
+    //                 font-size: 12px;
+    //                 line-height: 35px;
+    //                 text-align: center;
+    //                 text-transform: uppercase;
+    //                 letter-spacing: 0.5px;
+    //                 color: $main;
+    //                 position: absolute;
+    //                 bottom: -40px;
+    //                 left: 50%;
+    //                 transform: translateX(-50%);
+    //                 animation: scroll-text cubic-bezier(0.6, 0, 0.34, 1) 3s infinite;
+    //             }
+    //         }
+    //         @keyframes scroll {
+    //             0% {
+    //                 opacity: 0;
+    //                 transform: translate(-50%, 0px);
+    //             }
+    //             20% {
+    //                 opacity: 1;
+    //                 transform: translate(-50%, 0px);
+    //             }
+    //             50% {
+    //                 opacity: 1;
+    //             }
+    //             100% {
+    //                 opacity: 0;
+    //                 transform: translate(-50%, 14px);
+    //             }
+    //         }
+    //         @keyframes scroll-text {
+    //             0% {
+    //                 opacity: 0;
+    //             }
+    //             20% {
+    //                 opacity: 1;
+    //             }
+    //             50% {
+    //                 opacity: 1;
+    //             }
+    //             100% {
+    //                 opacity: 0;
+    //             }
+    //         }
+    //     }
+    //     .landing-transition {
+    //         width: 100vw;
+    //         height: 500px;
+    //         background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1));
+    //         position: absolute;
+    //         bottom: 0px;
+    //         left: 0px;
+    //     }
+    // }
+    // @media only screen and (min-width: 1920px) {
+    //     .landing-content {
+    //         background-size: 102%;
+    //     }
+    // }
+    // @media only screen and (max-width: $desktop) {
+    //     .landing-content {
+    //         padding-bottom: 90px;
+
+    //         .landing-navigation {
+    //             margin-top: 25px;
+    
+    //             .nav-logo {
+    //                 height: 75px;
+    //             }
+    //             .nav-content {
+    //                 margin: 30px auto;
+    //                 max-width: 88vw;
+    //                 justify-content: flex-end;
+    //             }
+    //         }
+    //         .landing-quote {
+    //             width: 680px;
+    //             margin-top: 50px;
+    //             display: flex;
+    //             p {
+    //                 font-size: 25px;
+    //                 letter-spacing: 0.04em;
+    //                 line-height: 31px;
+    //                 -webkit-text-stroke: 0.5px white;
+    //                 span {
+    //                     font-size: 30px;
+    //                 }
+    //             }
+    //             img {
+    //                 height: 22px;
+    //             }
+    //         }
+    //         .landing-divide {
+    //             width: 250px;
+    //             margin: 40px auto;
+    //         }
+    //         .landing-text {
+    //             h2 {
+    //                 font-size: 27px;
+    //             }
+    //             h1 {
+    //                 font-size: 44px;
+    //                 margin-top: -10px;
+    //                 line-height: 50px;
+    //             }
+    //         }
+    //         .scroll-animation {
+    //             bottom: -60px;
+    //         }
+    //     }
+    // }
+    // /* Home Landing */
+
+
+
+
+    // /* Hintergrund Kreise */
+    // .home-background-circles {
+    //     width: 400px;
+    //     position: absolute;
+    //     transform: translateY(calc(-250px - 25vw));
+    //     opacity: 0.3;
+    //     max-width: 22vw;
+    //     &.left {
+    //         left: 0;
+    //     }
+    //     &.right {
+    //         right: 0;
+    //     }
+    // }
+    // /* Hintergrund Kreise */
+
+    
+
+
+    // /* Home Elements */
+    // .home-intro {
+    //     width: 1000px;
+    //     max-width: 88vw;
+    //     margin-bottom: 100px;
+    //     border-radius: 50px;
+    //     overflow: hidden;
+    //     display: flex;
+    //     flex-direction: row;
+    //     flex-wrap: nowrap;
+    //     position: relative;
+    //     .intro-paper {
+    //         mix-blend-mode: color-burn;
+    //         height: 100%;
+    //         width: 100%;
+    //         object-fit: cover;
+    //         position: absolute;
+    //         top: 0px;
+    //         left: 0px;
+    //         transform: translateZ(1px);
+    //         pointer-events: none;
+    //         border-radius: 50px;
+    //         z-index: 1;
+    //     }
+    //     .intro-content {
+    //         height: 100%;
+    //         background-color: $main;
+    //         width: 500px;
+    //         max-width: 45vw;
+    //         padding: 60px 50px;
+    //         display: flex;
+    //         flex-direction: column;
+    //         flex-wrap: nowrap;
+    //         justify-content: space-between;
+    //         align-items: flex-start;
+    //         h2 {
+    //             color: white;
+    //             font-family: proxima-soft, sans-serif;
+    //             text-transform: uppercase;
+    //             font-weight: 800;
+    //         }
+    //         p {
+    //             color: white;
+    //             margin-top: 50px;
+    //         }
+    //         a {
+    //             width: 100%;
+    //             margin-top: 120px;
+    //         }
+    //     }
+    //     .intro-image {
+    //         background-size: cover;
+    //         background-position: center;
+    //         flex: auto;
+    //         position: relative;
+    //         img {
+    //             position: absolute;
+    //             width: 100%;
+    //             height: 100%;
+    //             object-fit: cover;
+    //         }
+    //         div {
+    //             height: 100%;
+    //             width: 70%;
+    //             position: absolute;
+    //             background-image: linear-gradient(to right, rgba(0, 30, 52, 1), rgba(0, 30, 52, 1) 5%, rgba(0, 30, 52, 0));
+    //         }
+    //     }
+    //     &.reverse {
+    //         flex-direction: row-reverse;
+    //         .intro-content {
+    //             align-items: flex-end;
+    //         }
+    //         .intro-image {
+    //             div {
+    //                 right: 0;
+    //                 background-image: linear-gradient(to left, rgba(0, 30, 52, 1), rgba(0, 30, 52, 1) 5%, rgba(0, 30, 52, 0));
+    //             }
+    //         }
+    //     }
+    // }
+    // @media only screen and (max-width: $desktop) {
+    //     .home-intro {
+    //         border-radius: 35px;
+    //         margin-bottom: 100px;
+    //         flex-direction: column;
+    //         .intro-paper {
+    //             border-radius: 35px;
+    //         }
+    //         .intro-content {
+    //             width: 100%;
+    //             max-width: none;
+    //             padding: 45px 40px 30px 40px;
+    //             h2 {
+
+    //             }
+    //             p {
+    //                 margin-top: 30px;
+    //             }
+    //             a {
+    //                 margin-top: 70px;
+    //             }
+    //         }
+    //         .intro-image {
+    //             height: 280px;
+    //             div {
+    //                 height: 70%;
+    //                 width: 100%;
+    //             }
+    //         }
+    //     }
+    // }
+    // .home-section {
+    //     margin-bottom: 150px;
+    //     display: flex;
+    //     flex-direction: column;
+    //     flex-wrap: nowrap;
+    //     justify-content: center;
+    //     align-items: center;
+    // }
+
+    // .home-list {
+    //     margin-bottom: calc(40px - 4vw);
+    //     .header-accent {
+    //         text-align: left;
+    //         margin-bottom: 30px;
+    //     }
+    //     .home-list-content {
+    //         width: 100%;
+    //         margin-top: 50px;
+    //         display: flex;
+    //         flex-direction: row;
+    //         flex-wrap: nowrap;
+    //         justify-content: space-between;
+    //         align-items: flex-start;
+
+    //         .column {
+    //             width: calc(50% - 20px);
+    //             display: flex;
+    //             flex-direction: column;
+    //             flex-wrap: nowrap;
+    //             justify-content: center;
+    //             align-items: center;
+
+    //             &:first-child {
+    //                 margin-top: 60px;
+    //             }
+    //             .item {
+    //                 width: 100%;
+    //                 box-sizing: border-box;
+    //                 padding: 40px 40px 55px 40px;
+    //                 margin-bottom: 40px;
+    //                 border-radius: 35px;
+    //                 position: relative;
+
+    //                 .paper-structure {
+    //                     border-radius: 35px;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // @media only screen and (max-width: $desktop) {
+    //     .home-list {
+    //         .home-list-content {
+    //             .column {
+    //                 width: calc(50% - 20px);
+
+    //                 .item {
+    //                     padding: 35px 40px 45px 40px;
+    //                     margin-bottom: 40px;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // @media only screen and (max-width: 800px) {
+    //     .home-list {
+    //         margin-bottom: 0px;
+        
+    //         .header-accent {
+    //             margin-bottom: 90px;
+    //         }
+    //         .home-list-content {
+    //             flex-direction: column;
+    //             justify-content: center;
+    //             align-items: center;
+        
+    //             .column {
+    //                 width: 100%;
+        
+    //                 &:first-child {
+    //                     margin-top: 0px;
+    //                 }
+    //                 .item {
+    //                     max-width: 500px;
+        
+    //                     &.right {
+    //                         margin-left: auto;
+    //                         margin-right: 0px;
+    //                     }
+    //                     &.left {
+    //                         margin-left: 0px;
+    //                         margin-right: auto;
+    //                     }
+    //                     .paper-structure {
+    //                         border-radius: 35px;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     } 
+    // }
+    // /* Home Elements */
+
+
+
+
+    // /* Kurse Section */
+    // .kurse-vorteile {
+    //     .home-list-content {
+    //         .column {
+    //             .item {
+    //                 padding: 0px 40px 45px 35px;
+
+    //                 .kurse-vorteile-icon {
+    //                     height: 60px;
+    //                     width: 60px;
+    //                     border-radius: 50%;
+    //                     margin-top: -30px;
+    //                     margin-bottom: 25px;
+    //                     background-color: $accent;
+    //                     position: relative;
+                    
+    //                     img {
+    //                         height: 36px;
+    //                         position: absolute;
+    //                         top: 50%;
+    //                         left: 50%;
+    //                         transform: translate(-50%, -50%);
+    //                     }
+    //                     &:last-child img {
+    //                         height: 39px;
+    //                     }
+    //                 }
+    //                 h4 {
+    //                     text-align: left;
+    //                     margin-bottom: 15px;
+    //                     line-height: 31px;
+    //                 }
+    //                 p {
+    //                     margin-top: 40px;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // .kurse-vorteile-transition {
+    //     width: 100vw;
+    // }
+    // @media only screen and (max-width: $desktop) {
+    //     .kurse-vorteile {
+    //         .home-list-content {
+    //             .column {
+    //                 .item {
+    //                     padding: 0px 40px 45px 40px;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     .kurse-vorteile-transition {
+    //         width: 960px;
+    //         max-width: 100vw;
+    //     }
+    // }
+    // @media only screen and (max-width: 800px) {
+    //     .kurse-vorteile {
+    //         .home-list-content {
+    //             .column {
+    //                 .item {
+    //                     padding: 0px 40px 60px 40px;
+    //                     margin-bottom: 85px;
+
+    //                     h4 {
+    //                         text-align: left;
+    //                         margin-bottom: 12px;
+    //                     }
+    //                     p {
+    //                         margin-top: 50px;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // .range-list {
+    //     .range-list-header-1::after {
+    //         background-image: linear-gradient(to right, $course-erwachsene, $course-kinder);
+    //     }
+    //     .range-list-header-2::after {
+    //         background-image: linear-gradient(to right, $workshop-erwachsene, $workshop-kinder);
+    //     }
+    //     .range-list-header-3::after {
+    //         background-image: linear-gradient(to right, var(--color-accent-dark), $accent);
+    //     }
+    //     .range-list-header-4::after {
+    //         background-image: linear-gradient(to right, $ferienprogramm-dark, $ferienprogramm);
+    //     }
+    // }
+    // /* Kurse Section */
+
+
+
+
+    // /* Kunsttuete Section */
+    // // Styling in kunsttuete.scss
+    // /* Kunsttuete Section */
+
+
+
+
+    // /* Shop Section */
+    // .shop-section {
+    //     .section-list {
+    //         margin: 80px 0 50px;
+    //         display: flex;
+    //         flex-direction: row;
+    //         flex-wrap: nowrap;
+    //         align-items: flex-start;
+    //         justify-content: space-between;
+    //     }
+    //     .section-list-item {
+    //         width: calc(25% - 40px);
+    //         .product-image {
+    //             box-sizing: border-box;
+    //             width: 100%;
+    //             border: solid $linegray 2px;
+    //             transition: ease-in-out 500ms;
+    //             div {
+    //                 height: calc(100% - 20px);
+    //                 margin: 10px;
+    //                 margin-bottom: 12px;
+    //                 overflow: hidden;
+    //                 img {
+    //                     height: 100%;
+    //                     width: 100%;
+    //                     object-fit: cover;
+    //                     object-position: center;
+    //                     transition: ease-in-out 500ms;
+    //                 }
+    //             }
+    //         }
+    //         .product-header {
+    //             font-size: 18px;
+    //             text-transform: uppercase;
+    //             padding-left: 20px;
+    //             padding-top: 18px;
+    //             padding-bottom: 15px;
+    //             border-left: solid $linegray 2px;
+    //             transition: ease-in-out 500ms;
+    //         } 
+    //         &:hover {
+    //             .product-image {
+    //                 border-color: $accent;
+    //                 div img {
+    //                     transform: scale(1.05);
+    //                 }
+    //             }
+    //             .product-header {
+    //                 border-left-color: $accent;
+    //             }
+    //         }
+    //     }   
+    // }
+    // @media only screen and (max-width: $desktop) {
+    //     .shop-section {
+    //         width: 450px;
+    //         .section-list {
+    //             margin-top: 70px;
+    //             margin: 80px 0 40px;
+    //             flex-wrap: wrap;
+    //         }
+    //         .section-list-item {
+    //             width: calc(50% - 12px);
+    //             margin-bottom: 30px;
+    //             .product-image {
+    //                 div {
+    //                     height: calc(100% - 20px);
+    //                     margin: 10px;
+    //                     margin-bottom: 8px;
+    //                 }
+    //             }
+    //             .product-header {
+    //                 font-size: 14px;
+    //                 padding: 10px 0 10px 12px;
+    //             } 
+    //         }   
+    //     }
+    // }
+    // /* Shop Section */
+
+
+
+
+    // /* Kommentare Section */
+    // .home-kommentare {
+    //     width: 100vw;
+    //     padding: 220px 0 280px;
+    //     margin: -130px 0;
+    //     position: relative;
+    //     .kommentare-background {
+    //         height: calc(100% - 40px);
+    //         width: 100%;
+    //         object-fit: cover;
+    //         position: absolute;
+    //         top: 20px;
+    //         left: 0;
+    //         filter: blur(8px);
+    //         &.gradient {
+    //             height: 100%;
+    //             background-image: radial-gradient(ellipse at 50vw 50%, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 65%);
+    //             background-size: 110% 100%;
+    //             top: 0;
+    //             filter: none;
+    //         }
+    //     }
+    //     .wrapper {
+    //         margin-bottom: 0;
+    //     }
+    //     .home-list {
+    //         .header-accent {
+    //             position: absolute;
+    //             transform: translateY(-80px);
+    //         }
+    //         .home-list-content {
+    //             .column {
+    //                 .item { 
+    //                     background-color: $main;
+    //                     padding: 35px 35px 45px 40px;
+    //                     * {
+    //                         color: white;
+    //                     }
+    //                     .kommentare-name {
+    //                         margin-bottom: 45px;
+    //                         display: flex;
+    //                         flex-direction: row;
+    //                         flex-wrap: nowrap;
+    //                         justify-content: flex-start;
+    //                         align-items: center;
+                        
+    //                         img {
+    //                             height: 26px;
+    //                             margin-right: 15px;
+    //                         }
+    //                         h5 {
+    //                             font-family: proxima-soft, sans-serif;
+    //                             transform: translateY(3px);
+    //                         }
+    //                     }
+    //                     .kommentare-text {
+    //                         img {
+    //                             margin-left: 12px;
+    //                             transform: translateY(9px);
+    //                             height: 16px;
+    //                             &:first-child {
+    //                                 margin-left: 0px;
+    //                                 margin-right: 12px;
+    //                                 transform: translateY(-6px);
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // @media only screen and (max-width: $desktop) {
+    //     .home-kommentare {
+    //         .kommentare-name {
+    //             margin-bottom: 35px;
+    //             img {
+    //                 height: 23px;
+    //             }
+    //         }
+    //         .kommentare-text {
+    //             img {
+    //                 margin-left: 8px;
+    //                 transform: translateY(7px);
+    //                 height: 13px;
+    //             }
+    //             &:first-child {
+    //                 margin-left: 0px;
+    //                 margin-right: 8px;
+    //                 transform: translateY(-4px);
+    //             }
+    //         }
+    //     }
+    // }
+    // @media only screen and (max-width: 800px) {
+    //     .home-kommentare .header-accent {
+    //         transform: translateY(-100px);
+    //         margin-bottom: 0px;
+    //     }
+    // }
+    // /* Kommentare Section */
+
+
+
+
+    // /* Über mich Section */
+    // .uebermich {
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+
+    //     .object-quote {
+    //         margin-bottom: 45px;
+    //     }
+    //     .story {
+    //         margin-bottom: 50px;
+    //     }
+    // }
+    // @media only screen and (max-width: $desktop) {
+    //     .uebermich {
+    //         .story {
+    //             margin-bottom: 50px;
+    //         }
+    //     }
+    // }
+    // /* Über mich Section */
+
+
+
+
+    // /* Schule der Phantasie Section */
+    // .schulederphantasie {
+    //     width: 800px;
+    //     margin-top: 140px;
+    //     padding: 0px 40px 45px 40px;
+    //     border-radius: 25px;
+    //     background-color: $lightgray;
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    //     align-items: center;
+    //     .image { 
+    //         margin: auto;
+    //         width: 450px;
+    //         height: 62px;
+    //         max-width: 100%;
+    //         transform: translateY(-50%);
+    //         object-fit: contain;
+    //         object-position: center;
+    //     }
+    //     p {
+    //         margin-bottom: 15px;
+    //         text-align: center;
+    //     }
+    //     .link-arrow-underlined {
+    //         &::after {
+    //             background: linear-gradient(to right, #de1e86 0%, #e95000 25%, #ffc700 50%, #008a75 75%, #00a6ec 100%);
+    //         }
+    //     }
+    // }
+    // @media only screen and (max-width: $desktop) {
+    //     .schulederphantasie {
+    //         padding: 0px 40px 40px 40px;
+
+    //         .image {
+    //             width: 380px;
+    //             height: 52px;
+    //         }
+    //     }
+    // }
+    // /* Schule der Phantasie Section */
+
+
+}

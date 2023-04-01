@@ -1,0 +1,503 @@
+// Input Feld
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="tel"], input[type="date"],
+textarea,
+select {
+	padding: 16px 18px 14px;
+	width: 100%;
+	background-color: white;
+	@include fluid-type(15px, 16px);
+	font-weight: 500;
+	color: $main;
+	border-radius: 8px;
+	border: solid $inputgray 2px;
+	outline: none;
+	-webkit-appearance: none;
+	position: relative;
+	transition: ease-in-out 200ms;
+	&::placeholder {
+		color: $darkgray;
+	}
+	&.wpcf7-not-valid {
+		border-color: $red;
+	}
+	&:-webkit-autofill {
+		
+	}
+	&:disabled {
+		opacity: 0.5;
+	}
+	&.--selected {
+		border-color: $main;
+	}
+	&.--erorr {
+		border-color: red;
+	}
+}
+
+// Häkchen, wenn Feld ausgefüllt ist
+.form-row--filled {
+	&:has(input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="tel"], input[type="date"],
+	textarea,
+	select) {
+		&::after {
+			content: '';
+			height: 20px;
+			width: 14px;
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13.477' height='9.852' viewBox='0 0 13.477 9.852'%3E%3Cpath id='Icon_feather-check' data-name='Icon feather-check' d='M15.941,9,9.107,15.834,6,12.728' transform='translate(-4.232 -7.232)' fill='none' stroke='%2355d045' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5'/%3E%3C/svg%3E%0A");
+			background-size: 100%;
+			background-repeat: no-repeat;
+			background-position: right center;
+			position: absolute;
+			right: 20px;
+			top: calc(50% - 7px);
+		}
+	}
+}
+
+// Input Feld Template
+.input__field {
+	padding-top: 7px !important;
+	position: relative;
+	&.--half {
+		width: calc(50% - 10px);
+	}
+	&.--active {
+		input, select, textarea {
+			border-color: $main;
+		}
+	}
+	&.--error {
+		input, select, textarea {
+			border-color: $red;
+		}
+	}
+	@media only screen and (max-width: $tablet) {
+		&.--half {
+			width: 100%;
+		}
+	}
+}
+
+// Label Template
+.input__label {
+	@include fluid-type(13px, 14px);
+	font-weight: 700;
+	line-height: 1em;
+	letter-spacing: 0.2px;
+	color: $accent;
+	padding: 0px 6px;
+	background-color: white;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 14px;
+	z-index: 1;
+	.required {
+		display: inline;
+		padding: 0;
+		border: none;
+		text-decoration: none;
+		position: static;
+	}
+}
+
+
+
+.standard__form .labeltext {
+	@extend .input__label;
+}
+
+
+// Input Label
+form:not(.woocommerce-form-login):not(.woocommerce-form-register):not(.woocommerce-checkout):not(.woocommerce-checkout) .form-row {
+	label:not(.woocommerce-form__label-for-checkbox) {
+		@extend .input__label;
+	} 
+}
+
+
+
+// Textarea Field
+textarea {
+	height: 150px;
+}
+
+
+
+
+// Ultimate Checkbox <--- please use this one!!!
+.new__checkbox {
+	display: inline-flex;
+	column-gap: 15px;
+	input {
+		position: relative;
+		&::after {
+			content: "";
+			display: block;
+			height: 18px;
+			width: 18px;
+			background-color: white;
+			border-radius: 5px;
+			border: solid $inputgray 1px;
+			position: absolute;
+			top: -1px;
+			left: 0;
+			transition: all 200ms;
+		}
+		&:checked {
+			&::after {
+				background-color: $accent;
+				border-color: rgba(black, .1);
+				background-image: url("img/shop/checkbox_checkmark.svg");
+				background-size: 12px;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			&:hover::after {
+				background-color: darken($accent, 5%);
+			}
+		}
+	}
+	label {
+		display: inline-block;
+		transform: translateY(-3px);
+	}
+	.checkbox__error {
+		color: $red;
+		position: absolute;
+		bottom: 0;
+		left: 28px;
+	}
+	&.--error {
+		padding-bottom: 22px;
+		position: relative;
+	}
+}
+
+
+.input__checkbox {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	display: inline-flex;
+	position: relative;
+	input {
+		height: unset;
+		width: 0;
+		&::after {
+			content: "";
+			display: block;
+			height: 18px;
+			width: 18px;
+			background-color: white;
+			border-radius: 5px;
+			border: solid $inputgray 1px;
+			position: absolute;
+			top: 3px;
+			left: 0;
+			transition: all 200ms;
+		}
+		&:hover::after {
+			background-color: $lightgray;
+		}
+		&:checked {
+			&::after {
+				background-color: $accent;
+				border-color: darken($accent, 10%);
+				background-image: url("img/shop/checkbox_checkmark.svg");
+				background-size: 12px;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			&:hover::after {
+				background-color: darken($accent, 5%);
+			}
+		}
+	}
+	span {
+		// display: inline-table;
+		padding-left: 25px !important;
+		@include fluid-type(15px, 16px);
+		a {
+			color: $accent;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+// Checkbox Field
+.checkbox,
+.wpcf7-acceptance label {	
+	@extend .input__checkbox;
+}
+
+// Radio Field
+input[type="radio"] {
+    height: 18px;
+    min-width: 18px;
+    background-color: white;
+    border: solid 1px $inputgray;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+// Input Fields List Margins
+$form-row-gap: 20px;
+$form-column-gap: 30px;
+
+// Input Fields List Stylings
+.standard__form,
+.woocommerce-billing-fields__field-wrapper,
+.woocommerce-shipping-fields__field-wrapper,
+.woocommerce-address-fields__field-wrapper,
+.woocommerce-EditAccountForm {
+	&, fieldset {
+		@include flex-row();
+		flex-wrap: wrap;
+		row-gap: $form-row-gap;
+		padding: 0px;
+	}
+} 
+
+// Wordpress form-row
+.form-row,
+.standard__form label {
+	display: inline-block;
+	padding-top: 7px;
+	width: 100%;
+	position: relative;
+}
+
+// Split Form
+.form__split {
+	width: calc( 50% - ( #{$form-column-gap} / 2 ) );
+	@include flex-row();
+	flex-wrap: wrap;
+	row-gap: $form-row-gap;
+	@media only screen and (max-width: $tablet) {
+			width: 100%;
+	}
+}
+
+// Input Sizes
+.standard__form label {
+	// Input Width
+	&.half {
+		width: calc( 50% - ( #{$form-column-gap} / 2 ) );
+	}
+	// Textarea Height
+	&.height--2 textarea,
+	&.height--two textarea {
+		height: 141px;
+	}
+	&.height--3 textarea,
+	&.height--three textarea {
+		height: 225px;
+	}
+	&.height--4 textarea,
+	&.height--four textarea {
+		height: 297px;
+	}
+	&.height--5 textarea,
+	&.height--five textarea {
+		height: 378px;
+	}
+	&.height--6 textarea,
+	&.height--six textarea {
+		height: 459px;
+	}
+}
+
+// Standarc Form
+.standard__form {
+	br {
+		display: none;
+	}
+	.wpcf7-acceptance {
+		display: inline-block;
+		margin-bottom: 15px;
+		.wpcf7-list-item {
+			margin-left: 0;
+			label {
+				input {
+					&::after {
+						top: 10px;
+					}
+				}
+				span {
+					padding-left: 30px;
+					font-size: 14px;
+					line-height: 1.5em;
+				}
+				.wpcf7-list-item-label {
+					&::before,
+					&::after {
+						content: unset;
+					}
+				}
+			}
+		}
+	}
+	.wpcf7-not-valid-tip {
+		padding-top: 5px;
+		font-size: 13px;
+		font-weight: 600;
+		color: $red;
+	}
+	& + p {
+		text-align: right;
+		input[type="submit"] {
+			@extend .button;
+			border: none;
+			margin: 0 0 0 auto;
+		}
+		.wpcf7-spinner {
+			display: none;
+		}
+	}
+}
+
+// Single Input Formular
+.form--one__line {
+	width: 100%;
+    @include flex-row();
+    align-items: stretch;
+    .form-row {
+        margin: 0;
+        padding-top: 7px !important;
+        .label-name {
+			font-weight: 700;
+			font-size: 14px;
+            background-image: linear-gradient(to bottom, $lightgray, white);
+			position: absolute;
+			top: 0;
+			left: 10px;
+        }
+        .label-error {
+            display: none;
+        }
+    }
+	p.form-input {
+		@extend .input__field;
+		width: unset;
+		flex: auto;
+		.label-name {
+			@extend .input__label;
+		}
+		input::placeholder {
+			color: transparent;
+		}
+	}
+    button {
+    }
+	button {
+		margin: 7px 0 0 12px !important;
+        padding: 0;
+		width: 64px;
+		min-width: 64px;
+        border: none;
+		width: 64px;
+		text-indent: -9999px;
+		color: transparent;
+		font-size: 0;
+		position: relative;
+		&::after {
+			content: 'GO';
+			padding-top: 27px;
+			height: 100%;
+			width: 100%;
+			text-indent: 0;
+			font-size: 16px;
+			color: white;
+			position: relative;
+			@include pos-center();
+		}
+		&:hover {
+            background-size: 1300%;
+        }
+	}
+	@media only screen and (max-width: $mobile) {
+		.button {
+			padding: 0 20px;
+		}
+	}
+}
+
+.form--one__line {
+}
+
+
+
+
+// Input Fields without Label
+#billing_address_2_field,
+#shipping_address_2_field { 
+	padding: 0;
+	input {
+		padding: 14.5px 16px;
+	}
+}
+
+#billing_state_field,
+#shipping_state_field {
+	.select2-selection--single {
+		padding: 14px 18px 14px;
+		height: 57px;
+		border: solid $inputgray 2px;
+		border-radius: 8px;
+		-webkit-appearance: none;
+		.select2-selection__rendered {
+			padding: 0;
+		}
+		.select2-selection__arrow {
+			top: 16px;
+			right: 16px;
+		}
+	}
+}
+
+#billing_country_field,
+#shipping_country_field {
+    display: inline-block;
+    padding-top: 7px;
+    position: relative;
+    label {
+        background-image: linear-gradient(to top, #f3f3f3, white);
+    }
+    span.woocommerce-input-wrapper {
+        display: inline-block;
+        padding: 17px 17px 15px;
+        width: 100%;
+        background-color: #f3f3f3;
+        border-radius: 8px;
+        border: solid $inputgray 2px;
+        outline: none;
+        -webkit-appearance: none;
+        position: relative;
+        strong {
+            font-weight: 500 !important;
+            color: $darkgray;
+        }
+        .select2-selection {
+            height: 53px;
+            border: solid 1px $main;
+            border-radius: 8px;
+            font-size: 14px;
+            padding: 12px 16px;
+            .select2-selection__rendered {
+                padding: 0;
+                color: $main;
+            }
+            .select2-selection__arrow {
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}

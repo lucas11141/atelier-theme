@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3846" height="300" viewBox="0 0 3846 300">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rechteck_2103" data-name="Rechteck 2103" width="3846" height="300" transform="translate(7561.001 -2380.002)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Gruppe_maskieren_397" data-name="Gruppe maskieren 397" transform="translate(-7561.001 2380.002)" clip-path="url(#clip-path)">
+    <ellipse id="Ellipse_9202" data-name="Ellipse 9202" cx="9482" cy="9484.904" rx="9482" ry="9484.904" transform="translate(437.001 -2379.002)" fill="#fff"/>
+    <g id="Ellipse_9203" data-name="Ellipse 9203" transform="translate(437.001 -2364.002)" fill="none" stroke="#3fcad6" stroke-width="6">
+      <ellipse cx="9482" cy="9484.904" rx="9482" ry="9484.904" stroke="none"/>
+      <ellipse cx="9482" cy="9484.904" rx="9479" ry="9481.904" fill="none"/>
+    </g>
+  </g>
+</svg>

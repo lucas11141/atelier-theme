@@ -1,0 +1,300 @@
+.shop-hero-banner {
+    padding: 1px 0 100px;
+    background-color: $main;
+    position: relative;
+    .header-bar {
+        .nav ul li .sub-menu:before {
+            content: unset;
+        }
+    }
+    &__content {
+        h1, h2, h3, h4 {
+            color: white;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            &:first-child {
+                padding-top: 0;
+            }
+        }
+    }
+    &__image-text {
+        @include flex-row();
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__text {
+        width: 480px;
+        &__item {
+            width: 480px;
+            @include flex-column();
+            gap: 60px;
+            .tag, h1, h2, p {
+                color: white;
+            }
+            .tag {
+                display: block;
+                width: fit-content;
+                margin-bottom: 20px;
+            }
+            h1, h2 {
+                padding: 0;
+                b {
+                    color: $accent;
+                }
+            }
+            div:nth-of-type(2) {
+                margin-top: 35px;
+            }
+        }
+    }
+    &__image {
+        height: 450px;
+        width: 350px;
+        position: relative;
+        .hero__slider {
+            overflow: hidden;
+            border-radius: 25px;
+            &__item {
+                height: 450px;
+                width: 350px;
+                position: relative;
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+            &__button {
+                height: calc(100% - (2 * 30px));
+                width: 25px;
+                background-color: $main-light;
+                background-position: center;
+                background-repeat: no-repeat;
+                border: none;
+                outline: none;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                @include transition();
+                cursor: pointer;
+                &:hover {
+                    width: 35px;
+                }
+                &--prev {
+                    border-radius: 25px 0 0 25px;
+                    right: calc(100% + 10px);
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6.228' height='10.457' viewBox='0 0 6.228 10.457'%3E%3Cpath id='Pfad_1224' data-name='Pfad 1224' d='M-10879.062,14271.693l-3.814,3.814,3.814,3.814' transform='translate(10883.875 -14270.279)' fill='none' stroke='%23ffffff00' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
+                    &:hover {
+                        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6.228' height='10.457' viewBox='0 0 6.228 10.457'%3E%3Cpath id='Pfad_1224' data-name='Pfad 1224' d='M-10879.062,14271.693l-3.814,3.814,3.814,3.814' transform='translate(10883.875 -14270.279)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
+                    }
+                }
+                &--next {
+                    border-radius: 0 25px 25px 0;
+                    left: calc(100% + 10px);
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6.229' height='10.457' viewBox='0 0 6.229 10.457'%3E%3Cpath id='Pfad_1223' data-name='Pfad 1223' d='M-10882.876,14271.693l3.814,3.814-3.814,3.814' transform='translate(10884.29 -14270.279)' fill='none' stroke='%23ffffff00' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E%0A");
+                    &:hover {
+                        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6.229' height='10.457' viewBox='0 0 6.229 10.457'%3E%3Cpath id='Pfad_1223' data-name='Pfad 1223' d='M-10882.876,14271.693l3.814,3.814-3.814,3.814' transform='translate(10884.29 -14270.279)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E%0A");
+                    }
+                }
+            }
+        }
+    }
+    .process-button {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='10' viewBox='0 0 9 10'%3E%3Cg id='Icon_feather-pause' data-name='Icon feather-pause' transform='translate(17.18 16.002) rotate(-180)'%3E%3Crect id='Rechteck_2202' data-name='Rechteck 2202' width='3' height='10' rx='1' transform='translate(8.18 6.002)' fill='%23152f43'/%3E%3Crect id='Rechteck_2203' data-name='Rechteck 2203' width='3' height='10' rx='1' transform='translate(14.18 6.002)' fill='%23152f43'/%3E%3C/g%3E%3C/svg%3E%0A");
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        @include transition();
+        svg {
+            height: 100%;
+            width: 100%;
+            .process {
+                stroke-dasharray: 110;
+                stroke-dashoffset: 110;
+            }
+        }
+        &:hover {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='10' viewBox='0 0 9 10'%3E%3Cg id='Icon_feather-pause' data-name='Icon feather-pause' transform='translate(17.18 16.002) rotate(-180)'%3E%3Crect id='Rechteck_2202' data-name='Rechteck 2202' width='3' height='10' rx='1' transform='translate(8.18 6.002)' fill='%23fff'/%3E%3Crect id='Rechteck_2203' data-name='Rechteck 2203' width='3' height='10' rx='1' transform='translate(14.18 6.002)' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E%0A");
+        }
+        &.--filled {
+            svg .process {
+                animation: fill 15s forwards linear;
+            }
+        }
+        &.--paused {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='10' viewBox='0 0 9 10'%3E%3Cpath id='Polygon_62' data-name='Polygon 62' d='M4.126,1.573a1,1,0,0,1,1.748,0l3.3,5.941A1,1,0,0,1,8.3,9H1.7A1,1,0,0,1,.825,7.514Z' transform='translate(9) rotate(90)' fill='%23fff'/%3E%3C/svg%3E%0A");
+            svg .process {
+                animation-play-state: paused;
+            }
+        }
+        @keyframes fill {
+            0% {
+                stroke-dasharray: 110;
+            }
+            100% {
+                stroke-dasharray: 217;
+            }
+        }
+    }
+    &__decoration {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        pointer-events: none;
+        .wrapper {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            img {
+                position: absolute;
+                top: 50%;
+                opacity: 6%;
+                transform: translateY(-50%);
+                &:nth-of-type(1) {
+                    right: calc(100% + 170px);
+                    top: -160px;
+                }
+                &:nth-of-type(2) {
+                    right: calc(100% - 20px);
+                    top: 50px;
+                }
+                &:nth-of-type(3) {
+                    left: calc(100% + 60px);
+                    top: -50px;
+                }
+                &:nth-of-type(4) {
+                    left: calc(100% + 160px);
+                    top: 130px;
+                }
+                &:nth-of-type(5) {
+                    left: calc(100% + 120px);
+                    top: 230px;
+                }
+            }
+        }
+    }
+    &--small {
+        padding-bottom: 25px;
+        border-bottom: solid 5px $accent;
+        .header-bar {
+            margin-bottom: 25px;
+        }
+    }
+    @media only screen and (max-width: 1250px) {
+        .process-button {
+            bottom: 30px;
+            right: 30px;
+        }
+    }
+    @media only screen and (min-width: 951px) {
+        &__image {
+            transform: translateX(-35px);
+        }
+    }
+    @media only screen and (max-width: 950px) {
+        &__image-text {
+            gap: 70px;
+        }
+        &__text {
+            width: 420px;
+            max-width: 50vw;
+            &__item {
+                div:nth-of-type(2) {
+                    margin-top: 35px;
+                }
+            }
+        }
+        &__image {
+            .hero__slider {
+                &__button {
+                    display: none !important;
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: $tablet) {
+        &__image-text {
+            gap: 50px;
+        }
+        &__image {
+            height: (450px * 0.9);
+            width: (350px * 0.9);
+            .hero__slider {
+                &__item {
+                    height: (450px * 0.9);
+                    width: (350px * 0.9);
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: $mobile) {
+        &__text {
+            width: 100%;
+            max-width: unset;
+        }
+        &__image {
+            display: none;
+        }
+    }
+}
+
+
+.shop-alert {
+    margin-bottom: 60px;
+    padding: 18px 0;
+    padding-left: 30px;
+    background-color: $accent;
+    overflow: hidden;
+    pointer-events: none;
+    div {
+        @include flex-row();
+        justify-content: flex-start;
+        align-items: baseline;
+        gap: 30px;
+        animation: move 60s linear infinite;
+    }
+    @keyframes move {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-5000px);
+        }
+    }
+    span {
+        color: white;
+        text-transform: uppercase;
+        font-size: 14px;
+        white-space: nowrap;
+        font-weight: 600;
+        &.--plus {
+            font-size: 16px;
+            letter-spacing: 4px;
+        }
+    }
+    @media only screen and (max-width: $tablet) {
+        padding: 16px 0;
+        div {
+            gap: 20px;
+            animation: move 100s linear infinite;
+        }
+    } 
+}
+
+.bottom-border {
+    width: 100%;
+    height: 5px;
+    background-color: $accent;
+}

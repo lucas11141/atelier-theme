@@ -1,0 +1,173 @@
+.produktslider {
+    &__header {
+        margin-bottom: 40px;
+        @include flex-row();
+        justify-content: space-between;
+        align-items: flex-end;
+        .button {
+            transform: translateY(-3px);
+        }
+    }
+}
+@media only screen and (max-width: $desktop) {
+    .produktslider {
+        &__header {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 15px;
+            .button {
+                transform: none;
+            }
+        }
+    }
+}
+
+
+.produktslider {
+    .slider__container {
+        margin: auto;
+        max-width: $wrapper-width;
+        position: relative;
+        .slider {
+            @include flex-row();
+            margin: auto;
+            position: static !important;
+            width: 1000px;
+        }
+    }
+    @media only screen and (max-width: $desktop) {
+        .slider__container {
+            margin-top: 40px;
+        }
+    }
+    @media only screen and (max-width: $mobile) {
+        .slider__container {
+            margin: 0;
+            max-width: 100%;
+            // .slider {
+            //     margin: 40px $wrapper-gap 25px;
+            // }
+        }
+    }
+}
+
+
+
+
+.produktslider .slider__container,
+.related .products {
+    @extend .wrapper;
+    margin: auto;
+    .slick-track {
+        @include flex-row();
+        justify-content: flex-start;
+        align-items: stretch;
+    }
+    .product,
+    .slider__item {
+        height: inherit !important;
+        margin-right: $gap-new;
+        // width: calc(30%);
+        @include grid-width(2);
+    }
+    .slider__item {
+        margin-right: $gap-new;
+        background-color: white;
+        border-radius: 20px;
+        @include box-shadow();
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 0.685;
+        * {
+            transition: $ease_standard 300ms;
+        }
+        img,
+        .item__background {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .item__title {
+            max-width: calc(100% - 60px);
+            position: absolute;
+            bottom: 28px;
+            left: 30px;
+            z-index: 1;
+            h6 {
+                color: white;
+                font-weight: 700;
+                opacity: 0.8;
+            }
+            h3 {
+                padding-top: 12px;
+                color: white;
+                -webkit-text-stroke-color: white;
+            }
+        }
+        .item__gradient {
+            height: 180px;
+            width: 100%;
+            background-image: linear-gradient(to top, rgba($main, 100%) 0%, rgba($main, 80%) 40%, rgba($main, 0%) 100%);
+            background-repeat: no-repeat;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        @media only screen and (min-width: $tablet) {
+            &:hover, &:active {
+                .item__background {
+                    transform: scale(1.02);
+                }
+                .item__title {
+                    line-height: 1.1em;
+                    transform: translateY(-5px);
+                }
+                .item__gradient {
+                    opacity: 0.9;
+                }
+            }
+        }
+    }
+    .slick-list {
+        overflow: visible;
+    }
+    @media only screen and (max-width: ($screen + 40px)) {
+        .product,
+        .slider__item {
+            margin-right: $gap-new;
+            width: calc((100vw - 40px - 6vw) / 3) !important;
+        }
+    }
+    @media only screen and (max-width: $desktop) {
+        .product,
+        .slider__item {
+            margin-right: $gap-new;
+            width: calc((100vw - 40px - 3vw) / 2) !important;
+        }
+    }
+    @media only screen and (max-width: $mobile) {
+        .product,
+        .slider__item {
+            margin-right: 15px;
+            width: 65vw !important;
+            max-width: 65vw !important;
+        }
+        .product {
+            .woocommerce-loop-product__title {
+                font-size: 20px;
+            }
+            .product__description {
+                font-size: 13px;
+            }
+        }
+        .slider__item .item__title {
+            left: 20px;
+            bottom: 18px;
+        }
+    }
+}

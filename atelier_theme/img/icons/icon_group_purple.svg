@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41">
+  <g id="Gruppe_2642" data-name="Gruppe 2642" transform="translate(-1804 -1320)">
+    <rect id="Rechteck_1717" data-name="Rechteck 1717" width="41" height="41" transform="translate(1804 1320)" fill="rgba(255,255,255,0)"/>
+    <g id="Icon_feather-users" data-name="Icon feather-users" transform="translate(1806.5 1322.5)">
+      <path id="Pfad_1031" data-name="Pfad 1031" d="M25.5,31.5v-3a6,6,0,0,0-6-6H7.5a6,6,0,0,0-6,6v3" fill="none" stroke="#4248de" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.3"/>
+      <path id="Pfad_1032" data-name="Pfad 1032" d="M19.5,10.5a6,6,0,1,1-6-6,6,6,0,0,1,6,6Z" fill="none" stroke="#4248de" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.3"/>
+      <path id="Pfad_1033" data-name="Pfad 1033" d="M34.5,31.5v-3A6,6,0,0,0,30,22.7" fill="none" stroke="#4248de" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.3"/>
+      <path id="Pfad_1034" data-name="Pfad 1034" d="M24,4.7A6,6,0,0,1,24,16.32" fill="none" stroke="#4248de" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.3"/>
+    </g>
+  </g>
+</svg>

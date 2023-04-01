@@ -1,0 +1,147 @@
+.zitat {
+    * {
+        padding: 0;
+    }
+    @include flex-row();
+    align-items: flex-end;
+    z-index: 1;
+    .zitat__texts {
+        flex: auto;
+        margin-right: 50px;
+        .name {
+            margin-bottom: 50px;
+            @include flex-row();
+            justify-content: flex-end;
+            position: relative;
+            .text {
+                font-family: gautreaux, serif;
+                font-size: 50px;
+                line-height: 50px;
+                -webkit-text-stroke: 3px $main;
+
+                &:first-child {
+                    margin-right: 15px;
+                }
+            }
+            .job {
+                font-size: 15px;
+                font-weight: 700;
+                font-style: italic;
+                color: $accent;
+                position: absolute;
+                bottom: -23px;
+                right: 243px;
+                white-space: nowrap;
+            }
+        }
+        .bubble {
+            padding: 30px 35px 32px 35px;
+            background-color: $lightgray;
+            border-radius: 15px;
+            position: relative;
+
+            p {
+                font-style: italic;
+                font-size: 17px;
+                font-weight: 600;
+                line-height: 31px;
+            }
+            span {
+                font-family: gautreaux, serif;
+                font-size: 60px;
+                line-height: 60px;
+                color: $accent;
+                -webkit-text-stroke: 3px $accent;
+                position: absolute;
+
+                &.q1 {
+                    top: -50px;
+                    right: 20px;
+                }
+                &.q2 {
+                    left: 20px;
+                    bottom: -10px;
+                }
+            }
+        }
+    }
+    .zitat__portrait {
+        height: 250px;
+        width: 250px;
+        min-width: 250px;
+        border-radius: 50%;
+        box-shadow: $shadow_stardard;
+        object-fit: cover;
+        object-position: 0px -27px;
+    }
+}
+@media only screen and (max-width: $desktop) {
+    .object-quote {
+        .texts {
+            margin-right: 0px;
+
+            .name {
+                margin-bottom: 15px;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                
+                .text {
+                    font-size: 40px;
+                    line-height: 40px;
+                    -webkit-text-stroke: 2.5px $main;
+
+                    &:last-child {
+                        margin-left: 14px;
+                        margin-top: 3px;
+                    }
+                }
+                .job {
+                    bottom: -27px;
+                    right: unset;
+                    left: 42px;
+                }
+            }
+            .bubble {
+                padding: 25px 30px 28px 30px;
+
+                p {
+                    font-size: 15px;
+                    line-height: 28px;
+                }
+                span {
+                    font-size: 50px;
+                    line-height: 50px;
+                    -webkit-text-stroke: 2.5px $accent;
+
+                    &.q1 {
+                        top: -9px;
+                    }
+                    &.q2 {
+                        bottom: -42px;
+                    }
+                }
+            }
+        }
+        .header-image-mobile {
+            width: 352px;
+            max-width: 88vw;
+            margin: auto;
+            margin-bottom: 35px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .portrait {
+            height: 150px;
+            width: 150px;
+            min-width: 150px;
+            object-position: 0px -20px;
+        }
+        .story {
+            margin-bottom: 50px;
+        }
+    }
+}

@@ -1,0 +1,274 @@
+.page__newsletter {
+    @include flex-row();
+    align-items: stretch;
+    column-gap: 100px;
+    .newsletter__img {
+        flex: auto;
+        height: 100vh;
+        min-height: 100vh;
+        width: 1px;
+        position: relative;
+        .img__overlay {
+            padding: 80px 0 0 calc((100vw - 1000px) / 2);
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba($main, 90%);
+            .back__button {
+                color: white;
+            }
+        }
+        .img__img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    .newsletter__content {
+        padding: 80px calc((100vw - 1000px) / 2) 80px 0;
+        @include flex-column();
+        justify-content: center;
+        .logo {
+            width: 90px;
+        }
+        h6 {
+            padding-top: 50px;
+        }
+    }
+    .newsletter__success {
+        padding: 80px calc((100vw - 1000px) / 2) 80px 0;
+        @include flex-column();
+        justify-content: center;
+        .process__step {
+            padding: 30px 0 39px 40px;
+            width: 520px;
+            img {
+                width: 22px;
+            }
+        }
+        .button {
+            margin-top: 50px;
+        }
+        display: none;
+    }
+    .newsletter__process {
+        margin-top: 50px;
+        @include flex-row();
+        justify-content: flex-start;
+        column-gap: 50px;
+    }
+    .process__step {
+        padding: 28px 0 34px 32px;
+        padding: 28px 0 37px 33px;
+        background-image: url(img/elements/newsletter_steps_background.svg);
+        background-size: contain;
+        background-repeat: no-repeat
+    }
+    form {
+        margin-top: 40px;
+        width: 520px;
+        p:not(.new__checkbox) {
+            @extend .input__field;
+            label {
+                @extend .input__label;
+            }
+        }
+        .new__checkbox {
+            padding-top: 15px;
+            label {
+                font-size: 13px;
+                a {
+                    color: $accent;
+                    text-decoration: underline;
+                }
+            }
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+        }
+        .sib_signup_box_inside_1 {
+            @include flex-column();
+            align-items: stretch;
+            row-gap: 20px;
+        }
+        .sib_msg_disp {
+            color: $red;
+        }
+    }
+}
+
+
+
+
+
+/* Newsletter  Sign Up */
+.newsletter__field {
+    @include flex-row();
+    row-gap: 25px;
+    justify-content: center;
+    align-items: center;
+    .newsletter__content {
+        @include flex-column();
+        max-width: 600px;
+        margin-right: 80px;
+        position: relative;
+        .newsletter__arrow {
+            position: absolute;
+            top: -65px;
+            left: -100px;
+            height: 230px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    }
+    .newsletter__image {
+        position: relative;
+        height: 410px;
+        width: 320px;
+        min-width: 320px;
+        img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            z-index: 1;
+            border-radius: 15px;
+        }
+    }
+    @media only screen and (max-width: $desktop) {
+        flex-direction: column;
+        .newsletter__content {
+            margin: 0;
+            .newsletter-form {
+                margin-top: 30px;
+                .button {
+                    width: 125px;
+                }
+            }
+        }
+        .newsletter__image {
+            width: 100%;
+            height: 260px;
+            min-width: unset;
+            img {
+                object-position: top;
+            }
+        }
+    }
+}
+// SIB Signup Form
+.form--newsletter {
+    margin-top: 30px;
+    width: 100%;
+    .sib_signup_box_inside_2,
+    .sib_signup_box_inside_3 {
+        @include flex-row();
+        gap: 15px 0;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: wrap;
+        .sib-alert-message-warning {
+            padding-top: 10px;
+            color: $red;
+        }
+        .sib_msg_disp {
+            width: 100%;
+            order: 1;
+            p {
+                text-align: center;
+            }
+            &:not(:has(p)) {
+                display: none !important;
+            }
+        }
+        p.sib-email-area {
+            width: calc(100% - 175px);
+        }
+        input[type="submit"] {
+            margin-top: 7px;
+            width: 160px;
+        }
+    }
+}
+// .newsletter-form {
+//     margin-top: 50px;
+//     width: 100%;
+//     @include flex-row();
+//     column-gap: 10px;
+//     .input__field {
+//         flex: auto;
+//     }
+//     .button {
+//         margin-top: 6px !important;
+//         padding: 19.5px 30px;
+//         border: none;
+//     }
+// }
+@media only screen and (max-width: $desktop) {
+    .newsletter {
+        .content {
+            max-width: 450px;
+            margin-right: 0px;
+    
+            h3 {
+                margin-bottom: 20px;
+                line-height: 29px;
+            }
+            .description {
+                font-size: 14px;
+                line-height: 25px;
+                margin-bottom: 50px;
+            }
+            .arrow {
+                height: 200px;
+                top: -45px;
+                left: unset;
+                right: 0px;
+            }
+        }
+        .image {
+            display: none;
+        }
+    }
+    .newsletter-form {
+        #mc_embed_signup_scroll {
+            flex-direction: column;
+            p {
+                margin: 0;
+            }
+            input[type="submit"] {
+                margin: 0;
+                width: 100%;
+            }
+        }
+        .mc-field-group {
+            margin-right: 0px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        .email {
+            margin-bottom: 12px;
+        }
+    }
+}
+@media only screen and (max-width: $tablet) {
+    .newsletter {
+        row-gap: 35px;
+        flex-direction: column;
+        .newsletter__content {
+            margin-right: 0;
+            max-width: unset;
+            width: 100%;
+        }
+        .newsletter__image {
+            display: none;
+            min-width: unset;
+            width: 100%;
+        }
+    }
+}
+/* END Newsletter Sign Up */
+

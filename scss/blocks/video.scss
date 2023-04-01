@@ -1,0 +1,17 @@
+.video {
+    background-color: $lightgray;
+    border-radius: 25px;
+    position: relative; 
+    overflow: hidden;
+    video {
+        margin-bottom: -10px;
+    }
+    @media only screen and (max-width: $mobile) {
+        width: 100vw;
+        border-radius: 0;
+        video {
+            height: 300px;
+            object-fit: cover;
+        }
+    }
+}
