@@ -1,0 +1,6 @@
+{
+	"require-dev": {
+		"php-stubs/woocommerce-stubs": "^7.6",
+		"php-stubs/acf-pro-stubs": "^6.0"
+	}
+}

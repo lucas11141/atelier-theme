@@ -1,111 +1,86 @@
 .uber__mich {
-    // overflow: hidden;
-    .bild__text__image {
-        width: 360px;
-        img {
-            width: 100%;
-        }
-        span {
-            display: block;
-            h2 {
-                padding-top: 40px;
-                font-family: gautreaux, serif;
-                @include fluid-type(35px, 50px);
-                line-height: 1;
-                font-weight: 700;
-                text-transform: none;
-                -webkit-text-stroke: 3px $main;
-                white-space: nowrap;
-            }
-            h6 {
-                transform: translateX(24px);
-            }
-        }
-    }
-    .bild__text__content {
-        max-width: 550px;
-        .quote__list {
-            .list__item {
-                .item__infos {
-                    margin-top: -30px;
-                }
-            }
-        }
-    }
-    @media only screen and (max-width: $tablet) {
-        .bild__text__image {
-            width: 100%;
-            height: unset;
-            @include flex-row();
-            align-items: center;
-            justify-content: center;
-            column-gap: 30px;
-            img {
-                width: 10px;
-                max-width: 260px;
-                flex: auto;
-            }
-            span {
-                min-width: 260px;
-                h2 {
-                    -webkit-text-stroke: 2px $main;
-                }
-            }
-        }
-        .bild__text__content {
-            max-width: unset;
-        }
-    }
-    @media only screen and (max-width: 450px) {
-        .bild__text__image {
-            flex-direction: column;
-            img {
-                margin-left: auto;
-                width: 150px;
-            }
-            span {
-                margin-right: auto;
-                min-width: unset;
-            }
-        }
-    }
-    // .sticky__element {
-    //     @include flex-column();
-    //     align-items: center;
-    //     justify-content: center;
-    //     div {
-    //         transform: none;
-    //         position: relative;
-    //         @include flex-column();
-    //         align-items: center;
-    //         row-gap: 30px;
-    //         top: unset;
-    //     }
-    //     img {
-    //         width: 100%;
-    //     }
-    //     span {
-    //         h2 {
-    //             font-family: gautreaux, serif;
-    //             font-size: 50px;
-    //             line-height: 50px;
-    //             font-weight: 700;
-    //             text-transform: none;
-    //             -webkit-text-stroke: 3px $main;
-    //             white-space: nowrap;
-    //         }
-    //         h6 {
-    //             transform: translateX(24px);
-    //         }
-    //     }
-    // }
-    // .sticky__content {
-    //     .quote__list {
-    //         .list__item {
-    //             .item__infos {
-    //                 margin-top: -30px;
-    //             }
-    //         }
-    //     }
-    // }
+	.bild__text__image {
+		width: 360px;
+
+		img {
+			width: 100%;
+		}
+
+		span {
+			display: block;
+
+			h2 {
+				padding-top: 40px;
+				font-family: 'gautreaux', serif;
+				@include fluid-type(35px, 50px);
+				line-height: 1;
+				font-weight: 700;
+				text-transform: none;
+				-webkit-text-stroke: 3px $main;
+				white-space: nowrap;
+			}
+
+			h6 {
+				transform: translateX(24px);
+			}
+		}
+	}
+
+	.bild__text__content {
+		max-width: 550px;
+
+		.quote__list {
+			.list__item {
+				.item__infos {
+					margin-top: -30px;
+				}
+			}
+		}
+	}
+
+	// Responsive
+	@media only screen and (max-width: $tablet) {
+		.bild__text__image {
+			width: 100%;
+			height: unset;
+			@include flex-row();
+			align-items: center;
+			justify-content: center;
+			column-gap: 30px;
+
+			img {
+				width: 10px;
+				max-width: 260px;
+				flex: auto;
+			}
+
+			span {
+				min-width: 260px;
+
+				h2 {
+					-webkit-text-stroke: 2px $main;
+				}
+			}
+		}
+
+		.bild__text__content {
+			max-width: unset;
+		}
+	}
+
+	@media only screen and (max-width: 450px) {
+		.bild__text__image {
+			flex-direction: column;
+
+			img {
+				margin-left: auto;
+				width: 150px;
+			}
+
+			span {
+				margin-right: auto;
+				min-width: unset;
+			}
+		}
+	}
 }

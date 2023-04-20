@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Block Name: Media & Text
  *
@@ -21,37 +22,39 @@ $video = $media['video'];
 $produkt_aktivieren = $media['produkt_aktivieren'];
 $produkt = $media['produkt'];
 
-$product_permalink = get_permalink( $produkt->ID );
-$product_category =  wp_get_post_terms( $produkt->ID, 'product_cat' )[0]->name;;
-$product_title = get_the_title( $produkt->ID );
-$product_short_description = get_field( 'short_description', $produkt->ID );
+if ($produkt) {
+    $product_permalink = get_permalink($produkt->ID);
+    $product_category =  wp_get_post_terms($produkt->ID, 'product_cat')[0]->name;;
+    $product_title = get_the_title($produkt->ID);
+    $product_short_description = get_field('short_description', $produkt->ID);
+}
 ?>
 
 <div class="media-text" id="<?= $id ?>">
 
-    
+
     <div class="media-text__text">
         <div class="media-text__text__content">
             <?php get_template_part('template-parts/paper'); ?>
-    
+
             <?php if ($tag) : ?>
                 <span class="tag --color-white"><?= $tag ?></span>
             <?php endif ?>
-    
+
             <?php if ($uberschrift_h5) : ?>
                 <h5><?= $uberschrift_h5 ?></h5>
             <?php endif ?>
-    
+
             <?php if ($uberschrift_h2) : ?>
                 <h2><?= $uberschrift_h2 ?></h2>
             <?php endif ?>
-    
+
             <?php if ($beschreibung) : ?>
                 <?= $beschreibung ?>
             <?php endif ?>
-    
+
             <?php if ($button) : ?>
-                <?php get_template_part('template-parts/button', '', array( 'button'=>$button, 'color'=>'accent' )); ?>
+                <?php get_template_part('template-parts/button', '', array('button' => $button, 'color' => 'accent')); ?>
             <?php endif ?>
         </div>
     </div>
@@ -80,5 +83,5 @@ $product_short_description = get_field( 'short_description', $produkt->ID );
             </div>
         <?php endif; ?>
     </div>
-    
+
 </div>

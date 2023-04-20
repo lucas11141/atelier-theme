@@ -1,30 +1,36 @@
 .buttons__list {
-    @include flex-row();
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    column-gap: 20px;
-    row-gap: 20px;
-    .button {
-        min-width: 250px;
-        padding-top: 22px;
-        padding-bottom: 22px;
-        flex: auto;
-    }
-    &.count--4 {
-        .button {
-            width: 40%;
-        }
-    }
-    @media only screen and (max-width: $desktop) {  
-        column-gap: 3vw;
-        row-gap: 3vw;
-    }
-    @media only screen and (max-width: $mobile) {
-        row-gap: 8px;
-        .button {
-            width: 100%;
-            padding-top: 17px;
-            padding-bottom: 17px;
-        }
-    }
+	@include flex-row();
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	column-gap: 20px;
+	row-gap: 20px;
+
+	.button {
+		min-width: 250px;
+		padding-top: 22px;
+		padding-bottom: 22px;
+		flex: auto;
+	}
+
+	&.count--4 {
+		.button {
+			width: 40%;
+		}
+	}
+
+	// Responsive
+	@media only screen and (max-width: $desktop) {
+		column-gap: 3vw;
+		row-gap: 3vw;
+	}
+
+	@media only screen and (max-width: $mobile) {
+		row-gap: 8px;
+
+		.button {
+			width: 100%;
+			padding-top: 17px;
+			padding-bottom: 17px;
+		}
+	}
 }

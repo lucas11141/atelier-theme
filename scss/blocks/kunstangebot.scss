@@ -1,146 +1,166 @@
 .kunstangebot__item {
-    width: 100%;
-    overflow: hidden;
-    .wrapper {
-        @include flex-row();
-        justify-content: flex-end;
-        align-items: center;
-        column-gap: 75px;
-        .item__image {
-            width: 400px;
-            min-width: 400px;
-            position: relative;
-            .image {
-                height: calc(100% - 4px);
-                width: calc(100% - 4px);
-                object-fit: cover;
-                position: absolute;
-                top: 2px;
-                left: 2px;
-                z-index: -1;
-            }
-            .image__mask {
-                &.--mobile {
-                    display: none;
-                }
-            }
-        }
-        .item__content {
-            min-width: 360px;
-            position: relative;
-            h2 {
-                padding: 0;
-            }
-            .two-buttons-vertical {
-                align-items: flex-start;
-            }
-            .background__number {
-                padding: 0;
-                font-size: 500px;
-                font-weight: 600;
-                line-height: 340px;
-                color: $accent;
-                position: absolute;
-                right: 0;
-                top: -100px;
-                opacity: .1;
-                pointer-events: none;
-            }
-        }
-    }
-    &.text__image .wrapper {
-        flex-direction: row-reverse;
-    }
-    &.--color {
-        &-blue .wrapper {
-            .background__number,
-            h6 {
-                color: $course-kinder;
-            }
-        }
-        &-purple .wrapper {
-            .background__number,
-            h6 {
-                color: $course-erwachsene;
-            }
-        }
-        &-orange .wrapper {
-            .background__number,
-            h6 {
-                color: $workshop-kinder;
-            }
-        }
-        &-red .wrapper {
-            .background__number,
-            h6 {
-                color: $workshop-erwachsene;
-            }
-        }
-        &-pink .wrapper {
-            .background__number,
-            h6 {
-                color: $kunstevent;
-            }
-        }
-        &-yellow .wrapper {
-            .background__number,
-            h6 {
-                color: $ferienprogramm;
-            }
-        }
-    }    
-}
-@media only screen and (max-width: $desktop) {
-    .kunstangebot__item .wrapper {
-        column-gap: 50px;
-        .item__content .two-buttons-vertical {
-            align-items: stretch;
-        }
-    }
-}
-@media only screen and (max-width: $tablet) {
-    .kunstangebot__item .wrapper {
-        column-gap: 40px;
-        .item__image {
-            min-width: 350px;
-        }
-        .item__content {
-            min-width: 340px;
-            .background__number {
-                font-size: 350px;
-                right: -20px;
-            }
-        }
-    }
-}
-@media only screen and (max-width: $mobile) {
-    .kunstangebot__item {
-        .wrapper {
-            height: unset;
-            flex-direction: column;
-            row-gap: 30px;
-            .item__image {
-                min-width: unset;
-                width: 100%;
-                max-width: 330px;
-                .image__mask {
-                    display: none;
-                    &.--mobile {
-                        display: block;
-                    }
-                }
-            }
-            .item__content {
-                min-width: unset;
-                width: 100%;
-            }
-            &.item--2,
-            &.item--4 {
-                flex-direction: column;
-            }
-        }
-        &.text__image .wrapper {
-            flex-direction: column;
-        }
-    }
+	width: 100%;
+	overflow: hidden;
+
+	@include flex-row();
+
+	.wrapper {
+		@include flex-row();
+		justify-content: flex-end;
+		align-items: center;
+		column-gap: 75px;
+	}
+
+	.item__image {
+		width: 400px;
+		min-width: 400px;
+		position: relative;
+
+		.image {
+			height: calc(100% - 4px);
+			width: calc(100% - 4px);
+			object-fit: cover;
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			z-index: -1;
+		}
+
+		.image__mask {
+			&.--mobile {
+				display: none;
+			}
+		}
+	}
+
+	.item__content {
+		min-width: 360px;
+		position: relative;
+
+		h2 {
+			padding: 0;
+		}
+
+		.two-buttons-vertical {
+			align-items: flex-start;
+		}
+
+		.background__number {
+			padding: 0;
+			font-size: 500px;
+			font-weight: 600;
+			line-height: 340px;
+			color: $accent;
+			position: absolute;
+			right: 0;
+			top: -100px;
+			opacity: 0.1;
+			pointer-events: none;
+		}
+	}
+
+	&.text__image .wrapper {
+		flex-direction: row-reverse;
+	}
+
+	// Responsive
+	@media only screen and (max-width: $desktop) {
+		.wrapper {
+			column-gap: 50px;
+		}
+
+		.item__content .two-buttons-vertical {
+			align-items: stretch;
+		}
+	}
+
+	@media only screen and (max-width: $tablet) {
+		.wrapper {
+			column-gap: 40px;
+		}
+
+		.item__image {
+			min-width: 350px;
+		}
+
+		.item__content {
+			min-width: 340px;
+
+			.background__number {
+				font-size: 350px;
+				right: -20px;
+			}
+		}
+	}
+
+	@media only screen and (max-width: $mobile) {
+		.wrapper {
+			height: unset;
+			flex-direction: column;
+			row-gap: 30px;
+		}
+
+		&.text__image .wrapper {
+			flex-direction: column;
+		}
+
+		.item__image {
+			min-width: unset;
+			width: 100%;
+			max-width: 330px;
+
+			.image__mask {
+				display: none;
+
+				&.--mobile {
+					display: block;
+				}
+			}
+		}
+
+		.item__content {
+			min-width: unset;
+			width: 100%;
+		}
+	}
+
+	// Farben
+	&.--color {
+		&-blue {
+			.background__number,
+			h6 {
+				color: $course-kinder;
+			}
+		}
+		&-purple {
+			.background__number,
+			h6 {
+				color: $course-erwachsene;
+			}
+		}
+		&-orange {
+			.background__number,
+			h6 {
+				color: $workshop-kinder;
+			}
+		}
+		&-red {
+			.background__number,
+			h6 {
+				color: $workshop-erwachsene;
+			}
+		}
+		&-pink {
+			.background__number,
+			h6 {
+				color: $kunstevent;
+			}
+		}
+		&-yellow {
+			.background__number,
+			h6 {
+				color: $ferienprogramm;
+			}
+		}
+	}
 }

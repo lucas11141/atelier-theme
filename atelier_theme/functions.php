@@ -15,8 +15,9 @@
 	WooCommerce Support
 \*------------------------------------*/
 
-function add_woocommerce_support() {
-    add_theme_support( 'woocommerce' );
+function add_woocommerce_support()
+{
+    add_theme_support('woocommerce');
     /* add_theme_support( 'woocommerce', array(
         'thumbnail_image_width' => 520,
         'single_image_width' => 520,
@@ -26,22 +27,26 @@ function add_woocommerce_support() {
 add_action('after_setup_theme', 'add_woocommerce_support');
 
 
-add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+add_filter('woocommerce_enqueue_styles', '__return_empty_array');
+
+
+
+require get_template_directory() . '/inc/helpers.php'; // Helper functions
+require get_template_directory() . '/inc/api.php'; // API functions
 
 
 
 
 
-
-
-function prefix_nav_description( $item_output, $item, $depth, $args ) {
-    if ( !empty( $item->description ) ) {
-        $item_output = str_replace( $args->link_after . '</a>', '<p class="menu-item-description">' . $item->description . '</p>' . $args->link_after . '</a>', $item_output );
+function prefix_nav_description($item_output, $item, $depth, $args)
+{
+    if (!empty($item->description)) {
+        $item_output = str_replace($args->link_after . '</a>', '<p class="menu-item-description">' . $item->description . '</p>' . $args->link_after . '</a>', $item_output);
     }
- 
+
     return $item_output;
 }
-add_filter( 'walker_nav_menu_start_el', 'prefix_nav_description', 10, 4 );
+add_filter('walker_nav_menu_start_el', 'prefix_nav_description', 10, 4);
 
 
 
@@ -52,20 +57,16 @@ add_filter( 'walker_nav_menu_start_el', 'prefix_nav_description', 10, 4 );
 	Theme Support
 \*------------------------------------*/
 
-if( function_exists('acf_add_options_page') ) {
-    
+if (function_exists('acf_add_options_page')) {
+
     acf_add_options_page('atelier Theme Options');
-    acf_add_options_page('Kunstangebote Options');
-    
 }
 
-if (!isset($content_width))
-{
+if (!isset($content_width)) {
     $content_width = 900;
 }
 
-if (function_exists('add_theme_support'))
-{
+if (function_exists('add_theme_support')) {
     // Add Menu Support
     add_theme_support('menus');
 
@@ -84,283 +85,283 @@ if (function_exists('add_theme_support'))
 // Atelier: Hauptmenü (links)
 function atelier_nav_left()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'atelier-header-menu-left',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'atelier-header-menu-left',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'link_before'     => '',
+            'link_after'      => '',
+            'items_wrap'      => '<ul>%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => ''
+        )
+    );
 }
 // Atelier: Hauptmenü (rechts)
 function atelier_nav_right()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'atelier-header-menu-right',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'atelier-header-menu-right',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'link_before'     => '',
+            'link_after'      => '',
+            'items_wrap'      => '<ul>%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => ''
+        )
+    );
 }
 // Atelier: Hauptmenü Mobil (oben)
 function atelier_nav_mobile_first()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'atelier-header-menu-mobile-first',
-		'menu'            => 'testmenu',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => '',
-		)
-	);
-}// Atelier: Hauptmenü Mobil (unten)
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'atelier-header-menu-mobile-first',
+            'menu'            => 'testmenu',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'items_wrap'      => '<ul>%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => '',
+        )
+    );
+} // Atelier: Hauptmenü Mobil (unten)
 function atelier_nav_mobile_second()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'atelier-header-menu-mobile-second',
-		'menu'            => 'testmenu',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => '',
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'atelier-header-menu-mobile-second',
+            'menu'            => 'testmenu',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'items_wrap'      => '<ul>%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => '',
+        )
+    );
 }
 // Atelier: Footer-Menü
 function atelier_footer_nav()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'atelier-footer-menu',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul class="footer__links">%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'atelier-footer-menu',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'link_before'     => '',
+            'link_after'      => '',
+            'items_wrap'      => '<ul class="footer__links">%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => ''
+        )
+    );
 }
 // Atelier: Rechtsmenü
 function atelier_law_nav()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'atelier-law-menu',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul class="nav--law">%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'atelier-law-menu',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'link_before'     => '',
+            'link_after'      => '',
+            'items_wrap'      => '<ul class="nav--law">%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => ''
+        )
+    );
 }
 
 
 // Shop: Hauptmenü (links)
 function shop_nav_left()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'shop-header-menu-left',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'shop-header-menu-left',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'link_before'     => '',
+            'link_after'      => '',
+            'items_wrap'      => '<ul>%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => ''
+        )
+    );
 }
 // Shop: Hauptmenü (rechts)
 function shop_nav_right()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'shop-header-menu-right',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'shop-header-menu-right',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'link_before'     => '',
+            'link_after'      => '',
+            'items_wrap'      => '<ul>%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => ''
+        )
+    );
 }
 // Shop: Hauptmenü Mobil (oben)
 function shop_nav_mobile_first()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'shop-header-menu-mobile-first',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => '',
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'shop-header-menu-mobile-first',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'items_wrap'      => '<ul>%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => '',
+        )
+    );
 }
 // Shop: Hauptmenü Mobil (unten)
 function shop_nav_mobile_second()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'shop-header-menu-mobile-second',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => '',
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'shop-header-menu-mobile-second',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'items_wrap'      => '<ul>%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => '',
+        )
+    );
 }
 // Shop: Footer-Menü
 function shop_footer_nav()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'shop-footer-menu',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul class="footer__links">%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'shop-footer-menu',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'link_before'     => '',
+            'link_after'      => '',
+            'items_wrap'      => '<ul class="footer__links">%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => ''
+        )
+    );
 }
 // Shop: Rechtsmenü
 function shop_law_nav()
 {
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'shop-law-menu',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul class="nav--law">%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
-		)
-	);
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'shop-law-menu',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'link_before'     => '',
+            'link_after'      => '',
+            'items_wrap'      => '<ul class="nav--law">%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => ''
+        )
+    );
 }
 
 
@@ -398,12 +399,13 @@ function atelier_styles()
 
 
 //Remove Gutenberg Block Library CSS from loading on the frontend
-function wp_remove_wp_block_library_css(){
-    wp_dequeue_style( 'wp-block-library' );
-    wp_dequeue_style( 'wp-block-library-theme' );
-    wp_dequeue_style( 'wc-block-style' ); // Remove WooCommerce block CSS
-} 
-add_action( 'wp_enqueue_scripts', 'wp_remove_wp_block_library_css', 100 );
+function wp_remove_wp_block_library_css()
+{
+    wp_dequeue_style('wp-block-library');
+    wp_dequeue_style('wp-block-library-theme');
+    wp_dequeue_style('wc-block-style'); // Remove WooCommerce block CSS
+}
+add_action('wp_enqueue_scripts', 'wp_remove_wp_block_library_css', 100);
 
 
 // Register Navigation
@@ -464,8 +466,7 @@ function add_slug_to_body_class($classes)
 }
 
 // If Dynamic Sidebar Exists
-if (function_exists('register_sidebar'))
-{
+if (function_exists('register_sidebar')) {
     // Define Sidebar Widget Area 1
     register_sidebar(array(
         'name' => __('Widget Area 1', 'atelier'),
@@ -540,14 +541,14 @@ function atelier_style_remove($tag)
 }
 
 // Remove thumbnail width and height dimensions that prevent fluid images in the_thumbnail
-function remove_thumbnail_dimensions( $html )
+function remove_thumbnail_dimensions($html)
 {
     $html = preg_replace('/(width|height)=\"\d*\"\s/', "", $html);
     return $html;
 }
 
 // Custom Gravatar in Settings > Discussion
-function ateliergravatar ($avatar_defaults)
+function ateliergravatar($avatar_defaults)
 {
     $myavatar = get_template_directory_uri() . '/img/gravatar.jpg';
     $avatar_defaults[$myavatar] = "atelier Avatar";
@@ -564,7 +565,6 @@ function ateliergravatar ($avatar_defaults)
 add_action('init', 'atelier_header_scripts'); // Add Custom Scripts to wp_head
 add_action('wp_enqueue_scripts', 'atelier_styles'); // Add Theme Stylesheet
 add_action('init', 'register_atelier_menu'); // Add HTML5 Blank Menu
-add_action('init', 'create_post_type_atelier'); // Add our HTML5 Blank Custom Post Type
 add_action('init', 'atelierwp_pagination'); // Add our HTML5 Pagination
 
 // Remove Actions
@@ -607,123 +607,8 @@ add_shortcode('atelier_shortcode_demo', 'atelier_shortcode_demo'); // You can pl
 add_shortcode('atelier_shortcode_demo_2', 'atelier_shortcode_demo_2'); // Place [atelier_shortcode_demo_2] in Pages, Posts now.
 
 
-/*------------------------------------*\
-	Custom Post Types
-\*------------------------------------*/
+require get_template_directory() . '/inc/custom_post_type.php';
 
-// Create 1 Custom Post type for a Demo, called atelier-post
-function create_post_type_atelier()
-{
-
-    register_taxonomy('course_days' , array('books'), array(
-        'hierarchical' => true,
-        'labels' => array(
-            'name' => _x( 'Wochentage', 'taxonomy general name' ),
-            'singular_name' => _x( 'Wochentag', 'taxonomy singular name' ),
-            'search_items' =>  __( 'Wochentage suchen' ),
-            'all_items' => __( 'Alle Wochentage' ),
-            'parent_item' => __( 'Eltern Wochentag' ),
-            'parent_item_colon' => __( 'Eltern Wochentag:' ),
-            'edit_item' => __( 'Wochentag bearbeiten' ), 
-            'update_item' => __( 'Wochentag aktualisieren' ),
-            'add_new_item' => __( 'Neuen Wochentag erstellen' ),
-            'new_item_name' => __( 'Neuer Wochentag Name' ),
-            'menu_name' => __( 'Wochentage' ),
-        ),  
-        'show_ui' => true,
-        'show_in_rest' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-        'rewrite' => array( 'slug' => 'wochentag' ),
-    ));
-    
-    register_taxonomy( 'product_badge', 'product', array(
-        'hierarchical' => true,
-        'labels' => array(
-            'name' => _x( 'Badges', 'taxonomy general name' ),
-            'singular_name' => _x( 'Badge', 'taxonomy singular name' ),
-            'search_items' =>  __( 'Badges suchen' ),
-            'all_items' => __( 'Alle Badges' ),
-            'parent_item' => __( 'Eltern Badge' ),
-            'parent_item_colon' => __( 'Eltern Badge:' ),
-            'edit_item' => __( 'Badge bearbeiten' ), 
-            'update_item' => __( 'Badge aktualisieren' ),
-            'add_new_item' => __( 'Neuen Badge erstellen' ),
-            'new_item_name' => __( 'Neuer Badge Name' ),
-            'menu_name' => __( 'Badge' ),
-        ),  
-        'show_ui' => true,
-        'show_in_rest' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-    ));
-    register_taxonomy_for_object_type( 'product_badge', 'product' );
-
-
-    register_taxonomy_for_object_type('category', 'kunstangebot'); // Register Taxonomies for Category
-    register_taxonomy_for_object_type('post_tag', 'kunstangebot');
-    register_post_type('kunstangebot', // Register Custom Post Type
-        array(
-        'labels' => array(
-            'name' => __('Kunstangebot', 'atelier'), // Rename these to suit
-            'singular_name' => __('Kunstangebot', 'atelier'),
-            'add_new' => __('Add New', 'atelier'),
-            'add_new_item' => __('Add New Blog Post', 'atelier'),
-            'edit' => __('Edit', 'atelier'),
-            'edit_item' => __('Edit Blog Post', 'atelier'),
-            'new_item' => __('New Blog Post', 'atelier'),
-            'view' => __('View Blog Post', 'atelier'),
-            'view_item' => __('View Blog Post', 'atelier'),
-            'search_items' => __('Search Blog Post', 'atelier'),
-            'not_found' => __('No Blog Posts found', 'atelier'),
-            'not_found_in_trash' => __('No Blog Posts found in Trash', 'atelier')
-        ),
-        'public' => true,
-        'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
-        'has_archive' => true,
-        'supports' => array(
-            'title',
-            'thumbnail'
-        ), // Go to Dashboard Custom HTML5 Blank post for supports
-        'can_export' => true, // Allows export in Tools > Export
-        'taxonomies' => array(
-            'post_tag',
-            'category',
-            // 'course_days'
-        ), // Add Category and Post Tags support
-        'show_in_rest' => true,
-    ));
-
-
-    register_post_type( 'termin',  array(
-        'labels'              => array(
-            'name'                => __( 'Termine', 'atelier' ),
-            'singular_name'       => __( 'Termin', 'atelier' ),
-            'add_new'             => __( 'Termin erstellen', 'atelier' ),
-            'add_new_item'        => __( 'Neuen Termin erstellen', 'atelier' ),
-            'edit_item'           => __( 'Termin bearbeiten', 'atelier' ),
-            'new_item'            => __( 'Neuer Termin', 'atelier' ),
-            'all_items'           => __( 'Alle Termine', 'atelier' ),
-            'view_item'           => __( 'Termin ansehen', 'atelier' ),
-            'search_items'        => __( 'Termine suchen', 'atelier' ),
-            'not_found'           => __( 'Keine Termine gefunden', 'atelier' ),
-            'not_found_in_trash'  => __( 'Keine Termine im Papierkorb gefunden', 'atelier' ),
-            'menu_name'           => __( 'Termine', 'atelier' ),
-        ),
-        'public'              => true,
-        'hierarchical'        => false,
-        'has_archive'         => true,
-        'supports'            => array( '' ),
-        'can_export' => true, // Allows export in Tools > Export
-        'taxonomies' => array(
-            'category',
-            'course_days'
-        ), // Add Category and Post Tags support
-        'show_in_rest' => true,
-        'menu_icon'   => 'dashicons-calendar',
-    ));
-
-}
 
 /*------------------------------------*\
 	ShortCode Functions
@@ -743,31 +628,34 @@ function atelier_shortcode_demo_2($atts, $content = null) // Demo Heading H2 sho
 
 add_action('template_redirect', 'my_custom_disable_author_page');
 
-function my_custom_disable_author_page() {
+function my_custom_disable_author_page()
+{
     global $wp_query;
 
-    if ( is_author() ) {
+    if (is_author()) {
         // Redirect to homepage, set status to 301 permenant redirect. 
         // Function defaults to 302 temporary redirect. 
-        wp_redirect(get_option('home'), 301); 
-        exit; 
+        wp_redirect(get_option('home'), 301);
+        exit;
     }
 }
 
 // Disable Update E-Mails
-add_filter( 'auto_core_update_send_email', 'wpb_stop_auto_update_emails', 10, 4 );
-  
-function wpb_stop_update_emails( $send, $type, $core_update, $result ) {
-if ( ! empty( $type ) && $type == 'success' ) {
-return false;
+add_filter('auto_core_update_send_email', 'wpb_stop_auto_update_emails', 10, 4);
+
+function wpb_stop_update_emails($send, $type, $core_update, $result)
+{
+    if (!empty($type) && $type == 'success') {
+        return false;
+    }
+    return true;
 }
-return true;
-}
-add_filter( 'auto_plugin_update_send_email', '__return_false' );
-add_filter( 'send_password_change_email', '__return_false' );
+add_filter('auto_plugin_update_send_email', '__return_false');
+add_filter('send_password_change_email', '__return_false');
 
 // Backend vergroessern
-function custom_admin_css() {
+function custom_admin_css()
+{
     echo '<style type="text/css">
     .wp-block { max-width: 1400px; }
     </style>';
@@ -780,461 +668,33 @@ add_action('admin_head', 'custom_admin_css');
               Register Blocks 
  ********************************************
  *******************************************/
-function creat_category( $categories, $post ) {
+function creat_category($categories, $post)
+{
     return array_merge(
         $categories,
         array(
             array(
                 'slug' => 'inhaltselemente',
-                'title' => __( 'Atelier Blöcke', 'inhaltselemente' ),
+                'title' => __('Atelier Blöcke', 'inhaltselemente'),
             ),
         )
     );
 }
-add_filter( 'block_categories', 'creat_category', 10, 2);
+add_filter('block_categories', 'creat_category', 10, 2);
 
 
-add_action('acf/init', 'my_acf_init');
-function my_acf_init() {
-    
-    // check function exists
-    if( function_exists('acf_register_block') ) {
-        
-        acf_register_block(
-            array(
-                'name'              => 'button',
-                'title'             => __('Button'),
-                'description'       => __('Eine verlinkte Schaltfläche.'),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'inhaltselemente',
-                'icon'              => 'button',
-                'mode'              => 'auto',
-                'keywords'          => array( 'button', 'cta'),
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'abstand',
-                'title'             => __('Abstand'),
-                'description'       => __('Ein Abstand zwischen den Elementen.'),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'abstand'),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'page-start',
-                'title'             => 'Seitenanfang',
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'preview',
-                'supports'          => array(
-                    'align' => true,
-                    'mode' => false,
-                    'jsx' => true
-                )
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'drei-schritte',
-                'title'             => __('3 Schritte'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'drei', "schritte"),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'newsletter',
-                'title'             => __('Newsletter'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'newsletter'),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'schulederphantasie',
-                'title'             => __('Schule der Phantasie'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'Schule der Phantasie'),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'zitat',
-                'title'             => __('Zitat'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'Zitat'),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'atelier-entdecken',
-                'title'             => __('Atelier entdecken'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'atelier', 'entdecken'),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'bild-text',
-                'title'             => __('Bild & Text'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'bild', 'text'),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'produktslider',
-                'title'             => __('Produktslider'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'produkt', 'slider'),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'video',
-                'title'             => __('Video'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'video' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'banner',
-                'title'             => __('Banner'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'banner' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'button-liste',
-                'title'             => __('Button Liste'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'button', 'liste' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'angebote-liste',
-                'title'             => __('Angebote Liste'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'angebote', 'liste' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'kunstangebot',
-                'title'             => __('Kunstangebot'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'angebote', 'liste' ),
-                'align'             => false,
-                'supports' => array( 'anchor' => true )
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'home-banner',
-                'title'             => __('Home Banner'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'home', 'banner' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'testimonials',
-                'title'             => __('Testimonials'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'testimonials' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'usp-liste',
-                'title'             => __('USP Liste'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'usp', 'liste' ),
-                'align'             => false,
-            )
-        );
+require get_template_directory() . '/inc/blocks.php'; // register custom gutenberg blocks
 
 
-        acf_register_block(
-            array(
-                'name'              => 'usp',
-                'title'             => __('USP'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'usp' ),
-                'align'             => false,
-            )
-        );
+function my_acf_block_render_callback($block)
+{
 
-        acf_register_block(
-            array(
-                'name'              => 'headline-button',
-                'title'             => __('Überschrift & Button'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'überschrift', 'button' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'bild-text-round',
-                'title'             => __('Bild & Text Rund'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'Bild', 'Text', 'rund' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'map',
-                'title'             => __('Karte'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'Karte', 'Map' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'uber-mich',
-                'title'             => __('Über mich'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'über', 'mich' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'bilder-slider',
-                'title'             => __('Bilder Slider'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'bilder', 'slider' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'galerie-ausstellung',
-                'title'             => __('Galerie Ausstellung'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'galerie', 'ausstellung' ),
-                'align'             => false,
-                'supports' => array( 'anchor' => true )
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'newsletter-sendinblue',
-                'title'             => __('Newsletter Sendinblue'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'newsletter', 'sendinblue' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'kontakt-hero-banner',
-                'title'             => __('Kontakt Hero Banner'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'kontakt', 'hero', 'banner' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'faq',
-                'title'             => __('FAQ'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'faq', 'fragen', 'antworten' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'shop-hero-banner',
-                'title'             => __('Shop Hero Banner'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'shop', 'hero', 'banner' ),
-                'align'             => false,
-            )
-        );
-
-        acf_register_block(
-            array(
-                'name'              => 'media-text',
-                'title'             => __('Media & Text'),
-                'description'       => __(''),
-                'render_callback'   => 'my_acf_block_render_callback',
-                'category'          => 'design',
-                'category'          => 'inhaltselemente',
-                'mode'              => 'edit',
-                'keywords'          => array( 'media', 'text' ),
-                'align'             => false,
-            )
-        );
-
-    }
-
-}
-
-function my_acf_block_render_callback( $block ) {
-    
     // convert name ("acf/testimonial") into path friendly slug ("testimonial")
     $slug = str_replace('acf/', '', $block['name']);
-    
+
     // include a template part from within the "template-parts/block" folder
-    if( file_exists( get_theme_file_path("/template-parts/block/content-{$slug}.php") ) ) {
-        include( get_theme_file_path("/template-parts/block/content-{$slug}.php") );
+    if (file_exists(get_theme_file_path("/template-parts/block/content-{$slug}.php"))) {
+        include(get_theme_file_path("/template-parts/block/content-{$slug}.php"));
     }
 }
 
@@ -1245,20 +705,21 @@ function my_acf_block_render_callback( $block ) {
 
 
 
-add_filter('wp_nav_menu_objects' , 'my_menu_class');
-function my_menu_class($menu) {
+add_filter('wp_nav_menu_objects', 'my_menu_class');
+function my_menu_class($menu)
+{
     $level = 0;
     $stack = array('0');
-    foreach($menu as $key => $item) {
-        while($item->menu_item_parent != array_pop($stack)) {
+    foreach ($menu as $key => $item) {
+        while ($item->menu_item_parent != array_pop($stack)) {
             $level--;
-        }   
+        }
         $level++;
         $stack[] = $item->menu_item_parent;
         $stack[] = $item->ID;
-        $menu[$key]->classes[] = 'level-'. ($level - 1);
-    }                    
-    return $menu;        
+        $menu[$key]->classes[] = 'level-' . ($level - 1);
+    }
+    return $menu;
 }
 
 
@@ -1308,9 +769,10 @@ function my_menu_class($menu) {
 
 
 // Disable Image Links
-add_action( 'after_setup_theme', 'default_attachment_display_settings' );
-function default_attachment_display_settings() {
-	update_option( 'image_default_link_type', 'none' );
+add_action('after_setup_theme', 'default_attachment_display_settings');
+function default_attachment_display_settings()
+{
+    update_option('image_default_link_type', 'none');
 }
 
 
@@ -1318,30 +780,32 @@ function default_attachment_display_settings() {
 
 
 
-add_action('woocommerce_shop_loop_item_title','woocommerce_atelier_loop_category',5);
-add_action('woocommerce_shop_loop_item_title','woocommerce_atelier_loop_short_description',15);
+add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_loop_category', 5);
+add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_loop_short_description', 15);
 // Shop Item adding category
-function woocommerce_atelier_loop_category() {
-    $terms = get_the_terms( $post->ID, 'product_cat' );
-    if ( $terms && ! is_wp_error( $terms ) ) :
-    //only displayed if the product has at least one category
+function woocommerce_atelier_loop_category()
+{
+    $terms = get_the_terms($post->ID, 'product_cat');
+    if ($terms && !is_wp_error($terms)) :
+        //only displayed if the product has at least one category
         $cat_links = array();
-        foreach ( $terms as $term ) {
+        foreach ($terms as $term) {
             $cat_links[] = $term->name;
         }
-        $on_cat = join( " ", $cat_links );
-        ?>
+        $on_cat = join(" ", $cat_links);
+?>
         <span class="product__category">
             <?php echo $on_cat; ?>
         </span>
     <?php endif;
 }
-function woocommerce_atelier_loop_short_description() {
-    $short_description = get_field ("short_description" , $product->id);
-    if( $short_description ) : ?>
+function woocommerce_atelier_loop_short_description()
+{
+    $short_description = get_field("short_description", $product->id);
+    if ($short_description) : ?>
         <p class="product__description"><?php echo $short_description; ?></p>
     <?php endif; ?>
-<?php }
+    <?php }
 
 
 
@@ -1349,7 +813,7 @@ function woocommerce_atelier_loop_short_description() {
 
 
 // remove rating
-remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_rating',5);
+remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
 
 
 
@@ -1358,19 +822,20 @@ remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loo
 
 // add image to category banner
 add_action('atelier_category_banner', 'woocommerce_atelier_category_thumbnail', 5);
-function woocommerce_atelier_category_thumbnail() {
+function woocommerce_atelier_category_thumbnail()
+{
     // verify that this is a product category page
-    if ( is_product_category() ){
+    if (is_product_category()) {
         global $wp_query;
 
         // get the query object
         $cat = $wp_query->get_queried_object();
 
         // get the thumbnail id using the queried category term_id
-        $thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true ); 
+        $thumbnail_id = get_term_meta($cat->term_id, 'thumbnail_id', true);
 
         // get the image URL
-        $image = wp_get_attachment_url( $thumbnail_id ); 
+        $image = wp_get_attachment_url($thumbnail_id);
 
         // print the IMG HTML
         echo "<img src='{$image}' alt='' width='762' height='365' />";
@@ -1383,14 +848,16 @@ function woocommerce_atelier_category_thumbnail() {
 
 
 // Change number of related products
-function woo_related_products_limit() {
+function woo_related_products_limit()
+{
     global $product;
 
     $args['posts_per_page'] = 6;
     return $args;
 }
-add_filter( 'woocommerce_output_related_products_args', 'jk_related_products_args' );
-function jk_related_products_args( $args ) {
+add_filter('woocommerce_output_related_products_args', 'jk_related_products_args');
+function jk_related_products_args($args)
+{
     $args['posts_per_page'] = 6; // 4 related products
     $args['columns'] = 1; // arranged in 2 columns
     return $args;
@@ -1402,41 +869,43 @@ function jk_related_products_args( $args ) {
 
 
 // remove single-product information
-remove_action('woocommerce_single_product_summary','woocommerce_template_single_excerpt',20);
-remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
-remove_action('woocommerce_after_single_product_summary','woocommerce_output_product_data_tabs',10);
-remove_action('woocommerce_after_single_product_summary','woocommerce_upsell_display',15);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
+remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 
 
-add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
-function woo_remove_product_tabs( $tabs ) {
-   unset( $tabs['additional_information'] );    
-   return $tabs;
+add_filter('woocommerce_product_tabs', 'woo_remove_product_tabs', 98);
+function woo_remove_product_tabs($tabs)
+{
+    unset($tabs['additional_information']);
+    return $tabs;
 }
 
 
 
 
-add_filter( 'woocommerce_get_image_size_gallery_thumbnail', function( $size ) {
+add_filter('woocommerce_get_image_size_gallery_thumbnail', function ($size) {
     return array(
-    'width' => 520,
-    'height' => 520,
-    'crop' => 0,
+        'width' => 520,
+        'height' => 520,
+        'crop' => 0,
     );
 });
- 
+
 
 
 
 
 
 // Nav Cart Icon - Update Count
-add_filter( 'woocommerce_add_to_cart_fragments', 'atelier_add_to_cart_fragment' );
-function atelier_add_to_cart_fragment( $fragments ) {
-	global $woocommerce;
-	$fragments['.nav__cart__quantity'] = '<div class="nav__cart__quantity"><span>' .  $woocommerce->cart->cart_contents_count . '</span></div>';
- 	return $fragments;
- }
+add_filter('woocommerce_add_to_cart_fragments', 'atelier_add_to_cart_fragment');
+function atelier_add_to_cart_fragment($fragments)
+{
+    global $woocommerce;
+    $fragments['.nav__cart__quantity'] = '<div class="nav__cart__quantity"><span>' .  $woocommerce->cart->cart_contents_count . '</span></div>';
+    return $fragments;
+}
 
 
 
@@ -1444,8 +913,9 @@ function atelier_add_to_cart_fragment( $fragments ) {
 
 
 // Breadcrumb Settings
-add_filter( 'woocommerce_breadcrumb_defaults', 'atelier_breadcrumbs_settings' );
-function atelier_breadcrumbs_settings() {
+add_filter('woocommerce_breadcrumb_defaults', 'atelier_breadcrumbs_settings');
+function atelier_breadcrumbs_settings()
+{
     return array(
         'delimiter'   => ' <span>&#47;</span> ',
         'wrap_before' => '<nav class="woocommerce-breadcrumb" itemprop="breadcrumb">',
@@ -1455,8 +925,9 @@ function atelier_breadcrumbs_settings() {
         'home'        => 'Shop',
     );
 }
-add_filter( 'woocommerce_breadcrumb_home_url', 'atelier_custom_breadrumb_home_url' );
-function atelier_custom_breadrumb_home_url() {
+add_filter('woocommerce_breadcrumb_home_url', 'atelier_custom_breadrumb_home_url');
+function atelier_custom_breadrumb_home_url()
+{
     return 'http://kunstausdertuete.de/shop';
 }
 
@@ -1466,30 +937,33 @@ function atelier_custom_breadrumb_home_url() {
 
 
 //Produktseite anpassungen
-add_action( 'woocommerce_single_product_summary', 'atelier_custom_field_short_description', 8 );
-add_action( 'woocommerce_single_product_summary', 'atelier_custom_field_delivery_info', 35 );
-add_action( 'woocommerce_single_product_summary', 'atelier_custom_field_bulletpoints', 45 );
-add_action( 'woocommerce_single_product_summary', 'atelier_custom_field_quote', 46 );
-add_action( 'woocommerce_single_product_summary', 'atelier_custom_field_accordeon', 47 );
+add_action('woocommerce_single_product_summary', 'atelier_custom_field_short_description', 8);
+add_action('woocommerce_single_product_summary', 'atelier_custom_field_delivery_info', 35);
+add_action('woocommerce_single_product_summary', 'atelier_custom_field_bulletpoints', 45);
+add_action('woocommerce_single_product_summary', 'atelier_custom_field_quote', 46);
+add_action('woocommerce_single_product_summary', 'atelier_custom_field_accordeon', 47);
 
-function atelier_custom_field_short_description() {
+function atelier_custom_field_short_description()
+{
     global $product;
-    $short_description = get_field("short_description", $product->get_id() );
+    $short_description = get_field("short_description", $product->get_id());
     // $short_description = get_the_excerpt( $product->get_id() );
-    if( !empty($short_description)) {
-        ?>
+    if (!empty($short_description)) {
+    ?>
         <span class="short__description"><?= $short_description ?></span>
-        <?php
+    <?php
     }
 }
 
-function atelier_custom_field_delivery_info() {
+function atelier_custom_field_delivery_info()
+{
     ?>
     <p class="delivery__info"><?php echo get_field("versandinformationen_kurz", "options"); ?></p>
     <?php
 }
 
-function atelier_custom_field_quote() {
+function atelier_custom_field_quote()
+{
     $spruch_aktivieren = get_field('spruch_aktivieren');
     $spruch_uberschrift = get_field('spruch_uberschrift');
     $spruch = get_field('spruch');
@@ -1500,39 +974,42 @@ function atelier_custom_field_quote() {
         </div>
     <?php endif;
 }
-			
-function atelier_custom_field_bulletpoints() {
+
+function atelier_custom_field_bulletpoints()
+{
     global $product;
     $uberschrift = get_field('uberschrift');
-    if( !empty($uberschrift) || have_rows('stichpunkte') ): ?>
+    if (!empty($uberschrift) || have_rows('stichpunkte')) : ?>
         <div class="product__bulletpoints">
-            <?php //echo $product->get_short_description(); ?>
-            <?php if( !empty($uberschrift) ): ?>
-            <h4><?php echo $uberschrift; ?></h4> 
+            <?php //echo $product->get_short_description(); 
+            ?>
+            <?php if (!empty($uberschrift)) : ?>
+                <h4><?php echo $uberschrift; ?></h4>
             <?php endif;
-            if( have_rows('stichpunkte') ): ?>
+            if (have_rows('stichpunkte')) : ?>
                 <ul>
-                <?php while( have_rows('stichpunkte') ) : the_row();
-                    $punkt = get_sub_field('punkt');
+                    <?php while (have_rows('stichpunkte')) : the_row();
+                        $punkt = get_sub_field('punkt');
                     ?>
-                    <li>
-                        <img class="--ll-disabled" src="<?php echo get_template_directory_uri(); ?>/img/shop/bullet_checkmark.svg" alt="">
-                        <span><?php echo $punkt; ?></span>
-                    </li>
+                        <li>
+                            <img class="--ll-disabled" src="<?php echo get_template_directory_uri(); ?>/img/shop/bullet_checkmark.svg" alt="">
+                            <span><?php echo $punkt; ?></span>
+                        </li>
                     <?php
-                endwhile; ?>
+                    endwhile; ?>
                 </ul>
             <?php endif; ?>
         </div>
-        <?php
+    <?php
     endif;
 }
 
-function atelier_custom_field_accordeon() { ?>
-    <div class="accordeon"> 
-    <?php global $product; ?>
+function atelier_custom_field_accordeon()
+{ ?>
+    <div class="accordeon">
+        <?php global $product; ?>
 
-        <?php if ( !empty(get_field("lieferumfang")) ): ?>
+        <?php if (!empty(get_field("lieferumfang"))) : ?>
             <div class="accordeon__item accordeon--lieferumfang">
                 <dt class="accordeon__header">
                     <h5>Lieferumfang</h5>
@@ -1543,23 +1020,23 @@ function atelier_custom_field_accordeon() { ?>
                 </dt>
                 <dd class="accordeon__content">
                     <div>
-                        <?php if( have_rows('lieferumfang') ): ?>
+                        <?php if (have_rows('lieferumfang')) : ?>
                             <ul>
-                            <?php while( have_rows('lieferumfang') ) : the_row();
-                                $inhalt = get_sub_field('inhalt');
+                                <?php while (have_rows('lieferumfang')) : the_row();
+                                    $inhalt = get_sub_field('inhalt');
                                 ?>
-                                <li><?php echo $inhalt; ?></li>
-                            <?php endwhile; ?>
+                                    <li><?php echo $inhalt; ?></li>
+                                <?php endwhile; ?>
                             </ul>
                         <?php endif; ?>
-                        <?php if( have_rows('weiteres_material') ): ?>
+                        <?php if (have_rows('weiteres_material')) : ?>
                             <h5>Weiteres Material</h5>
                             <ul>
-                            <?php while( have_rows('weiteres_material') ) : the_row();
-                                $inhalt = get_sub_field('inhalt');
+                                <?php while (have_rows('weiteres_material')) : the_row();
+                                    $inhalt = get_sub_field('inhalt');
                                 ?>
-                                <li><?php echo $inhalt; ?></li>
-                            <?php endwhile; ?>
+                                    <li><?php echo $inhalt; ?></li>
+                                <?php endwhile; ?>
                             </ul>
                         <?php endif; ?>
                     </div>
@@ -1571,7 +1048,7 @@ function atelier_custom_field_accordeon() { ?>
             </div>
         <?php endif; ?>
 
-        <?php if ( $product->get_description() !== "" ): ?>
+        <?php if ($product->get_description() !== "") : ?>
             <div class="accordeon__item">
                 <dt class="accordeon__header">
                     <h5>Beschreibung</h5>
@@ -1583,7 +1060,7 @@ function atelier_custom_field_accordeon() { ?>
             </div>
         <?php endif; ?>
 
-        <?php if ( $product->has_dimensions() ): ?>
+        <?php if ($product->has_dimensions()) : ?>
             <div class="accordeon__item">
                 <dt class="accordeon__header">
                     <h5>Produktgröße<?php /* echo __( 'Dimensions', 'woocommerce' ); */ ?></h5>
@@ -1596,24 +1073,24 @@ function atelier_custom_field_accordeon() { ?>
                     <div>
                         <ul>
                             <?php
-                            $dimensions = $product->get_dimensions( false );
-                            if( $dimensions["length"] != "" ) :
-                                ?> <li><strong>Länge:</strong> <?php echo $dimensions["length"]; ?>cm</li> <?php 
-                            endif;
-                            if( $dimensions["width"] != "" ) :
-                                ?> <li><strong>Breite:</strong> <?php echo $dimensions["width"]; ?>cm</li> <?php 
-                            endif;
-                            if( $dimensions["height"] != "" ) :
-                                ?> <li><strong>Höhe:</strong> <?php echo $dimensions["height"]; ?>cm</li> <?php 
-                            endif;
-                            ?>
+                            $dimensions = $product->get_dimensions(false);
+                            if ($dimensions["length"] != "") :
+                            ?> <li><strong>Länge:</strong> <?php echo $dimensions["length"]; ?>cm</li> <?php
+                                                                                                    endif;
+                                                                                                    if ($dimensions["width"] != "") :
+                                                                                                        ?> <li><strong>Breite:</strong> <?php echo $dimensions["width"]; ?>cm</li> <?php
+                                                                                                                                                                                endif;
+                                                                                                                                                                                if ($dimensions["height"] != "") :
+                                                                                                                                                                                    ?> <li><strong>Höhe:</strong> <?php echo $dimensions["height"]; ?>cm</li> <?php
+                                                                                                                                                                                                                                                            endif;
+                                                                                                                                                                                                                                                                ?>
                         </ul>
                     </div>
                 </dd>
             </div>
         <?php endif; ?>
 
-        <?php if ( !empty(get_field("versandinformationen_lang", "options")) ): ?>
+        <?php if (!empty(get_field("versandinformationen_lang", "options"))) : ?>
             <div class="accordeon__item">
                 <dt class="accordeon__header">
                     <h5>Versand & Rückversand</h5>
@@ -1625,11 +1102,11 @@ function atelier_custom_field_accordeon() { ?>
             </div>
         <?php endif; ?>
 
-        <?php if( have_rows('kacheln') ):
-            while( have_rows('kacheln') ) : the_row();
+        <?php if (have_rows('kacheln')) :
+            while (have_rows('kacheln')) : the_row();
                 $uberschrift = get_sub_field('uberschrift');
                 $inhalt = get_sub_field('inhalt'); ?>
-                    
+
                 <div class="accordeon__item">
                     <dt class="accordeon__header">
                         <h5><?php echo $uberschrift; ?></h5>
@@ -1640,274 +1117,226 @@ function atelier_custom_field_accordeon() { ?>
                     </dd>
                 </div>
 
-            <?php endwhile;
+        <?php endwhile;
         endif; ?>
 
-    </div> <?php 
-}
-
-
-
-
-
-
-//Warenkorb - Item Mengenauswahl als Select Input
-function woocommerce_quantity_input( $args = array(), $product = null, $echo = true ) {
-  
-    if ( is_null( $product ) ) {
-       $product = $GLOBALS['product'];
-    }
-  
-    $defaults = array(
-       'input_id' => uniqid( 'quantity_' ),
-       'input_name' => 'quantity',
-       'input_value' => '1',
-       'classes' => apply_filters( 'woocommerce_quantity_input_classes', array( 'input-text', 'qty', 'text' ), $product ),
-       'max_value' => apply_filters( 'woocommerce_quantity_input_max', -1, $product ),
-       'min_value' => apply_filters( 'woocommerce_quantity_input_min', 0, $product ),
-       'step' => apply_filters( 'woocommerce_quantity_input_step', 1, $product ),
-       'pattern' => apply_filters( 'woocommerce_quantity_input_pattern', has_filter( 'woocommerce_stock_amount', 'intval' ) ? '[0-9]*' : '' ),
-       'inputmode' => apply_filters( 'woocommerce_quantity_input_inputmode', has_filter( 'woocommerce_stock_amount', 'intval' ) ? 'numeric' : '' ),
-       'product_name' => $product ? $product->get_title() : '',
-    );
-  
-    $args = apply_filters( 'woocommerce_quantity_input_args', wp_parse_args( $args, $defaults ), $product );
-   
-    
-    $args['min_value'] = max( $args['min_value'], 0 );
-    $args['max_value'] = 0 < $args['max_value'] ? $args['max_value'] : 20;
- 
-    if ( '' !== $args['max_value'] && $args['max_value'] < $args['min_value'] ) {
-       $args['max_value'] = $args['min_value'];
-    }
-   
-    $options = '';
-     
-    for ( $count = $args['min_value']; $count <= $args['max_value']; $count = $count + $args['step'] ) {
- 
-       if ( '' !== $args['input_value'] && $args['input_value'] >= 1 && $count == $args['input_value'] ) {
-         $selected = 'selected';      
-       } else $selected = '';
-  
-       $options .= '<option value="' . $count . '"' . $selected . '>' . $count . '</option>';
-  
-    }
-      
-    $string = '<div class="quantity"><span>Menge:</span><select name="' . $args['input_name'] . '">' . $options . '</select></div>';
-  
-    if ( $echo ) {
-       echo $string;
-    } else {
-       return $string;
-    }
-   
-}
-
-
-
-
-
-
-add_filter( 'woocommerce_product_variation_title_include_attributes', 'custom_product_variation_title', 10, 2 );
-function custom_product_variation_title($should_include_attributes, $product){
-    $should_include_attributes = false;
-    return $should_include_attributes;
-}
-
-
-
-
-
-
-add_filter ( 'woocommerce_account_menu_items', 'remove_my_account_links' );
-function remove_my_account_links( $menu_links ){
-    // unset( $menu_links['dashboard'] ); // Remove Logout link
-	unset( $menu_links['customer-logout'] ); // Remove Logout link
-	return $menu_links;
-}
-
-
-
-
-
-// Unterkategorien am Anfang der Kategorieseiten
-function atelier_product_subcategories( $args = array() ) {
-        $parentid = get_queried_object_id();
-        $args = array(
-        'parent' => $parentid
-        );
-        $terms = get_terms( 'product_cat', $args );
-        if ( $terms ) {  
-            echo '<p class="shop__button__list shop__subcategories">';
-            foreach ( $terms as $term ) { ?>
-                <a class="button  --color-gray   <?php echo $term->slug; ?>" href="<?php echo esc_url( get_term_link( $term ) ); ?>">
-                    <span><?php echo $term->name; ?></span>
-                </a>
-            <?php } 
-            echo '</p>';
+    </div> <?php
         }
-}
-add_action( 'woocommerce_archive_description', 'atelier_product_subcategories', 20 );
 
 
 
 
 
-// Unterkategorien am Ende der Kategorieseiten
-function tutsplus_product_subcategories( $args = array() ) {
-    if( is_product_category() ) {
-        $parentid = get_queried_object_id();
-        $args = array(
-        'parent' => $parentid
-        );
-        $terms = get_terms( 'product_cat', $args );
-        if ( $terms ) {  
-            ?>
+
+        //Warenkorb - Item Mengenauswahl als Select Input
+        function woocommerce_quantity_input($args = array(), $product = null, $echo = true)
+        {
+
+            if (is_null($product)) {
+                $product = $GLOBALS['product'];
+            }
+
+            $defaults = array(
+                'input_id' => uniqid('quantity_'),
+                'input_name' => 'quantity',
+                'input_value' => '1',
+                'classes' => apply_filters('woocommerce_quantity_input_classes', array('input-text', 'qty', 'text'), $product),
+                'max_value' => apply_filters('woocommerce_quantity_input_max', -1, $product),
+                'min_value' => apply_filters('woocommerce_quantity_input_min', 0, $product),
+                'step' => apply_filters('woocommerce_quantity_input_step', 1, $product),
+                'pattern' => apply_filters('woocommerce_quantity_input_pattern', has_filter('woocommerce_stock_amount', 'intval') ? '[0-9]*' : ''),
+                'inputmode' => apply_filters('woocommerce_quantity_input_inputmode', has_filter('woocommerce_stock_amount', 'intval') ? 'numeric' : ''),
+                'product_name' => $product ? $product->get_title() : '',
+            );
+
+            $args = apply_filters('woocommerce_quantity_input_args', wp_parse_args($args, $defaults), $product);
+
+
+            $args['min_value'] = max($args['min_value'], 0);
+            $args['max_value'] = 0 < $args['max_value'] ? $args['max_value'] : 20;
+
+            if ('' !== $args['max_value'] && $args['max_value'] < $args['min_value']) {
+                $args['max_value'] = $args['min_value'];
+            }
+
+            $options = '';
+
+            for ($count = $args['min_value']; $count <= $args['max_value']; $count = $count + $args['step']) {
+
+                if ('' !== $args['input_value'] && $args['input_value'] >= 1 && $count == $args['input_value']) {
+                    $selected = 'selected';
+                } else $selected = '';
+
+                $options .= '<option value="' . $count . '"' . $selected . '>' . $count . '</option>';
+            }
+
+            $string = '<div class="quantity"><span>Menge:</span><select name="' . $args['input_name'] . '">' . $options . '</select></div>';
+
+            if ($echo) {
+                echo $string;
+            } else {
+                return $string;
+            }
+        }
+
+
+
+
+
+
+        add_filter('woocommerce_product_variation_title_include_attributes', 'custom_product_variation_title', 10, 2);
+        function custom_product_variation_title($should_include_attributes, $product)
+        {
+            $should_include_attributes = false;
+            return $should_include_attributes;
+        }
+
+
+
+
+
+
+
+        add_filter('woocommerce_account_menu_items', 'remove_my_account_links');
+        function remove_my_account_links($menu_links)
+        {
+            // unset( $menu_links['dashboard'] ); // Remove Logout link
+            unset($menu_links['customer-logout']); // Remove Logout link
+            return $menu_links;
+        }
+
+
+
+
+
+        // Unterkategorien am Anfang der Kategorieseiten
+        function atelier_product_subcategories($args = array())
+        {
+            $parentid = get_queried_object_id();
+            $args = array(
+                'parent' => $parentid
+            );
+            $terms = get_terms('product_cat', $args);
+            if ($terms) {
+                echo '<p class="shop__button__list shop__subcategories">';
+                foreach ($terms as $term) { ?>
+            <a class="button  --color-gray   <?php echo $term->slug; ?>" href="<?php echo esc_url(get_term_link($term)); ?>">
+                <span><?php echo $term->name; ?></span>
+            </a>
+        <?php }
+                echo '</p>';
+            }
+        }
+        add_action('woocommerce_archive_description', 'atelier_product_subcategories', 20);
+
+
+
+
+
+        // Unterkategorien am Ende der Kategorieseiten
+        function tutsplus_product_subcategories($args = array())
+        {
+            if (is_product_category()) {
+                $parentid = get_queried_object_id();
+                $args = array(
+                    'parent' => $parentid
+                );
+                $terms = get_terms('product_cat', $args);
+                if ($terms) {
+        ?>
             <div class="wrapper--ignore shop__category__suggestions">
                 <?php get_template_part('template-parts/paper'); ?>
                 <div class="wrapper">
-                    <h2>Mehr<br><?php echo single_cat_title( '', false ); ?><br>entdecken
+                    <h2>Mehr<br><?php echo single_cat_title('', false); ?><br>entdecken
                         <img src="<?php echo get_template_directory_uri(); ?>/img/shop/more_categories_background.svg" alt="">
                     </h2>
                     <div class="category__suggestions__items">
                         <?php
                         $i = 1;
-                        foreach ( $terms as $term ) {
-                            if($i <= 4) { ?>
-                                <a href="<?php echo esc_url( get_term_link( $term ) ); ?>" class="<?php echo $term->slug; ?>">
-                                    <div><?php woocommerce_subcategory_thumbnail( $term ); ?></div>
+                        foreach ($terms as $term) {
+                            if ($i <= 4) { ?>
+                                <a href="<?php echo esc_url(get_term_link($term)); ?>" class="<?php echo $term->slug; ?>">
+                                    <div><?php woocommerce_subcategory_thumbnail($term); ?></div>
                                     <h4><strong><?php echo $term->name; ?></strong></h4>
-                                </a> <?php 
-                                $i++;
-                            }
-                        } ?>
+                                </a> <?php
+                                        $i++;
+                                    }
+                                } ?>
                     </div>
                 </div>
             </div>
-            <?php
-        }
-    }
-}
-
-
-
-
-function cw_discount() {
-    global $woocommerce;
-    $cw_discount = 0;
-    $cart = WC()->cart;
-
-    foreach ( $woocommerce->cart->get_cart() as $cw_cart_key => $values) {
-        $_product = $values['data'];
-        if ( $_product->is_on_sale() ) {
-             $regular_price = $_product->get_regular_price();
-             $sale_price = $_product->get_sale_price();
-             $discount = ($regular_price - $sale_price) * $values['quantity'];
-             $cw_discount += $discount;
-         }
-    }
-    if ( $cw_discount > 0 || count(WC()->cart->get_applied_coupons()) > 0 ) : ?>
-        <span class="total__savings"><?= get_template_part('template-parts/icon', '', array( 'icon'=>'tag', 'color'=>'red' )); ?>Deine Ersparnis<?php echo wc_price( $cw_discount + $woocommerce->cart->discount_cart ); ?></span>
-    <?php endif; ?>
-
-    <?php if ( $cart->get_shipping_total() == 0 ) : ?>
-        <span class="total__savings"><?= get_template_part('template-parts/icon', '', array( 'icon'=>'tag', 'color'=>'red' )); ?>Kostenloser Versand<?php echo wc_price( $cart->get_shipping_total() ); ?></span>
-    <?php endif;
-}
-
-
-
-
- function acf_filter_rest_api_preload_paths( $preload_paths ) {
-    if ( ! get_the_ID() ) {
-      return $preload_paths;
-    }
-    $remove_path = '/wp/v2/' . get_post_type() . 's/' . get_the_ID() . '?context=edit';
-    $v1 =  array_filter(
-      $preload_paths,
-      function( $url ) use ( $remove_path ) {
-        return $url !== $remove_path;
-      }
-    );
-    $remove_path = '/wp/v2/' . get_post_type() . 's/' . get_the_ID() . '/autosaves?context=edit';
-    return array_filter(
-      $v1,
-      function( $url ) use ( $remove_path ) {
-        return $url !== $remove_path;
-      }
-    );
-  }
-  add_filter( 'block_editor_rest_api_preload_paths', 'acf_filter_rest_api_preload_paths', 10, 1 );
-
-
-
-
-
-
-
-
-  function woocommerce_support() {
-    add_theme_support( "woocommerce" );
-    //add_theme_support( "wc-product-gallery-zoom" );
-    //add_theme_support( "wc- product-gallery-lightbox" );
-    //add_theme_support( "wc-product-gallery-slider" );
-}
-add_action( "after_setup_theme", "woocommerce_support" );
-
-
-
-
-
-
-
-
-
-function substrwords($text, $maxchar, $end='...') {
-    if (strlen($text) > $maxchar || $text == '') {
-        $words = preg_split('/\s/', $text);      
-        $output = '';
-        $i      = 0;
-        while (1) {
-            $length = strlen($output)+strlen($words[$i]);
-            if ($length > $maxchar) {
-                break;
-            } 
-            else {
-                $output .= " " . $words[$i];
-                ++$i;
+        <?php
+                }
             }
         }
-        $output .= $end;
-    } 
-    else {
-        $output = $text;
-    }
-    return $output;
-}
 
 
 
 
-function translateReadableDateToGerman($str) {
-    $searchVal = array("March", "May", "June", "July", "October", "December", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-    $replaceVal = array("März", "Mai", "Juni", "Juli", "Oktober", "Dezember", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag");
-    return str_replace($searchVal, $replaceVal, $str);
-}
+        function cw_discount()
+        {
+            global $woocommerce;
+            $cw_discount = 0;
+            $cart = WC()->cart;
+
+            foreach ($woocommerce->cart->get_cart() as $cw_cart_key => $values) {
+                $_product = $values['data'];
+                if ($_product->is_on_sale()) {
+                    $regular_price = $_product->get_regular_price();
+                    $sale_price = $_product->get_sale_price();
+                    $discount = ($regular_price - $sale_price) * $values['quantity'];
+                    $cw_discount += $discount;
+                }
+            }
+            if ($cw_discount > 0 || count(WC()->cart->get_applied_coupons()) > 0) : ?>
+        <span class="total__savings"><?= get_template_part('template-parts/icon', '', array('icon' => 'tag', 'color' => 'red')); ?>Deine Ersparnis<?php echo wc_price($cw_discount + $woocommerce->cart->discount_cart); ?></span>
+    <?php endif; ?>
+
+    <?php if ($cart->get_shipping_total() == 0) : ?>
+        <span class="total__savings"><?= get_template_part('template-parts/icon', '', array('icon' => 'tag', 'color' => 'red')); ?>Kostenloser Versand<?php echo wc_price($cart->get_shipping_total()); ?></span>
+    <?php endif;
+        }
+
+
+
+
+        function acf_filter_rest_api_preload_paths($preload_paths)
+        {
+            if (!get_the_ID()) {
+                return $preload_paths;
+            }
+            $remove_path = '/wp/v2/' . get_post_type() . 's/' . get_the_ID() . '?context=edit';
+            $v1 =  array_filter(
+                $preload_paths,
+                function ($url) use ($remove_path) {
+                    return $url !== $remove_path;
+                }
+            );
+            $remove_path = '/wp/v2/' . get_post_type() . 's/' . get_the_ID() . '/autosaves?context=edit';
+            return array_filter(
+                $v1,
+                function ($url) use ($remove_path) {
+                    return $url !== $remove_path;
+                }
+            );
+        }
+        add_filter('block_editor_rest_api_preload_paths', 'acf_filter_rest_api_preload_paths', 10, 1);
 
 
 
 
 
 
-function register_custom_image_sizes() {
-    if ( ! current_theme_supports( 'post-thumbnails' ) ) {
-        add_theme_support( 'post-thumbnails' );
-    }
-    add_image_size( 'full', 2000, 2000, false );
-    add_image_size( 'gallery-lightbox', 1500, 1000, false );
-    add_image_size( 'gallery-slider', 600, 600, false );
-}
-add_action( 'after_setup_theme', 'register_custom_image_sizes' );
+
+
+        function woocommerce_support()
+        {
+            add_theme_support("woocommerce");
+            //add_theme_support( "wc-product-gallery-zoom" );
+            //add_theme_support( "wc- product-gallery-lightbox" );
+            //add_theme_support( "wc-product-gallery-slider" );
+        }
+        add_action("after_setup_theme", "woocommerce_support");
 
 
 
@@ -1915,103 +1344,166 @@ add_action( 'after_setup_theme', 'register_custom_image_sizes' );
 
 
 
-// custom menu example @ https://digwp.com/2011/11/html-formatting-custom-menus/
-function custom_menu_theme_mobile_big($menu_name) {
-	if (($locations = get_nav_menu_locations()) && isset($locations[$menu_name])) {
-		$menu = wp_get_nav_menu_object($locations[$menu_name]);
-		$menu_items = wp_get_nav_menu_items($menu->term_id);
 
-		$menu_list = "\t\t\t\t". '<ul>' ."\n";
-		foreach ((array) $menu_items as $key => $menu_item) {
-            // Level 1
-            if($menu_item->menu_item_parent === '0') {
-            // if(true) {
-                $template_directory_uri = get_template_directory_uri();
-                $url = $menu_item->url;
-                $title = $menu_item->title;
-                $description = $menu_item->description;
-                $classes = $menu_item->classes;
-                $classes = implode(" ", $classes);
-                $bild = get_field('bild', $menu_item);
-                $bild_url = $bild["url"];
-                $menu_list .= "<li class='dropdown__links__item {$classes}'>
+
+        function substrwords($text, $maxchar, $end = '...')
+        {
+            if (!$text) return;
+
+            if (strlen($text) > $maxchar || $text == '') {
+                $words = preg_split('/\s/', $text);
+                $output = '';
+                $i      = 0;
+                while (1) {
+                    $length = strlen($output) + strlen($words[$i]);
+                    if ($length > $maxchar) {
+                        break;
+                    } else {
+                        $output .= " " . $words[$i];
+                        ++$i;
+                    }
+                }
+                $output .= $end;
+            } else {
+                $output = $text;
+            }
+            return $output;
+        }
+
+
+
+
+        function translateReadableDateToGerman($str)
+        {
+            $searchVal = array("March", "May", "June", "July", "October", "December", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+            $replaceVal = array("März", "Mai", "Juni", "Juli", "Oktober", "Dezember", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag");
+            return str_replace($searchVal, $replaceVal, $str);
+        }
+
+
+
+
+
+
+        function register_custom_image_sizes()
+        {
+            if (!current_theme_supports('post-thumbnails')) {
+                add_theme_support('post-thumbnails');
+            }
+            add_image_size('full', 2000, 2000, false);
+            add_image_size('gallery-lightbox', 1500, 1000, false);
+            add_image_size('gallery-slider', 600, 600, false);
+        }
+        add_action('after_setup_theme', 'register_custom_image_sizes');
+
+
+
+
+
+
+
+        // custom menu example @ https://digwp.com/2011/11/html-formatting-custom-menus/
+        function custom_menu_theme_mobile_big($menu_name)
+        {
+            if (($locations = get_nav_menu_locations()) && isset($locations[$menu_name])) {
+                $menu = wp_get_nav_menu_object($locations[$menu_name]);
+                $menu_items = wp_get_nav_menu_items($menu->term_id);
+
+                $menu_list = "\t\t\t\t" . '<ul>' . "\n";
+                foreach ((array) $menu_items as $key => $menu_item) {
+                    // Level 1
+                    if ($menu_item->menu_item_parent === '0') {
+                        // if(true) {
+                        $template_directory_uri = get_template_directory_uri();
+                        $url = $menu_item->url;
+                        $title = $menu_item->title;
+                        $description = $menu_item->description;
+                        $classes = $menu_item->classes;
+                        $classes = implode(" ", $classes);
+                        $bild = get_field('bild', $menu_item);
+                        $bild_url = $bild["url"];
+                        $menu_list .= "<li class='dropdown__links__item {$classes}'>
                     <a class='main-link' href='{$url}'>
                         <div>
                             <p class='title__arrow'>{$title}<img src='{$template_directory_uri}/img/elements/arrow_dropdown_dark.svg' alt=''></p>
                             <span>{$description}</span>
                             </div>";
-                            if($bild_url) {
-                                $menu_list .= "<img class='image' src='{$bild_url}' alt=''>";
-                            }
-                    $menu_list .= "</a>";
-    
-                    // // Level 2
-                    $menu_list .= "<ul class='submenu' style='display:none;'>";
-                    foreach ((array) $menu_items as $key => $sub_menu_item) {
-                        if((int) $sub_menu_item->menu_item_parent === $menu_item->ID) {
-                            $classes = implode(" ", $sub_menu_item->classes);
-                            $menu_list .= "<li class='{$classes}'><a href='{$sub_menu_item->url}'>{$sub_menu_item->title}</a></li>";
+                        if ($bild_url) {
+                            $menu_list .= "<img class='image' src='{$bild_url}' alt=''>";
                         }
-                    }
-                    $menu_list .= "</ul>";
-    
-                $menu_list .= "</li>";
-            }
-        }
-        $menu_list .= "\t\t\t\t". '</ul>' ."\n";
-	} else {
-		// $menu_list = '<!-- no list defined -->';
-	}
-	echo $menu_list;
-}
-// custom menu example @ https://digwp.com/2011/11/html-formatting-custom-menus/
-function custom_menu_theme_mobile_small($menu_name) {
-	if (($locations = get_nav_menu_locations()) && isset($locations[$menu_name])) {
-		$menu = wp_get_nav_menu_object($locations[$menu_name]);
-		$menu_items = wp_get_nav_menu_items($menu->term_id);
+                        $menu_list .= "</a>";
 
-		$menu_list = "\t\t\t\t". '<ul>' ."\n";
-		foreach ((array) $menu_items as $key => $menu_item) {
-            $template_directory_uri = get_template_directory_uri();
-			$url = $menu_item->url;
-			$title = $menu_item->title;
-            $classes = $menu_item->classes;
-            $classes = implode(" ", $classes);
-            $icon = get_field('icon', $menu_item);
-            $menu_list .= "<li>
+                        // // Level 2
+                        $menu_list .= "<ul class='submenu' style='display:none;'>";
+                        foreach ((array) $menu_items as $key => $sub_menu_item) {
+                            if ((int) $sub_menu_item->menu_item_parent === $menu_item->ID) {
+                                $classes = implode(" ", $sub_menu_item->classes);
+                                $menu_list .= "<li class='{$classes}'><a href='{$sub_menu_item->url}'>{$sub_menu_item->title}</a></li>";
+                            }
+                        }
+                        $menu_list .= "</ul>";
+
+                        $menu_list .= "</li>";
+                    }
+                }
+                $menu_list .= "\t\t\t\t" . '</ul>' . "\n";
+            } else {
+                // $menu_list = '<!-- no list defined -->';
+            }
+            echo $menu_list;
+        }
+        // custom menu example @ https://digwp.com/2011/11/html-formatting-custom-menus/
+        function custom_menu_theme_mobile_small($menu_name)
+        {
+            if (($locations = get_nav_menu_locations()) && isset($locations[$menu_name])) {
+                $menu = wp_get_nav_menu_object($locations[$menu_name]);
+                $menu_items = wp_get_nav_menu_items($menu->term_id);
+
+                $menu_list = "\t\t\t\t" . '<ul>' . "\n";
+                foreach ((array) $menu_items as $key => $menu_item) {
+                    $template_directory_uri = get_template_directory_uri();
+                    $url = $menu_item->url;
+                    $title = $menu_item->title;
+                    $classes = $menu_item->classes;
+                    $classes = implode(" ", $classes);
+                    $icon = get_field('icon', $menu_item);
+                    $menu_list .= "<li>
                 <a class='button --color-main-light {$classes}' href='{$url}'>
                     <span class='title__arrow'>{$title}<img src='{$template_directory_uri}/img/elements/arrow_dropdown_white.svg' alt=''></span>
                     <img class='icon' src='{$icon}' alt=''>
                     <img class='icon__bg' src='{$icon}' alt=''>
                 </a>
             </li>";
-		}
-		$menu_list .= "\t\t\t\t". '</ul>' ."\n";
-	} else {
-		// $menu_list = '<!-- no list defined -->';
-	}
-	echo $menu_list;
-}
+                }
+                $menu_list .= "\t\t\t\t" . '</ul>' . "\n";
+            } else {
+                // $menu_list = '<!-- no list defined -->';
+            }
+            echo $menu_list;
+        }
 
 
 
 
 
 
-function get_paper_structure() {
-    $template_directory_uri = get_template_directory_uri();
-    return "<img class='paper-structure' src='{$template_directory_uri}/img/elements/paper_structure_500x.jpg' alt=''>";
-    // src="https://atelier-delatron.de/wp-content/themes/atelier_theme/img/paper_structure.webp"
-}
+        function get_paper_structure()
+        {
+            $template_directory_uri = get_template_directory_uri();
+            return "<img class='paper-structure' src='{$template_directory_uri}/img/elements/paper_structure_500x.jpg' alt=''>";
+            // src="https://atelier-delatron.de/wp-content/themes/atelier_theme/img/paper_structure.webp"
+        }
 
-function d(...$vars) {
-    echo '<pre>', var_dump(...$vars), '</pre>';
-}
+        function d(...$vars)
+        {
+            echo '<pre>', var_dump(...$vars), '</pre>';
+        }
 
-function dd(...$vars) {
-    echo '<pre>', var_dump(...$vars), '</pre>';
-    die();
-}
+        function dd(...$vars)
+        {
+            echo '<pre>', var_dump(...$vars), '</pre>';
+            die();
+        }
 
 
 
@@ -2020,8 +1512,8 @@ function dd(...$vars) {
 
 
 
-// remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form');
-// add_action('woocommerce_checkout_before_order_review_heading', 'woocommerce_checkout_coupon_form');
+        // remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form');
+        // add_action('woocommerce_checkout_before_order_review_heading', 'woocommerce_checkout_coupon_form');
 
 
 
@@ -2030,56 +1522,58 @@ function dd(...$vars) {
 
 
 
-/**
- * Hide shipping rates when free shipping is available, but keep "Local pickup" 
- * Updated to support WooCommerce 2.6 Shipping Zones
- */
+        /**
+         * Hide shipping rates when free shipping is available, but keep "Local pickup" 
+         * Updated to support WooCommerce 2.6 Shipping Zones
+         */
 
-function hide_shipping_when_free_is_available( $rates, $package ) {
-	$new_rates = array();
-	foreach ( $rates as $rate_id => $rate ) {
-		// Only modify rates if free_shipping is present.
-		if ( 'free_shipping' === $rate->method_id ) {
-			$new_rates[ $rate_id ] = $rate;
-			break;
-		}
-	}
+        function hide_shipping_when_free_is_available($rates, $package)
+        {
+            $new_rates = array();
+            foreach ($rates as $rate_id => $rate) {
+                // Only modify rates if free_shipping is present.
+                if ('free_shipping' === $rate->method_id) {
+                    $new_rates[$rate_id] = $rate;
+                    break;
+                }
+            }
 
-	if ( ! empty( $new_rates ) ) {
-		//Save local pickup if it's present.
-		foreach ( $rates as $rate_id => $rate ) {
-			if ('local_pickup' === $rate->method_id ) {
-				$new_rates[ $rate_id ] = $rate;
-				break;
-			}
-		}
-		return $new_rates;
-	}
+            if (!empty($new_rates)) {
+                //Save local pickup if it's present.
+                foreach ($rates as $rate_id => $rate) {
+                    if ('local_pickup' === $rate->method_id) {
+                        $new_rates[$rate_id] = $rate;
+                        break;
+                    }
+                }
+                return $new_rates;
+            }
 
-	return $rates;
-}
+            return $rates;
+        }
 
-add_filter( 'woocommerce_package_rates', 'hide_shipping_when_free_is_available', 10, 2 );
+        add_filter('woocommerce_package_rates', 'hide_shipping_when_free_is_available', 10, 2);
 
 
 
 
 
 
-add_action('woocommerce_before_shop_loop_item_title', 'neueFunktion', 20);
-function neueFunktion() {
-    global $product;
+        add_action('woocommerce_before_shop_loop_item_title', 'neueFunktion', 20);
+        function neueFunktion()
+        {
+            global $product;
 
-    $attachment_ids = $product->get_gallery_image_ids();
+            $attachment_ids = $product->get_gallery_image_ids();
 
-    $image_link = wp_get_attachment_image_url( $attachment_ids[0], 'medium' );
+            $image_link = wp_get_attachment_image_url($attachment_ids[0], 'medium');
 
-    echo '<img class="hover-image" src="' . $image_link . '" alt="">';
+            echo '<img class="hover-image" src="' . $image_link . '" alt="">';
 
-    // foreach( $attachment_ids as $attachment_id ) {
-    //     echo $image_link = wp_get_attachment_url( $attachment_id );
-    // }
-}
+            // foreach( $attachment_ids as $attachment_id ) {
+            //     echo $image_link = wp_get_attachment_url( $attachment_id );
+            // }
+        }
 
 
 
@@ -2127,31 +1621,37 @@ function neueFunktion() {
 
 
 
- 
 
 
-// Display Product Badges
-function woocommerce_atelier_product_badges( $product_id, $position='archive') {
-    $product = wc_get_product( $product_id );
-    $badge = wp_get_post_terms($product_id, 'product_badge')[0];
-    $badge_name = $badge->name;
-    $badge_icon = get_field('icon' , $badge);
-    $badge_color = get_field('farbe' , $badge);
-    $badge_tooltip = $badge->description;
-    $badge_in_archive = get_field('badge_in_archive', $product_id);
+
+        // Display Product Badges
+        function woocommerce_atelier_product_badges($product_id, $position = 'archive')
+        {
+            $product = wc_get_product($product_id);
+            $terms = wp_get_post_terms($product_id, 'product_badge');
+
+            // Überspringen, wenn kein Badge vorhanden
+            if (empty($terms)) return;
+
+            $badge = wp_get_post_terms($product_id, 'product_badge')[0];
+            $badge_name = $badge->name;
+            $badge_icon = get_field('icon', $badge);
+            $badge_color = get_field('farbe', $badge);
+            $badge_tooltip = $badge->description;
+            $badge_in_archive = get_field('badge_in_archive', $product_id);
     ?>
 
-    <?php if( $product->is_featured() ) : ?>
+    <?php if ($product->is_featured()) : ?>
         <span class="product__badge --featured">
-            <?php get_template_part('template-parts/icon', '', array( 'icon'=>'star', 'color'=>'white',  'size'=>'small' )); ?>
+            <?php get_template_part('template-parts/icon', '', array('icon' => 'star', 'color' => 'white',  'size' => 'small')); ?>
             Besonders beliebt
         </span>
         <?php return; ?>
     <?php endif; ?>
 
-    <?php if( $product->is_on_sale() ) : ?>
+    <?php if ($product->is_on_sale()) : ?>
         <span class="product__badge --onsale">
-            <?php get_template_part('template-parts/icon', '', array( 'icon'=>'tag', 'color'=>'white',  'size'=>'small' )); ?>
+            <?php get_template_part('template-parts/icon', '', array('icon' => 'tag', 'color' => 'white',  'size' => 'small')); ?>
             Im Angebot
         </span>
         <?php return; ?>
@@ -2159,28 +1659,28 @@ function woocommerce_atelier_product_badges( $product_id, $position='archive') {
 
     <?php if (!$badge) return; ?>
 
-    <?php if ( $position === 'product' || ($position === 'archive' && $badge_in_archive) ) : ?>
+    <?php if ($position === 'product' || ($position === 'archive' && $badge_in_archive)) : ?>
         <div class="badge-tooltip">
             <span class="product__badge" style="background-color:<?= $badge_color; ?>">
-                <?php get_template_part('template-parts/icon', '', array( 'url'=>$badge_icon['url'], 'alt'=>$badge_icon['alt'], 'size'=>'small' )); ?>
+                <?php get_template_part('template-parts/icon', '', array('url' => $badge_icon['url'], 'alt' => $badge_icon['alt'], 'size' => 'small')); ?>
                 <?= $badge_name ?>
             </span>
             <?php if ($badge_tooltip && $position == 'product') : ?>
                 <div class="tooltip">
-                    <?php get_template_part('template-parts/icon', '', array( 'icon'=>'info' )); ?>
+                    <?php get_template_part('template-parts/icon', '', array('icon' => 'info')); ?>
                     <span><?= $badge_tooltip ?></span>
                 </div>
             <?php endif; ?>
         </div>
-    <?php endif;
-}
+<?php endif;
+        }
 
 
 
 
 
 
-remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb');
+        remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb');
 
 
 
@@ -2188,23 +1688,25 @@ remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb');
 
 
 
-add_filter( 'woocommerce_cart_item_subtotal', 'show_coupon_item_subtotal_discount', 100, 3 );
-function show_coupon_item_subtotal_discount( $subtotal, $cart_item, $cart_item_key ){
-	//Check if sale price is not empty
-    
-	//Get product object
-    $_product = $cart_item['data'];
-	$line_subtotal_tax  = $cart_item['line_subtotal_tax'];
+        add_filter('woocommerce_cart_item_subtotal', 'show_coupon_item_subtotal_discount', 100, 3);
+        function show_coupon_item_subtotal_discount($subtotal, $cart_item, $cart_item_key)
+        {
+            //Check if sale price is not empty
 
-    if( $cart_item['line_subtotal'] !== $cart_item['line_total'] ) {
+            //Get product object
+            $_product = $cart_item['data'];
+            $line_subtotal_tax  = $cart_item['line_subtotal_tax'];
 
-        $line_tax = $cart_item['line_tax'];
-        $regular_price = $_product->get_regular_price()* $cart_item['quantity'];
-		$discountAmt = wc_price(($regular_price-$cart_item['line_subtotal']-$line_tax) + ($cart_item['line_subtotal']- $cart_item['line_total']));
+            if ($cart_item['line_subtotal'] !== $cart_item['line_total']) {
 
-        if( !empty( $_product->get_sale_price() )) {
+                $line_tax = $cart_item['line_tax'];
+                $regular_price = $_product->get_regular_price() * $cart_item['quantity'];
+                $discountAmt = wc_price(($regular_price - $cart_item['line_subtotal'] - $line_tax) + ($cart_item['line_subtotal'] - $cart_item['line_total']));
 
-            $subtotal = sprintf( '
+                if (!empty($_product->get_sale_price())) {
+
+                    $subtotal = sprintf(
+                        '
                 <del aria-hidden="true">
                     %s
                 </del>
@@ -2223,304 +1725,319 @@ function show_coupon_item_subtotal_discount( $subtotal, $cart_item, $cart_item_k
                         </bdi>
                     </span>
                 </p>',
-                wc_price($regular_price),
-                wc_price($cart_item['line_total'] + $line_tax),
-                $discountAmt
-            );
+                        wc_price($regular_price),
+                        wc_price($cart_item['line_total'] + $line_tax),
+                        $discountAmt
+                    );
+                } else {
 
-        } else {
-
-            $subtotal = sprintf( '
+                    $subtotal = sprintf(
+                        '
                 <del>%s</del>
                 <ins>%s</ins>
                 <p>
                     <span>Ersparnis</span>
                     %s
                 </p>',
-                wc_price($regular_price),
-                wc_price($cart_item['line_total'] + $line_tax),
-                $discountAmt
-            );
+                        wc_price($regular_price),
+                        wc_price($cart_item['line_total'] + $line_tax),
+                        $discountAmt
+                    );
+                }
+            } else if ('' !== $_product->get_sale_price()) {
 
-        }
+                $regular_price = $_product->get_regular_price() * $cart_item['quantity'];
+                $sale_price = $_product->get_sale_price() * $cart_item['quantity'];
+                $discountAmt = wc_price($regular_price - $sale_price);
 
-    } else if( '' !== $_product->get_sale_price() ) {
-        
-        $regular_price = $_product->get_regular_price() * $cart_item['quantity'];
-        $sale_price = $_product->get_sale_price() * $cart_item['quantity'];
-        $discountAmt=wc_price($regular_price-$sale_price);
-
-        $subtotal = sprintf( '
+                $subtotal = sprintf(
+                    '
             <del>%s</del>
             <ins>%s</ins>
             <p>
                 <span>Ersparnis</span>
                 %s
             </p>',
-            wc_price($regular_price),
-            wc_price($_product->get_sale_price() * $cart_item['quantity']),
-            $discountAmt
-        );
-	
-    }
-
-    return $subtotal;
-}
-
-
-
-
-
-
-
-
-
-// function vd_add_order_status( $statuses ) {
-//     $statuses['wc-my-custom-status'] = __( 'My Custom Status', 'text-domain' );
-//     return $statuses;
-// }
-// add_filter( 'wc_order_statuses', 'vd_add_order_status', 10, 1 );
-
-
-
-// function vd_register_order_post_status( $statuses ) {
-//     $statuses['wc-my-custom-status'] = array(
-//         'label'                     => _x( 'My Custom Status', 'Order status', 'text-domain' ),
-//         'public'                    => false,
-//         'exclude_from_search'       => false,
-//         'show_in_admin_all_list'    => true,
-//         'show_in_admin_status_list' => true,
-//         'label_count'               => _n_noop( 'Custom Desc <span class="count">(%s)</span>', 'Custom Desc <span class="count">(%s)</span>', 'text-domain' ),
-//    );
-// }
-// add_filter( 'woocommerce_register_shop_order_post_statuses', 'vd_register_order_post_status', 10, 1 );
-
-
-
-
-
-
-// // Remove Yoast
-// function my_remove_wp_seo_meta_box() {
-//     remove_meta_box('wpseo_meta', 'termin', 'normal');
-// }
-// add_action('add_meta_boxes', 'my_remove_wp_seo_meta_box', 100);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*------------------------------------*\
-	Custom Admin List: Termine
-\*------------------------------------*/
-
-// add list columns
-add_filter('manage_termin_posts_columns', 'bs_termin_table_head');
-function bs_termin_table_head( $defaults ) {
-    $defaults['termin']  = 'Termin';
-    $defaults['time']  = 'Uhrzeit';
-    $defaults['status']    = 'Status';
-    return $defaults;
-    // $defaults['category']    = 'Kategorie';
-    // $defaults['product']    = 'Kunstangebot';
-}
-
-// add list column contents
-add_action( 'manage_termin_posts_custom_column', 'bs_termin_table_content', 10, 2 );
-function bs_termin_table_content( $column_name, $post_id ) {
-
-    $date_format = 'j. F Y';
-
-    $category_slug = get_the_category($post_id)[0]->slug;
-
-    if ($category_slug === 'workshop') {
-        $termin_1 = get_field( 'termin_1', $post_id );
-        $termin_2 = get_field( 'termin_2', $post_id );
-    }
-    if ($category_slug === 'kurs') {
-        $datum = get_field( 'datum', $post_id );
-    }
-
-    if ($column_name == 'termin') {
-        if ($category_slug === 'workshop') {
-            if(!empty($termin_1['datum'])) {
-                $datum_1 = date($date_format, strtotime($termin_1['datum']));
-                echo '<a class="row-title" href="' . get_edit_post_link( $post_id ) . '">' . $datum_1 . '</a>';
+                    wc_price($regular_price),
+                    wc_price($_product->get_sale_price() * $cart_item['quantity']),
+                    $discountAmt
+                );
             }
-            if(!empty($termin_2['datum'])) {
-                $datum_2 = date($date_format, strtotime($termin_2['datum']));
-                echo ',<br><a class="row-title" href="' . get_edit_post_link( $post_id ) . '">' . $datum_2 . '</a>';
+
+            return $subtotal;
+        }
+
+
+
+
+
+
+
+
+
+        // function vd_add_order_status( $statuses ) {
+        //     $statuses['wc-my-custom-status'] = __( 'My Custom Status', 'text-domain' );
+        //     return $statuses;
+        // }
+        // add_filter( 'wc_order_statuses', 'vd_add_order_status', 10, 1 );
+
+
+
+        // function vd_register_order_post_status( $statuses ) {
+        //     $statuses['wc-my-custom-status'] = array(
+        //         'label'                     => _x( 'My Custom Status', 'Order status', 'text-domain' ),
+        //         'public'                    => false,
+        //         'exclude_from_search'       => false,
+        //         'show_in_admin_all_list'    => true,
+        //         'show_in_admin_status_list' => true,
+        //         'label_count'               => _n_noop( 'Custom Desc <span class="count">(%s)</span>', 'Custom Desc <span class="count">(%s)</span>', 'text-domain' ),
+        //    );
+        // }
+        // add_filter( 'woocommerce_register_shop_order_post_statuses', 'vd_register_order_post_status', 10, 1 );
+
+
+
+
+
+
+        // // Remove Yoast
+        // function my_remove_wp_seo_meta_box() {
+        //     remove_meta_box('wpseo_meta', 'termin', 'normal');
+        // }
+        // add_action('add_meta_boxes', 'my_remove_wp_seo_meta_box', 100);
+
+
+
+
+
+
+
+
+        // always update values of all bidirectional fields
+        add_filter('acfe/bidirectional/force_update', '__return_true');
+
+        // or target a specific field only
+        add_filter('acfe/bidirectional/force_update/name=my_field', '__return_true');
+
+
+
+
+
+        require get_template_directory() . '/inc/dates.php'; // Dates admin list
+
+        //         /*------------------------------------*\
+        // 	Custom Admin List: Termine
+        // \*------------------------------------*/
+
+        //         // add list columns
+        //         add_filter('manage_termin_posts_columns', 'bs_termin_table_head');
+        //         function bs_termin_table_head($defaults)
+        //         {
+        //             $defaults['termin']  = 'Termin';
+        //             $defaults['time']  = 'Uhrzeit';
+        //             $defaults['status']    = 'Status';
+        //             return $defaults;
+        //             // $defaults['category']    = 'Kategorie';
+        //             // $defaults['product']    = 'Kunstangebot';
+        //         }
+
+        //         // add list column contents
+        //         add_action('manage_termin_posts_custom_column', 'bs_termin_table_content', 10, 2);
+        //         function bs_termin_table_content($column_name, $post_id)
+        //         {
+
+        //             $date_format = 'j. F Y';
+
+        //             $category_slug = get_the_category($post_id)[0]->slug;
+
+        //             if ($category_slug === 'workshop') {
+        //                 $termin_1 = get_field('termin_1', $post_id);
+        //                 $termin_2 = get_field('termin_2', $post_id);
+        //             }
+        //             if ($category_slug === 'kurs') {
+        //                 $datum = get_field('datum', $post_id);
+        //             }
+
+        //             if ($column_name == 'termin') {
+        //                 if ($category_slug === 'workshop') {
+        //                     if (!empty($termin_1['datum'])) {
+        //                         $datum_1 = date($date_format, strtotime($termin_1['datum']));
+        //                         echo '<a class="row-title" href="' . get_edit_post_link($post_id) . '">' . $datum_1 . '</a>';
+        //                     }
+        //                     if (!empty($termin_2['datum'])) {
+        //                         $datum_2 = date($date_format, strtotime($termin_2['datum']));
+        //                         echo ',<br><a class="row-title" href="' . get_edit_post_link($post_id) . '">' . $datum_2 . '</a>';
+        //                     }
+        //                 }
+        //                 if ($category_slug === 'kurs') {
+        //                     $datum = date($date_format, strtotime($datum));
+        //                     echo '<a class="row-title" href="' . get_edit_post_link($post_id) . '">' . $datum . '</a>';
+        //                 }
+        //             }
+        //             if ($column_name == 'time') {
+        //                 if ($category_slug === 'workshop') {
+        //                     if (!empty($termin_1['datum'])) echo '<a class="row-title" href="' . get_edit_post_link($post_id) . '">' . $termin_1['startzeit'] . ' - ' . $termin_1['endzeit'] . ' Uhr</a>';
+        //                     if (!empty($termin_2['datum'])) echo ',<br><a class="row-title" href="' . get_edit_post_link($post_id) . '">' . $termin_2['startzeit'] . ' - ' . $termin_2['endzeit'] . ' Uhr</a>';
+        //                 }
+        //                 if ($category_slug === 'kurs') {
+        //                     //
+        //                 }
+        //             }
+        //             if ($column_name == 'status') {
+        //                 if ($category_slug === 'workshop') {
+        //                     $datum = new DateTime($termin_1['datum']);
+        //                 }
+        //                 if ($category_slug === 'kurs') {
+        //                     $datum = new DateTime($datum);
+        //                 }
+        //                 $today = new DateTime();
+        //                 if ($datum > $today) {
+        //                     echo '<span style="color:green;">In der Zukunft</span>';
+        //                 } else {
+        //                     echo '<span style="color:red;">Vergangen</span>';
+        //                 }
+        //             }
+        //             // if ($column_name == 'category') {
+        //             //     $product_id = get_field( 'kunstangebot', $post_id )->ID;
+        //             //     $product_cat = get_the_category( $product_id )[0]->name;
+        //             //     echo $product_cat;
+        //             // }
+        //             // if ($column_name == 'product') {
+        //             //     $product_id = get_field( 'kunstangebot', $post_id )->ID;
+        //             //     $product_name = get_the_title( $product_id );
+        //             //     echo $product_name;
+        //             // }
+        //         }
+
+        //         // Order by configuration
+        //         add_filter('manage_edit-termin_sortable_columns', 'bs_termin_table_sorting');
+        //         function bs_termin_table_sorting($columns)
+        //         {
+        //             $columns['termin'] = 'termin';
+        //             $columns['product'] = 'product';
+        //             return $columns;
+        //         }
+
+
+
+
+
+
+
+
+
+        // Get Woocommerce variation price based on product ID
+        function get_variation_price_by_id($product_id, $variation_id)
+        {
+            $currency_symbol = get_woocommerce_currency_symbol();
+            $product = new WC_Product_Variable($product_id);
+            $variations = $product->get_available_variations();
+            $var_data = [];
+            foreach ($variations as $variation) {
+                if ($variation['variation_id'] == $variation_id) {
+                    $display_regular_price = $variation['display_regular_price'] . '<span class="currency">' . $currency_symbol . '</span>';
+                    $display_price = $variation['display_price'] . '<span class="currency">' . $currency_symbol . '</span>';
+                }
             }
+
+            //Check if Regular price is equal with Sale price (Display price)
+            if ($display_regular_price == $display_price) {
+                $display_price = false;
+            }
+
+            $priceArray = array(
+                'display_regular_price' => $display_regular_price,
+                'display_price' => $display_price
+            );
+            $priceObject = (object)$priceArray;
+            return $priceObject;
         }
-        if ($category_slug === 'kurs') {
-            $datum = date($date_format, strtotime($datum));
-            echo '<a class="row-title" href="' . get_edit_post_link( $post_id ) . '">' . $datum . '</a>';
+
+
+
+
+
+
+        remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
+        function wvnderlab_single_title()
+        {
+            global $post;
+            $category = get_the_terms($post->ID, 'product_cat');
+            $category = $category[0]->name;
+            $product = wc_get_product($post->ID);
+            echo '<h1 class="product_title entry-title"><span style="font-size:0;">' . $category . ' </span>' . $product->get_title() . '</h1>';
         }
-    }
-    if ($column_name == 'time') {
-        if ($category_slug === 'workshop') {
-            if(!empty($termin_1['datum'])) echo '<a class="row-title" href="' . get_edit_post_link( $post_id ) . '">' . $termin_1['startzeit'] . ' - ' . $termin_1['endzeit'] . ' Uhr</a>';
-            if(!empty($termin_2['datum'])) echo ',<br><a class="row-title" href="' . get_edit_post_link( $post_id ) . '">' . $termin_2['startzeit'] . ' - ' . $termin_2['endzeit'] . ' Uhr</a>';
+        add_action('woocommerce_single_product_summary', 'wvnderlab_single_title', 5);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Benutzerdefinierter Bestellstatus
+        function register_shipment_arrival_order_status()
+        {
+            register_post_status('wc-arrival-shipment', array(
+                'label'                     => 'Point of Sale',
+                'public'                    => true,
+                'show_in_admin_status_list' => true,
+                'show_in_admin_all_list'    => true,
+                'exclude_from_search'       => false,
+                'label_count'               => _n_noop('Point of Sale <span class="count">(%s)</span>', 'Point of Sale <span class="count">(%s)</span>')
+            ));
         }
-        if ($category_slug === 'kurs') {
-            //
+        add_action('init', 'register_shipment_arrival_order_status');
+        function add_awaiting_shipment_to_order_statuses($order_statuses)
+        {
+            $new_order_statuses = array();
+            foreach ($order_statuses as $key => $status) {
+                $new_order_statuses[$key] = $status;
+                if ('wc-processing' === $key) {
+                    $new_order_statuses['wc-arrival-shipment'] = 'Point of Sale';
+                }
+            }
+            return $new_order_statuses;
         }
-    }
-    if ($column_name == 'status') {
-        if ($category_slug === 'workshop') {
-            $datum = new DateTime($termin_1['datum']);
+        add_filter('wc_order_statuses', 'add_awaiting_shipment_to_order_statuses');
+
+
+
+
+
+        function my_pre_get_posts($query)
+        {
+            // do not modify queries in the admin
+            if (is_admin()) {
+                return $query;
+            }
+
+            // only modify queries for 'event' post type
+            if (isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'course_date') {
+
+                $query->set('orderby', 'meta_value');
+                $query->set('meta_key', 'date');
+                $query->set('order', 'ASC');
+                $query->set('posts_per_page', 100);
+            }
+
+
+            // return
+            return $query;
         }
-        if ($category_slug === 'kurs') {
-            $datum = new DateTime($datum);
-        }
-        $today = new DateTime();
-        if ($datum > $today) {
-            echo '<span style="color:green;">In der Zukunft</span>';
-        } else {
-            echo '<span style="color:red;">Vergangen</span>';
-        }
-    }
-    // if ($column_name == 'category') {
-    //     $product_id = get_field( 'kunstangebot', $post_id )->ID;
-    //     $product_cat = get_the_category( $product_id )[0]->name;
-    //     echo $product_cat;
-    // }
-    // if ($column_name == 'product') {
-    //     $product_id = get_field( 'kunstangebot', $post_id )->ID;
-    //     $product_name = get_the_title( $product_id );
-    //     echo $product_name;
-    // }
-}
-
-// Order by configuration
-add_filter( 'manage_edit-termin_sortable_columns', 'bs_termin_table_sorting' );
-function bs_termin_table_sorting( $columns ) {
-  $columns['termin'] = 'termin';
-  $columns['product'] = 'product';
-  return $columns;
-}
-add_filter( 'request', 'bs_termin_column_orderby' );
-function bs_termin_column_orderby( $vars ) {
-    if ( isset( $vars['orderby'] ) && 'termin' == $vars['orderby'] ) {
-        $vars = array_merge( $vars, array(
-            'meta_key'   => 'termin',
-            'orderby'   => 'meta_value',
-        ) );
-    }
-    return $vars;
-}
-add_filter( 'request', 'bs_product_column_orderby' );
-function bs_product_column_orderby( $vars ) {
-    if ( isset( $vars['orderby'] ) && 'product' == $vars['orderby'] ) {
-        $vars = array_merge( $vars, array(
-            'meta_key'   => 'kunstangebot',
-            'orderby'   => 'meta_value',
-        ) );
-    }
-    return $vars;
-}
-
-
-
-
-
-
-
-
-
-
-
-// Get Woocommerce variation price based on product ID
-function get_variation_price_by_id($product_id, $variation_id){
-	$currency_symbol = get_woocommerce_currency_symbol();
-	$product = new WC_Product_Variable($product_id);
-	$variations = $product->get_available_variations();
-	$var_data = [];
-	foreach ($variations as $variation) {
-		if($variation['variation_id'] == $variation_id){
-			$display_regular_price = $variation['display_regular_price'].'<span class="currency">'. $currency_symbol .'</span>';
-			$display_price = $variation['display_price'].'<span class="currency">'. $currency_symbol .'</span>';
-		}
-	}
-
-	//Check if Regular price is equal with Sale price (Display price)
-	if ($display_regular_price == $display_price){
-		$display_price = false;
-	}
-
-	$priceArray = array(
-		'display_regular_price' => $display_regular_price,
-		'display_price' => $display_price
-	);
-	$priceObject = (object)$priceArray;
-	return $priceObject;
-}
-
-
-
-
-
-
-remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
-function wvnderlab_single_title() { 
-    global $post;
-    $category = get_the_terms( $post->ID, 'product_cat' );
-    $category = $category[0]->name;
-    $product = wc_get_product( $post->ID );
-    echo '<h1 class="product_title entry-title"><span style="font-size:0;">' . $category . ' </span>' . $product->get_title() . '</h1>';
-}
-add_action('woocommerce_single_product_summary', 'wvnderlab_single_title', 5);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Benutzerdefinierter Bestellstatus
-function register_shipment_arrival_order_status() {
-    register_post_status( 'wc-arrival-shipment', array(
-        'label'                     => 'Point of Sale',
-        'public'                    => true,
-        'show_in_admin_status_list' => true,
-        'show_in_admin_all_list'    => true,
-        'exclude_from_search'       => false,
-        'label_count'               => _n_noop( 'Point of Sale <span class="count">(%s)</span>', 'Point of Sale <span class="count">(%s)</span>' )
-    ) );
-}
-add_action( 'init', 'register_shipment_arrival_order_status' );
-function add_awaiting_shipment_to_order_statuses( $order_statuses ) {
-    $new_order_statuses = array();
-    foreach ( $order_statuses as $key => $status ) {
-        $new_order_statuses[ $key ] = $status;
-        if ( 'wc-processing' === $key ) {
-            $new_order_statuses['wc-arrival-shipment'] = 'Point of Sale';
-        }
-    }
-    return $new_order_statuses;
-}
-add_filter( 'wc_order_statuses', 'add_awaiting_shipment_to_order_statuses' );
+        add_action('pre_get_posts', 'my_pre_get_posts');

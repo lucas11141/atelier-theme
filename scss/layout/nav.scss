@@ -4,7 +4,7 @@
 .open-nav {
 	display: none;
 }
-.nav {	
+.nav {
 	@include flex-row();
 	align-items: center;
 	ul {
@@ -23,7 +23,7 @@
 
 			// Hover box extension
 			&::after {
-				content: "";
+				content: '';
 				display: block;
 				height: calc(100% + 30px);
 				width: calc(100% + 20px);
@@ -67,8 +67,9 @@
 				cursor: pointer;
 				position: relative;
 				z-index: 1;
+
 				&::before {
-					content: "";
+					content: '';
 					display: block;
 					height: 3px;
 					width: 0;
@@ -228,11 +229,13 @@
 				}
 			}
 
-			// 
+			//
 			&:hover a,
-			a:hover, 
-			&.current_page_item > a, 
-			&.current_page_item ul li a:hover  {
+			a:hover,
+			&.current-menu-item > a,
+			&.current_page_item > a,
+			&.current_page_item ul li a:hover {
+				&::after,
 				&::before {
 					width: 100%;
 				}
@@ -283,63 +286,60 @@
 	}
 }
 
-
-
-
 /* ---- Navigation ----*/
 .nav__account__link {
-    @include flex-row();
-    align-items: center;
-    column-gap: 8px;
-    padding: 8px 12px 8px 15px;
-    border-radius: 8px;
-    background-color: $lightgray;
-    span {
-        font-size: 12px;
-        font-weight: 800;
-        text-transform: none;
-    }
-    img {
-        height: 18px;
-    }
+	@include flex-row();
+	align-items: center;
+	column-gap: 8px;
+	padding: 8px 12px 8px 15px;
+	border-radius: 8px;
+	background-color: $lightgray;
+	span {
+		font-size: 12px;
+		font-weight: 800;
+		text-transform: none;
+	}
+	img {
+		height: 18px;
+	}
 }
 .nav__cart__link {
-    display: block;
-    height: 25px;
-    min-width: 25px;
-    margin-left: 15px;
+	display: block;
+	height: 25px;
+	min-width: 25px;
+	margin-left: 15px;
 	margin-right: 6px;
-    position: relative;
+	position: relative;
 	@include transition();
-    .nav__cart__quantity {
-        height: 18px;
-        width: 20px;
+	.nav__cart__quantity {
+		height: 18px;
+		width: 20px;
 		border-radius: 20px;
-        background-color: $main;
+		background-color: $main;
 		position: absolute;
 		top: -6px;
 		right: -8px;
 		z-index: 1;
 		@include transition();
-        span {
+		span {
 			color: white;
-            font-size: 11px;
-            font-weight: 700;
+			font-size: 11px;
+			font-weight: 700;
 			letter-spacing: 0.6px;
-            position: absolute;
-            left: 52%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+			position: absolute;
+			left: 52%;
+			top: 50%;
+			transform: translate(-50%, -50%);
 			@include transition();
-        }
-    }
-    .nav__cart__icon {
-        height: 18px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
+		}
+	}
+	.nav__cart__icon {
+		height: 18px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
 	& + ul {
 		margin-left: 10px;
 	}
@@ -376,9 +376,11 @@
 				color: white;
 				text-transform: uppercase;
 				position: relative;
+
 				&::before {
 					content: unset;
 				}
+
 				&::after {
 					content: '';
 					width: 7px;
@@ -390,11 +392,12 @@
 					position: absolute;
 					left: calc(100% - 16px);
 					top: 49%;
-					transform: translate(-50%,-50%);
+					transform: translate(-50%, -50%);
 				}
 			}
 			@media only screen and (max-width: $desktop) {
 				margin: 0;
+
 				a {
 					padding: 19px 30px 19px 22px;
 					background-position-x: calc(100% - 18px);
@@ -404,22 +407,17 @@
 	}
 }
 
-
-
-
 .menu-item {
-    &.--underline-blue > a::before {
-        background-color: $course-kinder !important;
-    }
-    &.--underline-red > a::before {
-    
-        background-color: $workshop-erwachsene !important;
-    }
-    &.--underline-pink > a::before {
-    
-        background-color: $kunstevent !important;
-    }
-    &.--underline-yellow > a::before {
-        background-color: $ferienprogramm !important;
-    }
+	&.--underline-blue > a::before {
+		background-color: $course-kinder !important;
+	}
+	&.--underline-red > a::before {
+		background-color: $workshop-erwachsene !important;
+	}
+	&.--underline-pink > a::before {
+		background-color: $kunstevent !important;
+	}
+	&.--underline-yellow > a::before {
+		background-color: $ferienprogramm !important;
+	}
 }

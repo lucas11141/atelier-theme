@@ -1,5 +1,10 @@
 // Input Feld
-input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="tel"], input[type="date"],
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+input[type='tel'],
+input[type='date'],
 textarea,
 select {
 	padding: 16px 18px 14px;
@@ -21,7 +26,6 @@ select {
 		border-color: $red;
 	}
 	&:-webkit-autofill {
-		
 	}
 	&:disabled {
 		opacity: 0.5;
@@ -36,9 +40,16 @@ select {
 
 // Häkchen, wenn Feld ausgefüllt ist
 .form-row--filled {
-	&:has(input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="tel"], input[type="date"],
-	textarea,
-	select) {
+	&:has(
+			input[type='text'],
+			input[type='password'],
+			input[type='email'],
+			input[type='number'],
+			input[type='tel'],
+			input[type='date'],
+			textarea,
+			select
+		) {
 		&::after {
 			content: '';
 			height: 20px;
@@ -62,12 +73,16 @@ select {
 		width: calc(50% - 10px);
 	}
 	&.--active {
-		input, select, textarea {
+		input,
+		select,
+		textarea {
 			border-color: $main;
 		}
 	}
 	&.--error {
-		input, select, textarea {
+		input,
+		select,
+		textarea {
 			border-color: $red;
 		}
 	}
@@ -101,29 +116,22 @@ select {
 	}
 }
 
-
-
 .standard__form .labeltext {
 	@extend .input__label;
 }
 
-
 // Input Label
-form:not(.woocommerce-form-login):not(.woocommerce-form-register):not(.woocommerce-checkout):not(.woocommerce-checkout) .form-row {
+form:not(.woocommerce-form-login):not(.woocommerce-form-register):not(.woocommerce-checkout):not(.woocommerce-checkout)
+	.form-row {
 	label:not(.woocommerce-form__label-for-checkbox) {
 		@extend .input__label;
-	} 
+	}
 }
-
-
 
 // Textarea Field
 textarea {
 	height: 150px;
 }
-
-
-
 
 // Ultimate Checkbox <--- please use this one!!!
 .new__checkbox {
@@ -132,7 +140,7 @@ textarea {
 	input {
 		position: relative;
 		&::after {
-			content: "";
+			content: '';
 			display: block;
 			height: 18px;
 			width: 18px;
@@ -147,8 +155,8 @@ textarea {
 		&:checked {
 			&::after {
 				background-color: $accent;
-				border-color: rgba(black, .1);
-				background-image: url("img/shop/checkbox_checkmark.svg");
+				border-color: rgba(black, 0.1);
+				background-image: url('img/shop/checkbox_checkmark.svg');
 				background-size: 12px;
 				background-position: center;
 				background-repeat: no-repeat;
@@ -174,7 +182,6 @@ textarea {
 	}
 }
 
-
 .input__checkbox {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
@@ -184,7 +191,7 @@ textarea {
 		height: unset;
 		width: 0;
 		&::after {
-			content: "";
+			content: '';
 			display: block;
 			height: 18px;
 			width: 18px;
@@ -203,7 +210,7 @@ textarea {
 			&::after {
 				background-color: $accent;
 				border-color: darken($accent, 10%);
-				background-image: url("img/shop/checkbox_checkmark.svg");
+				background-image: url('img/shop/checkbox_checkmark.svg');
 				background-size: 12px;
 				background-position: center;
 				background-repeat: no-repeat;
@@ -228,23 +235,18 @@ textarea {
 
 // Checkbox Field
 .checkbox,
-.wpcf7-acceptance label {	
+.wpcf7-acceptance label {
 	@extend .input__checkbox;
 }
 
 // Radio Field
-input[type="radio"] {
-    height: 18px;
-    min-width: 18px;
-    background-color: white;
-    border: solid 1px $inputgray;
-    border-radius: 5px;
+input[type='radio'] {
+	height: 18px;
+	min-width: 18px;
+	background-color: white;
+	border: solid 1px $inputgray;
+	border-radius: 5px;
 }
-
-
-
-
-
 
 // Input Fields List Margins
 $form-row-gap: 20px;
@@ -256,13 +258,14 @@ $form-column-gap: 30px;
 .woocommerce-shipping-fields__field-wrapper,
 .woocommerce-address-fields__field-wrapper,
 .woocommerce-EditAccountForm {
-	&, fieldset {
+	&,
+	fieldset {
 		@include flex-row();
 		flex-wrap: wrap;
 		row-gap: $form-row-gap;
 		padding: 0px;
 	}
-} 
+}
 
 // Wordpress form-row
 .form-row,
@@ -275,12 +278,17 @@ $form-column-gap: 30px;
 
 // Split Form
 .form__split {
-	width: calc( 50% - ( #{$form-column-gap} / 2 ) );
-	@include flex-row();
-	flex-wrap: wrap;
-	row-gap: $form-row-gap;
+	width: calc(50% - (#{$form-column-gap} / 2));
+
+	p {
+		width: 100%;
+		@include flex-row();
+		flex-wrap: wrap;
+		row-gap: $form-row-gap;
+	}
+
 	@media only screen and (max-width: $tablet) {
-			width: 100%;
+		width: 100%;
 	}
 }
 
@@ -288,7 +296,7 @@ $form-column-gap: 30px;
 .standard__form label {
 	// Input Width
 	&.half {
-		width: calc( 50% - ( #{$form-column-gap} / 2 ) );
+		width: calc(50% - (#{$form-column-gap} / 2));
 	}
 	// Textarea Height
 	&.height--2 textarea,
@@ -301,7 +309,7 @@ $form-column-gap: 30px;
 	}
 	&.height--4 textarea,
 	&.height--four textarea {
-		height: 297px;
+		height: 311px;
 	}
 	&.height--5 textarea,
 	&.height--five textarea {
@@ -351,7 +359,7 @@ $form-column-gap: 30px;
 	}
 	& + p {
 		text-align: right;
-		input[type="submit"] {
+		input[type='submit'] {
 			@extend .button;
 			border: none;
 			margin: 0 0 0 auto;
@@ -365,23 +373,23 @@ $form-column-gap: 30px;
 // Single Input Formular
 .form--one__line {
 	width: 100%;
-    @include flex-row();
-    align-items: stretch;
-    .form-row {
-        margin: 0;
-        padding-top: 7px !important;
-        .label-name {
+	@include flex-row();
+	align-items: stretch;
+	.form-row {
+		margin: 0;
+		padding-top: 7px !important;
+		.label-name {
 			font-weight: 700;
 			font-size: 14px;
-            background-image: linear-gradient(to bottom, $lightgray, white);
+			background-image: linear-gradient(to bottom, $lightgray, white);
 			position: absolute;
 			top: 0;
 			left: 10px;
-        }
-        .label-error {
-            display: none;
-        }
-    }
+		}
+		.label-error {
+			display: none;
+		}
+	}
 	p.form-input {
 		@extend .input__field;
 		width: unset;
@@ -393,14 +401,14 @@ $form-column-gap: 30px;
 			color: transparent;
 		}
 	}
-    button {
-    }
+	button {
+	}
 	button {
 		margin: 7px 0 0 12px !important;
-        padding: 0;
+		padding: 0;
 		width: 64px;
 		min-width: 64px;
-        border: none;
+		border: none;
 		width: 64px;
 		text-indent: -9999px;
 		color: transparent;
@@ -418,8 +426,8 @@ $form-column-gap: 30px;
 			@include pos-center();
 		}
 		&:hover {
-            background-size: 1300%;
-        }
+			background-size: 1300%;
+		}
 	}
 	@media only screen and (max-width: $mobile) {
 		.button {
@@ -431,12 +439,9 @@ $form-column-gap: 30px;
 .form--one__line {
 }
 
-
-
-
 // Input Fields without Label
 #billing_address_2_field,
-#shipping_address_2_field { 
+#shipping_address_2_field {
 	padding: 0;
 	input {
 		padding: 14.5px 16px;
@@ -463,41 +468,41 @@ $form-column-gap: 30px;
 
 #billing_country_field,
 #shipping_country_field {
-    display: inline-block;
-    padding-top: 7px;
-    position: relative;
-    label {
-        background-image: linear-gradient(to top, #f3f3f3, white);
-    }
-    span.woocommerce-input-wrapper {
-        display: inline-block;
-        padding: 17px 17px 15px;
-        width: 100%;
-        background-color: #f3f3f3;
-        border-radius: 8px;
-        border: solid $inputgray 2px;
-        outline: none;
-        -webkit-appearance: none;
-        position: relative;
-        strong {
-            font-weight: 500 !important;
-            color: $darkgray;
-        }
-        .select2-selection {
-            height: 53px;
-            border: solid 1px $main;
-            border-radius: 8px;
-            font-size: 14px;
-            padding: 12px 16px;
-            .select2-selection__rendered {
-                padding: 0;
-                color: $main;
-            }
-            .select2-selection__arrow {
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-        }
-    }
+	display: inline-block;
+	padding-top: 7px;
+	position: relative;
+	label {
+		background-image: linear-gradient(to top, #f3f3f3, white);
+	}
+	span.woocommerce-input-wrapper {
+		display: inline-block;
+		padding: 17px 17px 15px;
+		width: 100%;
+		background-color: #f3f3f3;
+		border-radius: 8px;
+		border: solid $inputgray 2px;
+		outline: none;
+		-webkit-appearance: none;
+		position: relative;
+		strong {
+			font-weight: 500 !important;
+			color: $darkgray;
+		}
+		.select2-selection {
+			height: 53px;
+			border: solid 1px $main;
+			border-radius: 8px;
+			font-size: 14px;
+			padding: 12px 16px;
+			.select2-selection__rendered {
+				padding: 0;
+				color: $main;
+			}
+			.select2-selection__arrow {
+				right: 10px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+		}
+	}
 }

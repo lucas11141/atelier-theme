@@ -1,84 +1,100 @@
+/*------------------------------------*\
+    Proxima Soft
+\*------------------------------------*/
 @font-face {
-    font-family: "proxima-soft";
-    src: local('Proxima Soft Regular'), local('Proxima-Soft-Regular'), url("fonts/proxima-soft-400.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-} 
-@font-face {
-    font-family: "proxima-soft";
-    src: local('Proxima Soft Medium'), local('Proxima-Soft-Medium'), url("fonts/proxima-soft-500.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-}  
-@font-face {
-    font-family: "proxima-soft";
-    src: local('Proxima Soft Semibold'), local('Proxima-Soft-Semibold'), url("fonts/proxima-soft-600.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-}
-@font-face {
-    font-family: "proxima-soft";
-    src: local('Proxima Soft Bold'), local('Proxima-Soft-Bold'), url("fonts/proxima-soft-700.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-}
-@font-face {
-    font-family: "proxima-soft";
-    src: local('Proxima Soft Extrabold'), local('Proxima-Soft-Extrabold'), url("fonts/proxima-soft-800.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 800;
-    font-display: swap;
-}
-@font-face {
-    font-family: "proxima-soft";
-    src: local('Proxima Soft Black'), local('Proxima-Soft-Black'), url("fonts/proxima-soft-900.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 900;
-    font-display: swap;
+	font-family: 'proxima-soft';
+	src: local('Proxima Soft Regular'), local('Proxima-Soft-Regular'),
+		url('assets/fonts/proxima-soft-400.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
 }
 
-
-
-
 @font-face {
-    font-family: "gooddog-new";
-    src: local('Gooddog New'), local('Gooddog-New'), url("fonts/gooddog-new.woff2") format("woff2");
-    font-display: auto;
-    font-style: normal;
-    font-weight: 400;
+	font-family: 'proxima-soft';
+	src: local('Proxima Soft Medium'), local('Proxima-Soft-Medium'),
+		url('assets/fonts/proxima-soft-500.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
 }
 
-
-
 @font-face {
-    font-family:"gautreaux";
-    src:url("fonts/gautreaux-300.woff2") format("woff2");
-    font-display:auto;
-    font-style:normal;
-    font-weight:300;
-    font-display:swap;
-} 
-@font-face {
-    font-family:"gautreaux";
-    src:url("fonts/gautreaux-700.woff2") format("woff2");
-    font-display:auto;
-    font-style:normal;
-    font-weight:700;
-    font-display:swap;
+	font-family: 'proxima-soft';
+	src: local('Proxima Soft Semibold'), local('Proxima-Soft-Semibold'),
+		url('assets/fonts/proxima-soft-600.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
 }
 
-
-
+@font-face {
+	font-family: 'proxima-soft';
+	src: local('Proxima Soft Bold'), local('Proxima-Soft-Bold'),
+		url('assets/fonts/proxima-soft-700.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+}
 
 @font-face {
-    font-family:"futura-pt-bold";
-    src:url("fonts/futura-pt-bold-700.woff2") format("woff2");
-    font-display:auto;
-    font-style:normal;
-    font-weight:700;
-    font-display:swap;
+	font-family: 'proxima-soft';
+	src: local('Proxima Soft Extrabold'), local('Proxima-Soft-Extrabold'),
+		url('assets/fonts/proxima-soft-800.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 800;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'proxima-soft';
+	src: local('Proxima Soft Black'), local('Proxima-Soft-Black'),
+		url('assets/fonts/proxima-soft-900.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+}
+
+/*------------------------------------*\
+    Gooddog New
+\*------------------------------------*/
+@font-face {
+	font-family: 'gooddog-new';
+	src: local('Gooddog New'), local('Gooddog-New'), url('assets/fonts/gooddog-new.woff2') format('woff2');
+	font-display: auto;
+	font-style: normal;
+	font-weight: 400;
+}
+
+/*------------------------------------*\
+    Gautreaux
+\*------------------------------------*/
+// @font-face {
+// 	font-family: 'gautreaux';
+// 	src: local('Gautreaux'), url('assets/fonts/gautreaux-300.woff2') format('woff2');
+// 	font-display: auto;
+// 	font-style: normal;
+// 	font-weight: 300;
+// 	font-display: swap;
+// }
+
+@font-face {
+	font-family: 'gautreaux';
+	src: local('Gautreaux'), url('assets/fonts/gautreaux-700.woff2') format('woff2');
+	font-display: auto;
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+}
+
+/*------------------------------------*\
+    Futura PT
+\*------------------------------------*/
+@font-face {
+	font-family: 'futura-pt-bold';
+	src: url('assets/fonts/futura-pt-bold-700.woff2') format('woff2');
+	font-display: auto;
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
 }

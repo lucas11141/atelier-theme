@@ -55,7 +55,7 @@ msgstr "% Kommentare"
 #: ../author.php:61 ../loop.php:39 ../page.php:31 ../single.php:53
 #: ../template-demo.php:31
 msgid "Sorry, nothing to display."
-msgstr "Nichts gefunden, was den Suchkriterien entspricht."
+msgstr "Keine Inhalte gefunden."
 
 #: ../category.php:6
 msgid "Categories for"

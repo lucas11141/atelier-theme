@@ -1,0 +1,100 @@
+.usp-tiles {
+	@extend .wrapper;
+	@include flex-row();
+	flex-wrap: wrap;
+	row-gap: 60px;
+
+	.usp__item {
+		padding: 65px 40px 45px;
+		width: calc(50% - 25px);
+		border-radius: 25px;
+		@include box-shadow();
+		position: relative;
+
+		.circle {
+			height: 70px;
+			aspect-ratio: 1/1;
+			border-radius: 50%;
+			background-color: $accent;
+			position: absolute;
+			left: 40px;
+			top: 0;
+			transform: translateY(-50%);
+
+			img {
+				height: 35px;
+				@include pos-center();
+			}
+		}
+
+		.title {
+			padding-top: 0;
+		}
+
+		.subline,
+		a {
+			color: $accent;
+			&:hover {
+				transform: none !important;
+			}
+			&::after {
+				content: unset !important;
+			}
+		}
+
+		&:nth-child(2),
+		&:nth-child(3) {
+			.circle {
+				background-color: $accent;
+			}
+
+			.subline,
+			a {
+				color: $accent;
+			}
+		}
+	}
+
+	@media only screen and (max-width: $screen) {
+		.usp__item {
+			width: calc(50% - 10px);
+		}
+	}
+
+	@media only screen and (max-width: $desktop) {
+		row-gap: 45px;
+		.usp__item {
+			padding: 55px 30px 35px;
+
+			.cicle {
+				height: 60px;
+				width: 60px;
+				left: 30px;
+
+				img {
+					height: 30px;
+				}
+			}
+
+			p {
+				padding-top: 20px;
+			}
+		}
+	}
+
+	@media only screen and (max-width: $tablet) {
+		.usp__item {
+			width: 100%;
+		}
+	}
+
+	@media only screen and (max-width: $mobile) {
+		.usp__item {
+			padding: 50px 25px 35px;
+
+			.circle {
+				left: 25px;
+			}
+		}
+	}
+}

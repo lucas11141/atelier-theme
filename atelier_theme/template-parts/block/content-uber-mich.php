@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Block Name: Über mich
  *
@@ -12,26 +13,6 @@ $zitat = get_field("zitat");
 $id = $block["id"];
 ?>
 
-<!-- <div id="<?php echo $id; ?>" class="sticky__split uber__mich">
-
-    <div class="wrapper">
-
-        <div class="sticky__element">
-            
-        </div>
-        
-        <div class="sticky__content">
-            
-        </div>
-
-    </div>
-
-</div> -->
-
-
-
-
-
 <div id="<?php echo $id; ?>" class="uber__mich bild__text wrapper">
 
     <div class="bild__text__image">
@@ -43,7 +24,7 @@ $id = $block["id"];
     </div>
 
     <div class="bild__text__content">
-    
+
         <div class="quote__list">
             <div class="list__item">
                 <?= $zitat ?>

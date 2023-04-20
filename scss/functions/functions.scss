@@ -1,0 +1,138 @@
+/*------------------------------------*\
+    Flexbox
+\*------------------------------------*/
+@mixin flex-row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+@mixin flex-column {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+@mixin flex-center {
+	@include flex-row();
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin flex-item-width($column-count, $gap) {
+	width: calc((100% - ((#{$column-count} - 1) * #{$gap})) / #{$column-count});
+}
+
+@mixin grid-width($columns: 3) {
+	width: calc(((#{$inner} - (5 * #{$gap-new})) / 6 * #{$columns}) + ((#{$columns} - 1) * #{$gap-new}));
+	max-width: calc(((#{$inner} - (5 * #{$gap-new})) / 6 * #{$columns}) + ((#{$columns} - 1) * #{$gap-new}));
+}
+
+/*------------------------------------*\
+    Position
+\*------------------------------------*/
+@mixin pos-center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+@mixin pos-cover() {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/*------------------------------------*\
+    Sonstiges
+\*------------------------------------*/
+@mixin box-shadow {
+	box-shadow: $shadow_stardard;
+}
+
+@mixin hide-text {
+	color: transparent;
+	font-size: 0;
+}
+
+@mixin hover-slide-left {
+	transition: transform 300ms $ease_standard;
+
+	&:hover {
+		transform: translateX(-3px);
+	}
+}
+
+@mixin transition {
+	transition: all 300ms $ease_standard;
+}
+
+@mixin dashed-border($color, $position) {
+	background-image: linear-gradient(to right, $color 0, $color 8px, transparent 8px);
+	background-position: $position;
+	background-size: 16px 1px;
+	background-repeat: repeat-x;
+}
+
+@mixin font-gooddog {
+	font-family: 'gooddog-new';
+	font-weight: 400;
+	text-transform: uppercase;
+	-webkit-text-stroke: 0.3px $main;
+
+	@media only screen and (max-width: $tablet) {
+		-webkit-text-stroke: unset !important;
+		-webkit-text-stroke-width: 0px !important;
+	}
+}
+
+@mixin hide-scrollbar {
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
+
+	&::-webkit-scrollbar {
+		display: none; /* Safari and Chrome */
+	}
+}
+
+@mixin dropshadow() {
+	box-shadow: 2px 2px 30px rgba(black, 8%);
+}
+
+@mixin loading() {
+	overflow: hidden;
+	position: relative;
+
+	&::after {
+		content: '';
+		height: 500%;
+		width: 200px;
+		background-image: linear-gradient(to right, rgba(#f9f9f9, 0%), #f9f9f9 40%, #f9f9f9 60%, rgba(#f9f9f9, 0%));
+		animation: paypal-loader-glance 2.5s ease-in-out infinite;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%) rotate(15deg);
+
+		@keyframes paypal-loader-glance {
+			from {
+				left: calc(-200px - 100px);
+			}
+			to {
+				left: calc(100% + 100px);
+			}
+		}
+	}
+}
+
+@mixin click-bounce() {
+	&:active {
+		transition-duration: 30ms;
+		transform: scale(0.98);
+	}
+}
