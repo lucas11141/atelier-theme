@@ -61,6 +61,7 @@
 					position: relative;
 					@include transition();
 					-webkit-text-stroke-color: white;
+					@include fluid-type(18px, 20px);
 
 					&::after {
 						content: '';
@@ -124,7 +125,7 @@
 		width: 280px;
 		min-height: 280px;
 		@include flex-column();
-		gap: 20px;
+		gap: 16px;
 
 		.contact__header {
 			margin-bottom: 13px;
