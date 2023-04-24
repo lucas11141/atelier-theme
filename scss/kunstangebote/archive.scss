@@ -48,6 +48,8 @@
 				object-fit: cover;
 			}
 		}
+
+		// Responsive
 		@media only screen and (max-width: ($desktop + 100px)) {
 			.header__content {
 				.header__image {
@@ -59,20 +61,28 @@
 				}
 			}
 		}
+
 		@media only screen and (max-width: $tablet) {
+			.category__header {
+				padding-bottom: 290px;
+			}
+
 			.header__content {
 				.back__button {
-					margin: 15px 0 20px;
+					margin-bottom: 30px;
 				}
 			}
 		}
+
 		@media only screen and (max-width: $mobile) {
 			.header__content {
 				padding-bottom: 30px;
+
 				.header__text {
 					width: 100%;
 					max-width: unset;
 				}
+
 				.header__image {
 					width: calc(470px / 2);
 					min-width: calc(470px / 2);
@@ -98,14 +108,17 @@
 				background-color: var(--product-color-1);
 			}
 
-			.subline,
+			.subline {
+				color: var(--product-color-1);
+			}
+
 			a {
 				color: var(--product-color-1);
 				@extend .--hover-link;
-			}
 
-			a::after {
-				background-color: var(--product-color-1) !important;
+				&::after {
+					background-color: var(--product-color-1) !important;
+				}
 			}
 
 			&:nth-child(2),
@@ -392,6 +405,7 @@
 					-webkit-text-fill-color: transparent;
 				}
 			}
+
 			.filter__reset {
 				@include flex-row();
 				align-items: center;
@@ -740,21 +754,24 @@
 		align-items: center;
 		border-radius: 25px;
 		border: solid var(--product-color-1) 4px;
+
 		* {
 			text-align: center;
 		}
+
 		h3 {
 			padding: 0;
 		}
+
 		h6 {
 			color: var(--product-color-1);
 		}
+
 		p {
 			max-width: 600px;
+			@include fluid-type(15px, 16px);
 		}
-		p + .button {
-			margin-top: 35px;
-		}
+
 		.button {
 			background-color: var(--product-color-1);
 		}
@@ -762,5 +779,10 @@
 
 	.no__workshops__available {
 		padding: 70px 50px;
+
+		// Responsive
+		@media only screen and (max-width: $tablet) {
+			padding: 40px 30px;
+		}
 	}
 }

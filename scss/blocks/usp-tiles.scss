@@ -55,6 +55,7 @@
 		}
 	}
 
+	// Responsive
 	@media only screen and (max-width: $screen) {
 		.usp__item {
 			width: calc(50% - 10px);
@@ -63,16 +64,16 @@
 
 	@media only screen and (max-width: $desktop) {
 		row-gap: 45px;
+
 		.usp__item {
 			padding: 55px 30px 35px;
 
-			.cicle {
+			.circle {
 				height: 60px;
-				width: 60px;
 				left: 30px;
 
 				img {
-					height: 30px;
+					height: 28px;
 				}
 			}
 

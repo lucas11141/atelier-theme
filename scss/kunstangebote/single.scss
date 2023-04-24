@@ -49,11 +49,11 @@
 			}
 		}
 		@media only screen and (max-width: $desktop) {
+			padding-bottom: 310px;
+			margin-bottom: -330px;
+
 			.wrapper {
 				.header__content {
-					div {
-						// width: 100%;
-					}
 					.image {
 						width: 270px;
 					}
@@ -63,7 +63,7 @@
 		@media only screen and (max-width: $tablet) {
 			.wrapper {
 				.back__button {
-					margin: 15px 0 20px;
+					margin-bottom: 30px;
 				}
 				.header__content {
 					margin-bottom: 60px;
@@ -203,6 +203,7 @@
 		h4,
 		h6 {
 			padding: 0;
+			text-align: left;
 		}
 
 		img {

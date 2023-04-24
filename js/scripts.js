@@ -275,7 +275,7 @@ jQuery(document).ready(function ($) {
 		})
 
 		// Header anzeigen, wenn kein Element mit der Klasse "page_start" vorhanden ist
-		if (!pageStart) {
+		if (!pageStart && !document.querySelector('.header--shop') && !document.querySelector('.home__banner')) {
 			hiddenHeader.classList.remove('--hidden-on-load')
 		}
 	}

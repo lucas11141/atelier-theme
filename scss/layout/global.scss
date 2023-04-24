@@ -174,7 +174,7 @@ h1 {
 	}
 }
 h2 {
-	@include fluid-type(28px, 32px);
+	@include fluid-type(24px, 32px);
 	b,
 	strong {
 		font-weight: 500;
@@ -345,7 +345,7 @@ strong {
 }
 
 /*------------------------------------*\
-Buttons Sytling
+Buttons Styling
 \*------------------------------------*/
 .button {
 	@include flex-row();
@@ -358,9 +358,11 @@ Buttons Sytling
 	border-radius: 10px;
 	transition: ease-in-out 200ms;
 	cursor: pointer;
+
 	&::after {
 		content: unset;
 	}
+
 	&,
 	span {
 		font-family: $main-font;
@@ -386,17 +388,14 @@ Buttons Sytling
 	background-repeat: no-repeat;
 	background-size: 0%;
 	transition: cubic-bezier(0.5, 0, 0.5, 1) 300ms background-size;
+
 	&:hover,
 	&:focus,
 	&:active {
 		transform: none;
 		background-size: 1020%;
 	}
-	&:active {
-		// filter: brightness(100%);
-		// transition: none;
-		// background-size: 0;
-	}
+
 	span {
 		transition: cubic-bezier(0.5, 0, 0.5, 1) 300ms color;
 	}
@@ -405,17 +404,20 @@ Buttons Sytling
 	}
 	&[disabled],
 	&.--disabled {
-		// opacity: 50%;
 		transition: none;
 		pointer-events: none;
 		cursor: default;
+
 		&::before {
 			transition: none;
 		}
 	}
+
+	// Responsive
 	@media only screen and (max-width: $desktop) {
-		padding: 18px 40px;
+		padding: 15px 40px;
 	}
+
 	@media only screen and (max-width: $mobile) {
 		width: 100%;
 	}
@@ -1646,7 +1648,7 @@ a img.aligncenter {
 	// Responsive
 	@media only screen and (max-width: $desktop) {
 		padding-bottom: 350px;
-		margin-bottom: -320px;
+		margin-bottom: -220px;
 	}
 }
 

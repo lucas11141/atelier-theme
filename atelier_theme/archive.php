@@ -19,6 +19,7 @@
             <?php get_template_part('template-parts/header-bar', '', array('type' => 'atelier', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
             <div class="wrapper header__content">
+
                 <?php
                 $thumbnail = get_field("thumbnail", $options);
                 $status = get_field("status", $options);
@@ -26,9 +27,8 @@
                 $headline_h1 = $hero_banner["headline_h1"] ?? null;
                 $subline_h1 = $hero_banner["subline_h1"] ?? null;
                 $description = $hero_banner["description"] ?? null;
-                // $button_1 = $hero_banner["button_1"];
-                // $button_2 = $hero_banner["button_2"];
                 ?>
+
                 <?php get_template_part('template-parts/button', 'link', array('color' => $color, 'direction' => 'left', 'button' => array('title' => 'Zurück zur Übersicht', 'url' => get_site_url() . '/#' . $postType))); ?>
 
                 <div class="header__text">
@@ -57,12 +57,8 @@
                             <?php get_template_part('template-parts/button', '', array('color' => $color, 'button' => array('title' => $plural . ' entdecken', 'url' => '#list'))); ?>
                         <?php else : ?>
                             <div class="two-buttons">
-                                <div class="filter--1">
-                                    <?php get_template_part('template-parts/button', '', array('color' => 'blue', 'button' => array('title' => 'Für Kinder', 'url' => '#list'))); ?>
-                                </div>
-                                <div class="filter--2">
-                                    <?php get_template_part('template-parts/button', '', array('color' => 'purple', 'button' => array('title' => 'Für Erwachsene', 'url' => '#list'))); ?>
-                                </div>
+                                <?php get_template_part('template-parts/button', '', array('color' => 'blue', 'class' => 'filter--1', 'button' => array('title' => 'Für Kinder', 'url' => '#list'))); ?>
+                                <?php get_template_part('template-parts/button', '', array('color' => 'purple', 'class' => 'filter--2', 'button' => array('title' => 'Für Erwachsene', 'url' => '#list'))); ?>
                             </div>
                         <?php endif; ?>
                     <?php endif; ?>
