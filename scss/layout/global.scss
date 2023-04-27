@@ -1984,17 +1984,16 @@ a img.aligncenter {
 }
 
 .booking-reminder {
-	padding: 10px 25px 10px 21px;
-	min-height: 62px;
-	min-width: 62px;
+	box-sizing: content-box;
+	padding: 0 25px 0 21px;
+	min-height: 60px;
+	min-width: 60px;
 	@include flex-row();
 	justify-content: center;
 	align-items: center;
-	// gap: 14px;
-	background: white;
+	background: $main;
+	border: solid 3px white;
 	border-radius: 100px;
-	border: solid 2.5px var(--book-color);
-	box-shadow: 0 0 30px rgba(black, 0.1);
 	position: fixed;
 	bottom: 30px;
 	left: 50%;
@@ -2003,13 +2002,16 @@ a img.aligncenter {
 	transition: all 200ms ease-in-out;
 
 	.feather {
-		stroke: var(--book-color);
+		stroke: white;
+		fill: white;
 	}
 
 	.booking-reminder__text {
+		box-sizing: content-box;
 		padding-left: 14px;
 		display: none;
 		opacity: 0;
+		transform: translateY(-1px);
 
 		span,
 		p {
@@ -2027,11 +2029,18 @@ a img.aligncenter {
 
 		p {
 			@extend h5;
+			padding-top: 1px;
+			color: white;
 		}
 	}
 
 	&.--closed {
-		padding: 10px;
+		padding: 0;
+	}
+
+	&:not(.--closed) {
+		background: $main;
+		color: white;
 	}
 
 	&.--hidden {
