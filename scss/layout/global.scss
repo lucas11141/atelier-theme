@@ -1982,3 +1982,59 @@ a img.aligncenter {
 .background__number {
 	pointer-events: none;
 }
+
+.booking-reminder {
+	padding: 10px 25px 10px 21px;
+	min-height: 62px;
+	min-width: 62px;
+	@include flex-row();
+	justify-content: center;
+	align-items: center;
+	// gap: 14px;
+	background: white;
+	border-radius: 100px;
+	border: solid 2.5px var(--book-color);
+	box-shadow: 0 0 30px rgba(black, 0.1);
+	position: fixed;
+	bottom: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
+	transition: all 200ms ease-in-out;
+
+	.feather {
+		stroke: var(--book-color);
+	}
+
+	.booking-reminder__text {
+		padding-left: 14px;
+		display: none;
+		opacity: 0;
+
+		span,
+		p {
+			padding: 0;
+			white-space: nowrap;
+		}
+
+		span {
+			display: block;
+			font-weight: 700;
+			@include fluid-type(10px, 12px);
+			text-transform: uppercase;
+			color: var(--book-color);
+		}
+
+		p {
+			@extend h5;
+		}
+	}
+
+	&.--closed {
+		padding: 10px;
+	}
+
+	&.--hidden {
+		display: none;
+	}
+}

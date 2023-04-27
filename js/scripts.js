@@ -2,6 +2,7 @@
 // @prepros-prepend "lib/jquery.magnific-popup.min.js";
 // @prepros-prepend "lib/mc-calendar.min.js";
 // @prepros-prepend "lib/slick.min.js";
+// @prepros-prepend "lib/js.cookie-2.2.1.min.js";
 
 jQuery(document).ready(function ($) {
 	function onElementLoad(selector, execution) {
@@ -677,8 +678,10 @@ jQuery(document).ready(function ($) {
 })
 
 // @prepros-prepend "blocks/form.js";
+// @prepros-append "blocks/booking-reminder.js";
 // @prepros-append "blocks/productfilter.js";
 // @prepros-append "blocks/newsletter.js";
 // @prepros-append "blocks/kontakt-hero-banner.js";
+// @prepros-append "pages/archive.js";
 // @prepros-append "lib/sendinblue.js";
 // @prepros-append "lib/lightbox.js";

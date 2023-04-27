@@ -13,8 +13,6 @@
         <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
                 <?php
-                $booking_url = "https://buchung.atelier-delatron.de";
-                $booking_url = "http://localhost:4300";
                 $is_bookable_note = "Aktuell nicht buchbar."; // TODO: Richtigen Wert einsetzen
 
                 $postId = get_the_ID();
@@ -430,14 +428,14 @@
                                             <?php else : ?>
 
                                                 <?php array_map(function ($time) {
+                                                    global $postId, $isBookable;
 
-                                                    global $booking_url, $postId, $isBookable;
                                                     $timeId = $time->term_id;
                                                     $weekday = get_field('weekday', 'course_time_' . $timeId);
                                                     $starttime = get_field('starttime', 'course_time_' . $timeId);
                                                     $endtime = get_field('endtime', 'course_time_' . $timeId); ?>
 
-                                                    <a class="date <?= empty(get_course_dates($timeId)) ? '--disabled' : '' ?>" href="<?= $booking_url ?>/?productId=<?= $postId ?>&courseTime=<?= $timeId ?>">
+                                                    <a class="date <?= empty(get_course_dates($timeId)) ? '--disabled' : '' ?>" href="<?= BOOK_URL ?>/?productId=<?= $postId ?>&courseTime=<?= $timeId ?>">
                                                         <div>
                                                             <h5><?= $weekday['label'] ?></h5>
                                                             <h6><?= $starttime . ' - ' . $endtime . ' Uhr' ?></h6>
@@ -464,8 +462,8 @@
                                             <?php else : ?>
 
                                                 <?php array_map(function ($date) {
+                                                    global $postId, $isBookable;
 
-                                                    global $booking_url, $postId, $isBookable;
                                                     $date_1 = get_field('date_1', $date->ID);
                                                     $date_2 = get_field('date_2', $date->ID);
 
@@ -475,7 +473,7 @@
                                                         $date_readable = translateReadableDateToGerman(date("d. F Y", $date_1_timestamp));
                                                         $date_day = translateReadableDateToGerman(date("l", $date_1_timestamp)); ?>
 
-                                                        <a class="date <?= $isBookable ?>" href="<?= $booking_url ?>/?productId=<?= $postId ?>&date=<?= $date->ID ?>">
+                                                        <a class="date <?= $isBookable ?>" href="<?= BOOK_URL ?>/?productId=<?= $postId ?>&date=<?= $date->ID ?>">
                                                             <div>
                                                                 <h5><?= $date_readable ?></h5>
                                                                 <h6><?= $date_day ?></h6>
@@ -491,7 +489,7 @@
                                                         $date_readable = translateReadableDateToGerman(date("d.", $date_1_timestamp) . " + " . date("d. F Y", $date_2_timestamp));
                                                         $date_day = translateReadableDateToGerman(date("l", $date_1_timestamp) . " + " . date("l", $date_2_timestamp)); ?>
 
-                                                        <a class="date <?= $isBookable ?>" href="<?= $booking_url ?>/?productId=<?= $postId ?>&date=<?= $date->ID ?>">
+                                                        <a class="date <?= $isBookable ?>" href="<?= BOOK_URL ?>/?productId=<?= $postId ?>&date=<?= $date->ID ?>">
                                                             <div>
                                                                 <h5><?= $date_readable ?></h5>
                                                                 <h6><?= $date_day ?></h6>
@@ -518,7 +516,7 @@
                                         <?php if ($postType === "birthday" || $postType === "event") :
                                             $sql_id = get_field("sql_id"); ?>
 
-                                            <a class="date" href="<?= $booking_url ?>/?productId=<?= get_the_ID(); ?>&start=true">
+                                            <a class="date" href="<?= BOOK_URL ?>/?productId=<?= get_the_ID(); ?>">
                                                 <div>
                                                     <h5>Jetzt Anfragen</h5>
                                                 </div>

@@ -1,91 +1,88 @@
 jQuery(document).ready(function ($) {
-	console.log('test')
-
 	// Product Filter
 	const productsFilter = document.querySelector('.products__filter')
 	if (productsFilter) {
-		let filterIndex = 0
-
-		//
 		const buttonOne = productsFilter.querySelector('.--child')
 		const buttonTwo = productsFilter.querySelector('.--adult')
+		const resetButton = document.querySelector('.filter__reset')
+		const productsOne = document.querySelectorAll('.product__item.--child')
+		const productsTwo = document.querySelectorAll('.product__item.--adult')
+		let currentFilter
+
+		// Erhält den aktuellen Filter aus der URL
+		function getFilterParams() {
+			const urlParams = new URLSearchParams(window.location.search)
+			let filter = urlParams.get('filter')
+
+			if (filter === '') filter = undefined
+
+			return filter
+		}
+
+		// Setzt den Filter
+		function setFilter(filter) {
+			if (filter === undefined) {
+				currentFilter = undefined
+
+				productsOne.forEach((product) => {
+					product.style.display = 'flex'
+				})
+				productsTwo.forEach((product) => {
+					product.style.display = 'flex'
+				})
+
+				buttonOne.classList.remove('--active')
+				buttonTwo.classList.remove('--active')
+				resetButton.classList.add('--hidden')
+			}
+			if (filter === 'child') {
+				currentFilter = 'child'
+
+				productsOne.forEach((product) => {
+					product.style.display = 'flex'
+				})
+				productsTwo.forEach((product) => {
+					product.style.display = 'none'
+				})
+
+				buttonOne.classList.add('--active')
+				buttonTwo.classList.remove('--active')
+				resetButton.classList.remove('--hidden')
+			}
+			if (filter === 'adult') {
+				currentFilter = 'adult'
+
+				productsOne.forEach((product) => {
+					product.style.display = 'none'
+				})
+				productsTwo.forEach((product) => {
+					product.style.display = 'flex'
+				})
+
+				buttonOne.classList.remove('--active')
+				buttonTwo.classList.add('--active')
+				resetButton.classList.remove('--hidden')
+			}
+		}
+
+		// Setzte den Filter beim Laden der Seite
+		setFilter(getFilterParams())
+
+		// Button Event Listener
 		buttonOne.addEventListener('click', () => {
-			if (filterIndex === 1) {
-				filterProduct(0)
+			if (currentFilter === 'child') {
+				setFilter(undefined)
 			} else {
-				filterProduct(1)
+				setFilter('child')
 			}
 		})
 		buttonTwo.addEventListener('click', () => {
-			if (filterIndex === 2) {
-				filterProduct(0)
+			if (currentFilter === 'adult') {
+				setFilter(undefined)
 			} else {
-				filterProduct(2)
+				setFilter('adult')
 			}
 		})
-
-		// Reset Button
-		const resetFilter = document.querySelector('.filter__reset')
-		resetFilter.addEventListener('click', () => filterProduct(0))
-
-		//
-		const productsOne = document.querySelectorAll('.product__item.--child')
-		const productsTwo = document.querySelectorAll('.product__item.--adult')
-
-		//
-		function filterProduct(filter) {
-			if (filter === 0) {
-				filterIndex = 0
-				console.log('Filter: 0')
-				productsOne.forEach((product) => {
-					product.style.display = 'flex'
-				})
-				productsTwo.forEach((product) => {
-					product.style.display = 'flex'
-				})
-				buttonOne.classList.remove('--active')
-				buttonTwo.classList.remove('--active')
-				resetFilter.classList.add('--hidden')
-			}
-			if (filter === 1) {
-				filterIndex = 1
-				console.log('Filter: 1')
-				productsOne.forEach((product) => {
-					product.style.display = 'flex'
-				})
-				productsTwo.forEach((product) => {
-					product.style.display = 'none'
-				})
-				buttonOne.classList.add('--active')
-				buttonTwo.classList.remove('--active')
-				resetFilter.classList.remove('--hidden')
-			}
-			if (filter === 2) {
-				filterIndex = 2
-				console.log('Filter: 2')
-				productsOne.forEach((product) => {
-					product.style.display = 'none'
-				})
-				productsTwo.forEach((product) => {
-					product.style.display = 'flex'
-				})
-				buttonOne.classList.remove('--active')
-				buttonTwo.classList.add('--active')
-				resetFilter.classList.remove('--hidden')
-			}
-		}
-	}
-
-	const filterOneBtn = document.querySelector('.filter--1')
-	if (filterOneBtn) {
-		filterOneBtn.addEventListener('click', () => {
-			filterProduct(1)
-		})
-	}
-	const filterTwoBtn = document.querySelector('.filter--2')
-	if (filterTwoBtn) {
-		filterTwoBtn.addEventListener('click', () => {
-			filterProduct(2)
-		})
+		resetButton.addEventListener('click', () => setFilter(undefined))
 	}
 })

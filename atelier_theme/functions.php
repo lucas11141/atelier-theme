@@ -33,6 +33,7 @@ add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
 require get_template_directory() . '/inc/helpers.php'; // Helper functions
 require get_template_directory() . '/inc/api.php'; // API functions
+require get_template_directory() . '/inc/variables.php'; // Variables
 
 
 
