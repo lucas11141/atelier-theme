@@ -57,8 +57,8 @@
                             <?php get_template_part('template-parts/button', '', array('color' => $color, 'button' => array('title' => $plural . ' entdecken', 'url' => '#list'))); ?>
                         <?php else : ?>
                             <div class="two-buttons">
-                                <?php get_template_part('template-parts/button', '', array('color' => 'blue', 'class' => 'filter--1', 'button' => array('title' => 'Für Kinder', 'url' => '#list'))); ?>
-                                <?php get_template_part('template-parts/button', '', array('color' => 'purple', 'class' => 'filter--2', 'button' => array('title' => 'Für Erwachsene', 'url' => '#list'))); ?>
+                                <?php get_template_part('template-parts/button', '', array('color' => 'blue', 'class' => 'button--filter --child', 'button' => array('title' => 'Für Kinder', 'url' => '#list'))); ?>
+                                <?php get_template_part('template-parts/button', '', array('color' => 'purple', 'class' => 'button--filter --adult', 'button' => array('title' => 'Für Erwachsene', 'url' => '#list'))); ?>
                             </div>
                         <?php endif; ?>
                     <?php endif; ?>
@@ -115,7 +115,7 @@
 
                 <!-- Kurse: Filter nach Gruppe -->
                 <div class="products__filter wrapper" id="list">
-                    <div class="filter__button --child">Kinder</div>
+                    <div class="filter__button button--filter --child">Kinder</div>
 
                     <div class="filter__count">
                         <?php get_template_part('template-parts/kunstangebot/product-count', '', array('label' => $post_count > 1 ? $plural : translateString($postType), 'value' => $post_count)); ?>
@@ -128,7 +128,7 @@
                         </div>
                     </div>
 
-                    <div class="filter__button --adult">Erwachsene</div>
+                    <div class="filter__button button--filter --adult">Erwachsene</div>
                 </div>
 
             <?php endif; ?>

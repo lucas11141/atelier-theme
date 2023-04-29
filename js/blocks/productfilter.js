@@ -1,6 +1,7 @@
 jQuery(document).ready(function ($) {
 	// Product Filter
 	const productsFilter = document.querySelector('.products__filter')
+
 	if (productsFilter) {
 		const buttonOne = productsFilter.querySelector('.--child')
 		const buttonTwo = productsFilter.querySelector('.--adult')
@@ -17,6 +18,13 @@ jQuery(document).ready(function ($) {
 			if (filter === '') filter = undefined
 
 			return filter
+		}
+
+		function setFilterParams(filter) {
+			// set url param filter
+			const urlParams = new URLSearchParams(window.location.search)
+			urlParams.set('filter', filter)
+			window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`)
 		}
 
 		// Setzt den Filter
@@ -63,6 +71,8 @@ jQuery(document).ready(function ($) {
 				buttonTwo.classList.add('--active')
 				resetButton.classList.remove('--hidden')
 			}
+
+			setFilterParams(filter)
 		}
 
 		// Setzte den Filter beim Laden der Seite
@@ -84,5 +94,16 @@ jQuery(document).ready(function ($) {
 			}
 		})
 		resetButton.addEventListener('click', () => setFilter(undefined))
+
+		// Filter Buttons im Archive Hero Banner
+		const filterButtonChild = document.querySelector('.button--filter.--child')
+		const filterButtonAdult = document.querySelector('.button--filter.--adult')
+
+		filterButtonChild.addEventListener('click', () => {
+			setFilter('child')
+		})
+		filterButtonAdult.addEventListener('click', () => {
+			setFilter('adult')
+		})
 	}
 })
