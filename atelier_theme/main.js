@@ -367,7 +367,6 @@ jQuery(document).ready(function ($) {
 	}
 
 	// Hide Header on Load
-
 	const hiddenHeader = document.querySelector('.header.--hidden-on-load')
 	if (hiddenHeader) {
 		let dropdownIsOpened = false
@@ -376,10 +375,12 @@ jQuery(document).ready(function ($) {
 
 		const pageStart = document.querySelector('.page__start')
 		if (pageStart) {
+			console.log('pageStart')
 			showOffset = pageStart.offsetHeight - 350
 		}
 		const showHeader = document.querySelector('.show-header-on-offset')
 		if (showHeader) {
+			console.log('showHeader')
 			showOffset = showHeader.offsetHeight - 350
 		}
 
@@ -395,6 +396,7 @@ jQuery(document).ready(function ($) {
 		// $(window).on("scroll", function() {
 		// });
 		function toggleHeader(wScroll) {
+			console.log(wScroll > showOffset)
 			if (wScroll > showOffset && wScroll > 20) {
 				hiddenHeader.classList.add('--show')
 			} else {

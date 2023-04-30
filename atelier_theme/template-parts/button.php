@@ -11,11 +11,7 @@ if ($button) :
 ?>
     <a class="button --color-<?php echo $color; ?> <?= $class ?>" href="<?php echo $link_url; ?>" target="<?php echo $link_target; ?>" <?= $disabled ? 'disabled' : '' ?>>
         <?php if ($icon) : ?>
-            <!-- <img src="<?= get_template_directory_uri() ?>/img/website/icon_<?= $icon ?>.svg"> -->
-
-            <svg class="feather">
-                <use href="<?= get_template_directory_uri() ?>/assets/feather-sprite.svg#<?= $icon ?>" />
-            </svg>
+            <?php get_template_part('template-parts/icon', 'feather', array('icon' => $icon, 'color' => 'white', 'size' => 'small')) ?>
         <?php endif; ?>
 
         <span><?php echo $link_title; ?></span>

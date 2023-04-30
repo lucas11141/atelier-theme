@@ -1,0 +1,51 @@
+/*------------------------------------*\
+Scroll Down Button
+\*------------------------------------*/
+.button--scrolldown {
+	width: fit-content;
+	font-size: 15px;
+	font-weight: 800;
+	text-transform: uppercase;
+	transition: 300ms all $ease_standard;
+	@include flex-row();
+	gap: 12px;
+	align-items: center;
+
+	&__chevron {
+		width: 36px;
+		aspect-ratio: 1 / 1;
+		border: solid 3px $main;
+		border-radius: 50%;
+		vertical-align: middle;
+		position: relative;
+
+		svg {
+			@include pos-center();
+		}
+	}
+
+	// Hover
+	&:hover {
+		transform: translateY(3px);
+
+		.button--scrolldown__chevron {
+			animation: shake 300ms $ease_standard;
+		}
+	}
+
+	// Animation
+	@keyframes shake {
+		0% {
+			transform: translateY(-1px) rotate(0deg);
+		}
+		25% {
+			transform: translateY(-1px) rotate(20deg);
+		}
+		75% {
+			transform: translateY(-1px) rotate(-20deg);
+		}
+		100% {
+			transform: translateY(-1px) rotate(0deg);
+		}
+	}
+}

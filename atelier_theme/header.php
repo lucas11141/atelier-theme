@@ -33,13 +33,7 @@
 <body <?php body_class(); ?>>
     <!-- site -->
 
-    <a class="booking-reminder --hidden --closed" href="<?= BOOK_URL ?>">
-        <?php get_template_part('template-parts/icon-feather', '', array('icon' => 'bookmark')); ?>
-        <div class="booking-reminder__text">
-            <span>Buchung abschließen</span>
-            <p></p>
-        </div>
-    </a>
+    <?php get_template_part('template-parts/booking-reminder') ?>
 
     <?php
     // d(wp_get_registered_image_subsizes());

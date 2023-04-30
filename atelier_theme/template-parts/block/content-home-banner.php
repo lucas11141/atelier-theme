@@ -1,17 +1,18 @@
 <?php
+
 /**
  * Block Name: Home Banner
  *
  */
 
 // get fields
-$quote = get_field( "quote" );
-$author = get_field( "author" );
-$headline_h1 = get_field( "headline_h1" );
-$headline_h6 = get_field( "headline_h6" );
-$button_1 = get_field( "button_1" );
-$button_2 = get_field( "button_2" );
-$button_3 = get_field( "button_3" );
+$quote = get_field("quote");
+$author = get_field("author");
+$headline_h1 = get_field("headline_h1");
+$headline_h6 = get_field("headline_h6");
+$button_1 = get_field("button_1");
+$button_2 = get_field("button_2");
+$button_3 = get_field("button_3");
 
 $id = $block["id"];
 ?>
@@ -20,11 +21,9 @@ $id = $block["id"];
 
 <div id="<?php echo $id; ?>" class="home__banner">
 
-    <img class="banner__background" src="<?= get_template_directory_uri() ?>/img/website/home/banner_background.png" alt="">
-
     <div class="banner__content">
 
-        <?php get_template_part('template-parts/header-bar', '', array( 'type'=>'atelier', 'color'=>'white', 'drop'=>false, 'hero'=>true )); ?>
+        <?php get_template_part('template-parts/header-bar', '', array('type' => 'atelier', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
         <div class="wrapper">
             <div class="banner__quote">
@@ -38,19 +37,19 @@ $id = $block["id"];
                     <h6><?= $headline_h6 ?></h6>
                     <!-- <p>Komm ins Atelier Kunst & Gestalten und lasse deiner Kreativität unter professioneller Anleitung freien Lauf! Egal ob Malen, Werkeln oder Basteln - Hier findest du den perfekten Raum ohne Druck und Angst.</p> -->
                     <p class="two-buttons-vertical">
-                        <?php if( !empty( $button_1 ) ) : ?>
-                            <a class="button --color-accent  " href="<?= $button_1[ "url" ] ?>" target="<?= $button_1[ "target" ]; ?>">
-                                <span><?= $button_1[ "title" ]; ?></span>
+                        <?php if (!empty($button_1)) : ?>
+                            <a class="button --color-accent  " href="<?= $button_1["url"] ?>" target="<?= $button_1["target"]; ?>">
+                                <span><?= $button_1["title"]; ?></span>
                             </a>
                         <?php endif; ?>
-                        <?php if( !empty( $button_2 ) ) : ?>
-                            <a class="button --color-white  " href="<?= $button_2[ "url" ] ?>" target="<?= $button_2[ "target" ]; ?>">
-                                <span><?= $button_2[ "title" ]; ?></span>
+                        <?php if (!empty($button_2)) : ?>
+                            <a class="button --color-white  " href="<?= $button_2["url"] ?>" target="<?= $button_2["target"]; ?>">
+                                <span><?= $button_2["title"]; ?></span>
                             </a>
                         <?php endif; ?>
-                        <?php if( !empty( $button_3 ) ) : ?>
-                            <a class="button --color-white  " href="<?= $button_3[ "url" ] ?>" target="<?= $button_3[ "target" ]; ?>">
-                                <span><?= $button_3[ "title" ]; ?></span>
+                        <?php if (!empty($button_3)) : ?>
+                            <a class="button --color-white  " href="<?= $button_3["url"] ?>" target="<?= $button_3["target"]; ?>">
+                                <span><?= $button_3["title"]; ?></span>
                             </a>
                         <?php endif; ?>
                     </p>
@@ -63,8 +62,12 @@ $id = $block["id"];
             </div>
         </div>
 
+        <img class="banner__background" src="<?= get_template_directory_uri() ?>/img/website/home/banner_background.png" alt="">
+
     </div>
 
-    <div class="scrolldown"><div class="wrapper"><a class="button__scrolldown" href="#angebote"><img src="<?= get_template_directory_uri() ?>/img/website/angebotsseite/arrow_down_circle.svg">Mehr erfahren</a></div></div>
+    <div class="wrapper">
+        <?php get_template_part('template-parts/button-scrolldown', '', array('href' => '#Kurse')); ?>
+    </div>
 
 </div>

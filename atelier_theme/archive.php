@@ -121,9 +121,7 @@
                         <?php get_template_part('template-parts/kunstangebot/product-count', '', array('label' => $post_count > 1 ? $plural : translateString($postType), 'value' => $post_count)); ?>
 
                         <div class="filter__reset --hidden">
-                            <svg class="feather">
-                                <use href="<?= get_template_directory_uri() ?>/assets/feather-sprite.svg#trash" />
-                            </svg>
+                            <?php get_template_part('template-parts/icon-feather', '', array('icon' => 'trash')); ?>
                             <span>Filter löschen</span>
                         </div>
                     </div>

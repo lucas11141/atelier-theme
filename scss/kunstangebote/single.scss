@@ -13,10 +13,11 @@
 	}
 
 	.product__header {
-		padding-top: 1px;
+		padding: 1px 0 300px;
+		margin-bottom: -300px;
 
 		.wrapper {
-			.back__button {
+			.button--back {
 				margin-bottom: 20px;
 			}
 
@@ -62,7 +63,7 @@
 		}
 		@media only screen and (max-width: $tablet) {
 			.wrapper {
-				.back__button {
+				.button--back {
 					margin-bottom: 30px;
 				}
 				.header__content {
@@ -587,8 +588,9 @@
 				h4 {
 					color: var(--product-color);
 				}
+
 				p {
-					padding-top: 20px;
+					padding-top: 30px;
 					color: white;
 				}
 			}

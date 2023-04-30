@@ -131,20 +131,6 @@ body {
 }
 
 /*------------------------------------*\
-    Feather Icons
-\*------------------------------------*/
-.feather {
-	width: 20px;
-	min-width: 20px;
-	aspect-ratio: 1/1;
-	stroke: white;
-	stroke-width: 2.8;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	fill: none;
-}
-
-/*------------------------------------*\
     Formatierung
 \*------------------------------------*/
 * {
@@ -270,6 +256,9 @@ h6 + p {
 h1 + h6,
 h2 + h6,
 h3 + h6,
+h1 > h6,
+h2 > h6,
+h3 > h6,
 h6 + h2 {
 	padding-top: 8px;
 }
@@ -645,7 +634,7 @@ Link Button
 /*------------------------------------*\
 \*------------------------------------*/
 .button-link,
-.back__button {
+.button--back {
 	display: inline-block;
 	padding: 6px 0 6px 17px;
 	background-image: url('img/website/arrow_back_green.svg');
@@ -693,42 +682,6 @@ Link Button
 	@media only screen and (max-width: $tablet) {
 		padding: 6px 0 6px 14px;
 		background-size: 7px;
-	}
-}
-
-/*------------------------------------*\
-Scroll Down Button
-\*------------------------------------*/
-.button__scrolldown {
-	font-size: 16px;
-	font-weight: 800;
-	text-transform: uppercase;
-	transition: 300ms all $ease_standard;
-	img {
-		margin-right: 12px;
-		height: 36px;
-		vertical-align: middle;
-		transform: translateY(-1px);
-	}
-	&:hover {
-		transform: translateY(3px);
-		img {
-			animation: shake 300ms $ease_standard;
-		}
-	}
-	@keyframes shake {
-		0% {
-			transform: translateY(-1px) rotate(0deg);
-		}
-		25% {
-			transform: translateY(-1px) rotate(20deg);
-		}
-		75% {
-			transform: translateY(-1px) rotate(-20deg);
-		}
-		100% {
-			transform: translateY(-1px) rotate(0deg);
-		}
 	}
 }
 
@@ -1710,7 +1663,7 @@ a img.aligncenter {
 .icon {
 	&.--size {
 		&-large {
-			height: 35px;
+			height: 32px;
 		}
 		&-normal {
 			height: 25px;
@@ -1981,69 +1934,4 @@ a img.aligncenter {
 
 .background__number {
 	pointer-events: none;
-}
-
-.booking-reminder {
-	box-sizing: content-box;
-	padding: 0 25px 0 21px;
-	min-height: 60px;
-	min-width: 60px;
-	@include flex-row();
-	justify-content: center;
-	align-items: center;
-	background: $main;
-	border: solid 3px white;
-	border-radius: 100px;
-	position: fixed;
-	bottom: 30px;
-	left: 50%;
-	transform: translateX(-50%);
-	z-index: 10;
-	transition: all 200ms ease-in-out;
-
-	.feather {
-		stroke: white;
-		fill: white;
-	}
-
-	.booking-reminder__text {
-		box-sizing: content-box;
-		padding-left: 14px;
-		display: none;
-		opacity: 0;
-		transform: translateY(-1px);
-
-		span,
-		p {
-			padding: 0;
-			white-space: nowrap;
-		}
-
-		span {
-			display: block;
-			font-weight: 700;
-			@include fluid-type(10px, 12px);
-			text-transform: uppercase;
-			color: var(--book-color);
-		}
-
-		p {
-			@extend h5;
-			padding-top: 1px;
-			color: white;
-		}
-	}
-
-	&.--closed {
-		padding: 0;
-	}
-
-	&:not(.--closed) {
-		background: $main;
-		color: white;
-	}
-
-	&.--hidden {
-		display: none;
-	}
 }

@@ -1,0 +1,64 @@
+.booking-reminder {
+	box-sizing: content-box;
+	padding: 0 25px 0 21px;
+	min-height: 60px;
+	min-width: 60px;
+	@include flex-row();
+	justify-content: center;
+	align-items: center;
+	background: $main;
+	border: solid 3px white;
+	border-radius: 100px;
+	position: fixed;
+	bottom: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
+	transition: all 200ms ease-in-out;
+
+	.feather {
+		stroke: white;
+		fill: white;
+	}
+
+	.booking-reminder__text {
+		box-sizing: content-box;
+		padding-left: 14px;
+		display: none;
+		opacity: 0;
+		transform: translateY(-1px);
+
+		span,
+		p {
+			padding: 0;
+			white-space: nowrap;
+		}
+
+		span {
+			display: block;
+			font-weight: 700;
+			@include fluid-type(10px, 12px);
+			text-transform: uppercase;
+			color: var(--book-color);
+		}
+
+		p {
+			@extend h5;
+			padding-top: 1px;
+			color: white;
+		}
+	}
+
+	&.--closed {
+		padding: 0;
+	}
+
+	&:not(.--closed) {
+		background: $main;
+		color: white;
+	}
+
+	&.--hidden {
+		display: none;
+	}
+}

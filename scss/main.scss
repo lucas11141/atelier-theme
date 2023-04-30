@@ -143,6 +143,11 @@ $max-vw: $ft-max-vp;
 @import 'shop/order';
 @import 'shop/account';
 
+// templarte parts
+@import 'template-parts/icon-feather';
+@import 'template-parts/button-scrolldown';
+@import 'template-parts/booking-reminder';
+
 //blocks
 @import 'blocks/drei-schritte';
 @import 'blocks/schulederphantasie';

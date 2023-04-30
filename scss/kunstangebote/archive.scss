@@ -13,8 +13,8 @@
 		.header__content {
 			position: relative;
 
-			.back__button {
-				margin-bottom: 20px;
+			.button--back {
+				margin-bottom: 30px;
 			}
 
 			.header__text {
@@ -68,7 +68,7 @@
 			}
 
 			.header__content {
-				.back__button {
+				.button--back {
 					margin-bottom: 30px;
 				}
 			}
@@ -411,7 +411,7 @@
 				align-items: center;
 				gap: 5px;
 				position: absolute;
-				top: calc(100% + 15px);
+				top: calc(100% + 18px);
 				left: 50%;
 				transform: translateX(-50%);
 				opacity: 50%;
@@ -421,7 +421,6 @@
 				.feather {
 					width: 13px;
 					min-width: 13px;
-					transform: translateY(-0.5px);
 					stroke: $main;
 				}
 
@@ -430,7 +429,7 @@
 					text-align: center;
 					line-height: 1.2;
 					white-space: nowrap;
-					font-weight: 600;
+					font-weight: 700;
 				}
 
 				&.--hidden {

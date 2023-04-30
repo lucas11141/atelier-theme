@@ -1,140 +1,150 @@
 .home__banner {
-    padding-top: 1px;
-    width: 100vw;
-    height: 100vh;
-    min-height: 970px;
-    max-height: 1080px;
-    position: relative;
-    .banner__background {
-        height: 1050px;
-        width: 100vw;
-        object-fit: cover;
-        object-position: center;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: -1;
-    }
-    .scrolldown {
-        width: 100vw;
-        position: absolute;
-        left: 0;
-        bottom: 50px;
-    }
-}
-.banner__content {
-    width: 100vw;
-    height: 80vh;
-}
-.banner__quote {
-    margin-top: 50px;
-    @include flex-column();
-    align-items: center;
-    p {
-        padding: 0;
-        @include fluid-type(20px, 25px);
-        @include font-gooddog();
-        color: white;
-        text-transform: uppercase;
-        text-align: center;
-        letter-spacing: unset;
-        line-height: 1.3;
-        font-weight: 500;
-    }
-    span {
-        padding-top: 15px;
-        color: white;
-        @include fluid-type(13px, 14px);
-    }
-}
-.banner__text__image {
-    margin-top: 100px;
-    @include flex-row();
-    justify-content: space-between;
-    .banner__text {
-        h1 {
-            padding: 0;
-            color: white;
-        }
-        .two-buttons-vertical {
-            padding-top: 50px;
-            align-items: flex-start;
-        }
-    }
-    .banner__portrait {
-        margin-top: 80px;
-        position: relative;
-        &::after {
-            content: "Frauke Delatron";
-            font-size: 18px;
-            font-weight: 800;
-            position: absolute;
-            left: 50%;
-            bottom: -60px;
-            transform: translateX(-50%);
-        }
-        .portrait__image {
+	padding-top: 1px;
 
-        }
-        .portrait__white {
-            @include pos-center();
-            transform: translate(-50%, -50%) scale(1.07);
-            z-index: -1;
-        }
-        .portrait__border {
-            @include pos-center();
-            transform: translate(-50%, -50%) scale(1.1);
-            z-index: -2;
-        }
-    }
-}
-@media only screen and (max-width: $screen) {
-}
-@media only screen and (max-width: $desktop) {
-    .home__banner {
-        margin-bottom: 160px;
-        min-height: unset;
-        max-height: unset;
-        height: unset;
-        padding-bottom: 170px;
-        .banner__background {
-            height: 770px;
-        }
-    }
-    .banner__content {
-        height: unset;
-    }
-    .banner__quote {
-        display: none;
-    }
-    .banner__text__image {
-        margin-top: 30px;
-        position: relative;
-        .banner__text {
-            p {
-                padding-top: 35px;
-            }
-            .two-buttons-vertical {
-                padding-top: 35px;
-            }
-        }
-        .banner__portrait {
-            width: 150px;
-            position: absolute;
-            right: 0;
-            bottom: -240px;
-            &::after {
-                font-size: 14px;
-                bottom: -38px;
-                white-space: nowrap;
-            }
-        }
-    }
-    .scrolldown {
-        display: none;
-    }
-}
-@media only screen and (max-width: $tablet) {
-}
-@media only screen and (max-width: $mobile) {
+	.banner__content {
+		padding-top: 1px;
+		position: relative;
+		overflow: visible;
+
+		.header-bar {
+			margin-bottom: 50px;
+		}
+
+		.banner__quote {
+			@include flex-column();
+			align-items: center;
+
+			p {
+				padding: 0;
+				@include fluid-type(20px, 25px);
+				@include font-gooddog();
+				color: white;
+				text-transform: uppercase;
+				text-align: center;
+				letter-spacing: unset;
+				line-height: 1.3;
+				font-weight: 500;
+			}
+
+			span {
+				padding-top: 15px;
+				color: white;
+				@include fluid-type(13px, 14px);
+			}
+		}
+
+		.banner__text__image {
+			margin-top: 50px;
+			@include flex-row();
+			justify-content: space-between;
+
+			.banner__text {
+				h1 {
+					padding: 0;
+					color: white;
+				}
+				.two-buttons-vertical {
+					padding-top: 50px;
+					align-items: flex-start;
+				}
+			}
+			.banner__portrait {
+				margin-top: 80px;
+				position: relative;
+
+				&::after {
+					content: 'Frauke Delatron';
+					font-size: 18px;
+					font-weight: 800;
+					position: absolute;
+					left: 50%;
+					bottom: -60px;
+					transform: translateX(-50%);
+				}
+
+				.portrait__image {
+					position: relative;
+					z-index: 2;
+				}
+
+				.portrait__white {
+					@include pos-center();
+					transform: translate(-50%, -50%) scale(1.07);
+					z-index: 1;
+				}
+
+				.portrait__border {
+					@include pos-center();
+					transform: translate(-50%, -50%) scale(1.1);
+					z-index: -1;
+				}
+			}
+		}
+
+		.banner__background {
+			height: calc(100% + 200px);
+			width: 100vw;
+			object-fit: cover;
+			object-position: center;
+			position: absolute;
+			left: 50%;
+			top: 0;
+			transform: translateX(-50%);
+			z-index: -1;
+		}
+	}
+
+	.button--scrolldown {
+		margin-top: 50px;
+	}
+
+	// Responsive
+	@media only screen and (max-width: $desktop) {
+		.home__banner {
+			margin-bottom: 160px;
+			min-height: unset;
+			max-height: unset;
+			height: unset;
+			padding-bottom: 170px;
+		}
+
+		.banner__content {
+			height: unset;
+
+			.banner__quote {
+				display: none;
+			}
+
+			.banner__text__image {
+				margin-top: 30px;
+				position: relative;
+
+				.banner__text {
+					p {
+						padding-top: 35px;
+					}
+
+					.two-buttons-vertical {
+						padding-top: 35px;
+					}
+				}
+
+				.banner__portrait {
+					width: 150px;
+					position: absolute;
+					right: 0;
+					bottom: -240px;
+					&::after {
+						font-size: 14px;
+						bottom: -38px;
+						white-space: nowrap;
+					}
+				}
+			}
+		}
+
+		.scrolldown {
+			display: none;
+		}
+	}
 }
