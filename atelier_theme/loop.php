@@ -60,7 +60,7 @@ $the_query = new WP_Query($args);
                 <?php
                 the_post_thumbnail('gallery-slider');
                 ?>
-                <img class="border__right" src="<?= get_template_directory_uri() ?>/img/website/border_round_right_white.svg" alt="">
+                <img class="border__right" src="<?= get_template_directory_uri() ?>/assets/img/website/border_round_right_white.svg" alt="">
                 <div class="product__time">
                     <span class="time"><?= $duration ?> Stunden</span>
                     <span class="hour">Dauer</span>

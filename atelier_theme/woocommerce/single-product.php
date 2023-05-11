@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Template for displaying all single products
  *
@@ -15,31 +16,33 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
 
-get_header( 'shop' ); ?>
+get_header('shop'); ?>
 
 
 <header class="shop-hero-banner shop-hero-banner--small show-header-on-offset">
 
 	<?php get_template_part('template-parts/paper'); ?>
-	<div class="shop-hero-banner__decoration"><div class="wrapper">
-		<img src="<?= get_template_directory_uri() ?>/img/modules/shop-hero-banner/snowflake_medium.svg" alt=""> 
-		<img src="<?= get_template_directory_uri() ?>/img/modules/shop-hero-banner/snowflake_large.svg" alt=""> 
-		<img src="<?= get_template_directory_uri() ?>/img/modules/shop-hero-banner/snowflake_large.svg" alt=""> 
-		<img src="<?= get_template_directory_uri() ?>/img/modules/shop-hero-banner/snowflake_medium.svg" alt=""> 
-		<img src="<?= get_template_directory_uri() ?>/img/modules/shop-hero-banner/snowflake_small.svg" alt=""> 
-	</div></div>
+	<div class="shop-hero-banner__decoration">
+		<div class="wrapper">
+			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
+			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
+			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
+			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
+			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
+		</div>
+	</div>
 
 	<div class="shop-hero-banner__background-image">
-		<?php if ( $image ): ?>
+		<?php if ($image) : ?>
 			<img src="<?php echo $image; ?>" alt="">
 		<?php endif; ?>
 	</div>
 
-	<?php get_template_part('template-parts/header-bar', '', array( 'type'=>'shop', 'color'=>'white', 'drop'=>false, 'hero'=>true )); ?>
+	<?php get_template_part('template-parts/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
 	<div class="shop-hero-banner__content wrapper">
 		<div class="shop-hero-banner--account__header">
@@ -64,37 +67,38 @@ get_header( 'shop' ); ?>
 	 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
 	 * @hooked woocommerce_breadcrumb - 20
 	 */
-	do_action( 'woocommerce_before_main_content' );
+	do_action('woocommerce_before_main_content');
 	?>
 
-	<?php while ( have_posts() ) : ?>
+	<?php while (have_posts()) : ?>
 		<?php the_post(); ?>
 
-		<?php wc_get_template_part( 'content', 'single-product' ); ?>
+		<?php wc_get_template_part('content', 'single-product'); ?>
 
-	<?php endwhile; // end of the loop. ?>
-
-	<?php
-		/**
-		 * woocommerce_after_main_content hook.
-		 *
-		 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
-		 */
-		do_action( 'woocommerce_after_main_content' );
+	<?php endwhile; // end of the loop. 
 	?>
 
 	<?php
-		/**
-		 * woocommerce_sidebar hook.
-		 *
-		 * @hooked woocommerce_get_sidebar - 10
-		 */
-		do_action( 'woocommerce_sidebar' );
+	/**
+	 * woocommerce_after_main_content hook.
+	 *
+	 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+	 */
+	do_action('woocommerce_after_main_content');
+	?>
+
+	<?php
+	/**
+	 * woocommerce_sidebar hook.
+	 *
+	 * @hooked woocommerce_get_sidebar - 10
+	 */
+	do_action('woocommerce_sidebar');
 	?>
 
 </div>
 
 <?php
-get_footer( 'shop' );
+get_footer('shop');
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */

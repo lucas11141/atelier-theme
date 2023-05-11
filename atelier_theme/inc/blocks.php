@@ -1,4 +1,19 @@
 <?php
+function creat_category($categories, $post)
+{
+    return array_merge(
+        $categories,
+        array(
+            array(
+                'slug' => 'inhaltselemente',
+                'title' => __('Atelier Blöcke', 'inhaltselemente'),
+            ),
+        )
+    );
+}
+add_filter('block_categories', 'creat_category', 10, 2);
+
+
 add_action('acf/init', 'my_acf_init');
 function my_acf_init()
 {
@@ -441,5 +456,20 @@ function my_acf_init()
                 'align' => false,
             )
         );
+    }
+}
+
+function my_acf_block_render_callback($block, $content = '', $is_preview = false, $post_id = 0)
+{
+
+    $slug = str_replace('acf/', '', $block['name']);
+
+    $src = $block['data']['src'] ?? '';
+    if ($is_preview) :
+        echo '<img src="' . $src . '" width="100%" height="auto" />';
+    endif;
+
+    if (file_exists(get_theme_file_path("/template-parts/block/content-{$slug}.php"))) {
+        include(get_theme_file_path("/template-parts/block/content-{$slug}.php"));
     }
 }

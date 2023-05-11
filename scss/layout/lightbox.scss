@@ -1,210 +1,206 @@
 .gallery__button {
-    display: block !important;
-    height: 48px;
-    width: 48px;
-    background-color: white;
-    border: solid 3px $main;
-    border-radius: 50%;
-    cursor: pointer;
-    background-size: 48px;
-    background-position-x: 50%;
-    background-position-y: 50%;
-    &.button__prev {
-        background-image: url(img/elements/arrow_left_gallery.svg);
-    }
-    &.button__next {
-        background-image: url(img/elements/arrow_right_gallery.svg);
-    }
-    &:not(.swiper-button-disabled) {
-        &.button__prev {
-            &:hover {
-                animation: arrow-left 300ms $ease_standard;
-            }
-        }
-        &.button__next {
-            &:hover {
-                animation: arrow-right 300ms $ease_standard;
-            }
-        }
-    }
-    &.swiper-button-disabled {
-        opacity: 0.5;
-        cursor: default;
-    }
-    @keyframes arrow-left {
-        from {
-            background-position-x: 50%;
-        }
-        to {
-            background-position-x: calc( 50% - 48px );
-        }
-    }
-    @keyframes arrow-right {
-        from {
-            background-position-x: 50%;
-        }
-        to {
-            background-position-x: calc( 50% + 48px );
-        }
-    }
+	display: block !important;
+	height: 48px;
+	width: 48px;
+	background-color: white;
+	border: solid 3px $main;
+	border-radius: 50%;
+	cursor: pointer;
+	background-size: 48px;
+	background-position-x: 50%;
+	background-position-y: 50%;
+	&.button__prev {
+		background-image: url(../img/elements/arrow_left_gallery.svg);
+	}
+	&.button__next {
+		background-image: url(../img/elements/arrow_right_gallery.svg);
+	}
+	&:not(.swiper-button-disabled) {
+		&.button__prev {
+			&:hover {
+				animation: arrow-left 300ms $ease_standard;
+			}
+		}
+		&.button__next {
+			&:hover {
+				animation: arrow-right 300ms $ease_standard;
+			}
+		}
+	}
+	&.swiper-button-disabled {
+		opacity: 0.5;
+		cursor: default;
+	}
+	@keyframes arrow-left {
+		from {
+			background-position-x: 50%;
+		}
+		to {
+			background-position-x: calc(50% - 48px);
+		}
+	}
+	@keyframes arrow-right {
+		from {
+			background-position-x: 50%;
+		}
+		to {
+			background-position-x: calc(50% + 48px);
+		}
+	}
 }
 @media only screen and (max-width: $desktop) {
-    .gallery__button {
-        height: 40px;
-        width: 40px;
-        background-size: 40px;
-        @keyframes arrow-left {
-            from {
-                background-position-x: 50%;
-            }
-            to {
-                background-position-x: calc( 50% - 40px );
-            }
-        }
-        @keyframes arrow-right {
-            from {
-                background-position-x: 50%;
-            }
-            to {
-                background-position-x: calc( 50% + 40px );
-            }
-        }
-    }
+	.gallery__button {
+		height: 40px;
+		width: 40px;
+		background-size: 40px;
+		@keyframes arrow-left {
+			from {
+				background-position-x: 50%;
+			}
+			to {
+				background-position-x: calc(50% - 40px);
+			}
+		}
+		@keyframes arrow-right {
+			from {
+				background-position-x: 50%;
+			}
+			to {
+				background-position-x: calc(50% + 40px);
+			}
+		}
+	}
 }
-
-
 
 .gallery__meta {
-    padding: 18px 20px;
-    @include flex-row();
-    column-gap: 20px;
-    background-color: white; 
-    border-radius: 15px;
-    box-shadow: $shadow_stardard;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    transition: all 300ms $ease_standard;
-    .meta__text {
-        h5, h6 {
-            padding: 0;
-            white-space: nowrap;
-        }
-        h6 {
-            padding-top: 5px;
-        }
-    }
-    .icon__scale-up {
-        position: relative;
-        .icon--one,
-        .icon--two {
-            position: absolute;
-            opacity: 0;
-            transition: all 200ms $ease_standard;
-        }
-        .icon--one {
-            top: 16px;
-            right: 13px;
-        }
-        .icon--two {
-            bottom: 16px;
-            left: 13px;
-        }
-    }
-    @media only screen and (max-width: $desktop) {
-        padding: 14px 16px;
-        column-gap: 20px;
-        bottom: 10px;
-        left: 10px;
-        .icon__scale-up {
-            transform: scale(0.8);
-        }
-    }
+	padding: 18px 20px;
+	@include flex-row();
+	column-gap: 20px;
+	background-color: white;
+	border-radius: 15px;
+	box-shadow: $shadow_stardard;
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	transition: all 300ms $ease_standard;
+	.meta__text {
+		h5,
+		h6 {
+			padding: 0;
+			white-space: nowrap;
+		}
+		h6 {
+			padding-top: 5px;
+		}
+	}
+	.icon__scale-up {
+		position: relative;
+		.icon--one,
+		.icon--two {
+			position: absolute;
+			opacity: 0;
+			transition: all 200ms $ease_standard;
+		}
+		.icon--one {
+			top: 16px;
+			right: 13px;
+		}
+		.icon--two {
+			bottom: 16px;
+			left: 13px;
+		}
+	}
+	@media only screen and (max-width: $desktop) {
+		padding: 14px 16px;
+		column-gap: 20px;
+		bottom: 10px;
+		left: 10px;
+		.icon__scale-up {
+			transform: scale(0.8);
+		}
+	}
 }
 
-
-
-
 .gallery__popup {
-    opacity: 0;
-    pointer-events: none;
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    transition: ease-in-out 200ms;
-    &.--opened {
-        opacity: 1;
-        pointer-events: all;
-    }
-    .popup__background {
-        height: 100%;
-        width: 100%;
-        background-color: rgba(white, 90%);
-        position: absolute;
-        top: 0;
-        left: 0;
-        cursor: zoom-out;
-    }
-    .popup__image {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        .image__img {
-            max-height: 90vh;
-            max-width: 90vw;
-            border-radius: 25px;
-            object-fit: contain;
-            box-shadow: 5px 5px 30px rgba(black, 10%);
-            box-shadow: $shadow_stardard;
-        }
-    }
-    .gallery__buttons {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        column-gap: 20px;
-        .gallery__button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            &.button__prev {
-                left: 50px;
-            }
-            &.button__next {
-                right: 50px;
-            }
-        }
-    }
-    .gallery__indicator {
-        font-size: 50px;
-        color: white;
-        position: absolute;
-        left: 50%;
-        bottom: 100px;
-        transform: translateX(-50%);
-    }
-    @media only screen and (max-width: $desktop) {
-        .popup__image {
-            .image__img {
-                max-width: $wrapper-width;
-                max-height: calc(100vh - #{$wrapper-gap});
-            }
-        }
-        .gallery__buttons {
-            .gallery__button {
-                border-color: white;
-                box-shadow: $shadow_stardard;
-                &.button__prev {
-                    left: calc(#{$wrapper-gap} * 2);
-                }
-                &.button__next {
-                    right: calc(#{$wrapper-gap} * 2);
-                }
-            }
-        }
-    }
+	opacity: 0;
+	pointer-events: none;
+	height: 100vh;
+	width: 100vw;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	transition: ease-in-out 200ms;
+	&.--opened {
+		opacity: 1;
+		pointer-events: all;
+	}
+	.popup__background {
+		height: 100%;
+		width: 100%;
+		background-color: rgba(white, 90%);
+		position: absolute;
+		top: 0;
+		left: 0;
+		cursor: zoom-out;
+	}
+	.popup__image {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		.image__img {
+			max-height: 90vh;
+			max-width: 90vw;
+			border-radius: 25px;
+			object-fit: contain;
+			box-shadow: 5px 5px 30px rgba(black, 10%);
+			box-shadow: $shadow_stardard;
+		}
+	}
+	.gallery__buttons {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		column-gap: 20px;
+		.gallery__button {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			&.button__prev {
+				left: 50px;
+			}
+			&.button__next {
+				right: 50px;
+			}
+		}
+	}
+	.gallery__indicator {
+		font-size: 50px;
+		color: white;
+		position: absolute;
+		left: 50%;
+		bottom: 100px;
+		transform: translateX(-50%);
+	}
+	@media only screen and (max-width: $desktop) {
+		.popup__image {
+			.image__img {
+				max-width: $wrapper-width;
+				max-height: calc(100vh - #{$wrapper-gap});
+			}
+		}
+		.gallery__buttons {
+			.gallery__button {
+				border-color: white;
+				box-shadow: $shadow_stardard;
+				&.button__prev {
+					left: calc(#{$wrapper-gap} * 2);
+				}
+				&.button__next {
+					right: calc(#{$wrapper-gap} * 2);
+				}
+			}
+		}
+	}
 }

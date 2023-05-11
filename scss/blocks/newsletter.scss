@@ -62,7 +62,7 @@
 	.process__step {
 		padding: 28px 0 34px 32px;
 		padding: 28px 0 37px 33px;
-		background-image: url(img/elements/newsletter_steps_background.svg);
+		background-image: url(../img/elements/newsletter_steps_background.svg);
 		background-size: contain;
 		background-repeat: no-repeat;
 	}
@@ -85,7 +85,7 @@
 				}
 			}
 		}
-		input[type='submit'] {
+		input[type="submit"] {
 			margin-top: 10px;
 		}
 		.sib_signup_box_inside_1 {
@@ -182,7 +182,7 @@
 		p.sib-email-area {
 			width: calc(100% - 175px);
 		}
-		input[type='submit'] {
+		input[type="submit"] {
 			margin-top: 7px;
 			width: 160px;
 		}
@@ -234,7 +234,7 @@
 			p {
 				margin: 0;
 			}
-			input[type='submit'] {
+			input[type="submit"] {
 				margin: 0;
 				width: 100%;
 			}

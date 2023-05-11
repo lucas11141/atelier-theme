@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
-  <g id="Gruppe_1975" data-name="Gruppe 1975" transform="translate(-9328 3103)">
-    <g id="Gruppe_1965" data-name="Gruppe 1965" transform="translate(9336 -3095)">
-      <path id="Rechteck_1169" data-name="Rechteck 1169" d="M5,0H17a5,5,0,0,1,5,5V5a2,2,0,0,1-2,2H2A2,2,0,0,1,0,5V5A5,5,0,0,1,5,0Z" transform="translate(0 15)" fill="none" stroke="#001e34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
-      <rect id="Rechteck_1170" data-name="Rechteck 1170" width="10" height="10" rx="5" transform="translate(6)" fill="none" stroke="#001e34" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
-    </g>
-    <rect id="Rechteck_1716" data-name="Rechteck 1716" width="38" height="38" transform="translate(9328 -3103)" fill="rgba(255,255,255,0)"/>
-  </g>
-</svg>

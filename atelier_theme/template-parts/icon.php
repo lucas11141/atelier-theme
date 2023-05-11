@@ -9,6 +9,6 @@ $alt = $args['alt'] ?? $icon;
     <img class="icon --size-<?= $size ?>" alt="<?= $alt ?>" src="<?= $url ?>">
 <?php else : ?>
     <?php if ($icon) : ?>
-        <img class="icon --size-<?= $size ?>" alt="<?= $alt ?>" src="<?= get_template_directory_uri() ?>/img/icons/icon_<?= $icon ?>_<?= $color ?>.svg">
+        <img class="icon --size-<?= $size ?>" alt="<?= $alt ?>" src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_<?= $icon ?>_<?= $color ?>.svg">
     <?php endif; ?>
 <?php endif; ?>

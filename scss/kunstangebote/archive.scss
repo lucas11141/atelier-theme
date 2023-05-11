@@ -37,7 +37,7 @@
 
 			.header__image {
 				width: 760px;
-				mask-image: url('img/website/angebotsseite/header_image_mask.png');
+				mask-image: url("../img/website/angebotsseite/header_image_mask.png");
 				mask-repeat: no-repeat;
 				mask-size: contain;
 				position: absolute;
@@ -201,7 +201,7 @@
 						font-weight: 900;
 					}
 					&::after {
-						content: '%';
+						content: "%";
 						@include fluid-type(65px, 75px);
 						font-weight: 900;
 						line-height: 1;
@@ -307,7 +307,7 @@
 
 			&::before,
 			&::after {
-				content: '';
+				content: "";
 				display: block;
 				background-size: contain;
 				position: absolute;
@@ -391,7 +391,11 @@
 			.products__count {
 				border-color: transparent;
 				background-image: linear-gradient(white, white),
-					linear-gradient(to right, var(--product-color-1), var(--product-color-2));
+					linear-gradient(
+						to right,
+						var(--product-color-1),
+						var(--product-color-2)
+					);
 				background-origin: border-box;
 				background-clip: content-box, border-box;
 
@@ -616,7 +620,7 @@
 				}
 
 				&::before {
-					content: '';
+					content: "";
 					height: 100%;
 					width: 100%;
 					background-image: radial-gradient(

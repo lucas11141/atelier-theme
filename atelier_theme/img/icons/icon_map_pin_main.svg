@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-  <g id="Gruppe_3116" data-name="Gruppe 3116" transform="translate(-384 -363)">
-    <rect id="Rechteck_2233" data-name="Rechteck 2233" width="40" height="40" transform="translate(384 363)" fill="none"/>
-    <g id="Icon_feather-map-pin" data-name="Icon feather-map-pin" transform="translate(386 365)">
-      <path id="Pfad_1230" data-name="Pfad 1230" d="M31.5,15C31.5,25.5,18,34.5,18,34.5S4.5,25.5,4.5,15a13.5,13.5,0,1,1,27,0Z" fill="none" stroke="#001e34" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-      <path id="Pfad_1231" data-name="Pfad 1231" d="M22.5,15A4.5,4.5,0,1,1,18,10.5,4.5,4.5,0,0,1,22.5,15Z" fill="none" stroke="#001e34" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-    </g>
-  </g>
-</svg>

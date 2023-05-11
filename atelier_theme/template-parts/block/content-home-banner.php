@@ -55,14 +55,14 @@ $id = $block["id"];
                     </p>
                 </div>
                 <div class="banner__portrait">
-                    <img class="portrait__image" src="<?= get_template_directory_uri() ?>/img/website/home/banner_portrait.png">
-                    <img class="portrait__white" src="<?= get_template_directory_uri() ?>/img/website/home/banner_portrait_white.svg">
-                    <img class="portrait__border" src="<?= get_template_directory_uri() ?>/img/website/home/banner_portrait_border.svg">
+                    <img class="portrait__image" src="<?= get_template_directory_uri() ?>/assets/img/website/home/banner_portrait.png">
+                    <img class="portrait__white" src="<?= get_template_directory_uri() ?>/assets/img/website/home/banner_portrait_white.svg">
+                    <img class="portrait__border" src="<?= get_template_directory_uri() ?>/assets/img/website/home/banner_portrait_border.svg">
                 </div>
             </div>
         </div>
 
-        <img class="banner__background" src="<?= get_template_directory_uri() ?>/img/website/home/banner_background.png" alt="">
+        <img class="banner__background" src="<?= get_template_directory_uri() ?>/assets/img/website/home/banner_background.png" alt="">
 
     </div>
 

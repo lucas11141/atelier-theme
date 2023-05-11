@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34" height="39" viewBox="0 0 34 39">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rechteck_2058" data-name="Rechteck 2058" width="14" height="17" transform="translate(0 0)" fill="#fff" stroke="#707070" stroke-width="3"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Rechteck_2064" data-name="Rechteck 2064" width="14" height="17" transform="translate(0 -0.184)" fill="#fff" stroke="#707070" stroke-width="3"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <rect id="Rechteck_2060" data-name="Rechteck 2060" width="14" height="17" transform="translate(0.426 0)" fill="#fff" stroke="#707070" stroke-width="3"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <rect id="Rechteck_2062" data-name="Rechteck 2062" width="14" height="17" transform="translate(0.426 -0.184)" fill="#fff" stroke="#707070" stroke-width="3"/>
+    </clipPath>
+  </defs>
+  <g id="Gruppe_2715" data-name="Gruppe 2715" transform="translate(-941.022 -2022.554)">
+    <g id="Gruppe_maskieren_378" data-name="Gruppe maskieren 378" transform="translate(941.022 2022.554)" clip-path="url(#clip-path)">
+      <g id="Rechteck_2057" data-name="Rechteck 2057" transform="translate(0 0)" fill="#fff" stroke="#001e34" stroke-width="3">
+        <rect width="34" height="39" rx="8" stroke="none"/>
+        <rect x="1.5" y="1.5" width="31" height="36" rx="6.5" fill="none"/>
+      </g>
+    </g>
+    <g id="Gruppe_maskieren_381" data-name="Gruppe maskieren 381" transform="translate(941.022 2044.738)" clip-path="url(#clip-path-2)">
+      <g id="Rechteck_2063" data-name="Rechteck 2063" transform="translate(0 -22.184)" fill="#fff" stroke="#001e34" stroke-width="3">
+        <rect width="34" height="39" rx="8" stroke="none"/>
+        <rect x="1.5" y="1.5" width="31" height="36" rx="6.5" fill="none"/>
+      </g>
+    </g>
+    <g id="Gruppe_maskieren_379" data-name="Gruppe maskieren 379" transform="translate(960.597 2022.554)" clip-path="url(#clip-path-3)">
+      <g id="Rechteck_2059" data-name="Rechteck 2059" transform="translate(-19.574 0)" fill="#fff" stroke="#001e34" stroke-width="3">
+        <rect width="34" height="39" rx="8" stroke="none"/>
+        <rect x="1.5" y="1.5" width="31" height="36" rx="6.5" fill="none"/>
+      </g>
+    </g>
+    <g id="Gruppe_maskieren_380" data-name="Gruppe maskieren 380" transform="translate(960.597 2044.738)" clip-path="url(#clip-path-4)">
+      <g id="Rechteck_2061" data-name="Rechteck 2061" transform="translate(-19.574 -22.184)" fill="#fff" stroke="#001e34" stroke-width="3">
+        <rect width="34" height="39" rx="8" stroke="none"/>
+        <rect x="1.5" y="1.5" width="31" height="36" rx="6.5" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

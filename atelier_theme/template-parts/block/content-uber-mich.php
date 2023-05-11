@@ -29,7 +29,7 @@ $id = $block["id"];
             <div class="list__item">
                 <?= $zitat ?>
                 <div class="item__infos">
-                    <img src="<?= get_template_directory_uri() ?>/img/website/testimonial_quote_bottom.svg">
+                    <img src="<?= get_template_directory_uri() ?>/assets/img/website/testimonial_quote_bottom.svg">
                 </div>
             </div>
         </div>
