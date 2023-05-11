@@ -1,7 +1,8 @@
 <?php
 /*
- *  Author: Kevin Brandao @atelier
- *  URL: atelier.com@atelier
+ * Author: Lucas Delatron @atelier
+ * URL: atelier-delatron.de
+ *
  */
 
 /*------------------------------------*\
@@ -383,7 +384,7 @@ $template_directory_uri = get_template_directory_uri();
 function atelier_header_scripts()
 {
     if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
-        wp_register_script('atelierscripts', get_template_directory_uri() . '/main.js', array('jquery'), '06_12_22'); // Custom scripts
+        wp_register_script('atelierscripts', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '06_12_22'); // Custom scripts
         wp_enqueue_script('atelierscripts'); // Enqueue it!
     }
 }
@@ -391,10 +392,10 @@ function atelier_header_scripts()
 // Load Blank styles
 function atelier_styles()
 {
-    wp_register_style('normalize', get_template_directory_uri() . '/normalize.min.css', array(), '29_11_22_2', 'all');
+    wp_register_style('normalize', get_template_directory_uri() . '/assets/css/normalize.min.css', array(), '29_11_22_2', 'all');
     wp_enqueue_style('normalize'); // Enqueue it!
 
-    wp_register_style('atelierstyle', get_template_directory_uri() . '/style.css', array(), '29_11_22_13', 'all');
+    wp_register_style('atelierstyle', get_template_directory_uri() . '/assets/css/main.css', array(), '29_11_22_13', 'all');
     wp_enqueue_style('atelierstyle'); // Enqueue it!
 }
 
