@@ -478,7 +478,7 @@
                                                                 <h5><?= $date_readable ?></h5>
                                                                 <h6><?= $date_day ?></h6>
                                                             </div>
-                                                            <span><?= $date_1["starttime"] ?></span>
+                                                            <span><?= $date_1["starttime"] ?> - <?= $date_1['endtime'] ?> Uhr</span>
                                                             <img src="<?= get_template_directory_uri() ?>/img/website/arrow_right_circle.svg">
                                                         </a>
 
@@ -495,8 +495,8 @@
                                                                 <h6><?= $date_day ?></h6>
                                                             </div>
                                                             <div>
-                                                                <span><?= $date_1["starttime"] ?></span>
-                                                                <span><?= $date_2["starttime"] ?></span>
+                                                                <span><?= $date_1["starttime"] ?> - <?= $date_1['endtime'] ?> Uhr</span>
+                                                                <span><?= $date_2["starttime"] ?> - <?= $date_2['endtime'] ?> Uhr</span>
                                                             </div>
                                                             <img src="<?= get_template_directory_uri() ?>/img/website/arrow_right_circle.svg">
                                                         </a>

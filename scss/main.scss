@@ -4,7 +4,7 @@ $main-light: #152f43;
 $main--light: #687785;
 $main--lighten: lighten($main, 5%);
 $second: #55d045;
-$accent: #55d045;
+$accent: $second;
 $accent-dark: #44ad36;
 $accent--darken: darken($accent, 8%);
 $text: #001e34;
@@ -34,8 +34,8 @@ $kunstevent: #b23cdf;
 $kunstevent-dark: darken($kunstevent, 10%);
 
 // fonts
-$main-font: 'Proxima-Soft', sans-serif;
-$second-font: 'gooddog-new', serif;
+$main-font: "Proxima-Soft", sans-serif;
+$second-font: "gooddog-new", serif;
 
 // layout
 $screen: 1000px;
@@ -101,8 +101,14 @@ $max-vw: $ft-max-vp;
 			font-size: $min-font-size;
 			@media screen and (min-width: $min-vw) {
 				font-size: calc(
-					#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
-						((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+					#{$min-font-size} + #{strip-unit(
+							$max-font-size - $min-font-size
+						)} *
+						(
+							(100vw - #{$min-vw}) / #{strip-unit(
+									$max-vw - $min-vw
+								)}
+						)
 				);
 			}
 			@media screen and (min-width: $max-vw) {
@@ -113,79 +119,79 @@ $max-vw: $ft-max-vp;
 }
 
 // lib
-@import 'lib/swiper-bundle.min';
-@import 'lib/slick';
-@import 'lib/hamburger';
-@import 'lib/reset';
-@import 'lib/mc-calendar.min';
+@import "lib/swiper-bundle.min";
+@import "lib/slick";
+@import "lib/hamburger";
+@import "lib/reset";
+@import "lib/mc-calendar.min";
 
 // functions
-@import 'functions/functions';
+@import "functions/functions";
 
 //layout
-@import 'layout/fonts';
-@import 'layout/global';
-@import 'layout/header';
-@import 'layout/footer';
-@import 'layout/nav';
-@import 'layout/forms';
-@import 'layout/popups';
-@import 'layout/lightbox';
+@import "layout/fonts";
+@import "layout/global";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/nav";
+@import "layout/forms";
+@import "layout/popups";
+@import "layout/lightbox";
 
 // shop
-@import 'shop/shop';
-@import 'shop/archive';
-@import 'shop/single';
-@import 'shop/category';
-@import 'shop/cart-checkout';
-@import 'shop/cart';
-@import 'shop/checkout';
-@import 'shop/order';
-@import 'shop/account';
+@import "shop/shop";
+@import "shop/archive";
+@import "shop/single";
+@import "shop/category";
+@import "shop/cart-checkout";
+@import "shop/cart";
+@import "shop/checkout";
+@import "shop/order";
+@import "shop/account";
 
 // templarte parts
-@import 'template-parts/icon-feather';
-@import 'template-parts/button-scrolldown';
-@import 'template-parts/booking-reminder';
+@import "template-parts/icon-feather";
+@import "template-parts/button-scrolldown";
+@import "template-parts/booking-reminder";
 
 //blocks
-@import 'blocks/drei-schritte';
-@import 'blocks/schulederphantasie';
-@import 'blocks/newsletter';
-@import 'blocks/zitat';
-@import 'blocks/atelier-entdecken';
-@import 'blocks/bild-text';
-@import 'blocks/produktslider';
-@import 'blocks/video';
-@import 'blocks/button-liste';
-@import 'blocks/buttons-list';
-@import 'blocks/angebote-liste';
-@import 'blocks/kunstangebot';
-@import 'blocks/home-banner';
-@import 'blocks/testimonials';
-@import 'blocks/usp';
-@import 'blocks/usp-tiles';
-@import 'blocks/headline-button';
-@import 'blocks/map';
-@import 'blocks/uber-mich';
-@import 'blocks/bilder-slider';
-@import 'blocks/galerie-ausstellung';
-@import 'blocks/kontakt-hero-banner';
-@import 'blocks/faq';
-@import 'blocks/media-text';
+@import "blocks/drei-schritte";
+@import "blocks/schulederphantasie";
+@import "blocks/newsletter";
+@import "blocks/zitat";
+@import "blocks/atelier-entdecken";
+@import "blocks/bild-text";
+@import "blocks/produktslider";
+@import "blocks/video";
+@import "blocks/button-liste";
+@import "blocks/buttons-list";
+@import "blocks/angebote-liste";
+@import "blocks/kunstangebot";
+@import "blocks/home-banner";
+@import "blocks/testimonials";
+@import "blocks/usp";
+@import "blocks/usp-tiles";
+@import "blocks/headline-button";
+@import "blocks/map";
+@import "blocks/uber-mich";
+@import "blocks/bilder-slider";
+@import "blocks/galerie-ausstellung";
+@import "blocks/kontakt-hero-banner";
+@import "blocks/faq";
+@import "blocks/media-text";
 
 //shop blocks
-@import 'blocks/shop-hero-banner';
-@import 'blocks/shop-product-banner';
+@import "blocks/shop-hero-banner";
+@import "blocks/shop-product-banner";
 
 //pages
-@import 'pages/home';
-@import 'pages/courses';
-@import 'pages/coursepage';
-@import 'pages/checkout';
-@import 'pages/kunsttuete';
-@import 'pages/galerie';
+@import "pages/home";
+@import "pages/courses";
+@import "pages/coursepage";
+@import "pages/checkout";
+@import "pages/kunsttuete";
+@import "pages/galerie";
 
 //website
-@import 'kunstangebote/archive';
-@import 'kunstangebote/single';
+@import "kunstangebote/archive";
+@import "kunstangebote/single";
