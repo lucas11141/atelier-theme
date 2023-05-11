@@ -132,7 +132,7 @@
                     <div class="item">
                         <div>
                             <h6><?= $title; ?></h6><span><?= $value; ?></span>
-                        </div><img src="<?= get_template_directory_uri() ?>/img/icons/icon_<?= $icon ?>_<?= $color ?>.svg" alt="">
+                        </div><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_<?= $icon ?>_<?= $color ?>.svg" alt="">
                     </div>
                 <?php } ?>
 
@@ -215,7 +215,7 @@
                         <?php endif; ?>
 
                         <?php get_template_part('template-parts/paper'); ?>
-                        <img class="background__circle" src="<?= get_template_directory_uri() ?>/img/website/kontakt/kontakt_background_circle_<?= $color ?>.svg" alt="">
+                        <img class="background__circle" src="<?= get_template_directory_uri() ?>/assets/img/website/kontakt/kontakt_background_circle_<?= $color ?>.svg" alt="">
                     </div>
 
                     <div class="product__page">
@@ -244,7 +244,7 @@
                                                     <?php if ($subline) : ?>
                                                         <h6>
                                                             <?php if ($show_clock) : ?>
-                                                                <img src="<?= get_template_directory_uri() ?>/img/icons/icon_mini_clock_<?= $color ?>.svg">
+                                                                <img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_mini_clock_<?= $color ?>.svg">
                                                             <?php endif; ?>
                                                             <?php if ($postType === "birthday" && $i === 3) :
                                                                 echo ($duration - 0.5) . " Stunden";
@@ -388,10 +388,10 @@
                         </div>
 
                         <div class="product__book" id="book">
-                            <img class="border__top" src="<?= get_template_directory_uri() ?>/img/website/border_round_top_white.svg">
+                            <img class="border__top" src="<?= get_template_directory_uri() ?>/assets/img/website/border_round_top_white.svg">
                             <div class="book__content wrapper">
                                 <div class="book__info">
-                                    <h2><img src="<?= get_template_directory_uri() ?>/img/website/icon_bookmark_<?= $color ?>.svg">
+                                    <h2><img src="<?= get_template_directory_uri() ?>/assets/img/website/icon_bookmark_<?= $color ?>.svg">
                                         <?php if ($postType === "course" || $postType === "workshop" || $postType === "holiday_workshop") { ?>
                                             Buchung
                                         <?php } else { ?>
@@ -401,7 +401,7 @@
                                     <h6><?= $booking['subline'] ?></h6>
                                     <p><?= $booking['description'] ?></p>
                                 </div>
-                                <img class="arrow__right" src="<?= get_template_directory_uri() ?>/img/website/book_arrow_right_<?= $color ?>.svg">
+                                <img class="arrow__right" src="<?= get_template_directory_uri() ?>/assets/img/website/book_arrow_right_<?= $color ?>.svg">
                                 <div class="book__dates">
 
                                     <?php if ($postType === "course" || $postType === "workshop") : ?>
@@ -440,7 +440,7 @@
                                                             <h5><?= $weekday['label'] ?></h5>
                                                             <h6><?= $starttime . ' - ' . $endtime . ' Uhr' ?></h6>
                                                         </div>
-                                                        <img src="<?= get_template_directory_uri() ?>/img/website/arrow_right_circle.svg">
+                                                        <img src="<?= get_template_directory_uri() ?>/assets/img/website/arrow_right_circle.svg">
                                                     </a>
 
                                                 <?php }, $course_times); ?>
@@ -479,7 +479,7 @@
                                                                 <h6><?= $date_day ?></h6>
                                                             </div>
                                                             <span><?= $date_1["starttime"] ?> - <?= $date_1['endtime'] ?> Uhr</span>
-                                                            <img src="<?= get_template_directory_uri() ?>/img/website/arrow_right_circle.svg">
+                                                            <img src="<?= get_template_directory_uri() ?>/assets/img/website/arrow_right_circle.svg">
                                                         </a>
 
                                                     <?php else :
@@ -498,7 +498,7 @@
                                                                 <span><?= $date_1["starttime"] ?> - <?= $date_1['endtime'] ?> Uhr</span>
                                                                 <span><?= $date_2["starttime"] ?> - <?= $date_2['endtime'] ?> Uhr</span>
                                                             </div>
-                                                            <img src="<?= get_template_directory_uri() ?>/img/website/arrow_right_circle.svg">
+                                                            <img src="<?= get_template_directory_uri() ?>/assets/img/website/arrow_right_circle.svg">
                                                         </a>
 
                                                     <?php endif; ?>
@@ -520,7 +520,7 @@
                                                 <div>
                                                     <h5>Jetzt Anfragen</h5>
                                                 </div>
-                                                <img class="--visible" src="<?= get_template_directory_uri() ?>/img/website/arrow_right_circle.svg">
+                                                <img class="--visible" src="<?= get_template_directory_uri() ?>/assets/img/website/arrow_right_circle.svg">
                                             </a>
 
                                         <?php endif; ?>
@@ -528,7 +528,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <img class="border__bottom" src="<?= get_template_directory_uri() ?>/img/website/border_round_bottom_<?= $color ?>.svg">
+                            <img class="border__bottom" src="<?= get_template_directory_uri() ?>/assets/img/website/border_round_bottom_<?= $color ?>.svg">
                         </div>
 
                         <?php if ($faq) : ?>
@@ -569,7 +569,7 @@
 
                         <!-- <div class="popup popup__pricelist --preisliste --hidden">
                             <div class="popup__field">
-                                <a class="button --color-white   popup__close"><img src="<?php echo get_template_directory_uri(); ?>/img/elements/cross_dark.svg" alt=""></a>
+                                <a class="button --color-white   popup__close"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/elements/cross_dark.svg" alt=""></a>
                                 <div class="popup__content">
                                     <div class="pricelist__description">
                                         <h3>Preisliste<br><b>Kunstevents</b></h3>
@@ -577,7 +577,7 @@
                                         <p>Der Gesamtpreis richtet sich nach der <b>Dauer des Events</b> und der <b>Teilnehmerzahl</b> (inkl. Material)</p>
                                         <a class="" href="https://atelier-delatron.shop/buchung?step=0&product_id=<?= get_the_ID(); ?>&product_cat=<?= $postType ?>">
                                             <span>Event anfragen</span>
-                                            <img src="<?= get_template_directory_uri() ?>/img/website/book/arrow_right_circle_pink.svg" alt="">
+                                            <img src="<?= get_template_directory_uri() ?>/assets/img/website/book/arrow_right_circle_pink.svg" alt="">
                                         </a>
                                     </div>
                                     <div class="pricelist__prices">

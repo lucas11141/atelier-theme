@@ -35,11 +35,11 @@ $username = $current_user->display_name;
     <?php get_template_part('template-parts/paper'); ?>
     <div class="shop-hero-banner__decoration">
         <div class="wrapper">
-            <img src="<?= get_template_directory_uri() ?>/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
         </div>
     </div>
 

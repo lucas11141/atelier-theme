@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Block Name: Galerie Ausstellung
  *
@@ -11,7 +12,7 @@ $uberschrift_h6 = get_field("uberschrift_h6");
 $uberschrift_h2 = get_field("uberschrift_h2");
 
 $id = $block["id"];
-if( !empty( $block["anchor"] ) ) {
+if (!empty($block["anchor"])) {
     $id = $block['anchor'];
 }
 ?>
@@ -33,25 +34,27 @@ if( !empty( $block["anchor"] ) ) {
         </div>
 
         <div class="swiper-wrapper lightbox">
-            <?php if( $images ): ?>
+            <?php if ($images) : ?>
                 <?php $first_slide = true; ?>
-                <?php foreach( $images as $image ):
+                <?php foreach ($images as $image) :
                     $title = $image["title"];
                     $caption = $image["caption"];
                     $url_lightbox = $image['sizes']['gallery-lightbox'];
                     $url_preview = $image['sizes']['gallery-slider'];
-                    ?>
-                    <div class="swiper-slide <?php if($first_slide===true) { echo "swiper-slide-activekk"; } ?>">
-                        <img class="image__img lightbox__image swiper-lazy" src="<?php echo esc_url($url_preview); ?>" alt="" data-lightbox-src="<?php echo esc_url($url_lightbox); ?>" data-title="<?php echo esc_attr($title); ?>" data-caption="<?php echo esc_attr($caption) ?>"/>
+                ?>
+                    <div class="swiper-slide <?php if ($first_slide === true) {
+                                                    echo "swiper-slide-activekk";
+                                                } ?>">
+                        <img class="image__img lightbox__image swiper-lazy" src="<?php echo esc_url($url_preview); ?>" alt="" data-lightbox-src="<?php echo esc_url($url_lightbox); ?>" data-title="<?php echo esc_attr($title); ?>" data-caption="<?php echo esc_attr($caption) ?>" />
                         <div class="gallery__meta">
                             <div class="meta__text">
                                 <h5><?= $title ?></h5>
                                 <h6><?= $caption ?></h6>
                             </div>
                             <div class="icon__scale-up">
-                                <img class="icon--main" src="<?= get_template_directory_uri() ?>/img/icons/icon_scale_up.svg" alt="">
-                                <img class="icon--one" src="<?= get_template_directory_uri() ?>/img/icons/icon_scale_up_top_right.svg" alt="">
-                                <img class="icon--two" src="<?= get_template_directory_uri() ?>/img/icons/icon_scale_up_bottom_left.svg" alt="">
+                                <img class="icon--main" src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_scale_up.svg" alt="">
+                                <img class="icon--one" src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_scale_up_top_right.svg" alt="">
+                                <img class="icon--two" src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_scale_up_bottom_left.svg" alt="">
                             </div>
                         </div>
                     </div>
@@ -59,7 +62,7 @@ if( !empty( $block["anchor"] ) ) {
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
-        
+
         <div class="wrapper galerie__pagination">
             <div class="swiper-pagination"></div>
         </div>

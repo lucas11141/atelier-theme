@@ -13,26 +13,26 @@ $newsletter_bild = get_field("newsletter_bild", "options");
             <a class="button--back" onclick="window.history.back();">
                 <span>Zurück zur Webseite</span>
             </a>
-            <img class="paper__structure" src="<?= get_template_directory_uri() ?>/img/elements/paper_structure_500x.jpg" alt="">
+            <img class="paper__structure" src="<?= get_template_directory_uri() ?>/assets/img/elements/paper_structure_500x.jpg" alt="">
         </div>
         <img class="img__img" src="<?= $newsletter_bild["url"] ?>" alt="">
     </div>
 
     <div class="newsletter__content">
-        <img class="logo" src="<?= get_template_directory_uri() ?>/img/logos/logo_4_dark.svg" alt="Logo">
+        <img class="logo" src="<?= get_template_directory_uri() ?>/assets/img/logos/logo_4_dark.svg" alt="Logo">
         <h6>immer informiert</h6>
         <h2>Newsletter Abonnieren</h2>
         <div class="newsletter__process">
             <div class="process__step">
-                <img src="<?= get_template_directory_uri() ?>/img/icons/icon_newsletter_send.svg" alt="">
+                <img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_newsletter_send.svg" alt="">
                 <h5>Absenden</h5>
             </div>
             <div class="process__step">
-                <img src="<?= get_template_directory_uri() ?>/img/icons/icon_newsletter_mail.svg" alt="">
+                <img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_newsletter_mail.svg" alt="">
                 <h5>Bestätigen</h5>
             </div>
             <div class="process__step">
-                <img src="<?= get_template_directory_uri() ?>/img/icons/icon_newsletter_done.svg" alt="">
+                <img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_newsletter_done.svg" alt="">
                 <h5>Fertig</h5>
             </div>
         </div>
@@ -41,7 +41,7 @@ $newsletter_bild = get_field("newsletter_bild", "options");
 
     <div class="newsletter__success">
         <div class="process__step">
-            <img src="<?= get_template_directory_uri() ?>/img/icons/icon_newsletter_done.svg" alt="">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_newsletter_done.svg" alt="">
             <h4>Anmeldung<br>Erfolgreich</h5>
         </div>
         <a class="button --color-main  " href="https://www.atelier-delatron.de">

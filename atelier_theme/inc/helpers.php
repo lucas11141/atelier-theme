@@ -1,4 +1,38 @@
 <?php
+function d(...$vars)
+{
+    echo '<pre>', var_dump(...$vars), '</pre>';
+}
+
+function dd(...$vars)
+{
+    echo '<pre>', var_dump(...$vars), '</pre>';
+    die();
+}
+
+function substrwords($text, $maxchar, $end = '...')
+{
+    if (!$text) return;
+
+    if (strlen($text) > $maxchar || $text == '') {
+        $words = preg_split('/\s/', $text);
+        $output = '';
+        $i      = 0;
+        while (1) {
+            $length = strlen($output) + strlen($words[$i]);
+            if ($length > $maxchar) {
+                break;
+            } else {
+                $output .= " " . $words[$i];
+                ++$i;
+            }
+        }
+        $output .= $end;
+    } else {
+        $output = $text;
+    }
+    return $output;
+}
 
 function translateString($string)
 {
@@ -15,6 +49,19 @@ function translateString($string)
     return $translations[$string] ?? $string;
 }
 
+function translateReadableDateToGerman($str)
+{
+    $searchVal = array("March", "May", "June", "July", "October", "December", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+    $replaceVal = array("März", "Mai", "Juni", "Juli", "Oktober", "Dezember", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag");
+    return str_replace($searchVal, $replaceVal, $str);
+}
+
+function get_paper_structure()
+{
+    $template_directory_uri = get_template_directory_uri();
+    return "<img class='paper-structure' src='{$template_directory_uri}/assets/img/elements/paper_structure_500x.jpg' alt=''>";
+    // src="https://atelier-delatron.de/wp-content/themes/atelier_theme/assets/img/paper_structure.webp"
+}
 
 function load_product_colors($postType, $group = 'child'): string
 {

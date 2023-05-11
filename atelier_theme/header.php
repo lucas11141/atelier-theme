@@ -8,8 +8,8 @@
                                         echo ' :';
                                     } ?> <?php bloginfo('name'); ?></title>
 
-    <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon.svg">
-    <link rel="icon" type="image/ico" sizes="256x256" href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon.ico">
+    <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon/favicon.svg">
+    <link rel="icon" type="image/ico" sizes="256x256" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon/favicon.ico">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->

@@ -194,7 +194,7 @@ $product_category_name = "Kurs im 14-Tage Rhythmus";
 
 <div class="book">
 
-    <img class="background_swing" src="<?= get_template_directory_uri(); ?>/img/website/book/book_swing_<?= $color_name ?>.svg" alt="">
+    <img class="background_swing" src="<?= get_template_directory_uri(); ?>/assets/img/website/book/book_swing_<?= $color_name ?>.svg" alt="">
 
     <div class="wrapper">
 
@@ -421,7 +421,7 @@ $product_category_name = "Kurs im 14-Tage Rhythmus";
                                 <div class="info__table__row info__table__row--geburtstag-price-base">
                                     <span>Grundpreis
                                         <div class="tooltip">
-                                            <img src="<?= get_template_directory_uri() ?>/img/icons/icon_mini_info_<?= $color_name ?>" alt="Info">
+                                            <img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_mini_info_<?= $color_name ?>" alt="Info">
                                             <span></span>
                                         </div>
                                     </span>
@@ -432,7 +432,7 @@ $product_category_name = "Kurs im 14-Tage Rhythmus";
                                     <span>
                                         Materialkosten
                                         <div class="tooltip">
-                                            <img src="<?= get_template_directory_uri() ?>/img/icons/icon_mini_info_<?= $color_name ?>" alt="Info">
+                                            <img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_mini_info_<?= $color_name ?>" alt="Info">
                                             <span></span>
                                         </div>
                                     </span>
@@ -459,7 +459,7 @@ $product_category_name = "Kurs im 14-Tage Rhythmus";
                                     <span>
                                         Gesamtpreis
                                         <div class="tooltip">
-                                            <img src="<?= get_template_directory_uri() ?>/img/icons/icon_mini_info_<?= $color_name ?>" alt="Info">
+                                            <img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_mini_info_<?= $color_name ?>" alt="Info">
                                             <span></span>
                                         </div>
                                     </span>

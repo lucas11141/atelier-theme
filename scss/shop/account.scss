@@ -351,7 +351,10 @@
 		}
 	}
 	@media only screen and (max-width: $desktop) {
-		.account__content--addresses .addresses__list .woocommerce-Addresses .woocommerce-Address {
+		.account__content--addresses
+			.addresses__list
+			.woocommerce-Addresses
+			.woocommerce-Address {
 			width: 100%;
 			min-width: unset;
 		}
@@ -392,10 +395,10 @@
 			margin-top: 20px;
 			@include flex-column();
 			row-gap: 20px;
-			span[for='username'],
-			span[for='password'],
-			label[for='reg_email'],
-			label[for='reg_password'] {
+			span[for="username"],
+			span[for="password"],
+			label[for="reg_email"],
+			label[for="reg_password"] {
 				@extend .input__label;
 			}
 			.form-row {
@@ -425,7 +428,7 @@
 			height: 28px;
 			width: 28px;
 			background-color: transparent;
-			background-image: url('img/shop/icon_eye_closed.svg');
+			background-image: url("../img/shop/icon_eye_closed.svg");
 			background-size: 18px;
 			background-position: center;
 			background-repeat: no-repeat;
@@ -434,7 +437,7 @@
 			bottom: 10px;
 			right: 12px;
 			&.display-password {
-				background-image: url('img/shop/icon_eye_open.svg');
+				background-image: url("../img/shop/icon_eye_open.svg");
 			}
 		}
 		.lost_password {

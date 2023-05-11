@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Block Name: Newsletter
  *
@@ -21,7 +22,7 @@ $align_class = $block['align'] ? 'align' . $block['align'] : '';
 <div id="<?php echo $id; ?>" class="newsletter__field wrapper">
     <div class="newsletter__content">
 
-        <img class="newsletter__arrow" src="<?php echo get_template_directory_uri(); ?>/img/icons/newsletter_plane.svg" alt="">
+        <img class="newsletter__arrow" src="<?php echo get_template_directory_uri(); ?>/assets/img/icons/newsletter_plane.svg" alt="">
 
         <h6><?php echo $uberschrift_h5; ?></h6>
         <h2><?php echo $uberschrift_h2; ?></h2>
@@ -34,8 +35,8 @@ $align_class = $block['align'] ? 'align' . $block['align'] : '';
     </div>
 
     <div class="newsletter__image">
-        <?php if( !empty( $bild ) ): ?>
-            <img src="<?php echo esc_url($bild['sizes']['woocommerce_thumbnail']); ?>" alt="<?php echo esc_attr($bild['alt']); ?>"/>
+        <?php if (!empty($bild)) : ?>
+            <img src="<?php echo esc_url($bild['sizes']['woocommerce_thumbnail']); ?>" alt="<?php echo esc_attr($bild['alt']); ?>" />
         <?php endif; ?>
     </div>
 </div>
@@ -59,7 +60,7 @@ $align_class = $block['align'] ? 'align' . $block['align'] : '';
 
         </div>
 
-        <?php if( !empty( $bild ) ): ?>
+        <?php if (!empty($bild)) : ?>
             <img class="popup__image" src="<?php echo esc_url($bild['sizes']['woocommerce_thumbnail']); ?>" alt="<?php echo esc_attr($bild['alt']); ?>"/>
         <?php endif; ?>
 

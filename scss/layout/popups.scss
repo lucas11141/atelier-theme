@@ -1,297 +1,284 @@
-
 /*------------------------------------*\
     POPUPS
 \*------------------------------------*/
 .popup {
-    padding: 50px;
-    width: $wrapper-width;
-    max-width: $screen;
-    border-radius: 25px;
-    overflow: visible;
-    &::backdrop {
-        background: rgba($main, 90%);
-    }
-    &__close {
-        padding: 0;
-        height: 55px;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        background-color: white;
-        box-shadow: 0 0 20px rgba(black, 0.2);
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        transform: translate(50%, -50%) !important;
-        &::before {
-            content: "";
-            height: 16px;
-            aspect-ratio: 1;
-            background-image: url(img/elements/cross_dark.svg);
-            background-size: contain;
-            background-repeat: no-repeat;
-            @include pos-center();
-            pointer-events: none;
-        }
-    }
+	padding: 50px;
+	width: $wrapper-width;
+	max-width: $screen;
+	border-radius: 25px;
+	overflow: visible;
+	&::backdrop {
+		background: rgba($main, 90%);
+	}
+	&__close {
+		padding: 0;
+		height: 55px;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		background-color: white;
+		box-shadow: 0 0 20px rgba(black, 0.2);
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		transform: translate(50%, -50%) !important;
+		&::before {
+			content: "";
+			height: 16px;
+			aspect-ratio: 1;
+			background-image: url(../img/elements/cross_dark.svg);
+			background-size: contain;
+			background-repeat: no-repeat;
+			@include pos-center();
+			pointer-events: none;
+		}
+	}
 }
-
-
 
 .popup--newsletter {
-    padding: 0;
-    .popup__content {
-        min-height: 450px;
-        @include flex-row();
-        align-items: center;
-        .popup__text {
-            padding: 50px;
-            width: 60%;
-            @include flex-column();
-            h5 {
-                padding-top: 0;
-            }
-        }
-        .popup__image {
-            width: 40%;
-            min-height: 450px;
-            flex: auto;
-            border-top-right-radius: 25px;
-            border-bottom-right-radius: 25px;
-            object-fit: cover;
-        }
-    }
-    @media only screen and (max-width: $desktop) {
-        .popup__content {
-            .popup__text {
-                padding: 40px;
-                padding: 5vw;
-                max-width: 450px;
-            }
-        }
-    }
-    @media only screen and (max-width: $mobile) {
-        .popup__content {
-            flex-direction: column;
-            row-gap: 0;
-            min-height: unset;
-            .popup__text {
-                padding: 35px 25px 30px 25px;
-                .newsletter-form {
-                    margin-top: 30px;
-                }
-            }
-            .popup__image {
-                display: none;
-            }
-        }
-    }
+	padding: 0;
+	.popup__content {
+		min-height: 450px;
+		@include flex-row();
+		align-items: center;
+		.popup__text {
+			padding: 50px;
+			width: 60%;
+			@include flex-column();
+			h5 {
+				padding-top: 0;
+			}
+		}
+		.popup__image {
+			width: 40%;
+			min-height: 450px;
+			flex: auto;
+			border-top-right-radius: 25px;
+			border-bottom-right-radius: 25px;
+			object-fit: cover;
+		}
+	}
+	@media only screen and (max-width: $desktop) {
+		.popup__content {
+			.popup__text {
+				padding: 40px;
+				padding: 5vw;
+				max-width: 450px;
+			}
+		}
+	}
+	@media only screen and (max-width: $mobile) {
+		.popup__content {
+			flex-direction: column;
+			row-gap: 0;
+			min-height: unset;
+			.popup__text {
+				padding: 35px 25px 30px 25px;
+				.newsletter-form {
+					margin-top: 30px;
+				}
+			}
+			.popup__image {
+				display: none;
+			}
+		}
+	}
 }
-
-
-
 
 /* ---- Popups ----*/
 .popup--old {
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba($main, 0.9);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-    transition: opacity 200ms ease-in-out;
-    &.--hidden {
-        opacity: 0;
-        pointer-events: none;
-    }
-    .popup__field {
-        max-height: 90vh;
-        @extend .wrapper;
-        padding: 50px 0px 50px 50px;
-        background-color: white;
-        border-radius: 25px;
-        overflow-y: scroll;
-        @include pos-center();
-        .popup__close {
-            padding: 0;
-            height: 60px;
-            width: 60px;
-            border-radius: 50%;
-            background-color: white;
-            box-shadow: 0 0 20px rgba(black, 0.2);
-            position: absolute;
-            top: 3px;
-            right: 3px;
-            transform: translate(50%, -50%);
-            img {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
-        .popup__content {
-            padding-right: 50px;
-            max-height: 900px;
-            overflow-y: scroll;
-        }
-        @media only screen and (max-width: $desktop) {
-            padding: 35px 0px 35px 30px;
-            .popup__content {
-                padding-right: 30px;
-                .popup__text {
-                    padding: 40px;
-                    padding: 5vw;
-                    max-width: 450px;
-                }
-            }
-        }
-    }
-    // @media only screen and (max-width: $mobile) {
-    //     .popup__field {
-    //         .popup__content {
-    //             flex-direction: column;
-    //             row-gap: 0;
-    //             min-height: unset;
-    //             .popup__text {
-    //                 padding: 35px 25px 30px 25px;
-    //                 .newsletter-form {
-    //                     margin-top: 30px;
-    //                 }
-    //             }
-    //             .popup__image {
-    //                 display: none;
-    //             }
-    //         }
-    //     }
-    // }
-    // @media only screen and (max-width: $mobile) {
-    //     .popup__close {
-    //         height: 55px;
-    //         width: 55px;
-    //         top: 10px;
-    //         right: 10px;
-    //     }
-    // }
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba($main, 0.9);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	transition: opacity 200ms ease-in-out;
+	&.--hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
+	.popup__field {
+		max-height: 90vh;
+		@extend .wrapper;
+		padding: 50px 0px 50px 50px;
+		background-color: white;
+		border-radius: 25px;
+		overflow-y: scroll;
+		@include pos-center();
+		.popup__close {
+			padding: 0;
+			height: 60px;
+			width: 60px;
+			border-radius: 50%;
+			background-color: white;
+			box-shadow: 0 0 20px rgba(black, 0.2);
+			position: absolute;
+			top: 3px;
+			right: 3px;
+			transform: translate(50%, -50%);
+			img {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+		}
+		.popup__content {
+			padding-right: 50px;
+			max-height: 900px;
+			overflow-y: scroll;
+		}
+		@media only screen and (max-width: $desktop) {
+			padding: 35px 0px 35px 30px;
+			.popup__content {
+				padding-right: 30px;
+				.popup__text {
+					padding: 40px;
+					padding: 5vw;
+					max-width: 450px;
+				}
+			}
+		}
+	}
+	// @media only screen and (max-width: $mobile) {
+	//     .popup__field {
+	//         .popup__content {
+	//             flex-direction: column;
+	//             row-gap: 0;
+	//             min-height: unset;
+	//             .popup__text {
+	//                 padding: 35px 25px 30px 25px;
+	//                 .newsletter-form {
+	//                     margin-top: 30px;
+	//                 }
+	//             }
+	//             .popup__image {
+	//                 display: none;
+	//             }
+	//         }
+	//     }
+	// }
+	// @media only screen and (max-width: $mobile) {
+	//     .popup__close {
+	//         height: 55px;
+	//         width: 55px;
+	//         top: 10px;
+	//         right: 10px;
+	//     }
+	// }
 }
 
-
-
-
-
-
-
-
 .popup__pricelist {
-    .popup__content {
-        @include flex-row();
-        align-items: stretch;
-        .pricelist__description {
-            max-width: 360px;
-            position: relative;
-            h3 {
-                padding: 0;
-            }
-            a {
-                @include flex-row();
-                column-gap: 10px;
-                justify-content: flex-end;
-                align-items: center;
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                span {
-                    font-size: 16px;
-                    font-weight: 800;
-                    text-transform: uppercase;
-                    color: var(--product-color);
-                }
-            }
-        }
-        .pricelist__prices {
-            min-width: 430px;
-            flex: auto;
-            margin-left: 50px;
-            padding-left: 50px;
-            border-left: solid 1px $linegray;
-            h5 {
-                padding-top: 50px;
-                &:first-of-type {
-                    padding-top: 0;
-                }
-            }
-            .prices__list {
-                margin-top: 20px;
-                @include flex-row();
-                column-gap: 15px;
-                div {
-                    padding: 15px 18px 10px 15px;
-                    width: 1px;
-                    flex: auto;
-                    max-width: 136px;
-                    background-color: $lightgray;
-                    border: solid 1px $linegray;
-                    border-radius: 10px;
-                    h6 {
-                        padding: 0;
-                    }
-                    span {
-                        padding-top: 2px;
-                        @include fluid-type(17px, 18px);
-                        font-weight: 800;
-                    }
-                }
-            }
-        }
-    }
-    @media only screen and (max-width: $desktop) {
-        .popup__content {
-            .pricelist__prices {
-                min-width: 400px;
-                margin-left: 35px;
-                padding-left: 35px;
-            }
-        }
-    }
-    @media only screen and (max-width: $tablet) {
-        .popup__content {
-            flex-direction: column;
-            .pricelist__description {
-                max-width: unset;
-                h3 {
-                    padding-top: 8px;
-                }
-                a {
-                    width: fit-content;
-                    margin-top: 20px;
-                    position: static;
-                }
-            }
-            .pricelist__prices {
-                min-width: unset;
-                margin-left: 0;
-                margin-top: 30px;
-                padding-left: 0;
-                padding-top: 30px;
-                border: none;
-                border-top: solid 1px $linegray;
-                h5 {
-                    padding-top: 30px;
-                    &:first-of-type {
-                        padding-top: 0;
-                    }
-                }
-                .prices__list {
-                    margin-top: 10px;
-                    justify-content: flex-start;
-                    flex-wrap: wrap;
-                    row-gap: 12px;
-                    div {
-                        width: calc(50% - 7.5px);
-                        min-width: calc(50% - 7.5px);
-                    }
-                }
-            }
-        }
-    }
+	.popup__content {
+		@include flex-row();
+		align-items: stretch;
+		.pricelist__description {
+			max-width: 360px;
+			position: relative;
+			h3 {
+				padding: 0;
+			}
+			a {
+				@include flex-row();
+				column-gap: 10px;
+				justify-content: flex-end;
+				align-items: center;
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				span {
+					font-size: 16px;
+					font-weight: 800;
+					text-transform: uppercase;
+					color: var(--product-color);
+				}
+			}
+		}
+		.pricelist__prices {
+			min-width: 430px;
+			flex: auto;
+			margin-left: 50px;
+			padding-left: 50px;
+			border-left: solid 1px $linegray;
+			h5 {
+				padding-top: 50px;
+				&:first-of-type {
+					padding-top: 0;
+				}
+			}
+			.prices__list {
+				margin-top: 20px;
+				@include flex-row();
+				column-gap: 15px;
+				div {
+					padding: 15px 18px 10px 15px;
+					width: 1px;
+					flex: auto;
+					max-width: 136px;
+					background-color: $lightgray;
+					border: solid 1px $linegray;
+					border-radius: 10px;
+					h6 {
+						padding: 0;
+					}
+					span {
+						padding-top: 2px;
+						@include fluid-type(17px, 18px);
+						font-weight: 800;
+					}
+				}
+			}
+		}
+	}
+	@media only screen and (max-width: $desktop) {
+		.popup__content {
+			.pricelist__prices {
+				min-width: 400px;
+				margin-left: 35px;
+				padding-left: 35px;
+			}
+		}
+	}
+	@media only screen and (max-width: $tablet) {
+		.popup__content {
+			flex-direction: column;
+			.pricelist__description {
+				max-width: unset;
+				h3 {
+					padding-top: 8px;
+				}
+				a {
+					width: fit-content;
+					margin-top: 20px;
+					position: static;
+				}
+			}
+			.pricelist__prices {
+				min-width: unset;
+				margin-left: 0;
+				margin-top: 30px;
+				padding-left: 0;
+				padding-top: 30px;
+				border: none;
+				border-top: solid 1px $linegray;
+				h5 {
+					padding-top: 30px;
+					&:first-of-type {
+						padding-top: 0;
+					}
+				}
+				.prices__list {
+					margin-top: 10px;
+					justify-content: flex-start;
+					flex-wrap: wrap;
+					row-gap: 12px;
+					div {
+						width: calc(50% - 7.5px);
+						min-width: calc(50% - 7.5px);
+					}
+				}
+			}
+		}
+	}
 }

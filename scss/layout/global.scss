@@ -6,7 +6,7 @@
 	white-space: nowrap;
 	position: relative;
 	&::after {
-		content: '';
+		content: "";
 		height: 1.5px;
 		width: 0;
 		background-color: $main;
@@ -303,7 +303,7 @@ ul {
 	font-weight: 700;
 	position: relative;
 	&::after {
-		content: '';
+		content: "";
 		display: block;
 		height: 1.5px;
 		width: 0;
@@ -459,14 +459,19 @@ Buttons Styling
 }
 
 /* Button Colors */
-@mixin button-config($background-color, $font-color, $border-color: '') {
+@mixin button-config($background-color, $font-color, $border-color: "") {
 	background-color: $background-color;
 	span {
 		color: $font-color;
 	}
 	$background-color-dark: darken($background-color, 10%);
 	$background-color-light: lighten($background-color, 10%);
-	background-image: radial-gradient(circle, $background-color-dark 0%, $background-color-dark 10%, transparent 10%);
+	background-image: radial-gradient(
+		circle,
+		$background-color-dark 0%,
+		$background-color-dark 10%,
+		transparent 10%
+	);
 	&:focus,
 	&:active {
 		background-color: #274358;
@@ -488,7 +493,12 @@ Buttons Styling
 	span {
 		color: $font-color;
 	}
-	background-image: radial-gradient(circle, $font-color 0%, $font-color 10%, transparent 10%);
+	background-image: radial-gradient(
+		circle,
+		$font-color 0%,
+		$font-color 10%,
+		transparent 10%
+	);
 }
 .button {
 	@include button-config($accent, white);
@@ -637,7 +647,7 @@ Link Button
 .button--back {
 	display: inline-block;
 	padding: 6px 0 6px 17px;
-	background-image: url('img/website/arrow_back_green.svg');
+	background-image: url("../img/website/arrow_back_green.svg");
 	background-position: 0 52%;
 	background-size: 8px;
 	background-repeat: no-repeat;
@@ -657,25 +667,25 @@ Link Button
 
 	&.--color {
 		&-green {
-			background-image: url('img/website/arrow_back_green.svg');
+			background-image: url("../img/website/arrow_back_green.svg");
 		}
 		&-blue {
-			background-image: url('img/website/arrow_back_blue.svg');
+			background-image: url("../img/website/arrow_back_blue.svg");
 		}
 		&-purple {
-			background-image: url('img/website/arrow_back_purple.svg');
+			background-image: url("../img/website/arrow_back_purple.svg");
 		}
 		&-orange {
-			background-image: url('img/website/arrow_back_orange.svg');
+			background-image: url("../img/website/arrow_back_orange.svg");
 		}
 		&-red {
-			background-image: url('img/website/arrow_back_red.svg');
+			background-image: url("../img/website/arrow_back_red.svg");
 		}
 		&-yellow {
-			background-image: url('img/website/arrow_back_yellow.svg');
+			background-image: url("../img/website/arrow_back_yellow.svg");
 		}
 		&-pink {
-			background-image: url('img/website/arrow_back_pink.svg');
+			background-image: url("../img/website/arrow_back_pink.svg");
 		}
 	}
 
@@ -705,7 +715,7 @@ Quote List
 				padding-top: 0;
 				position: relative;
 				&::after {
-					content: url(img/website/testimonial_quote_top.svg);
+					content: url(../img/website/testimonial_quote_top.svg);
 					height: 44px;
 					position: absolute;
 					top: -10px;
@@ -842,15 +852,19 @@ Abstände
 	padding: calc(80px + 3.3vw) $wrapper-gap 140px;
 	width: 100vw !important;
 	max-width: 100vw !important;
-	background: radial-gradient(closest-corner, rgba(#001e34, 0.9), rgba(#001e34, 0.95));
+	background: radial-gradient(
+		closest-corner,
+		rgba(#001e34, 0.9),
+		rgba(#001e34, 0.95)
+	);
 	position: relative;
 	overflow: hidden;
 	*:not(h6) {
 		color: white;
 	}
 	&::before {
-		content: '';
-		background-image: url(img/website/border_round_top_white.svg);
+		content: "";
+		background-image: url(../img/website/border_round_top_white.svg);
 		background-size: 102%;
 		background-position: top center;
 		background-repeat: no-repeat;
@@ -861,8 +875,8 @@ Abstände
 		left: -2px;
 	}
 	&::after {
-		content: '';
-		background-image: url(img/website/border_round_reverse_bottom_white.svg);
+		content: "";
+		background-image: url(../img/website/border_round_reverse_bottom_white.svg);
 		background-size: 102%;
 		background-position: bottom center;
 		background-repeat: no-repeat;
@@ -907,7 +921,7 @@ Abstände
 		background-color: $main;
 		position: relative;
 		&::after {
-			content: '!';
+			content: "!";
 			@include fluid-type(16px, 18px);
 			font-weight: 800;
 			color: white;
@@ -1045,7 +1059,7 @@ Abstände
 				position: relative;
 
 				&::before {
-					content: '';
+					content: "";
 					display: block;
 					height: 100%;
 					width: 100%;
@@ -1124,7 +1138,11 @@ Abstände
 			}
 		}
 		&.accordeon--lieferumfang {
-			background-image: linear-gradient(to top right, darken($accent, 10%), $accent);
+			background-image: linear-gradient(
+				to top right,
+				darken($accent, 10%),
+				$accent
+			);
 			border: none;
 			* {
 				color: white;
@@ -1147,7 +1165,7 @@ Abstände
 					padding: 35px 0 15px;
 				}
 				li {
-					list-style-image: url(img/elements/arrow_bulletpoint.svg);
+					list-style-image: url(../img/elements/arrow_bulletpoint.svg);
 				}
 				.content__logotext {
 				}
@@ -1157,7 +1175,7 @@ Abstände
 					@include flex-column();
 					justify-content: center;
 					row-gap: 22px;
-					background-image: url(img/elements/kunsttute_material_wave.svg);
+					background-image: url(../img/elements/kunsttute_material_wave.svg);
 					background-position: left top;
 					background-size: cover;
 					position: absolute;
@@ -1227,7 +1245,7 @@ Clear
 \*------------------------------------*/
 .clear:before,
 .clear:after {
-	content: ' ';
+	content: " ";
 	display: table;
 }
 .clear:after {
@@ -1499,15 +1517,15 @@ a img.aligncenter {
 		text-decoration: underline;
 	}
 	a[href]:after {
-		content: ' (' attr(href) ')';
+		content: " (" attr(href) ")";
 	}
 	abbr[title]:after {
-		content: ' (' attr(title) ')';
+		content: " (" attr(title) ")";
 	}
 	.ir a:after,
-	a[href^='javascript:']:after,
-	a[href^='#']:after {
-		content: '';
+	a[href^="javascript:"]:after,
+	a[href^="#"]:after {
+		content: "";
 	}
 	pre,
 	blockquote {
@@ -1585,7 +1603,12 @@ a img.aligncenter {
 
 	&.--background-image {
 		background-color: transparent;
-		background-image: linear-gradient(to right, $main 0%, $main 50%, rgba($main, 80%) 100%);
+		background-image: linear-gradient(
+			to right,
+			$main 0%,
+			$main 50%,
+			rgba($main, 80%) 100%
+		);
 
 		.background__image {
 			width: 50%;
@@ -1717,7 +1740,7 @@ a img.aligncenter {
 			cursor: auto;
 		}
 		&::after {
-			content: '';
+			content: "";
 			width: 0;
 			height: 0;
 			border-left: 8px solid transparent;
@@ -1734,7 +1757,7 @@ a img.aligncenter {
 			opacity: 1;
 			pointer-events: all;
 			&::before {
-				content: '';
+				content: "";
 				width: calc(100% + 4px);
 				// height: calc(100% + 12px);
 				position: absolute;
@@ -1784,7 +1807,7 @@ a img.aligncenter {
 			height: 30px;
 			width: 35px;
 			background-color: transparent;
-			background-image: url(img/elements/arrow_left_main.svg);
+			background-image: url(../img/elements/arrow_left_main.svg);
 			background-position: 50% 20px;
 			background-position: center;
 			background-repeat: no-repeat;
@@ -1799,7 +1822,7 @@ a img.aligncenter {
 			}
 			&::before,
 			&::after {
-				content: url(img/elements/arrow_left_accent.svg);
+				content: url(../img/elements/arrow_left_accent.svg);
 				width: 8px;
 				position: absolute;
 				left: 20px;
@@ -1845,7 +1868,7 @@ a img.aligncenter {
 			@include hide-text();
 			@include transition();
 			&::before {
-				content: '';
+				content: "";
 				height: calc(100% - 6px);
 				width: calc(100% - 6px);
 				background-color: $accent;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Email Header
  *
@@ -15,7 +16,7 @@
  * @version 4.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
 
@@ -25,104 +26,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo( 'charset' ); ?>" />
-		<title><?php echo get_bloginfo( 'name', 'display' ); ?></title>
 
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="color-scheme" content="light">
-		<meta name="supported-color-schemes" content="light">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo('charset'); ?>" />
+	<title><?php echo get_bloginfo('name', 'display'); ?></title>
 
-		<link rel="stylesheet" href="https://use.typekit.net/geu7xjt.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="light">
+	<meta name="supported-color-schemes" content="light">
 
-	</head>
-	
-	<body> 
+	<link rel="stylesheet" href="https://use.typekit.net/geu7xjt.css">
 
-		<div class="email__header">
-			<div class="inner">
-				<div class="header__topic">
-					<div class="topic__dots">
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-					<span>Kunst aus der Tüte</span>
+</head>
+
+<body>
+
+	<div class="email__header">
+		<div class="inner">
+			<div class="header__topic">
+				<div class="topic__dots">
+					<div></div>
+					<div></div>
+					<div></div>
 				</div>
-				<a href="https://kunstausdertuete.de"><img class="header__logo" src="https://atelier-delatron.de/img/logos/logo_1_white.svg"></a>
+				<span>Kunst aus der Tüte</span>
 			</div>
-			<img class="header__background" src="https://atelier-delatron.de/img/email_header_background.svg">
+			<a href="https://kunstausdertuete.de"><img class="header__logo" src="https://atelier-delatron.de/assets/img/logos/logo_1_white.svg"></a>
 		</div>
+		<img class="header__background" src="https://atelier-delatron.de/assets/img/email_header_background.svg">
+	</div>
 
-		<div class="email__content">
-			<div class="inner">
-
-
-
-
-
-
-
-
-
-<style>
-	.email__header {
-		width: 100vw;
-		height: 160px;
-		margin-bottom: 70px;
-		padding-top: 25px;
-		position: relative;
-	}
-	.email__header .inner {
-		margin: 1px auto;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: space-between;
-		align-items: center;
-		transform: translateZ(1px);
-	}
-	.email__header .header__topic {
-		display: flex;
-		flex-direction: column;
-		flex-wrap: nowrap;
-		justify-content: flex-start;
-	}
-		.email__header .header__topic span {
-			font-size: 13px;
-			font-weight: 700;
-			text-transform: uppercase;
-			color: white;
-		}
-	.email__header .topic__dots {
-		margin-bottom: 5px;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: flex-start;
-	}
-		.email__header .topic__dots div {
-			height: 5px;
-			width: 5px;
-			border-radius: 50%;
-			background-color: #55D045;
-			margin-right: 5px;
-		}
-	.email__header .header__logo {
-		height: 50px;
-		width: 175px;
-	}
-	.email__header .header__background {
-		width: 100%;
-		height: 100%;
-		object-position: bottom;
-		object-fit: cover;
-		position: absolute;
-		top: 0px;
-		pointer-events: none;
-	}
-</style>
+	<div class="email__content">
+		<div class="inner">
 
 
 
@@ -132,104 +68,190 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 
-<style>
-	:root {
-		--main: #001E34;
-		--accent: #55D045;
-		--lightgray: #F7F7F7;
-		--linegray: #E3E3E3;
-	}
+			<style>
+				.email__header {
+					width: 100vw;
+					height: 160px;
+					margin-bottom: 70px;
+					padding-top: 25px;
+					position: relative;
+				}
 
+				.email__header .inner {
+					margin: 1px auto;
+					display: flex;
+					flex-direction: row;
+					flex-wrap: nowrap;
+					justify-content: space-between;
+					align-items: center;
+					transform: translateZ(1px);
+				}
 
-	* {
-		font-family: proxima-soft, sans-serif;
-		font-weight: 400;
-		padding: 0px;
-		margin: 0px;
-		box-sizing: border-box;
-	}
-	body {
-		/* background-color: var(--lightgray); */
-		background-color: white;
-		margin: 0px;
-	}
-	.inner {
-		width: 96vw;
-		max-width: 600px;
-		margin: auto;
-	}
+				.email__header .header__topic {
+					display: flex;
+					flex-direction: column;
+					flex-wrap: nowrap;
+					justify-content: flex-start;
+				}
 
+				.email__header .header__topic span {
+					font-size: 13px;
+					font-weight: 700;
+					text-transform: uppercase;
+					color: white;
+				}
 
+				.email__header .topic__dots {
+					margin-bottom: 5px;
+					display: flex;
+					flex-direction: row;
+					flex-wrap: nowrap;
+					justify-content: flex-start;
+				}
 
-	p,
-	a,
-	address {
-		margin: 0;
-		padding: 10px 0 0;
-		font-size: 14px;
-		line-height: 1.5em;
-		font-style: normal;
-	}
-	a {
-		color: var(--accent);
-		font-weight: 700;
-		text-decoration: underline;
-	}
+				.email__header .topic__dots div {
+					height: 5px;
+					width: 5px;
+					border-radius: 50%;
+					background-color: #55D045;
+					margin-right: 5px;
+				}
 
+				.email__header .header__logo {
+					height: 50px;
+					width: 175px;
+				}
 
-
-	h1, h2, h3 {
-		margin: 0;
-		padding: 0;
-		font-family: proxima-soft, sans-serif;
-		font-weight: 800;
-		line-height: 1.2em;
-		text-transform: uppercase;
-		color: var(--main);
-	}
-	h1 {
-		font-size: 25px;
-	}
-	h2 {
-		font-size: 17px;
-	}
-	h3 {
-		font-size: 15px;
-	}
-	h1 span, h2 span, h3 span {
-		color: var(--second);
-		white-space: nowrap;
-		font-weight: 800;
-	}
+				.email__header .header__background {
+					width: 100%;
+					height: 100%;
+					object-position: bottom;
+					object-fit: cover;
+					position: absolute;
+					top: 0px;
+					pointer-events: none;
+				}
+			</style>
 
 
 
-	.email__box,
-	section {
-		margin-bottom: 30px;
-		padding: 25px;
-		/* background-color: white; */
-		border-radius: 15px;
-		/* box-shadow: 0 0 20px rgba(0 0 0 / 5%); */
-		background-color: var(--lightgray);
-		border: solid 1px var(--linegray);
-	}
-	.email__box p:first-child {
-		padding-top: 0;
-	}
 
 
 
-	.email__message {
-		margin-bottom: 70px;
-		font-size: 16px;
-	}
-	.email__message h1 {
-		margin-bottom: 10px;
-	}
 
 
-	/* 
+
+			<style>
+				:root {
+					--main: #001E34;
+					--accent: #55D045;
+					--lightgray: #F7F7F7;
+					--linegray: #E3E3E3;
+				}
+
+
+				* {
+					font-family: proxima-soft, sans-serif;
+					font-weight: 400;
+					padding: 0px;
+					margin: 0px;
+					box-sizing: border-box;
+				}
+
+				body {
+					/* background-color: var(--lightgray); */
+					background-color: white;
+					margin: 0px;
+				}
+
+				.inner {
+					width: 96vw;
+					max-width: 600px;
+					margin: auto;
+				}
+
+
+
+				p,
+				a,
+				address {
+					margin: 0;
+					padding: 10px 0 0;
+					font-size: 14px;
+					line-height: 1.5em;
+					font-style: normal;
+				}
+
+				a {
+					color: var(--accent);
+					font-weight: 700;
+					text-decoration: underline;
+				}
+
+
+
+				h1,
+				h2,
+				h3 {
+					margin: 0;
+					padding: 0;
+					font-family: proxima-soft, sans-serif;
+					font-weight: 800;
+					line-height: 1.2em;
+					text-transform: uppercase;
+					color: var(--main);
+				}
+
+				h1 {
+					font-size: 25px;
+				}
+
+				h2 {
+					font-size: 17px;
+				}
+
+				h3 {
+					font-size: 15px;
+				}
+
+				h1 span,
+				h2 span,
+				h3 span {
+					color: var(--second);
+					white-space: nowrap;
+					font-weight: 800;
+				}
+
+
+
+				.email__box,
+				section {
+					margin-bottom: 30px;
+					padding: 25px;
+					/* background-color: white; */
+					border-radius: 15px;
+					/* box-shadow: 0 0 20px rgba(0 0 0 / 5%); */
+					background-color: var(--lightgray);
+					border: solid 1px var(--linegray);
+				}
+
+				.email__box p:first-child {
+					padding-top: 0;
+				}
+
+
+
+				.email__message {
+					margin-bottom: 70px;
+					font-size: 16px;
+				}
+
+				.email__message h1 {
+					margin-bottom: 10px;
+				}
+
+
+				/* 
 	.button {
 		padding: 11px 100px;
 		border: solid #55D045 3px;
@@ -254,7 +276,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 
-	/* .email-content {
+				/* .email-content {
 		background-color: var(--lightgray);
 		padding: 120px 0px 70px;
 	}
@@ -444,4 +466,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 	}
 	*/
-</style>
+			</style>

@@ -77,7 +77,7 @@
 
 
             <?php get_template_part('template-parts/paper'); ?>
-            <img class="background__circle" src="<?= get_template_directory_uri() ?>/img/website/kontakt/kontakt_background_circle.svg" alt="">
+            <img class="background__circle" src="<?= get_template_directory_uri() ?>/assets/img/website/kontakt/kontakt_background_circle.svg" alt="">
 
         </div> -->
 

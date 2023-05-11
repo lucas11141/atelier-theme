@@ -11,10 +11,10 @@
 	window.dataLayer = window.dataLayer || []
 	window.dataLayer.push({
 		'event': 'booking',
-		'booking_product' :  product,
-		'booking_category' : category,
-		"booking_value" : value,
-		"booking_currency" : 'EUR'
+		'booking_product': product,
+		'booking_category': category,
+		"booking_value": value,
+		"booking_currency": 'EUR'
 	})
 </script>
 
@@ -23,6 +23,7 @@
 	.footer {
 		display: none;
 	}
+
 	main {
 		padding: 0 !important;
 	}
@@ -30,21 +31,51 @@
 
 
 
-<?php 
+<?php
 // Get color
 $color_name = $_GET["color"];
-if( $color_name === "blue" ) : ?>
-	<style> :root { --product-color: #3fcad6; --product-color-dark: #33a2ab; } </style>
-<?php elseif( $color_name === "purple" ) : ?>
-	<style> :root { --product-color: #4248de; --product-color-dark: #353ab2; } </style>
-<?php elseif( $color_name === "red" ) : ?>
-	<style> :root { --product-color: #de332a; --product-color-dark: #c72e26; } </style>
-<?php elseif( $color_name === "green" ) : ?>
-	<style> :root { --product-color: #55d045; --product-color-dark: #44ad36; } </style>
-<?php elseif( $color_name === "pink" ) : ?>
-	<style> :root { --product-color: #b23cdf; --product-color-dark: #9322BE; } </style>
-<?php elseif( $color_name === "yellow" ) : ?>
-	<style> :root { --product-color: #d8d12b; --product-color-dark: #d8d12b; } </style>
+if ($color_name === "blue") : ?>
+	<style>
+		:root {
+			--product-color: #3fcad6;
+			--product-color-dark: #33a2ab;
+		}
+	</style>
+<?php elseif ($color_name === "purple") : ?>
+	<style>
+		:root {
+			--product-color: #4248de;
+			--product-color-dark: #353ab2;
+		}
+	</style>
+<?php elseif ($color_name === "red") : ?>
+	<style>
+		:root {
+			--product-color: #de332a;
+			--product-color-dark: #c72e26;
+		}
+	</style>
+<?php elseif ($color_name === "green") : ?>
+	<style>
+		:root {
+			--product-color: #55d045;
+			--product-color-dark: #44ad36;
+		}
+	</style>
+<?php elseif ($color_name === "pink") : ?>
+	<style>
+		:root {
+			--product-color: #b23cdf;
+			--product-color-dark: #9322BE;
+		}
+	</style>
+<?php elseif ($color_name === "yellow") : ?>
+	<style>
+		:root {
+			--product-color: #d8d12b;
+			--product-color-dark: #d8d12b;
+		}
+	</style>
 <?php endif; ?>
 
 
@@ -52,32 +83,32 @@ if( $color_name === "blue" ) : ?>
 
 <div class="book__confirmed website">
 
-	<img class="background_swing" src="<?= get_template_directory_uri(); ?>/img/website/book/book_swing_<?= $color_name ?>.svg" alt="">
+	<img class="background_swing" src="<?= get_template_directory_uri(); ?>/assets/img/website/book/book_swing_<?= $color_name ?>.svg" alt="">
 
 	<div class="wrapper">
 
 
 
 		<div class="book__header">
-			<img class="logo" src="<?= get_template_directory_uri() ?>/img/logos/logo_3_dark.svg" alt="Atelier Kunst & Gestalten Logo">
+			<img class="logo" src="<?= get_template_directory_uri() ?>/assets/img/logos/logo_3_dark.svg" alt="Atelier Kunst & Gestalten Logo">
 		</div>
 
 
-		
+
 		<div class="book__container book__confirmation">
 
 			<div class="confirmation__header">
-				<img src="<?= get_template_directory_uri() ?>/img/website/book/confirmation_checkmark_<?= $color_name ?>.svg" alt="Häkchen Icon">
-				<?php if( $color_name  === "blue" || $color_name === "purple" || $color_name === "red" || $color_name === "yellow" ) : ?>
+				<img src="<?= get_template_directory_uri() ?>/assets/img/website/book/confirmation_checkmark_<?= $color_name ?>.svg" alt="Häkchen Icon">
+				<?php if ($color_name  === "blue" || $color_name === "purple" || $color_name === "red" || $color_name === "yellow") : ?>
 					<div>
 						<h2>Vielen Dank<br><b>für deine Buchung</b></h2>
 						<h6>Ich habe deine Buchung erhalten</h6>
 					</div>
-				<?php else: ?>
+				<?php else : ?>
 					<div>
-					<h2>Vielen Dank<br><b>für deine Anfrage</b></h2>
-					<h6>Ich habe deine Anfrage erhalten</h6>
-				</div>
+						<h2>Vielen Dank<br><b>für deine Anfrage</b></h2>
+						<h6>Ich habe deine Anfrage erhalten</h6>
+					</div>
 				<?php endif; ?>
 			</div>
 
@@ -88,10 +119,10 @@ if( $color_name === "blue" ) : ?>
 			</a>
 
 		</div>
-		
 
 
-    </div>
+
+	</div>
 </div>
 
 
