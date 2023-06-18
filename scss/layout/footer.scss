@@ -2,11 +2,17 @@
     FOOTER.SCSS
 \*------------------------------------*/
 .footer {
+	display: none;
 	width: 100vw;
 	padding: 100px 0 35px;
 	background-color: $main;
 	position: relative;
 	overflow: hidden;
+
+	// ::selection {
+	// 	background-color: $accent;
+	// 	background-color: #a1e7988a;
+	// }
 
 	* {
 		color: white;
@@ -15,6 +21,77 @@
 
 	.paper-structure {
 		z-index: 1;
+		user-select: none;
+	}
+
+	.footer__newsletter {
+		@extend .inner;
+		margin: -20px auto 120px;
+
+		h6 {
+			padding: 0 0 5px;
+			color: $accent;
+			text-wrap: balance;
+		}
+
+		h2 {
+			@include font-gooddog();
+			@include fluid-type(28px, 36px);
+			font-weight: 400;
+		}
+
+		.list {
+			margin: 25px 0 5px;
+			width: 100%;
+			@include flex-row();
+			justify-content: start;
+			flex-wrap: wrap;
+			gap: 30px;
+
+			span {
+				@include fluid-type(13px, 16px);
+				font-weight: 700;
+				display: inline-flex;
+				gap: 10px;
+
+				img {
+					pointer-events: none;
+					user-select: none;
+				}
+			}
+		}
+
+		#sib_signup_form_2 {
+			margin-top: 35px;
+			max-width: 480px;
+		}
+
+		.privacy {
+			@include fluid-type(13px, 16px);
+			padding-top: 15px;
+			color: $main--light;
+
+			a {
+				color: $main--light;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+
+		.decoration {
+			width: 100vw;
+			min-width: 100vw;
+			height: 350px;
+			object-fit: cover;
+			position: absolute;
+			left: 50%;
+			bottom: calc(100% - 180px);
+			translate: -50% 0px;
+			pointer-events: none;
+			user-select: none;
+		}
 	}
 
 	.footer__decoration {
@@ -26,6 +103,7 @@
 		transform: translateX(-50%);
 		pointer-events: none;
 		object-fit: cover;
+		user-select: none;
 	}
 
 	.footer__content {
@@ -64,7 +142,7 @@
 					@include fluid-type(18px, 20px);
 
 					&::after {
-						content: '';
+						content: "";
 						height: 3px;
 						width: 50px;
 						background-color: $accent;
@@ -77,7 +155,7 @@
 						opacity: 60%;
 					}
 
-					&[href='#'] {
+					&[href="#"] {
 						pointer-events: none;
 					}
 				}
@@ -118,6 +196,7 @@
 		}
 		.footer__logo {
 			width: 200px;
+			user-select: none;
 		}
 	}
 
@@ -185,7 +264,9 @@
 		display: none !important;
 	}
 
-	// Responsive
+	/*------------------------------------*/
+	/* 	Responsive
+	/*------------------------------------*/
 	@media only screen and (max-width: $tablet) {
 		padding: 35px 0 30px;
 
@@ -195,6 +276,27 @@
 
 		&.footer--mobile {
 			display: block !important;
+		}
+
+		.footer__newsletter {
+			margin: 10px auto 60px;
+
+			.list {
+				margin: 15px 0 5px;
+				width: 100%;
+				gap: 10px 20px;
+
+				span {
+					gap: 8px;
+				}
+			}
+
+			#sib_signup_form_2 {
+				margin-top: 25px;
+			}
+			.decoration {
+				display: none;
+			}
 		}
 
 		.footer__decoration {
@@ -252,7 +354,7 @@
 					position: relative;
 
 					&::after {
-						content: '';
+						content: "";
 						height: 3px;
 						width: 50px;
 						background-color: $accent;

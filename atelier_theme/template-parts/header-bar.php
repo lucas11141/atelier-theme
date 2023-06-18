@@ -6,6 +6,8 @@ $drop = $args['drop'] ?? true;
 $hero = $args['hero'] ?? false;
 $hero = $hero ? 'true' : 'false';
 
+if ($type !== 'atelier' && $type !== 'shop') $type = 'atelier';
+
 if ($type === 'atelier') {
     $homeUrl = home_url();
 } elseif ($type === 'shop') {

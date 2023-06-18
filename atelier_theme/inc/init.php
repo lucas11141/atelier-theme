@@ -15,3 +15,4 @@ require get_template_directory() . '/inc/admin-list.php'; //
 // require get_template_directory() . '/inc/widget.php'; //
 require get_template_directory() . '/inc/cleanup.php'; //
 require get_template_directory() . '/inc/misc.php'; //
+require get_template_directory() . '/inc/contactform7.php'; //

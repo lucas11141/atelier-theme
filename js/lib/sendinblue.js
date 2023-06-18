@@ -1,96 +1,147 @@
-function sibSendEmail(event, customer, content) {
+jQuery(document).ready(function ($) {
+	document
+		.querySelectorAll(".standard__form[data-sib-template-id]")
+		.forEach((form) => {
+			const templateId = parseInt(form.dataset.sibTemplateId);
 
-    if( customer["name"] ) {
-        const fullname = customer["name"]
-        const splitName = fullname.split(" ")
-        customer["firstname"] = splitName[0]
-        customer["lastname"] = ""
-        splitName.forEach((part, index) => {
-            if( index >= 1) {
-                customer["lastname"] = customer["lastname"] + " " + part
-            }
-        })
-    }
+			// replace all references in fields with the child input, select or textarea
+			const fields = form.querySelectorAll("label[data-sib-param]");
+			const inputs = [];
 
-    sendinblue.identify( customer["email"],
-        {
-            'VORNAME' : customer["firstname"],
-            'NACHNAME' : customer["lastname"],
-            'TELEFON' : customer["phone"],
-        }
-    )
+			fields.forEach((field) => {
+				const input = field.querySelector("input, select, textarea");
+				input.dataset.sibParam = field.dataset.sibParam;
+				inputs.push(input);
+			});
 
-    content["email"] = customer["email"]
-    setTimeout(function() {
-        sendinblue.track( event,
-            {
-                "email_id" : customer["email"]
-            },
-            content
-        )
-    }, 20)
+			document.addEventListener("wpcf7submit", (e) => {
+				if (e.target.dataset.status === "sent") {
+					const params = getFormValues(inputs);
+					const isEmailSent = sibSendEmail(templateId, params);
 
-    return true
-}
+					// Add message to success message if sendinblue mail was sent
+					if (isEmailSent) {
+						const successMessage = form.parentElement.querySelector(
+							".wpcf7-response-output"
+						);
+						setTimeout(() => {
+							successMessage.innerHTML =
+								successMessage.innerHTML +
+								" Du hast eine Bestätigungs-Mail erhalten.";
+						}, 500);
+					}
+				}
+			});
+		});
 
+	function getFormValues(inputs) {
+		const params = {};
 
+		// map over all inputs and add them to the params object. save values seperated by . into child objects
+		inputs.forEach((input) => {
+			const param = input.dataset.sibParam;
+			const value = input.value;
+			const splitParam = param.split(".");
 
-jQuery( document ).ready(function($) {
+			if (splitParam.length > 1) {
+				const childParam = splitParam[0];
+				const childValue = splitParam[1];
 
-    const sibConfigs = document.querySelectorAll(".sib-config")
-    let sibForms = []
-    sibConfigs.forEach(config => {
-        sibForms.push(config.parentElement)
-    })
-    sibForms.forEach(form => {
-        const sibConfig = form.querySelector(".sib-config")
-        const formFields = form.querySelectorAll("input, select, textarea")
-        const sibFields = []
-        formFields.forEach(field => {
-            if( field.id.includes("sib-") ) {
-                sibFields.push(field)
-            }
-        })
+				if (!params[childParam]) {
+					params[childParam] = {};
+				}
 
-        const submitButton = form.querySelector(".wpcf7-submit")
-        let sibEvent = null
-        let sibCustomer = {}
-        let sibValues = {
-            "data" : {}
-        }
-        submitButton.addEventListener("click", (e) => {
-            sibEvent = sibConfig.dataset.sibEvent   
+				params[childParam][childValue] = value;
+			} else {
+				params[param] = value;
+			}
+		});
 
-            formFields.forEach(field => {
-                let fieldID = field.id
-                if( fieldID.includes("sib-c-") ) {
-                    fieldID = fieldID.replace('sib-c-', '');
-                    const fieldValue = field.value
-                    sibCustomer[fieldID] = fieldValue;
-                }
-            })
+		// split name into firstname and lastname
+		if (params.customer.name) {
+			const fullname = params.customer.name;
+			const splitName = fullname.split(" ");
+			params.customer.firstname = splitName[0];
+			params.customer.lastname = "";
+			splitName.forEach((part, index) => {
+				if (index >= 1) {
+					params.customer.lastname =
+						params.customer.lastname + " " + part;
+				}
+			});
+			params.customer.lastname = params.customer.lastname.substring(1);
+		}
 
-            formFields.forEach(field => {
-                let fieldID = field.id
-                if( fieldID.includes("sib-v-") ) {
-                    fieldID = fieldID.replace('sib-v-', '');
-                    const fieldValue = field.value
-                    sibValues["data"][fieldID] = fieldValue;
-                }
-            })
-        })
+		return params;
+	}
 
-        const formSubmitObserver = new MutationObserver(entries => {
-            console.log(sibEvent)
-            console.log(sibCustomer)
-            console.log(sibValues)
-            if( entries[0].target.innerText === "Vielen Dank für deine Nachricht. Sie wurde gesendet." ) {
-                console.log("Formular abgesendet.")
-                sibSendEmail(sibEvent, sibCustomer, sibValues)
-            }
-        })
-        formSubmitObserver.observe(form.querySelector(".wpcf7-response-output"), { childList: true })
-    
-    })
+	async function sibSendEmail(templateId, params) {
+		const options = {
+			method: "POST",
+			headers: {
+				accept: "application/json",
+				"content-type": "application/json",
+				"api-key":
+					"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",
+			},
+			body: JSON.stringify({
+				to: [
+					{
+						email: params.customer.email,
+						name: `${params.customer.firstname} ${params.customer.lastname}`,
+					},
+				],
+				bcc: [
+					{
+						email: "info@atelier-delatron.de",
+						name: "Frauke Delatron",
+					},
+				],
+				templateId,
+				params,
+			}),
+		};
+		let result;
+		await fetch("https://api.sendinblue.com/v3/smtp/email", options)
+			.then((response) => response.json())
+			.then((response) => (result = response))
+			.catch((err) => console.error(err));
 
-})
+		return result.messageId ? true : false;
+	}
+
+	async function sib(templateId, params) {
+		const options = {
+			method: "POST",
+			headers: {
+				accept: "application/json",
+				"content-type": "application/json",
+				"api-key":
+					"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",
+			},
+			body: JSON.stringify({
+				to: [
+					{
+						email: params.customer.email,
+						name: `${params.customer.firstname} ${params.customer.lastname}`,
+					},
+				],
+				bcc: [
+					{
+						email: "info@atelier-delatron.de",
+						name: "Frauke Delatron",
+					},
+				],
+				templateId,
+				params,
+			}),
+		};
+		let result;
+		await fetch("https://api.sendinblue.com/v3/smtp/email", options)
+			.then((response) => response.json())
+			.then((response) => (result = response))
+			.catch((err) => console.error(err));
+
+		return result.messageId ? true : false;
+	}
+});

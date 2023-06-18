@@ -3,6 +3,7 @@
 // @prepros-prepend "lib/mc-calendar.min.js";
 // @prepros-prepend "lib/slick.min.js";
 // @prepros-prepend "lib/js.cookie-2.2.1.min.js";
+// @prepros-prepend "scripts/websiteMode.js";
 
 jQuery(document).ready(function ($) {
 	function onElementLoad(selector, execution) {
@@ -18,59 +19,6 @@ jQuery(document).ready(function ($) {
 			subtree: true,
 		});
 	}
-
-	// set website moe
-	var websiteMode = "website";
-	if (document.querySelector(".button--toggle-site.--to-website"))
-		websiteMode = "shop";
-
-	// set empty object on session start
-	if (!sessionStorage.getItem("site_toggle_links")) {
-		sessionStorage.setItem(
-			"site_toggle_links",
-			JSON.stringify({
-				website: "",
-				shop: "",
-			})
-		);
-	}
-
-	// add content group to tag manager data layer
-	window.dataLayer = window.dataLayer || [];
-	window.dataLayer.push({
-		content_group: websiteMode,
-	});
-
-	// set toggle links from sessionStorage
-	const siteToggleLinks = JSON.parse(
-		sessionStorage.getItem("site_toggle_links")
-	);
-	const toggleTo = websiteMode === "website" ? "shop" : "website";
-	const toggleToLink = siteToggleLinks[toggleTo];
-	if (toggleToLink) {
-		document
-			.querySelectorAll(".nav__toggle__site a, .button--toggle-site")
-			.forEach((button) => {
-				button.href = toggleToLink;
-			});
-	}
-
-	// set new Link
-	siteToggleLinks[websiteMode] = window.location.href;
-	document
-		.querySelectorAll(".nav__toggle__site a, .button--toggle-site")
-		.forEach((button) => {
-			button.addEventListener("click", (e) => {
-				gtag("event", "page_toggle", {
-					origin: websiteMode,
-					direction: toggleTo,
-				});
-				sessionStorage.setItem(
-					"site_toggle_links",
-					JSON.stringify(siteToggleLinks)
-				);
-			});
-		});
 
 	if (document.querySelector(".tracking-detail")) {
 		$(".shipping__status").append($(".tracking-detail"));
@@ -262,16 +210,14 @@ jQuery(document).ready(function ($) {
 
 		const pageStart = document.querySelector(".page__start");
 		if (pageStart) {
-			console.log("pageStart");
 			showOffset = pageStart.offsetHeight - 350;
 		}
 		const showHeader = document.querySelector(".show-header-on-offset");
 		if (showHeader) {
-			console.log("showHeader");
 			showOffset = showHeader.offsetHeight - 350;
 		}
 
-		toggleHeader(wScroll);
+		// toggleHeader(wScroll);
 		window.addEventListener(
 			"scroll",
 			() => {
@@ -283,7 +229,6 @@ jQuery(document).ready(function ($) {
 		// $(window).on("scroll", function() {
 		// });
 		function toggleHeader(wScroll) {
-			console.log(wScroll > showOffset);
 			if (wScroll > showOffset && wScroll > 20) {
 				hiddenHeader.classList.add("--show");
 			} else {
@@ -307,7 +252,7 @@ jQuery(document).ready(function ($) {
 			!document.querySelector(".header--shop") &&
 			!document.querySelector(".home__banner")
 		) {
-			hiddenHeader.classList.remove("--hidden-on-load");
+			// hiddenHeader.classList.remove("--hidden-on-load");
 		}
 	}
 
@@ -348,7 +293,6 @@ jQuery(document).ready(function ($) {
 		if (target.classList.contains("accordeon__item--opened")) {
 			setTimeout(function () {
 				if (window.innerHeight < target.offsetHeight + 100) {
-					console.log("dfdf");
 					window.scrollTo({
 						behavior: "smooth",
 						top:
@@ -698,7 +642,6 @@ jQuery(document).ready(function ($) {
 		.querySelectorAll(".woocommerce-shipping-methods li")
 		.forEach((element) => {
 			element.addEventListener("click", (e) => {
-				// console.log('click', e.currentTarget)
 				e.currentTarget.querySelector("input").checked = true;
 				jQuery("body").trigger("update_checkout");
 
@@ -732,7 +675,6 @@ jQuery(document).ready(function ($) {
 				if (isNaN(shipping)) {
 					total = subtotal;
 				} else {
-					console.log(shipping);
 					total = subtotal + shipping;
 				}
 				total = `${total}`.substring(0, 5).replace(".", ",");
@@ -775,7 +717,6 @@ jQuery(document).ready(function ($) {
 	}
 });
 
-// @prepros-prepend "blocks/form.js";
 // @prepros-append "blocks/booking-reminder.js";
 // @prepros-append "blocks/productfilter.js";
 // @prepros-append "blocks/newsletter.js";
@@ -783,3 +724,4 @@ jQuery(document).ready(function ($) {
 // @prepros-append "pages/archive.js";
 // @prepros-append "lib/sendinblue.js";
 // @prepros-append "lib/lightbox.js";
+// @prepros-append "scripts/contactform7.js";

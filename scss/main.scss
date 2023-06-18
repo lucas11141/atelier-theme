@@ -189,6 +189,7 @@ $max-vw: $ft-max-vp;
 @import "blocks/kontakt-hero-banner";
 @import "blocks/faq";
 @import "blocks/media-text";
+@import "blocks/hero-banner";
 
 //shop blocks
 @import "blocks/shop-hero-banner";
@@ -201,6 +202,7 @@ $max-vw: $ft-max-vp;
 @import "pages/checkout";
 @import "pages/kunsttuete";
 @import "pages/galerie";
+@import "pages/newsletter";
 
 //website
 @import "kunstangebote/archive";

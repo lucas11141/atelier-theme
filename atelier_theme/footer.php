@@ -1,36 +1,41 @@
 			</main>
 
 			<?php
-			if (is_page('shop') || is_woocommerce() || is_shop() || is_product_category() || is_product_tag() || is_product() || is_cart() || is_checkout() || is_account_page() || is_page('sendungsverfolgung')) {
-				$websiteCat = 'shop';
-			} else {
-				$websiteCat = 'atelier';
-			}
+			global $websiteMode;
 
-			$seitenkategorie = get_field('seitenkategorie');
-			if ($seitenkategorie === 'shop' || $websiteCat === 'website') {
-				$websiteCat = $seitenkategorie;
-			}
-
-			if ($websiteCat === 'shop') {
-				$contactLink = get_permalink(get_page_by_path('kontakt-shop'));
-			} else {
-				$contactLink = get_permalink(get_page_by_path('kontakt')) . '#allgemein';
-			}
+			// set link to contact page
+			$contactLink = $websiteMode === 'shop' ? get_permalink(get_page_by_path('kontakt-shop')) : get_permalink(get_page_by_path('kontakt')) . '#allgemein';
 			?>
 
 			<footer class="footer footer--desktop">
 
 				<?php get_template_part('template-parts/paper'); ?>
+
+				<div class="footer__newsletter">
+					<h6>Möchtest du Produktneuigkeiten und Updates?</h6>
+					<h2>Melde dich für den Newsletter an.</h2>
+
+					<div class="list">
+						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Termine</span>
+						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Angebote</span>
+						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Veranstaltungen</span>
+					</div>
+
+					<?php echo do_shortcode('[sibwp_form id=2]'); ?>
+					<p class="privacy">Deine Daten sind sicher. Lies die <a href="https://www.atelier-delatron.de/datenschutz">Datenschutzerklärung</a>.</p>
+
+					<img class="decoration" src="<?php echo get_template_directory_uri(); ?>/assets/img/elements/footer_newsletter_decoration.svg" alt="">
+				</div>
+
 				<img class="footer__decoration" src="<?php echo get_template_directory_uri(); ?>/assets/img/elements/footer_decoration.svg" alt="">
 
 				<div class="wrapper">
 
 					<div class="footer__content">
 
-						<?php if ($websiteCat === 'atelier') :
+						<?php if ($websiteMode === 'atelier') :
 							atelier_footer_nav();
-						elseif ($websiteCat === 'shop') :
+						elseif ($websiteMode === 'shop') :
 							shop_footer_nav();
 						endif; ?>
 
@@ -57,19 +62,17 @@
 								</li>
 							</ul>
 
-							<?php if ($websiteCat !== 'shop') : ?>
-								<a class="button button--small --color-white button__contact" href="<?= $contactLink ?>">
-									<span>Zum Kontaktformular</span>
-								</a>
-							<?php endif; ?>
+							<a class="button button--small --color-white button__contact" href="<?= $contactLink ?>">
+								<span>Zum Kontaktformular</span>
+							</a>
 
-							<?php if ($websiteCat === 'atelier') : ?>
+							<?php if ($websiteMode === 'atelier') : ?>
 								<a href="<?= get_permalink(get_page_by_path('shop')) ?>" class="button button--small --color-accent button--toggle-site --to-shop">
 									<span>Zum Online-Shop</span>
 									<img src="<?php echo get_template_directory_uri(); ?>/assets/img/shop/arrow_next_page.svg" alt="">
 								</a>
-							<?php elseif ($websiteCat === 'shop') : ?>
-								<a href="<?= home_url() ?>" class="button button--small --color-accent button--toggle-site --to-website">
+							<?php elseif ($websiteMode === 'shop') : ?>
+								<a href="<?= home_url() ?>" class="button button--small --color-accent button--toggle-site --to-atelier">
 									<span>Zu den Kunstkursen</span>
 									<img src="<?php echo get_template_directory_uri(); ?>/assets/img/shop/arrow_next_page.svg" alt="">
 								</a>
@@ -78,14 +81,7 @@
 
 					</div>
 
-					<?php
-					if ($websiteCat === 'atelier') {
-						atelier_law_nav();
-					} elseif ($websiteCat === 'shop') {
-						shop_law_nav();
-					}
-					?>
-
+					<?php law_nav(); ?>
 
 					<p class="copyright">© 2022 Atelier Kunst & Gestalten.</p>
 
@@ -96,6 +92,23 @@
 			<footer class="footer footer--mobile">
 
 				<?php get_template_part('template-parts/paper'); ?>
+
+				<div class="footer__newsletter">
+					<h6>Möchtest du Produktneuigkeiten und Updates?</h6>
+					<h2>Melde dich für den Newsletter an.</h2>
+
+					<div class="list">
+						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Termine</span>
+						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Angebote</span>
+						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Veranstaltungen</span>
+					</div>
+
+					<?php echo do_shortcode('[sibwp_form id=2]'); ?>
+					<p class="privacy">Deine Daten sind sicher. Lies die <a href="https://www.atelier-delatron.de/datenschutz">Datenschutzerklärung</a>.</p>
+
+					<img class="decoration" src="<?php echo get_template_directory_uri(); ?>/assets/img/elements/footer_newsletter_decoration.svg" alt="">
+				</div>
+
 				<img class="footer__decoration" src="<?php echo get_template_directory_uri(); ?>/assets/img/elements/footer_decoration.svg" alt="">
 
 				<div class="wrapper">
@@ -104,9 +117,9 @@
 
 						<img class="footer__logo" src="<?php echo get_template_directory_uri(); ?>/assets/img/logos/logo_1_white.svg" height="80" width="279" alt="Atelier Kunst & Gestalten Logo">
 
-						<?php if ($websiteCat === 'atelier') :
+						<?php if ($websiteMode === 'atelier') :
 							atelier_footer_nav();
-						elseif ($websiteCat === 'shop') :
+						elseif ($websiteMode === 'shop') :
 							shop_footer_nav();
 						endif; ?>
 
@@ -138,13 +151,13 @@
 								<span>Zum Kontaktformular</span>
 							</a>
 
-							<?php if ($websiteCat === 'atelier') : ?>
+							<?php if ($websiteMode === 'atelier') : ?>
 								<a href="<?= get_permalink(get_page_by_path('shop')) ?>" class="button --color-accent button--toggle-site --to-shop">
 									<span>Zum Online-Shop</span>
 									<img src="<?php echo get_template_directory_uri(); ?>/assets/img/shop/arrow_next_page.svg" alt="">
 								</a>
-							<?php elseif ($websiteCat === 'shop') : ?>
-								<a href="<?= home_url() ?>" class="button --color-accent button--toggle-site --to-website">
+							<?php elseif ($websiteMode === 'shop') : ?>
+								<a href="<?= home_url() ?>" class="button --color-accent button--toggle-site --to-atelier">
 									<span>Zu den Kunstkursen</span>
 									<img src="<?php echo get_template_directory_uri(); ?>/assets/img/shop/arrow_next_page.svg" alt="">
 								</a>
@@ -156,13 +169,7 @@
 
 					<p class="copyright">© 2022 Atelier Kunst & Gestalten.</p>
 
-					<?php
-					if ($websiteCat === 'atelier') {
-						atelier_law_nav();
-					} elseif ($websiteCat === 'shop') {
-						shop_law_nav();
-					}
-					?>
+					<?php law_nav(); ?>
 
 				</div>
 

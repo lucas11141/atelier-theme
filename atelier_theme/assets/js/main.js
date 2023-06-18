@@ -13,133 +13,32 @@ if(window.innerWidth < 850) {
 /*! js-cookie v2.2.1 | MIT */
 
 !function(a){var b;if("function"==typeof define&&define.amd&&(define(a),b=!0),"object"==typeof exports&&(module.exports=a(),b=!0),!b){var c=window.Cookies,d=window.Cookies=a();d.noConflict=function(){return window.Cookies=c,d}}}(function(){function a(){for(var a=0,b={};a<arguments.length;a++){var c=arguments[a];for(var d in c)b[d]=c[d]}return b}function b(a){return a.replace(/(%[0-9A-Z]{2})+/g,decodeURIComponent)}function c(d){function e(){}function f(b,c,f){if("undefined"!=typeof document){f=a({path:"/"},e.defaults,f),"number"==typeof f.expires&&(f.expires=new Date(1*new Date+864e5*f.expires)),f.expires=f.expires?f.expires.toUTCString():"";try{var g=JSON.stringify(c);/^[\{\[]/.test(g)&&(c=g)}catch(j){}c=d.write?d.write(c,b):encodeURIComponent(c+"").replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,decodeURIComponent),b=encodeURIComponent(b+"").replace(/%(23|24|26|2B|5E|60|7C)/g,decodeURIComponent).replace(/[\(\)]/g,escape);var h="";for(var i in f)f[i]&&(h+="; "+i,!0!==f[i]&&(h+="="+f[i].split(";")[0]));return document.cookie=b+"="+c+h}}function g(a,c){if("undefined"!=typeof document){for(var e={},f=document.cookie?document.cookie.split("; "):[],g=0;g<f.length;g++){var h=f[g].split("="),i=h.slice(1).join("=");c||'"'!==i.charAt(0)||(i=i.slice(1,-1));try{var j=b(h[0]);if(i=(d.read||d)(i,j)||b(i),c)try{i=JSON.parse(i)}catch(k){}if(e[j]=i,a===j)break}catch(k){}}return a?e[a]:e}}return e.set=f,e.get=function(a){return g(a,!1)},e.getJSON=function(a){return g(a,!0)},e.remove=function(b,c){f(b,"",a(c,{expires:-1}))},e.defaults={},e.withConverter=c,e}return c(function(){})});
-class Form {
+jQuery(document).ready(function ($) {
+	const websiteMode =
+		document.querySelector("#website-mode").dataset.websiteMode;
 
-    constructor(formElement, validation) {
-        console.log(validation)
-        this.validation = validation
-        this.formInputs = formElement.querySelectorAll("input:not([type='radio']), select, textarea")
-    }
+	if (websiteMode === "shop") {
+		// add url parameter websiteMode to all links
+		document.querySelectorAll(".nav--law a").forEach((link) => {
+			if (link.href.indexOf("?") > -1) {
+				link.href += "&websiteMode=" + websiteMode;
+			} else {
+				link.href += "?websiteMode=" + websiteMode;
+			}
+		});
+	}
 
-    validateForm() {
-        let isValidArray = []
-        this.formInputs.forEach((input, index) => {
-			const inputIsValid = this.validateInput(input, this.validation[index])
-            isValidArray.push(inputIsValid)
-        })
+	/*------------------------------------*/
+	/* 	Google Analytics
+    /*------------------------------------*/
 
-        let formIsValid = true
-        for(const value of isValidArray) {
-            if(value === false) {
-                formIsValid = false
-            }
-        }
-        if(formIsValid === true ) {
-            return true
-        }
-        return false
-    }
+	// add content group to tag manager data layer
+	window.dataLayer = window.dataLayer || [];
+	window.dataLayer.push({
+		content_group: websiteMode,
+	});
+});
 
-    validationSchema(inputValue, configKey, configValue) {
-        if(configKey === "isRequired" && configValue === false) {
-            return "notRequired"
-        }
-        switch(configKey) {
-            case "isRequired":
-                return inputValue.trim().length !== 0
-            case "minLength":
-                return inputValue.trim().length >= configValue
-            case "maxLength":
-                return inputValue.trim().length <= configValue
-            case "isEmail":
-                return /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(inputValue);
-            case "isNumber":
-                return /[0-9]/.test(inputValue);
-            case "minNumber":
-                return inputValue >= configValue
-            case "maxNumber":
-                return inputValue <= configValue
-            default:
-                throw new Error( `Validation Schema not known, please add key ${configKey} to validationSchema`);
-        }
-    }
-
-    validateInput(input, validationConfig) {
-        let isRequired = true
-        let isValid = true
-        let errorMessage
-        for(let item in validationConfig) {
-            let configKey = item
-            let configValue = validationConfig[item][0]
-            errorMessage = validationConfig[item][1]
-            isValid = this.validationSchema(input.value, configKey, configValue)
-            if(isValid === "notRequired") {
-                isValid = true
-                isRequired = false
-                continue
-            }
-            if(!isValid) {
-                break
-            }
-        }
-        if(isRequired) {
-            if(isValid) {
-                this.setError(input, false)
-                return true
-            } else {
-                this.setError(input, errorMessage)
-                return false
-            }
-        } else {
-            if(input.value !== "") {
-                if(isValid) {
-                    this.setError(input, false)
-                    return true
-                } else {
-                    this.setError(input, errorMessage)
-                    return false
-                }
-            }
-            if(!isValid) {
-                this.setError(input, false)
-            }
-            return true
-        }
-    }
-
-    setError(input, errorMessage) { 
-        if(errorMessage === false) {
-            input.parentElement.classList.remove("--error")
-            input.parentElement.querySelector(".input__error").innerText = ""
-        } else {
-            input.parentElement.classList.add("--error")
-            input.parentElement.querySelector(".input__error").innerText = errorMessage
-            //input.parentElement.querySelector(".input__error").innerText = errorMessage
-        }
-    }
-
-    getValues() {
-        let returnObj = {}
-        this.formInputs.forEach((input) => {
-            const key = input.name
-            Object.assign(returnObj, {
-                [key]: input.value,
-            })
-        })
-        return returnObj
-    }
-
-    setValues(valuesObj) {
-        if(valuesObj !== null) {
-            this.formInputs.forEach((input) => {
-                if( valuesObj[input.name] != "" && valuesObj[input.name] != undefined) {
-                    input.value = valuesObj[input.name]
-                }
-            })
-        }
-    }
-
-}
 
 jQuery(document).ready(function ($) {
 	function onElementLoad(selector, execution) {
@@ -155,59 +54,6 @@ jQuery(document).ready(function ($) {
 			subtree: true,
 		});
 	}
-
-	// set website moe
-	var websiteMode = "website";
-	if (document.querySelector(".button--toggle-site.--to-website"))
-		websiteMode = "shop";
-
-	// set empty object on session start
-	if (!sessionStorage.getItem("site_toggle_links")) {
-		sessionStorage.setItem(
-			"site_toggle_links",
-			JSON.stringify({
-				website: "",
-				shop: "",
-			})
-		);
-	}
-
-	// add content group to tag manager data layer
-	window.dataLayer = window.dataLayer || [];
-	window.dataLayer.push({
-		content_group: websiteMode,
-	});
-
-	// set toggle links from sessionStorage
-	const siteToggleLinks = JSON.parse(
-		sessionStorage.getItem("site_toggle_links")
-	);
-	const toggleTo = websiteMode === "website" ? "shop" : "website";
-	const toggleToLink = siteToggleLinks[toggleTo];
-	if (toggleToLink) {
-		document
-			.querySelectorAll(".nav__toggle__site a, .button--toggle-site")
-			.forEach((button) => {
-				button.href = toggleToLink;
-			});
-	}
-
-	// set new Link
-	siteToggleLinks[websiteMode] = window.location.href;
-	document
-		.querySelectorAll(".nav__toggle__site a, .button--toggle-site")
-		.forEach((button) => {
-			button.addEventListener("click", (e) => {
-				gtag("event", "page_toggle", {
-					origin: websiteMode,
-					direction: toggleTo,
-				});
-				sessionStorage.setItem(
-					"site_toggle_links",
-					JSON.stringify(siteToggleLinks)
-				);
-			});
-		});
 
 	if (document.querySelector(".tracking-detail")) {
 		$(".shipping__status").append($(".tracking-detail"));
@@ -399,16 +245,14 @@ jQuery(document).ready(function ($) {
 
 		const pageStart = document.querySelector(".page__start");
 		if (pageStart) {
-			console.log("pageStart");
 			showOffset = pageStart.offsetHeight - 350;
 		}
 		const showHeader = document.querySelector(".show-header-on-offset");
 		if (showHeader) {
-			console.log("showHeader");
 			showOffset = showHeader.offsetHeight - 350;
 		}
 
-		toggleHeader(wScroll);
+		// toggleHeader(wScroll);
 		window.addEventListener(
 			"scroll",
 			() => {
@@ -420,7 +264,6 @@ jQuery(document).ready(function ($) {
 		// $(window).on("scroll", function() {
 		// });
 		function toggleHeader(wScroll) {
-			console.log(wScroll > showOffset);
 			if (wScroll > showOffset && wScroll > 20) {
 				hiddenHeader.classList.add("--show");
 			} else {
@@ -444,7 +287,7 @@ jQuery(document).ready(function ($) {
 			!document.querySelector(".header--shop") &&
 			!document.querySelector(".home__banner")
 		) {
-			hiddenHeader.classList.remove("--hidden-on-load");
+			// hiddenHeader.classList.remove("--hidden-on-load");
 		}
 	}
 
@@ -485,7 +328,6 @@ jQuery(document).ready(function ($) {
 		if (target.classList.contains("accordeon__item--opened")) {
 			setTimeout(function () {
 				if (window.innerHeight < target.offsetHeight + 100) {
-					console.log("dfdf");
 					window.scrollTo({
 						behavior: "smooth",
 						top:
@@ -835,7 +677,6 @@ jQuery(document).ready(function ($) {
 		.querySelectorAll(".woocommerce-shipping-methods li")
 		.forEach((element) => {
 			element.addEventListener("click", (e) => {
-				// console.log('click', e.currentTarget)
 				e.currentTarget.querySelector("input").checked = true;
 				jQuery("body").trigger("update_checkout");
 
@@ -869,7 +710,6 @@ jQuery(document).ready(function ($) {
 				if (isNaN(shipping)) {
 					total = subtotal;
 				} else {
-					console.log(shipping);
 					total = subtotal + shipping;
 				}
 				total = `${total}`.substring(0, 5).replace(".", ",");
@@ -914,51 +754,50 @@ jQuery(document).ready(function ($) {
 
 
 jQuery(document).ready(function ($) {
-	const bookingReminder = $('.booking-reminder')
-	const urlParams = new URLSearchParams(window.location.search)
-	const bookUncompleted = urlParams.get('book_uncompleted') || Cookies.get('book_uncompleted')
-	const bookTitle = urlParams.get('book_title') || Cookies.get('book_title')
-	const bookColor = urlParams.get('book_color') || Cookies.get('book_color')
+	const bookingReminder = $(".booking-reminder");
+	const urlParams = new URLSearchParams(window.location.search);
+	const bookUncompleted =
+		urlParams.get("book_uncompleted") || Cookies.get("book_uncompleted");
+	const bookTitle = urlParams.get("book_title") || Cookies.get("book_title");
+	const bookColor = urlParams.get("book_color") || Cookies.get("book_color");
 
-	console.log('bookTitle', bookTitle)
+	if (bookUncompleted === "true") {
+		document.documentElement.style.setProperty("--book-color", bookColor);
+		bookingReminder.find(".booking-reminder__text p").text(bookTitle);
+		bookingReminder.removeClass("--hidden");
 
-	if (bookUncompleted === 'true') {
-		document.documentElement.style.setProperty('--book-color', bookColor)
-		bookingReminder.find('.booking-reminder__text p').text(bookTitle)
-		bookingReminder.removeClass('--hidden')
-
-		Cookies.set('book_uncompleted', 'true', { expires: 1 })
-		Cookies.set('book_title', bookTitle, { expires: 1 })
-		Cookies.set('book_color', bookColor, { expires: 1 })
+		Cookies.set("book_uncompleted", "true", { expires: 1 });
+		Cookies.set("book_title", bookTitle, { expires: 1 });
+		Cookies.set("book_color", bookColor, { expires: 1 });
 	}
 
 	bookingReminder.hover(
 		function () {
-			$(this).removeClass('--closed')
-			$(this).find('.booking-reminder__text').animate(
+			$(this).removeClass("--closed");
+			$(this).find(".booking-reminder__text").animate(
 				{
-					width: 'toggle',
+					width: "toggle",
 					opacity: 1,
-					'padding-left': '14px',
+					"padding-left": "14px",
 				},
 				200,
-				'swing'
-			)
+				"swing"
+			);
 		},
 		function () {
-			$(this).addClass('--closed')
-			$(this).find('.booking-reminder__text').animate(
+			$(this).addClass("--closed");
+			$(this).find(".booking-reminder__text").animate(
 				{
-					width: 'toggle',
+					width: "toggle",
 					opacity: 0,
-					'padding-left': '0px',
+					"padding-left": "0px",
 				},
 				200,
-				'swing'
-			)
+				"swing"
+			);
 		}
-	)
-})
+	);
+});
 
 jQuery(document).ready(function ($) {
 	// Product Filter
@@ -1070,601 +909,654 @@ jQuery(document).ready(function ($) {
 	}
 })
 
-jQuery( document ).ready(function($) {
-
-    // Set a Cookie
-    function setCookie(cName, cValue, expDays) {
-        let date = new Date();
-        date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
-        const expires = "expires=" + date.toUTCString();
-        document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
-    }
-
-    function getCookie(cName) {
-        const name = cName + "=";
-        const cDecoded = decodeURIComponent(document.cookie); //to be careful
-        const cArr = cDecoded .split('; ');
-        let res;
-        cArr.forEach(val => {
-            if (val.indexOf(name) === 0) res = val.substring(name.length);
-        })
-        return res;
-    }
-
-
-    const newsletterIsOnPage = document.querySelectorAll(".newsletter__field").length > 0
-    if( newsletterIsOnPage ) {
-
-        document.querySelector('.newsletter__image').addEventListener("click", () => {
-            document.querySelector('.popup--newsletter').showModal()
-        })
-
-        const popupNewsletter = document.querySelector(".popup--newsletter")
-        if(popupNewsletter) {
-            setTimeout(function() {
-                if(getCookie("newsletter_opened") != "true") {
-                    popupNewsletter.showModal()
-                }
-            }, 1000*5)
-            popupNewsletter.addEventListener('close', () => {
-                console.log('close')
-                setCookie('newsletter_opened', true, 14);
-            })
-        }
-        
-
-
-
-
-        
-        const newsletterEmailButton = document.querySelector(".newsletter-form .button")
-        if( newsletterEmailButton ) {
-            newsletterEmailButton.addEventListener("click", () => {
-                const emailValue = document.getElementById("sib-email").value
-                newsletterEmailButton.href = newsletterEmailButton.href + "?email=" + emailValue
-                // sessionStorage.setItem("newsletter_email", emailValue)
-            })
-        }
-    
-        // document.querySelector("input.sib-email-area").value = sessionStorage.getItem("newsletter_email")
-        // transfereEmail = document.getElementById("transfered__email").innerText
-        // document.querySelector("input.sib-email-area").value = transfereEmail
-    
-    
-    
-        function waitForElm(selector) {
-            return new Promise(resolve => {
-                if (document.querySelector(selector) !== null) {
-                    return resolve(document.querySelector(selector));
-                }
-        
-                const observer = new MutationObserver(mutations => {
-                    if (document.querySelector(selector) !== null) {
-                        resolve(document.querySelector(selector));
-                        observer.disconnect();
-                    }
-                });
-        
-                observer.observe(document.body, {
-                    childList: true,
-                    subtree: true
-                });
-            });
-        }
-    
-        waitForElm('.sib-alert-message-success').then((elm) => {
-            document.querySelector(".newsletter__content").style.display = "none"
-            document.querySelector(".newsletter__success").style.display = "flex"
-        });
-    
-    
-    
-    
-
-    
-
-
-
-        // function setWithExpiry(key, value, ttl) {
-        //     const now = new Date()
-    
-        //     // `item` is an object which contains the original value
-        //     // as well as the time when it's supposed to expire
-        //     const item = {
-        //         value: value,
-        //         expiry: now.getTime() + ttl,
-        //     }
-        //     localStorage.setItem(key, JSON.stringify(item))
-        // }
-
-        // function getWithExpiry(key) {
-        //     const itemStr = localStorage.getItem(key)
-        //     // if the item doesn't exist, return null
-        //     if (!itemStr) {
-        //         return null
-        //     }
-        //     const item = JSON.parse(itemStr)
-        //     const now = new Date()
-        //     // compare the expiry time of the item with the current time
-        //     if (now.getTime() > item.expiry) {
-        //         // If the item is expired, delete the item from storage
-        //         // and return null
-        //         localStorage.removeItem(key)
-        //         return null
-        //     }
-        //     return item.value
-        // }
-
-        // function closeNewsletterPopup() {
-        //     document.querySelector(".newsletter__popup").close()
-        //     setWithExpiry("newsletter_opened", "true", 1000*60*60*24)
-        // }
-        // $(".newsletter__content input[type='submit']").click(function() {
-        //     closeNewsletterPopup();
-        // })
-        // $(".newsletter__popup input[type='submit']").click(function() {
-        //     closeNewsletterPopup();
-        // })
-
-    }
-
-})
 jQuery(document).ready(function ($) {
-	const contactBanner = document.querySelector('.kontakt__banner')
+	// Set a Cookie
+	function setCookie(cName, cValue, expDays) {
+		let date = new Date();
+		date.setTime(date.getTime() + expDays * 24 * 60 * 60 * 1000);
+		const expires = "expires=" + date.toUTCString();
+		document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+	}
+
+	function getCookie(cName) {
+		const name = cName + "=";
+		const cDecoded = decodeURIComponent(document.cookie); //to be careful
+		const cArr = cDecoded.split("; ");
+		let res;
+		cArr.forEach((val) => {
+			if (val.indexOf(name) === 0) res = val.substring(name.length);
+		});
+		return res;
+	}
+
+	const newsletterIsOnPage =
+		document.querySelectorAll(".newsletter__field").length > 0;
+	if (newsletterIsOnPage) {
+		document
+			.querySelector(".newsletter__image")
+			.addEventListener("click", () => {
+				document.querySelector(".popup--newsletter").showModal();
+			});
+
+		const popupNewsletter = document.querySelector(".popup--newsletter");
+		if (popupNewsletter) {
+			setTimeout(function () {
+				if (getCookie("newsletter_opened") != "true") {
+					popupNewsletter.showModal();
+				}
+			}, 1000 * 5);
+			popupNewsletter.addEventListener("close", () => {
+				setCookie("newsletter_opened", true, 14);
+			});
+		}
+
+		const newsletterEmailButton = document.querySelector(
+			".newsletter-form .button"
+		);
+		if (newsletterEmailButton) {
+			newsletterEmailButton.addEventListener("click", () => {
+				const emailValue = document.getElementById("sib-email").value;
+				newsletterEmailButton.href =
+					newsletterEmailButton.href + "?email=" + emailValue;
+				// sessionStorage.setItem("newsletter_email", emailValue)
+			});
+		}
+
+		// document.querySelector("input.sib-email-area").value = sessionStorage.getItem("newsletter_email")
+		// transfereEmail = document.getElementById("transfered__email").innerText
+		// document.querySelector("input.sib-email-area").value = transfereEmail
+
+		function waitForElm(selector) {
+			return new Promise((resolve) => {
+				if (document.querySelector(selector) !== null) {
+					return resolve(document.querySelector(selector));
+				}
+
+				const observer = new MutationObserver((mutations) => {
+					if (document.querySelector(selector) !== null) {
+						resolve(document.querySelector(selector));
+						observer.disconnect();
+					}
+				});
+
+				observer.observe(document.body, {
+					childList: true,
+					subtree: true,
+				});
+			});
+		}
+
+		waitForElm(".sib-alert-message-success").then((elm) => {
+			document.querySelector(".newsletter__content").style.display =
+				"none";
+			document.querySelector(".newsletter__success").style.display =
+				"flex";
+		});
+
+		// function setWithExpiry(key, value, ttl) {
+		//     const now = new Date()
+
+		//     // `item` is an object which contains the original value
+		//     // as well as the time when it's supposed to expire
+		//     const item = {
+		//         value: value,
+		//         expiry: now.getTime() + ttl,
+		//     }
+		//     localStorage.setItem(key, JSON.stringify(item))
+		// }
+
+		// function getWithExpiry(key) {
+		//     const itemStr = localStorage.getItem(key)
+		//     // if the item doesn't exist, return null
+		//     if (!itemStr) {
+		//         return null
+		//     }
+		//     const item = JSON.parse(itemStr)
+		//     const now = new Date()
+		//     // compare the expiry time of the item with the current time
+		//     if (now.getTime() > item.expiry) {
+		//         // If the item is expired, delete the item from storage
+		//         // and return null
+		//         localStorage.removeItem(key)
+		//         return null
+		//     }
+		//     return item.value
+		// }
+
+		// function closeNewsletterPopup() {
+		//     document.querySelector(".newsletter__popup").close()
+		//     setWithExpiry("newsletter_opened", "true", 1000*60*60*24)
+		// }
+		// $(".newsletter__content input[type='submit']").click(function() {
+		//     closeNewsletterPopup();
+		// })
+		// $(".newsletter__popup input[type='submit']").click(function() {
+		//     closeNewsletterPopup();
+		// })
+	}
+});
+
+jQuery(document).ready(function ($) {
+	/*------------------------------------*/
+	/* 	Add options to course select
+	/*------------------------------------*/
+	const courseSelect = document.querySelector('select[name="course"]');
+	const courseSelectOptions = document.querySelectorAll("#course-names li");
+
+	// save all possible values of courseSelectOptions in an array (remove duplicates)
+	const courseSelectOptionsGroups = [
+		...new Set(
+			Array.from(courseSelectOptions).map(
+				(option) => option.dataset.group
+			)
+		),
+	];
+
+	// split courseSelectOptions into arrays by group
+	const courseSelectOptionsByGroup = courseSelectOptionsGroups.map(
+		(group) => {
+			return Array.from(courseSelectOptions).filter(
+				(option) => option.dataset.group === group
+			);
+		}
+	);
+
+	courseSelectOptionsByGroup.forEach((group) => {
+		// create optgroup element
+		const optgroupElement = document.createElement("optgroup");
+		optgroupElement.label = group[0].dataset.gruppe;
+		optgroupElement.dataset.group = group[0].dataset.group;
+
+		group.forEach((option) => {
+			// create option element
+			const optionElement = document.createElement("option");
+			optionElement.value = option.innerText;
+			optionElement.innerText = option.innerText;
+			optionElement.dataset.group = option.dataset.group;
+
+			optgroupElement.appendChild(optionElement);
+		});
+
+		courseSelect.appendChild(optgroupElement);
+	});
+
+	/*------------------------------------*/
+	/* 	Section Name
+	/*------------------------------------*/
+
+	const contactBanner = document.querySelector(".kontakt__banner");
 	if (contactBanner) {
-		let currentActive
-		var hasScrolled = false
-		const tabButtons = contactBanner.querySelectorAll('.methods__item')
-		const tabContents = document.querySelectorAll('.methods__content')
+		let currentActive;
+		var hasScrolled = false;
+		const tabButtons = contactBanner.querySelectorAll(".methods__item");
+		const tabContents = document.querySelectorAll(".methods__content");
+
+		openTab(0, false);
 
 		tabButtons.forEach((button) => {
-			button.addEventListener('click', (e) => {
-				openTab(e.target.dataset.index)
-			})
-		})
+			button.addEventListener("click", (e) => {
+				openTab(e.target.dataset.index);
+			});
+		});
 
-		function openTab(index) {
+		function openTab(index, scroll = true) {
 			// Hide Elements for no Selection
 			tabButtons.forEach((button) => {
-				button.classList.remove('--arrows')
-			})
-			document.querySelector('.form__dummy').style.display = 'none'
+				button.classList.remove("--arrows");
+			});
+			document.querySelector(".form__dummy").style.display = "none";
 
 			// Highlight current Tab
-			const activeTab = tabButtons[index]
+			const activeTab = tabButtons[index];
 			if (activeTab.dataset.index != currentActive) {
 				tabButtons.forEach((button) => {
-					button.classList.remove('--active')
-				})
-				activeTab.classList.add('--active')
+					button.classList.remove("--active");
+				});
+				activeTab.classList.add("--active");
 			}
-			currentActive = index
+			currentActive = index;
 
 			// Show current Tab Content
 			tabContents.forEach((content) => {
-				content.classList.add('--hidden')
+				content.classList.add("--hidden");
 				if (content.dataset.index == currentActive) {
-					content.classList.remove('--hidden')
+					content.classList.remove("--hidden");
 				}
-			})
+			});
 
-			if (!hasScrolled) {
-				document.querySelector('.kontakt__forms').scrollIntoView({ behavior: 'smooth', block: 'center' })
-				hasScrolled = true
+			if (!hasScrolled && scroll) {
+				document
+					.querySelector(".kontakt__forms")
+					.scrollIntoView({ behavior: "smooth", block: "center" });
+				hasScrolled = true;
 			}
+
+			const schnupperForm = document.querySelector(".schnuppertermin");
+			if (index == 1) adjustTextareaHeight(schnupperForm);
 		}
 
 		if (window.location.hash) {
-			var hash = window.location.hash // = "#login"
-			hash = hash.substring(1)
-			console.log(document.querySelector('.kontakt__methods'))
+			var hash = window.location.hash; // = "#login"
+			hash = hash.substring(1);
 			tabButtons.forEach((button) => {
 				if (button.dataset.hash === hash) {
-					button.classList.add('--active')
-					openTab(button.dataset.index)
+					button.classList.add("--active");
+					openTab(button.dataset.index);
 				}
-			})
+			});
 		}
 	}
 
 	// Schnuppertermin Formular
+	const schnupperForm = document.querySelector(".schnuppertermin");
+	if (schnupperForm) {
+		initVariableForm(schnupperForm, courseSelect);
+	}
 
-	const variableFormConditionFieldClass = '.condition__field'
-	const variableFormToggleFieldClass = '.toggle__field'
+	function initVariableForm(form, selectElement) {
+		// Check if all parameters are defined
+		if (!form) throw new Error("Es wurde kein Formular definiert.");
+		if (!selectElement)
+			throw new Error("Es wurde kein Select-Feld definiert.");
 
-	function variableForm(form, condition) {
-		let toggleFieldsIsVisible = false
-		const toggleFields = form.querySelectorAll(variableFormToggleFieldClass)
-		if (toggleFields.length > 0) {
-			toggleFields.forEach((field) => {
-				field.style.display = 'none'
-			})
+		adjustTextareaHeight(form);
 
-			const textarea = document.querySelector("label[for='nachricht']")
+		selectElement.addEventListener("change", (e) => {
+			// get data-group attribute from selected option
+			const group =
+				e.target.options[e.target.selectedIndex].dataset.group;
+			showToogleFields("group", group);
 
-			const conditionField = form.querySelector(variableFormConditionFieldClass)
-			if (conditionField !== null) {
-				const SplitLeftFieldsCount = form.querySelectorAll('.form__split:first-child label').length
-				const SplitLeftConstantFieldsCount =
-					SplitLeftFieldsCount -
-					form.querySelectorAll('.form__split:first-child ' + variableFormToggleFieldClass).length
+			const rows = form.querySelectorAll(
+				".form__split:first-child label:not(.--hidden)"
+			).length;
+			adjustTextareaHeight(form);
+		});
+	}
 
-				conditionField.querySelector('select').addEventListener('change', (e) => {
-					const conditionFieldValue = e.target.options[e.target.selectedIndex].value
-					if (conditionFieldValue.includes(condition)) {
-						if (toggleFieldsIsVisible === false) {
-							toggleFields.forEach((field) => {
-								field.querySelector('input').value = ''
-								field.style.display = 'block'
-							})
-							textarea.classList.remove('height--' + SplitLeftConstantFieldsCount)
-							textarea.classList.add('height--' + SplitLeftFieldsCount)
-						}
-						toggleFieldsIsVisible = true
-					} else {
-						if (toggleFieldsIsVisible === true) {
-							toggleFields.forEach((field) => {
-								field.style.display = 'none'
-								field.querySelector('input').value = '-'
-							})
-							textarea.classList.add('height--' + SplitLeftConstantFieldsCount)
-							textarea.classList.remove('height--' + SplitLeftFieldsCount)
-						}
-						toggleFieldsIsVisible = false
-					}
-				})
+	function showToogleFields(dataAttribute, value) {
+		document.querySelectorAll(".toggle__field").forEach((field) => {
+			if (field.dataset[dataAttribute] === value) {
+				field.classList.remove("--hidden");
 			} else {
-				throw new Error(
-					'Es wurde keine Select-Feld mit der Klasse "' +
-						variableFormConditionFieldClass +
-						'" definiert. Bei diesem Feld wird die Bedingung "' +
-						condition +
-						'" abgefragt.'
-				)
+				field.classList.add("--hidden");
+				field.querySelector("input").value = ""; // Reset Value
 			}
-		} else {
-			throw new Error(
-				'Es wurde keine Input-Feld mit der Klasse "' +
-					variableFormToggleFieldClass +
-					'" definiert. Diese Felder werden angezeigt/versteckt, wenn die Bedingung "' +
-					condition +
-					'" passt/nicht passt.'
-			)
+		});
+	}
+
+	function adjustTextareaHeight(form) {
+		const splitLeftHeight = form.querySelector(
+			".form__split:first-child"
+		).offsetHeight;
+
+		const textarea = form.querySelector("label[for='message']");
+		textarea.style.height = splitLeftHeight + "px";
+	}
+});
+
+jQuery(document).ready(function ($) {});
+
+jQuery(document).ready(function ($) {
+	document
+		.querySelectorAll(".standard__form[data-sib-template-id]")
+		.forEach((form) => {
+			const templateId = parseInt(form.dataset.sibTemplateId);
+
+			// replace all references in fields with the child input, select or textarea
+			const fields = form.querySelectorAll("label[data-sib-param]");
+			const inputs = [];
+
+			fields.forEach((field) => {
+				const input = field.querySelector("input, select, textarea");
+				input.dataset.sibParam = field.dataset.sibParam;
+				inputs.push(input);
+			});
+
+			document.addEventListener("wpcf7submit", (e) => {
+				if (e.target.dataset.status === "sent") {
+					const params = getFormValues(inputs);
+					const isEmailSent = sibSendEmail(templateId, params);
+
+					// Add message to success message if sendinblue mail was sent
+					if (isEmailSent) {
+						const successMessage = form.parentElement.querySelector(
+							".wpcf7-response-output"
+						);
+						setTimeout(() => {
+							successMessage.innerHTML =
+								successMessage.innerHTML +
+								" Du hast eine Bestätigungs-Mail erhalten.";
+						}, 500);
+					}
+				}
+			});
+		});
+
+	function getFormValues(inputs) {
+		const params = {};
+
+		// map over all inputs and add them to the params object. save values seperated by . into child objects
+		inputs.forEach((input) => {
+			const param = input.dataset.sibParam;
+			const value = input.value;
+			const splitParam = param.split(".");
+
+			if (splitParam.length > 1) {
+				const childParam = splitParam[0];
+				const childValue = splitParam[1];
+
+				if (!params[childParam]) {
+					params[childParam] = {};
+				}
+
+				params[childParam][childValue] = value;
+			} else {
+				params[param] = value;
+			}
+		});
+
+		// split name into firstname and lastname
+		if (params.customer.name) {
+			const fullname = params.customer.name;
+			const splitName = fullname.split(" ");
+			params.customer.firstname = splitName[0];
+			params.customer.lastname = "";
+			splitName.forEach((part, index) => {
+				if (index >= 1) {
+					params.customer.lastname =
+						params.customer.lastname + " " + part;
+				}
+			});
+			params.customer.lastname = params.customer.lastname.substring(1);
+		}
+
+		return params;
+	}
+
+	async function sibSendEmail(templateId, params) {
+		const options = {
+			method: "POST",
+			headers: {
+				accept: "application/json",
+				"content-type": "application/json",
+				"api-key":
+					"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",
+			},
+			body: JSON.stringify({
+				to: [
+					{
+						email: params.customer.email,
+						name: `${params.customer.firstname} ${params.customer.lastname}`,
+					},
+				],
+				bcc: [
+					{
+						email: "info@atelier-delatron.de",
+						name: "Frauke Delatron",
+					},
+				],
+				templateId,
+				params,
+			}),
+		};
+		let result;
+		await fetch("https://api.sendinblue.com/v3/smtp/email", options)
+			.then((response) => response.json())
+			.then((response) => (result = response))
+			.catch((err) => console.error(err));
+
+		return result.messageId ? true : false;
+	}
+
+	async function sib(templateId, params) {
+		const options = {
+			method: "POST",
+			headers: {
+				accept: "application/json",
+				"content-type": "application/json",
+				"api-key":
+					"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",
+			},
+			body: JSON.stringify({
+				to: [
+					{
+						email: params.customer.email,
+						name: `${params.customer.firstname} ${params.customer.lastname}`,
+					},
+				],
+				bcc: [
+					{
+						email: "info@atelier-delatron.de",
+						name: "Frauke Delatron",
+					},
+				],
+				templateId,
+				params,
+			}),
+		};
+		let result;
+		await fetch("https://api.sendinblue.com/v3/smtp/email", options)
+			.then((response) => response.json())
+			.then((response) => (result = response))
+			.catch((err) => console.error(err));
+
+		return result.messageId ? true : false;
+	}
+});
+
+jQuery(document).ready(function ($) {
+	class Gallery {
+		constructor(galleryElement) {
+			this.galleryElement = galleryElement;
+
+			this.lightboxImages =
+				this.galleryElement.querySelectorAll(".lightbox__image");
+			this.imageData = [];
+
+			this.galleryIndex = 0;
+			this.popupIsOpened = false;
+
+			this.popupElement =
+				this.galleryElement.querySelector(".gallery__popup");
+			this.popupBackground =
+				this.popupElement.querySelector(".popup__background");
+			this.popupImage = this.popupElement.querySelector(
+				".popup__image .image__img"
+			);
+			this.imageMetaTitle =
+				this.popupElement.querySelector(".meta__text h5");
+			this.imageMetaCaption =
+				this.popupElement.querySelector(".meta__text h6");
+
+			this.thumbnailImages;
+
+			this.prevButton = this.popupElement.querySelector(".button__prev");
+			this.nextButton = this.popupElement.querySelector(".button__next");
+
+			this.setLightboxData();
+			this.createEventHandlers();
+		}
+
+		// Bilder in Array Speichern
+		setLightboxData() {
+			this.lightboxImages.forEach((image, index) => {
+				const data = {};
+				data["src"] = image.dataset.lightboxSrc;
+				data["title"] = image.dataset.title;
+				data["caption"] = image.dataset.caption;
+				this.imageData.push(data);
+				image.dataset.index = index;
+			});
+		}
+
+		// Event Listener
+		createEventHandlers() {
+			this.prevButton.addEventListener("click", () => this.move(-1));
+			this.nextButton.addEventListener("click", () => this.move(1));
+			this.lightboxImages.forEach((image) => {
+				image.addEventListener("click", (e) => {
+					// console.log(e.target)
+					// if( e.target.parentElement.classList.contains("swiper-slide-active") ) {
+					this.showImage(e);
+					// }
+				});
+			});
+			this.popupBackground.addEventListener("click", () =>
+				this.closePopup()
+			);
+		}
+
+		//Popup öffnen
+		showImage(event) {
+			this.updateImage(parseInt(event.target.dataset.index));
+			if (this.popupIsOpened === false) {
+				this.popupElement.classList.add("--opened");
+				this.popupIsOpened = true;
+			}
+		}
+
+		//Popup schließen
+		closePopup() {
+			this.popupElement.classList.remove("--opened");
+			this.popupIsOpened = false;
+		}
+
+		// Bild vor/zurück
+		move(moveIndex) {
+			this.galleryIndex = this.galleryIndex + moveIndex;
+			if (this.galleryIndex > this.imageData.length - 1) {
+				this.galleryIndex = 0;
+			} else if (this.galleryIndex < 0) {
+				this.galleryIndex = this.imageData.length - 1;
+			}
+			this.updateImage(this.galleryIndex);
+		}
+
+		// Hauptbild aktualisieren
+		updateImage(index) {
+			this.popupImage.src = this.imageData[index]["src"];
+			this.imageMetaTitle.innerText = this.imageData[index]["title"];
+			this.imageMetaCaption.innerText = this.imageData[index]["caption"];
+			this.galleryIndex = index;
+			// imageIndicator.innerHTML = `${(parseInt(index) + 1)} / ${images.length}`
+			//toggleActive(index)
 		}
 	}
 
-	const schnupperForm = document.querySelector('.schnuppertermin')
-	if (schnupperForm) {
-		variableForm(schnupperForm, 'Kinder')
+	// const lightboxElement = document.querySelector(".lightbox")
+	// const gallery1 = new Gallery(lightboxElement)
+
+	const galleryAusstellungBlocks = document.querySelectorAll(
+		".galerie__ausstellung"
+	);
+	if (galleryAusstellungBlocks.length > 0) {
+		galleryAusstellungBlocks.forEach((block) => {
+			const gallery = new Gallery(block);
+		});
 	}
-})
+
+	function initGallery(element) {
+		//     const lightboxImages = element.querySelectorAll(".lightbox__image")
+		//     // const currentLighboxImage = element.querySelector(".swiper-slide-active .lightbox__image")
+		//     let imageData = []
+		//     let galleryIndex = 0
+		//     let popupIsOpened = false
+		//     // const thumbnailContainer = document.querySelector(".gallery__thumbnails")
+		//     const popupElement = document.querySelector(".gallery__popup")
+		//     const popupBackground = document.querySelector(".popup__background")
+		//     const popupImage = document.querySelector(".popup__image .image__img")
+		//     const imageMetaTitle = popupElement.querySelector(".meta__text h5")
+		//     const imageMetaCaption = popupElement.querySelector(".meta__text h6")
+		//     let thumbnailImages
+		//     const prevButton = popupElement.querySelector(".button__prev")
+		//     const nextButton = popupElement.querySelector(".button__next")
+		//     // const imageIndicator = document.querySelector(".gallery__indicator")
+		//     // createImages()
+		//     setLightboxData()
+		//     createEventHandlers()
+		//     // Bilder in Array Speichern
+		//     function setLightboxData() {
+		//         lightboxImages.forEach((image, index) => {
+		//             const data = {}
+		//             data["src"] = image.dataset.src
+		//             data["title"] = image.dataset.title
+		//             data["caption"] = image.dataset.caption
+		//             imageData.push(data)
+		//             image.dataset.index = index
+		//         });
+		//         console.log(imageData)
+		//     }
+		//     // Event Listener
+		//     function createEventHandlers() {
+		//         prevButton.addEventListener("click", () => move(-1) )
+		//         nextButton.addEventListener("click", () => move(1) )
+		//         lightboxImages.forEach(image => {
+		//             image.addEventListener("click", (e) => showImage(e) )
+		//         })
+		//         // currentLighboxImage.addEventListener("click", (e) => {
+		//         //     e.target.dataset.index
+		//         // })
+		//         popupBackground.addEventListener("click", () => closePopup())
+		//     }
+		//     //Popup öffnen
+		//     function showImage(event) {
+		//         updateImage(parseInt(event.target.dataset.index))
+		//         if(popupIsOpened === false) {
+		//             popupElement.classList.add("--opened")
+		//             popupIsOpened = true
+		//         }
+		//     }
+		//     //Popup schließen
+		//     function closePopup() {
+		//         popupElement.classList.remove("--opened")
+		//         popupIsOpened = false
+		//     }
+		//     // Bild vor/zurück
+		//     function move(moveIndex) {
+		//         galleryIndex = galleryIndex + moveIndex
+		//         if(galleryIndex > (imageData.length - 1)) {
+		//             galleryIndex = 0;
+		//         } else if(galleryIndex < 0) {
+		//             galleryIndex = imageData.length - 1
+		//         }
+		//         updateImage(galleryIndex)
+		//     }
+		//     // Hauptbild aktualisieren
+		//     function updateImage(index) {
+		//         popupImage.src = imageData[index]["src"]
+		//         imageMetaTitle.innerText = imageData[index]["title"]
+		//         imageMetaCaption.innerText = imageData[index]["caption"]
+		//         galleryIndex = index
+		//         // imageIndicator.innerHTML = `${(parseInt(index) + 1)} / ${images.length}`
+		//         //toggleActive(index)
+		//     }
+		// }
+	}
+});
 
 jQuery(document).ready(function ($) {
-	console.log('script: archive.js')
-})
+	// Move the spinner into the submit button wrapper
+	document
+		.querySelectorAll("input[type='submit'].has-spinner")
+		.forEach((input) => {
+			// wrap input in div
+			const wrapper = document.createElement("div");
+			wrapper.classList.add("submit-wrapper");
+			input.parentNode.insertBefore(wrapper, input);
+			wrapper.appendChild(input);
+
+			// remove all existim spinner elements ".wpcf7-spinner"
+			const spinner = wrapper.nextSibling;
+			spinner.remove();
+
+			const newSpinner = document.createElement("div");
+			newSpinner.classList.add("wpcf7-spinner");
+			newSpinner.classList.add("loading-spinner");
+			newSpinner.innerHTML =
+				"<div></div><div></div><div></div><div></div>";
+			wrapper.appendChild(newSpinner);
+		});
+});
 
-function sibSendEmail(event, customer, content) {
-
-    if( customer["name"] ) {
-        const fullname = customer["name"]
-        const splitName = fullname.split(" ")
-        customer["firstname"] = splitName[0]
-        customer["lastname"] = ""
-        splitName.forEach((part, index) => {
-            if( index >= 1) {
-                customer["lastname"] = customer["lastname"] + " " + part
-            }
-        })
-    }
-
-    sendinblue.identify( customer["email"],
-        {
-            'VORNAME' : customer["firstname"],
-            'NACHNAME' : customer["lastname"],
-            'TELEFON' : customer["phone"],
-        }
-    )
-
-    content["email"] = customer["email"]
-    setTimeout(function() {
-        sendinblue.track( event,
-            {
-                "email_id" : customer["email"]
-            },
-            content
-        )
-    }, 20)
-
-    return true
-}
-
-
-
-jQuery( document ).ready(function($) {
-
-    const sibConfigs = document.querySelectorAll(".sib-config")
-    let sibForms = []
-    sibConfigs.forEach(config => {
-        sibForms.push(config.parentElement)
-    })
-    sibForms.forEach(form => {
-        const sibConfig = form.querySelector(".sib-config")
-        const formFields = form.querySelectorAll("input, select, textarea")
-        const sibFields = []
-        formFields.forEach(field => {
-            if( field.id.includes("sib-") ) {
-                sibFields.push(field)
-            }
-        })
-
-        const submitButton = form.querySelector(".wpcf7-submit")
-        let sibEvent = null
-        let sibCustomer = {}
-        let sibValues = {
-            "data" : {}
-        }
-        submitButton.addEventListener("click", (e) => {
-            sibEvent = sibConfig.dataset.sibEvent   
-
-            formFields.forEach(field => {
-                let fieldID = field.id
-                if( fieldID.includes("sib-c-") ) {
-                    fieldID = fieldID.replace('sib-c-', '');
-                    const fieldValue = field.value
-                    sibCustomer[fieldID] = fieldValue;
-                }
-            })
-
-            formFields.forEach(field => {
-                let fieldID = field.id
-                if( fieldID.includes("sib-v-") ) {
-                    fieldID = fieldID.replace('sib-v-', '');
-                    const fieldValue = field.value
-                    sibValues["data"][fieldID] = fieldValue;
-                }
-            })
-        })
-
-        const formSubmitObserver = new MutationObserver(entries => {
-            console.log(sibEvent)
-            console.log(sibCustomer)
-            console.log(sibValues)
-            if( entries[0].target.innerText === "Vielen Dank für deine Nachricht. Sie wurde gesendet." ) {
-                console.log("Formular abgesendet.")
-                sibSendEmail(sibEvent, sibCustomer, sibValues)
-            }
-        })
-        formSubmitObserver.observe(form.querySelector(".wpcf7-response-output"), { childList: true })
-    
-    })
-
-})
-jQuery( document ).ready(function($) {
-
-
-    class Gallery {
-
-        constructor(galleryElement) {
-            this.galleryElement = galleryElement
-
-            this.lightboxImages = this.galleryElement.querySelectorAll(".lightbox__image")
-            this.imageData = []
-    
-            this.galleryIndex = 0
-            this.popupIsOpened = false
-    
-            this.popupElement = this.galleryElement.querySelector(".gallery__popup")
-            this.popupBackground = this.popupElement.querySelector(".popup__background")
-            this.popupImage = this.popupElement.querySelector(".popup__image .image__img")
-            this.imageMetaTitle = this.popupElement.querySelector(".meta__text h5")
-            this.imageMetaCaption = this.popupElement.querySelector(".meta__text h6")
-    
-            this.thumbnailImages
-    
-            this.prevButton = this.popupElement.querySelector(".button__prev")
-            this.nextButton = this.popupElement.querySelector(".button__next")
-
-            this.setLightboxData()
-            this.createEventHandlers()
-        }
-
-        
-
-
-
-
-
-        // Bilder in Array Speichern
-        setLightboxData() {
-            this.lightboxImages.forEach((image, index) => {
-                const data = {}
-                data["src"] = image.dataset.lightboxSrc
-                data["title"] = image.dataset.title
-                data["caption"] = image.dataset.caption
-                this.imageData.push(data)
-                image.dataset.index = index
-            });
-            console.log(this.imageData)
-        }
-
-
-        // Event Listener
-        createEventHandlers() {
-            this.prevButton.addEventListener("click", () => this.move(-1) )
-            this.nextButton.addEventListener("click", () => this.move(1) )
-            this.lightboxImages.forEach(image => {
-                image.addEventListener("click", (e) => {
-                    // console.log(e.target)
-                    // if( e.target.parentElement.classList.contains("swiper-slide-active") ) {
-                        this.showImage(e) 
-                    // }
-                })
-            })
-            this.popupBackground.addEventListener("click", () => this.closePopup())
-        }
-
-
-        //Popup öffnen
-        showImage(event) {
-            this.updateImage(parseInt(event.target.dataset.index))
-            if(this.popupIsOpened === false) {
-                this.popupElement.classList.add("--opened")
-                this.popupIsOpened = true
-            }
-        }
-
-
-        //Popup schließen
-        closePopup() {
-            this.popupElement.classList.remove("--opened")
-            this.popupIsOpened = false
-        }
-
-
-        // Bild vor/zurück
-        move(moveIndex) {
-            this.galleryIndex = this.galleryIndex + moveIndex
-            if(this.galleryIndex > (this.imageData.length - 1)) {
-                this.galleryIndex = 0;
-            } else if(this.galleryIndex < 0) {
-                this.galleryIndex = this.imageData.length - 1
-            }
-            this.updateImage(this.galleryIndex)
-        }
-
-
-        // Hauptbild aktualisieren
-        updateImage(index) {
-            this.popupImage.src = this.imageData[index]["src"]
-            this.imageMetaTitle.innerText = this.imageData[index]["title"]
-            this.imageMetaCaption.innerText = this.imageData[index]["caption"]
-            this.galleryIndex = index
-            // imageIndicator.innerHTML = `${(parseInt(index) + 1)} / ${images.length}`
-            //toggleActive(index)
-        }
-
-    }
-
-
-    // const lightboxElement = document.querySelector(".lightbox")
-    // const gallery1 = new Gallery(lightboxElement)
-
-
-    const galleryAusstellungBlocks = document.querySelectorAll(".galerie__ausstellung")
-    if( galleryAusstellungBlocks.length > 0 ) {
-        galleryAusstellungBlocks.forEach(block => {
-            const gallery = new Gallery(block)
-        })
-    }
-
-
-
-
-
-
-
-
-    function initGallery(element) {
-
-    //     const lightboxImages = element.querySelectorAll(".lightbox__image")
-    //     // const currentLighboxImage = element.querySelector(".swiper-slide-active .lightbox__image")
-    //     let imageData = []
-
-    //     let galleryIndex = 0
-    //     let popupIsOpened = false
-
-    //     // const thumbnailContainer = document.querySelector(".gallery__thumbnails")
-    //     const popupElement = document.querySelector(".gallery__popup")
-    //     const popupBackground = document.querySelector(".popup__background")
-    //     const popupImage = document.querySelector(".popup__image .image__img")
-    //     const imageMetaTitle = popupElement.querySelector(".meta__text h5")
-    //     const imageMetaCaption = popupElement.querySelector(".meta__text h6")
-
-    //     let thumbnailImages
-
-    //     const prevButton = popupElement.querySelector(".button__prev")
-    //     const nextButton = popupElement.querySelector(".button__next")
-    //     // const imageIndicator = document.querySelector(".gallery__indicator")
-
-    //     // createImages()
-    //     setLightboxData()
-    //     createEventHandlers()
-
-
-
-
-
-    //     // Bilder in Array Speichern
-    //     function setLightboxData() {
-    //         lightboxImages.forEach((image, index) => {
-    //             const data = {}
-    //             data["src"] = image.dataset.src
-    //             data["title"] = image.dataset.title
-    //             data["caption"] = image.dataset.caption
-    //             imageData.push(data)
-    //             image.dataset.index = index
-    //         });
-    //         console.log(imageData)
-    //     }
-
-
-    //     // Event Listener
-    //     function createEventHandlers() {
-    //         prevButton.addEventListener("click", () => move(-1) )
-    //         nextButton.addEventListener("click", () => move(1) )
-    //         lightboxImages.forEach(image => {
-    //             image.addEventListener("click", (e) => showImage(e) )
-    //         })
-    //         // currentLighboxImage.addEventListener("click", (e) => {
-    //         //     e.target.dataset.index
-    //         // })
-    //         popupBackground.addEventListener("click", () => closePopup())
-    //     }
-
-
-    //     //Popup öffnen
-    //     function showImage(event) {
-    //         updateImage(parseInt(event.target.dataset.index))
-    //         if(popupIsOpened === false) {
-    //             popupElement.classList.add("--opened")
-    //             popupIsOpened = true
-    //         }
-    //     }
-
-
-    //     //Popup schließen
-    //     function closePopup() {
-    //         popupElement.classList.remove("--opened")
-    //         popupIsOpened = false
-    //     }
-
-
-    //     // Bild vor/zurück
-    //     function move(moveIndex) {
-    //         galleryIndex = galleryIndex + moveIndex
-    //         if(galleryIndex > (imageData.length - 1)) {
-    //             galleryIndex = 0;
-    //         } else if(galleryIndex < 0) {
-    //             galleryIndex = imageData.length - 1
-    //         }
-    //         updateImage(galleryIndex)
-    //     }
-
-
-    //     // Hauptbild aktualisieren
-    //     function updateImage(index) {
-    //         popupImage.src = imageData[index]["src"]
-    //         imageMetaTitle.innerText = imageData[index]["title"]
-    //         imageMetaCaption.innerText = imageData[index]["caption"]
-    //         galleryIndex = index
-    //         // imageIndicator.innerHTML = `${(parseInt(index) + 1)} / ${images.length}`
-    //         //toggleActive(index)
-    //     }
-
-    // }
-
-    }
-
-
-})
 //# sourceMappingURL=main.js.map

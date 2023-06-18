@@ -1,3 +1,1 @@
-jQuery(document).ready(function ($) {
-	console.log('script: archive.js')
-})
+jQuery(document).ready(function ($) {});

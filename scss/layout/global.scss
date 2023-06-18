@@ -50,6 +50,10 @@ body {
 }
 #main {
 	padding: 85px 0 15px;
+
+	&:has(.hero-banner) {
+		padding-top: 0;
+	}
 }
 .hidden {
 	opacity: 0;
@@ -461,6 +465,7 @@ Buttons Styling
 /* Button Colors */
 @mixin button-config($background-color, $font-color, $border-color: "") {
 	background-color: $background-color;
+
 	span {
 		color: $font-color;
 	}
@@ -483,10 +488,10 @@ Buttons Styling
 			transparent 10%
 		);
 	}
-	&[disabled],
-	&.--disabled {
-		background-color: lighten($background-color, 30%);
-	}
+	// &[disabled],
+	// &.--disabled {
+	// 	background-color: lighten($background-color, 30%);
+	// }
 }
 @mixin button-config-transparent($font-color) {
 	background-color: transparent;
@@ -502,6 +507,8 @@ Buttons Styling
 }
 .button {
 	@include button-config($accent, white);
+	transition: all 300ms ease-in-out;
+
 	&.--color {
 		&-main {
 			@include button-config($main, white);
@@ -582,6 +589,11 @@ Buttons Styling
 		&-pink {
 			@include button-config($kunstevent, white);
 		}
+	}
+
+	&:disabled,
+	&.--disabled {
+		opacity: 50%;
 	}
 }
 
@@ -1957,4 +1969,12 @@ a img.aligncenter {
 
 .background__number {
 	pointer-events: none;
+}
+
+// iframe[title="reCAPTCHA"] {
+// 	display: none !important;
+// }
+
+.grecaptcha-badge {
+	display: none !important;
 }

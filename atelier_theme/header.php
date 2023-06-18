@@ -1,3 +1,34 @@
+<?php
+/*------------------------------------*/
+/* 	Define website mode depending on page
+/*------------------------------------*/
+if (is_page('shop') || is_woocommerce() || is_shop() || is_product_category() || is_product_tag() || is_product() || is_cart() || is_checkout() || is_account_page() || is_page('sendungsverfolgung')) {
+    $setWebsiteMode = 'shop';
+} else {
+    $setWebsiteMode = 'atelier';
+}
+
+// // override websiteMode with ACF field
+// $seitenkategorie = get_field('seitenkategorie');
+// if(isset($seitenkategorie)) $setWebsiteMode = $seitenkategorie;
+
+// override websiteMode with URL parameter
+if (isset($_GET['websiteMode'])) $setWebsiteMode = $_GET['websiteMode'];
+
+global $websiteMode;
+$websiteMode = $setWebsiteMode; // Passe den Wert der globalen Variable an
+
+/*------------------------------------*/
+/* 	Section Name
+/*------------------------------------*/
+$headerHiddenOnLoad = true;
+
+// // get page id
+// $page_id = get_queried_object_id();
+// if (get_field('header_anfangs_verstecken', $page_id)) $header_hidden = "--hidden-on-load";
+?>
+
+
 <!doctype html>
 <html <?php language_attributes(); ?> class="no-js">
 
@@ -31,69 +62,33 @@
 </head>
 
 <body <?php body_class(); ?>>
-    <!-- site -->
 
     <?php get_template_part('template-parts/booking-reminder') ?>
 
-    <?php
-    // d(wp_get_registered_image_subsizes());
+    <div id='website-mode' data-website-mode="<?= $websiteMode ?>"></div>
 
-    if (is_page('shop') || is_woocommerce() || is_shop() || is_product_category() || is_product_tag() || is_product() || is_cart() || is_checkout() || is_account_page() || is_page('sendungsverfolgung')) {
-        $websiteCat = 'shop';
-    } else {
-        $websiteCat = 'atelier';
-    }
+    <header class="header <?= $headerHiddenOnLoad ? '--hidden-on-load' : '' ?> <?= is_page("Kunstangebote") ? "--hidden" : ''; ?> header--<?= $websiteMode ?>" data-show-offset="<?= $header_hidden_offset ?>">
 
-    $seitenkategorie = get_field('seitenkategorie');
-    if ($seitenkategorie === 'shop' || $websiteCat === 'website') {
-        $websiteCat = $seitenkategorie;
-    }
-    ?>
-    <div id="website-mode--<?= $websiteCat ?>"></div>
-
-    <?php
-    if (!is_page('impressum') && !is_page('datenschutz')  && !is_page('agb-shop')) {
-        $header_hidden = "--hidden-on-load";
-        $header_hidden_offset = get_field("anzeige_offset");
-    } else {
-        $header_hidden = "";
-    }
-    ?>
-
-    <header class="header <?= $header_hidden ?> <?php if (is_page("Kunstangebote")) {
-                                                    echo "--hidden";
-                                                } ?> header--<?= $websiteCat ?>" data-show-offset="<?= $header_hidden_offset ?>">
-
-        <?php if ($websiteCat === 'atelier') :
-            get_template_part('template-parts/header-bar', '', array('type' => 'atelier', 'nav' => true));
-        elseif ($websiteCat === 'shop') :
-            get_template_part('template-parts/header-bar', '', array('type' => 'shop', 'nav' => true));
-        endif; ?>
+        <?php get_template_part('template-parts/header-bar', '', array('type' => $websiteMode, 'nav' => true)); ?>
 
         <div class="header__dropdown header__dropdown__mobile" style="display:none;">
 
             <div class="dropdown__links">
-                <?php if ($websiteCat === 'atelier') :
+                <?php if ($websiteMode === 'atelier') :
                     custom_menu_theme_mobile_big("atelier-header-menu-mobile-first");
-                elseif ($websiteCat === 'shop') :
+                elseif ($websiteMode === 'shop') :
                     custom_menu_theme_mobile_big("shop-header-menu-mobile-first");
                 endif; ?>
             </div>
 
             <div class="dropdown__dark">
-                <?php if ($websiteCat === 'atelier') :
+                <?php if ($websiteMode === 'atelier') :
                     custom_menu_theme_mobile_small("atelier-header-menu-mobile-second");
-                elseif ($websiteCat === 'shop') :
+                elseif ($websiteMode === 'shop') :
                     custom_menu_theme_mobile_small("shop-header-menu-mobile-second");
                 endif; ?>
 
-                <?php
-                if ($websiteCat === 'atelier') {
-                    atelier_law_nav();
-                } elseif ($websiteCat === 'shop') {
-                    shop_law_nav();
-                }
-                ?>
+                <?php law_nav(); ?>
 
                 <?php echo get_paper_structure(); ?>
             </div>
