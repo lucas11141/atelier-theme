@@ -28,8 +28,14 @@
 }
 
 @mixin grid-width($columns: 3) {
-	width: calc(((#{$inner} - (5 * #{$gap-new})) / 6 * #{$columns}) + ((#{$columns} - 1) * #{$gap-new}));
-	max-width: calc(((#{$inner} - (5 * #{$gap-new})) / 6 * #{$columns}) + ((#{$columns} - 1) * #{$gap-new}));
+	width: calc(
+		((#{$inner} - (5 * #{$gap-new})) / 6 * #{$columns}) +
+			((#{$columns} - 1) * #{$gap-new})
+	);
+	max-width: calc(
+		((#{$inner} - (5 * #{$gap-new})) / 6 * #{$columns}) +
+			((#{$columns} - 1) * #{$gap-new})
+	);
 }
 
 /*------------------------------------*\
@@ -74,14 +80,19 @@
 }
 
 @mixin dashed-border($color, $position) {
-	background-image: linear-gradient(to right, $color 0, $color 8px, transparent 8px);
+	background-image: linear-gradient(
+		to right,
+		$color 0,
+		$color 8px,
+		transparent 8px
+	);
 	background-position: $position;
 	background-size: 16px 1px;
 	background-repeat: repeat-x;
 }
 
 @mixin font-gooddog {
-	font-family: 'gooddog-new';
+	font-family: "gooddog-new";
 	font-weight: 400;
 	text-transform: uppercase;
 	-webkit-text-stroke: 0.3px $main;
@@ -110,10 +121,16 @@
 	position: relative;
 
 	&::after {
-		content: '';
+		content: "";
 		height: 500%;
 		width: 200px;
-		background-image: linear-gradient(to right, rgba(#f9f9f9, 0%), #f9f9f9 40%, #f9f9f9 60%, rgba(#f9f9f9, 0%));
+		background-image: linear-gradient(
+			to right,
+			rgba(#f9f9f9, 0%),
+			#f9f9f9 40%,
+			#f9f9f9 60%,
+			rgba(#f9f9f9, 0%)
+		);
 		animation: paypal-loader-glance 2.5s ease-in-out infinite;
 		position: absolute;
 		top: 50%;
@@ -134,5 +151,15 @@
 	&:active {
 		transition-duration: 30ms;
 		transform: scale(0.98);
+	}
+}
+
+@mixin dark() {
+	:is(h1, h2, h3, h4, h5, h6) {
+		font-weight: 700;
+	}
+
+	* {
+		color: white;
 	}
 }

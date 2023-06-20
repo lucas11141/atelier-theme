@@ -2,14 +2,16 @@
     POPUPS
 \*------------------------------------*/
 .popup {
-	padding: 50px;
+	padding: 0;
 	width: $wrapper-width;
 	max-width: $screen;
 	border-radius: 25px;
 	overflow: visible;
+
 	&::backdrop {
 		background: rgba($main, 90%);
 	}
+
 	&__close {
 		padding: 0;
 		height: 55px;
@@ -20,7 +22,9 @@
 		position: absolute;
 		top: 5px;
 		right: 5px;
+		z-index: 1;
 		transform: translate(50%, -50%) !important;
+
 		&::before {
 			content: "";
 			height: 16px;
@@ -30,56 +34,6 @@
 			background-repeat: no-repeat;
 			@include pos-center();
 			pointer-events: none;
-		}
-	}
-}
-
-.popup--newsletter {
-	padding: 0;
-	.popup__content {
-		min-height: 450px;
-		@include flex-row();
-		align-items: center;
-		.popup__text {
-			padding: 50px;
-			width: 60%;
-			@include flex-column();
-			h5 {
-				padding-top: 0;
-			}
-		}
-		.popup__image {
-			width: 40%;
-			min-height: 450px;
-			flex: auto;
-			border-top-right-radius: 25px;
-			border-bottom-right-radius: 25px;
-			object-fit: cover;
-		}
-	}
-	@media only screen and (max-width: $desktop) {
-		.popup__content {
-			.popup__text {
-				padding: 40px;
-				padding: 5vw;
-				max-width: 450px;
-			}
-		}
-	}
-	@media only screen and (max-width: $mobile) {
-		.popup__content {
-			flex-direction: column;
-			row-gap: 0;
-			min-height: unset;
-			.popup__text {
-				padding: 35px 25px 30px 25px;
-				.newsletter-form {
-					margin-top: 30px;
-				}
-			}
-			.popup__image {
-				display: none;
-			}
 		}
 	}
 }

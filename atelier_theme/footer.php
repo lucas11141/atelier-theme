@@ -5,6 +5,12 @@
 
 			// set link to contact page
 			$contactLink = $websiteMode === 'shop' ? get_permalink(get_page_by_path('kontakt-shop')) : get_permalink(get_page_by_path('kontakt')) . '#allgemein';
+
+			$preheader = get_field('preheader', 'options');
+			$uberschrift_h2 = get_field('uberschrift_h2', 'options');
+			$inhalte = get_field('inhalte', 'options');
+			$formular_shortcode = get_field('formular_shortcode', 'options');
+			$hinweis = get_field('hinweis', 'options');
 			?>
 
 			<footer class="footer footer--desktop">
@@ -12,17 +18,27 @@
 				<?php get_template_part('template-parts/paper'); ?>
 
 				<div class="footer__newsletter">
-					<h6>Möchtest du Produktneuigkeiten und Updates?</h6>
-					<h2>Melde dich für den Newsletter an.</h2>
+					<?php if ($preheader) : ?>
+						<h6><?= $preheader ?></h6>
+					<?php endif; ?>
 
-					<div class="list">
-						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Termine</span>
-						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Angebote</span>
-						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Veranstaltungen</span>
-					</div>
+					<h2><?= $uberschrift_h2 ?></h2>
 
-					<?php echo do_shortcode('[sibwp_form id=2]'); ?>
-					<p class="privacy">Deine Daten sind sicher. Lies die <a href="https://www.atelier-delatron.de/datenschutz">Datenschutzerklärung</a>.</p>
+					<?php if ($inhalte) : ?>
+						<div class="list">
+							<?php foreach ($inhalte as $item) :
+								$titel = $item['titel'];
+							?>
+								<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg"><?= $titel ?></span>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php echo do_shortcode($formular_shortcode); ?>
+
+					<?php if ($hinweis) : ?>
+						<p class="privacy"><?= $hinweis ?></p>
+					<?php endif; ?>
 
 					<img class="decoration" src="<?php echo get_template_directory_uri(); ?>/assets/img/elements/footer_newsletter_decoration.svg" alt="">
 				</div>
@@ -94,17 +110,27 @@
 				<?php get_template_part('template-parts/paper'); ?>
 
 				<div class="footer__newsletter">
-					<h6>Möchtest du Produktneuigkeiten und Updates?</h6>
-					<h2>Melde dich für den Newsletter an.</h2>
+					<?php if ($preheader) : ?>
+						<h6><?= $preheader ?></h6>
+					<?php endif; ?>
 
-					<div class="list">
-						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Termine</span>
-						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Angebote</span>
-						<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg">Veranstaltungen</span>
-					</div>
+					<h2><?= $uberschrift_h2 ?></h2>
 
-					<?php echo do_shortcode('[sibwp_form id=2]'); ?>
-					<p class="privacy">Deine Daten sind sicher. Lies die <a href="https://www.atelier-delatron.de/datenschutz">Datenschutzerklärung</a>.</p>
+					<?php if ($inhalte) : ?>
+						<div class="list">
+							<?php foreach ($inhalte as $item) :
+								$titel = $item['titel'];
+							?>
+								<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg"><?= $titel ?></span>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php echo do_shortcode($formular_shortcode); ?>
+
+					<?php if ($hinweis) : ?>
+						<p class="privacy"><?= $hinweis ?></p>
+					<?php endif; ?>
 
 					<img class="decoration" src="<?php echo get_template_directory_uri(); ?>/assets/img/elements/footer_newsletter_decoration.svg" alt="">
 				</div>
@@ -174,6 +200,40 @@
 				</div>
 
 			</footer>
+
+			<dialog class="popup popup--newsletter">
+				<form method="dialog">
+					<button class="button --color-white popup__close" value="cancel"></button>
+				</form>
+
+				<div class="popup__content">
+					<?php if ($preheader) : ?>
+						<h6><?= $preheader ?></h6>
+					<?php endif; ?>
+
+					<h2><?= $uberschrift_h2 ?></h2>
+
+					<?php if ($inhalte) : ?>
+						<div class="list">
+							<?php foreach ($inhalte as $item) :
+								$titel = $item['titel'];
+							?>
+								<span><img src="<?= get_template_directory_uri() ?>/assets/img/icons/icon_checkmark_green.svg"><?= $titel ?></span>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php echo do_shortcode($formular_shortcode); ?>
+
+					<?php if ($hinweis) : ?>
+						<p class="privacy"><?= $hinweis ?></p>
+					<?php endif; ?>
+
+					<img class="decoration" src="<?php echo get_template_directory_uri(); ?>/assets/img/elements/newsletter_decoration_popup.svg" alt="">
+					<?php get_template_part('template-parts/paper'); ?>
+				</div>
+
+			</dialog>
 
 			<?php wp_footer(); ?>
 

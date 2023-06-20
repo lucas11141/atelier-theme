@@ -237,7 +237,6 @@ $id = $block['id'];
                     scaledSize: new google.maps.Size(48, 67)
                 }
             });
-
         }
     </script>
 

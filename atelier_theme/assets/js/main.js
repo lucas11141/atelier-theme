@@ -39,6 +39,50 @@ jQuery(document).ready(function ($) {
 	});
 });
 
+function scrollView(element, align, margin = 0) {
+	const screenElementHeightDelta = window.innerHeight - element.offsetHeight;
+
+	console.log(margin);
+
+	if (align === "center") {
+		if (screenElementHeightDelta < margin * 2) {
+			// align top with margin when screen is to small
+			window.scrollTo({
+				behavior: "smooth",
+				top:
+					element.getBoundingClientRect().top -
+					document.body.getBoundingClientRect().top -
+					margin,
+			});
+		} else {
+			// align element in center
+			element.scrollIntoView({ behavior: "smooth", block: "center" });
+		}
+	} else if (align === "top") {
+		window.scrollTo({
+			behavior: "smooth",
+			top:
+				element.getBoundingClientRect().top -
+				document.body.getBoundingClientRect().top -
+				margin,
+		});
+	} else if (align === "bottom") {
+		const rect = element.getBoundingClientRect();
+		const scrollTop =
+			window.pageYOffset || document.documentElement.scrollTop;
+		const offsetTop = rect.top + scrollTop;
+		const wHeight = window.innerHeight;
+		const elHeight = rect.height;
+		const scollOffset = offsetTop - (wHeight - elHeight - margin);
+		console.log(elHeight);
+		console.log(offsetTop);
+		window.scrollTo({
+			behavior: "smooth",
+			top: scollOffset,
+		});
+	}
+}
+
 
 jQuery(document).ready(function ($) {
 	function onElementLoad(selector, execution) {
@@ -910,133 +954,6 @@ jQuery(document).ready(function ($) {
 })
 
 jQuery(document).ready(function ($) {
-	// Set a Cookie
-	function setCookie(cName, cValue, expDays) {
-		let date = new Date();
-		date.setTime(date.getTime() + expDays * 24 * 60 * 60 * 1000);
-		const expires = "expires=" + date.toUTCString();
-		document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
-	}
-
-	function getCookie(cName) {
-		const name = cName + "=";
-		const cDecoded = decodeURIComponent(document.cookie); //to be careful
-		const cArr = cDecoded.split("; ");
-		let res;
-		cArr.forEach((val) => {
-			if (val.indexOf(name) === 0) res = val.substring(name.length);
-		});
-		return res;
-	}
-
-	const newsletterIsOnPage =
-		document.querySelectorAll(".newsletter__field").length > 0;
-	if (newsletterIsOnPage) {
-		document
-			.querySelector(".newsletter__image")
-			.addEventListener("click", () => {
-				document.querySelector(".popup--newsletter").showModal();
-			});
-
-		const popupNewsletter = document.querySelector(".popup--newsletter");
-		if (popupNewsletter) {
-			setTimeout(function () {
-				if (getCookie("newsletter_opened") != "true") {
-					popupNewsletter.showModal();
-				}
-			}, 1000 * 5);
-			popupNewsletter.addEventListener("close", () => {
-				setCookie("newsletter_opened", true, 14);
-			});
-		}
-
-		const newsletterEmailButton = document.querySelector(
-			".newsletter-form .button"
-		);
-		if (newsletterEmailButton) {
-			newsletterEmailButton.addEventListener("click", () => {
-				const emailValue = document.getElementById("sib-email").value;
-				newsletterEmailButton.href =
-					newsletterEmailButton.href + "?email=" + emailValue;
-				// sessionStorage.setItem("newsletter_email", emailValue)
-			});
-		}
-
-		// document.querySelector("input.sib-email-area").value = sessionStorage.getItem("newsletter_email")
-		// transfereEmail = document.getElementById("transfered__email").innerText
-		// document.querySelector("input.sib-email-area").value = transfereEmail
-
-		function waitForElm(selector) {
-			return new Promise((resolve) => {
-				if (document.querySelector(selector) !== null) {
-					return resolve(document.querySelector(selector));
-				}
-
-				const observer = new MutationObserver((mutations) => {
-					if (document.querySelector(selector) !== null) {
-						resolve(document.querySelector(selector));
-						observer.disconnect();
-					}
-				});
-
-				observer.observe(document.body, {
-					childList: true,
-					subtree: true,
-				});
-			});
-		}
-
-		waitForElm(".sib-alert-message-success").then((elm) => {
-			document.querySelector(".newsletter__content").style.display =
-				"none";
-			document.querySelector(".newsletter__success").style.display =
-				"flex";
-		});
-
-		// function setWithExpiry(key, value, ttl) {
-		//     const now = new Date()
-
-		//     // `item` is an object which contains the original value
-		//     // as well as the time when it's supposed to expire
-		//     const item = {
-		//         value: value,
-		//         expiry: now.getTime() + ttl,
-		//     }
-		//     localStorage.setItem(key, JSON.stringify(item))
-		// }
-
-		// function getWithExpiry(key) {
-		//     const itemStr = localStorage.getItem(key)
-		//     // if the item doesn't exist, return null
-		//     if (!itemStr) {
-		//         return null
-		//     }
-		//     const item = JSON.parse(itemStr)
-		//     const now = new Date()
-		//     // compare the expiry time of the item with the current time
-		//     if (now.getTime() > item.expiry) {
-		//         // If the item is expired, delete the item from storage
-		//         // and return null
-		//         localStorage.removeItem(key)
-		//         return null
-		//     }
-		//     return item.value
-		// }
-
-		// function closeNewsletterPopup() {
-		//     document.querySelector(".newsletter__popup").close()
-		//     setWithExpiry("newsletter_opened", "true", 1000*60*60*24)
-		// }
-		// $(".newsletter__content input[type='submit']").click(function() {
-		//     closeNewsletterPopup();
-		// })
-		// $(".newsletter__popup input[type='submit']").click(function() {
-		//     closeNewsletterPopup();
-		// })
-	}
-});
-
-jQuery(document).ready(function ($) {
 	/*------------------------------------*/
 	/* 	Add options to course select
 	/*------------------------------------*/
@@ -1124,12 +1041,15 @@ jQuery(document).ready(function ($) {
 				}
 			});
 
-			if (!hasScrolled && scroll) {
-				document
-					.querySelector(".kontakt__forms")
-					.scrollIntoView({ behavior: "smooth", block: "center" });
-				hasScrolled = true;
-			}
+			// if (!hasScrolled && scroll) {
+			// 	scrollView(
+			// 		document.querySelector(".kontakt__methods"),
+			// 		"top",
+			// 		200
+			// 	);
+			// 	console.log("scroll");
+			// 	hasScrolled = true;
+			// }
 
 			const schnupperForm = document.querySelector(".schnuppertermin");
 			if (index == 1) adjustTextareaHeight(schnupperForm);
@@ -1196,154 +1116,6 @@ jQuery(document).ready(function ($) {
 });
 
 jQuery(document).ready(function ($) {});
-
-jQuery(document).ready(function ($) {
-	document
-		.querySelectorAll(".standard__form[data-sib-template-id]")
-		.forEach((form) => {
-			const templateId = parseInt(form.dataset.sibTemplateId);
-
-			// replace all references in fields with the child input, select or textarea
-			const fields = form.querySelectorAll("label[data-sib-param]");
-			const inputs = [];
-
-			fields.forEach((field) => {
-				const input = field.querySelector("input, select, textarea");
-				input.dataset.sibParam = field.dataset.sibParam;
-				inputs.push(input);
-			});
-
-			document.addEventListener("wpcf7submit", (e) => {
-				if (e.target.dataset.status === "sent") {
-					const params = getFormValues(inputs);
-					const isEmailSent = sibSendEmail(templateId, params);
-
-					// Add message to success message if sendinblue mail was sent
-					if (isEmailSent) {
-						const successMessage = form.parentElement.querySelector(
-							".wpcf7-response-output"
-						);
-						setTimeout(() => {
-							successMessage.innerHTML =
-								successMessage.innerHTML +
-								" Du hast eine Bestätigungs-Mail erhalten.";
-						}, 500);
-					}
-				}
-			});
-		});
-
-	function getFormValues(inputs) {
-		const params = {};
-
-		// map over all inputs and add them to the params object. save values seperated by . into child objects
-		inputs.forEach((input) => {
-			const param = input.dataset.sibParam;
-			const value = input.value;
-			const splitParam = param.split(".");
-
-			if (splitParam.length > 1) {
-				const childParam = splitParam[0];
-				const childValue = splitParam[1];
-
-				if (!params[childParam]) {
-					params[childParam] = {};
-				}
-
-				params[childParam][childValue] = value;
-			} else {
-				params[param] = value;
-			}
-		});
-
-		// split name into firstname and lastname
-		if (params.customer.name) {
-			const fullname = params.customer.name;
-			const splitName = fullname.split(" ");
-			params.customer.firstname = splitName[0];
-			params.customer.lastname = "";
-			splitName.forEach((part, index) => {
-				if (index >= 1) {
-					params.customer.lastname =
-						params.customer.lastname + " " + part;
-				}
-			});
-			params.customer.lastname = params.customer.lastname.substring(1);
-		}
-
-		return params;
-	}
-
-	async function sibSendEmail(templateId, params) {
-		const options = {
-			method: "POST",
-			headers: {
-				accept: "application/json",
-				"content-type": "application/json",
-				"api-key":
-					"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",
-			},
-			body: JSON.stringify({
-				to: [
-					{
-						email: params.customer.email,
-						name: `${params.customer.firstname} ${params.customer.lastname}`,
-					},
-				],
-				bcc: [
-					{
-						email: "info@atelier-delatron.de",
-						name: "Frauke Delatron",
-					},
-				],
-				templateId,
-				params,
-			}),
-		};
-		let result;
-		await fetch("https://api.sendinblue.com/v3/smtp/email", options)
-			.then((response) => response.json())
-			.then((response) => (result = response))
-			.catch((err) => console.error(err));
-
-		return result.messageId ? true : false;
-	}
-
-	async function sib(templateId, params) {
-		const options = {
-			method: "POST",
-			headers: {
-				accept: "application/json",
-				"content-type": "application/json",
-				"api-key":
-					"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",
-			},
-			body: JSON.stringify({
-				to: [
-					{
-						email: params.customer.email,
-						name: `${params.customer.firstname} ${params.customer.lastname}`,
-					},
-				],
-				bcc: [
-					{
-						email: "info@atelier-delatron.de",
-						name: "Frauke Delatron",
-					},
-				],
-				templateId,
-				params,
-			}),
-		};
-		let result;
-		await fetch("https://api.sendinblue.com/v3/smtp/email", options)
-			.then((response) => response.json())
-			.then((response) => (result = response))
-			.catch((err) => console.error(err));
-
-		return result.messageId ? true : false;
-	}
-});
 
 jQuery(document).ready(function ($) {
 	class Gallery {
@@ -1536,6 +1308,132 @@ jQuery(document).ready(function ($) {
 });
 
 jQuery(document).ready(function ($) {
+	document.addEventListener("wpcf7submit", (e) => {
+		const form = e.target;
+
+		const templateId = parseInt(
+			form.querySelector(".standard__form").dataset.brevoTemplateId
+		);
+
+		if (!templateId)
+			throw new Error(
+				"This form does not have a brevo template id",
+				form
+			);
+
+		// replace all references in fields with the child input, select or textarea
+		const fields = form.querySelectorAll("label[data-brevo-param]");
+		const inputs = [];
+
+		fields.forEach((field) => {
+			const input = field.querySelector("input, select, textarea");
+			input.dataset.brevoParam = field.dataset.brevoParam;
+			inputs.push(input);
+		});
+
+		if (e.target.dataset.status === "sent") {
+			const params = getFormValues(inputs);
+			const isEmailSent = brevoSendEmail(templateId, params);
+
+			// Add message to success message if sendinblue mail was sent
+			if (isEmailSent) {
+				const successMessage = form.querySelector(
+					".wpcf7-response-output"
+				);
+				setTimeout(() => {
+					successMessage.innerHTML =
+						successMessage.innerHTML +
+						" Du hast eine Bestätigungs-Mail erhalten.";
+				}, 500);
+			}
+		}
+	});
+
+	function getFormValues(inputs) {
+		const params = {};
+
+		// map over all inputs and add them to the params object. save values seperated by . into child objects
+		inputs.forEach((input) => {
+			const param = input.dataset.brevoParam;
+			const value = input.value;
+			const splitParam = param.split(".");
+
+			if (splitParam.length > 1) {
+				const childParam = splitParam[0];
+				const childValue = splitParam[1];
+
+				if (!params[childParam]) {
+					params[childParam] = {};
+				}
+
+				params[childParam][childValue] = value;
+			} else {
+				params[param] = value;
+			}
+		});
+
+		// split name into firstname and lastname
+		if (params.customer.name) {
+			const fullname = params.customer.name;
+			const splitName = fullname.split(" ");
+			params.customer.firstname = splitName[0];
+			params.customer.lastname = "";
+			splitName.forEach((part, index) => {
+				if (index >= 1) {
+					params.customer.lastname =
+						params.customer.lastname + " " + part;
+				}
+			});
+			params.customer.lastname = params.customer.lastname.substring(1);
+		}
+
+		return params;
+	}
+
+	async function brevoSendEmail(templateId, params) {
+		console.log(templateId, params);
+
+		const options = {
+			method: "POST",
+			headers: {
+				accept: "application/json",
+				"content-type": "application/json",
+			},
+			body: JSON.stringify({
+				to: [
+					{
+						email: params.customer.email,
+						name: `${params.customer.firstname} ${params.customer.lastname}`,
+					},
+				],
+				bcc: [
+					{
+						email: "info@atelier-delatron.de",
+						name: "Frauke Delatron",
+					},
+				],
+				templateId,
+				params,
+			}),
+		};
+
+		fetch(
+			"/wp-content/themes/atelier_theme/functions/brevoSendEmail.php",
+			options
+		)
+			.then((response) => response.json())
+			.then((result) => {
+				console.log(result);
+				const messageId = result.messageId;
+				const success = messageId ? true : false;
+				console.log(success);
+				return success;
+			})
+			.catch((error) => console.error(error));
+	}
+});
+
+jQuery(document).ready(function ($) {
 	// Move the spinner into the submit button wrapper
 	document
 		.querySelectorAll("input[type='submit'].has-spinner")
@@ -1557,6 +1455,26 @@ jQuery(document).ready(function ($) {
 				"<div></div><div></div><div></div><div></div>";
 			wrapper.appendChild(newSpinner);
 		});
+});
+
+jQuery(document).ready(function ($) {
+	const popupNewsletter = document.querySelector(".popup--newsletter");
+	console.log(
+		Cookies.get("newsletter_opened"),
+		typeof Cookies.get("newsletter_opened")
+	);
+
+	if (popupNewsletter) {
+		setTimeout(function () {
+			if (Cookies.get("newsletter_opened") !== "true") {
+				popupNewsletter.showModal();
+			}
+		}, 1000 * 20);
+
+		popupNewsletter.addEventListener("close", () => {
+			Cookies.set("newsletter_opened", "true", { expires: 30 });
+		});
+	}
 });
 
 //# sourceMappingURL=main.js.map

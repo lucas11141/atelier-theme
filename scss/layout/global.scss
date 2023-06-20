@@ -412,7 +412,9 @@ Buttons Styling
 	}
 
 	@media only screen and (max-width: $mobile) {
-		width: 100%;
+		&:not(.popup__close) {
+			width: 100%;
+		}
 	}
 }
 

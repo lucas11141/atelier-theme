@@ -1,4 +1,8 @@
 <?php
+// Save environment variables in $_ENV
+$_ENV = include ($_SERVER['DOCUMENT_ROOT'] . '/config/env.php') ?? false;
+if (WP_DEBUG) d($_ENV);
+
 /*------------------------------------*/
 /* 	Define website mode depending on page
 /*------------------------------------*/
@@ -22,6 +26,9 @@ $websiteMode = $setWebsiteMode; // Passe den Wert der globalen Variable an
 /* 	Section Name
 /*------------------------------------*/
 $headerHiddenOnLoad = true;
+
+// ceck if page is 404
+if (is_404()) $headerHiddenOnLoad = false;
 
 // // get page id
 // $page_id = get_queried_object_id();
@@ -58,7 +65,6 @@ $headerHiddenOnLoad = true;
     <?php if (is_page('galerie')) : ?>
         <script type="text/javascript" src="<?= get_template_directory_uri() ?>/js/pages/gallery.js" defer></script>
     <?php endif; ?>
-
 </head>
 
 <body <?php body_class(); ?>>

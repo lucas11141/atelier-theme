@@ -8,14 +8,9 @@
 	background-color: $main;
 	position: relative;
 	overflow: hidden;
-
-	// ::selection {
-	// 	background-color: $accent;
-	// 	background-color: #a1e7988a;
-	// }
+	@include dark();
 
 	* {
-		color: white;
 		font-family: $main-font;
 	}
 
@@ -32,12 +27,6 @@
 			padding: 0 0 5px;
 			color: $accent;
 			text-wrap: balance;
-		}
-
-		h2 {
-			@include font-gooddog();
-			@include fluid-type(28px, 36px);
-			font-weight: 400;
 		}
 
 		.list {
@@ -254,7 +243,7 @@
 	}
 
 	.nav--law {
-		width: 300px;
+		width: fit-content;
 		display: inline-flex;
 	}
 

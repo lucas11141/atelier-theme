@@ -86,12 +86,15 @@ jQuery(document).ready(function ($) {
 				}
 			});
 
-			if (!hasScrolled && scroll) {
-				document
-					.querySelector(".kontakt__forms")
-					.scrollIntoView({ behavior: "smooth", block: "center" });
-				hasScrolled = true;
-			}
+			// if (!hasScrolled && scroll) {
+			// 	scrollView(
+			// 		document.querySelector(".kontakt__methods"),
+			// 		"top",
+			// 		200
+			// 	);
+			// 	console.log("scroll");
+			// 	hasScrolled = true;
+			// }
 
 			const schnupperForm = document.querySelector(".schnuppertermin");
 			if (index == 1) adjustTextareaHeight(schnupperForm);

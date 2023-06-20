@@ -1,3 +1,171 @@
+.popup--newsletter {
+	background: $main;
+	border: solid 3px $main;
+
+	.popup__content {
+		padding: 80px 60px;
+		position: relative;
+		overflow: hidden;
+
+		h6 {
+			padding: 0 0 5px;
+			color: $accent;
+			text-wrap: balance;
+		}
+
+		h2 {
+			@include font-gooddog();
+			@include fluid-type(28px, 36px);
+			font-weight: 400;
+			color: white;
+		}
+
+		.list {
+			margin: 25px 0 5px;
+			width: 100%;
+			@include flex-row();
+			justify-content: start;
+			flex-wrap: wrap;
+			gap: 30px;
+
+			span {
+				@include fluid-type(13px, 16px);
+				font-weight: 700;
+				display: inline-flex;
+				gap: 10px;
+				color: white;
+
+				img {
+					pointer-events: none;
+					user-select: none;
+				}
+			}
+		}
+
+		#sib_signup_form_2 {
+			margin-top: 35px;
+			max-width: 480px;
+		}
+
+		.privacy {
+			@include fluid-type(13px, 16px);
+			padding-top: 15px;
+			color: $main--light;
+
+			a {
+				color: $main--light;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
+		}
+
+		.decoration {
+			width: 250px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			pointer-events: none;
+			user-select: none;
+		}
+
+		.paper {
+			border-radius: 22px;
+		}
+	}
+
+	&::backdrop {
+		background: rgba(#617888, 90%);
+	}
+
+	/*------------------------------------*/
+	/* 	Responsive
+	/*------------------------------------*/
+	@media only screen and (max-width: $tablet) {
+		.popup__content {
+			padding: 45px 40px;
+
+			.decoration {
+				width: 120px;
+			}
+
+			.list {
+				margin: 15px 0 5px;
+				width: 100%;
+				gap: 10px 20px;
+
+				span {
+					gap: 8px;
+				}
+			}
+
+			#sib_signup_form_2 {
+				margin-top: 25px;
+			}
+		}
+	}
+
+	@media only screen and (max-width: 630px) {
+		.popup__content {
+			padding: 30px;
+			.decoration {
+				display: none;
+			}
+		}
+	}
+}
+
+// .popup--newsletter {
+// 	padding: 0;
+// 	.popup__content {
+// 		min-height: 450px;
+// 		@include flex-row();
+// 		align-items: center;
+// 		.popup__text {
+// 			padding: 50px;
+// 			width: 60%;
+// 			@include flex-column();
+// 			h5 {
+// 				padding-top: 0;
+// 			}
+// 		}
+// 		.popup__image {
+// 			width: 40%;
+// 			min-height: 450px;
+// 			flex: auto;
+// 			border-top-right-radius: 25px;
+// 			border-bottom-right-radius: 25px;
+// 			object-fit: cover;
+// 		}
+// 	}
+// 	@media only screen and (max-width: $desktop) {
+// 		.popup__content {
+// 			.popup__text {
+// 				padding: 40px;
+// 				padding: 5vw;
+// 				max-width: 450px;
+// 			}
+// 		}
+// 	}
+// 	@media only screen and (max-width: $mobile) {
+// 		.popup__content {
+// 			flex-direction: column;
+// 			row-gap: 0;
+// 			min-height: unset;
+// 			.popup__text {
+// 				padding: 35px 25px 30px 25px;
+// 				.newsletter-form {
+// 					margin-top: 30px;
+// 				}
+// 			}
+// 			.popup__image {
+// 				display: none;
+// 			}
+// 		}
+// 	}
+// }
+
 /* Newsletter  Sign Up */
 .newsletter {
 	@extend .inner;

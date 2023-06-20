@@ -4,6 +4,7 @@
 // @prepros-prepend "lib/slick.min.js";
 // @prepros-prepend "lib/js.cookie-2.2.1.min.js";
 // @prepros-prepend "scripts/websiteMode.js";
+// @prepros-prepend "functions/scrollView.js";
 
 jQuery(document).ready(function ($) {
 	function onElementLoad(selector, execution) {
@@ -719,9 +720,9 @@ jQuery(document).ready(function ($) {
 
 // @prepros-append "blocks/booking-reminder.js";
 // @prepros-append "blocks/productfilter.js";
-// @prepros-append "blocks/newsletter.js";
 // @prepros-append "blocks/kontakt-hero-banner.js";
 // @prepros-append "pages/archive.js";
-// @prepros-append "lib/sendinblue.js";
 // @prepros-append "lib/lightbox.js";
+// @prepros-append "scripts/brevo.js";
 // @prepros-append "scripts/contactform7.js";
+// @prepros-append "scripts/newsletterPopup.js";
