@@ -65,6 +65,19 @@ function atelier_blank_view_article($more)
     return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'atelier') . '</a>';
 }
 
+// Disable SEO for development
+function custom_noindex_setting()
+{
+    $site_url = get_site_url();
+
+    if (strpos($site_url, 'dev.atelier-delatron.de') !== false) {
+        update_option('blog_public', 'no');
+    } else {
+        update_option('blog_public', 'yes');
+    }
+}
+
+add_action('init', 'custom_noindex_setting'); // Disable SEO for development
 add_action('init', 'atelierwp_pagination'); // Add our HTML5 Pagination
 add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)

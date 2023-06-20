@@ -384,8 +384,8 @@
 
 				&::after {
 					content: "";
-					width: 7px;
-					height: 20px;
+					width: 7px !important;
+					height: 20px !important;
 					background-image: url(../img/elements/arrow_right_white.svg);
 					background-size: contain;
 					background-repeat: no-repeat;

@@ -1,129 +1,161 @@
 jQuery(document).ready(function ($) {
-	const contactBanner = document.querySelector('.kontakt__banner')
+	/*------------------------------------*/
+	/* 	Add options to course select
+	/*------------------------------------*/
+	const courseSelect = document.querySelector('select[name="course"]');
+	const courseSelectOptions = document.querySelectorAll("#course-names li");
+
+	// save all possible values of courseSelectOptions in an array (remove duplicates)
+	const courseSelectOptionsGroups = [
+		...new Set(
+			Array.from(courseSelectOptions).map(
+				(option) => option.dataset.group
+			)
+		),
+	];
+
+	// split courseSelectOptions into arrays by group
+	const courseSelectOptionsByGroup = courseSelectOptionsGroups.map(
+		(group) => {
+			return Array.from(courseSelectOptions).filter(
+				(option) => option.dataset.group === group
+			);
+		}
+	);
+
+	courseSelectOptionsByGroup.forEach((group) => {
+		// create optgroup element
+		const optgroupElement = document.createElement("optgroup");
+		optgroupElement.label = group[0].dataset.gruppe;
+		optgroupElement.dataset.group = group[0].dataset.group;
+
+		group.forEach((option) => {
+			// create option element
+			const optionElement = document.createElement("option");
+			optionElement.value = option.innerText;
+			optionElement.innerText = option.innerText;
+			optionElement.dataset.group = option.dataset.group;
+
+			optgroupElement.appendChild(optionElement);
+		});
+
+		courseSelect.appendChild(optgroupElement);
+	});
+
+	/*------------------------------------*/
+	/* 	Section Name
+	/*------------------------------------*/
+
+	const contactBanner = document.querySelector(".kontakt__banner");
 	if (contactBanner) {
-		let currentActive
-		var hasScrolled = false
-		const tabButtons = contactBanner.querySelectorAll('.methods__item')
-		const tabContents = document.querySelectorAll('.methods__content')
+		let currentActive;
+		var hasScrolled = false;
+		const tabButtons = contactBanner.querySelectorAll(".methods__item");
+		const tabContents = document.querySelectorAll(".methods__content");
+
+		openTab(0, false);
 
 		tabButtons.forEach((button) => {
-			button.addEventListener('click', (e) => {
-				openTab(e.target.dataset.index)
-			})
-		})
+			button.addEventListener("click", (e) => {
+				openTab(e.target.dataset.index);
+			});
+		});
 
-		function openTab(index) {
+		function openTab(index, scroll = true) {
 			// Hide Elements for no Selection
 			tabButtons.forEach((button) => {
-				button.classList.remove('--arrows')
-			})
-			document.querySelector('.form__dummy').style.display = 'none'
+				button.classList.remove("--arrows");
+			});
+			document.querySelector(".form__dummy").style.display = "none";
 
 			// Highlight current Tab
-			const activeTab = tabButtons[index]
+			const activeTab = tabButtons[index];
 			if (activeTab.dataset.index != currentActive) {
 				tabButtons.forEach((button) => {
-					button.classList.remove('--active')
-				})
-				activeTab.classList.add('--active')
+					button.classList.remove("--active");
+				});
+				activeTab.classList.add("--active");
 			}
-			currentActive = index
+			currentActive = index;
 
 			// Show current Tab Content
 			tabContents.forEach((content) => {
-				content.classList.add('--hidden')
+				content.classList.add("--hidden");
 				if (content.dataset.index == currentActive) {
-					content.classList.remove('--hidden')
+					content.classList.remove("--hidden");
 				}
-			})
+			});
 
-			if (!hasScrolled) {
-				document.querySelector('.kontakt__forms').scrollIntoView({ behavior: 'smooth', block: 'center' })
-				hasScrolled = true
-			}
+			// if (!hasScrolled && scroll) {
+			// 	scrollView(
+			// 		document.querySelector(".kontakt__methods"),
+			// 		"top",
+			// 		200
+			// 	);
+			// 	console.log("scroll");
+			// 	hasScrolled = true;
+			// }
+
+			const schnupperForm = document.querySelector(".schnuppertermin");
+			if (index == 1) adjustTextareaHeight(schnupperForm);
 		}
 
 		if (window.location.hash) {
-			var hash = window.location.hash // = "#login"
-			hash = hash.substring(1)
-			console.log(document.querySelector('.kontakt__methods'))
+			var hash = window.location.hash; // = "#login"
+			hash = hash.substring(1);
 			tabButtons.forEach((button) => {
 				if (button.dataset.hash === hash) {
-					button.classList.add('--active')
-					openTab(button.dataset.index)
+					button.classList.add("--active");
+					openTab(button.dataset.index);
 				}
-			})
+			});
 		}
 	}
 
 	// Schnuppertermin Formular
-
-	const variableFormConditionFieldClass = '.condition__field'
-	const variableFormToggleFieldClass = '.toggle__field'
-
-	function variableForm(form, condition) {
-		let toggleFieldsIsVisible = false
-		const toggleFields = form.querySelectorAll(variableFormToggleFieldClass)
-		if (toggleFields.length > 0) {
-			toggleFields.forEach((field) => {
-				field.style.display = 'none'
-			})
-
-			const textarea = document.querySelector("label[for='nachricht']")
-
-			const conditionField = form.querySelector(variableFormConditionFieldClass)
-			if (conditionField !== null) {
-				const SplitLeftFieldsCount = form.querySelectorAll('.form__split:first-child label').length
-				const SplitLeftConstantFieldsCount =
-					SplitLeftFieldsCount -
-					form.querySelectorAll('.form__split:first-child ' + variableFormToggleFieldClass).length
-
-				conditionField.querySelector('select').addEventListener('change', (e) => {
-					const conditionFieldValue = e.target.options[e.target.selectedIndex].value
-					if (conditionFieldValue.includes(condition)) {
-						if (toggleFieldsIsVisible === false) {
-							toggleFields.forEach((field) => {
-								field.querySelector('input').value = ''
-								field.style.display = 'block'
-							})
-							textarea.classList.remove('height--' + SplitLeftConstantFieldsCount)
-							textarea.classList.add('height--' + SplitLeftFieldsCount)
-						}
-						toggleFieldsIsVisible = true
-					} else {
-						if (toggleFieldsIsVisible === true) {
-							toggleFields.forEach((field) => {
-								field.style.display = 'none'
-								field.querySelector('input').value = '-'
-							})
-							textarea.classList.add('height--' + SplitLeftConstantFieldsCount)
-							textarea.classList.remove('height--' + SplitLeftFieldsCount)
-						}
-						toggleFieldsIsVisible = false
-					}
-				})
-			} else {
-				throw new Error(
-					'Es wurde keine Select-Feld mit der Klasse "' +
-						variableFormConditionFieldClass +
-						'" definiert. Bei diesem Feld wird die Bedingung "' +
-						condition +
-						'" abgefragt.'
-				)
-			}
-		} else {
-			throw new Error(
-				'Es wurde keine Input-Feld mit der Klasse "' +
-					variableFormToggleFieldClass +
-					'" definiert. Diese Felder werden angezeigt/versteckt, wenn die Bedingung "' +
-					condition +
-					'" passt/nicht passt.'
-			)
-		}
-	}
-
-	const schnupperForm = document.querySelector('.schnuppertermin')
+	const schnupperForm = document.querySelector(".schnuppertermin");
 	if (schnupperForm) {
-		variableForm(schnupperForm, 'Kinder')
+		initVariableForm(schnupperForm, courseSelect);
 	}
-})
+
+	function initVariableForm(form, selectElement) {
+		// Check if all parameters are defined
+		if (!form) throw new Error("Es wurde kein Formular definiert.");
+		if (!selectElement)
+			throw new Error("Es wurde kein Select-Feld definiert.");
+
+		adjustTextareaHeight(form);
+
+		selectElement.addEventListener("change", (e) => {
+			// get data-group attribute from selected option
+			const group =
+				e.target.options[e.target.selectedIndex].dataset.group;
+			showToogleFields("group", group);
+
+			const rows = form.querySelectorAll(
+				".form__split:first-child label:not(.--hidden)"
+			).length;
+			adjustTextareaHeight(form);
+		});
+	}
+
+	function showToogleFields(dataAttribute, value) {
+		document.querySelectorAll(".toggle__field").forEach((field) => {
+			if (field.dataset[dataAttribute] === value) {
+				field.classList.remove("--hidden");
+			} else {
+				field.classList.add("--hidden");
+				field.querySelector("input").value = ""; // Reset Value
+			}
+		});
+	}
+
+	function adjustTextareaHeight(form) {
+		const splitLeftHeight = form.querySelector(
+			".form__split:first-child"
+		).offsetHeight;
+
+		const textarea = form.querySelector("label[for='message']");
+		textarea.style.height = splitLeftHeight + "px";
+	}
+});

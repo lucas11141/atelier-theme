@@ -1,4 +1,29 @@
 <?php
+// Allgemein: Rechtsmenü
+function law_nav()
+{
+    wp_nav_menu(
+        array(
+            'theme_location'  => 'law-menu',
+            'menu'            => '',
+            'container'       => 'div',
+            'container_class' => 'menu-{menu slug}-container',
+            'container_id'    => '',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'link_before'     => '',
+            'link_after'      => '',
+            'items_wrap'      => '<ul class="nav--law">%3$s</ul>',
+            'depth'           => 0,
+            'walker'          => ''
+        )
+    );
+}
+
 /*------------------------------------*\
 	Website - Definitionen
 \*------------------------------------*/
@@ -117,31 +142,6 @@ function atelier_footer_nav()
             'link_before'     => '',
             'link_after'      => '',
             'items_wrap'      => '<ul class="footer__links">%3$s</ul>',
-            'depth'           => 0,
-            'walker'          => ''
-        )
-    );
-}
-
-// Atelier: Rechtsmenü
-function atelier_law_nav()
-{
-    wp_nav_menu(
-        array(
-            'theme_location'  => 'atelier-law-menu',
-            'menu'            => '',
-            'container'       => 'div',
-            'container_class' => 'menu-{menu slug}-container',
-            'container_id'    => '',
-            'menu_class'      => 'menu',
-            'menu_id'         => '',
-            'echo'            => true,
-            'fallback_cb'     => 'wp_page_menu',
-            'before'          => '',
-            'after'           => '',
-            'link_before'     => '',
-            'link_after'      => '',
-            'items_wrap'      => '<ul class="nav--law">%3$s</ul>',
             'depth'           => 0,
             'walker'          => ''
         )
@@ -272,31 +272,6 @@ function shop_footer_nav()
     );
 }
 
-// Shop: Rechtsmenü
-function shop_law_nav()
-{
-    wp_nav_menu(
-        array(
-            'theme_location'  => 'shop-law-menu',
-            'menu'            => '',
-            'container'       => 'div',
-            'container_class' => 'menu-{menu slug}-container',
-            'container_id'    => '',
-            'menu_class'      => 'menu',
-            'menu_id'         => '',
-            'echo'            => true,
-            'fallback_cb'     => 'wp_page_menu',
-            'before'          => '',
-            'after'           => '',
-            'link_before'     => '',
-            'link_after'      => '',
-            'items_wrap'      => '<ul class="nav--law">%3$s</ul>',
-            'depth'           => 0,
-            'walker'          => ''
-        )
-    );
-}
-
 // Register Navigation
 function register_atelier_menu()
 {
@@ -313,7 +288,9 @@ function register_atelier_menu()
         'shop-header-menu-mobile-first' =>  __('Shop: Hauptmenü Mobil (oben)', 'atelier'), // Main Navigation,
         'shop-header-menu-mobile-second' =>  __('Shop: Hauptmenu Mobil (unten)', 'atelier'), // Main Navigation,
         'shop-footer-menu' => __('Shop: Footer-Menü', 'atelier'), // Main Navigation
-        'shop-law-menu' => __('Shop: Rechtsmenü', 'atelier'), // Main Navigation        
+        'shop-law-menu' => __('Shop: Rechtsmenü', 'atelier'), // Main Navigation      
+
+        'law-menu' => __('Rechtsmenü', 'atelier'), // Main Navigation
     ));
 }
 

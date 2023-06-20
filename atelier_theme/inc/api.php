@@ -105,25 +105,29 @@ function add_custom_api()
             // $dates = $post->acf->dates;
             $dates = get_field('dates', $postId);
 
-            $dates = array_map(function ($date) {
-                $dateId = $date->ID;
+            if ($dates) {
+                $dates = array_map(function ($date) {
+                    $dateId = $date->ID;
 
-                $date_1 = get_field('date_1', $date->ID);
-                $date_1['date'] = strtotime($date_1['date']);
+                    $date_1 = get_field('date_1', $date->ID);
+                    $date_1['date'] = strtotime($date_1['date']);
 
-                $date_2 = get_field('date_2', $date->ID);
-                $date_2['date'] = strtotime($date_2['date']);
+                    $date_2 = get_field('date_2', $date->ID);
+                    $date_2['date'] = strtotime($date_2['date']);
 
-                if ($date_2['date']) return [
-                    'id' => $dateId,
-                    'parts' => array($date_1, $date_2)
-                ];
+                    if ($date_2['date']) return [
+                        'id' => $dateId,
+                        'parts' => array($date_1, $date_2)
+                    ];
 
-                return array(
-                    'id' => $dateId,
-                    'parts' => array($date_1)
-                );
-            }, $dates);
+                    return array(
+                        'id' => $dateId,
+                        'parts' => array($date_1)
+                    );
+                }, $dates);
+            } else {
+                $dates = [];
+            }
 
             $post->dates = $dates;
         }

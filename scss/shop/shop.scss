@@ -43,7 +43,7 @@ html {
 }
 
 //SHOP
-body:has(#website-mode--shop) {
+body:has(#website-mode[data-website-mode="shop"]) {
 	// .woocommerce,
 	// .shop,
 	// .woocommerce-page,

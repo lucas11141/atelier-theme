@@ -1,116 +1,186 @@
-.page__newsletter {
-	@include flex-row();
-	align-items: stretch;
-	column-gap: 100px;
-	.newsletter__img {
-		flex: auto;
-		height: 100vh;
-		min-height: 100vh;
-		width: 1px;
+.popup--newsletter {
+	background: $main;
+	border: solid 3px $main;
+
+	.popup__content {
+		padding: 80px 60px;
 		position: relative;
-		.img__overlay {
-			padding: 80px 0 0 calc((100vw - 1000px) / 2);
-			position: absolute;
-			height: 100%;
-			width: 100%;
-			top: 0;
-			left: 0;
-			background-color: rgba($main, 90%);
-			.button--back {
-				color: white;
-			}
-		}
-		.img__img {
-			height: 100%;
-			width: 100%;
-			object-fit: cover;
-		}
-	}
-	.newsletter__content {
-		padding: 80px calc((100vw - 1000px) / 2) 80px 0;
-		@include flex-column();
-		justify-content: center;
-		.logo {
-			width: 90px;
-		}
+		overflow: hidden;
+
 		h6 {
-			padding-top: 50px;
+			padding: 0 0 5px;
+			color: $accent;
+			text-wrap: balance;
 		}
-	}
-	.newsletter__success {
-		padding: 80px calc((100vw - 1000px) / 2) 80px 0;
-		@include flex-column();
-		justify-content: center;
-		.process__step {
-			padding: 30px 0 39px 40px;
-			width: 520px;
-			img {
-				width: 22px;
-			}
+
+		h2 {
+			@include font-gooddog();
+			@include fluid-type(28px, 36px);
+			font-weight: 400;
+			color: white;
 		}
-		.button {
-			margin-top: 50px;
-		}
-		display: none;
-	}
-	.newsletter__process {
-		margin-top: 50px;
-		@include flex-row();
-		justify-content: flex-start;
-		column-gap: 50px;
-	}
-	.process__step {
-		padding: 28px 0 34px 32px;
-		padding: 28px 0 37px 33px;
-		background-image: url(../img/elements/newsletter_steps_background.svg);
-		background-size: contain;
-		background-repeat: no-repeat;
-	}
-	form {
-		margin-top: 40px;
-		width: 520px;
-		p:not(.new__checkbox) {
-			@extend .input__field;
-			label {
-				@extend .input__label;
-			}
-		}
-		.new__checkbox {
-			padding-top: 15px;
-			label {
-				font-size: 13px;
-				a {
-					color: $accent;
-					text-decoration: underline;
+
+		.list {
+			margin: 25px 0 5px;
+			width: 100%;
+			@include flex-row();
+			justify-content: start;
+			flex-wrap: wrap;
+			gap: 30px;
+
+			span {
+				@include fluid-type(13px, 16px);
+				font-weight: 700;
+				display: inline-flex;
+				gap: 10px;
+				color: white;
+
+				img {
+					pointer-events: none;
+					user-select: none;
 				}
 			}
 		}
-		input[type="submit"] {
-			margin-top: 10px;
+
+		#sib_signup_form_2 {
+			margin-top: 35px;
+			max-width: 480px;
 		}
-		.sib_signup_box_inside_1 {
-			@include flex-column();
-			align-items: stretch;
-			row-gap: 20px;
+
+		.privacy {
+			@include fluid-type(13px, 16px);
+			padding-top: 15px;
+			color: $main--light;
+
+			a {
+				color: $main--light;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
 		}
-		.sib_msg_disp {
-			color: $red;
+
+		.decoration {
+			width: 250px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			pointer-events: none;
+			user-select: none;
+		}
+
+		.paper {
+			border-radius: 22px;
+		}
+	}
+
+	&::backdrop {
+		background: rgba(#617888, 90%);
+	}
+
+	/*------------------------------------*/
+	/* 	Responsive
+	/*------------------------------------*/
+	@media only screen and (max-width: $tablet) {
+		.popup__content {
+			padding: 45px 40px;
+
+			.decoration {
+				width: 120px;
+			}
+
+			.list {
+				margin: 15px 0 5px;
+				width: 100%;
+				gap: 10px 20px;
+
+				span {
+					gap: 8px;
+				}
+			}
+
+			#sib_signup_form_2 {
+				margin-top: 25px;
+			}
+		}
+	}
+
+	@media only screen and (max-width: 630px) {
+		.popup__content {
+			padding: 30px;
+			.decoration {
+				display: none;
+			}
 		}
 	}
 }
 
+// .popup--newsletter {
+// 	padding: 0;
+// 	.popup__content {
+// 		min-height: 450px;
+// 		@include flex-row();
+// 		align-items: center;
+// 		.popup__text {
+// 			padding: 50px;
+// 			width: 60%;
+// 			@include flex-column();
+// 			h5 {
+// 				padding-top: 0;
+// 			}
+// 		}
+// 		.popup__image {
+// 			width: 40%;
+// 			min-height: 450px;
+// 			flex: auto;
+// 			border-top-right-radius: 25px;
+// 			border-bottom-right-radius: 25px;
+// 			object-fit: cover;
+// 		}
+// 	}
+// 	@media only screen and (max-width: $desktop) {
+// 		.popup__content {
+// 			.popup__text {
+// 				padding: 40px;
+// 				padding: 5vw;
+// 				max-width: 450px;
+// 			}
+// 		}
+// 	}
+// 	@media only screen and (max-width: $mobile) {
+// 		.popup__content {
+// 			flex-direction: column;
+// 			row-gap: 0;
+// 			min-height: unset;
+// 			.popup__text {
+// 				padding: 35px 25px 30px 25px;
+// 				.newsletter-form {
+// 					margin-top: 30px;
+// 				}
+// 			}
+// 			.popup__image {
+// 				display: none;
+// 			}
+// 		}
+// 	}
+// }
+
 /* Newsletter  Sign Up */
-.newsletter__field {
+.newsletter {
+	@extend .inner;
 	@include flex-row();
-	row-gap: 25px;
+	gap: 25px 80px;
 	justify-content: center;
 	align-items: center;
-	.newsletter__content {
-		@include flex-column();
+
+	.content {
+		flex: auto;
 		max-width: 600px;
-		margin-right: 80px;
+		@include flex-column();
 		position: relative;
-		.newsletter__arrow {
+
+		.decoration {
 			position: absolute;
 			top: -65px;
 			left: -100px;
@@ -119,11 +189,13 @@
 			pointer-events: none;
 		}
 	}
-	.newsletter__image {
+
+	.image {
 		position: relative;
 		height: 410px;
 		width: 320px;
 		min-width: 320px;
+
 		img {
 			object-fit: cover;
 			height: 100%;
@@ -133,27 +205,38 @@
 			border-radius: 15px;
 		}
 	}
+
+	/*------------------------------------*/
+	/* 	Responsive
+	/*------------------------------------*/
+
 	@media only screen and (max-width: $desktop) {
 		flex-direction: column;
+
 		.newsletter__content {
 			margin: 0;
+
 			.newsletter-form {
 				margin-top: 30px;
+
 				.button {
 					width: 125px;
 				}
 			}
 		}
+
 		.newsletter__image {
 			width: 100%;
 			height: 260px;
 			min-width: unset;
+
 			img {
 				object-position: top;
 			}
 		}
 	}
 }
+
 // SIB Signup Form
 .form--newsletter {
 	margin-top: 30px;
@@ -188,20 +271,6 @@
 		}
 	}
 }
-// .newsletter-form {
-//     margin-top: 50px;
-//     width: 100%;
-//     @include flex-row();
-//     column-gap: 10px;
-//     .input__field {
-//         flex: auto;
-//     }
-//     .button {
-//         margin-top: 6px !important;
-//         padding: 19.5px 30px;
-//         border: none;
-//     }
-// }
 @media only screen and (max-width: $desktop) {
 	.newsletter {
 		.content {

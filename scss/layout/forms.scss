@@ -18,7 +18,7 @@ select {
 	outline: none;
 	-webkit-appearance: none;
 	position: relative;
-	transition: ease-in-out 200ms;
+	transition: border-color ease-in-out 200ms;
 	&::placeholder {
 		color: $darkgray;
 	}
@@ -130,11 +130,6 @@ form:not(.woocommerce-form-login):not(.woocommerce-form-register):not(
 	}
 }
 
-// Textarea Field
-textarea {
-	height: 150px;
-}
-
 // Ultimate Checkbox <--- please use this one!!!
 .new__checkbox {
 	display: inline-flex;
@@ -224,7 +219,7 @@ textarea {
 	}
 	span {
 		// display: inline-table;
-		padding-left: 25px !important;
+		padding-left: 30px !important;
 		@include fluid-type(15px, 16px);
 		a {
 			color: $accent;
@@ -294,6 +289,11 @@ $form-column-gap: 30px;
 	}
 }
 
+// Textarea Field
+textarea {
+	height: 150px;
+}
+
 // Input Sizes
 .standard__form label {
 	// Input Width
@@ -323,52 +323,43 @@ $form-column-gap: 30px;
 	}
 }
 
-// Standarc Form
+// Standard Form
 .standard__form {
-	br {
-		display: none;
-	}
-	.wpcf7-acceptance {
-		display: inline-block;
-		margin-bottom: 15px;
-		.wpcf7-list-item {
-			margin-left: 0;
-			label {
-				input {
-					&::after {
-						top: 10px;
-					}
-				}
-				span {
-					padding-left: 30px;
-					font-size: 14px;
-					line-height: 1.5em;
-				}
-				.wpcf7-list-item-label {
-					&::before,
-					&::after {
-						content: unset;
-					}
-				}
+	label {
+		padding-bottom: 20px;
+
+		&:last-of-type {
+			padding-bottom: 5px;
+		}
+
+		.labeltext {
+			color: $accent !important;
+		}
+
+		.wpcf7-form-control-wrap {
+			display: block;
+		}
+
+		.wpcf7-not-valid-tip {
+			padding: 0 6px;
+			background: white;
+			font-weight: 700;
+			font-size: 14px;
+			color: $red;
+			position: absolute;
+			bottom: -9px;
+			right: 14px;
+		}
+
+		&:has(.wpcf7-not-valid) {
+			.labeltext {
+				color: $red !important;
 			}
 		}
 	}
-	.wpcf7-not-valid-tip {
-		padding-top: 5px;
-		font-size: 13px;
-		font-weight: 600;
-		color: $red;
-	}
-	& + p {
-		text-align: right;
-		input[type="submit"] {
-			@extend .button;
-			border: none;
-			margin: 0 0 0 auto;
-		}
-		.wpcf7-spinner {
-			display: none;
-		}
+
+	br {
+		display: none;
 	}
 }
 
@@ -438,9 +429,6 @@ $form-column-gap: 30px;
 	}
 }
 
-.form--one__line {
-}
-
 // Input Fields without Label
 #billing_address_2_field,
 #shipping_address_2_field {
@@ -505,6 +493,243 @@ $form-column-gap: 30px;
 				top: 50%;
 				transform: translateY(-50%);
 			}
+		}
+	}
+}
+
+.wpcf7-acceptance {
+	display: block;
+	margin: 10px 0 25px;
+
+	.wpcf7-list-item {
+		margin-left: 0;
+
+		label {
+			padding: 0;
+			display: flex;
+
+			input::after {
+				top: 2px;
+			}
+
+			span {
+				font-weight: 600;
+				font-size: 14px;
+				line-height: 1.5em;
+
+				&::before,
+				&::after {
+					content: unset;
+				}
+			}
+		}
+	}
+}
+
+.wpcf7-submit {
+	@extend .button;
+	@extend .--color-main;
+	margin: 0;
+	width: 100%;
+	border: none;
+}
+
+.submit-wrapper {
+	position: relative;
+}
+
+.wpcf7-spinner {
+	margin: auto;
+	background-color: transparent;
+	opacity: 1;
+	pointer-events: none;
+
+	&::before {
+		content: unset;
+	}
+}
+
+.loading-spinner {
+	visibility: hidden;
+	display: block;
+	border: none;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	translate: -50% -50%;
+	scale: 0.8;
+
+	div {
+		box-sizing: border-box;
+		display: block;
+		position: absolute;
+		width: 32px;
+		height: 32px;
+		margin: 4px;
+		border: 4px solid #fff;
+		border-radius: 50%;
+		animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+		border-color: #fff transparent transparent transparent;
+
+		&:nth-child(1) {
+			animation-delay: -0.45s;
+		}
+		&:nth-child(2) {
+			animation-delay: -0.3s;
+		}
+		&:nth-child(3) {
+			animation-delay: -0.15s;
+		}
+	}
+
+	@keyframes lds-ring {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}
+
+.wpcf7-response-output {
+	margin: 30px 0 0 !important;
+	padding: 10px 20px !important;
+	border-radius: 10px;
+	font-weight: 600;
+}
+
+.wpcf7-form {
+	&.submitting {
+		.wpcf7-spinner {
+			visibility: visible;
+		}
+
+		.wpcf7-submit {
+			color: transparent;
+			transition: none;
+		}
+	}
+
+	&.invalid {
+		.wpcf7-response-output {
+			background: #fff1c8;
+			border-color: #ffeaaf !important;
+			color: #ffb900;
+		}
+	}
+
+	&.sent {
+		position: relative;
+		border-radius: 20px;
+		background: white;
+		border: solid 2px $inputgray;
+
+		.standard__form,
+		.wpcf7-submit,
+		.wpcf7-spinner {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.wpcf7-response-output {
+			margin: 0 !important;
+			width: max-content;
+			max-width: 80%;
+			text-align: center;
+			color: $accent;
+			border-color: #b7ffaf !important;
+			background: #d6ffc8;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			translate: -50% -50%;
+		}
+	}
+}
+
+.toggle__field {
+	&.--hidden {
+		display: none;
+	}
+}
+
+.schnuppertermin {
+	label[for="message"] {
+		.wpcf7-form-control-wrap,
+		textarea {
+			height: 100%;
+		}
+	}
+}
+
+/*------------------------------------*/
+/* 	One-Line Newsletter Form
+/*------------------------------------*/
+#sib_signup_form_2 {
+	.input {
+		width: 100%;
+		position: relative;
+
+		.email {
+			padding: 15px 18px 15px;
+			border-radius: 10px;
+		}
+
+		.submit-container {
+			position: absolute;
+			right: 6px;
+			top: 6px;
+			bottom: 6px;
+		}
+
+		.submit {
+			@extend .button;
+			padding: 0 25px;
+			height: 100%;
+			text-transform: none;
+			border-radius: 8px;
+
+			input {
+				padding-right: 135px;
+			}
+		}
+	}
+
+	&.sib_processing {
+		.submit {
+			color: transparent !important;
+		}
+
+		.loading-spinner {
+			visibility: visible;
+		}
+	}
+
+	.sib_loader {
+		display: none !important;
+	}
+
+	.sib_signup_box_inside_2 {
+		display: flex !important;
+		flex-direction: column !important;
+	}
+
+	.sib_msg_disp {
+		order: 1 !important;
+		margin: 0 !important;
+
+		.sib-alert-message-success {
+			margin: 15px 0 00 !important;
+			padding: 10px 20px !important;
+			border-radius: 10px !important;
+			font-weight: 600 !important;
+			border-color: #b7ffaf !important;
+			background: #d6ffc8 !important;
+			border-width: 2px !important;
+			border-style: solid !important;
 		}
 	}
 }

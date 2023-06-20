@@ -86,7 +86,7 @@ function my_acf_init()
                 'category' => 'design',
                 'category' => 'inhaltselemente',
                 'mode' => 'edit',
-                'keywords' => array('newsletter'),
+                'keywords' => array('newsletter', 'sendinblue', 'brevo'),
                 'align' => false,
             )
         );
@@ -389,20 +389,6 @@ function my_acf_init()
 
         acf_register_block(
             array(
-                'name' => 'newsletter-sendinblue',
-                'title' => __('Newsletter Sendinblue'),
-                'description' => __(''),
-                'render_callback' => 'my_acf_block_render_callback',
-                'category' => 'design',
-                'category' => 'inhaltselemente',
-                'mode' => 'edit',
-                'keywords' => array('newsletter', 'sendinblue'),
-                'align' => false,
-            )
-        );
-
-        acf_register_block(
-            array(
                 'name' => 'kontakt-hero-banner',
                 'title' => __('Kontakt Hero Banner'),
                 'description' => __(''),
@@ -431,6 +417,20 @@ function my_acf_init()
 
         acf_register_block(
             array(
+                'name' => 'hero-banner',
+                'title' => __('Hero Banner'),
+                'description' => __(''),
+                'render_callback' => 'my_acf_block_render_callback',
+                'category' => 'design',
+                'category' => 'inhaltselemente',
+                'mode' => 'edit',
+                'keywords' => array('hero', 'banner'),
+                'align' => false,
+            )
+        );
+
+        acf_register_block(
+            array(
                 'name' => 'shop-hero-banner',
                 'title' => __('Shop Hero Banner'),
                 'description' => __(''),
@@ -442,6 +442,7 @@ function my_acf_init()
                 'align' => false,
             )
         );
+
 
         acf_register_block(
             array(
