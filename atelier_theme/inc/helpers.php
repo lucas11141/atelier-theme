@@ -131,11 +131,51 @@ function load_product_colors($postType, $group = 'child'): string
         }
 
 
+        function product_has_dates($postId)
+        {
+            $postType = get_post_type($postId);
+            $hasDates = false;
+
+            if ($postType === 'birthday' || $postType === 'event') {
+                $hasDates = true;
+            }
+
+            if ($postType === 'course') {
+                $course_times = get_field('course_times', $postId);
+
+                foreach ($course_times as $time) {
+                    $dates = get_course_dates($time->term_id);
+                    if (!empty($dates)) $hasDates = true;
+                }
+            }
+
+            if ($postType === 'workshop' || $postType === 'holiday_workshop') {
+                $dates = get_field('dates', $postId);
+
+                // filter out dates that are not published
+                if (!empty($dates)) {
+                    $dates = array_filter($dates, function ($date) {
+                        return $date->post_status === 'publish';
+                    });
+                }
+
+                $hasDates = ($dates === '' || empty($dates)) ? false : true;
+            }
+
+            return $hasDates;
+        }
 
         function get_course_dates(int $timeId): array
         {
             // Check if course_time has dates in the future
             $dates = get_field('dates', 'course_time_' . $timeId);
+
+            // filter all dates that are not published
+            if (!empty($dates)) {
+                $dates = array_filter($dates, function ($dateId) {
+                    return get_post_status($dateId) === 'publish';
+                });
+            }
 
             if (!empty($dates)) {
                 $dates = array_filter($dates, function ($dateId) {
@@ -153,50 +193,16 @@ function load_product_colors($postType, $group = 'child'): string
             return $dates;
         }
 
-        function course_has_dates($postId): bool
-        {
-            $hasDates = false;
-            $course_times = get_field('course_times', $postId);
-
-            foreach ($course_times as $time) {
-                $dates = get_course_dates($time->term_id);
-                if (!empty($dates)) $hasDates = true;
-            }
-
-            return $hasDates;
-        }
-
-        function workshop_has_dates($postId): bool
-        {
-            $dates = get_field('dates', $postId);
-            return ($dates === '' || empty($dates)) ? false : true;
-        }
-
-        function holiday_workshop_has_dates($postId): bool
-        {
-            $dates = get_field('dates', $postId);
-            $booking_link = get_field('booking_link', $postId);
-            return ($dates === '' || empty($dates) || !isset($booking_link)) ? false : true;
-        }
-
-        function get_booking_button($postId, $hasDates)
+        function get_booking_button($postId, $hasDates = false)
         {
             global $color;
+            $postType = get_post_type($postId);
 
             if ($hasDates) {
                 $blocked = is_booking_scheduled();
                 $booking_link = get_permalink($postId) . '#book';
 
-                if (!$blocked) {
-                    get_template_part('template-parts/button', '', array(
-                        'button' => array(
-                            'url' => $booking_link,
-                            'title' => 'Jetzt Buchen',
-                        ),
-                        'icon' => 'bookmark',
-                        'color' => $color
-                    ));
-                } else {
+                if ($postType === 'holiday_workshop' && $blocked) {
                     $bookable_from = get_field('bookable_from', 'holiday_workshop_options');
                     $bookable_from = date('d.m.Y', strtotime($bookable_from));
                     $postType = get_post_type($postId);
@@ -210,18 +216,31 @@ function load_product_colors($postType, $group = 'child'): string
                         'icon' => 'bookmark',
                         'color' => $postType === 'course' ? 'course-' . $group['value'] : $color
                     ));
+
+                    return;
                 }
-            } else {
+
                 get_template_part('template-parts/button', '', array(
                     'button' => array(
-                        'url' => '#',
-                        'title' => 'Keine Termine',
+                        'url' => $booking_link,
+                        'title' => 'Jetzt Buchen',
                     ),
-                    'icon' => 'calendar',
-                    'disabled' => true,
+                    'icon' => 'bookmark',
                     'color' => $color
                 ));
+
+                return;
             }
+
+            get_template_part('template-parts/button', '', array(
+                'button' => array(
+                    'url' => '#',
+                    'title' => 'Keine Termine',
+                ),
+                'icon' => 'calendar',
+                'disabled' => true,
+                'color' => $color
+            ));
         }
 
         function is_booking_scheduled(): bool
@@ -232,9 +251,6 @@ function load_product_colors($postType, $group = 'child'): string
             if (!$bookable_from) {
                 $blocked = false;
             }
-            // else {
-            //     $blocked = $bookable_from;
-            // }
 
             return $blocked;
         }
@@ -245,19 +261,3 @@ function load_product_colors($postType, $group = 'child'): string
             $bookable_from = date('d.m.Y', strtotime($bookable_from));
             return $bookable_from;
         }
-
-        // function is_future_date($date)
-        // {
-        //     $date = date('d/m/Y', $date);
-        //     $today = date('d/m/Y');
-
-        //     $compare = strcmp($date, $today);
-
-        //     if ($compare > 0) {
-        //         return true; // Das Datum liegt in der Zukunft
-        //     } elseif ($compare === 0) {
-        //         return false; // Das Datum ist heute
-        //     } else {
-        //         return false; // Das Datum liegt in der Vergangenheit
-        //     }
-        // }

@@ -55,10 +55,10 @@
                 // Leere Werte
                 $duration = null;
 
+                $hasDates = product_has_dates($postId);
+
                 // Kurse
                 if ($postType === 'course') {
-                    $hasDates = course_has_dates($postId);
-
                     $sessions = get_field("sessions");
                     $duration = get_field("duration");
                     $duration = $sessions . ' x ' . $duration;
@@ -81,8 +81,6 @@
 
                 // Workshops
                 if ($postType === 'workshop' || $postType === 'holiday_workshop') {
-                    $hasDates = workshop_has_dates($postId);
-
                     $duration = get_field('duration_1');
                     if (get_field('duration_2', $postId)) $duration .= ' + ' . get_field('duration_2');
                 }
@@ -95,7 +93,6 @@
 
                 // Kindergeburtstage
                 if ($postType === 'birthday') {
-                    $hasDates = true;
                     $duration = get_field('duration');
                     $max_persons = get_field('max_persons');
                     $weekdays = get_field('weekdays', $options);
@@ -103,7 +100,6 @@
 
                 // Kunstevents
                 if ($postType === 'event') {
-                    $hasDates = true;
                     $weekdays = get_field('weekdays', $options);
 
                     $event_pricing = get_field("pricing", $options);
@@ -416,9 +412,11 @@
 
                                         <?php if ($postType === "workshop" || $postType === "holiday_workshop") :
 
+                                            // get all dates that are published
                                             $dates = get_field('dates');
-
-                                            d($dates);
+                                            $dates = array_filter($dates, function ($date) {
+                                                return get_post_status($date->ID) === 'publish';
+                                            });
 
                                             if (empty($dates)) : ?>
 
@@ -480,7 +478,7 @@
 
                                                     <?php endif; ?>
 
-                                                <?php }, get_field('dates')); ?>
+                                                <?php }, $dates); ?>
 
                                             <?php endif; ?>
 

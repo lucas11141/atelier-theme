@@ -11,14 +11,14 @@ $the_query = new WP_Query($args);
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
         <?php
+        global $color;
         $postId = get_the_ID();
         $postType = get_post_type($postId);
 
         // Dates
-        $hasDates = false;
+        $hasDates = product_has_dates($postId);
 
         // Allgemein
-        global $color;
         $title = get_the_title();
         $duration = get_field("duration", $postId);
         $group = get_field("group", $postId);
@@ -28,34 +28,21 @@ $the_query = new WP_Query($args);
         $options = $postType . '_options';
         $booking = get_field("booking", $options);
 
-        // Kurse
-        if ($postType === 'course') {
-            $hasDates = course_has_dates($postId);
-            $duration = get_field('sessions') . ' x ' . $duration;
-        }
-
-        // Workshops
-        if ($postType === 'workshop' || $postType === 'holiday_workshop') {
-            $hasDates = workshop_has_dates($postId);
-            $duration = get_field('duration_1', $postId);
-            if (get_field('duration_2', $postId)) $duration .= ' + ' . get_field('duration_2', $postId);
-        }
-
-        // Ferienworkshops
-        if ($postType === 'holiday_workshop') {
-            $booking_scheduled = get_field('booking_scheduled', 'holiday_workshop_options');
-        }
-
-        // Kindergeburtstage
-        if ($postType === 'birthday') {
-            $hasDates = true;
-            $duration = get_field('duration', $postId);
-        }
-
-        // Kunstevents
-        if ($postType === 'event') {
-            $hasDates = true;
-            $duration = get_field('duration', $postId);
+        // Set duration for each post type
+        switch ($postType) {
+            case 'course':
+                $duration = get_field('sessions') . ' x ' . $duration;
+                break;
+            case 'workshop' || 'holiday_workshop':
+                $duration = get_field('duration_1', $postId);
+                if (get_field('duration_2', $postId)) $duration .= ' + ' . get_field('duration_2', $postId);
+                break;
+            case 'birthday':
+                $duration = get_field('duration', $postId);
+                break;
+            case 'event':
+                $duration = get_field('duration', $postId);
+                break;
         }
         ?>
 
@@ -98,7 +85,7 @@ $the_query = new WP_Query($args);
                         ),
                         'color' => 'transparent'
                     )); ?>
-                    <?php get_booking_button($postId, $hasDates, $booking_scheduled); ?>
+                    <?php get_booking_button($postId, $hasDates); ?>
                 </div>
             </div>
 
