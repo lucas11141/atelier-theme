@@ -55,6 +55,7 @@
                 // Leere Werte
                 $duration = null;
 
+                $booking_scheduled = false;
                 $hasDates = product_has_dates($postId);
 
                 // Kurse
