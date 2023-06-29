@@ -13,8 +13,6 @@
         <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
                 <?php
-                $is_bookable_note = "Aktuell nicht buchbar."; // TODO: Richtigen Wert einsetzen
-
                 $postId = get_the_ID();
                 $postType = get_post_type();
                 $options = $postType . '_options';
@@ -89,6 +87,12 @@
                     if (get_field('duration_2', $postId)) $duration .= ' + ' . get_field('duration_2');
                 }
 
+                // Ferienworkshops
+                if ($postType === 'holiday_workshop') {
+                    $booking_scheduled = is_booking_scheduled();
+                    $booking_from = get_booking_schedule_date();
+                }
+
                 // Kindergeburtstage
                 if ($postType === 'birthday') {
                     $hasDates = true;
@@ -149,12 +153,12 @@
                             <div class="header__content">
                                 <div class="header__text">
 
-                                    <!-- <?php if (!$is_bookable && !empty($is_bookable_note)) : ?>
+                                    <?php if ($booking_scheduled) : ?>
                                         <div class="info__badge">
                                             <div></div>
-                                            <p><?= $is_bookable_note ?></p>
+                                            <p>Buchung ab <?= $booking_from ?></p>
                                         </div>
-                                    <?php endif; ?> -->
+                                    <?php endif; ?>
 
                                     <h1 class="title">
                                         <?= $title ?>
@@ -173,27 +177,7 @@
 
                                     <div class="two-buttons">
                                         <?php get_template_part('template-parts/button', '', array('icon' => 'pen-tool', 'button' => array('url' => '#services', 'title' => 'So läuft`s ab'), 'color' => 'white')) ?>
-
-                                        <?php if ($hasDates) : ?>
-                                            <?php get_template_part('template-parts/button', '', array(
-                                                'button' => array(
-                                                    'url' => '#book',
-                                                    'title' => 'Jetzt ' . $booking['verb'],
-                                                ),
-                                                'icon' => 'bookmark',
-                                                'color' => $color
-                                            )); ?>
-                                        <?php else : ?>
-                                        <?php get_template_part('template-parts/button', '', array(
-                                                'button' => array(
-                                                    'url' => '#',
-                                                    'title' => 'Keine Termine',
-                                                ),
-                                                'icon' => 'calendar',
-                                                'disabled' => true,
-                                                'color' => $color
-                                            ));
-                                        endif; ?>
+                                        <?php get_booking_button($postId, $hasDates); ?>
                                     </div>
 
                                     <?php if ($category_note) :  ?>
@@ -356,26 +340,7 @@
                                             <?php get_template_part('template-parts/kunstangebot/available-days', '', array('days' => $weekdays)); ?>
                                         <?php endif; ?>
 
-                                        <?php if ($hasDates) : ?>
-                                            <?php get_template_part('template-parts/button', '', array(
-                                                'button' => array(
-                                                    'url' => '#book',
-                                                    'title' => 'Jetzt ' . $booking['verb'],
-                                                ),
-                                                'icon' => 'bookmark',
-                                                'color' => $color
-                                            )); ?>
-                                        <?php else : ?>
-                                        <?php get_template_part('template-parts/button', '', array(
-                                                'button' => array(
-                                                    'url' => '#',
-                                                    'title' => 'Keine Termine',
-                                                ),
-                                                'icon' => 'calendar',
-                                                'disabled' => true,
-                                                'color' => $color
-                                            ));
-                                        endif; ?>
+                                        <?php get_booking_button($postId, $hasDates); ?>
 
                                         <?php if ($postType === "Kunstevent") : ?>
                                             <a class="button --color-transparent --open__popup button__pricelist" data-popup="preisliste">
@@ -408,10 +373,10 @@
                                         <h5 class="headline">Buchung beginnen...</h5>
                                     <?php endif; ?>
 
-                                    <?php if (!$isBookable && !empty($is_bookable_note)) : ?>
+                                    <?php if ($booking_scheduled) : ?>
                                         <div class="info__badge">
                                             <div></div>
-                                            <p><?= $is_bookable_note ?></p>
+                                            <p>Buchung ab <?= $booking_from ?></p>
                                         </div>
                                     <?php endif; ?>
 
@@ -453,6 +418,8 @@
 
                                             $dates = get_field('dates');
 
+                                            d($dates);
+
                                             if (empty($dates)) : ?>
 
                                                 <div class="no__dates__available">
@@ -462,10 +429,20 @@
                                             <?php else : ?>
 
                                                 <?php array_map(function ($date) {
-                                                    global $postId, $isBookable;
+                                                    global $postId, $postType, $isBookable, $booking_scheduled;
 
                                                     $date_1 = get_field('date_1', $date->ID);
                                                     $date_2 = get_field('date_2', $date->ID);
+                                                    $booking_link = get_field('booking_link', $date->ID);
+                                                    $external_link = true;
+
+                                                    if (empty($booking_link) && $postType === 'holiday_workshop') {
+                                                        $booking_link = get_field('holiday_workshops_booking_link_fallback', 'holiday_workshop_options');
+                                                    }
+                                                    if (empty($booking_link)) {
+                                                        $booking_link = BOOK_URL . '/?productId=' . $postId . '&date=' . $date->ID;
+                                                        $external_link = false;
+                                                    }
 
                                                     if (empty($date_2['date'])) :
 
@@ -473,7 +450,7 @@
                                                         $date_readable = translateReadableDateToGerman(date("d. F Y", $date_1_timestamp));
                                                         $date_day = translateReadableDateToGerman(date("l", $date_1_timestamp)); ?>
 
-                                                        <a class="date <?= $isBookable ?>" href="<?= BOOK_URL ?>/?productId=<?= $postId ?>&date=<?= $date->ID ?>">
+                                                        <a class="date <?= $isBookable ?> <?= $booking_scheduled ? '--disabled' : '' ?>" href="<?= $booking_link ?>" target="<?= $external_link ? '_blank' : '_self' ?>">
                                                             <div>
                                                                 <h5><?= $date_readable ?></h5>
                                                                 <h6><?= $date_day ?></h6>

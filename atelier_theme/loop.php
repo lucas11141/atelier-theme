@@ -41,6 +41,11 @@ $the_query = new WP_Query($args);
             if (get_field('duration_2', $postId)) $duration .= ' + ' . get_field('duration_2', $postId);
         }
 
+        // Ferienworkshops
+        if ($postType === 'holiday_workshop') {
+            $booking_scheduled = get_field('booking_scheduled', 'holiday_workshop_options');
+        }
+
         // Kindergeburtstage
         if ($postType === 'birthday') {
             $hasDates = true;
@@ -54,7 +59,7 @@ $the_query = new WP_Query($args);
         }
         ?>
 
-        <article class="product__item --<?= $postType === 'course' ? $group['value'] : '' ?> <?= $hasDates ? '' : '--disabled' ?>">
+        <article class="product__item <?= $postType === '--course' ? '--' . $group['value'] : '' ?> <?= $hasDates ? '' : '--disabled' ?>">
 
             <div class="product__image">
                 <?php
@@ -93,27 +98,7 @@ $the_query = new WP_Query($args);
                         ),
                         'color' => 'transparent'
                     )); ?>
-                    <?php if ($hasDates) : ?>
-                        <?php get_template_part('template-parts/button', '', array(
-                            'button' => array(
-                                'url' => get_permalink() . '#book',
-                                'title' => 'Jetzt ' . $booking['verb'],
-                            ),
-                            'icon' => 'bookmark',
-                            'color' => $postType === 'course' ? 'course-' . $group['value'] : $color
-                        )); ?>
-                    <?php else : ?>
-                        <?php get_template_part('template-parts/button', '', array(
-                            'button' => array(
-                                'url' => '#',
-                                'title' => 'Keine Termine',
-                            ),
-                            'icon' => 'calendar',
-                            'disabled' => true,
-                            'color' => $postType === 'course' ? '-' . $group['value'] : $color
-                        )); ?>
-
-                    <?php endif; ?>
+                    <?php get_booking_button($postId, $hasDates, $booking_scheduled); ?>
                 </div>
             </div>
 

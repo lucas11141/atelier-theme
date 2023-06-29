@@ -172,17 +172,45 @@ function load_product_colors($postType, $group = 'child'): string
             return ($dates === '' || empty($dates)) ? false : true;
         }
 
-        function get_booking_button($postId, $hasDates, $buttonColor)
+        function holiday_workshop_has_dates($postId): bool
         {
+            $dates = get_field('dates', $postId);
+            $booking_link = get_field('booking_link', $postId);
+            return ($dates === '' || empty($dates) || !isset($booking_link)) ? false : true;
+        }
+
+        function get_booking_button($postId, $hasDates)
+        {
+            global $color;
+
             if ($hasDates) {
-                get_template_part('template-parts/button', '', array(
-                    'button' => array(
-                        'url' => get_permalink($postId) . '#book',
-                        'title' => 'Jetzt Buchen',
-                    ),
-                    'icon' => 'bookmark',
-                    'color' => $buttonColor
-                ));
+                $blocked = is_booking_scheduled();
+                $booking_link = get_permalink($postId) . '#book';
+
+                if (!$blocked) {
+                    get_template_part('template-parts/button', '', array(
+                        'button' => array(
+                            'url' => $booking_link,
+                            'title' => 'Jetzt Buchen',
+                        ),
+                        'icon' => 'bookmark',
+                        'color' => $color
+                    ));
+                } else {
+                    $bookable_from = get_field('bookable_from', 'holiday_workshop_options');
+                    $bookable_from = date('d.m.Y', strtotime($bookable_from));
+                    $postType = get_post_type($postId);
+                    $group = get_field('group', $postId);
+
+                    get_template_part('template-parts/button', '', array(
+                        'button' => array(
+                            'url' => $booking_link,
+                            'title' => 'Buchung ab ' . $bookable_from,
+                        ),
+                        'icon' => 'bookmark',
+                        'color' => $postType === 'course' ? 'course-' . $group['value'] : $color
+                    ));
+                }
             } else {
                 get_template_part('template-parts/button', '', array(
                     'button' => array(
@@ -191,7 +219,45 @@ function load_product_colors($postType, $group = 'child'): string
                     ),
                     'icon' => 'calendar',
                     'disabled' => true,
-                    'color' => $buttonColor
+                    'color' => $color
                 ));
             }
         }
+
+        function is_booking_scheduled(): bool
+        {
+            $blocked = get_field('booking_scheduled', 'holiday_workshop_options');
+            $bookable_from = get_field('bookable_from', 'holiday_workshop_options');
+
+            if (!$bookable_from) {
+                $blocked = false;
+            }
+            // else {
+            //     $blocked = $bookable_from;
+            // }
+
+            return $blocked;
+        }
+
+        function get_booking_schedule_date(): string
+        {
+            $bookable_from = get_field('bookable_from', 'holiday_workshop_options');
+            $bookable_from = date('d.m.Y', strtotime($bookable_from));
+            return $bookable_from;
+        }
+
+        // function is_future_date($date)
+        // {
+        //     $date = date('d/m/Y', $date);
+        //     $today = date('d/m/Y');
+
+        //     $compare = strcmp($date, $today);
+
+        //     if ($compare > 0) {
+        //         return true; // Das Datum liegt in der Zukunft
+        //     } elseif ($compare === 0) {
+        //         return false; // Das Datum ist heute
+        //     } else {
+        //         return false; // Das Datum liegt in der Vergangenheit
+        //     }
+        // }

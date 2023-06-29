@@ -615,6 +615,10 @@
 					left: 50%;
 					top: -65px;
 					transform: translateX(-50%);
+
+					p {
+						white-space: nowrap;
+					}
 				}
 				.dates__list {
 					width: 360px;
