@@ -1,7 +1,7 @@
 <?php
 // Save environment variables in $_ENV
 $_ENV = include ($_SERVER['DOCUMENT_ROOT'] . '/config/env.php') ?? false;
-if (WP_DEBUG) d($_ENV);
+// if (WP_DEBUG) d($_ENV);
 
 /*------------------------------------*/
 /* 	Define website mode depending on page
