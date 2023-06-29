@@ -46,7 +46,7 @@ $the_query = new WP_Query($args);
         }
         ?>
 
-        <article class="product__item <?= $postType === '--course' ? '--' . $group['value'] : '' ?> <?= $hasDates ? '' : '--disabled' ?>">
+        <article class="product__item <?= $postType === 'course' ? '--' . $group['value'] : '' ?> <?= $hasDates ? '' : '--disabled' ?>">
 
             <div class="product__image">
                 <?php

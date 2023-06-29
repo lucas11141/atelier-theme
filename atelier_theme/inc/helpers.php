@@ -196,7 +196,10 @@ function load_product_colors($postType, $group = 'child'): string
         function get_booking_button($postId, $hasDates = false)
         {
             global $color;
+            $buttonColor = $color;
             $postType = get_post_type($postId);
+
+            if ($postType === 'course' && get_field('group')['value'] === 'adult') $buttonColor = 'purple';
 
             if ($hasDates) {
                 $blocked = is_booking_scheduled();
@@ -214,7 +217,7 @@ function load_product_colors($postType, $group = 'child'): string
                             'title' => 'Buchung ab ' . $bookable_from,
                         ),
                         'icon' => 'bookmark',
-                        'color' => $postType === 'course' ? 'course-' . $group['value'] : $color
+                        'color' => $postType === 'course' ? 'course-' . $group['value'] : $buttonColor
                     ));
 
                     return;
@@ -226,7 +229,7 @@ function load_product_colors($postType, $group = 'child'): string
                         'title' => 'Jetzt Buchen',
                     ),
                     'icon' => 'bookmark',
-                    'color' => $color
+                    'color' => $buttonColor
                 ));
 
                 return;
@@ -239,7 +242,7 @@ function load_product_colors($postType, $group = 'child'): string
                 ),
                 'icon' => 'calendar',
                 'disabled' => true,
-                'color' => $color
+                'color' => $buttonColor
             ));
         }
 
