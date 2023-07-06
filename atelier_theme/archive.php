@@ -28,8 +28,10 @@
                 $subline_h1 = $hero_banner["subline_h1"] ?? null;
                 $description = $hero_banner["description"] ?? null;
 
-                $booking_scheduled = is_booking_scheduled();
-                if ($booking_scheduled) $status = 'Buchung ab ' . get_booking_schedule_date();
+                if ($postType === 'holiday_workshop') {
+                    $booking_scheduled = is_booking_scheduled();
+                    if ($booking_scheduled) $status = 'Buchung ab ' . get_booking_schedule_date();
+                }
                 ?>
 
                 <?php get_template_part('template-parts/button', 'link', array('color' => $color, 'direction' => 'left', 'button' => array('title' => 'Zurück zur Übersicht', 'url' => get_site_url() . '/#' . $postType))); ?>
