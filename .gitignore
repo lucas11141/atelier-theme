@@ -1,3 +1,5 @@
 vendor
 .DS_Store
 composer.lock
+atelier_theme/assets/css/main.css
+atelier_theme/assets/css/main.css.map

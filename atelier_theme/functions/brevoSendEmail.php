@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $headers = array(
         'Content-Type: application/json',
         'api-key: ' . $_ENV['BREVO_API_KEY'],
-        // 'api-key: ' . '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',
     );
 
     // Erstelle die Anfrage-Optionen

@@ -76,7 +76,11 @@ function create_post_type_atelier()
 
 function create_post_types_kunstangebote()
 {
-    // Kurse
+    /* ------------------------------------ */
+    /*  Kurse
+    /* ------------------------------------ */
+
+    // Registriere den Post Type Kurse
     register_post_type(
         'course', // Register Custom Post Type
         array(
@@ -109,7 +113,8 @@ function create_post_types_kunstangebote()
             'menu_icon' => 'dashicons-art'
         )
     );
-    // Kurse -> Einstellungen
+
+    // Einstellungen für Kurse
     if (function_exists('acf_add_options_page')) {
         acf_add_options_page(array(
             'post_id' => 'course_options',
@@ -120,7 +125,8 @@ function create_post_types_kunstangebote()
             'redirect'      => false
         ));
     }
-    // Kurse -> Termine
+
+    // Termine für Kurse
     register_post_type(
         'course_date', // Register Custom Post Type
         array(
@@ -151,7 +157,8 @@ function create_post_types_kunstangebote()
             // 'show_in_rest' => true,
         )
     );
-    // Kurse -> Zeiten
+
+    // Zeiten für Kurse
     register_taxonomy('course_time', array('course', 'course_date'), array(
         'labels' => array(
             'name' => _x('Kurszeiten', 'taxonomy general name'),
@@ -181,9 +188,11 @@ function create_post_types_kunstangebote()
         endif;
     }
 
+    /* ------------------------------------ */
+    /*  Workshops
+    /* ------------------------------------ */
 
-
-    // Workshops
+    // Registriere den Post Type Workshops
     register_post_type(
         'workshop', // Register Custom Post Type
         array(
@@ -213,7 +222,7 @@ function create_post_types_kunstangebote()
             'menu_icon' => 'dashicons-art'
         )
     );
-    // Workshops -> Einstellungen
+    // Einsellungen für Workshops
     if (function_exists('acf_add_options_page')) {
         acf_add_options_page(array(
             'post_id'     => 'workshop_options',
@@ -224,7 +233,7 @@ function create_post_types_kunstangebote()
             'redirect'      => false
         ));
     }
-    // Workshops -> Termine
+    // Termine für Workshops
     register_post_type(
         'workshop_date', // Register Custom Post Type
         array(
@@ -251,7 +260,11 @@ function create_post_types_kunstangebote()
         )
     );
 
-    // Geburtstage
+    /* ------------------------------------ */
+    /*  Geburtstage
+    /* ------------------------------------ */
+
+    // Registriere den Post Type Geburtstage
     register_post_type(
         'birthday', // Register Custom Post Type
         array(
@@ -281,7 +294,8 @@ function create_post_types_kunstangebote()
             'menu_icon' => 'dashicons-buddicons-community'
         )
     );
-    // Kindergeburtstage -> Einstellungen
+
+    // Einstellungen für Geburtstage
     if (function_exists('acf_add_options_page')) {
         acf_add_options_page(array(
             'post_id'     => 'birthday_options',
@@ -293,7 +307,11 @@ function create_post_types_kunstangebote()
         ));
     }
 
-    // Kunstevents
+    /* ------------------------------------ */
+    /*  Kunstevents
+    /* ------------------------------------ */
+
+    // Registriere den Post Type Kunstevents
     register_post_type(
         'event', // Register Custom Post Type
         array(
@@ -323,7 +341,8 @@ function create_post_types_kunstangebote()
             'menu_icon' => 'dashicons-art'
         )
     );
-    // Kunstevents -> Einstellungen
+
+    // Einstellungen für Kunstevents
     if (function_exists('acf_add_options_page')) {
         acf_add_options_page(array(
             'post_id'     => 'event_options',
@@ -335,7 +354,11 @@ function create_post_types_kunstangebote()
         ));
     }
 
-    // Ferienprogramm
+    /* ------------------------------------ */
+    /*  Ferienworkshops
+    /* ------------------------------------ */
+
+    // Registriere den Post Type Ferienworkshops
     register_post_type(
         'holiday_workshop', // Register Custom Post Type
         array(
@@ -365,43 +388,42 @@ function create_post_types_kunstangebote()
             'menu_icon' => 'dashicons-art'
         )
     );
-    // // Ferienworkshops -> Einstellungen
-    // if (function_exists('acf_add_options_page')) {
-    //     acf_add_options_page(array(
-    //         'post_id'     => 'holiday_workshop_options',
-    //         'page_title'    => __('Ferienworkshops: Einstellungen'),
-    //         'menu_title'    => __('Ferienworkshops: Einstellungen'),
-    //         'capability'    => 'edit_posts',
-    //         'icon_url' => 'dashicons-admin-generic',
-    //         'redirect'      => false
-    //     ));
-    // }
-    // // Ferienworkshops -> Termine
-    // register_post_type(
-    //     'holiday_workshop_date', // Register Custom Post Type
-    //     array(
-    //         'labels' => array(
-    //             'name' => __('Ferienworkshoptermine', 'atelier'), // Rename these to suit
-    //             'singular_name' => __('Ferienworkshoptermin', 'atelier'),
-    //             'add_new' => __('Neu erstellen', 'atelier'),
-    //             'add_new_item' => __('Neuen Ferienworkshoptermin erstellen', 'atelier'),
-    //             'edit' => __('Bearbeiten', 'atelier'),
-    //             'edit_item' => __('Ferienworkshoptermin bearbeiten', 'atelier'),
-    //             'new_item' => __('Neuer Ferienworkshoptermin', 'atelier'),
-    //             'view' => __('Ferienworkshoptermin ansehen', 'atelier'),
-    //             'view_item' => __('Ferienworkshoptermin ansehen', 'atelier'),
-    //             'search_items' => __('Ferienworkshoptermin suchen', 'atelier'),
-    //             'not_found' => __('Keine Ferienworkshoptermine gefunden', 'atelier'),
-    //             'not_found_in_trash' => __('Keine Ferienworkshoptermine im Papierkorb gefunden', 'atelier')
-    //         ),
-    //         'supports' => array(
-    //             'editor'
-    //         ),
-    //         'public' => true,
-    //         'can_export' => true, // Allows export in Tools > Export
-    //         // 'show_in_rest' => true,
-    //     )
-    // );
+
+    // Einstellungen für Ferienworkshops
+    if (function_exists('acf_add_options_page')) {
+        acf_add_options_page(array(
+            'post_id'     => 'holiday_workshop_options',
+            'page_title'    => __('Ferienworkshops: Einstellungen'),
+            'menu_title'    => __('Ferienworkshops: Einstellungen'),
+            'capability'    => 'edit_posts',
+            'icon_url' => 'dashicons-admin-generic',
+            'redirect'      => false
+        ));
+    }
+
+    // Termine für Ferienworkshops
+    register_post_type(
+        'h_workshop_date', // Register Custom Post Type
+        array(
+            'labels' => array(
+                'name' => __('Ferienworkshoptermine', 'atelier'), // Rename these to suit
+                'singular_name' => __('Ferienworkshoptermin', 'atelier'),
+                'add_new' => __('Neu erstellen', 'atelier'),
+                'add_new_item' => __('Neuen Ferienworkshoptermin erstellen', 'atelier'),
+                'edit' => __('Bearbeiten', 'atelier'),
+                'edit_item' => __('Ferienworkshoptermin bearbeiten', 'atelier'),
+                'new_item' => __('Neuer Ferienworkshoptermin', 'atelier'),
+                'view' => __('Ferienworkshoptermin ansehen', 'atelier'),
+                'view_item' => __('Ferienworkshoptermin ansehen', 'atelier'),
+                'search_items' => __('Ferienworkshoptermin suchen', 'atelier'),
+                'not_found' => __('Keine Ferienworkshoptermine gefunden', 'atelier'),
+                'not_found_in_trash' => __('Keine Ferienworkshoptermine im Papierkorb gefunden', 'atelier')
+            ),
+            'public' => true,
+            'can_export' => true, // Allows export in Tools > Export
+            // 'show_in_rest' => true,
+        )
+    );
 }
 
 
