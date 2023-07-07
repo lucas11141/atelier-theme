@@ -656,12 +656,10 @@ Link Button
 \*------------------------------------*/
 .button-link,
 .button--back {
-	display: inline-block;
-	padding: 6px 0 6px 17px;
-	background-image: url("../img/website/arrow_back_green.svg");
-	background-position: 0 52%;
-	background-size: 8px;
-	background-repeat: no-repeat;
+	padding: 6px 0;
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
 	text-decoration: none;
 	transition: all $ease_standard 300ms;
 	cursor: pointer;
@@ -672,37 +670,55 @@ Link Button
 		line-height: 1.2;
 	}
 
-	&:hover {
-		transform: translateX(-3px);
+	// Direction variants
+	&.--direction-left {
+		.arrow {
+			rotate: 180deg;
+			order: -1;
+		}
 	}
 
+	// Color variants
 	&.--color {
-		&-green {
-			background-image: url("../img/website/arrow_back_green.svg");
+		&-green .arrow path {
+			fill: $accent;
 		}
-		&-blue {
-			background-image: url("../img/website/arrow_back_blue.svg");
+		&-blue .arrow path {
+			fill: $course-kinder;
 		}
-		&-purple {
-			background-image: url("../img/website/arrow_back_purple.svg");
+		&-purple .arrow path {
+			fill: $course-erwachsene;
 		}
-		&-orange {
-			background-image: url("../img/website/arrow_back_orange.svg");
+		&-orange .arrow path {
+			fill: $workshop-kinder;
 		}
-		&-red {
-			background-image: url("../img/website/arrow_back_red.svg");
+		&-red .arrow path {
+			fill: $workshop-erwachsene;
 		}
-		&-yellow {
-			background-image: url("../img/website/arrow_back_yellow.svg");
+		&-yellow .arrow path {
+			fill: $ferienprogramm;
 		}
-		&-pink {
-			background-image: url("../img/website/arrow_back_pink.svg");
+		&-pink .arrow path {
+			fill: $kunstevent;
 		}
 	}
 
+	// Animations
+	&:hover {
+		transform: translateX(3px);
+
+		&.--direction-left {
+			transform: translateX(-3px);
+		}
+	}
+
+	// Responsive
 	@media only screen and (max-width: $tablet) {
-		padding: 6px 0 6px 14px;
-		background-size: 7px;
+		padding: 6px 0;
+
+		svg {
+			width: 7px;
+		}
 	}
 }
 
