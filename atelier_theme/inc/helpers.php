@@ -143,8 +143,8 @@ function load_product_colors($postType, $group = 'child'): string
             if ($postType === 'course') {
                 $course_times = get_field('course_times', $postId);
 
-                foreach ($course_times as $time) {
-                    $dates = get_course_dates($time->term_id);
+                foreach ($course_times as $course_time_id) {
+                    $dates = get_course_dates($course_time_id);
                     if (!empty($dates)) $hasDates = true;
                 }
             }
@@ -154,8 +154,8 @@ function load_product_colors($postType, $group = 'child'): string
 
                 // filter out dates that are not published
                 if (!empty($dates)) {
-                    $dates = array_filter($dates, function ($date) {
-                        return $date->post_status === 'publish';
+                    $dates = array_filter($dates, function ($dateId) {
+                        return get_post_status($dateId) === 'publish';
                     });
                 }
 
@@ -165,7 +165,7 @@ function load_product_colors($postType, $group = 'child'): string
             return $hasDates;
         }
 
-        function get_course_dates(int $timeId): array
+        function get_course_dates(int $timeId)
         {
             // Check if course_time has dates in the future
             $dates = get_field('dates', 'course_time_' . $timeId);
@@ -188,7 +188,7 @@ function load_product_colors($postType, $group = 'child'): string
                 }, $dates);
             }
 
-            if ($dates === '') return [];
+            if (empty($dates)) return [];
 
             return $dates;
         }

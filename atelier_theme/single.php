@@ -64,17 +64,34 @@
                     $duration = get_field("duration");
                     $duration = $sessions . ' x ' . $duration;
 
-                    // Load weekdays from course_times and order them
-                    $course_times = get_field('course_times');
-                    $order = array_column($course_times, 'term_order');
-                    array_multisort($order, SORT_ASC, $course_times);
+                    // Load weekdays from courseTimes
+                    $courseTimes = get_field('course_times'); // gives back array of ids
 
-                    if ($course_times) {
-                        $weekdays = array_map(function ($time) {
-                            $weekday = get_field('weekday', 'course_time_' . $time->term_id);
+                    // Get weekdays for indicator which days are available
+                    if ($courseTimes) {
+                        // change array of ids to array of objects to be able to sort by term_order
+                        $courseTimes = array_map(function ($courseTimeId) {
+                            $term = get_term($courseTimeId, 'course_time');
+                            return $term;
+                        }, $courseTimes);
+
+                        // order the posts by term_order
+                        $order = array_column($courseTimes, 'term_order');
+                        array_multisort($order, SORT_ASC, $courseTimes);
+
+                        // Get weekdays
+                        $weekdays = array_map(function ($courseTime) {
+                            $weekday = get_field('weekday', 'course_time_' . $courseTime->term_id);
                             return $weekday['value'];
-                        }, get_field('course_times'));
+                        }, $courseTimes);
+
+                        // Filter out duplicates
                         $weekdays = array_values(array_unique($weekdays));
+
+                        // reduce array to contain only the term_id again
+                        $courseTimes = array_map(function ($courseTime) {
+                            return $courseTime->term_id;
+                        }, $courseTimes);
                     } else {
                         $weekdays = [];
                     }
@@ -381,7 +398,7 @@
 
                                         <?php if ($postType === "course") :
 
-                                            if (empty($course_times)) : ?>
+                                            if (empty($courseTimes)) : ?>
 
                                                 <div class="no__dates__available">
                                                     <span>Keine Termine verfügbar!</span>
@@ -389,15 +406,15 @@
 
                                             <?php else : ?>
 
-                                                <?php array_map(function ($time) {
-                                                    global $postId, $isBookable;
+                                                <?php array_map(function ($courseTimeId) {
+                                                    global $postId;
 
-                                                    $timeId = $time->term_id;
-                                                    $weekday = get_field('weekday', 'course_time_' . $timeId);
-                                                    $starttime = get_field('starttime', 'course_time_' . $timeId);
-                                                    $endtime = get_field('endtime', 'course_time_' . $timeId); ?>
+                                                    // TODO: Move the data fetching to the top of the file
+                                                    $weekday = get_field('weekday', 'course_time_' . $courseTimeId);
+                                                    $starttime = get_field('starttime', 'course_time_' . $courseTimeId);
+                                                    $endtime = get_field('endtime', 'course_time_' . $courseTimeId); ?>
 
-                                                    <a class="date <?= empty(get_course_dates($timeId)) ? '--disabled' : '' ?>" href="<?= BOOK_URL ?>/?productId=<?= $postId ?>&courseTime=<?= $timeId ?>">
+                                                    <a class="date <?= empty(get_course_dates($courseTimeId)) ? '--disabled' : '' ?>" href="<?= BOOK_URL ?>/?productId=<?= $postId ?>&courseTime=<?= $courseTimeId ?>">
                                                         <div>
                                                             <h5><?= $weekday['label'] ?></h5>
                                                             <h6><?= $starttime . ' - ' . $endtime . ' Uhr' ?></h6>
@@ -405,7 +422,7 @@
                                                         <img src="<?= get_template_directory_uri() ?>/assets/img/website/arrow_right_circle.svg">
                                                     </a>
 
-                                                <?php }, $course_times); ?>
+                                                <?php }, $courseTimes); ?>
 
                                             <?php endif; ?>
 
@@ -415,9 +432,12 @@
 
                                             // get all dates that are published
                                             $dates = get_field('dates');
-                                            $dates = array_filter($dates, function ($date) {
-                                                return get_post_status($date->ID) === 'publish';
-                                            });
+
+                                            if (!empty($dates)) {
+                                                $dates = array_filter($dates, function ($dateId) {
+                                                    return get_post_status($dateId) === 'publish';
+                                                });
+                                            }
 
                                             if (empty($dates)) : ?>
 
@@ -427,19 +447,19 @@
 
                                             <?php else : ?>
 
-                                                <?php array_map(function ($date) {
+                                                <?php array_map(function ($dateId) {
                                                     global $postId, $postType, $isBookable, $booking_scheduled;
 
-                                                    $date_1 = get_field('date_1', $date->ID);
-                                                    $date_2 = get_field('date_2', $date->ID);
-                                                    $booking_link = get_field('booking_link', $date->ID);
+                                                    $date_1 = get_field('date_1', $dateId);
+                                                    $date_2 = get_field('date_2', $dateId);
+                                                    $booking_link = get_field('booking_link', $dateId);
                                                     $external_link = true;
 
                                                     if (empty($booking_link) && $postType === 'holiday_workshop') {
                                                         $booking_link = get_field('holiday_workshops_booking_link_fallback', 'holiday_workshop_options');
                                                     }
                                                     if (empty($booking_link)) {
-                                                        $booking_link = BOOK_URL . '/?productId=' . $postId . '&date=' . $date->ID;
+                                                        $booking_link = BOOK_URL . '/?productId=' . $postId . '&date=' . $dateId;
                                                         $external_link = false;
                                                     }
 
@@ -465,7 +485,7 @@
                                                         $date_readable = translateReadableDateToGerman(date("d.", $date_1_timestamp) . " + " . date("d. F Y", $date_2_timestamp));
                                                         $date_day = translateReadableDateToGerman(date("l", $date_1_timestamp) . " + " . date("l", $date_2_timestamp)); ?>
 
-                                                        <a class="date <?= $isBookable ?>" href="<?= BOOK_URL ?>/?productId=<?= $postId ?>&date=<?= $date->ID ?>">
+                                                        <a class="date <?= $isBookable ?>" href="<?= BOOK_URL ?>/?productId=<?= $postId ?>&date=<?= $dateId ?>">
                                                             <div>
                                                                 <h5><?= $date_readable ?></h5>
                                                                 <h6><?= $date_day ?></h6>

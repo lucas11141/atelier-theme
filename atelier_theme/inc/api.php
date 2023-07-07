@@ -49,17 +49,23 @@ function add_custom_api()
         if ($postType === 'course') {
             // Sortiere Kurszeiten nach aufsteigender term_order
             $course_times = $post->acf["course_times"];
+
+            // change array of ids to array of objects to be able to sort by term_order
+            $course_times = array_map(function ($courseTimeId) {
+                $term = get_term($courseTimeId, 'course_time');
+                return $term;
+            }, $course_times);
+
             usort($course_times, function ($a, $b) {
+                // get term order of term_id $a and $b
                 return $a->term_order - $b->term_order;
             });
 
             // Erweitere Kurszeiten mit den zugehörigen Terminen
-            $course_times = array_map(function ($time) {
-                $timeId = $time->term_id;
+            $course_times = array_map(function ($course_time_id) {
+                $weekday = get_field('weekday', 'course_time_' . $course_time_id);
 
-                $weekday = get_field('weekday', 'course_time_' . $timeId);
-
-                $time = get_field('starttime', 'course_time_' . $timeId);
+                $time = get_field('starttime', 'course_time_' . $course_time_id);
                 $time = strtotime($time);
 
                 // get all dates by term_id of course_times
@@ -71,13 +77,12 @@ function add_custom_api()
                         array(
                             'taxonomy' => 'course_time',
                             'field' => 'term_id',
-                            'terms' => $timeId,
+                            'terms' => $course_time_id,
                         ),
                     ),
                 );
                 $dates = get_posts($args);
-                $dates = array_map(function ($date) {
-                    $dateId = $date->ID;
+                $dates = array_map(function ($dateId) {
                     $date = get_field('date', $dateId);
                     $date = strtotime($date);
 
@@ -90,7 +95,7 @@ function add_custom_api()
                 }, $dates);
 
                 return array(
-                    'id' => $timeId,
+                    'id' => $course_time_id,
                     'weekday' => $weekday,
                     'time' => $time,
                     'dates' => $dates
@@ -106,13 +111,11 @@ function add_custom_api()
             $dates = get_field('dates', $postId);
 
             if ($dates) {
-                $dates = array_map(function ($date) {
-                    $dateId = $date->ID;
-
-                    $date_1 = get_field('date_1', $date->ID);
+                $dates = array_map(function ($dateId) {
+                    $date_1 = get_field('date_1', $dateId);
                     $date_1['date'] = strtotime($date_1['date']);
 
-                    $date_2 = get_field('date_2', $date->ID);
+                    $date_2 = get_field('date_2', $dateId);
                     $date_2['date'] = strtotime($date_2['date']);
 
                     if ($date_2['date']) return [
