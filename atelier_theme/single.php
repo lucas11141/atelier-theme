@@ -66,11 +66,15 @@
                     $duration = get_field("duration");
                     $duration = $sessions . ' x ' . $duration;
 
-                    // Load weekdays from courseTimes
-                    $courseTimes = get_field('course_times'); // gives back array of ids
+                    // Get course times connected to this course (array of ids)
+                    $courseTimes = get_field('course_times');
+                    $weekdays = [];
 
-                    // Get weekdays for indicator which days are available
-                    if ($courseTimes) {
+                    if (!empty($courseTimes)) {
+                        /* --------------------------------- */
+                        /* Sort course times and get ACF data
+                        /* --------------------------------- */
+
                         // change array of ids to array of objects to be able to sort by term_order
                         $courseTimes = array_map(function ($courseTimeId) {
                             $term = get_term($courseTimeId, 'course_time');
@@ -81,22 +85,9 @@
                         $order = array_column($courseTimes, 'term_order');
                         array_multisort($order, SORT_ASC, $courseTimes);
 
-                        // Get weekdays
-                        $weekdays = array_map(function ($courseTime) {
-                            $weekday = get_field('weekday', 'course_time_' . $courseTime->term_id);
-                            return $weekday['value'];
-                        }, $courseTimes);
-
-                        // Filter out duplicates
-                        $weekdays = array_values(array_unique($weekdays));
-
-                        // reduce array to contain only the term_id again
+                        // Add ACF data for weekday, starttime and endtime to each courseTime
                         $courseTimes = array_map(function ($courseTime) {
-                            return $courseTime->term_id;
-                        }, $courseTimes);
-
-                        // create array of objects with all the information
-                        $courseTimes = array_map(function ($courseTimeId) {
+                            $courseTimeId = $courseTime->term_id;
                             return array(
                                 'id' => $courseTimeId,
                                 'weekday' => get_field('weekday', 'course_time_' . $courseTimeId),
@@ -104,8 +95,18 @@
                                 'endtime' => get_field('endtime', 'course_time_' . $courseTimeId)
                             );
                         }, $courseTimes);
-                    } else {
-                        $weekdays = [];
+
+                        /* --------------------------------- */
+                        /* Get weekdays for indicator which days are available
+                        /* --------------------------------- */
+
+                        // Create array of weekdays
+                        $weekdays = array_map(function ($courseTime) {
+                            return $courseTime['weekday']['value'];
+                        }, $courseTimes);
+
+                        // Filter out duplicates
+                        $weekdays = array_values(array_unique($weekdays));
                     }
                 }
 
