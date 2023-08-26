@@ -58,7 +58,9 @@
                 $booking_scheduled = false;
                 $hasDates = product_has_dates($postId);
 
-                // Kurse
+                /* --------------------------------- */
+                /* Kurse
+                /* --------------------------------- */
                 if ($postType === 'course') {
                     $sessions = get_field("sessions");
                     $duration = get_field("duration");
@@ -91,6 +93,16 @@
                         // reduce array to contain only the term_id again
                         $courseTimes = array_map(function ($courseTime) {
                             return $courseTime->term_id;
+                        }, $courseTimes);
+
+                        // create array of objects with all the information
+                        $courseTimes = array_map(function ($courseTimeId) {
+                            return array(
+                                'id' => $courseTimeId,
+                                'weekday' => get_field('weekday', 'course_time_' . $courseTimeId),
+                                'starttime' => get_field('starttime', 'course_time_' . $courseTimeId),
+                                'endtime' => get_field('endtime', 'course_time_' . $courseTimeId)
+                            );
                         }, $courseTimes);
                     } else {
                         $weekdays = [];
@@ -396,34 +408,24 @@
 
                                     <div class="dates__list" style="color:white;">
 
-                                        <?php if ($postType === "course") :
+                                        <?php if ($postType === "course") : ?>
 
-                                            if (empty($courseTimes)) : ?>
+                                            <?php if (!empty($courseTimes)) : ?>
+                                                <?php foreach ($courseTimes as $courseTime) : ?>
 
-                                                <div class="no__dates__available">
-                                                    <span>Keine Termine verfügbar!</span>
-                                                </div>
-
-                                            <?php else : ?>
-
-                                                <?php array_map(function ($courseTimeId) {
-                                                    global $postId;
-
-                                                    // TODO: Move the data fetching to the top of the file
-                                                    $weekday = get_field('weekday', 'course_time_' . $courseTimeId);
-                                                    $starttime = get_field('starttime', 'course_time_' . $courseTimeId);
-                                                    $endtime = get_field('endtime', 'course_time_' . $courseTimeId); ?>
-
-                                                    <a class="date <?= empty(get_course_dates($courseTimeId)) ? '--disabled' : '' ?>" href="<?= BOOK_URL ?>/?productId=<?= $postId ?>&courseTime=<?= $courseTimeId ?>">
+                                                    <a class="date <?= empty(get_course_dates($courseTime['id'])) ? '--disabled' : '' ?>" href="<?= BOOK_URL ?>/?productId=<?= $postId ?>&courseTime=<?= $courseTime['id'] ?>">
                                                         <div>
-                                                            <h5><?= $weekday['label'] ?></h5>
-                                                            <h6><?= $starttime . ' - ' . $endtime . ' Uhr' ?></h6>
+                                                            <h5><?= $courseTime['weekday']['label'] ?></h5>
+                                                            <h6><?= $courseTime['starttime'] . ' - ' . $courseTime['endtime'] . ' Uhr' ?></h6>
                                                         </div>
                                                         <img src="<?= get_template_directory_uri() ?>/assets/img/website/arrow_right_circle.svg">
                                                     </a>
 
-                                                <?php }, $courseTimes); ?>
-
+                                                <?php endforeach; ?>
+                                            <?php else : ?>
+                                                <div class="no__dates__available">
+                                                    <span>Keine Termine verfügbar!</span>
+                                                </div>
                                             <?php endif; ?>
 
                                         <?php endif; ?>
