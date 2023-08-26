@@ -37,9 +37,11 @@ function add_custom_api()
         );
 
         $post = get_posts($args)[0] ?? null;
-        $postType = $post->post_type;
 
+        // Error handling: Kunstangebot nicht gefunden
         if (!$post) wp_send_json_error(array('message' => 'Kunstangebot nicht gefunden'), 404);
+
+        $postType = $post->post_type;
 
         $post->acf = get_fields($postId);
         $post->thumbnail = get_the_post_thumbnail_url($postId, 'medium');
@@ -63,6 +65,8 @@ function add_custom_api()
 
             // Erweitere Kurszeiten mit den zugehörigen Terminen
             $course_times = array_map(function ($course_time_id) {
+                $course_time_id = $course_time_id->term_id;
+
                 $weekday = get_field('weekday', 'course_time_' . $course_time_id);
 
                 $time = get_field('starttime', 'course_time_' . $course_time_id);
@@ -152,14 +156,19 @@ function add_custom_api()
             }, $durations);
         }
 
-        // rename per_person to perPerson in $post->pricing object
-        $post->acf['pricing']["perPerson"] = $post->acf['pricing']["per_person"];
-        unset($post->acf['pricing']["per_person"]);
+        if (isset($post->acf['pricing'])) {
+            // rename per_person to perPerson in $post->pricing object
+            if (isset($post->acf['pricing']["per_person"])) {
+                $post->acf['pricing']["perPerson"] = $post->acf['pricing']["per_person"];
+                unset($post->acf['pricing']["per_person"]);
+            }
 
-        // conver all values of $post->acf['pricing'] into int values
-        $post->acf['pricing'] = array_map(function ($value) {
-            return intval($value);
-        }, $post->acf['pricing']);
+            // conver all values of $post->acf['pricing'] into int values
+            $post->acf['pricing'] = array_map(function ($value) {
+                return intval($value);
+            }, $post->acf['pricing']);
+        }
+
 
         return $post;
     }

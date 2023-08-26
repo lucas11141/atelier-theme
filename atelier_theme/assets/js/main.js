@@ -1333,6 +1333,29 @@ jQuery(document).ready(function ($) {
 
 		if (e.target.dataset.status === "sent") {
 			const params = getFormValues(inputs);
+
+			// console.log("params", params);
+			// brevoGetContact(params)
+			// 	.then((res) => res.json())
+			// 	.then((res) => {
+			// 		console.log("brevoGetContact", res);
+			// 		if (res.code === "document_not_found") {
+			// 			console.log("create contact");
+			// 			brevoCreateContact(params)
+			// 				.then((response) => response.json())
+			// 				.then((result) => {
+			// 					console.log("brevoCreateContact", result);
+			// 					const messageId = result.messageId;
+			// 					const success = messageId ? true : false;
+			// 					return success;
+			// 				})
+			// 				.catch((error) => console.error(error));
+			// 		}
+			// 	})
+			// 	.catch((error) => console.error(error));
+
+			// const isContactCreated = brevoCreateContact(params);
+			// console.log("isContactCreated", isContactCreated);
 			const isEmailSent = brevoSendEmail(templateId, params);
 
 			// Add message to success message if sendinblue mail was sent
@@ -1390,8 +1413,40 @@ jQuery(document).ready(function ($) {
 		return params;
 	}
 
+	async function brevoGetContact(params) {
+		const options = {
+			method: "POST",
+			headers: {
+				accept: "application/json",
+				"content-type": "application/json",
+			},
+			body: JSON.stringify(params),
+		};
+
+		return fetch(
+			"/wp-content/themes/atelier_theme/functions/brevoGetContact.php",
+			options
+		);
+	}
+
+	async function brevoCreateContact(params) {
+		const options = {
+			method: "POST",
+			headers: {
+				accept: "application/json",
+				"content-type": "application/json",
+			},
+			body: JSON.stringify(params),
+		};
+
+		return fetch(
+			"/wp-content/themes/atelier_theme/functions/brevoCreateContact.php",
+			options
+		);
+	}
+
 	async function brevoSendEmail(templateId, params) {
-		console.log(templateId, params);
+		// console.log(templateId, params);
 
 		const options = {
 			method: "POST",
@@ -1423,7 +1478,7 @@ jQuery(document).ready(function ($) {
 		)
 			.then((response) => response.json())
 			.then((result) => {
-				console.log(result);
+				// console.log(result);
 				const messageId = result.messageId;
 				const success = messageId ? true : false;
 				console.log(success);

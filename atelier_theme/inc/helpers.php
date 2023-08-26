@@ -253,6 +253,9 @@ function load_product_colors($postType, $group = 'child'): string
 
             if (!$bookable_from) {
                 $blocked = false;
+            } else {
+                $bookable_from = strtotime($bookable_from);
+                $blocked = time() < $bookable_from;
             }
 
             return $blocked;

@@ -247,7 +247,7 @@ input[type="radio"] {
 
 // Input Fields List Margins
 $form-row-gap: 20px;
-$form-column-gap: 30px;
+$form-column-gap: 18px;
 
 // Input Fields List Stylings
 .standard__form,
@@ -275,6 +275,9 @@ $form-column-gap: 30px;
 
 // Split Form
 .form__split {
+	@include flex-row();
+	flex-wrap: wrap;
+	justify-content: space-between;
 	width: calc(50% - (#{$form-column-gap} / 2));
 
 	p {
@@ -315,7 +318,7 @@ textarea {
 	}
 	&.height--5 textarea,
 	&.height--five textarea {
-		height: 378px;
+		height: 395px;
 	}
 	&.height--6 textarea,
 	&.height--six textarea {
@@ -497,9 +500,14 @@ textarea {
 	}
 }
 
+.checkboxes {
+	margin: 10px 0 25px;
+	@include flex-column();
+	gap: 10px;
+}
+
 .wpcf7-acceptance {
 	display: block;
-	margin: 10px 0 25px;
 
 	.wpcf7-list-item {
 		margin-left: 0;

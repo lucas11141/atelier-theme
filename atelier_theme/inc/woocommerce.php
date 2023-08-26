@@ -18,6 +18,7 @@ add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_loop_short_d
 // Shop Item adding category
 function woocommerce_atelier_loop_category()
 {
+    global $post;
     $terms = get_the_terms($post->ID, 'product_cat');
     if ($terms && !is_wp_error($terms)) :
         //only displayed if the product has at least one category
@@ -34,7 +35,8 @@ function woocommerce_atelier_loop_category()
 }
 function woocommerce_atelier_loop_short_description()
 {
-    $short_description = get_field("short_description", $product->id);
+    global $post;
+    $short_description = get_field("short_description", $post->id);
     if ($short_description) : ?>
         <p class="product__description"><?php echo $short_description; ?></p>
     <?php endif; ?>
