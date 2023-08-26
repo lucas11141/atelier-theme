@@ -106,6 +106,9 @@ function add_custom_api()
                 );
             }, $course_times);
 
+            // Numerate weekdays
+            $course_times = numerateWeekdays($course_times);
+
             $post->times = $course_times;
         }
 

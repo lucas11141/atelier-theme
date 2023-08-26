@@ -96,36 +96,8 @@
                             );
                         }, $courseTimes);
 
-                        /* --------------------------------- */
-                        /* Add roman numerals to every courseTime that is not the only one on that weekday
-                        /* --------------------------------- */
-
-                        // Variables
-                        $i;
-                        $numberedWeekdays = [];
-
-                        // Loop through every courseTime
-                        $courseTimes = array_map(function ($courseTime) use ($courseTimes) {
-                            global $i, $numberedWeekdays;
-
-                            $weekday = $courseTime['weekday']['value'];
-                            $weekdayCount = count(array_filter($courseTimes, function ($courseTime) use ($weekday) {
-                                return $courseTime['weekday']['value'] === $weekday;
-                            }));
-
-                            if (!in_array($weekday, $numberedWeekdays)) $i = 1;
-                            else $i++;
-
-                            if ($weekdayCount > 1) {
-                                $courseTime['weekday']['label'] .= ' ' . $i;
-                                $numberedWeekdays[] = $courseTime['weekday']['value'];
-                            }
-
-                            return $courseTime;
-                        }, $courseTimes);
-
-                        // Reset variables
-                        $i = null;
+                        // Numerate weekdays
+                        $courseTimes = numerateWeekdays($courseTimes);
 
                         /* --------------------------------- */
                         /* Get weekdays for indicator which days are available

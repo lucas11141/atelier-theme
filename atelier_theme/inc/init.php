@@ -17,3 +17,8 @@ require get_template_directory() . '/inc/cleanup.php'; //
 require get_template_directory() . '/inc/misc.php'; //
 require get_template_directory() . '/inc/contactform7.php'; //
 require get_template_directory() . '/inc/cron.php'; // Cron functions
+
+// import all files from /inc/utils
+foreach (glob(get_template_directory() . '/inc/utils/*.php') as $filename) {
+    require $filename;
+}
