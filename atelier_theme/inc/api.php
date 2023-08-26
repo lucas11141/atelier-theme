@@ -86,7 +86,8 @@ function add_custom_api()
                     ),
                 );
                 $dates = get_posts($args);
-                $dates = array_map(function ($dateId) {
+                $dates = array_map(function ($date) {
+                    $dateId = $date->ID;
                     $date = get_field('date', $dateId);
                     $date = strtotime($date);
 
@@ -94,9 +95,14 @@ function add_custom_api()
                         'id' => $dateId,
                         'date' => $date
                     );
-
-                    // TODO: Nur Termine in der Zukunft ausgeben
                 }, $dates);
+
+                // remove all dates that are in the past
+                $dates = array_filter($dates, function ($date) {
+                    return $date['date'] >= strtotime('today');
+                });
+                // reset array keys
+                $dates = array_values($dates);
 
                 return array(
                     'id' => $course_time_id,
