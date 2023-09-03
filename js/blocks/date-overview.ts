@@ -78,10 +78,12 @@ export default function dateOverview() {
 
 			this.dateButtons.forEach((button) => {
 				if (type === "category") {
+					// active all buttons when identifier is null
 					if (identifier === null) {
 						button.dataset.active = "true";
 						return;
 					}
+
 					const productCategories =
 						button.dataset.productCategories?.split(
 							","
@@ -103,6 +105,36 @@ export default function dateOverview() {
 						button.dataset.active = "true";
 					} else {
 						button.dataset.active = "false";
+					}
+				} else {
+					throw new Error("Invalid filter type");
+				}
+			});
+
+			const buttonParts = this.container.querySelectorAll(
+				"#date-overview__calendar__product-part"
+			) as NodeListOf<HTMLElement>;
+			buttonParts.forEach((part) => {
+				if (type === "category") {
+					// active all buttons when identifier is null
+					if (identifier === null) {
+						part.dataset.active = "true";
+						return;
+					}
+
+					if (part.dataset.productCategory === identifier) {
+						part.dataset.active = "true";
+					} else {
+						part.dataset.active = "false";
+					}
+				} else if (type === "product") {
+					const productId = Number(part.dataset.productId);
+
+					// check if array contains identifier
+					if (productId === identifier) {
+						part.dataset.active = "true";
+					} else {
+						part.dataset.active = "false";
 					}
 				} else {
 					throw new Error("Invalid filter type");
