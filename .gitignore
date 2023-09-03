@@ -8,3 +8,4 @@ atelier_theme/assets/js/main.js
 .gitignore
 atelier_theme/assets/js/main.js.map
 js/blocks/date-overview.js
+atelier_theme/assets/css/tailwind.css
