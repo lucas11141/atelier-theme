@@ -18,7 +18,9 @@ function dateOverview() {
     initEventListeners() {
       this.calendar.onSelect(() => {
         console.log("onSelect");
+        // TODO: Scroll to item in list
       });
+
       this.filter.onFilterCategory(category => {
         this.calendar.setFilter("category", category);
         this.list.setFilter("category", category);
@@ -53,6 +55,7 @@ function dateOverview() {
     initEventListeners() {
       this.dateButtons.forEach(day => {
         day.addEventListener("click", e => {
+          // TODO: Only trigger when day is active
           if (this.onSelectCallback) this.onSelectCallback();
         });
       });
@@ -228,6 +231,19 @@ function dateOverview() {
     }
     onFilterCategory(callback) {
       this.onFilterCategoryCallback = callback;
+    }
+  }
+
+  /*------------------------------------*/
+  /* 	Product selector
+  /*------------------------------------*/
+  // TODO: Implement
+  class DateOverviewProductSelector {
+    container;
+    products;
+    constructor(container) {
+      this.container = container;
+      this.products = this.container.querySelectorAll(".product-selector__product");
     }
   }
   const calendarElement = document.querySelector(".date-overview__calendar");

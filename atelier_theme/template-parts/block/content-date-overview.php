@@ -1,4 +1,8 @@
 <?php
+// TODO: switch to ids for js element selection
+// TODO: only load dates of current month
+// TODO: when clicking on next month, load dates of next month. When clicking back the dates are still there
+
 /*------------------------------------*/
 /* Block name: 	Terminübersicht
 /*------------------------------------*/
@@ -18,6 +22,8 @@ $colors = [
 ];
 
 $categories = array_keys($colors);
+
+// TODO: Create array with better structure for filters
 
 /* ------------------------------------ */
 /* Courses
