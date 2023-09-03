@@ -1,20 +1,26 @@
+import $ from "jquery";
+
 export default function dateOverview() {
 	class DateOverview {
 		calendar: DateOverviewCalendar;
 		list: DateOverviewList;
 		filter: DateOverviewFilter;
+		selector: DateOverviewSelector;
+		currentYear: number;
 		currentMonth: number;
 
 		constructor(
 			calendarElement: HTMLElement,
 			listElement: HTMLElement,
-			filterElement: HTMLElement
+			filterElement: HTMLElement,
+			selectorElement: HTMLElement
 		) {
 			this.calendar = new DateOverviewCalendar(calendarElement);
 			this.list = new DateOverviewList(listElement);
 			this.filter = new DateOverviewFilter(filterElement);
+			this.selector = new DateOverviewSelector(selectorElement);
+			this.currentYear = new Date().getFullYear();
 			this.currentMonth = new Date().getMonth() + 1;
-			console.log(this.currentMonth);
 
 			this.initEventListeners();
 		}
@@ -27,22 +33,45 @@ export default function dateOverview() {
 
 			this.calendar.onNext(() => {
 				this.currentMonth++;
-				console.log("next");
+
+				// Reset month and increase year
+				if (this.currentMonth > 12) {
+					this.currentMonth = 1;
+					this.currentYear++;
+				}
+
+				this.calendar.renderDates(this.currentYear, this.currentMonth);
 			});
 
 			this.calendar.onPrev(() => {
 				this.currentMonth--;
-				console.log("prev");
+
+				// Reset month and decrease year
+				if (this.currentMonth < 1) {
+					this.currentMonth = 12;
+					this.currentYear--;
+				}
+
+				this.calendar.renderDates(this.currentYear, this.currentMonth);
 			});
+
+			// this.calendar.onRender(() => {
+			// 	this.calendar.setFilter("category", this.filter.getFilter());
+			// });
 
 			this.filter.onFilterCategory((category) => {
 				this.calendar.setFilter("category", category);
 				this.list.setFilter("category", category);
 			});
 
+			// Filtering by product id
 			this.list.onFilterProduct((productId, productCategory) => {
 				this.calendar.setFilter("product", productId);
 				this.filter.setFilter(productCategory);
+			});
+			this.selector.onSelect((productId) => {
+				this.calendar.setFilter("product", productId);
+				this.list.renderProductDates(productId);
 			});
 		}
 	}
@@ -52,18 +81,33 @@ export default function dateOverview() {
 	/*------------------------------------*/
 	class DateOverviewCalendar {
 		container: HTMLElement;
+		daysContainer: HTMLElement;
 		monthLabel: HTMLElement;
 		nextButton: HTMLElement;
 		prevButton: HTMLElement;
 		dateButtons: NodeListOf<HTMLElement>;
+		renderedMonths: {
+			year: number;
+			month: number;
+		}[] = [
+			{
+				year: new Date().getFullYear(),
+				month: new Date().getMonth() + 1,
+			},
+		];
+		monthDays: NodeListOf<HTMLElement>;
 
 		// Event listeners
 		private onSelectCallback: (date: string) => void;
 		private onNextCallback: () => void;
 		private onPrevCallback: () => void;
+		private onRenderCallback: () => void;
 
 		constructor(container) {
 			this.container = container;
+			this.daysContainer = this.container.querySelector(
+				"#date-overview__calendar__days"
+			) as HTMLElement;
 			this.monthLabel = this.container.querySelector(
 				"#calendar__month"
 			) as HTMLElement;
@@ -73,8 +117,12 @@ export default function dateOverview() {
 			this.prevButton = this.container.querySelector(
 				"#calendar__prev"
 			) as HTMLElement;
-			this.dateButtons =
-				this.container.querySelectorAll("#calendar__day");
+			this.dateButtons = this.container.querySelectorAll(
+				"#date-overview__calendar__day"
+			);
+			this.monthDays = this.container.querySelectorAll(
+				"#date-overview__calendar__days"
+			);
 
 			this.initEventListeners();
 		}
@@ -107,9 +155,93 @@ export default function dateOverview() {
 			});
 		}
 
-		public setFilter(type: FilterType, identifier: Category | number) {
-			// TODO: Make active buttons monochrome
+		public renderDates(year: number, month: number) {
+			const thisClone = this;
 
+			this.setMonthName(year, month);
+
+			// Skip ajax if month is already rendered
+			if (
+				this.renderedMonths.find(
+					(renderedMonth) =>
+						renderedMonth.year === year &&
+						renderedMonth.month === month
+				)
+			) {
+				this.monthDays.forEach((monthItem) => {
+					if (
+						monthItem.dataset.year === `${year}` &&
+						monthItem.dataset.month === `${month}`
+					) {
+						monthItem.style.display = "grid";
+					} else {
+						monthItem.style.display = "none";
+					}
+				});
+				return;
+			}
+
+			$.ajax({
+				// @ts-ignore
+				url: ajaxurl,
+				type: "POST",
+				data: {
+					action: "render_date_overview_calender_items", // Dies sollte mit dem in add_action definierten Haken übereinstimmen
+					year,
+					month,
+				},
+				success: function (response) {
+					thisClone.monthDays.forEach((month) => {
+						month.style.display = "none";
+					});
+
+					// Den geladenen Inhalt in die Seite einfügen
+					thisClone.container.insertAdjacentHTML(
+						"beforeend",
+						response
+					);
+
+					// push new month to this.monthDays#
+					thisClone.monthDays = thisClone.container.querySelectorAll(
+						"#date-overview__calendar__days"
+					);
+
+					thisClone.dateButtons =
+						thisClone.container.querySelectorAll(
+							"#date-overview__calendar__day"
+						);
+
+					thisClone.renderedMonths.push({
+						year,
+						month,
+					});
+
+					// Trigger onRender event
+					if (thisClone.onRenderCallback)
+						thisClone.onRenderCallback();
+				},
+			});
+		}
+
+		setMonthName(year: number, month: number) {
+			const months = [
+				"Januar",
+				"Februar",
+				"März",
+				"April",
+				"Mai",
+				"Juni",
+				"Juli",
+				"August",
+				"September",
+				"Oktober",
+				"November",
+				"Dezember",
+			];
+			this.monthLabel.innerHTML = `${months[month - 1]} ${year}`;
+		}
+
+		public setFilter(type: FilterType, identifier: Category | number) {
 			this.dateButtons.forEach((button) => {
 				if (type === "category") {
 					// active all buttons when identifier is null
@@ -124,7 +256,10 @@ export default function dateOverview() {
 						) as string[];
 
 					// check if array contains identifier
-					if (productCategories.includes(identifier as string)) {
+					if (
+						productCategories &&
+						productCategories.includes(identifier as string)
+					) {
 						button.dataset.active = "true";
 					} else {
 						button.dataset.active = "false";
@@ -135,7 +270,10 @@ export default function dateOverview() {
 						.map(Number) as number[];
 
 					// check if array contains identifier
-					if (productIds.includes(identifier as number)) {
+					if (
+						productIds &&
+						productIds.includes(identifier as number)
+					) {
 						button.dataset.active = "true";
 					} else {
 						button.dataset.active = "false";
@@ -187,6 +325,10 @@ export default function dateOverview() {
 		public onPrev(callback: () => void) {
 			this.onPrevCallback = callback;
 		}
+
+		public onRender(callback: () => void) {
+			this.onRenderCallback = callback;
+		}
 	}
 
 	/*------------------------------------*/
@@ -231,7 +373,6 @@ export default function dateOverview() {
 		}
 
 		public setFilter(type: FilterType, identifier: Category | number) {
-			console.log("setFilter", type, identifier);
 			this.dateItems.forEach((item) => {
 				if (type === "category") {
 					if (identifier === null) {
@@ -247,13 +388,9 @@ export default function dateOverview() {
 						item.dataset.active = "false";
 					}
 				} else if (type === "product") {
+					// TODO: Load all dates of product with ajax
+
 					const productId = Number(item.dataset.productId);
-					console.log(
-						item,
-						productId,
-						identifier,
-						productId === identifier
-					);
 
 					// check if array contains identifier
 					if (productId === identifier) {
@@ -280,6 +417,25 @@ export default function dateOverview() {
 				behavior: "smooth",
 				block: "center",
 				inline: "center",
+			});
+		}
+
+		public renderProductDates(productId: number) {
+			// AJAX-Anfrage, um die Komponente zu laden
+			$.ajax({
+				// @ts-ignore
+				url: ajaxurl,
+				type: "POST",
+				data: {
+					action: "get_date_overview_product_dates", // Dies sollte mit dem in add_action definierten Haken übereinstimmen
+					productId,
+				},
+				success: function (response) {
+					// Den geladenen Inhalt in die Seite einfügen
+					// $('#my-component-container').html(response);
+
+					console.log("get_date_overview_product_dates", response);
+				},
 			});
 		}
 
@@ -383,15 +539,37 @@ export default function dateOverview() {
 	/* 	Product selector
 	/*------------------------------------*/
 	// TODO: Implement
-	class DateOverviewProductSelector {
+	class DateOverviewSelector {
 		container: HTMLElement;
-		products: NodeListOf<HTMLElement>;
+		select: HTMLSelectElement;
+		selected: number;
+		private onSelectCallback: (productId: number) => void;
 
 		constructor(container) {
 			this.container = container;
-			this.products = this.container.querySelectorAll(
-				".product-selector__product"
-			);
+			this.select = this.container.querySelector(
+				"select"
+			) as HTMLSelectElement;
+
+			if (!this.select) throw new Error("No select element found");
+
+			this.initEventListeners();
+		}
+
+		initEventListeners() {
+			this.select.addEventListener("change", (e) => {
+				const target = e.currentTarget as HTMLSelectElement;
+				const productId = Number(target.value);
+
+				// Trigger onSelect event
+				if (this.onSelectCallback) this.onSelectCallback(productId);
+
+				this.selected = productId;
+			});
+		}
+
+		public onSelect(callback: (productId: number) => void) {
+			this.onSelectCallback = callback;
 		}
 	}
 
@@ -404,16 +582,18 @@ export default function dateOverview() {
 	const filterElement = document.querySelector(
 		"#date-overview__filter"
 	) as HTMLElement;
+	const selectorElement = document.querySelector(
+		"#date-overview__selector"
+	) as HTMLElement;
 
-	console.log(calendarElement, listElement, filterElement);
-
-	if (!calendarElement || !listElement || !filterElement)
+	if (!calendarElement || !listElement || !filterElement || !selectorElement)
 		throw new Error("No calendar, list or filter element found");
 
 	const overview = new DateOverview(
 		calendarElement,
 		listElement,
-		filterElement
+		filterElement,
+		selectorElement
 	);
 }
 
