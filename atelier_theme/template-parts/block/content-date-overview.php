@@ -64,6 +64,8 @@ foreach ($courseDateIds as $dateId) {
             'date' => $date,
             'product' => array(
                 'ID' => $course->ID,
+                'starttime' =>  get_field('starttime', 'course_time_' . $timeId),
+                'endtime' =>  get_field('endtime', 'course_time_' . $timeId),
                 'title' => $course->post_title,
                 'category' => $course->post_type . '-' . get_field('group', $course->ID)['value'],
                 'group' => get_field('group', $course->ID)
@@ -75,6 +77,8 @@ foreach ($courseDateIds as $dateId) {
 /* ------------------------------------ */
 /* Workshops
 /* ------------------------------------ */
+
+// TODO: Make shure to correctly display workshops with multiple dates
 
 // Query dates
 $workshopDateIds = get_posts(array(
@@ -103,8 +107,8 @@ $workshopDateIds = get_posts(array(
 // Get data of dates
 $workshopsDates = [];
 foreach ($workshopDateIds as $dateId) {
-    $date = get_field('date_1', $dateId);
-    $date = new DateTime($date['date']);
+    $dateField = get_field('date_1', $dateId);
+    $date = new DateTime($dateField['date']);
     $date->setTimezone(new DateTimeZone('Europe/Berlin'));
     $date->format('Y-m-d');
 
@@ -116,6 +120,8 @@ foreach ($workshopDateIds as $dateId) {
             'date' => $date,
             'product' => array(
                 'ID' => $workshopId,
+                'starttime' =>  $dateField['starttime'],
+                'endtime' =>  $dateField['endtime'],
                 'title' => get_the_title($workshopId),
                 'category' => get_post_type($workshopId),
                 'group' => get_field('group', $workshopId)
@@ -127,6 +133,8 @@ foreach ($workshopDateIds as $dateId) {
 /* ------------------------------------ */
 /* Holiday Workshops
 /* ------------------------------------ */
+
+// TODO: Make shure to correctly display workshops with multiple dates
 
 // Query dates
 $holidayWorkshopDateIds = get_posts(array(
@@ -155,8 +163,8 @@ $holidayWorkshopDateIds = get_posts(array(
 // Get data of dates
 $holidayWorkshopDates = [];
 foreach ($holidayWorkshopDateIds as $dateId) {
-    $date = get_field('date_1', $dateId);
-    $date = new DateTime($date['date']);
+    $dateField = get_field('date_1', $dateId);
+    $date = new DateTime($dateField['date']);
     $date->setTimezone(new DateTimeZone('Europe/Berlin'));
     $date->format('Y-m-d');
 
@@ -168,6 +176,8 @@ foreach ($holidayWorkshopDateIds as $dateId) {
             'date' => $date,
             'product' => array(
                 'ID' => $workshopId,
+                'starttime' =>  $dateField['starttime'],
+                'endtime' =>  $dateField['endtime'],
                 'title' => get_the_title($workshopId),
                 'category' => get_post_type($workshopId),
                 'group' => get_field('group', $workshopId)
@@ -191,6 +201,21 @@ foreach ($dates as $date) {
         if ($date['date'] === $day['date']) {
             $calenderGrid[$key]['products'][] = $date['product'];
         }
+    }
+}
+
+// Sort products by starttime
+// go through $calenderGrid and when products is given sort the items by starttime
+foreach ($calenderGrid as $key => $day) {
+    if (isset($day['products']) && count($day['products']) > 1) {
+        $products = $day['products'];
+        usort($products, function ($a, $b) {
+            $timeA = new DateTime($a['starttime']);
+            $timeB = new DateTime($b['starttime']);
+            // return $timeA <=> $timeB;
+            return $timeB <=> $timeA;
+        });
+        $calenderGrid[$key]['products'] = $products;
     }
 }
 
