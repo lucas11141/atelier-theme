@@ -1,5 +1,4 @@
 <?php
-// TODO: switch to ids for js element selection
 // TODO: only load dates of current month
 // TODO: when clicking on next month, load dates of next month. When clicking back the dates are still there
 
@@ -154,7 +153,7 @@ foreach ($holidayWorkshopDateIds as $dateId) {
     }
 }
 
-$calenderGrid = generateCalendarGrid(2023, 10);
+$calenderGrid = generateCalendarGrid();
 $dates = array_merge($courseDates, $workshopDates, $holidayWorkshopDates);
 
 // map $dates to $calenderGrid
@@ -238,7 +237,7 @@ function generateCalendarGrid(Int $year = null, Int $month = null)
             <?php endif; ?>
         </div>
 
-        <div class="date-overview__calendar isolate grid grid-cols-7 gap-px bg-gray-200 border border-solid border-gray-200 w-[490px] rounded-[16px] text-center overflow-hidden text-sm">
+        <div id="date-overview__calendar" class="isolate grid grid-cols-7 gap-px bg-gray-200 border border-solid border-gray-200 w-[490px] rounded-[16px] text-center overflow-hidden text-sm">
 
             <!-- Month controls -->
             <button type="button" class="calendar__prev col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10">
@@ -331,7 +330,7 @@ function generateCalendarGrid(Int $year = null, Int $month = null)
             <div class="mr-10 h-20 bg-gray-100 rounded-2xl"></div>
         </div>
 
-        <div id="date-overview__filter" class="col-start-2 flex flex-wrap gap-x-5 gap-y-3">
+        <div id="date-overview__filter" class="col-start-2 flex flex-wrap justify-center gap-x-5 gap-y-3">
             <?php foreach ($categories as $category) : ?>
                 <div id="date-overview__filter__button" class="group items-center gap-2.5 flex cursor-pointer <?= $colors[$category] ?>" data-category="<?= $category ?>" data-active="true" data-selected="false">
                     <div class="relative w-2.5 aspect-square bg-current rounded-full group-data-[selected=true]:scale-[80%] group-data-[active=false]:text-gray-300">
@@ -345,9 +344,9 @@ function generateCalendarGrid(Int $year = null, Int $month = null)
             <?php endforeach; ?>
         </div>
 
-        <div class="date-overview__list w-full row-start-2 flex-1 ml-auto flex flex-col justify-start items-stretch gap-3.5">
+        <div id="date-overview__list" class="w-full row-start-2 flex-1 ml-auto flex flex-col justify-start items-stretch gap-3.5">
             <div class="flex items-center gap-4">
-                <span class="text-sm font-extrabold uppercase leading-none">Oktober</span>
+                <span class="text-sm font-extrabold uppercase leading-none"><?= $month = date('F'); ?></span>
                 <div class="h-px w-px flex-auto bg-gray-200"></div>
             </div>
 
@@ -364,7 +363,7 @@ function generateCalendarGrid(Int $year = null, Int $month = null)
                 if (empty($products)) continue; ?>
 
                 <?php foreach ($products as $product) : ?>
-                    <div class="date-overview__list__item bg-white rounded-2xl shadow border border-solid border-gray-200 justify-start items-stretch flex <?= $colors[$product['category']] ?> data-[active=false]:hidden" data-product-id="<?= $product['ID'] ?>" data-product-category="<?= $product['category'] ?>" data-date="<?= $date['date'] ?>">
+                    <div id="date-overview__list__item" class="bg-white rounded-2xl shadow border border-solid border-gray-200 justify-start items-stretch flex <?= $colors[$product['category']] ?> data-[active=false]:hidden" data-product-id="<?= $product['ID'] ?>" data-product-category="<?= $product['category'] ?>" data-date="<?= $date['date'] ?>">
                         <div class="w-20 p-5 bg-gray-50 border-r border-solid border-gray-200 flex flex-col items-center">
                             <div class="text-main text-[22px] font-bold uppercase leading-relaxed"><?= $date['day'] ?></div>
                             <div class="text-gray-300 text-xs font-bold uppercase leading-[13.80px]"><?= $date['month'] ?></div>

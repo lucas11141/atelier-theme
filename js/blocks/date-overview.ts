@@ -131,7 +131,7 @@ export default function dateOverview() {
 		constructor(container) {
 			this.container = container;
 			this.dateItems = this.container.querySelectorAll(
-				".date-overview__list__item"
+				"#date-overview__list__item"
 			);
 
 			this.initEventListeners();
@@ -306,14 +306,16 @@ export default function dateOverview() {
 	}
 
 	const calendarElement = document.querySelector(
-		".date-overview__calendar"
+		"#date-overview__calendar"
 	) as HTMLElement;
 	const listElement = document.querySelector(
-		".date-overview__list"
+		"#date-overview__list"
 	) as HTMLElement;
 	const filterElement = document.querySelector(
 		"#date-overview__filter"
 	) as HTMLElement;
+
+	console.log(calendarElement, listElement, filterElement);
 
 	if (!calendarElement || !listElement || !filterElement)
 		throw new Error("No calendar, list or filter element found");
