@@ -71,6 +71,8 @@ body {
 	left: 0px;
 	transform: translateZ(1px);
 	pointer-events: none;
+	user-select: none;
+
 	&--gray {
 		mix-blend-mode: darken;
 	}

@@ -1,3 +1,6 @@
+import $ from "jquery";
+import dateOverview from "./blocks/date-overview";
+
 // @prepros-prepend "options/variables.js";
 // @prepros-prepend "lib/jquery.magnific-popup.min.js";
 // @prepros-prepend "lib/mc-calendar.min.js";
@@ -6,7 +9,10 @@
 // @prepros-prepend "scripts/websiteMode.js";
 // @prepros-prepend "functions/scrollView.js";
 
+
 jQuery(document).ready(function ($) {
+	dateOverview(); // date-overview.ts
+
 	function onElementLoad(selector, execution) {
 		const observer = new MutationObserver((mutations) => {
 			if (document.querySelectorAll(selector).length > 0) {

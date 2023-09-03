@@ -1,0 +1,28 @@
+.hero-rounded {
+	&__content {
+		@include flex-row;
+	}
+
+	&__text {
+		width: min-content;
+	}
+}
+
+.date-overview__filter {
+	&__button {
+		&.--selected {
+			&::before {
+				content: "";
+				width: calc(100% + 6px);
+				aspect-ratio: 1;
+				border: solid 1.5px currentColor;
+				@include pos-center;
+			}
+		}
+
+		&.--inactive {
+		}
+	}
+}
+
+// create scss variable that saves an array of: course-child, course-adult, workshop, holiday_workshop

@@ -340,7 +340,7 @@ $archive-gap: 20px;
 					white-space: nowrap;
 					overflow: hidden;
 					&:hover {
-						background-color: lighten($main, 5%);
+						background-color: $main--lighten;
 					}
 				}
 				&.prev {

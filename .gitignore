@@ -3,3 +3,4 @@ vendor
 composer.lock
 atelier_theme/assets/css/main.css
 atelier_theme/assets/css/main.css.map
+/node_modules

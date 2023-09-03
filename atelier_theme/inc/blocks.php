@@ -457,6 +457,21 @@ function my_acf_init()
                 'align' => false,
             )
         );
+
+        acf_register_block(
+            array(
+                'name' => 'date-overview',
+                'title' => __('Terminüberblick'),
+                'description' => __(''),
+                'render_callback' => 'my_acf_block_render_callback',
+                'category' => 'design',
+                'category' => 'inhaltselemente',
+                'mode' => 'edit',
+                'keywords' => array('termin', 'übersicht'),
+                'align' => false,
+                'supports' => array('anchor' => true)
+            )
+        );
     }
 }
 

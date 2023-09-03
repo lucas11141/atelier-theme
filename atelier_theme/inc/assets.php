@@ -6,6 +6,9 @@ function atelier_styles()
 
     wp_register_style('atelierstyle', get_template_directory_uri() . '/assets/css/main.css', array(), '1.1.2', 'all');
     wp_enqueue_style('atelierstyle'); // Enqueue it!
+
+    wp_register_style('ateliertailwind', get_template_directory_uri() . '/assets/css/tailwind.css', array(), '1.1.2', 'all');
+    wp_enqueue_style('ateliertailwind'); // Enqueue it!
 }
 
 function atelier_header_scripts()

@@ -24,40 +24,41 @@
 			"/* Block name: \t${1:Unbenannter Block}",
 			"/*------------------------------------*/",
 			"",
-			"$$id = $$block['id'];",
+			"$$id = $$block['anchor'] ?? $$block['id'];",
 			"",
 			"// ACF Fields",
-			"$$field = get_field('field');",
+			"$$feld = get_field('feld');",
 			"?>",
 			"",
 			"<div class=\"${2:unnamed-block}\" id=\"<?php echo $$id; ?>\">",
 			"\t$3",
 			"</div>"
 		],
-		"description": "TBC"
+		"description": "Beinhalted das Basisgerüst für einen neuen Template Part."
 	},
 	"ACF Repeater (foreach)": {
 		"scope": "php,html",
 		"prefix": "acffe",
 		"body": [
-			"<?php if( !empty($${1:field}) ): ?>",
-			"\t<?php foreach( $${1:field} as $${1:field}_item ):",
-			"\t\t$${2:subfield} = $${1:field}_item['${2:subfield}']; ?>",
+			"<?php if( !empty($${1:feld}) ): ?>",
+			"\t<?php foreach( $${1:feld} as $${1:feld}Item ):",
+			"\t\t$${2:unterfeld} = $${1:feld}Item['${2:unterfeld}']; ?>",
 			"",
 			"\t\t\t${3:<div></div>}",
 			"",
 			"\t<?php endforeach; ?>",
 			"<?php endif; ?>"
-		]
+		],
+		"description": "Beinhalted das Basisgerüst für die Ausgabe eines ACF-Feldes 'Wiederholung'."
 	},
-	"Comment Section": {
-		"scope": "scss,css,javascript",
+	"SCSS Section": {
+		"scope": "scss,css,javascript,typescript",
 		"prefix": "se",
 		"body": [
 			"/*------------------------------------*/",
 			"/* \t${1:Section Name}",
 			"/*------------------------------------*/"
 		],
-		"description": "TBC"
+		"description": "Nutzte diese Snippet um eine neue Section zu kommentieren."
 	}
 }

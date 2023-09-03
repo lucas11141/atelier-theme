@@ -1,0 +1,241 @@
+.hero-rounded {
+	padding-top: 1px;
+	width: 100%;
+	background-color: $main;
+	position: relative;
+
+	&__content {
+		@extend .wrapper;
+		z-index: 1;
+	}
+
+	&__text {
+		h1 {
+			padding: 0;
+			color: white;
+		}
+		h5 {
+			color: $accent;
+		}
+	}
+
+	&__circle--new {
+		height: 300px;
+		width: 100%;
+		position: absolute;
+		bottom: -200px;
+		left: 50%;
+		transform: translateX(-50%);
+		pointer-events: none;
+		user-select: none;
+		overflow: hidden;
+
+		&::after {
+			content: "";
+			width: 18000px;
+			min-width: calc(100vw * 15);
+			aspect-ratio: 1;
+			border-radius: 50%;
+			background-color: white;
+			position: absolute;
+			top: 0;
+			left: 75%;
+			translate: -50%;
+		}
+	}
+
+	// @media only screen and (max-width: $desktop) {
+	// 	.kontakt__methods {
+	// 		flex-wrap: wrap;
+	// 		column-gap: 20px;
+	// 		row-gap: 20px;
+	// 		.methods__item {
+	// 			width: calc(50% - 10px);
+	// 			max-width: calc(50% - 10px);
+	// 			min-height: 120px;
+	// 			flex: auto;
+	// 			&:hover,
+	// 			&::after,
+	// 			&.--active {
+	// 				transform: none;
+	// 			}
+	// 			&::after {
+	// 				width: calc(100% + 14px);
+	// 				height: calc(100% + 14px);
+	// 				border-radius: 22px;
+	// 				left: -7px;
+	// 				top: -7px;
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// @media only screen and (max-width: $tablet) {
+	// 	margin-bottom: -270px;
+	// 	padding-bottom: 350px;
+	// 	.banner__text {
+	// 		padding-top: 25px;
+	// 		column-gap: 20px;
+	// 		img {
+	// 			width: 150px;
+	// 		}
+	// 	}
+	// 	.kontakt__methods {
+	// 		margin-top: 35px;
+	// 		.methods__item {
+	// 			padding: 22px;
+	// 			width: 100%;
+	// 			max-width: 100%;
+	// 			min-height: unset;
+	// 			p {
+	// 				padding-top: 8px;
+	// 			}
+	// 			&::before {
+	// 				content: unset;
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// @media only screen and (max-width: $mobile) {
+	// 	.banner__text {
+	// 		padding-top: 30px;
+	// 		img {
+	// 			display: none;
+	// 		}
+	// 	}
+	// 	.kontakt__methods {
+	// 		row-gap: 15px;
+	// 	}
+	// }
+}
+// .kontakt__forms {
+// 	margin-top: 70px;
+// 	transition: height 500ms ease-in-out;
+// 	.form__dummy {
+// 		position: relative;
+// 		p {
+// 			font-weight: 700;
+// 			position: absolute;
+// 			top: 3px;
+// 			left: 50%;
+// 			transform: translateX(-50%);
+// 			white-space: nowrap;
+// 		}
+// 		.dummy__item {
+// 			background-color: $lightgray;
+// 			border-radius: 8px;
+// 			&.dummy__title {
+// 				width: 210px;
+// 				height: 30px;
+// 			}
+// 			&.dummy__input {
+// 				width: 100%;
+// 				height: 50px;
+// 			}
+// 			&.dummy__textarea {
+// 				width: 100%;
+// 				height: 205px;
+// 			}
+// 		}
+// 		.flex-row {
+// 			margin-top: 35px;
+// 			.flex-column {
+// 				width: calc(50% - 15px);
+// 				row-gap: 26px;
+// 			}
+// 		}
+// 	}
+// 	.methods__content {
+// 		h4 {
+// 			padding: 0 0 30px;
+// 			img {
+// 				margin-right: 10px;
+// 				height: 20px;
+// 				transform: translateY(-1px);
+// 			}
+// 		}
+// 		&.--hidden {
+// 			display: none;
+// 		}
+// 	}
+// 	@media only screen and (max-width: $desktop) {
+// 		margin-top: 50px;
+// 		.form__dummy {
+// 			padding-top: 20px;
+// 			p {
+// 				top: 23px;
+// 			}
+// 		}
+// 	}
+// 	@media only screen and (max-width: $tablet) {
+// 		margin-top: 40px;
+// 		.form__dummy {
+// 			.dummy__title {
+// 				opacity: 0;
+// 			}
+// 			.flex-row {
+// 				flex-direction: column;
+// 				.flex-column {
+// 					width: 100%;
+// 					&:last-of-type {
+// 						display: none;
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+// .contact__list {
+// 	@include flex-row();
+// 	.contact__item {
+// 		padding: 28px 20px;
+// 		width: calc(50% - 15px);
+// 		@include flex-row();
+// 		justify-content: flex-start;
+// 		align-items: center;
+// 		column-gap: 20px;
+// 		background-color: white;
+// 		border-radius: 15px;
+// 		box-shadow: $shadow_stardard;
+// 		transition: transform 300ms ease-in-out;
+// 		img {
+// 			height: 42px;
+// 			opacity: 0.25;
+// 		}
+// 		div {
+// 			h6 {
+// 				padding: 0;
+// 			}
+// 			h4 {
+// 				padding: 5px 0 0;
+// 				font-weight: 700;
+// 			}
+// 		}
+// 		&:hover {
+// 			transform: scale(1.02);
+// 		}
+// 	}
+// 	@media only screen and (max-width: $desktop) {
+// 		.contact__item {
+// 			padding: 24px 18px;
+// 			img {
+// 				height: 38px;
+// 			}
+// 			&:hover {
+// 				transform: none;
+// 			}
+// 		}
+// 	}
+// 	@media only screen and (max-width: $tablet) {
+// 		.contact__item {
+// 			width: 100%;
+// 		}
+// 	}
+// }
+
+// .flex-row {
+// 	@include flex-row();
+// }
+// .flex-column {
+// 	@include flex-column();
+// }

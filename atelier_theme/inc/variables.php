@@ -15,3 +15,9 @@ function custom_setup_globals()
     $websiteMode = 'atelier';
 }
 add_action('init', 'custom_setup_globals');
+
+
+
+if (ENV === 'development') {
+} else {
+}

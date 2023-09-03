@@ -8,6 +8,10 @@ Author: Andrew Wilson
 Author URI: https://youtube.com/followandrew
 */
 
+:root {
+	--color-main: #001e34;
+}
+
 // colors
 $main: #001e34;
 $main-light: #152f43;
@@ -17,7 +21,7 @@ $second: #55d045;
 $accent: $second;
 $accent-dark: #44ad36;
 $accent--darken: darken($accent, 8%);
-$text: #001e34;
+$text: var(--color-main);
 $red: rgb(218, 15, 15);
 $red: #c3241b;
 $dark-red: #c3241b;
@@ -147,6 +151,7 @@ $max-vw: $ft-max-vp;
 @import "layout/forms";
 @import "layout/popups";
 @import "layout/lightbox";
+@import "layout/hero-rounded";
 
 // shop
 @import "shop/shop";
@@ -190,6 +195,7 @@ $max-vw: $ft-max-vp;
 @import "blocks/faq";
 @import "blocks/media-text";
 @import "blocks/hero-banner";
+@import "blocks/date-overview";
 
 //shop blocks
 @import "blocks/shop-hero-banner";
