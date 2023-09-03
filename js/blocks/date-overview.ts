@@ -41,6 +41,7 @@ export default function dateOverview() {
 				}
 
 				this.calendar.renderDates(this.currentYear, this.currentMonth);
+				this.list.renderDates(this.currentYear, this.currentMonth);
 			});
 
 			this.calendar.onPrev(() => {
@@ -53,6 +54,7 @@ export default function dateOverview() {
 				}
 
 				this.calendar.renderDates(this.currentYear, this.currentMonth);
+				this.list.renderDates(this.currentYear, this.currentMonth);
 			});
 
 			// this.calendar.onRender(() => {
@@ -337,6 +339,16 @@ export default function dateOverview() {
 	class DateOverviewList {
 		container: HTMLElement;
 		dateItems: NodeListOf<HTMLElement>;
+		renderedMonths: {
+			year: number;
+			month: number;
+		}[] = [
+			{
+				year: new Date().getFullYear(),
+				month: new Date().getMonth() + 1,
+			},
+		];
+		monthDays: NodeListOf<HTMLElement>;
 
 		// Event listeners
 		private onFilterProductCallback: (
@@ -348,6 +360,9 @@ export default function dateOverview() {
 			this.container = container;
 			this.dateItems = this.container.querySelectorAll(
 				"#date-overview__list__item"
+			);
+			this.monthDays = this.container.querySelectorAll(
+				"#date-overview__list__days"
 			);
 
 			this.initEventListeners();
@@ -401,6 +416,69 @@ export default function dateOverview() {
 				} else {
 					throw new Error("Invalid filter type");
 				}
+			});
+		}
+
+		public renderDates(year: number, month: number) {
+			const thisClone = this;
+
+			// Skip ajax if month is already rendered
+			if (
+				this.renderedMonths.find(
+					(renderedMonth) =>
+						renderedMonth.year === year &&
+						renderedMonth.month === month
+				)
+			) {
+				this.monthDays.forEach((monthItem) => {
+					if (
+						monthItem.dataset.year === `${year}` &&
+						monthItem.dataset.month === `${month}`
+					) {
+						monthItem.style.display = "flex";
+					} else {
+						monthItem.style.display = "none";
+					}
+				});
+				return;
+			}
+
+			$.ajax({
+				// @ts-ignore
+				url: ajaxurl,
+				type: "POST",
+				data: {
+					action: "render_date_overview_calender_items_2", // Dies sollte mit dem in add_action definierten Haken übereinstimmen
+					year,
+					month,
+				},
+				success: function (response) {
+					console.log(response);
+
+					thisClone.monthDays.forEach((month) => {
+						month.style.display = "none";
+					});
+
+					// Den geladenen Inhalt in die Seite einfügen
+					thisClone.container.insertAdjacentHTML(
+						"beforeend",
+						response
+					);
+
+					// push new month to this.monthDays#
+					thisClone.monthDays = thisClone.container.querySelectorAll(
+						"#date-overview__list__days"
+					);
+
+					thisClone.renderedMonths.push({
+						year,
+						month,
+					});
+
+					// // Trigger onRender event
+					// if (thisClone.onRenderCallback)
+					// 	thisClone.onRenderCallback();
+				},
 			});
 		}
 

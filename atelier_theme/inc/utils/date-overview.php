@@ -246,7 +246,7 @@ function generateCalendarGrid($year = null, $month = null)
     return $calendarGrid;
 }
 
-function renderCalendar($calendarGrid, $year, $month)
+function getDateOverviewCalendarDays($calendarGrid, $year, $month)
 {
     // TODO: globalize colors
     $colors = [
@@ -255,7 +255,6 @@ function renderCalendar($calendarGrid, $year, $month)
         'workshop' => 'text-red-500',
         'holiday_workshop' => 'text-yellow-500',
     ];
-
 
     $content = '<div id="date-overview__calendar__days" class="col-span-full grid grid-cols-7 gap-px full" data-year="' . $year . '" data-month="' . $month . '">';
 
@@ -309,6 +308,55 @@ function renderCalendar($calendarGrid, $year, $month)
             ';
         }
     }
+
+    $content .= '</div>';
+
+    echo $content;
+}
+
+function getDateOverviewDaysList($calendarGrid, $year, $month)
+{
+    // TODO: globalize colors
+    $colors = [
+        'course-child' => 'text-cyan-400',
+        'course-adult' => 'text-indigo-600',
+        'workshop' => 'text-red-500',
+        'holiday_workshop' => 'text-yellow-500',
+    ];
+
+    $content = '<div id="date-overview__list__days" class="flex flex-col justify-start items-stretch gap-3.5" data-year="' . $year . '" data-month="' . $month . '">';
+
+    foreach ($calendarGrid as $date) {
+        $products = $date['products'] ?? false;
+
+        // skip if no products
+        if (!isset($products) || empty($products)) continue;
+
+        foreach ($products as $product) {
+            $content .= '
+            <div id="date-overview__list__item" class="bg-white rounded-2xl shadow border border-solid border-gray-200 justify-start items-stretch flex ' . $colors[$product['category']] . '" data-[active=false]:hidden" data-product-id="' . $product['ID'] . '" data-product-category="' . $product['category'] . '" data-date="' . $date['date'] . '">
+                <div class="w-20 p-5 bg-gray-50 border-r border-solid border-gray-200 flex flex-col items-center">
+                    <div class="text-main text-[22px] font-bold uppercase leading-relaxed">' . $date['day'] . '</div>
+                    <div class="text-gray-300 text-xs font-bold uppercase leading-[13.80px]">' . $date['month'] . '</div>
+                </div>
+                <div class="flex-auto px-6 py-4 justify-between items-center gap-2.5 flex">
+                    <div class="flex-col justify-start items-start gap-1.5 inline-flex">
+                        <div class="text-main text-base font-extrabold uppercase leading-[18.40px]">' . $product['title'] . '</div>
+                        <div class="text-current text-sm font-extrabold uppercase leading-none">' . $product['category'] . '</div>
+                    </div>
+                    <div class="justify-start items-center gap-3.5 flex">
+                        <div class="filter-button w-9 h-9 py-[18px] bg-gray-50 rounded-[10px] border border-gray-100 justify-center items-center gap-2.5 flex"></div>
+                        <div class="w-9 h-9 py-[18px] bg-current rounded-[10px] justify-center items-center gap-2.5 flex">
+                            <div class="w-[15px] h-[15px] relative"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ';
+        }
+    }
+
+    $content .= '</div>';
 
     echo $content;
 }

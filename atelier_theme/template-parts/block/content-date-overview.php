@@ -72,7 +72,6 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
                 </span>
             </button>
 
-
             <!-- Weekdays -->
             <?php $weekdays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']; ?>
             <?php foreach ($weekdays as $weekday) : ?>
@@ -81,57 +80,8 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
                 </span>
             <?php endforeach; ?>
 
-            <div id="date-overview__calendar__days" class="col-span-full grid grid-cols-7 gap-px full" data-year="<?= $target_year ?>" data-month="<?= $target_month ?>">
-                <!-- Days -->
-                <?php foreach ($calendarGrid as $index => $date) : ?>
-                    <?php if ($date['currentMonth']) :
-                        if (!empty($date['products'])) :
-                            $products = $date['products'];
-
-                            // safe product ids in one string
-                            $productIds = '';
-                            foreach ($products as $product) {
-                                $productIds .= $product['ID'] . ',';
-                            }
-                            $productIds = rtrim($productIds, ',');
-
-                            $productCategories = '';
-                            foreach ($products as $product) {
-                                $productCategories .= $product['category'] . ',';
-                            }
-                            $productCategories = rtrim($productCategories, ',');
-                    ?>
-                            <button type="button" id="date-overview__calendar__day" class="group relative bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10" data-product-ids="<?= $productIds ?>" data-product-categories="<?= $productCategories ?>" data-date="<?= $date['date'] ?>" data-active="true">
-
-                                <time class="mx-auto my-1 w-7 h-7 overflow-hidden relative rounded-lg border border-black border-opacity-5 flex-col justify-center items-center flex" datetime="<?= $date['date'] ?>" data-group="<?= $date['group'] ?>" data-category="<?= $product['category'] ?>">
-                                    <div class="text-white text-sm font-semibold uppercase leading-[14px] z-10"><?= $date['day'] ?></div>
-                                    <div class="absolute flex inset-0 rotate-45 scale-125 pointer-none bg-gray-300">
-                                        <?php foreach ($products as $product) : ?>
-                                            <div id="date-overview__calendar__product-part" class="h-full w-px flex-auto bg-current <?= $colors[$product['category']] ?> group-data-[active=false]:bg-gray-300 data-[active=false]:hidden" data-product-id="<?= $product['ID'] ?>" data-product-category="<?= $product['category'] ?>" data-active="true"></div>
-                                        <?php endforeach; ?>
-                                    </div>
-                                </time>
-
-                            </button>
-
-                        <?php else : ?>
-
-                            <button id="date-overview__calendar__day" type="button" class="relative bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10">
-                                <time datetime="<?= $date['date'] ?>" data-product-ids="<?= $productIds ?>" class="mx-auto flex h-9 w-9 items-center justify-center rounded-full"><?= $date['day'] ?></time>
-                            </button>
-
-                        <?php endif; ?>
-                    <?php else : ?>
-
-                        <button id="date-overview__calendar__day" type="button" class="relative bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
-                            <time datetime="<?= $date['date'] ?>" data-product-ids="<?= $productIds ?>" class="mx-auto flex h-9 w-9 items-center justify-center rounded-full"><?= $date['day'] ?></time>
-                        </button>
-
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </div>
-
-
+            <!-- Render the calender days component -->
+            <?php getDateOverviewCalendarDays($calendarGrid, $target_year, $target_month) ?>
         </div>
 
     </div>
@@ -167,39 +117,15 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
             <?php endforeach; ?>
         </div>
 
-        <div id="date-overview__list" class="w-full row-start-2 flex-1 ml-auto flex flex-col justify-start items-stretch gap-3.5">
+        <div class="w-full row-start-2 flex-1 ml-auto">
             <div class="flex items-center gap-4">
                 <span class="text-sm font-extrabold uppercase leading-none"><?= $month = date('F'); ?></span>
                 <div class="h-px w-px flex-auto bg-gray-200"></div>
             </div>
 
-            <?php foreach ($calendarGrid as $date) :
-                $products = $date['products'] ?? false;
-
-                // skip if no products
-                if (!isset($products) || empty($products)) continue; ?>
-
-                <?php foreach ($products as $product) : ?>
-                    <div id="date-overview__list__item" class="bg-white rounded-2xl shadow border border-solid border-gray-200 justify-start items-stretch flex <?= $colors[$product['category']] ?> data-[active=false]:hidden" data-product-id="<?= $product['ID'] ?>" data-product-category="<?= $product['category'] ?>" data-date="<?= $date['date'] ?>">
-                        <div class="w-20 p-5 bg-gray-50 border-r border-solid border-gray-200 flex flex-col items-center">
-                            <div class="text-main text-[22px] font-bold uppercase leading-relaxed"><?= $date['day'] ?></div>
-                            <div class="text-gray-300 text-xs font-bold uppercase leading-[13.80px]"><?= $date['month'] ?></div>
-                        </div>
-                        <div class="flex-auto px-6 py-4 justify-between items-center gap-2.5 flex">
-                            <div class="flex-col justify-start items-start gap-1.5 inline-flex">
-                                <div class="text-main text-base font-extrabold uppercase leading-[18.40px]"><?= $product['title'] ?></div>
-                                <div class="text-current text-sm font-extrabold uppercase leading-none"><?= $product['category'] ?></div>
-                            </div>
-                            <div class="justify-start items-center gap-3.5 flex">
-                                <div class="filter-button w-9 h-9 py-[18px] bg-gray-50 rounded-[10px] border border-gray-100 justify-center items-center gap-2.5 flex"></div>
-                                <div class="w-9 h-9 py-[18px] bg-current rounded-[10px] justify-center items-center gap-2.5 flex">
-                                    <div class="w-[15px] h-[15px] relative"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php endforeach; ?>
+            <div id="date-overview__list">
+                <?php getDateOverviewDaysList($calendarGrid, $target_year, $target_month) ?>
+            </div>
         </div>
     </div>
 </div>
