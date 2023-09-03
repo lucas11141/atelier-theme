@@ -1,5 +1,4 @@
 <?php
-// TODO: only load dates of current month
 // TODO: when clicking on next month, load dates of next month. When clicking back the dates are still there
 
 /*------------------------------------*/
@@ -24,6 +23,9 @@ $categories = array_keys($colors);
 
 // TODO: Create array with better structure for filters
 
+$target_month = 9; // Hier kannst du den gewünschten Monat festlegen, z.B. 8 für August
+$target_year = date('Y'); // Aktuelles Jahr
+
 /* ------------------------------------ */
 /* Courses
 /* ------------------------------------ */
@@ -32,9 +34,17 @@ $categories = array_keys($colors);
 $courseDateIds = get_posts(array(
     'post_type' => 'course_date',
     'posts_per_page' => -1,
-    'orderby' => 'date',
-    'order' => 'ASC',
     'fields' => 'ids',
+
+    // Get all dates of current month
+    'meta_query'     => array(
+        array(
+            'key'     => 'date', // Name des ACF-Felds
+            'value'   => array($target_year . "-" . $target_month . "-01", $target_year . "-" . $target_month . "-31"), // Format: JJJJ-MM-TT
+            'compare' => 'BETWEEN', // Abgleich auf einen Wert zwischen dem 1. und letzten Tag des Monats
+            'type'    => 'DATE',
+        ),
+    ),
 ));
 
 // Get data of dates
@@ -43,14 +53,7 @@ foreach ($courseDateIds as $dateId) {
     $date = get_field('date', $dateId);
     $date = new DateTime($date);
     $date->setTimezone(new DateTimeZone('Europe/Berlin'));
-    $date->format('Y-m-d H:i:s');
-
-    // exit if date is in the past
-    if ($date < new DateTime('today')) {
-        continue;
-    }
-
-    // TODO: Only get dates of current month
+    $date->format('Y-m-d');
 
     // get all courses of this date
     $courseTimes = get_field('course_time', $dateId);
@@ -77,9 +80,24 @@ foreach ($courseDateIds as $dateId) {
 $workshopDateIds = get_posts(array(
     'post_type' => 'workshop_date',
     'posts_per_page' => -1,
-    'orderby' => 'date',
-    'order' => 'ASC',
     'fields' => 'ids',
+
+    // Get all items with date in current month
+    'meta_query'     => array(
+        'relation' => 'OR',
+        array(
+            'key'     => 'date_1_date', // Name des ACF-Felds
+            'value'   => array($target_year . "-" . $target_month . "-01", $target_year . "-" . $target_month . "-31"), // Format: JJJJ-MM-TT
+            'compare' => 'BETWEEN', // Abgleich auf einen Wert zwischen dem 1. und letzten Tag des Monats
+            'type'    => 'DATE',
+        ),
+        array(
+            'key'     => 'date_2_date', // Name des ACF-Felds
+            'value'   => array($target_year . "-" . $target_month . "-01", $target_year . "-" . $target_month . "-31"), // Format: JJJJ-MM-TT
+            'compare' => 'BETWEEN', // Abgleich auf einen Wert zwischen dem 1. und letzten Tag des Monats
+            'type'    => 'DATE',
+        ),
+    ),
 ));
 
 // Get data of dates
@@ -88,12 +106,7 @@ foreach ($workshopDateIds as $dateId) {
     $date = get_field('date_1', $dateId);
     $date = new DateTime($date['date']);
     $date->setTimezone(new DateTimeZone('Europe/Berlin'));
-    $date->format('Y-m-d H:i:s');
-
-    // exit if date is in the past
-    if ($date < new DateTime('today')) {
-        continue;
-    }
+    $date->format('Y-m-d');
 
     // get all workshops of this date
     $workshops = get_field('workshop', $dateId);
@@ -119,23 +132,33 @@ foreach ($workshopDateIds as $dateId) {
 $holidayWorkshopDateIds = get_posts(array(
     'post_type' => 'h_workshop_date',
     'posts_per_page' => -1,
-    'orderby' => 'date',
-    'order' => 'ASC',
     'fields' => 'ids',
+
+    // Get all items with date in current month
+    'meta_query'     => array(
+        'relation' => 'OR',
+        array(
+            'key'     => 'date_1_date', // Name des ACF-Felds
+            'value'   => array($target_year . "-" . $target_month . "-01", $target_year . "-" . $target_month . "-31"), // Format: JJJJ-MM-TT
+            'compare' => 'BETWEEN', // Abgleich auf einen Wert zwischen dem 1. und letzten Tag des Monats
+            'type'    => 'DATE',
+        ),
+        array(
+            'key'     => 'date_2_date', // Name des ACF-Felds
+            'value'   => array($target_year . "-" . $target_month . "-01", $target_year . "-" . $target_month . "-31"), // Format: JJJJ-MM-TT
+            'compare' => 'BETWEEN', // Abgleich auf einen Wert zwischen dem 1. und letzten Tag des Monats
+            'type'    => 'DATE',
+        ),
+    ),
 ));
 
 // Get data of dates
 $holidayWorkshopDates = [];
 foreach ($holidayWorkshopDateIds as $dateId) {
-    $date = get_field('date', $dateId);
-    $date = new DateTime($date);
+    $date = get_field('date_1', $dateId);
+    $date = new DateTime($date['date']);
     $date->setTimezone(new DateTimeZone('Europe/Berlin'));
-    $date->format('Y-m-d H:i:s');
-
-    // exit if date is in the past
-    if ($date < new DateTime('today')) {
-        continue;
-    }
+    $date->format('Y-m-d');
 
     // get all workshops of this date
     $workshops = get_field('workshop', $dateId);
@@ -152,6 +175,10 @@ foreach ($holidayWorkshopDateIds as $dateId) {
         );
     }
 }
+
+/* ------------------------------------ */
+/* Create Calendar Grid data
+/* ------------------------------------ */
 
 $calenderGrid = generateCalendarGrid();
 $dates = array_merge($courseDates, $workshopDates, $holidayWorkshopDates);
@@ -350,17 +377,11 @@ function generateCalendarGrid(Int $year = null, Int $month = null)
                 <div class="h-px w-px flex-auto bg-gray-200"></div>
             </div>
 
-            <?php
-            // remove all items not in current month
-            $calenderGrid = array_filter($calenderGrid, function ($date) {
-                return $date['currentMonth'];
-            });
-            ?>
             <?php foreach ($calenderGrid as $date) :
-                $products = $date['products'];
+                $products = $date['products'] ?? false;
 
                 // skip if no products
-                if (empty($products)) continue; ?>
+                if (!isset($products) || empty($products)) continue; ?>
 
                 <?php foreach ($products as $product) : ?>
                     <div id="date-overview__list__item" class="bg-white rounded-2xl shadow border border-solid border-gray-200 justify-start items-stretch flex <?= $colors[$product['category']] ?> data-[active=false]:hidden" data-product-id="<?= $product['ID'] ?>" data-product-category="<?= $product['category'] ?>" data-date="<?= $date['date'] ?>">
