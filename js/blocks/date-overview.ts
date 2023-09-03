@@ -3,6 +3,7 @@ export default function dateOverview() {
 		calendar: DateOverviewCalendar;
 		list: DateOverviewList;
 		filter: DateOverviewFilter;
+		currentMonth: number;
 
 		constructor(
 			calendarElement: HTMLElement,
@@ -12,14 +13,26 @@ export default function dateOverview() {
 			this.calendar = new DateOverviewCalendar(calendarElement);
 			this.list = new DateOverviewList(listElement);
 			this.filter = new DateOverviewFilter(filterElement);
+			this.currentMonth = new Date().getMonth() + 1;
+			console.log(this.currentMonth);
 
 			this.initEventListeners();
 		}
 
 		initEventListeners() {
-			this.calendar.onSelect(() => {
-				console.log("onSelect");
+			this.calendar.onSelect((date) => {
+				this.list.scrollToItem(date);
 				// TODO: Scroll to item in list
+			});
+
+			this.calendar.onNext(() => {
+				this.currentMonth++;
+				console.log("next");
+			});
+
+			this.calendar.onPrev(() => {
+				this.currentMonth--;
+				console.log("prev");
 			});
 
 			this.filter.onFilterCategory((category) => {
@@ -45,21 +58,23 @@ export default function dateOverview() {
 		dateButtons: NodeListOf<HTMLElement>;
 
 		// Event listeners
-		private onSelectCallback: () => void;
+		private onSelectCallback: (date: string) => void;
+		private onNextCallback: () => void;
+		private onPrevCallback: () => void;
 
 		constructor(container) {
 			this.container = container;
 			this.monthLabel = this.container.querySelector(
-				".calendar__month"
+				"#calendar__month"
 			) as HTMLElement;
 			this.nextButton = this.container.querySelector(
-				".calendar__next"
+				"#calendar__next"
 			) as HTMLElement;
 			this.prevButton = this.container.querySelector(
-				".calendar__prev"
+				"#calendar__prev"
 			) as HTMLElement;
 			this.dateButtons =
-				this.container.querySelectorAll(".calendar__day");
+				this.container.querySelectorAll("#calendar__day");
 
 			this.initEventListeners();
 		}
@@ -67,9 +82,28 @@ export default function dateOverview() {
 		initEventListeners() {
 			this.dateButtons.forEach((day) => {
 				day.addEventListener("click", (e) => {
-					// TODO: Only trigger when day is active
-					if (this.onSelectCallback) this.onSelectCallback();
+					const target = e.currentTarget as HTMLElement;
+					const date = target.dataset.date;
+
+					// Do nothing when button is inactive
+					if (target.dataset.active === "false") return;
+
+					// Error handling
+					if (!date) throw new Error("No date found");
+
+					// Trigger onSelect event
+					if (this.onSelectCallback) this.onSelectCallback(date);
 				});
+			});
+
+			this.nextButton.addEventListener("click", (e) => {
+				// Trigger onNext event
+				if (this.onNextCallback) this.onNextCallback();
+			});
+
+			this.prevButton.addEventListener("click", (e) => {
+				// Trigger onPrev event
+				if (this.onPrevCallback) this.onPrevCallback();
 			});
 		}
 
@@ -142,8 +176,16 @@ export default function dateOverview() {
 			});
 		}
 
-		public onSelect(callback: () => void) {
+		public onSelect(callback: (date: string) => void) {
 			this.onSelectCallback = callback;
+		}
+
+		public onNext(callback: () => void) {
+			this.onNextCallback = callback;
+		}
+
+		public onPrev(callback: () => void) {
+			this.onPrevCallback = callback;
 		}
 	}
 
@@ -222,6 +264,22 @@ export default function dateOverview() {
 				} else {
 					throw new Error("Invalid filter type");
 				}
+			});
+		}
+
+		public scrollToItem(date: string) {
+			// TODO: Add short animation to catch attention
+
+			const item = this.container.querySelector(
+				`#date-overview__list__item[data-date="${date}"]`
+			) as HTMLElement;
+
+			if (!item) throw new Error("No item found");
+
+			item.scrollIntoView({
+				behavior: "smooth",
+				block: "center",
+				inline: "center",
 			});
 		}
 

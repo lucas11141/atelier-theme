@@ -292,7 +292,7 @@ function generateCalendarGrid(Int $year = null, Int $month = null)
         <div id="date-overview__calendar" class="isolate grid grid-cols-7 gap-px bg-gray-200 border border-solid border-gray-200 w-[490px] rounded-[16px] text-center overflow-hidden text-sm">
 
             <!-- Month controls -->
-            <button type="button" class="calendar__prev col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10">
+            <button type="button" id="calendar__prev" class="col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10">
                 <span class="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold">
                     <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.75 9L1.75 5L5.75 1" stroke="#001E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -300,9 +300,9 @@ function generateCalendarGrid(Int $year = null, Int $month = null)
                 </span>
             </button>
             <div class="font-extrabold uppercase leading-none bg-gray-50 col-span-5 flex justify-center items-center">
-                <span class="calendar__month"><?= $month = date('F'); ?></span>
+                <span id="calendar__month"><?= $month = date('F'); ?></span>
             </div>
-            <button type="button" class="calendar__next col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10">
+            <button type="button" id="calendar__next" class="col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10">
                 <span class="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold">
                     <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.25 1L5.25 5L1.25 9" stroke="#001E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -338,7 +338,7 @@ function generateCalendarGrid(Int $year = null, Int $month = null)
                         }
                         $productCategories = rtrim($productCategories, ',');
                 ?>
-                        <button type="button" class="group calendar__day relative bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10" data-product-ids="<?= $productIds ?>" data-product-categories="<?= $productCategories ?>" data-active="true">
+                        <button type="button" id="calendar__day" class="group relative bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10" data-product-ids="<?= $productIds ?>" data-product-categories="<?= $productCategories ?>" data-date="<?= $date['date'] ?>" data-active="true">
 
                             <time class="mx-auto my-1 w-7 h-7 overflow-hidden relative rounded-lg border border-black border-opacity-5 flex-col justify-center items-center flex" datetime="<?= $date['date'] ?>" data-group="<?= $date['group'] ?>" data-category="<?= $product['category'] ?>">
                                 <div class="text-white text-sm font-semibold uppercase leading-[14px] z-10"><?= $date['day'] ?></div>
