@@ -1,6 +1,3 @@
-import $ from "jquery";
-import dateOverview from "./blocks/date-overview";
-
 // @prepros-prepend "options/variables.js";
 // @prepros-prepend "lib/jquery.magnific-popup.min.js";
 // @prepros-prepend "lib/mc-calendar.min.js";
@@ -9,10 +6,7 @@ import dateOverview from "./blocks/date-overview";
 // @prepros-prepend "scripts/websiteMode.js";
 // @prepros-prepend "functions/scrollView.js";
 
-
 jQuery(document).ready(function ($) {
-	dateOverview(); // date-overview.ts
-
 	function onElementLoad(selector, execution) {
 		const observer = new MutationObserver((mutations) => {
 			if (document.querySelectorAll(selector).length > 0) {
@@ -35,14 +29,10 @@ jQuery(document).ready(function ($) {
     // order review - move elements to split left
 	\*------------------------------------*/
 	if (document.querySelector(".woocommerce-thankyou-order-details")) {
-		$(".checkout-split .left .container").prepend(
-			$(".woocommerce-thankyou-order-details")
-		);
+		$(".checkout-split .left .container").prepend($(".woocommerce-thankyou-order-details"));
 	}
 	if (document.querySelector(".woocommerce-thankyou-order-received")) {
-		$(".checkout-split .left .container").prepend(
-			$(".woocommerce-thankyou-order-received")
-		);
+		$(".checkout-split .left .container").prepend($(".woocommerce-thankyou-order-received"));
 	}
 
 	class ShopHeroSlider {
@@ -77,9 +67,7 @@ jQuery(document).ready(function ($) {
 			});
 
 			this.sliderLength = this.imageSlider.slick("getSlick").slideCount;
-			this.processBar = document.querySelector(
-				".process-button .process"
-			);
+			this.processBar = document.querySelector(".process-button .process");
 			this.processButton = document.querySelector(".process-button");
 			this.isPaused = false;
 
@@ -110,10 +98,7 @@ jQuery(document).ready(function ($) {
 		}
 	}
 	if (document.querySelector(".shop-hero-banner .hero__slider")) {
-		const shopHeroSlider = new ShopHeroSlider(
-			".shop-hero-banner__text",
-			".hero__slider"
-		);
+		const shopHeroSlider = new ShopHeroSlider(".shop-hero-banner__text", ".hero__slider");
 	}
 
 	//
@@ -151,13 +136,11 @@ jQuery(document).ready(function ($) {
 		$(this).parent("li").children(".sub-menu").slideToggle(200);
 	});
 
-	$(".header__dropdown__mobile .dropdown__links__item .submenu").each(
-		(index, element) => {
-			if ($(element).find("li").length > 0) {
-				$(element).parent().addClass("hasSub");
-			}
+	$(".header__dropdown__mobile .dropdown__links__item .submenu").each((index, element) => {
+		if ($(element).find("li").length > 0) {
+			$(element).parent().addClass("hasSub");
 		}
-	);
+	});
 
 	$(".header__dropdown__mobile .hasSub .main-link").on("click", function (e) {
 		e.preventDefault();
@@ -168,14 +151,11 @@ jQuery(document).ready(function ($) {
 	// Leichtes Scrollen
 	$("a[href*=\\#]:not([href=\\#])").click(function () {
 		if (
-			location.pathname.replace(/^\//, "") ==
-				this.pathname.replace(/^\//, "") &&
+			location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") &&
 			location.hostname == this.hostname
 		) {
 			var target = $(this.hash);
-			target = target.length
-				? target
-				: $("[name=" + this.hash.slice(1) + "]");
+			target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
 			if (target.length) {
 				$("html,body").animate(
 					{
@@ -267,8 +247,7 @@ jQuery(document).ready(function ($) {
 	function disableScroll() {
 		// Get the current page scroll position
 		scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-		(scrollLeft =
-			window.pageXOffset || document.documentElement.scrollLeft),
+		(scrollLeft = window.pageXOffset || document.documentElement.scrollLeft),
 			// if any scroll is attempted, set this to the previous value
 			(window.onscroll = function () {
 				window.scrollTo(scrollLeft, scrollTop);
@@ -282,12 +261,8 @@ jQuery(document).ready(function ($) {
 
 	//Accordeon
 	$(".accordeon__item .accordeon__header").click(function (e) {
-		$(this)
-			.parent(".accordeon__item")
-			.toggleClass("accordeon__item--opened");
-		$accordion_content = $(this)
-			.parent(".accordeon__item")
-			.find(".accordeon__content");
+		$(this).parent(".accordeon__item").toggleClass("accordeon__item--opened");
+		$accordion_content = $(this).parent(".accordeon__item").find(".accordeon__content");
 		$(".accordeon__content").not($accordion_content).slideUp(200);
 		$(".accordeon__item")
 			.find(".accordeon__content")
@@ -347,12 +322,9 @@ jQuery(document).ready(function ($) {
 		scrollOffset = 265;
 	}
 	//Warenkorb Neu laden bei Gutscheincode anpassungen
-	jQuery(document.body).on(
-		"applied_coupon_in_checkout removed_coupon_in_checkout",
-		function () {
-			location.reload();
-		}
-	);
+	jQuery(document.body).on("applied_coupon_in_checkout removed_coupon_in_checkout", function () {
+		location.reload();
+	});
 
 	//Input Border Farbe bei Füllung färben
 	$("input, textarea").each(function () {
@@ -372,9 +344,7 @@ jQuery(document).ready(function ($) {
 	});
 
 	// Formular anpassen
-	$("<div class='checkmark'></div>").insertAfter(
-		'.standard-formular input[type="checkbox"]'
-	);
+	$("<div class='checkmark'></div>").insertAfter('.standard-formular input[type="checkbox"]');
 	$("input.half").each(function () {
 		$(this).parent().addClass("half");
 	});
@@ -393,12 +363,7 @@ jQuery(document).ready(function ($) {
 		9000
 	);
 
-	function waitForElementToDisplay(
-		selector,
-		callback,
-		checkFrequencyInMs,
-		timeoutInMs
-	) {
+	function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
 		var startTimeInMs = Date.now();
 		(function loopSearch() {
 			if (document.querySelector(selector) != null) {
@@ -406,8 +371,7 @@ jQuery(document).ready(function ($) {
 				return;
 			} else {
 				setTimeout(function () {
-					if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
-						return;
+					if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs) return;
 					loopSearch();
 				}, checkFrequencyInMs);
 			}
@@ -415,9 +379,7 @@ jQuery(document).ready(function ($) {
 	}
 
 	if (document.querySelector(".kasse")) {
-		const noticesWrapper = document.querySelector(
-			".woocommerce-notices-wrapper"
-		);
+		const noticesWrapper = document.querySelector(".woocommerce-notices-wrapper");
 
 		// create a new instance of 'MutationObserver' named 'observer',
 		// passing it a callback function
@@ -454,10 +416,7 @@ jQuery(document).ready(function ($) {
 		$(".tab__content#" + tabName).show();
 	});
 
-	selectedName = $(".swatch.selected")
-		.parent()
-		.find(".swatch__tooltip")
-		.text();
+	selectedName = $(".swatch.selected").parent().find(".swatch__tooltip").text();
 	$(".variations .label label").append("<span></span>");
 	updateVariationTooltip();
 
@@ -496,22 +455,20 @@ jQuery(document).ready(function ($) {
 			// Swipe Down
 		}
 	}
-	document
-		.querySelectorAll(".woocommerce-message, .woocommerce-error")
-		.forEach((item) => {
-			item.addEventListener("touchstart", (e) => {
-				touchstartY = e.changedTouches[0].screenY;
-			});
-
-			item.addEventListener("touchend", (e) => {
-				touchendY = e.changedTouches[0].screenY;
-				handleGesture(item);
-			});
-
-			item.addEventListener("touchmove", (e) => {
-				e.preventDefault();
-			});
+	document.querySelectorAll(".woocommerce-message, .woocommerce-error").forEach((item) => {
+		item.addEventListener("touchstart", (e) => {
+			touchstartY = e.changedTouches[0].screenY;
 		});
+
+		item.addEventListener("touchend", (e) => {
+			touchendY = e.changedTouches[0].screenY;
+			handleGesture(item);
+		});
+
+		item.addEventListener("touchmove", (e) => {
+			e.preventDefault();
+		});
+	});
 
 	$(".related").append('<div class="slider__controls"></div>');
 
@@ -608,9 +565,7 @@ jQuery(document).ready(function ($) {
 			disableScroll();
 			e.preventDefault();
 			const popup = e.target.dataset.popup;
-			document
-				.querySelector(".popup.--" + popup)
-				.classList.remove("--hidden");
+			document.querySelector(".popup.--" + popup).classList.remove("--hidden");
 		});
 	});
 	popupButtonsSpan.forEach((button) => {
@@ -618,17 +573,13 @@ jQuery(document).ready(function ($) {
 			disableScroll();
 			e.preventDefault();
 			const popup = e.target.parentElement.dataset.popup;
-			document
-				.querySelector(".popup.--" + popup)
-				.classList.remove("--hidden");
+			document.querySelector(".popup.--" + popup).classList.remove("--hidden");
 		});
 	});
 
 	// Close popups
 	const popupCloseButtons = document.querySelectorAll(".popup .popup__close");
-	const popupCloseButtonsImg = document.querySelectorAll(
-		".popup .popup__close img"
-	);
+	const popupCloseButtonsImg = document.querySelectorAll(".popup .popup__close img");
 	popupCloseButtons.forEach((button) => {
 		button.addEventListener("click", (e) => {
 			enableScroll();
@@ -638,66 +589,53 @@ jQuery(document).ready(function ($) {
 	popupCloseButtonsImg.forEach((button) => {
 		button.addEventListener("click", (e) => {
 			enableScroll();
-			e.target.parentElement.parentElement.parentElement.classList.add(
-				"--hidden"
-			);
+			e.target.parentElement.parentElement.parentElement.classList.add("--hidden");
 		});
 	});
 
 	// Erweitere die Click-Box input zum li Container
-	document
-		.querySelectorAll(".woocommerce-shipping-methods li")
-		.forEach((element) => {
-			element.addEventListener("click", (e) => {
-				e.currentTarget.querySelector("input").checked = true;
-				jQuery("body").trigger("update_checkout");
+	document.querySelectorAll(".woocommerce-shipping-methods li").forEach((element) => {
+		element.addEventListener("click", (e) => {
+			e.currentTarget.querySelector("input").checked = true;
+			jQuery("body").trigger("update_checkout");
 
-				const label =
-					e.currentTarget.querySelector("label").childNodes[0]
-						.nodeValue;
-				$(".shipping__total .label").text(label);
+			const label = e.currentTarget.querySelector("label").childNodes[0].nodeValue;
+			$(".shipping__total .label").text(label);
 
-				let amount = undefined;
-				if (e.currentTarget.querySelector(".amount")) {
-					amount =
-						e.currentTarget.querySelector(".amount bdi")
-							.childNodes[0].nodeValue +
-						'<span class="woocommerce-Price-currencySymbol">€</span>';
-				}
-				if (amount === undefined) {
-					amount = "Kostenlos!";
-				}
-				document.querySelector(".shipping__total .totals").innerHTML =
-					amount;
+			let amount = undefined;
+			if (e.currentTarget.querySelector(".amount")) {
+				amount =
+					e.currentTarget.querySelector(".amount bdi").childNodes[0].nodeValue +
+					'<span class="woocommerce-Price-currencySymbol">€</span>';
+			}
+			if (amount === undefined) {
+				amount = "Kostenlos!";
+			}
+			document.querySelector(".shipping__total .totals").innerHTML = amount;
 
-				// Gesamtsumme ausrechen und anzeigen
-				let subtotalEl = document.querySelector(".subtotal bdi");
-				if (!subtotalEl)
-					subtotalEl = document.querySelector(".cart-subtotal bdi");
-				const subtotal = parseFloat(
-					subtotalEl.childNodes[0].nodeValue.replace(",", ".")
-				);
-				const shipping = parseFloat(amount.replace(",", "."));
-				let total;
-				if (isNaN(shipping)) {
-					total = subtotal;
-				} else {
-					total = subtotal + shipping;
-				}
-				total = `${total}`.substring(0, 5).replace(".", ",");
-				document.querySelector(
-					".order-total bdi"
-				).innerHTML = `${total}<span class="woocommerce-Price-currencySymbol">€</span>`;
+			// Gesamtsumme ausrechen und anzeigen
+			let subtotalEl = document.querySelector(".subtotal bdi");
+			if (!subtotalEl) subtotalEl = document.querySelector(".cart-subtotal bdi");
+			const subtotal = parseFloat(subtotalEl.childNodes[0].nodeValue.replace(",", "."));
+			const shipping = parseFloat(amount.replace(",", "."));
+			let total;
+			if (isNaN(shipping)) {
+				total = subtotal;
+			} else {
+				total = subtotal + shipping;
+			}
+			total = `${total}`.substring(0, 5).replace(".", ",");
+			document.querySelector(
+				".order-total bdi"
+			).innerHTML = `${total}<span class="woocommerce-Price-currencySymbol">€</span>`;
 
-				newElement = null;
-				newElement = document.createElement("div");
-				newElement.classList.add("shop_table__icon");
-				newElement.classList.add("shop_table__icon--shipping");
-				document
-					.querySelector(".shipping__total th")
-					.prepend(newElement);
-			});
+			newElement = null;
+			newElement = document.createElement("div");
+			newElement.classList.add("shop_table__icon");
+			newElement.classList.add("shop_table__icon--shipping");
+			document.querySelector(".shipping__total th").prepend(newElement);
 		});
+	});
 
 	let newElement;
 
@@ -708,12 +646,9 @@ jQuery(document).ready(function ($) {
 		element.querySelector("th").prepend(newElement);
 	});
 
-	document
-		.querySelectorAll(".woocommerce-remove-coupon")
-		.forEach((element) => {
-			element.innerHTML =
-				'<div class="icon--remove-coupon" title="Gutschein entfernen"></div>';
-		});
+	document.querySelectorAll(".woocommerce-remove-coupon").forEach((element) => {
+		element.innerHTML = '<div class="icon--remove-coupon" title="Gutschein entfernen"></div>';
+	});
 
 	newElement = null;
 	newElement = document.createElement("div");

@@ -488,4 +488,16 @@ function my_acf_block_render_callback($block, $content = '', $is_preview = false
     if (file_exists(get_theme_file_path("/template-parts/block/content-{$slug}.php"))) {
         include(get_theme_file_path("/template-parts/block/content-{$slug}.php"));
     }
+
+    // include css if exist
+    if (file_exists(get_theme_file_path("/assets/css/{$slug}.css"))) {
+        wp_register_style($slug . '_style', get_template_directory_uri() . "/assets/css/{$slug}.css", array(), '1.0', 'all');
+        wp_enqueue_style($slug . '_style'); // Enqueue it!
+    }
+
+    // include js if exist
+    if (file_exists(get_theme_file_path("/assets/js/{$slug}.js"))) {
+        wp_register_script($slug . '_js', get_template_directory_uri() . "/assets/js/{$slug}.js", array('jquery'), '1.0.0'); // Custom scripts
+        wp_enqueue_script($slug . '_js'); // Enqueue it!
+    }
 }
