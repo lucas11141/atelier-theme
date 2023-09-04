@@ -10,6 +10,10 @@ Author URI: https://youtube.com/followandrew
 
 :root {
 	--color-main: #001e34;
+	--color-course-child: #3fcad6;
+	--color-course-adult: #4b42db;
+	--color-workshop: #de332a;
+	--color-holiday_workshop: #d8d12b;
 }
 
 // colors
@@ -115,14 +119,8 @@ $max-vw: $ft-max-vp;
 			font-size: $min-font-size;
 			@media screen and (min-width: $min-vw) {
 				font-size: calc(
-					#{$min-font-size} + #{strip-unit(
-							$max-font-size - $min-font-size
-						)} *
-						(
-							(100vw - #{$min-vw}) / #{strip-unit(
-									$max-vw - $min-vw
-								)}
-						)
+					#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+						((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
 				);
 			}
 			@media screen and (min-width: $max-vw) {

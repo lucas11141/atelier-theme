@@ -80,8 +80,8 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
                 </span>
             <?php endforeach; ?>
 
-            <!-- Render the calender days component -->
-            <?php getDateOverviewCalendarDays($calendarGrid, $target_year, $target_month) ?>
+            <!-- Days -->
+            <div id="date-overview__calendar__days" class="col-span-full grid grid-cols-7 gap-px full"></div>
         </div>
 
     </div>
@@ -123,9 +123,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
                 <div class="h-px w-px flex-auto bg-gray-200"></div>
             </div>
 
-            <div id="date-overview__list">
-                <?php getDateOverviewDaysList($calendarGrid, $target_year, $target_month) ?>
-            </div>
+            <div id="date-overview__list"></div>
         </div>
     </div>
 </div>
@@ -133,3 +131,54 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 </div>
 
 <div class="space-extralarge"></div>
+
+<template id="template--date-overview__list__item">
+    <div id="date-overview__list__item" class="bg-white rounded-2xl shadow border border-solid border-gray-200 justify-start items-stretch flex <?= $colors[$product['category']] ?> data-[active=false]:hidden">
+        <div class="w-20 p-5 bg-gray-50 border-r border-solid border-gray-200 flex flex-col items-center">
+            <div template-day class="text-main text-[22px] font-bold uppercase leading-relaxed"></div>
+            <div template-month class="text-gray-300 text-xs font-bold uppercase leading-[13.80px]"></div>
+        </div>
+        <div class="flex-auto px-6 py-4 justify-between items-center gap-2.5 flex">
+            <div class="flex-col justify-start items-start gap-1.5 inline-flex">
+                <div template-title class="text-main text-base font-extrabold uppercase leading-[18.40px]"></div>
+                <div template-category class="text-current text-sm font-extrabold uppercase leading-none"></div>
+            </div>
+            <div class="justify-start items-center gap-3.5 flex">
+                <div class="filter-button w-9 h-9 py-[18px] bg-gray-50 rounded-[10px] border border-gray-100 justify-center items-center gap-2.5 flex"></div>
+                <a template-booking-button class="w-9 h-9 py-[18px] bg-current rounded-[10px] justify-center items-center gap-2.5 flex">
+                    <div class="w-[15px] h-[15px] relative"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="template--date-overview__calendar__day--filled">
+    <button type="button" id="date-overview__calendar__day--filled" class="group relative bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10">
+        <!-- data-product-ids="<?= $productIds ?>" data-product-categories="<?= $productCategories ?>" data-date="<?= $date['date'] ?>" data-active="true" -->
+        <time class="mx-auto my-1 w-7 h-7 overflow-hidden relative rounded-lg border border-black border-opacity-5 flex-col justify-center items-center flex">
+            <!-- datetime="<?= $date['date'] ?>" data-group="<?= $date['group'] ?>" data-category="<?= $product['category'] ?>" -->
+            <div template-day class="text-white text-sm font-semibold uppercase leading-[14px] z-10"></div>
+            <div id="date-overview__calendar__day__slide__color-container" class="absolute flex inset-0 rotate-45 scale-125 pointer-none bg-gray-300"></div>
+        </time>
+    </button>
+</template>
+
+<template id="template--date-overview__calendar__day__color-slice">
+    <div id="date-overview__calendar__day__color-slice" class="h-full w-px flex-auto bg-current <?= $colors[$product['category']] ?> group-data-[active=false]:bg-gray-300 data-[active=false]:hidden"></div>
+    <!-- data-product-id="<?= $product['ID'] ?>" data-product-category="<?= $product['category'] ?>" data-active="true" -->
+</template>
+
+<template id="template--date-overview__calendar__day--empty">
+    <button id="date-overview__calendar__day--empty" type="button" class="relative bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10">
+        <time template-day class="mx-auto flex h-9 w-9 items-center justify-center rounded-full"></time>
+        <!-- datetime="<?= $date['date'] ?>" data-product-ids="<?= $productIds ?>"  -->
+    </button>
+</template>
+
+<template id="template--date-overview__calendar__day--other-month">
+    <button id="date-overview__calendar__day--other-month" type="button" class="relative bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+        <time template-day class="mx-auto flex h-9 w-9 items-center justify-center rounded-full"></time>
+        <!-- datetime="<?= $date['date'] ?>" data-product-ids="<?= $productIds ?>" -->
+    </button>
+</template>
