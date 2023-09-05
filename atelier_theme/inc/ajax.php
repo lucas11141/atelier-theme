@@ -119,6 +119,8 @@ function date_overview_get_product_dates()
     $year = $_POST['year'];
     $month = $_POST['month'];
 
+    $yearEnd = $year + 1;
+
     /* ------------------------------------ */
     /* Courses
     /* ------------------------------------ */
@@ -133,7 +135,7 @@ function date_overview_get_product_dates()
         'meta_query'     => array(
             array(
                 'key'     => 'date', // Name des ACF-Felds
-                'value'   => array($year . "-" . $month . "-01", $year . "-" . $month . "-31"), // Format: JJJJ-MM-TT
+                'value'   => array($year . "-" . $month . "-01", $yearEnd . "-" . $month . "-31"), // Format: JJJJ-MM-TT
                 'compare' => 'BETWEEN', // Abgleich auf einen Wert zwischen dem 1. und letzten Tag des Monats
                 'type'    => 'DATE',
             ),
@@ -184,13 +186,13 @@ function date_overview_get_product_dates()
             'relation' => 'OR',
             array(
                 'key'     => 'date_1_date', // Name des ACF-Felds
-                'value'   => array($year . "-" . $month . "-01", $year . "-" . $month . "-31"), // Format: JJJJ-MM-TT
+                'value'   => array($year . "-" . $month . "-01", $yearEnd . "-" . $month . "-31"), // Format: JJJJ-MM-TT
                 'compare' => 'BETWEEN', // Abgleich auf einen Wert zwischen dem 1. und letzten Tag des Monats
                 'type'    => 'DATE',
             ),
             array(
                 'key'     => 'date_2_date', // Name des ACF-Felds
-                'value'   => array($year . "-" . $month . "-01", $year . "-" . $month . "-31"), // Format: JJJJ-MM-TT
+                'value'   => array($year . "-" . $month . "-01", $yearEnd . "-" . $month . "-31"), // Format: JJJJ-MM-TT
                 'compare' => 'BETWEEN', // Abgleich auf einen Wert zwischen dem 1. und letzten Tag des Monats
                 'type'    => 'DATE',
             ),
@@ -240,13 +242,13 @@ function date_overview_get_product_dates()
             'relation' => 'OR',
             array(
                 'key'     => 'date_1_date', // Name des ACF-Felds
-                'value'   => array($year . "-" . $month . "-01", $year . "-" . $month . "-31"), // Format: JJJJ-MM-TT
+                'value'   => array($year . "-" . $month . "-01", $yearEnd . "-" . $month . "-31"), // Format: JJJJ-MM-TT
                 'compare' => 'BETWEEN', // Abgleich auf einen Wert zwischen dem 1. und letzten Tag des Monats
                 'type'    => 'DATE',
             ),
             array(
                 'key'     => 'date_2_date', // Name des ACF-Felds
-                'value'   => array($year . "-" . $month . "-01", $year . "-" . $month . "-31"), // Format: JJJJ-MM-TT
+                'value'   => array($year . "-" . $month . "-01", $yearEnd . "-" . $month . "-31"), // Format: JJJJ-MM-TT
                 'compare' => 'BETWEEN', // Abgleich auf einen Wert zwischen dem 1. und letzten Tag des Monats
                 'type'    => 'DATE',
             ),
@@ -279,26 +281,17 @@ function date_overview_get_product_dates()
         }
     }
 
-    /* ------------------------------------ */
-    /* Create Calendar Grid data
-    /* ------------------------------------ */
+    // Merge all dates
+    $dates = array_merge($courseDates, $workshopDates, $holidayWorkshopDates);
 
-    // $calenderGrid = generateCalendarGrid($year, $month);
-
-    // // map $dates to $calenderGrid
-    // foreach ($dates as $date) {
-    //     $date['date'] = $date['date']->format('Y-m-d');
-
-    //     foreach ($calenderGrid as $key => $day) {
-    //         if ($date['date'] === $day['date']) {
-    //             $calenderGrid[$key]['products'][] = $date['product'];
-    //         }
-    //     }
-    // }
+    // Sort dates by date
+    usort($dates, function ($a, $b) {
+        return $a['date'] <=> $b['date'];
+    });
 
     // // Sort products by starttime
     // // go through $calenderGrid and when products is given sort the items by starttime
-    // foreach ($calenderGrid as $key => $day) {
+    // foreach ($dates as $key => $day) {
     //     if (isset($day['products']) && count($day['products']) > 1) {
     //         $products = $day['products'];
     //         usort($products, function ($a, $b) {
@@ -311,7 +304,6 @@ function date_overview_get_product_dates()
     //     }
     // }
 
-    $dates = array_merge($courseDates, $workshopDates, $holidayWorkshopDates);
     wp_send_json_success($dates);
 }
 
