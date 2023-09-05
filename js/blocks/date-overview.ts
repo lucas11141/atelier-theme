@@ -100,8 +100,9 @@ class DateOverview {
 		});
 
 		this.selector.onSelect((productId) => {
-			this.calendar.setFilter("product", productId);
-			this.list.setFilter("product", productId);
+			this.list.showDates("product", { productId });
+			// this.calendar.setFilter("product", productId);
+			// this.list.setFilter("product", productId);
 			// this.list.renderProductDates(productId);
 		});
 
@@ -135,7 +136,7 @@ class DateOverview {
 
 				// Display month
 				thisClone.calendar.showMonth(year, month);
-				thisClone.list.showMonth(year, month);
+				thisClone.list.showDates("month", { year, month });
 
 				thisClone.fetchedOnce = true;
 
@@ -707,22 +708,30 @@ class DateOverviewList {
 		});
 
 		this.monthLists.forEach((monthList) => {
-			this.renderListItems(monthList.year, monthList.month);
+			this.showDates("month", { year: monthList.year, month: monthList.month });
 		});
 	}
 
-	public setDates(dates: DateResponse[]) {
-		this.dates = dates;
-
-		this.renderListItems();
-		this.initEventListeners();
+	public showDates(
+		type: "month" | "product",
+		options: { year: number; month: number } | { productId: number }
+	) {
+		// TODO: Create two modes: rendring all dates of a specific
+		if (type === "month") {
+			this.renderMonthDatesList(options.year, options.month);
+		} else if (type === "product") {
+			this.renderProductDatesList(options.productId);
+		} else {
+			throw new Error('Invalid argument "type"');
+		}
 	}
 
-	public showMonth(year: number, month: number) {
-		this.renderListItems(year, month);
-	}
+	/*------------------------------------*/
+	/* 	Render functions
+	/*------------------------------------*/
 
-	renderListItems(year: number, month: number) {
+	// Display all dates by month
+	renderMonthDatesList(year: number, month: number) {
 		this.currentYear = year;
 		this.currentMonth = month;
 
@@ -733,11 +742,47 @@ class DateOverviewList {
 		if (!monthList) throw new Error("No monthList found");
 
 		this.container.innerHTML = "";
+
+		this.renderListMonth(year, month);
 		monthList.forEach((item) => {
 			this.renderListItem(item);
 		});
 	}
+
+	// Display all dates of a product in month sections
+	renderProductDatesList(productId: number) {
+		// Create MonthList object for all dates of the product
+		const productDates: MonthList[] = [];
+		this.monthLists.forEach((monthList) => {
+			const monthDates = monthList.items.filter((item) => item.product?.ID === productId);
+			productDates.push({
+				year: monthList.year,
+				month: monthList.month,
+				items: monthDates,
+			});
+		});
+
+		if (!productDates) throw new Error("No productDates found");
+
+		// Remove old content
+		this.container.innerHTML = "";
+
+		// Append a new section element for each month
+		productDates.forEach((monthList) => {
+			// Return of month has no dates
+			if (monthList.items.length === 0) return;
+
+			this.renderListMonth(monthList.year, monthList.month);
+
+			monthList.items.forEach((item) => {
+				this.renderListItem(item);
+			});
+		});
+	}
+
+	// Render a single date item
 	renderListItem(item: MonthListItem) {
+		// TODO: Add two modes: show group or show weekday
 		// Append existing element
 		if (item.element) {
 			this.container.appendChild(item.element);
@@ -809,6 +854,34 @@ class DateOverviewList {
 			this.onFilterProductCallback(item.product.ID, item.product.category);
 		});
 	}
+
+	// Render a month label
+	renderListMonth(year: number, month: number) {
+		const template = document.querySelector(
+			"#template--date-overview__list__month"
+		) as HTMLTemplateElement;
+		if (!template) throw new Error('No template "#template--date-overview__list__month" found');
+
+		// Clone template
+		const clone = template.content.cloneNode(true) as HTMLElement;
+
+		// Add item to list
+		this.container.appendChild(clone);
+
+		const monthElement = this.container.lastElementChild as HTMLElement;
+
+		const label = monthElement.querySelector("[template-label]") as HTMLElement;
+		if (!label) throw new Error("No label found");
+
+		label.innerHTML = new Intl.DateTimeFormat("de-DE", {
+			month: "long",
+			// year: "numeric",
+		}).format(new Date(year, month - 1));
+	}
+
+	/*------------------------------------*/
+	/* 	
+	/*------------------------------------*/
 
 	fetchProductDates(productId: number) {
 		// TODO: Implement

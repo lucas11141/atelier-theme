@@ -138,14 +138,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
             <?php endforeach; ?>
         </div>
 
-        <div class="w-full row-start-2 flex-1 ml-auto">
-            <div class="flex items-center gap-4">
-                <span class="text-sm font-extrabold uppercase leading-none"><?= $month = date('F'); ?></span>
-                <div class="h-px w-px flex-auto bg-gray-200"></div>
-            </div>
-
-            <div id="date-overview__list" class="flex flex-col gap-4 mt-5"></div>
-        </div>
+        <div id="date-overview__list" class="w-full row-start-2 flex-1 ml-auto flex flex-col"></div>
     </div>
 </div>
 
@@ -154,7 +147,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 <div class="space-extralarge"></div>
 
 <template id="template--date-overview__list__item">
-    <div id="date-overview__list__item" class="bg-white rounded-2xl shadow-calendar border border-solid border-gray-200 justify-start items-stretch flex <?= $colors[$product['category']] ?> data-[active=false]:hidden overflow-hidden">
+    <div id="date-overview__list__item" class="mt-4 bg-white rounded-2xl shadow-calendar border border-solid border-gray-200 justify-start items-stretch flex <?= $colors[$product['category']] ?> data-[active=false]:hidden overflow-hidden">
         <div class="w-20 p-5 bg-gray-50 border-r border-solid border-gray-200 flex flex-col items-center">
             <div template-day class="text-main text-[22px] font-bold uppercase leading-relaxed"></div>
             <div template-month class="text-gray-300 text-xs font-bold uppercase leading-[13.80px]"></div>
@@ -177,6 +170,13 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
                 </a>
             </div>
         </div>
+    </div>
+</template>
+
+<template id="template--date-overview__list__month">
+    <div id="date-overview__list__month" class="mt-12 mb-1 flex gap-4 items-center first:mt-0">
+        <span template-label class="text-sm font-extrabold uppercase leading-none"></span>
+        <div class="w-px h-px flex-auto bg-gray-200"></div>
     </div>
 </template>
 
