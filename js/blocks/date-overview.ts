@@ -87,8 +87,9 @@ class DateOverview {
 		});
 
 		this.filter.onFilterCategory((category) => {
+			console.log("onFilterCategory", category);
 			this.calendar.setFilter("category", category);
-			this.list.setFilter("category", category);
+			// this.list.setFilter("category", category);
 		});
 
 		// Filtering by product id
@@ -281,7 +282,9 @@ class DateOverviewCalendar {
 			});
 		});
 
-		this.renderGridItems(this.currentYear, this.currentMonth);
+		this.monthGrids.forEach((monthGrid) => {
+			this.renderGridItems(monthGrid.year, monthGrid.month);
+		});
 	}
 
 	renderGridItems(year: number, month: number) {
@@ -439,6 +442,7 @@ class DateOverviewCalendar {
 		this.setButtonState();
 	}
 
+	// Manage states
 	setMonthName(year: number, month: number) {
 		const months = [
 			"Januar",
@@ -456,7 +460,6 @@ class DateOverviewCalendar {
 		];
 		this.monthLabel.innerHTML = `${months[month - 1]} ${year}`;
 	}
-
 	setButtonState() {
 		// Activate buttons
 		this.nextButton.dataset.active = "true";
@@ -480,7 +483,7 @@ class DateOverviewCalendar {
 		}
 	}
 
-	public setFilter(type: FilterType, identifier: Category | number) {
+	public setFilter(type: FilterType, identifier: CategoryFilter | number) {
 		this.monthGrids.forEach((monthGrid) => {
 			monthGrid.items.forEach((item) => {
 				const button = item.element;
@@ -491,18 +494,17 @@ class DateOverviewCalendar {
 					// active all buttons when identifier is null
 					if (identifier === null) {
 						button.dataset.active = "true";
-						return;
-					}
-
-					const productCategories = button.dataset.productCategories?.split(
-						","
-					) as string[];
-
-					// check if array contains identifier
-					if (productCategories && productCategories.includes(identifier as string)) {
-						button.dataset.active = "true";
 					} else {
-						button.dataset.active = "false";
+						const productCategories = button.dataset.productCategories?.split(
+							","
+						) as string[];
+
+						// check if array contains identifier
+						if (productCategories && productCategories.includes(identifier as string)) {
+							button.dataset.active = "true";
+						} else {
+							button.dataset.active = "false";
+						}
 					}
 				} else if (type === "product") {
 					const productIds = button.dataset.productIds
@@ -523,7 +525,7 @@ class DateOverviewCalendar {
 					"#date-overview__calendar__day__color-slice"
 				) as NodeListOf<HTMLElement>;
 
-				colorSlices.forEach((slice) => {
+				colorSlices?.forEach((slice) => {
 					if (type === "category") {
 						// active all buttons when identifier is null
 						if (identifier === null) {
@@ -804,9 +806,9 @@ class DateOverviewList {
 	/*------------------------------------*/
 class DateOverviewFilter {
 	container: HTMLElement;
-	category: Category;
+	category: CategoryFilter;
 	buttons: NodeListOf<HTMLElement>;
-	private onFilterCategoryCallback: (category: Category) => void;
+	private onFilterCategoryCallback: (category: CategoryFilter) => void;
 
 	constructor(container) {
 		this.container = container;
@@ -827,7 +829,6 @@ class DateOverviewFilter {
 					this.setFilterCategory(category);
 				} else {
 					this.setFilterCategory(null);
-					// TODO: add null to filter
 				}
 
 				// Trigger onFilterCategory event
@@ -851,14 +852,14 @@ class DateOverviewFilter {
 		}
 	}
 
-	setFilterCategory(category: Category) {
+	setFilterCategory(category: CategoryFilter) {
 		this.setFilter(category);
 
 		// Trigger onFilterCategory event when used inside the class
 		if (this.onFilterCategoryCallback) this.onFilterCategoryCallback(this.category);
 	}
 
-	public setFilter(category: Category) {
+	public setFilter(category: CategoryFilter) {
 		// Set button states
 		this.buttons.forEach((button) => {
 			if (category === null) {
@@ -880,7 +881,7 @@ class DateOverviewFilter {
 		return this.category;
 	}
 
-	public onFilterCategory(callback: (category: Category) => void) {
+	public onFilterCategory(callback: (category: CategoryFilter) => void) {
 		this.onFilterCategoryCallback = callback;
 	}
 }
@@ -981,3 +982,5 @@ type DateResponse = {
 	product: ProductType;
 	listElement?: HTMLElement;
 };
+
+type CategoryFilter = Category | null;
