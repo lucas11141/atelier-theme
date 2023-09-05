@@ -795,8 +795,11 @@ class DateOverviewList {
 		// // add formatted day from this.currentMonth using Intl.DateTimeFormat
 		// bookingButton.href = date.product.;
 
+		const filterButton = element.querySelector("[template-filter-button]") as HTMLElement;
+		if (!filterButton) throw new Error("No filter button found");
+
 		// Add event listener
-		element.addEventListener("click", () => {
+		filterButton.addEventListener("click", () => {
 			this.fetchProductDates(item.product.ID);
 			this.setFilter("product", item.product.ID);
 
@@ -809,22 +812,15 @@ class DateOverviewList {
 		// TODO: Implement
 	}
 
-	initEventListeners() {
-		this.dates.forEach((date) => {
-			const listElement = date.listElement;
+	getCurrentMonthList() {
+		const monthList = this.monthLists.find(
+			(monthList) =>
+				monthList.year === this.currentYear && monthList.month === this.currentMonth
+		)?.items as MonthListItem[];
 
-			if (!listElement) throw new Error("No list item found");
+		if (!monthList) throw new Error("No monthList found");
 
-			const filterButton = listElement.querySelector(".filter-button") as HTMLElement;
-
-			filterButton.addEventListener("click", () => {
-				this.setFilter("product", date.product.ID);
-
-				// Trigger onFilterProduct event
-				if (this.onFilterProductCallback)
-					this.onFilterProductCallback(date.product.ID, date.product.category);
-			});
-		});
+		return monthList;
 	}
 
 	public setFilter(type: FilterType, identifier: CategoryFilter | number) {
@@ -863,16 +859,14 @@ class DateOverviewList {
 	public scrollToItem(date: string) {
 		// TODO: Add short animation to catch attention
 
-		const item = this.container.querySelector(
-			`#date-overview__list__item[data-date="${date}"]`
-		) as HTMLElement;
-
-		if (!item) throw new Error("No item found");
-
-		item.scrollIntoView({
-			behavior: "smooth",
-			block: "center",
-			inline: "center",
+		const monthList = this.getCurrentMonthList();
+		monthList.forEach((item) => {
+			if (item.date === date) {
+				item.element?.scrollIntoView({
+					behavior: "smooth",
+				});
+				return;
+			}
 		});
 	}
 
