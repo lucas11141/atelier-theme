@@ -1,7 +1,10 @@
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
 
+import { Navigation } from "swiper/modules";
 import Swiper from "swiper";
+
+Swiper.use([Navigation]);
 
 class DateOverview {
 	fetchedOnce: boolean = false;
@@ -162,8 +165,6 @@ class DateOverviewCalendar {
 
 	// old
 	daysContainer: HTMLElement;
-	nextButton: HTMLElement;
-	prevButton: HTMLElement;
 	dateButtons: NodeListOf<HTMLElement>;
 	monthDays: NodeListOf<HTMLElement>;
 
@@ -178,14 +179,11 @@ class DateOverviewCalendar {
 		this.daysContainer = this.container.querySelector(
 			"#date-overview__calendar__days"
 		) as HTMLElement;
-		this.nextButton = this.container.querySelector("#calendar__next") as HTMLElement;
-		this.prevButton = this.container.querySelector("#calendar__prev") as HTMLElement;
 		this.dateButtons = this.container.querySelectorAll("#date-overview__calendar__day");
 		this.monthDays = this.container.querySelectorAll("#date-overview__calendar__days");
 
 		this.createMonthGrids(this.currentYear, this.currentMonth);
 		this.initMonthLabelSlider();
-		this.initEventListeners();
 	}
 
 	// TODO: Rename. it isn't a grid
@@ -267,6 +265,8 @@ class DateOverviewCalendar {
 
 	initMonthLabelSlider() {
 		const slider = this.container.querySelector("#calendar__month-slider .swiper-wrapper");
+		const nextButton = this.container.querySelector("#calendar__next") as HTMLElement;
+		const prevButton = this.container.querySelector("#calendar__prev") as HTMLElement;
 
 		// Append a slide for each month with the month name and year
 		this.monthGrids.forEach((monthGrid) => {
@@ -295,7 +295,27 @@ class DateOverviewCalendar {
 			spaceBetween: 24,
 			speed: 300,
 			allowTouchMove: false,
+
+			navigation: {
+				nextEl: nextButton,
+				prevEl: prevButton,
+			},
+
+			on: {
+				navigationNext: () => {
+					// Trigger onNext event
+					if (this.onNextCallback) {
+						this.onNextCallback();
+					}
+				},
+				navigationPrev: () => {
+					// Trigger onPrev event
+					if (this.onPrevCallback) this.onPrevCallback();
+				},
+			},
 		});
+
+		console.log(this.monthLabelSlider);
 
 		if (!this.monthLabelSlider) throw new Error("No monthLabelSlider found");
 	}
@@ -455,34 +475,13 @@ class DateOverviewCalendar {
 		}
 	}
 
-	initEventListeners() {
-		this.nextButton.addEventListener("click", (e) => {
-			// Trigger onNext event
-			if (this.onNextCallback) {
-				this.onNextCallback();
-			}
-		});
-
-		this.prevButton.addEventListener("click", (e) => {
-			const todayYear = new Date().getFullYear();
-			const todayMonth = new Date().getMonth() + 1;
-
-			// Only trigger event if the selected month is the current month or a future month
-			if (
-				this.currentYear < todayYear ||
-				(this.currentYear === todayYear && this.currentMonth <= todayMonth)
-			)
-				return;
-
-			// Trigger onPrev event
-			if (this.onPrevCallback) this.onPrevCallback();
-		});
-	}
-
 	public showMonth(year: number, month: number) {
 		this.renderGridItems(year, month);
-		this.showMonthLabel(year, month);
-		this.setButtonState();
+
+		const monthIndex = this.monthGrids.findIndex(
+			(monthGrid) => monthGrid.year === year && monthGrid.month === month
+		);
+		this.monthLabelSlider.slideTo(monthIndex);
 	}
 
 	public showProduct(productId: number) {
@@ -497,37 +496,6 @@ class DateOverviewCalendar {
 		});
 
 		this.showMonth(firstMonth?.year as number, firstMonth?.month as number);
-	}
-
-	// Manage states
-	showMonthLabel(year: number, month: number) {
-		// Get index of the month in monthGrids
-		const monthIndex = this.monthGrids.findIndex(
-			(monthGrid) => monthGrid.year === year && monthGrid.month === month
-		);
-		this.monthLabelSlider.slideTo(monthIndex);
-	}
-	setButtonState() {
-		// Activate buttons
-		this.nextButton.dataset.active = "true";
-		this.prevButton.dataset.active = "true";
-
-		// Check if current month is the current month
-		const isTodayMonth =
-			this.currentYear === new Date().getFullYear() &&
-			this.currentMonth === new Date().getMonth() + 1;
-
-		if (isTodayMonth) {
-			this.prevButton.dataset.active = "false";
-		}
-
-		const isNextYearMonth =
-			this.currentYear === new Date().getFullYear() + 1 &&
-			this.currentMonth === new Date().getMonth();
-
-		if (isNextYearMonth) {
-			this.nextButton.dataset.active = "false";
-		}
 	}
 
 	public setFilter(type: FilterType, identifier: CategoryFilter | number) {

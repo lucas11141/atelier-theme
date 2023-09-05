@@ -77,7 +77,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
         <div id="date-overview__calendar" class="isolate grid grid-cols-7 gap-px bg-gray-200 border border-solid border-gray-200 w-[490px] rounded-[16px] text-center overflow-hidden text-sm shadow-calendar">
 
             <!-- Month controls -->
-            <button type="button" id="calendar__prev" class="col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10 data-[active=false]:opacity-20 data-[active=false]:pointer-events-none" data-active="false">
+            <button type="button" id="calendar__prev" class="col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10 [&:is(.swiper-button-disabled)]:opacity-20" data-active="false">
                 <span class="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold">
                     <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.75 9L1.75 5L5.75 1" stroke="#001E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -89,7 +89,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
                     <div class="swiper-wrapper"></div>
                 </div>
             </div>
-            <button type="button" id="calendar__next" class="col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10  data-[active=false]:opacity-20 data-[active=false]:pointer-events-none" data-active="true">
+            <button type="button" id="calendar__next" class="col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10 [&:is(.swiper-button-disabled)]:opacity-20" data-active="true">
                 <span class="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold">
                     <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.25 1L5.25 5L1.25 9" stroke="#001E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
