@@ -89,7 +89,7 @@ class DateOverview {
 				thisClone.calendar.setDates(dates, year, month);
 				thisClone.list.setDates(dates);
 
-				// TODO: Set apply filter to new dates when filter is set
+				// TODO: apply filter to new dates when filter is set
 			},
 		});
 	}
@@ -255,6 +255,9 @@ class DateOverviewCalendar {
 	}
 
 	renderGridItems(year: number, month: number) {
+		this.currentYear = year;
+		this.currentMonth = month;
+
 		const monthGrid = this.monthGrids.find(
 			(monthGrid) => monthGrid.year === year && monthGrid.month === month
 		)?.items as MonthGridItem[];
@@ -390,7 +393,6 @@ class DateOverviewCalendar {
 
 	initEventListeners() {
 		this.nextButton.addEventListener("click", (e) => {
-			// BUG: Event is not triggering
 			// Trigger onNext event
 			if (this.onNextCallback) {
 				this.onNextCallback();
@@ -398,6 +400,16 @@ class DateOverviewCalendar {
 		});
 
 		this.prevButton.addEventListener("click", (e) => {
+			const todayYear = new Date().getFullYear();
+			const todayMonth = new Date().getMonth() + 1;
+
+			// Only trigger event if the selected month is the current month or a future month
+			if (
+				this.currentYear < todayYear ||
+				(this.currentYear === todayYear && this.currentMonth <= todayMonth)
+			)
+				return;
+
 			// Trigger onPrev event
 			if (this.onPrevCallback) this.onPrevCallback();
 		});
@@ -421,12 +433,36 @@ class DateOverviewCalendar {
 		this.monthLabel.innerHTML = `${months[month - 1]} ${year}`;
 	}
 
+	setButtonState() {
+		// Activate buttons
+		this.nextButton.dataset.active = "true";
+		this.prevButton.dataset.active = "true";
+
+		// Check if current month is the current month
+		const isTodayMonth =
+			this.currentYear === new Date().getFullYear() &&
+			this.currentMonth === new Date().getMonth() + 1;
+
+		if (isTodayMonth) {
+			this.prevButton.dataset.active = "false";
+		}
+
+		const isNextYearMonth =
+			this.currentYear === new Date().getFullYear() + 1 &&
+			this.currentMonth === new Date().getMonth();
+
+		if (isNextYearMonth) {
+			this.nextButton.dataset.active = "false";
+		}
+	}
+
 	public setDates(dates: DateResponse[], year: number, month: number) {
 		this.dates = dates;
 
 		this.generateGridObject(year, month);
 		this.renderGridItems(year, month);
 		this.setMonthName(year, month);
+		this.setButtonState();
 	}
 
 	public setFilter(type: FilterType, identifier: Category | number) {
@@ -681,7 +717,6 @@ class DateOverviewList {
 	}
 
 	public setFilter(type: FilterType, identifier: Category | number) {
-		console.trace("setFilter", type, identifier);
 		this.dateItems.forEach((item) => {
 			if (type === "category") {
 				if (identifier === null) {
@@ -697,8 +732,6 @@ class DateOverviewList {
 					item.dataset.active = "false";
 				}
 			} else if (type === "product") {
-				// TODO: Load all dates of product with ajax
-
 				const productId = Number(item.dataset.productId);
 
 				// check if array contains identifier
