@@ -99,10 +99,11 @@ class DateOverview {
 			this.filter.setFilter(productCategory);
 		});
 
-		// this.selector.onSelect((productId) => {
-		// 	this.calendar.setFilter("product", productId);
-		// 	this.list.renderProductDates(productId);
-		// });
+		this.selector.onSelect((productId) => {
+			this.calendar.setFilter("product", productId);
+			this.list.setFilter("product", productId);
+			// this.list.renderProductDates(productId);
+		});
 
 		// this.calendar.onRender(() => {
 		// 	this.calendar.setFilter("category", this.filter.getFilter());
@@ -130,6 +131,7 @@ class DateOverview {
 				// Fill calendar and list with data
 				thisClone.calendar.fillGridData(dates);
 				thisClone.list.fillListData(dates);
+				thisClone.selector.fillSelectorData(dates);
 
 				// Display month
 				thisClone.calendar.showMonth(year, month);
@@ -964,8 +966,6 @@ class DateOverviewFilter {
 /* 	Product selector
 	/*------------------------------------*/
 class DateOverviewSelector {
-	// TODO: Implement
-
 	container: HTMLElement;
 	select: HTMLSelectElement;
 	selected: number;
@@ -978,6 +978,38 @@ class DateOverviewSelector {
 		if (!this.select) throw new Error("No select element found");
 
 		this.initEventListeners();
+	}
+
+	fillSelectorData(dates: DateResponse[]) {
+		// Create array of all products without duplicates
+		const products = dates.map((date) => date.product);
+		const uniqueProducts = products.filter(
+			(product, index, self) => index === self.findIndex((p) => p.ID === product.ID)
+		);
+
+		// Sort products by title
+		uniqueProducts.sort((a, b) => {
+			if (a.title < b.title) return -1;
+			if (a.title > b.title) return 1;
+			return 0;
+		});
+
+		uniqueProducts.forEach((product) => {
+			this.renderOption(product);
+		});
+	}
+
+	renderOption(product: ProductType) {
+		this.select.innerHTML += `<option value="${product.ID}">${product.title}</option>`;
+
+		// Add event listener
+		const option = this.select.querySelector(`option[value="${product.ID}"]`);
+		if (!option) throw new Error("No option found");
+
+		option.addEventListener("click", () => {
+			// Trigger onSelect event
+			if (this.onSelectCallback) this.onSelectCallback(product.ID);
+		});
 	}
 
 	initEventListeners() {

@@ -117,11 +117,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
     <div class="grid grid-cols-2 mt-8 gap-x-5 gap-y-12">
         <div class="row-start-2">
             <div id="date-overview__selector" class="mr-10 h-20 bg-gray-100 rounded-2xl">
-                <select>
-                    <?php foreach ($allProducts as $product) : ?>
-                        <option value="<?= $product['id'] ?>"><?= $product['title'] ?></option>
-                    <?php endforeach; ?>
-                </select>
+                <select></select>
             </div>
 
         </div>
