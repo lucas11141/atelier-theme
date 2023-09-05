@@ -21,6 +21,29 @@ $colors = [
 
 $categories = array_keys($colors);
 
+$filterButtonLabels = array(
+    'course-child' => array(
+        'label' => 'Kurse',
+        'group' => array(
+            'value' => 'child',
+            'label' => 'Kind',
+        )
+    ),
+    'course-adult' => array(
+        'label' => 'Kurse',
+        'group' => array(
+            'value' => 'adult',
+            'label' => 'Erwachsene',
+        )
+    ),
+    'workshop' => array(
+        'label' => 'Workshops',
+    ),
+    'holiday_workshop' => array(
+        'label' => 'Ferienprogramm',
+    ),
+);
+
 // TODO: Create array with better structure for filters
 
 $target_month = date('n'); // Aktueller Monat
@@ -104,14 +127,16 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
         </div>
 
         <div id="date-overview__filter" class="col-start-2 flex flex-wrap justify-center gap-x-5 gap-y-3">
-            <?php foreach ($categories as $category) : ?>
+            <?php foreach ($categories as $category) :
+                $filterButtonLabel = $filterButtonLabels[$category];
+            ?>
                 <div id="date-overview__filter__button" class="group items-center gap-2.5 flex cursor-pointer <?= $colors[$category] ?>" data-category="<?= $category ?>" data-active="true" data-selected="false">
                     <div class="relative w-2.5 aspect-square bg-current rounded-full group-data-[selected=true]:scale-[80%] group-data-[active=false]:text-gray-300">
                         <div class="hidden absolute -inset-1 border-2 border-solid border-current rounded-full group-data-[selected=true]:block group-data-[selected=true]:opacity-100"></div>
                     </div>
-                    <p class="gap-1 flex leading-none text-sm text-main group-data-[active=false]:text-gray-300">
-                        <b class="font-extrabold uppercase"><?= $category ?></b>
-                        <span class="font-normal"></span>
+                    <p class="gap-1 flex leading-none items-baseline text-sm text-main group-data-[active=false]:text-gray-300">
+                        <b class="font-extrabold uppercase"><?= $filterButtonLabel['label'] ?></b>
+                        <span class="font-normal"><?= isset($filterButtonLabel['group']) ? 'für ' . $filterButtonLabel['group']['label'] : '' ?></span>
                     </p>
                 </div>
             <?php endforeach; ?>
