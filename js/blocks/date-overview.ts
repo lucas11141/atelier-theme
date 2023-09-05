@@ -1,9 +1,8 @@
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
 
-// TODO: Add pagination to ajax call fetching the dates. On page load fetch the nect 3 months and on next/prev fetch the next/prev month.
-
 class DateOverview {
+	fetchedOnce: boolean = false;
 	allDates: {
 		year: number;
 		month: number;
@@ -32,10 +31,10 @@ class DateOverview {
 
 		// Set current month
 		console.log("constructor");
-		this.setMonth(new Date().getFullYear(), new Date().getMonth() + 1);
+		this.showMonth(new Date().getFullYear(), new Date().getMonth() + 1);
 	}
 
-	setMonth(year: number, month: number) {
+	showMonth(year: number, month: number) {
 		// return if month is already set
 		if (this.currentYear === year && this.currentMonth === month)
 			throw new Error("Month is already set");
@@ -44,54 +43,14 @@ class DateOverview {
 		this.currentYear = year;
 		this.currentMonth = month;
 
+		console.log("this.fetchedOnce", this.fetchedOnce);
+
 		// Check if dates of this month are already fetched
-		const alreadyFetched = this.allDates.some((monthGrid) => {
-			return monthGrid.month === month && monthGrid.year === year;
-		});
-
-		if (alreadyFetched) {
-			const dates = this.allDates.find((monthGrid) => {
-				return monthGrid.month === month && monthGrid.year === year;
-			})?.dates as DateResponse[];
-
-			this.calendar.setDates(dates, year, month);
-			this.list.setDates(dates);
+		if (this.fetchedOnce) {
+			this.calendar.showMonth(year, month);
 		} else {
-			console.log("fetching dates ...");
 			this.fetchDates(year, month);
 		}
-	}
-
-	async fetchDates(year: number, month: number) {
-		const thisClone = this;
-
-		await $.ajax({
-			// @ts-ignore
-			url: ajaxurl,
-			type: "POST",
-			data: {
-				action: "date_overview_get_product_dates", // Dies sollte mit dem in add_action definierten Haken übereinstimmen
-				year: year,
-				month: month,
-			},
-			success: function (response) {
-				console.log("date_overview_get_product_dates", response);
-				thisClone.dates = response;
-
-				const dates: DateResponse[] = response.data;
-
-				thisClone.allDates.push({
-					year,
-					month,
-					dates,
-				});
-
-				thisClone.calendar.setDates(dates, year, month);
-				thisClone.list.setDates(dates);
-
-				// TODO: apply filter to new dates when filter is set
-			},
-		});
 	}
 
 	initEventListeners() {
@@ -111,7 +70,7 @@ class DateOverview {
 				month = 1;
 			}
 
-			this.setMonth(year, month);
+			this.showMonth(year, month);
 		});
 
 		this.calendar.onPrev(() => {
@@ -124,7 +83,7 @@ class DateOverview {
 				month = 12;
 			}
 
-			this.setMonth(year, month);
+			this.showMonth(year, month);
 		});
 
 		this.filter.onFilterCategory((category) => {
@@ -146,6 +105,37 @@ class DateOverview {
 		// this.calendar.onRender(() => {
 		// 	this.calendar.setFilter("category", this.filter.getFilter());
 		// });
+	}
+
+	async fetchDates(year: number, month: number) {
+		const thisClone = this;
+
+		await $.ajax({
+			// @ts-ignore
+			url: ajaxurl,
+			type: "POST",
+			data: {
+				action: "date_overview_get_product_dates", // Dies sollte mit dem in add_action definierten Haken übereinstimmen
+				year: year,
+				month: month,
+			},
+			success: function (response) {
+				console.log("date_overview_get_product_dates", response);
+				thisClone.dates = response;
+
+				const dates: DateResponse[] = response.data;
+
+				thisClone.calendar.fillGridData(dates);
+				thisClone.calendar.showMonth(year, month);
+				// thisClone.list.setDates(dates);
+
+				thisClone.fetchedOnce = true;
+
+				// TODO: apply filter to new dates when filter is set
+			},
+		});
+
+		console.log("this.fetchedOnce", this.fetchedOnce);
 	}
 }
 
@@ -185,18 +175,28 @@ class DateOverviewCalendar {
 		this.dateButtons = this.container.querySelectorAll("#date-overview__calendar__day");
 		this.monthDays = this.container.querySelectorAll("#date-overview__calendar__days");
 
-		this.generateGridObject(this.currentYear, this.currentMonth);
+		this.createMonthGrids(this.currentYear, this.currentMonth);
 		this.initEventListeners();
 	}
 
-	generateGridObject(year: number, month: number) {
-		// Check if dates of this month are already fetched
-		const alreadyFetched = this.monthGrids.some((monthGrid) => {
-			return monthGrid.month === month && monthGrid.year === year;
-		});
+	// TODO: Rename. it isn't a grid
+	createMonthGrids(year: number, month: number) {
+		// render empty object of type MonthGrid[] for the next 12 month
+		for (let i = 0; i < 12; i++) {
+			// start with current month and go on
+			let forMonth = month + i;
+			let forYear = year;
 
-		if (alreadyFetched) return;
+			// Reset month and increase year
+			if (forMonth > 12) {
+				forYear++;
+				forMonth = forMonth - 12;
+			}
 
+			this.monthGrids.push(this.createMonthGrid(forYear, forMonth));
+		}
+	}
+	createMonthGrid(year: number, month: number): MonthGrid {
 		// Erster Tag des angegebenen Monats und Jahres
 		const firstDayOfMonth = new Date(`${year}-${month.toString().padStart(2, "0")}-01`);
 		firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 1);
@@ -246,12 +246,42 @@ class DateOverviewCalendar {
 			startDate.setDate(startDate.getDate() + 1);
 		}
 
-		// Add new monthGrid to this.monthGrids
-		this.monthGrids.push({
+		const monthGridObject: MonthGrid = {
 			year,
 			month,
 			items: monthGrid,
+		};
+
+		// Add new monthGrid to this.monthGrids
+		return monthGridObject;
+	}
+
+	public fillGridData(dates: DateResponse[]) {
+		// TODO: Minimoze forEach calls
+
+		// fill newDates with dates
+		dates.forEach((date) => {
+			// get year and month of date
+			const dateYear = new Date(date.date.date as string).getFullYear();
+			const dateMonth = new Date(date.date.date as string).getMonth() + 1;
+
+			// TODO: Fix Type date type in DateResponse
+
+			// date.date.date as string
+			const test = new Date(date.date.date as string).toISOString().split("T")[0];
+
+			this.monthGrids.forEach((monthGrid) => {
+				monthGrid.items.forEach((item) => {
+					// add products to monthGrid if date and month and year match
+					if (item.date === test) {
+						if (!item.products) item.products = [];
+						item.products.push(date.product);
+					}
+				});
+			});
 		});
+
+		this.renderGridItems(this.currentYear, this.currentMonth);
 	}
 
 	renderGridItems(year: number, month: number) {
@@ -264,26 +294,11 @@ class DateOverviewCalendar {
 
 		if (!monthGrid) throw new Error("No monthGrid found");
 
-		// Map dates and products to monthGrid
-		this.dates.forEach((date) => {
-			if (typeof date.date !== "string") {
-				date.date = new Date(date.date.date).toISOString().split("T")[0];
-			}
-
-			monthGrid.forEach((item) => {
-				if (date.date === item.date) {
-					if (!item.products) item.products = [];
-					item.products.push(date.product);
-				}
-			});
-		});
-
 		this.daysContainer.innerHTML = "";
 		monthGrid.forEach((item) => {
 			this.renderGridItem(item);
 		});
 	}
-
 	renderGridItem(item: MonthGridItem) {
 		// Append existing element
 		if (item.element) {
@@ -323,6 +338,9 @@ class DateOverviewCalendar {
 		day.innerHTML = new Intl.DateTimeFormat("de-DE", {
 			day: "numeric",
 		}).format(new Date(item.date));
+
+		// Return of item is not in current month
+		if (!item.currentMonth) return;
 
 		// data-product-ids="<?= $productIds ?>" data-product-categories="<?= $productCategories ?>" data-date="<?= $date['date'] ?>" data-active="true"
 		const productIds = item.products?.map((product) => product.ID).join(",");
@@ -415,6 +433,12 @@ class DateOverviewCalendar {
 		});
 	}
 
+	showMonth(year: number, month: number) {
+		this.renderGridItems(year, month);
+		this.setMonthName(year, month);
+		this.setButtonState();
+	}
+
 	setMonthName(year: number, month: number) {
 		const months = [
 			"Januar",
@@ -456,17 +480,7 @@ class DateOverviewCalendar {
 		}
 	}
 
-	public setDates(dates: DateResponse[], year: number, month: number) {
-		this.dates = dates;
-
-		this.generateGridObject(year, month);
-		this.renderGridItems(year, month);
-		this.setMonthName(year, month);
-		this.setButtonState();
-	}
-
 	public setFilter(type: FilterType, identifier: Category | number) {
-		console.log("setFilter dfxdf", type, identifier);
 		this.monthGrids.forEach((monthGrid) => {
 			monthGrid.items.forEach((item) => {
 				const button = item.element;
@@ -505,7 +519,6 @@ class DateOverviewCalendar {
 					throw new Error("Invalid filter type");
 				}
 
-				console.log();
 				const colorSlices = button.querySelectorAll(
 					"#date-overview__calendar__day__color-slice"
 				) as NodeListOf<HTMLElement>;
