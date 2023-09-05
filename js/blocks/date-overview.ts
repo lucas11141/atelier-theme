@@ -48,6 +48,7 @@ class DateOverview {
 		// Check if dates of this month are already fetched
 		if (this.fetchedOnce) {
 			this.calendar.showMonth(year, month);
+			this.list.showMonth(year, month);
 		} else {
 			this.fetchDates(year, month);
 		}
@@ -87,9 +88,8 @@ class DateOverview {
 		});
 
 		this.filter.onFilterCategory((category) => {
-			console.log("onFilterCategory", category);
 			this.calendar.setFilter("category", category);
-			// this.list.setFilter("category", category);
+			this.list.setFilter("category", category);
 		});
 
 		// Filtering by product id
@@ -126,17 +126,19 @@ class DateOverview {
 
 				const dates: DateResponse[] = response.data;
 
+				// Fill calendar and list with data
 				thisClone.calendar.fillGridData(dates);
+				thisClone.list.fillListData(dates);
+
+				// Display month
 				thisClone.calendar.showMonth(year, month);
-				// thisClone.list.setDates(dates);
+				thisClone.list.showMonth(year, month);
 
 				thisClone.fetchedOnce = true;
 
 				// TODO: apply filter to new dates when filter is set
 			},
 		});
-
-		console.log("this.fetchedOnce", this.fetchedOnce);
 	}
 }
 
@@ -436,7 +438,7 @@ class DateOverviewCalendar {
 		});
 	}
 
-	showMonth(year: number, month: number) {
+	public showMonth(year: number, month: number) {
 		this.renderGridItems(year, month);
 		this.setMonthName(year, month);
 		this.setButtonState();
@@ -631,8 +633,11 @@ class DateOverviewCalendar {
 /* 	List view
 	/*------------------------------------*/
 class DateOverviewList {
+	currentYear: number = new Date().getFullYear();
+	currentMonth: number = new Date().getMonth() + 1;
 	container: HTMLElement;
 	dates: DateResponse[];
+	monthLists: MonthList[] = [];
 
 	// old
 	dateItems: NodeListOf<HTMLElement>;
@@ -646,6 +651,61 @@ class DateOverviewList {
 
 		this.dateItems = this.container.querySelectorAll("#date-overview__list__item");
 		this.monthDays = this.container.querySelectorAll("#date-overview__list__days");
+
+		this.createMonthGrids(this.currentYear, this.currentMonth);
+	}
+
+	// TODO: Rename
+	createMonthGrids(year: number, month: number) {
+		// render empty object of type MonthGrid[] for the next 12 month
+		for (let i = 0; i < 12; i++) {
+			// start with current month and go on
+			let forMonth = month + i;
+			let forYear = year;
+
+			// Reset month and increase year
+			if (forMonth > 12) {
+				forYear++;
+				forMonth = forMonth - 12;
+			}
+
+			this.monthLists.push({
+				year: forYear,
+				month: forMonth,
+				items: [],
+			});
+		}
+	}
+
+	public fillListData(dates: DateResponse[]) {
+		// TODO: Minimoze forEach calls
+
+		// fill newDates with dates
+		dates.forEach((date) => {
+			// get year and month of date
+			const dateYear = new Date(date.date.date as string).getFullYear();
+			const dateMonth = new Date(date.date.date as string).getMonth() + 1;
+			const dateDay = new Date(date.date.date as string).getDate();
+
+			// date.date.date as string
+			const test = new Date(date.date.date as string).toISOString().split("T")[0];
+
+			const monthList = this.monthLists.find(
+				(monthList) => monthList.year === dateYear && monthList.month === dateMonth
+			) as MonthList;
+
+			if (!monthList.items) monthList.items = [];
+			monthList.items.push({
+				date: test,
+				day: dateDay,
+				month: dateMonth,
+				product: date.product,
+			});
+		});
+
+		this.monthLists.forEach((monthList) => {
+			this.renderListItems(monthList.year, monthList.month);
+		});
 	}
 
 	public setDates(dates: DateResponse[]) {
@@ -655,13 +715,32 @@ class DateOverviewList {
 		this.initEventListeners();
 	}
 
-	renderListItems() {
-		this.dates.forEach((date) => {
-			this.renderListItem(date);
-		});
+	public showMonth(year: number, month: number) {
+		this.renderListItems(year, month);
 	}
 
-	renderListItem(date: DateResponse) {
+	renderListItems(year: number, month: number) {
+		this.currentYear = year;
+		this.currentMonth = month;
+
+		const monthList = this.monthLists.find(
+			(monthList) => monthList.year === year && monthList.month === month
+		)?.items as MonthListItem[];
+
+		if (!monthList) throw new Error("No monthList found");
+
+		this.container.innerHTML = "";
+		monthList.forEach((item) => {
+			this.renderListItem(item);
+		});
+	}
+	renderListItem(item: MonthListItem) {
+		// Append existing element
+		if (item.element) {
+			this.container.appendChild(item.element);
+			return;
+		}
+
 		const template = document.querySelector(
 			"#template--date-overview__list__item"
 		) as HTMLTemplateElement;
@@ -675,36 +754,37 @@ class DateOverviewList {
 		this.container.appendChild(clone);
 
 		// select currently added item
-		const item = this.container.lastElementChild as HTMLElement;
-		date.listElement = item;
+		const element = this.container.lastElementChild as HTMLElement;
+		item.element = element;
 
-		item.style.color = `var(--color-${date.product.category})`;
+		element.style.color = `var(--color-${item.product?.category})`;
 
 		// select by template-month attribute
-		const month = item.querySelector("[template-month]") as HTMLElement;
+		const month = element.querySelector("[template-month]") as HTMLElement;
 		if (!month) throw new Error("No month found");
 		// add formatted month from this.currentMonth using Intl.DateTimeFormat
 		month.innerHTML = new Intl.DateTimeFormat("de-DE", {
 			month: "short",
-		}).format(new Date(date.date as string));
+		}).format(new Date(item.date));
 
-		const day = item.querySelector("[template-day]") as HTMLElement;
+		const day = element.querySelector("[template-day]") as HTMLElement;
 		if (!day) throw new Error("No day found");
 		// add formatted day from this.currentMonth using Intl.DateTimeFormat
 		day.innerHTML = new Intl.DateTimeFormat("de-DE", {
 			day: "numeric",
-		}).format(new Date(date.date as string));
+		}).format(new Date(item.date));
 
-		const title = item.querySelector("[template-title]") as HTMLElement;
+		const title = element.querySelector("[template-title]") as HTMLElement;
 		if (!title) throw new Error("No title found");
 		// add formatted day from this.currentMonth using Intl.DateTimeFormat
-		title.innerHTML = date.product.title;
+		title.innerHTML = item.product.title;
 
-		const category = item.querySelector("[template-category]") as HTMLElement;
+		const category = element.querySelector("[template-category]") as HTMLElement;
 		if (!category) throw new Error("No category found");
 		// add formatted day from this.currentMonth using Intl.DateTimeFormat
-		category.innerHTML = date.product.category;
+		category.innerHTML = item.product.category;
 
+		// TODO: Add booking URL
 		// const bookingButton = item.querySelector(
 		// 	"[template-booking-button]"
 		// ) as HTMLLinkElement;
@@ -731,33 +811,36 @@ class DateOverviewList {
 		});
 	}
 
-	public setFilter(type: FilterType, identifier: Category | number) {
-		this.dateItems.forEach((item) => {
-			if (type === "category") {
-				if (identifier === null) {
-					item.dataset.active = "true";
-					return;
-				}
-				const productCategory = item.dataset.productCategory;
+	public setFilter(type: FilterType, identifier: CategoryFilter | number) {
+		this.monthLists.forEach((monthList) => {
+			monthList.items.forEach((item) => {
+				const element = item.element;
 
-				// check if array contains identifier
-				if (productCategory === identifier) {
-					item.dataset.active = "true";
-				} else {
-					item.dataset.active = "false";
-				}
-			} else if (type === "product") {
-				const productId = Number(item.dataset.productId);
+				if (!element) return;
 
-				// check if array contains identifier
-				if (productId === identifier) {
-					item.dataset.active = "true";
+				if (type === "category") {
+					if (identifier === null) {
+						element.dataset.active = "true";
+						return;
+					}
+
+					// check if array contains identifier
+					if (item.product?.category === identifier) {
+						element.dataset.active = "true";
+					} else {
+						element.dataset.active = "false";
+					}
+				} else if (type === "product") {
+					// check if array contains identifier
+					if (item.product?.ID === identifier) {
+						element.dataset.active = "true";
+					} else {
+						element.dataset.active = "false";
+					}
 				} else {
-					item.dataset.active = "false";
+					throw new Error("Invalid filter type");
 				}
-			} else {
-				throw new Error("Invalid filter type");
-			}
+			});
 		});
 	}
 
@@ -774,25 +857,6 @@ class DateOverviewList {
 			behavior: "smooth",
 			block: "center",
 			inline: "center",
-		});
-	}
-
-	public renderProductDates(productId: number) {
-		// AJAX-Anfrage, um die Komponente zu laden
-		$.ajax({
-			// @ts-ignore
-			url: ajaxurl,
-			type: "POST",
-			data: {
-				action: "get_date_overview_product_dates", // Dies sollte mit dem in add_action definierten Haken übereinstimmen
-				productId,
-			},
-			success: function (response) {
-				// Den geladenen Inhalt in die Seite einfügen
-				// $('#my-component-container').html(response);
-
-				console.log("get_date_overview_product_dates", response);
-			},
 		});
 	}
 
@@ -958,6 +1022,20 @@ type MonthGridItem = {
 	currentMonth: boolean;
 	element?: HTMLElement;
 	products?: ProductType[];
+};
+
+// Month list
+type MonthList = {
+	month: number;
+	year: number;
+	items: MonthListItem[];
+};
+type MonthListItem = {
+	date: string;
+	day: number;
+	month: number;
+	element?: HTMLElement;
+	product?: ProductType;
 };
 
 // API response
