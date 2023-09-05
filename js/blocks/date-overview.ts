@@ -94,6 +94,7 @@ class DateOverview {
 
 		// Filtering by product id
 		this.list.onFilterProduct((productId, productCategory) => {
+			console.log("onFilterProduct", productId, productCategory);
 			this.calendar.setFilter("product", productId);
 			this.filter.setFilter(productCategory);
 		});
@@ -741,6 +742,8 @@ class DateOverviewList {
 			return;
 		}
 
+		if (!item.product) throw new Error("No product found");
+
 		const template = document.querySelector(
 			"#template--date-overview__list__item"
 		) as HTMLTemplateElement;
@@ -791,6 +794,19 @@ class DateOverviewList {
 		// if (!bookingButton) throw new Error("No booking button found");
 		// // add formatted day from this.currentMonth using Intl.DateTimeFormat
 		// bookingButton.href = date.product.;
+
+		// Add event listener
+		element.addEventListener("click", () => {
+			this.fetchProductDates(item.product.ID);
+			this.setFilter("product", item.product.ID);
+
+			// Trigger onFilterProduct event
+			this.onFilterProductCallback(item.product.ID, item.product.category);
+		});
+	}
+
+	fetchProductDates(productId: number) {
+		// TODO: Implement
 	}
 
 	initEventListeners() {
