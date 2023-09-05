@@ -116,10 +116,29 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 <div class="inner">
     <div class="grid grid-cols-2 mt-8 gap-x-5 gap-y-12">
         <div class="row-start-2">
-            <div id="date-overview__selector" class="mr-10 h-20 bg-gray-100 rounded-2xl">
-                <select>
-                    <option value="">Produkt auswählen ...</option>
-                </select>
+            <div id="date-overview__selector" class="mr-10 relative rounded-lg overflow-hidden text-indigo-500 border border-solid border-gray-200 shadow-calendar">
+                <label class="relative w-[calc(100%_+_2px)] flex flex-row items-center gap-7 p-5 bg-white border border-solid border-gray-200 rounded-lg -inset-px shadow-calendar">
+                    <div template-product-image class="w-24 min-w-[96px] aspect-square rounded-full bg-gray-50 border border-solid border-gray-200"></div>
+                    <div class="flex-auto flex flex-col gap-2.5 items-start">
+                        <p template-product-title class="text-main font-extrabold uppercase text-xl leading-tight">Aquarellkurs</p>
+                        <span template-product-category class="bg-main text-white uppercase text-2xs font-bold px-3 py-1.5 rounded">Kurs für Erwachsene</span>
+                    </div>
+                    <svg class="mr-2" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 7.13156L6 1.8684L1 7.13156" stroke="#001E34" stroke-width="2.3" stroke-linejoin="round" />
+                        <path d="M11 17.1316L6 22.1316L1 17.1316" stroke="#001E34" stroke-width="2.3" stroke-linejoin="round" />
+                    </svg>
+
+
+                    <select class="absolute inset-0 opacity-0 cursor-pointer">
+                        <option value="">Produkt auswählen ...</option>
+                    </select>
+                </label>
+
+                <div class="flex gap-3 -mt-4 p-7 pt-11 bg-gray-50">
+                    <button class="px-4 py-2 bg-current text-white flex-1 rounded" role="button">Montag</button>
+                    <button class="px-4 py-2 bg-current text-white flex-1 rounded" role="button">Mittwoch</button>
+                    <button class="px-4 py-2 bg-current text-white flex-1 rounded" role="button">freitag</button>
+                </div>
             </div>
 
         </div>
@@ -184,7 +203,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 
 <template id="template--date-overview__calendar__day--filled">
     <button type="button" id="date-overview__calendar__day--filled" class="group relative bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10">
-        <time class="mx-auto my-1 w-7 h-7 overflow-hidden relative rounded-lg border border-black border-opacity-5 flex-col justify-center items-center flex">
+        <time class="mx-auto my-1 w-7 h-7 overflow-hidden relative rounded border border-black border-opacity-5 flex-col justify-center items-center flex">
             <div template-day class="text-white text-sm font-semibold uppercase leading-[14px] z-10"></div>
             <div id="date-overview__calendar__day__slide__color-container" class="absolute flex inset-0 rotate-45 scale-125 pointer-none bg-gray-300"></div>
         </time>

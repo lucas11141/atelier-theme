@@ -91,20 +91,23 @@ class DateOverview {
 				month: this.currentMonth,
 				category,
 			});
-			this.selector.setProduct("");
+			this.selector.showProduct("");
 		});
 
 		// Filtering by product id
 		this.list.onFilterProduct((productId, productCategory) => {
 			this.calendar.setFilter("product", productId);
+			this.calendar.showProduct(productId);
 			this.filter.setFilter(productCategory);
-			this.selector.setProduct(productId);
+			this.selector.showProduct(productId);
 		});
 
 		this.selector.onSelect((productId, productCategory) => {
 			this.list.showDates("product", { productId });
 			this.calendar.setFilter("product", productId);
+			this.calendar.showProduct(productId);
 			this.filter.setFilter(productCategory);
+			this.selector.showProduct(productId);
 		});
 	}
 
@@ -443,6 +446,20 @@ class DateOverviewCalendar {
 		this.renderGridItems(year, month);
 		this.setMonthName(year, month);
 		this.setButtonState();
+	}
+
+	public showProduct(productId: number) {
+		// Get month of the first monthGrid with the given productId
+		const firstMonth = this.monthGrids.find((monthGrid) => {
+			const monthGridItem = monthGrid.items.find((item) => {
+				if (!item.products) return false;
+				return item.products.find((product) => product.ID === productId);
+			});
+
+			return monthGridItem !== undefined;
+		});
+
+		this.showMonth(firstMonth?.year as number, firstMonth?.month as number);
 	}
 
 	// Manage states
@@ -1029,15 +1046,31 @@ class DateOverviewFilter {
 	/*------------------------------------*/
 class DateOverviewSelector {
 	container: HTMLElement;
+	products: ProductType[];
 	select: HTMLSelectElement;
+	productTitle: HTMLElement;
+	productCategory: HTMLElement;
+	productImage: HTMLElement;
+
+	selectorOptions: SelectorOption[] = [];
+	label: HTMLElement;
 	selected: number;
 	private onSelectCallback: (productId: number, productCategory: Category) => void;
 
 	constructor(container) {
 		this.container = container;
 		this.select = this.container.querySelector("select") as HTMLSelectElement;
+		this.label = this.container.querySelector("label") as HTMLElement;
+		this.productTitle = this.container.querySelector("[template-product-title]") as HTMLElement;
+		this.productCategory = this.container.querySelector(
+			"[template-product-category]"
+		) as HTMLElement;
+		this.productImage = this.container.querySelector("[template-product-image]") as HTMLElement;
 
-		if (!this.select) throw new Error("No select element found");
+		// Error handling
+		if (!this.productTitle || !this.productCategory || !this.productImage)
+			throw new Error("No product title, category or image found");
+		if (!this.select || !this.label) throw new Error("No select or label element found");
 
 		this.initEventListeners();
 	}
@@ -1056,7 +1089,12 @@ class DateOverviewSelector {
 			return 0;
 		});
 
-		uniqueProducts.forEach((product) => {
+		this.products = uniqueProducts;
+		this.renderOptions();
+	}
+
+	renderOptions() {
+		this.products.forEach((product) => {
 			this.renderOption(product);
 		});
 	}
@@ -1071,11 +1109,21 @@ class DateOverviewSelector {
 		if (!option) throw new Error("No option found");
 
 		option.dataset.productCategory = product.category;
+	}
 
-		// option.addEventListener("click", () => {
-		// 	// Trigger onSelect event
-		// 	if (this.onSelectCallback) this.onSelectCallback(product.ID, product.category);
-		// });
+	renderOptionLabel(productId: number | "") {
+		if (productId === "" || productId === 0) {
+			this.productTitle.innerHTML = "Kein Produkt ausgewählt";
+			this.productCategory.innerHTML = "";
+			return;
+		}
+
+		const product = this.products.find((product) => product.ID === productId);
+		if (!product) throw new Error("No product found");
+
+		this.productTitle.innerHTML = product.title;
+		this.productCategory.innerHTML = product.category;
+		this.productCategory.style.backgroundColor = `var(--color-${product.category})`;
 	}
 
 	initEventListeners() {
@@ -1091,8 +1139,10 @@ class DateOverviewSelector {
 		});
 	}
 
-	public setProduct(productId: number | "") {
+	public showProduct(productId: number | "") {
+		console.log("showProduct", productId);
 		this.select.value = productId.toString();
+		this.renderOptionLabel(productId);
 	}
 
 	public onSelect(callback: (productId: number, productCategory: Category) => void) {
@@ -1149,6 +1199,13 @@ type MonthListItem = {
 	month: number;
 	element?: HTMLElement;
 	product?: ProductType;
+};
+
+// Selector
+type SelectorOption = {
+	month: number;
+	year: number;
+	items: MonthListItem[];
 };
 
 // API response
