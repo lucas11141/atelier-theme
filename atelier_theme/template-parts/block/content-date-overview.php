@@ -117,7 +117,9 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
     <div class="grid grid-cols-2 mt-8 gap-x-5 gap-y-12">
         <div class="row-start-2">
             <div id="date-overview__selector" class="mr-10 h-20 bg-gray-100 rounded-2xl">
-                <select></select>
+                <select>
+                    <option value="">Produkt auswählen ...</option>
+                </select>
             </div>
 
         </div>
@@ -147,7 +149,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 <div class="space-extralarge"></div>
 
 <template id="template--date-overview__list__item">
-    <div id="date-overview__list__item" class="mt-4 bg-white rounded-2xl shadow-calendar border border-solid border-gray-200 justify-start items-stretch flex <?= $colors[$product['category']] ?> data-[active=false]:hidden overflow-hidden">
+    <div id="date-overview__list__item" class="mt-4 bg-white rounded-2xl shadow-calendar border border-solid border-gray-200 justify-start items-stretch flex <?= $colors[$product['category']] ?> overflow-hidden">
         <div class="w-20 p-5 bg-gray-50 border-r border-solid border-gray-200 flex flex-col items-center">
             <div template-day class="text-main text-[22px] font-bold uppercase leading-relaxed"></div>
             <div template-month class="text-gray-300 text-xs font-bold uppercase leading-[13.80px]"></div>

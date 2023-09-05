@@ -30,7 +30,6 @@ class DateOverview {
 		this.initEventListeners();
 
 		// Set current month
-		console.log("constructor");
 		this.showMonth(new Date().getFullYear(), new Date().getMonth() + 1);
 	}
 
@@ -43,12 +42,10 @@ class DateOverview {
 		this.currentYear = year;
 		this.currentMonth = month;
 
-		console.log("this.fetchedOnce", this.fetchedOnce);
-
 		// Check if dates of this month are already fetched
 		if (this.fetchedOnce) {
 			this.calendar.showMonth(year, month);
-			this.list.showMonth(year, month);
+			this.list.showDates("month", { year, month });
 		} else {
 			this.fetchDates(year, month);
 		}
@@ -89,26 +86,26 @@ class DateOverview {
 
 		this.filter.onFilterCategory((category) => {
 			this.calendar.setFilter("category", category);
-			this.list.setFilter("category", category);
+			this.list.showDates("category", {
+				year: this.currentYear,
+				month: this.currentMonth,
+				category,
+			});
+			this.selector.setProduct("");
 		});
 
 		// Filtering by product id
 		this.list.onFilterProduct((productId, productCategory) => {
-			console.log("onFilterProduct", productId, productCategory);
+			this.calendar.setFilter("product", productId);
+			this.filter.setFilter(productCategory);
+			this.selector.setProduct(productId);
+		});
+
+		this.selector.onSelect((productId, productCategory) => {
+			this.list.showDates("product", { productId });
 			this.calendar.setFilter("product", productId);
 			this.filter.setFilter(productCategory);
 		});
-
-		this.selector.onSelect((productId) => {
-			this.list.showDates("product", { productId });
-			// this.calendar.setFilter("product", productId);
-			// this.list.setFilter("product", productId);
-			// this.list.renderProductDates(productId);
-		});
-
-		// this.calendar.onRender(() => {
-		// 	this.calendar.setFilter("category", this.filter.getFilter());
-		// });
 	}
 
 	async fetchDates(year: number, month: number) {
@@ -713,12 +710,21 @@ class DateOverviewList {
 	}
 
 	public showDates(
-		type: "month" | "product",
-		options: { year: number; month: number } | { productId: number }
+		type: "month" | "product" | "category",
+		options:
+			| { year: number; month: number }
+			| { productId: number }
+			| { year: number; month: number; category: CategoryFilter }
 	) {
 		// TODO: Create two modes: rendring all dates of a specific
 		if (type === "month") {
 			this.renderMonthDatesList(options.year, options.month);
+		} else if (type === "category") {
+			if (options.category !== null) {
+				this.renderMonthCategoryDatesList(options.year, options.month, options.category);
+			} else {
+				this.renderMonthDatesList(options.year, options.month);
+			}
 		} else if (type === "product") {
 			this.renderProductDatesList(options.productId);
 		} else {
@@ -745,6 +751,26 @@ class DateOverviewList {
 
 		this.renderListMonth(year, month);
 		monthList.forEach((item) => {
+			this.renderListItem(item);
+		});
+	}
+
+	renderMonthCategoryDatesList(year: number, month: number, cateogry: Category) {
+		// get all dates of the month with the given category
+		const monthList = this.monthLists.find(
+			(monthList) => monthList.year === year && monthList.month === month
+		)?.items as MonthListItem[];
+
+		if (!monthList) throw new Error("No monthList found");
+
+		const categoryDates = monthList.filter((item) => item.product?.category === cateogry);
+
+		// Remove old content
+		this.container.innerHTML = "";
+
+		// Append a new section element for each month
+		this.renderListMonth(year, month);
+		categoryDates.forEach((item) => {
 			this.renderListItem(item);
 		});
 	}
@@ -848,7 +874,7 @@ class DateOverviewList {
 		// Add event listener
 		filterButton.addEventListener("click", () => {
 			this.fetchProductDates(item.product.ID);
-			this.setFilter("product", item.product.ID);
+			this.showDates("product", { productId: item.product.ID });
 
 			// Trigger onFilterProduct event
 			this.onFilterProductCallback(item.product.ID, item.product.category);
@@ -896,39 +922,6 @@ class DateOverviewList {
 		if (!monthList) throw new Error("No monthList found");
 
 		return monthList;
-	}
-
-	public setFilter(type: FilterType, identifier: CategoryFilter | number) {
-		this.monthLists.forEach((monthList) => {
-			monthList.items.forEach((item) => {
-				const element = item.element;
-
-				if (!element) return;
-
-				if (type === "category") {
-					if (identifier === null) {
-						element.dataset.active = "true";
-						return;
-					}
-
-					// check if array contains identifier
-					if (item.product?.category === identifier) {
-						element.dataset.active = "true";
-					} else {
-						element.dataset.active = "false";
-					}
-				} else if (type === "product") {
-					// check if array contains identifier
-					if (item.product?.ID === identifier) {
-						element.dataset.active = "true";
-					} else {
-						element.dataset.active = "false";
-					}
-				} else {
-					throw new Error("Invalid filter type");
-				}
-			});
-		});
 	}
 
 	public scrollToItem(date: string) {
@@ -1026,10 +1019,6 @@ class DateOverviewFilter {
 		this.category = category;
 	}
 
-	public getFilter() {
-		return this.category;
-	}
-
 	public onFilterCategory(callback: (category: CategoryFilter) => void) {
 		this.onFilterCategoryCallback = callback;
 	}
@@ -1042,7 +1031,7 @@ class DateOverviewSelector {
 	container: HTMLElement;
 	select: HTMLSelectElement;
 	selected: number;
-	private onSelectCallback: (productId: number) => void;
+	private onSelectCallback: (productId: number, productCategory: Category) => void;
 
 	constructor(container) {
 		this.container = container;
@@ -1076,28 +1065,37 @@ class DateOverviewSelector {
 		this.select.innerHTML += `<option value="${product.ID}">${product.title}</option>`;
 
 		// Add event listener
-		const option = this.select.querySelector(`option[value="${product.ID}"]`);
+		const option = this.select.querySelector(
+			`option[value="${product.ID}"]`
+		) as HTMLOptionElement;
 		if (!option) throw new Error("No option found");
 
-		option.addEventListener("click", () => {
-			// Trigger onSelect event
-			if (this.onSelectCallback) this.onSelectCallback(product.ID);
-		});
+		option.dataset.productCategory = product.category;
+
+		// option.addEventListener("click", () => {
+		// 	// Trigger onSelect event
+		// 	if (this.onSelectCallback) this.onSelectCallback(product.ID, product.category);
+		// });
 	}
 
 	initEventListeners() {
 		this.select.addEventListener("change", (e) => {
 			const target = e.currentTarget as HTMLSelectElement;
 			const productId = Number(target.value);
+			const productCategory = target.selectedOptions[0].dataset.productCategory as Category;
 
 			// Trigger onSelect event
-			if (this.onSelectCallback) this.onSelectCallback(productId);
+			if (this.onSelectCallback) this.onSelectCallback(productId, productCategory);
 
 			this.selected = productId;
 		});
 	}
 
-	public onSelect(callback: (productId: number) => void) {
+	public setProduct(productId: number | "") {
+		this.select.value = productId.toString();
+	}
+
+	public onSelect(callback: (productId: number, productCategory: Category) => void) {
 		this.onSelectCallback = callback;
 	}
 }
