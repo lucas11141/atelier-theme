@@ -1,6 +1,8 @@
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
 
+import Swiper from "swiper";
+
 class DateOverview {
 	fetchedOnce: boolean = false;
 	allDates: {
@@ -153,13 +155,13 @@ class DateOverviewCalendar {
 	currentYear: number = new Date().getFullYear();
 	currentMonth: number = new Date().getMonth() + 1;
 	monthGrids: MonthGrid[] = [];
-
 	container: HTMLElement;
 	dates: DateResponse[];
+	monthLabelSlider: Swiper;
+	monthLabelSliderYear: Swiper;
 
 	// old
 	daysContainer: HTMLElement;
-	monthLabel: HTMLElement;
 	nextButton: HTMLElement;
 	prevButton: HTMLElement;
 	dateButtons: NodeListOf<HTMLElement>;
@@ -176,13 +178,13 @@ class DateOverviewCalendar {
 		this.daysContainer = this.container.querySelector(
 			"#date-overview__calendar__days"
 		) as HTMLElement;
-		this.monthLabel = this.container.querySelector("#calendar__month") as HTMLElement;
 		this.nextButton = this.container.querySelector("#calendar__next") as HTMLElement;
 		this.prevButton = this.container.querySelector("#calendar__prev") as HTMLElement;
 		this.dateButtons = this.container.querySelectorAll("#date-overview__calendar__day");
 		this.monthDays = this.container.querySelectorAll("#date-overview__calendar__days");
 
 		this.createMonthGrids(this.currentYear, this.currentMonth);
+		this.initMonthLabelSlider();
 		this.initEventListeners();
 	}
 
@@ -261,6 +263,41 @@ class DateOverviewCalendar {
 
 		// Add new monthGrid to this.monthGrids
 		return monthGridObject;
+	}
+
+	initMonthLabelSlider() {
+		const slider = this.container.querySelector("#calendar__month-slider .swiper-wrapper");
+
+		// Append a slide for each month with the month name and year
+		this.monthGrids.forEach((monthGrid) => {
+			const monthSlide = document.createElement("div");
+			const monthLabel = Intl.DateTimeFormat("de-DE", {
+				month: "long",
+				year: "numeric",
+			}).format(new Date(monthGrid.year, monthGrid.month - 1, 1));
+
+			monthSlide.classList.add(
+				"swiper-slide",
+				"w-min",
+				"whitespace-nowrap",
+				"[&:not(:is(.swiper-slide-active))]:opacity-10",
+				"transition-opacity",
+				"duration-300"
+			);
+			monthSlide.innerHTML = monthLabel;
+
+			slider?.appendChild(monthSlide);
+		});
+
+		this.monthLabelSlider = new Swiper("#calendar__month-slider", {
+			slidesPerView: "auto",
+			centeredSlides: true,
+			spaceBetween: 24,
+			speed: 300,
+			allowTouchMove: false,
+		});
+
+		if (!this.monthLabelSlider) throw new Error("No monthLabelSlider found");
 	}
 
 	public fillGridData(dates: DateResponse[]) {
@@ -444,7 +481,7 @@ class DateOverviewCalendar {
 
 	public showMonth(year: number, month: number) {
 		this.renderGridItems(year, month);
-		this.setMonthName(year, month);
+		this.showMonthLabel(year, month);
 		this.setButtonState();
 	}
 
@@ -463,22 +500,12 @@ class DateOverviewCalendar {
 	}
 
 	// Manage states
-	setMonthName(year: number, month: number) {
-		const months = [
-			"Januar",
-			"Februar",
-			"März",
-			"April",
-			"Mai",
-			"Juni",
-			"Juli",
-			"August",
-			"September",
-			"Oktober",
-			"November",
-			"Dezember",
-		];
-		this.monthLabel.innerHTML = `${months[month - 1]} ${year}`;
+	showMonthLabel(year: number, month: number) {
+		// Get index of the month in monthGrids
+		const monthIndex = this.monthGrids.findIndex(
+			(monthGrid) => monthGrid.year === year && monthGrid.month === month
+		);
+		this.monthLabelSlider.slideTo(monthIndex);
 	}
 	setButtonState() {
 		// Activate buttons

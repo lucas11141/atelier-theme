@@ -4,6 +4,7 @@
     "prettier-plugin-tailwindcss": "^0.5.4"
   },
   "dependencies": {
-    "jquery": "^3.7.1"
+    "jquery": "^3.7.1",
+    "swiper": "^10.2.0"
   }
 }

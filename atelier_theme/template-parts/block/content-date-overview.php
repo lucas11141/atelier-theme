@@ -85,7 +85,9 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
                 </span>
             </button>
             <div class="font-extrabold uppercase leading-none bg-gray-50 col-span-5 flex justify-center items-center">
-                <span id="calendar__month"><?= date('F'); ?></span>
+                <div id="calendar__month-slider" class="swiper">
+                    <div class="swiper-wrapper"></div>
+                </div>
             </div>
             <button type="button" id="calendar__next" class="col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10  data-[active=false]:opacity-20 data-[active=false]:pointer-events-none" data-active="true">
                 <span class="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold">
