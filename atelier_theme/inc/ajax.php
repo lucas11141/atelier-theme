@@ -148,7 +148,7 @@ function date_overview_get_product_dates()
         $date = get_field('date', $dateId);
         $date = new DateTime($date);
         $date->setTimezone(new DateTimeZone('Europe/Berlin'));
-        $date->format('Y-m-d');
+        $date = $date->format('Y-m-d'); // convert into string of format Y-m-d
 
         // get all courses of this date
         $courseTimes = get_field('course_time', $dateId);
@@ -205,7 +205,7 @@ function date_overview_get_product_dates()
         $dateField = get_field('date_1', $dateId);
         $date = new DateTime($dateField['date']);
         $date->setTimezone(new DateTimeZone('Europe/Berlin'));
-        $date->format('Y-m-d');
+        $date = $date->format('Y-m-d'); // convert into string of format Y-m-d
 
         // get all workshops of this date
         $workshops = get_field('workshop', $dateId);
@@ -261,7 +261,7 @@ function date_overview_get_product_dates()
         $dateField = get_field('date_1', $dateId);
         $date = new DateTime($dateField['date']);
         $date->setTimezone(new DateTimeZone('Europe/Berlin'));
-        $date->format('Y-m-d');
+        $date = $date->format('Y-m-d'); // convert into string of format Y-m-d
 
         // get all workshops of this date
         $workshops = get_field('workshop', $dateId);

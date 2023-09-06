@@ -337,14 +337,10 @@ class DateOverviewCalendar {
 
 		// fill newDates with dates
 		dates.forEach((date) => {
-			// get year and month of date
-			const dateYear = new Date(date.date.date as string).getFullYear();
-			const dateMonth = new Date(date.date.date as string).getMonth() + 1;
-
 			// TODO: Fix Type date type in DateResponse
 
 			// date.date.date as string
-			const test = new Date(date.date.date as string).toISOString().split("T")[0];
+			const test = new Date(date.date).toISOString().split("T")[0];
 
 			this.monthGrids.forEach((monthGrid) => {
 				monthGrid.items.forEach((item) => {
@@ -639,12 +635,12 @@ class DateOverviewList {
 		// fill newDates with dates
 		dates.forEach((date) => {
 			// get year and month of date
-			const dateYear = new Date(date.date.date as string).getFullYear();
-			const dateMonth = new Date(date.date.date as string).getMonth() + 1;
-			const dateDay = new Date(date.date.date as string).getDate();
+			const dateYear = new Date(date.date).getFullYear();
+			const dateMonth = new Date(date.date).getMonth() + 1;
+			const dateDay = new Date(date.date).getDate();
 
 			// date.date.date as string
-			const test = new Date(date.date.date as string).toISOString().split("T")[0];
+			const test = new Date(date.date).toISOString().split("T")[0];
 
 			const monthList = this.monthLists.find(
 				(monthList) => monthList.year === dateYear && monthList.month === dateMonth
@@ -831,6 +827,8 @@ class DateOverviewList {
 
 		// Add event listener
 		filterButton.addEventListener("click", () => {
+			if (!item.product) throw new Error("No product ID found");
+
 			this.fetchProductDates(item.product.ID);
 			this.setFilter({
 				type: "product",
@@ -1183,7 +1181,7 @@ type ProductType = {
 	};
 };
 type DateResponse = {
-	date: DateType | string;
+	date: string;
 	product: ProductType;
 	listElement?: HTMLElement;
 };
