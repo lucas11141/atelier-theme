@@ -3,8 +3,8 @@
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
 
-import { Navigation } from "swiper/modules";
-import Swiper from "swiper";
+import { Navigation } from 'swiper/modules';
+import Swiper from 'swiper';
 
 Swiper.use([Navigation]);
 
@@ -43,7 +43,7 @@ class DateOverview {
 	showMonth(year: number, month: number) {
 		// return if month is already set
 		if (this.currentYear === year && this.currentMonth === month)
-			throw new Error("Month is already set");
+			throw new Error('Month is already set');
 
 		// Set current month
 		this.currentYear = year;
@@ -96,31 +96,31 @@ class DateOverview {
 				this.list.setFilter(null);
 			} else {
 				this.calendar.setFilter({
-					type: "category",
+					type: 'category',
 					year: this.currentYear,
 					month: this.currentMonth,
 					category,
 				});
 				this.list.setFilter({
-					type: "category",
+					type: 'category',
 					year: this.currentYear,
 					month: this.currentMonth,
 					category,
 				});
 			}
 
-			this.selector.showProduct("");
+			this.selector.showProduct('');
 		});
 
 		this.list.onFilterProduct((productId, productCategory) => {
-			this.calendar.setFilter({ type: "product", productId });
+			this.calendar.setFilter({ type: 'product', productId });
 			this.filter.setFilter(productCategory);
 			this.selector.showProduct(productId);
 		});
 
 		this.selector.onSelect((productId, productCategory) => {
-			this.list.setFilter({ type: "product", productId });
-			this.calendar.setFilter({ type: "product", productId });
+			this.list.setFilter({ type: 'product', productId });
+			this.calendar.setFilter({ type: 'product', productId });
 			this.filter.setFilter(productCategory);
 			this.selector.showProduct(productId);
 		});
@@ -132,14 +132,13 @@ class DateOverview {
 		await $.ajax({
 			// @ts-ignore
 			url: ajaxurl,
-			type: "POST",
+			type: 'POST',
 			data: {
-				action: "date_overview_get_product_dates", // Dies sollte mit dem in add_action definierten Haken übereinstimmen
+				action: 'date_overview_get_product_dates', // Dies sollte mit dem in add_action definierten Haken übereinstimmen
 				year: year,
 				month: month,
 			},
 			success: function (response) {
-				console.log("date_overview_get_product_dates", response);
 				thisClone.dates = response;
 
 				const dates: DateResponse[] = response.data;
@@ -154,31 +153,26 @@ class DateOverview {
 				thisClone.list.showMonth(year, month);
 
 				thisClone.fetchedOnce = true;
-
-				// TODO: apply filter to new dates when filter is set
 			},
 		});
 	}
 }
 
 /*------------------------------------*/
-/* 	Calendar view
-	/*------------------------------------*/
+/* Calendar view */
+/*------------------------------------*/
 class DateOverviewCalendar {
 	currentYear: number = new Date().getFullYear();
 	currentMonth: number = new Date().getMonth() + 1;
 	monthGrids: MonthGrid[] = [];
 	filter: Filter = null;
 
+	// Without default values
 	container: HTMLElement;
 	dates: DateResponse[];
 	monthLabelSlider: Swiper;
 	monthLabelSliderYear: Swiper;
-
-	// old
 	daysContainer: HTMLElement;
-	dateButtons: NodeListOf<HTMLElement>;
-	monthDays: NodeListOf<HTMLElement>;
 
 	// Event listeners
 	private onSelectCallback: (date: string) => void;
@@ -187,19 +181,18 @@ class DateOverviewCalendar {
 
 	constructor(container) {
 		this.container = container;
-
 		this.daysContainer = this.container.querySelector(
-			"#date-overview__calendar__days"
+			'#date-overview__calendar__days'
 		) as HTMLElement;
-		this.dateButtons = this.container.querySelectorAll("#date-overview__calendar__day");
-		this.monthDays = this.container.querySelectorAll("#date-overview__calendar__days");
 
-		this.createMonthGrids(this.currentYear, this.currentMonth);
+		this.generateEmptyMonthGrids(this.currentYear, this.currentMonth);
 		this.initMonthLabelSlider();
 	}
 
-	// TODO: Rename. it isn't a grid
-	createMonthGrids(year: number, month: number) {
+	/*------------------------------------*/
+	/* Initialisation */
+	/*------------------------------------*/
+	generateEmptyMonthGrids(year: number, month: number) {
 		// render empty object of type MonthGrid[] for the next 12 month
 		for (let i = 0; i < 12; i++) {
 			// start with current month and go on
@@ -212,12 +205,12 @@ class DateOverviewCalendar {
 				forMonth = forMonth - 12;
 			}
 
-			this.monthGrids.push(this.createMonthGrid(forYear, forMonth));
+			this.monthGrids.push(this.generateEmptyMonthGrid(forYear, forMonth));
 		}
 	}
-	createMonthGrid(year: number, month: number): MonthGrid {
+	generateEmptyMonthGrid(year: number, month: number): MonthGrid {
 		// Erster Tag des angegebenen Monats und Jahres
-		const firstDayOfMonth = new Date(`${year}-${month.toString().padStart(2, "0")}-01`);
+		const firstDayOfMonth = new Date(`${year}-${month.toString().padStart(2, '0')}-01`);
 		firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 1);
 
 		// Erstelle den letzten Tag des angegebenen Monats und Jahres
@@ -232,7 +225,7 @@ class DateOverviewCalendar {
 		// Days from last month
 		while (startDate <= firstDayOfMonth) {
 			monthGrid.push({
-				date: startDate.toISOString().split("T")[0],
+				date: startDate.toISOString().split('T')[0],
 				day: startDate.getDate(),
 				month: startDate.getMonth() + 1,
 				currentMonth: false,
@@ -243,7 +236,7 @@ class DateOverviewCalendar {
 		// Days from current month
 		while (startDate <= lastDayOfMonth) {
 			monthGrid.push({
-				date: startDate.toISOString().split("T")[0],
+				date: startDate.toISOString().split('T')[0],
 				day: startDate.getDate(),
 				month: startDate.getMonth() + 1,
 				currentMonth: true,
@@ -257,7 +250,7 @@ class DateOverviewCalendar {
 		// Days from next month
 		while (monthGrid.length < maxCount) {
 			monthGrid.push({
-				date: startDate.toISOString().split("T")[0],
+				date: startDate.toISOString().split('T')[0],
 				day: startDate.getDate(),
 				month: startDate.getMonth() + 1,
 				currentMonth: false,
@@ -274,35 +267,34 @@ class DateOverviewCalendar {
 		// Add new monthGrid to this.monthGrids
 		return monthGridObject;
 	}
-
 	initMonthLabelSlider() {
-		const slider = this.container.querySelector("#calendar__month-slider .swiper-wrapper");
-		const nextButton = this.container.querySelector("#calendar__next") as HTMLElement;
-		const prevButton = this.container.querySelector("#calendar__prev") as HTMLElement;
+		const slider = this.container.querySelector('#calendar__month-slider .swiper-wrapper');
+		const nextButton = this.container.querySelector('#calendar__next') as HTMLElement;
+		const prevButton = this.container.querySelector('#calendar__prev') as HTMLElement;
 
 		// Append a slide for each month with the month name and year
 		this.monthGrids.forEach((monthGrid) => {
-			const monthSlide = document.createElement("div");
-			const monthLabel = Intl.DateTimeFormat("de-DE", {
-				month: "long",
-				year: "numeric",
+			const monthSlide = document.createElement('div');
+			const monthLabel = Intl.DateTimeFormat('de-DE', {
+				month: 'long',
+				year: 'numeric',
 			}).format(new Date(monthGrid.year, monthGrid.month - 1, 1));
 
 			monthSlide.classList.add(
-				"swiper-slide",
-				"w-min",
-				"whitespace-nowrap",
-				"[&:not(:is(.swiper-slide-active))]:opacity-10",
-				"transition-opacity",
-				"duration-300"
+				'swiper-slide',
+				'w-min',
+				'whitespace-nowrap',
+				'[&:not(:is(.swiper-slide-active))]:opacity-10',
+				'transition-opacity',
+				'duration-300'
 			);
 			monthSlide.innerHTML = monthLabel;
 
 			slider?.appendChild(monthSlide);
 		});
 
-		this.monthLabelSlider = new Swiper("#calendar__month-slider", {
-			slidesPerView: "auto",
+		this.monthLabelSlider = new Swiper('#calendar__month-slider', {
+			slidesPerView: 'auto',
 			centeredSlides: true,
 			spaceBetween: 24,
 			speed: 300,
@@ -327,25 +319,19 @@ class DateOverviewCalendar {
 			},
 		});
 
-		console.log(this.monthLabelSlider);
-
-		if (!this.monthLabelSlider) throw new Error("No monthLabelSlider found");
+		if (!this.monthLabelSlider) throw new Error('No monthLabelSlider found');
 	}
-
 	public fillGridData(dates: DateResponse[]) {
 		// TODO: Minimoze forEach calls
 
 		// fill newDates with dates
 		dates.forEach((date) => {
-			// TODO: Fix Type date type in DateResponse
-
-			// date.date.date as string
-			const test = new Date(date.date).toISOString().split("T")[0];
+			const dateString = new Date(date.date).toISOString().split('T')[0];
 
 			this.monthGrids.forEach((monthGrid) => {
 				monthGrid.items.forEach((item) => {
 					// add products to monthGrid if date and month and year match
-					if (item.date === test) {
+					if (item.date === dateString) {
 						if (!item.products) item.products = [];
 						item.products.push(date.product);
 					}
@@ -356,10 +342,11 @@ class DateOverviewCalendar {
 		this.monthGrids.forEach((monthGrid) => {
 			this.renderGridItems(monthGrid.year, monthGrid.month);
 		});
-
-		console.log("fillGridData", this.monthGrids);
 	}
 
+	/*------------------------------------*/
+	/* Render functions */
+	/*------------------------------------*/
 	renderGridItems(year: number, month: number) {
 		this.currentYear = year;
 		this.currentMonth = month;
@@ -368,9 +355,9 @@ class DateOverviewCalendar {
 			(monthGrid) => monthGrid.year === year && monthGrid.month === month
 		)?.items as MonthGridItem[];
 
-		if (!monthGrid) throw new Error("No monthGrid found");
+		if (!monthGrid) throw new Error('No monthGrid found');
 
-		this.daysContainer.innerHTML = "";
+		this.daysContainer.innerHTML = '';
 		monthGrid.forEach((item) => {
 			this.renderGridItem(item);
 		});
@@ -382,15 +369,15 @@ class DateOverviewCalendar {
 			return;
 		}
 
-		let templateQuery = "";
+		let templateQuery = '';
 		if (item.currentMonth) {
 			if (item.products) {
-				templateQuery = "#template--date-overview__calendar__day--filled";
+				templateQuery = '#template--date-overview__calendar__day--filled';
 			} else {
-				templateQuery = "#template--date-overview__calendar__day--empty";
+				templateQuery = '#template--date-overview__calendar__day--empty';
 			}
 		} else {
-			templateQuery = "#template--date-overview__calendar__day--other-month";
+			templateQuery = '#template--date-overview__calendar__day--other-month';
 		}
 
 		// Select template
@@ -408,35 +395,35 @@ class DateOverviewCalendar {
 		item.element = element;
 
 		// select by template-month attribute
-		const day = element.querySelector("[template-day]") as HTMLElement;
-		if (!day) throw new Error("No day found");
+		const day = element.querySelector('[template-day]') as HTMLElement;
+		if (!day) throw new Error('No day found');
 		// add formatted day from this.currentMonth using Intl.DateTimeFormat
-		day.innerHTML = new Intl.DateTimeFormat("de-DE", {
-			day: "numeric",
+		day.innerHTML = new Intl.DateTimeFormat('de-DE', {
+			day: 'numeric',
 		}).format(new Date(item.date));
 
 		// Return of item is not in current month
 		if (!item.currentMonth) return;
 
 		// data-product-ids="<?= $productIds ?>" data-product-categories="<?= $productCategories ?>" data-date="<?= $date['date'] ?>" data-active="true"
-		const productIds = item.products?.map((product) => product.ID).join(",");
+		const productIds = item.products?.map((product) => product.ID).join(',');
 		element.dataset.productIds = productIds;
 
-		const productCategories = item.products?.map((product) => product.category).join(",");
+		const productCategories = item.products?.map((product) => product.category).join(',');
 		element.dataset.productCategories = productCategories;
 
 		element.dataset.date = item.date;
 
 		// Add event listener
-		element.addEventListener("click", (e) => {
+		element.addEventListener('click', (e) => {
 			const target = e.currentTarget as HTMLElement;
 			const date = target.dataset.date;
 
 			// Do nothing when button is inactive
-			if (target.dataset.active === "false") return;
+			if (target.dataset.active === 'false') return;
 
 			// Error handling
-			if (!date) throw new Error("No date found");
+			if (!date) throw new Error('No date found');
 
 			// Trigger onSelect event
 			if (this.onSelectCallback) this.onSelectCallback(date);
@@ -445,21 +432,21 @@ class DateOverviewCalendar {
 		// Add product parts
 		if (item.products) {
 			// Add event listener
-			item.element.addEventListener("click", () => {
+			item.element.addEventListener('click', () => {
 				// Trigger onSelect event
 				if (this.onSelectCallback) this.onSelectCallback(item.date);
 			});
 
 			item.products.forEach((product) => {
 				const container = element.querySelector(
-					"#date-overview__calendar__day__slide__color-container"
+					'#date-overview__calendar__day__slide__color-container'
 				);
 
-				if (!container) throw new Error("No container found");
+				if (!container) throw new Error('No container found');
 
 				// this.renderProductPart(item, product);
 				const template = document.querySelector(
-					"#template--date-overview__calendar__day__color-slice"
+					'#template--date-overview__calendar__day__color-slice'
 				) as HTMLTemplateElement;
 
 				if (!template)
@@ -485,6 +472,9 @@ class DateOverviewCalendar {
 		}
 	}
 
+	/*------------------------------------*/
+	/* Public functions */
+	/*------------------------------------*/
 	public showMonth(year: number, month: number) {
 		this.renderGridItems(year, month);
 
@@ -493,22 +483,21 @@ class DateOverviewCalendar {
 		);
 		this.monthLabelSlider.slideTo(monthIndex);
 	}
-
 	public setFilter(filter: Filter) {
 		this.filter = filter;
 
 		// Set active state of all buttons
 		this.monthGrids.forEach((monthGrid) => {
 			monthGrid.items.forEach((item) => {
-				if (!item.element) throw new Error("No button found");
+				if (!item.element) throw new Error('No button found');
 
 				// Activate all buttons when identifier is null
 				if (filter === null) {
-					item.element.dataset.active = "true";
+					item.element.dataset.active = 'true';
 				}
 
 				// Filter by category
-				if (filter?.type === "category") {
+				if (filter?.type === 'category') {
 					const categories: Category[] = [];
 					item.products?.forEach((product) => {
 						categories.push(product.category);
@@ -517,7 +506,7 @@ class DateOverviewCalendar {
 				}
 
 				// Filter by product
-				if (filter?.type === "product") {
+				if (filter?.type === 'product') {
 					const productIds: number[] = [];
 					item.products?.forEach((product) => {
 						productIds.push(product.ID);
@@ -527,23 +516,23 @@ class DateOverviewCalendar {
 
 				// Set color slices active state
 				const colorSlices = item.element.querySelectorAll(
-					"#date-overview__calendar__day__color-slice"
+					'#date-overview__calendar__day__color-slice'
 				) as NodeListOf<HTMLElement>;
 
 				colorSlices.forEach((slice) => {
 					// active all buttons when identifier is null
 					if (filter === null) {
-						slice.dataset.active = "true";
+						slice.dataset.active = 'true';
 					}
 
 					// Filter by category
-					if (filter?.type === "category") {
+					if (filter?.type === 'category') {
 						const category = slice.dataset.productCategory as Category;
 						slice.dataset.active = (category === filter.category).toString(); // Activate slice if productCategory matches
 					}
 
 					// Filter by product
-					if (filter?.type === "product") {
+					if (filter?.type === 'product') {
 						const productId = Number(slice.dataset.productId);
 						slice.dataset.active = (productId === filter.productId).toString(); // Activate slice if productId matches
 					}
@@ -552,7 +541,7 @@ class DateOverviewCalendar {
 		});
 
 		// Show the first month with the filtedes product
-		if (filter?.type === "product") {
+		if (filter?.type === 'product') {
 			// Get month of the first monthGrid with the given productId
 			const firstMonth = this.monthGrids.find((monthGrid) => {
 				const monthGridItem = monthGrid.items.find((item) => {
@@ -567,7 +556,9 @@ class DateOverviewCalendar {
 		}
 	}
 
-	// Event listeners
+	/*------------------------------------*/
+	/* Event listeners */
+	/*------------------------------------*/
 	public onSelect(callback: (date: string) => void) {
 		this.onSelectCallback = callback;
 	}
@@ -580,20 +571,17 @@ class DateOverviewCalendar {
 }
 
 /*------------------------------------*/
-/* 	List view
-	/*------------------------------------*/
+/* List view */
+/*------------------------------------*/
 class DateOverviewList {
 	currentYear: number = new Date().getFullYear();
 	currentMonth: number = new Date().getMonth() + 1;
 	monthLists: MonthList[] = [];
 	filter: Filter = null;
 
+	// Without default values
 	container: HTMLElement;
 	dates: DateResponse[];
-
-	// old
-	dateItems: NodeListOf<HTMLElement>;
-	monthDays: NodeListOf<HTMLElement>;
 
 	// Event listeners
 	private onFilterProductCallback: (productId: number, productCategory: Category) => void;
@@ -601,14 +589,13 @@ class DateOverviewList {
 	constructor(container) {
 		this.container = container;
 
-		this.dateItems = this.container.querySelectorAll("#date-overview__list__item");
-		this.monthDays = this.container.querySelectorAll("#date-overview__list__days");
-
-		this.createMonthGrids(this.currentYear, this.currentMonth);
+		this.generareEmptyMonthLists(this.currentYear, this.currentMonth);
 	}
 
-	// TODO: Rename
-	createMonthGrids(year: number, month: number) {
+	/*------------------------------------*/
+	/* Initialisation */
+	/*------------------------------------*/
+	generareEmptyMonthLists(year: number, month: number) {
 		// render empty object of type MonthGrid[] for the next 12 month
 		for (let i = 0; i < 12; i++) {
 			// start with current month and go on
@@ -628,7 +615,6 @@ class DateOverviewList {
 			});
 		}
 	}
-
 	public fillListData(dates: DateResponse[]) {
 		// TODO: Minimoze forEach calls
 
@@ -640,7 +626,7 @@ class DateOverviewList {
 			const dateDay = new Date(date.date).getDate();
 
 			// date.date.date as string
-			const test = new Date(date.date).toISOString().split("T")[0];
+			const dateString = new Date(date.date).toISOString().split('T')[0];
 
 			const monthList = this.monthLists.find(
 				(monthList) => monthList.year === dateYear && monthList.month === dateMonth
@@ -648,7 +634,7 @@ class DateOverviewList {
 
 			if (!monthList.items) monthList.items = [];
 			monthList.items.push({
-				date: test,
+				date: dateString,
 				day: dateDay,
 				month: dateMonth,
 				product: date.product,
@@ -660,36 +646,9 @@ class DateOverviewList {
 		});
 	}
 
-	public showMonth(year: number, month: number) {
-		if (!this.filter) {
-			this.renderMonthDatesList(this.currentYear, this.currentMonth);
-			return;
-		}
-
-		if (this.filter.type === "category") {
-			this.renderMonthCategoryDatesList(
-				this.filter.year,
-				this.filter.month,
-				this.filter.category
-			);
-			return;
-		}
-
-		if (this.filter.type === "product") {
-			this.renderProductDatesList(this.filter.productId);
-			return;
-		}
-	}
-
-	public setFilter(filter: Filter) {
-		this.filter = filter;
-		this.showMonth(this.currentYear, this.currentMonth);
-	}
-
 	/*------------------------------------*/
-	/* 	Render functions
+	/* Render functions */
 	/*------------------------------------*/
-
 	// Display all dates by month
 	renderMonthDatesList(year: number, month: number) {
 		this.currentYear = year;
@@ -699,28 +658,27 @@ class DateOverviewList {
 			(monthList) => monthList.year === year && monthList.month === month
 		)?.items as MonthListItem[];
 
-		if (!monthList) throw new Error("No monthList found");
+		if (!monthList) throw new Error('No monthList found');
 
-		this.container.innerHTML = "";
+		this.container.innerHTML = '';
 
 		this.renderListMonth(year, month);
 		monthList.forEach((item) => {
 			this.renderListItem(item);
 		});
 	}
-
 	renderMonthCategoryDatesList(year: number, month: number, cateogry: Category) {
 		// get all dates of the month with the given category
 		const monthList = this.monthLists.find(
 			(monthList) => monthList.year === year && monthList.month === month
 		)?.items as MonthListItem[];
 
-		if (!monthList) throw new Error("No monthList found");
+		if (!monthList) throw new Error('No monthList found');
 
 		const categoryDates = monthList.filter((item) => item.product?.category === cateogry);
 
 		// Remove old content
-		this.container.innerHTML = "";
+		this.container.innerHTML = '';
 
 		// Append a new section element for each month
 		this.renderListMonth(year, month);
@@ -728,7 +686,6 @@ class DateOverviewList {
 			this.renderListItem(item);
 		});
 	}
-
 	// Display all dates of a product in month sections
 	renderProductDatesList(productId: number) {
 		// Create MonthList object for all dates of the product
@@ -742,10 +699,10 @@ class DateOverviewList {
 			});
 		});
 
-		if (!productDates) throw new Error("No productDates found");
+		if (!productDates) throw new Error('No productDates found');
 
 		// Remove old content
-		this.container.innerHTML = "";
+		this.container.innerHTML = '';
 
 		// Append a new section element for each month
 		productDates.forEach((monthList) => {
@@ -759,20 +716,20 @@ class DateOverviewList {
 			});
 		});
 	}
-
 	// Render a single date item
 	renderListItem(item: MonthListItem) {
-		// TODO: Add two modes: show group or show weekday
+		// TODO: Add two modes: show group or show weekday for courses
+
 		// Append existing element
 		if (item.element) {
 			this.container.appendChild(item.element);
 			return;
 		}
 
-		if (!item.product) throw new Error("No product found");
+		if (!item.product) throw new Error('No product found');
 
 		const template = document.querySelector(
-			"#template--date-overview__list__item"
+			'#template--date-overview__list__item'
 		) as HTMLTemplateElement;
 
 		if (!template) throw new Error('No template "#template--date-overview__list__item" found');
@@ -790,27 +747,27 @@ class DateOverviewList {
 		element.style.color = `var(--color-${item.product?.category})`;
 
 		// select by template-month attribute
-		const month = element.querySelector("[template-month]") as HTMLElement;
-		if (!month) throw new Error("No month found");
+		const month = element.querySelector('[template-month]') as HTMLElement;
+		if (!month) throw new Error('No month found');
 		// add formatted month from this.currentMonth using Intl.DateTimeFormat
-		month.innerHTML = new Intl.DateTimeFormat("de-DE", {
-			month: "short",
+		month.innerHTML = new Intl.DateTimeFormat('de-DE', {
+			month: 'short',
 		}).format(new Date(item.date));
 
-		const day = element.querySelector("[template-day]") as HTMLElement;
-		if (!day) throw new Error("No day found");
+		const day = element.querySelector('[template-day]') as HTMLElement;
+		if (!day) throw new Error('No day found');
 		// add formatted day from this.currentMonth using Intl.DateTimeFormat
-		day.innerHTML = new Intl.DateTimeFormat("de-DE", {
-			day: "numeric",
+		day.innerHTML = new Intl.DateTimeFormat('de-DE', {
+			day: 'numeric',
 		}).format(new Date(item.date));
 
-		const title = element.querySelector("[template-title]") as HTMLElement;
-		if (!title) throw new Error("No title found");
+		const title = element.querySelector('[template-title]') as HTMLElement;
+		if (!title) throw new Error('No title found');
 		// add formatted day from this.currentMonth using Intl.DateTimeFormat
 		title.innerHTML = item.product.title;
 
-		const category = element.querySelector("[template-category]") as HTMLElement;
-		if (!category) throw new Error("No category found");
+		const category = element.querySelector('[template-category]') as HTMLElement;
+		if (!category) throw new Error('No category found');
 		// add formatted day from this.currentMonth using Intl.DateTimeFormat
 		category.innerHTML = item.product.category;
 
@@ -822,16 +779,16 @@ class DateOverviewList {
 		// // add formatted day from this.currentMonth using Intl.DateTimeFormat
 		// bookingButton.href = date.product.;
 
-		const filterButton = element.querySelector("[template-filter-button]") as HTMLElement;
-		if (!filterButton) throw new Error("No filter button found");
+		const filterButton = element.querySelector('[template-filter-button]') as HTMLElement;
+		if (!filterButton) throw new Error('No filter button found');
 
 		// Add event listener
-		filterButton.addEventListener("click", () => {
-			if (!item.product) throw new Error("No product ID found");
+		filterButton.addEventListener('click', () => {
+			if (!item.product) throw new Error('No product ID found');
 
 			this.fetchProductDates(item.product.ID);
 			this.setFilter({
-				type: "product",
+				type: 'product',
 				productId: item.product.ID,
 			});
 
@@ -839,11 +796,10 @@ class DateOverviewList {
 			this.onFilterProductCallback(item.product.ID, item.product.category);
 		});
 	}
-
 	// Render a month label
 	renderListMonth(year: number, month: number) {
 		const template = document.querySelector(
-			"#template--date-overview__list__month"
+			'#template--date-overview__list__month'
 		) as HTMLTemplateElement;
 		if (!template) throw new Error('No template "#template--date-overview__list__month" found');
 
@@ -855,34 +811,56 @@ class DateOverviewList {
 
 		const monthElement = this.container.lastElementChild as HTMLElement;
 
-		const label = monthElement.querySelector("[template-label]") as HTMLElement;
-		if (!label) throw new Error("No label found");
+		const label = monthElement.querySelector('[template-label]') as HTMLElement;
+		if (!label) throw new Error('No label found');
 
-		label.innerHTML = new Intl.DateTimeFormat("de-DE", {
-			month: "long",
+		label.innerHTML = new Intl.DateTimeFormat('de-DE', {
+			month: 'long',
 			// year: "numeric",
 		}).format(new Date(year, month - 1));
 	}
 
 	/*------------------------------------*/
-	/* 	
+	/* Misc */
 	/*------------------------------------*/
-
-	fetchProductDates(productId: number) {
-		// TODO: Implement
-	}
-
 	getCurrentMonthList() {
 		const monthList = this.monthLists.find(
 			(monthList) =>
 				monthList.year === this.currentYear && monthList.month === this.currentMonth
 		)?.items as MonthListItem[];
 
-		if (!monthList) throw new Error("No monthList found");
+		if (!monthList) throw new Error('No monthList found');
 
 		return monthList;
 	}
 
+	/*------------------------------------*/
+	/* Public functions */
+	/*------------------------------------*/
+	public showMonth(year: number, month: number) {
+		if (!this.filter) {
+			this.renderMonthDatesList(this.currentYear, this.currentMonth);
+			return;
+		}
+
+		if (this.filter.type === 'category') {
+			this.renderMonthCategoryDatesList(
+				this.filter.year,
+				this.filter.month,
+				this.filter.category
+			);
+			return;
+		}
+
+		if (this.filter.type === 'product') {
+			this.renderProductDatesList(this.filter.productId);
+			return;
+		}
+	}
+	public setFilter(filter: Filter) {
+		this.filter = filter;
+		this.showMonth(this.currentYear, this.currentMonth);
+	}
 	public scrollToItem(date: string) {
 		// TODO: Add short animation to catch attention
 
@@ -890,46 +868,55 @@ class DateOverviewList {
 		monthList.forEach((item) => {
 			if (item.date === date) {
 				item.element?.scrollIntoView({
-					behavior: "smooth",
+					behavior: 'smooth',
 				});
 				return;
 			}
 		});
 	}
 
+	/*------------------------------------*/
+	/* Event listeners */
+	/*------------------------------------*/
 	public onFilterProduct(callback: (productId: number, productCategory: Category) => void) {
 		this.onFilterProductCallback = callback;
 	}
 }
 
 /*------------------------------------*/
-/* 	Filter component
-	/*------------------------------------*/
+/* Filter component */
+/*------------------------------------*/
 class DateOverviewFilter {
+	// Without default values
 	container: HTMLElement;
 	category: CategoryFilter;
 	buttons: NodeListOf<HTMLElement>;
+
+	// Event listeners
 	private onFilterCategoryCallback: (category: CategoryFilter) => void;
 
 	constructor(container) {
 		this.container = container;
-		this.buttons = this.container.querySelectorAll("#date-overview__filter__button");
+		this.buttons = this.container.querySelectorAll('#date-overview__filter__button');
 
 		// Error handling
-		if (!this.buttons) throw new Error("No buttons found");
+		if (!this.buttons) throw new Error('No buttons found');
 
 		this.initEventListeners();
 	}
 
+	/*------------------------------------*/
+	/* Initialisaton */
+	/*------------------------------------*/
 	initEventListeners() {
 		this.buttons.forEach((button) => {
-			button.addEventListener("click", () => {
+			button.addEventListener('click', () => {
 				// Set category
 				const category = button.dataset.category as Category;
 				if (category !== this.category) {
-					this.setFilterCategory(category);
+					this.setFilter(category);
 				} else {
-					this.setFilterCategory(null);
+					this.setFilter(null);
 				}
 
 				// Trigger onFilterCategory event
@@ -938,38 +925,37 @@ class DateOverviewFilter {
 		});
 	}
 
+	/*------------------------------------*/
+	/* Renser functions */
+	/*------------------------------------*/
 	setButtonState(element: HTMLElement, state: FilterButtonState) {
-		if (state == "unselected") {
-			element.dataset.selected = "false";
-			element.dataset.active = "true";
-		} else if (state == "selected") {
-			element.dataset.selected = "true";
-			element.dataset.active = "true";
-		} else if (state == "inactive") {
-			element.dataset.selected = "false";
-			element.dataset.active = "false";
+		if (state == 'unselected') {
+			element.dataset.selected = 'false';
+			element.dataset.active = 'true';
+		} else if (state == 'selected') {
+			element.dataset.selected = 'true';
+			element.dataset.active = 'true';
+		} else if (state == 'inactive') {
+			element.dataset.selected = 'false';
+			element.dataset.active = 'false';
 		} else {
-			throw new Error("Invalid button state");
+			throw new Error('Invalid button state');
 		}
 	}
 
-	setFilterCategory(category: CategoryFilter) {
-		this.setFilter(category);
-
-		// Trigger onFilterCategory event when used inside the class
-		if (this.onFilterCategoryCallback) this.onFilterCategoryCallback(this.category);
-	}
-
+	/*------------------------------------*/
+	/* Public functions */
+	/*------------------------------------*/
 	public setFilter(category: CategoryFilter) {
 		// Set button states
 		this.buttons.forEach((button) => {
 			if (category === null) {
-				this.setButtonState(button, "unselected");
+				this.setButtonState(button, 'unselected');
 			} else {
 				if (button.dataset.category === category) {
-					this.setButtonState(button, "selected");
+					this.setButtonState(button, 'selected');
 				} else {
-					this.setButtonState(button, "inactive");
+					this.setButtonState(button, 'inactive');
 				}
 			}
 		});
@@ -978,45 +964,66 @@ class DateOverviewFilter {
 		this.category = category;
 	}
 
+	/*------------------------------------*/
+	/* Event listeners */
+	/*------------------------------------*/
 	public onFilterCategory(callback: (category: CategoryFilter) => void) {
 		this.onFilterCategoryCallback = callback;
 	}
 }
 
 /*------------------------------------*/
-/* 	Product selector
-	/*------------------------------------*/
+/* Product selector */
+/*------------------------------------*/
 class DateOverviewSelector {
+	selectorOptions: SelectorOption[] = [];
+
+	// Without default values
 	container: HTMLElement;
 	products: ProductType[];
 	select: HTMLSelectElement;
 	productTitle: HTMLElement;
 	productCategory: HTMLElement;
 	productImage: HTMLElement;
-
-	selectorOptions: SelectorOption[] = [];
 	label: HTMLElement;
 	selected: number;
+
+	// Event listeners
 	private onSelectCallback: (productId: number, productCategory: Category) => void;
 
 	constructor(container) {
 		this.container = container;
-		this.select = this.container.querySelector("select") as HTMLSelectElement;
-		this.label = this.container.querySelector("label") as HTMLElement;
-		this.productTitle = this.container.querySelector("[template-product-title]") as HTMLElement;
+		this.select = this.container.querySelector('select') as HTMLSelectElement;
+		this.label = this.container.querySelector('label') as HTMLElement;
+		this.productTitle = this.container.querySelector('[template-product-title]') as HTMLElement;
 		this.productCategory = this.container.querySelector(
-			"[template-product-category]"
+			'[template-product-category]'
 		) as HTMLElement;
-		this.productImage = this.container.querySelector("[template-product-image]") as HTMLElement;
+		this.productImage = this.container.querySelector('[template-product-image]') as HTMLElement;
 
 		// Error handling
 		if (!this.productTitle || !this.productCategory || !this.productImage)
-			throw new Error("No product title, category or image found");
-		if (!this.select || !this.label) throw new Error("No select or label element found");
+			throw new Error('No product title, category or image found');
+		if (!this.select || !this.label) throw new Error('No select or label element found');
 
 		this.initEventListeners();
 	}
 
+	/*------------------------------------*/
+	/* Initialisation */
+	/*------------------------------------*/
+	initEventListeners() {
+		this.select.addEventListener('change', (e) => {
+			const target = e.currentTarget as HTMLSelectElement;
+			const productId = Number(target.value);
+			const productCategory = target.selectedOptions[0].dataset.productCategory as Category;
+
+			// Trigger onSelect event
+			if (this.onSelectCallback) this.onSelectCallback(productId, productCategory);
+
+			this.selected = productId;
+		});
+	}
 	fillSelectorData(dates: DateResponse[]) {
 		// Create array of all products without duplicates
 		const products = dates.map((date) => date.product);
@@ -1035,13 +1042,15 @@ class DateOverviewSelector {
 		this.renderOptions();
 	}
 
+	/*------------------------------------*/
+	/* Render functions */
+	/*------------------------------------*/
 	renderOptions() {
 		console;
 		this.products.forEach((product) => {
 			this.renderOption(product);
 		});
 	}
-
 	renderOption(product: ProductType) {
 		this.select.innerHTML += `<option value="${product.ID}">${product.title}</option>`;
 
@@ -1049,79 +1058,70 @@ class DateOverviewSelector {
 		const option = this.select.querySelector(
 			`option[value="${product.ID}"]`
 		) as HTMLOptionElement;
-		if (!option) throw new Error("No option found");
+		if (!option) throw new Error('No option found');
 
 		option.dataset.productCategory = product.category;
 	}
-
-	renderOptionLabel(productId: number | "") {
-		if (productId === "" || productId === 0) {
-			this.productTitle.innerHTML = "Kein Produkt ausgewählt";
-			this.productCategory.innerHTML = "";
+	renderOptionLabel(productId: number | '') {
+		if (productId === '' || productId === 0) {
+			this.productTitle.innerHTML = 'Kein Produkt ausgewählt';
+			this.productCategory.innerHTML = '';
 			return;
 		}
 
 		const product = this.products.find((product) => product.ID === productId);
-		if (!product) throw new Error("No product found");
+		if (!product) throw new Error('No product found');
 
 		this.productTitle.innerHTML = product.title;
 		this.productCategory.innerHTML = product.category;
 		this.productCategory.style.backgroundColor = `var(--color-${product.category})`;
 	}
 
-	initEventListeners() {
-		this.select.addEventListener("change", (e) => {
-			const target = e.currentTarget as HTMLSelectElement;
-			const productId = Number(target.value);
-			const productCategory = target.selectedOptions[0].dataset.productCategory as Category;
-
-			// Trigger onSelect event
-			if (this.onSelectCallback) this.onSelectCallback(productId, productCategory);
-
-			this.selected = productId;
-		});
-	}
-
-	public showProduct(productId: number | "") {
-		console.log("showProduct", productId);
+	/*------------------------------------*/
+	/* Public functions */
+	/*------------------------------------*/
+	public showProduct(productId: number | '') {
 		this.select.value = productId.toString();
 		this.renderOptionLabel(productId);
 	}
 
+	/*------------------------------------*/
+	/* Event listeners */
+	/*------------------------------------*/
 	public onSelect(callback: (productId: number, productCategory: Category) => void) {
 		this.onSelectCallback = callback;
 	}
 }
 
 /*------------------------------------*/
-/* 	Init component
-	/*------------------------------------*/
-const calendarElement = document.querySelector("#date-overview__calendar") as HTMLElement;
-const listElement = document.querySelector("#date-overview__list") as HTMLElement;
-const filterElement = document.querySelector("#date-overview__filter") as HTMLElement;
-const selectorElement = document.querySelector("#date-overview__selector") as HTMLElement;
+/* Init component */
+/*------------------------------------*/
+const calendarElement = document.querySelector('#date-overview__calendar') as HTMLElement;
+const listElement = document.querySelector('#date-overview__list') as HTMLElement;
+const filterElement = document.querySelector('#date-overview__filter') as HTMLElement;
+const selectorElement = document.querySelector('#date-overview__selector') as HTMLElement;
 
 if (!calendarElement || !listElement || !filterElement || !selectorElement)
-	throw new Error("No calendar, list or filter element found");
+	throw new Error('No calendar, list or filter element found');
 
 new DateOverview(calendarElement, listElement, filterElement, selectorElement);
 
 /*------------------------------------*/
-/* 	 Type definitions
+/* Type definitions */
 /*------------------------------------*/
 
 // Enums
-type Category = "course-child" | "course-adult" | "workshop" | "holiday_workshop";
-type FilterButtonState = "unselected" | "selected" | "inactive";
+type Category = 'course-child' | 'course-adult' | 'workshop' | 'holiday_workshop';
+type FilterButtonState = 'unselected' | 'selected' | 'inactive';
 
 // Month grid
 type Filter =
 	| {
-			type: "product";
+			type: 'product';
 			productId: number;
 	  }
 	| {
-			type: "category";
+			type: 'category';
 			year: number;
 			month: number;
 			category: Category;
@@ -1164,11 +1164,6 @@ type SelectorOption = {
 };
 
 // API response
-type DateType = {
-	date: string;
-	timezone_type: number;
-	timezone: string;
-};
 type ProductType = {
 	ID: number;
 	starttime: string;
