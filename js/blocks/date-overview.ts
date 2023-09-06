@@ -786,7 +786,6 @@ class DateOverviewList {
 		filterButton.addEventListener('click', () => {
 			if (!item.product) throw new Error('No product ID found');
 
-			this.fetchProductDates(item.product.ID);
 			this.setFilter({
 				type: 'product',
 				productId: item.product.ID,
