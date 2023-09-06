@@ -1,3 +1,5 @@
+// TODO: Seperate the weekdays on courses
+
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
 
@@ -50,7 +52,7 @@ class DateOverview {
 		// Check if dates of this month are already fetched
 		if (this.fetchedOnce) {
 			this.calendar.showMonth(year, month);
-			this.list.showDates("month", { year, month });
+			this.list.showMonth(year, month);
 		} else {
 			this.fetchDates(year, month);
 		}
@@ -59,7 +61,6 @@ class DateOverview {
 	initEventListeners() {
 		this.calendar.onSelect((date) => {
 			this.list.scrollToItem(date);
-			// TODO: Scroll to item in list
 		});
 
 		this.calendar.onNext(() => {
@@ -90,27 +91,36 @@ class DateOverview {
 		});
 
 		this.filter.onFilterCategory((category) => {
-			this.calendar.setFilter("category", category);
-			this.list.showDates("category", {
-				year: this.currentYear,
-				month: this.currentMonth,
-				category,
-			});
+			if (category === null) {
+				this.calendar.setFilter(null);
+				this.list.setFilter(null);
+			} else {
+				this.calendar.setFilter({
+					type: "category",
+					year: this.currentYear,
+					month: this.currentMonth,
+					category,
+				});
+				this.list.setFilter({
+					type: "category",
+					year: this.currentYear,
+					month: this.currentMonth,
+					category,
+				});
+			}
+
 			this.selector.showProduct("");
 		});
 
-		// Filtering by product id
 		this.list.onFilterProduct((productId, productCategory) => {
-			this.calendar.setFilter("product", productId);
-			this.calendar.showProduct(productId);
+			this.calendar.setFilter({ type: "product", productId });
 			this.filter.setFilter(productCategory);
 			this.selector.showProduct(productId);
 		});
 
 		this.selector.onSelect((productId, productCategory) => {
-			this.list.showDates("product", { productId });
-			this.calendar.setFilter("product", productId);
-			this.calendar.showProduct(productId);
+			this.list.setFilter({ type: "product", productId });
+			this.calendar.setFilter({ type: "product", productId });
 			this.filter.setFilter(productCategory);
 			this.selector.showProduct(productId);
 		});
@@ -141,7 +151,7 @@ class DateOverview {
 
 				// Display month
 				thisClone.calendar.showMonth(year, month);
-				thisClone.list.showDates("month", { year, month });
+				thisClone.list.showMonth(year, month);
 
 				thisClone.fetchedOnce = true;
 
@@ -158,6 +168,8 @@ class DateOverviewCalendar {
 	currentYear: number = new Date().getFullYear();
 	currentMonth: number = new Date().getMonth() + 1;
 	monthGrids: MonthGrid[] = [];
+	filter: Filter = null;
+
 	container: HTMLElement;
 	dates: DateResponse[];
 	monthLabelSlider: Swiper;
@@ -348,6 +360,8 @@ class DateOverviewCalendar {
 		this.monthGrids.forEach((monthGrid) => {
 			this.renderGridItems(monthGrid.year, monthGrid.month);
 		});
+
+		console.log("fillGridData", this.monthGrids);
 	}
 
 	renderGridItems(year: number, month: number) {
@@ -484,150 +498,77 @@ class DateOverviewCalendar {
 		this.monthLabelSlider.slideTo(monthIndex);
 	}
 
-	public showProduct(productId: number) {
-		// Get month of the first monthGrid with the given productId
-		const firstMonth = this.monthGrids.find((monthGrid) => {
-			const monthGridItem = monthGrid.items.find((item) => {
-				if (!item.products) return false;
-				return item.products.find((product) => product.ID === productId);
-			});
+	public setFilter(filter: Filter) {
+		this.filter = filter;
 
-			return monthGridItem !== undefined;
-		});
-
-		this.showMonth(firstMonth?.year as number, firstMonth?.month as number);
-	}
-
-	public setFilter(type: FilterType, identifier: CategoryFilter | number) {
+		// Set active state of all buttons
 		this.monthGrids.forEach((monthGrid) => {
 			monthGrid.items.forEach((item) => {
-				const button = item.element;
+				if (!item.element) throw new Error("No button found");
 
-				if (!button) throw new Error("No button found");
-
-				if (type === "category") {
-					// active all buttons when identifier is null
-					if (identifier === null) {
-						button.dataset.active = "true";
-					} else {
-						const productCategories = button.dataset.productCategories?.split(
-							","
-						) as string[];
-
-						// check if array contains identifier
-						if (productCategories && productCategories.includes(identifier as string)) {
-							button.dataset.active = "true";
-						} else {
-							button.dataset.active = "false";
-						}
-					}
-				} else if (type === "product") {
-					const productIds = button.dataset.productIds
-						?.split(",")
-						.map(Number) as number[];
-
-					// check if array contains identifier
-					if (productIds && productIds.includes(identifier as number)) {
-						button.dataset.active = "true";
-					} else {
-						button.dataset.active = "false";
-					}
-				} else {
-					throw new Error("Invalid filter type");
+				// Activate all buttons when identifier is null
+				if (filter === null) {
+					item.element.dataset.active = "true";
 				}
 
-				const colorSlices = button.querySelectorAll(
+				// Filter by category
+				if (filter?.type === "category") {
+					const categories: Category[] = [];
+					item.products?.forEach((product) => {
+						categories.push(product.category);
+					});
+					item.element.dataset.active = categories.includes(filter.category).toString(); // Activate slice if productCategory matches
+				}
+
+				// Filter by product
+				if (filter?.type === "product") {
+					const productIds: number[] = [];
+					item.products?.forEach((product) => {
+						productIds.push(product.ID);
+					});
+					item.element.dataset.active = productIds.includes(filter.productId).toString(); // Activate slice if productId matches
+				}
+
+				// Set color slices active state
+				const colorSlices = item.element.querySelectorAll(
 					"#date-overview__calendar__day__color-slice"
 				) as NodeListOf<HTMLElement>;
 
-				colorSlices?.forEach((slice) => {
-					if (type === "category") {
-						// active all buttons when identifier is null
-						if (identifier === null) {
-							slice.dataset.active = "true";
-							return;
-						}
+				colorSlices.forEach((slice) => {
+					// active all buttons when identifier is null
+					if (filter === null) {
+						slice.dataset.active = "true";
+					}
 
-						if (slice.dataset.productCategory === identifier) {
-							slice.dataset.active = "true";
-						} else {
-							slice.dataset.active = "false";
-						}
-					} else if (type === "product") {
+					// Filter by category
+					if (filter?.type === "category") {
+						const category = slice.dataset.productCategory as Category;
+						slice.dataset.active = (category === filter.category).toString(); // Activate slice if productCategory matches
+					}
+
+					// Filter by product
+					if (filter?.type === "product") {
 						const productId = Number(slice.dataset.productId);
-
-						// check if array contains identifier
-						if (productId === identifier) {
-							slice.dataset.active = "true";
-						} else {
-							slice.dataset.active = "false";
-						}
-					} else {
-						throw new Error("Invalid filter type");
+						slice.dataset.active = (productId === filter.productId).toString(); // Activate slice if productId matches
 					}
 				});
 			});
 		});
 
-		this.dateButtons.forEach((button) => {
-			if (type === "category") {
-				// active all buttons when identifier is null
-				if (identifier === null) {
-					button.dataset.active = "true";
-					return;
-				}
+		// Show the first month with the filtedes product
+		if (filter?.type === "product") {
+			// Get month of the first monthGrid with the given productId
+			const firstMonth = this.monthGrids.find((monthGrid) => {
+				const monthGridItem = monthGrid.items.find((item) => {
+					if (!item.products) return false;
+					return item.products.find((product) => product.ID === filter.productId);
+				});
 
-				const productCategories = button.dataset.productCategories?.split(",") as string[];
+				return monthGridItem !== undefined;
+			});
 
-				// check if array contains identifier
-				if (productCategories && productCategories.includes(identifier as string)) {
-					button.dataset.active = "true";
-				} else {
-					button.dataset.active = "false";
-				}
-			} else if (type === "product") {
-				const productIds = button.dataset.productIds?.split(",").map(Number) as number[];
-
-				// check if array contains identifier
-				if (productIds && productIds.includes(identifier as number)) {
-					button.dataset.active = "true";
-				} else {
-					button.dataset.active = "false";
-				}
-			} else {
-				throw new Error("Invalid filter type");
-			}
-		});
-
-		const buttonParts = this.container.querySelectorAll(
-			"#date-overview__calendar__product-part"
-		) as NodeListOf<HTMLElement>;
-		buttonParts.forEach((part) => {
-			if (type === "category") {
-				// active all buttons when identifier is null
-				if (identifier === null) {
-					part.dataset.active = "true";
-					return;
-				}
-
-				if (part.dataset.productCategory === identifier) {
-					part.dataset.active = "true";
-				} else {
-					part.dataset.active = "false";
-				}
-			} else if (type === "product") {
-				const productId = Number(part.dataset.productId);
-
-				// check if array contains identifier
-				if (productId === identifier) {
-					part.dataset.active = "true";
-				} else {
-					part.dataset.active = "false";
-				}
-			} else {
-				throw new Error("Invalid filter type");
-			}
-		});
+			this.showMonth(firstMonth?.year as number, firstMonth?.month as number);
+		}
 	}
 
 	// Event listeners
@@ -648,9 +589,11 @@ class DateOverviewCalendar {
 class DateOverviewList {
 	currentYear: number = new Date().getFullYear();
 	currentMonth: number = new Date().getMonth() + 1;
+	monthLists: MonthList[] = [];
+	filter: Filter = null;
+
 	container: HTMLElement;
 	dates: DateResponse[];
-	monthLists: MonthList[] = [];
 
 	// old
 	dateItems: NodeListOf<HTMLElement>;
@@ -717,31 +660,34 @@ class DateOverviewList {
 		});
 
 		this.monthLists.forEach((monthList) => {
-			this.showDates("month", { year: monthList.year, month: monthList.month });
+			this.showMonth(monthList.year, monthList.month);
 		});
 	}
 
-	public showDates(
-		type: "month" | "product" | "category",
-		options:
-			| { year: number; month: number }
-			| { productId: number }
-			| { year: number; month: number; category: CategoryFilter }
-	) {
-		// TODO: Create two modes: rendring all dates of a specific
-		if (type === "month") {
-			this.renderMonthDatesList(options.year, options.month);
-		} else if (type === "category") {
-			if (options.category !== null) {
-				this.renderMonthCategoryDatesList(options.year, options.month, options.category);
-			} else {
-				this.renderMonthDatesList(options.year, options.month);
-			}
-		} else if (type === "product") {
-			this.renderProductDatesList(options.productId);
-		} else {
-			throw new Error('Invalid argument "type"');
+	public showMonth(year: number, month: number) {
+		if (!this.filter) {
+			this.renderMonthDatesList(this.currentYear, this.currentMonth);
+			return;
 		}
+
+		if (this.filter.type === "category") {
+			this.renderMonthCategoryDatesList(
+				this.filter.year,
+				this.filter.month,
+				this.filter.category
+			);
+			return;
+		}
+
+		if (this.filter.type === "product") {
+			this.renderProductDatesList(this.filter.productId);
+			return;
+		}
+	}
+
+	public setFilter(filter: Filter) {
+		this.filter = filter;
+		this.showMonth(this.currentYear, this.currentMonth);
 	}
 
 	/*------------------------------------*/
@@ -886,7 +832,10 @@ class DateOverviewList {
 		// Add event listener
 		filterButton.addEventListener("click", () => {
 			this.fetchProductDates(item.product.ID);
-			this.showDates("product", { productId: item.product.ID });
+			this.setFilter({
+				type: "product",
+				productId: item.product.ID,
+			});
 
 			// Trigger onFilterProduct event
 			this.onFilterProductCallback(item.product.ID, item.product.category);
@@ -1089,6 +1038,7 @@ class DateOverviewSelector {
 	}
 
 	renderOptions() {
+		console;
 		this.products.forEach((product) => {
 			this.renderOption(product);
 		});
@@ -1165,9 +1115,21 @@ new DateOverview(calendarElement, listElement, filterElement, selectorElement);
 // Enums
 type Category = "course-child" | "course-adult" | "workshop" | "holiday_workshop";
 type FilterButtonState = "unselected" | "selected" | "inactive";
-type FilterType = "category" | "product";
 
 // Month grid
+type Filter =
+	| {
+			type: "product";
+			productId: number;
+	  }
+	| {
+			type: "category";
+			year: number;
+			month: number;
+			category: Category;
+	  }
+	| null;
+
 type MonthGrid = {
 	month: number;
 	year: number;
