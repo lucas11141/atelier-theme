@@ -1,4 +1,5 @@
 // TODO: Seperate the weekdays on courses
+// TODO: Remove the filter on lite item when filtered by product
 
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
@@ -484,6 +485,9 @@ class DateOverviewCalendar {
 		this.monthLabelSlider.slideTo(monthIndex);
 	}
 	public setFilter(filter: Filter) {
+		// Reset filter when filter is null
+		if (filter?.type === 'product' && filter.productId === 0) filter = null;
+
 		this.filter = filter;
 
 		// Set active state of all buttons
@@ -542,17 +546,21 @@ class DateOverviewCalendar {
 
 		// Show the first month with the filtedes product
 		if (filter?.type === 'product') {
-			// Get month of the first monthGrid with the given productId
-			const firstMonth = this.monthGrids.find((monthGrid) => {
-				const monthGridItem = monthGrid.items.find((item) => {
-					if (!item.products) return false;
-					return item.products.find((product) => product.ID === filter.productId);
+			if (filter.productId !== 0) {
+				// Get month of the first monthGrid with the given productId
+				const firstMonth = this.monthGrids.find((monthGrid) => {
+					const monthGridItem = monthGrid.items.find((item) => {
+						if (!item.products) return false;
+						return item.products.find((product) => product.ID === filter.productId);
+					});
+
+					return monthGridItem !== undefined;
 				});
-
-				return monthGridItem !== undefined;
-			});
-
-			this.showMonth(firstMonth?.year as number, firstMonth?.month as number);
+				this.showMonth(firstMonth?.year as number, firstMonth?.month as number);
+			} else {
+				const firstMonth = this.monthGrids[0];
+				this.showMonth(firstMonth?.year as number, firstMonth?.month as number);
+			}
 		}
 	}
 
@@ -857,6 +865,9 @@ class DateOverviewList {
 		}
 	}
 	public setFilter(filter: Filter) {
+		// Reset filter when filter is null
+		if (filter?.type === 'product' && filter.productId === 0) filter = null;
+
 		this.filter = filter;
 		this.showMonth(this.currentYear, this.currentMonth);
 	}
