@@ -280,14 +280,7 @@ class DateOverviewCalendar {
 				year: 'numeric',
 			}).format(new Date(monthGrid.year, monthGrid.month - 1, 1));
 
-			monthSlide.classList.add(
-				'swiper-slide',
-				'w-min',
-				'whitespace-nowrap',
-				'[&:not(:is(.swiper-slide-active))]:opacity-10',
-				'transition-opacity',
-				'duration-300'
-			);
+			monthSlide.classList.add('swiper-slide');
 			monthSlide.innerHTML = monthLabel;
 
 			slider?.appendChild(monthSlide);
@@ -322,7 +315,7 @@ class DateOverviewCalendar {
 		if (!this.monthLabelSlider) throw new Error('No monthLabelSlider found');
 	}
 	public fillGridData(dates: DateResponse[]) {
-		// TODO: Minimoze forEach calls
+		// FUTURE: Minimoze forEach calls
 
 		// fill newDates with dates
 		dates.forEach((date) => {
@@ -623,7 +616,7 @@ class DateOverviewList {
 		}
 	}
 	public fillListData(dates: DateResponse[]) {
-		// TODO: Minimoze forEach calls
+		// FUTURE: Minimoze forEach calls
 
 		// fill newDates with dates
 		dates.forEach((date) => {
@@ -695,6 +688,8 @@ class DateOverviewList {
 	}
 	// Display all dates of a product in month sections
 	renderProductDatesList(productId: number) {
+		// TODO: Add two modes: show group or show weekday for courses
+
 		// Create MonthList object for all dates of the product
 		const productDates: MonthList[] = [];
 		this.monthLists.forEach((monthList) => {
@@ -725,9 +720,6 @@ class DateOverviewList {
 	}
 	// Render a single date item
 	renderListItem(item: MonthListItem) {
-		console.log('renderListItem', item.element);
-		// TODO: Add two modes: show group or show weekday for courses
-
 		// FUTURE: Add function to hide or show the filtr button. This is needed when the list is filtered by product
 		// // Append existing element
 		// if (item.element) {
@@ -791,7 +783,6 @@ class DateOverviewList {
 		const filterButton = element.querySelector('[template-filter-button]') as HTMLElement;
 		if (!filterButton) throw new Error('No filter button found');
 
-		console.log('this.filter', this.filter);
 		// Remove filter button when is filtered by product
 		if (this.filter?.type === 'product') {
 			const filterButton = element.querySelector('[template-filter-button]') as HTMLElement;
@@ -814,7 +805,6 @@ class DateOverviewList {
 	}
 	// Render a month label
 	renderListMonth(year: number, month: number) {
-		console.log('renderListMonth', year, month);
 		const template = document.querySelector(
 			'#template--date-overview__list__month'
 		) as HTMLTemplateElement;
@@ -950,14 +940,14 @@ class DateOverviewFilter {
 	/*------------------------------------*/
 	setButtonState(element: HTMLElement, state: FilterButtonState) {
 		if (state == 'unselected') {
-			element.dataset.selected = 'false';
-			element.dataset.active = 'true';
+			element.classList.remove('--selected');
+			element.classList.remove('--inactive');
 		} else if (state == 'selected') {
-			element.dataset.selected = 'true';
-			element.dataset.active = 'true';
+			element.classList.add('--selected');
+			element.classList.remove('--inactive');
 		} else if (state == 'inactive') {
-			element.dataset.selected = 'false';
-			element.dataset.active = 'false';
+			element.classList.remove('--selected');
+			element.classList.add('--inactive');
 		} else {
 			throw new Error('Invalid button state');
 		}

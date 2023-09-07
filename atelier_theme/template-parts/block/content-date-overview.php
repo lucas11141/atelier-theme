@@ -74,39 +74,35 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
             <?php endif; ?>
         </div>
 
-        <div id="date-overview__calendar" class="isolate grid grid-cols-7 gap-px bg-gray-200 border border-solid border-gray-200 w-[490px] rounded-[16px] text-center overflow-hidden text-sm shadow-calendar">
+        <div id="date-overview__calendar" class="date-overview__calendar">
 
             <!-- Month controls -->
-            <button type="button" id="calendar__prev" class="col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10 [&:is(.swiper-button-disabled)]:opacity-20" data-active="false">
-                <span class="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold">
-                    <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.75 9L1.75 5L5.75 1" stroke="#001E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </span>
+            <button type="button" id="calendar__prev" class="date-overview__calendar__prev" data-active="false">
+                <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.75 9L1.75 5L5.75 1" stroke="#001E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
             </button>
-            <div class="font-extrabold uppercase leading-none bg-gray-50 col-span-5 flex justify-center items-center">
-                <div id="calendar__month-slider" class="swiper">
+            <div class="date-overview__calendar__month">
+                <div id="calendar__month-slider" class="date-overview__calendar__month-slider swiper">
                     <div class="swiper-wrapper"></div>
                 </div>
             </div>
-            <button type="button" id="calendar__next" class="col-span-1 relative bg-gray-50 py-1.5 hover:bg-gray-100 focus:z-10 [&:is(.swiper-button-disabled)]:opacity-20" data-active="true">
-                <span class="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold">
-                    <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.25 1L5.25 5L1.25 9" stroke="#001E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </span>
+            <button type="button" id="calendar__next" class="date-overview__calendar__next" data-active="true">
+                <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.25 1L5.25 5L1.25 9" stroke="#001E34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
             </button>
 
             <!-- Weekdays -->
             <?php $weekdays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']; ?>
             <?php foreach ($weekdays as $weekday) : ?>
-                <span class="relative bg-gray-50 py-1.5 border-b border-gray-200">
-                    <span class="mx-auto flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold"><?php echo $weekday ?></span>
+                <span class="date-overview__calendar__weekday">
+                    <span><?php echo $weekday ?></span>
                 </span>
             <?php endforeach; ?>
 
             <!-- Days -->
-            <div id="date-overview__calendar__days" class="col-span-full grid grid-cols-7 gap-px full"></div>
+            <div id="date-overview__calendar__days" class="date-overview__calendar__days"></div>
         </div>
 
     </div>
@@ -116,52 +112,50 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 </div>
 
 <div class="inner">
-    <div class="grid grid-cols-2 mt-8 gap-x-5 gap-y-12">
-        <div class="row-start-2">
-            <div id="date-overview__selector" class="mr-10 relative rounded-lg overflow-hidden text-indigo-500 border border-solid border-gray-200 shadow-calendar">
-                <label class="relative w-[calc(100%_+_2px)] flex flex-row items-center gap-7 p-5 bg-white border border-solid border-gray-200 rounded-lg -inset-px shadow-calendar">
-                    <div template-product-image class="w-24 min-w-[96px] aspect-square rounded-full bg-gray-50 border border-solid border-gray-200"></div>
-                    <div class="flex-auto flex flex-col gap-2.5 items-start">
-                        <p template-product-title class="text-main font-extrabold uppercase text-xl leading-tight">Aquarellkurs</p>
-                        <span template-product-category class="bg-main text-white uppercase text-2xs font-bold px-3 py-1.5 rounded">Kurs für Erwachsene</span>
-                    </div>
-                    <svg class="mr-2" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11 7.13156L6 1.8684L1 7.13156" stroke="#001E34" stroke-width="2.3" stroke-linejoin="round" />
-                        <path d="M11 17.1316L6 22.1316L1 17.1316" stroke="#001E34" stroke-width="2.3" stroke-linejoin="round" />
-                    </svg>
+    <div class="date-overview__content">
+        <div id="date-overview__selector" class="date-overview__selector">
+            <label>
+                <div template-product-image class="image"></div>
 
-
-                    <select class="absolute inset-0 opacity-0 cursor-pointer">
-                        <option value="">Produkt auswählen ...</option>
-                    </select>
-                </label>
-
-                <div class="flex gap-3 -mt-4 p-7 pt-11 bg-gray-50">
-                    <button class="px-4 py-2 bg-current text-white flex-1 rounded" role="button">Montag</button>
-                    <button class="px-4 py-2 bg-current text-white flex-1 rounded" role="button">Mittwoch</button>
-                    <button class="px-4 py-2 bg-current text-white flex-1 rounded" role="button">freitag</button>
+                <div class="text">
+                    <p template-product-title class="title">Aquarellkurs</p>
+                    <span template-product-category class="category">Kurs für Erwachsene</span>
                 </div>
-            </div>
 
+                <svg class="icon" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 7.13156L6 1.8684L1 7.13156" stroke="#001E34" stroke-width="2.3" stroke-linejoin="round" />
+                    <path d="M11 17.1316L6 22.1316L1 17.1316" stroke="#001E34" stroke-width="2.3" stroke-linejoin="round" />
+                </svg>
+
+                <select>
+                    <option value="">Produkt auswählen ...</option>
+                </select>
+            </label>
+
+            <!-- <div class="weekdays">
+                <button role="button">Montag</button>
+                <button role="button">Mittwoch</button>
+                <button role="button">freitag</button>
+            </div> -->
         </div>
 
-        <div id="date-overview__filter" class="col-start-2 flex flex-wrap justify-center gap-x-5 gap-y-3">
+        <div id="date-overview__filter" class="date-overview__filter">
             <?php foreach ($categories as $category) :
                 $filterButtonLabel = $filterButtonLabels[$category];
             ?>
-                <div id="date-overview__filter__button" class="group items-center gap-2.5 flex cursor-pointer <?= $colors[$category] ?>" data-category="<?= $category ?>" data-active="true" data-selected="false">
-                    <div class="relative w-2.5 aspect-square bg-current rounded-full group-data-[selected=true]:scale-[80%] group-data-[active=false]:text-gray-300">
-                        <div class="hidden absolute -inset-1 border-2 border-solid border-current rounded-full group-data-[selected=true]:block group-data-[selected=true]:opacity-100"></div>
+                <div id="date-overview__filter__button" class="date-overview__filter__button" style="color:var(--color-<?= $category ?>)" data-category="<?= $category ?>">
+                    <div class="dot">
+                        <div></div>
                     </div>
-                    <p class="gap-1 flex leading-none items-baseline text-sm text-main group-data-[active=false]:text-gray-300">
-                        <b class="font-extrabold uppercase"><?= $filterButtonLabel['label'] ?></b>
-                        <span class="font-normal"><?= isset($filterButtonLabel['group']) ? 'für ' . $filterButtonLabel['group']['label'] : '' ?></span>
+                    <p class="label">
+                        <b><?= $filterButtonLabel['label'] ?></b>
+                        <span><?= isset($filterButtonLabel['group']) ? 'für ' . $filterButtonLabel['group']['label'] : '' ?></span>
                     </p>
                 </div>
             <?php endforeach; ?>
         </div>
 
-        <div id="date-overview__list" class="w-full row-start-2 flex-1 ml-auto flex flex-col"></div>
+        <div id="date-overview__list" class="date-overview__list"></div>
     </div>
 </div>
 
@@ -170,24 +164,24 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 <div class="space-extralarge"></div>
 
 <template id="template--date-overview__list__item">
-    <div id="date-overview__list__item" class="mt-4 bg-white rounded-2xl shadow-calendar border border-solid border-gray-200 justify-start items-stretch flex <?= $colors[$product['category']] ?> overflow-hidden">
-        <div class="w-20 p-5 bg-gray-50 border-r border-solid border-gray-200 flex flex-col items-center">
-            <div template-day class="text-main text-[22px] font-bold uppercase leading-relaxed"></div>
-            <div template-month class="text-gray-300 text-xs font-bold uppercase leading-[13.80px]"></div>
+    <div id="date-overview__list__item" class="date-overview__list__item">
+        <div class="date">
+            <div template-day class="day"></div>
+            <div template-month class="month"></div>
         </div>
-        <div class="flex-auto px-6 py-4 justify-between items-center gap-2.5 flex">
-            <div class="flex-col justify-start items-start gap-1.5 inline-flex">
-                <div template-title class="text-main text-base font-extrabold uppercase leading-[18.40px]"></div>
-                <div template-category class="text-current text-sm font-extrabold uppercase leading-none"></div>
+        <div class="content">
+            <div class="text">
+                <div template-title class="title"></div>
+                <div template-category class="category"></div>
             </div>
-            <div class="justify-start items-center gap-3.5 flex">
-                <button template-filter-button class="relative w-9 h-9 py-[18px] bg-gray-50 rounded-[10px] border border-solid border-gray-200 justify-center items-center gap-2.5 flex" role="button">
-                    <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div class="buttons">
+                <button template-filter-button class="filter" role="button">
+                    <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 1H1L6.6 7.83222V12.5556L9.4 14V7.83222L15 1Z" stroke="#042135" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
-                <a template-booking-button class="relative w-9 h-9 py-[18px] bg-current rounded-[10px] justify-center items-center gap-2.5 flex">
-                    <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a template-booking-button class="book">
+                    <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.375 13.125L8 10L3.625 13.125V3.125C3.625 2.79348 3.7567 2.47554 3.99112 2.24112C4.22554 2.0067 4.54348 1.875 4.875 1.875H11.125C11.4565 1.875 11.7745 2.0067 12.0089 2.24112C12.2433 2.47554 12.375 2.79348 12.375 3.125V13.125Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
@@ -197,33 +191,33 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 </template>
 
 <template id="template--date-overview__list__month">
-    <div id="date-overview__list__month" class="mt-12 mb-1 flex gap-4 items-center first:mt-0">
-        <span template-label class="text-sm font-extrabold uppercase leading-none"></span>
-        <div class="w-px h-px flex-auto bg-gray-200"></div>
+    <div id="date-overview__list__month" class="date-overview__list__month">
+        <span template-label></span>
+        <div></div>
     </div>
 </template>
 
 <template id="template--date-overview__calendar__day--filled">
-    <button type="button" id="date-overview__calendar__day--filled" class="group relative bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10">
-        <time class="mx-auto my-1 w-7 h-7 overflow-hidden relative rounded border border-black border-opacity-5 flex-col justify-center items-center flex">
-            <div template-day class="text-white text-sm font-semibold uppercase leading-[14px] z-10"></div>
-            <div id="date-overview__calendar__day__slide__color-container" class="absolute flex inset-0 rotate-45 scale-125 pointer-none bg-gray-300"></div>
+    <button type="button" id="date-overview__calendar__day--filled" class="date-overview__calendar__day --filled">
+        <time>
+            <span template-day></span>
+            <div id="date-overview__calendar__day__slide__color-container" class="date-overview__calendar__day__slide__color-container"></div>
         </time>
     </button>
 </template>
 
 <template id="template--date-overview__calendar__day__color-slice">
-    <div id="date-overview__calendar__day__color-slice" class="h-full w-px flex-auto bg-current <?= $colors[$product['category']] ?> group-data-[active=false]:bg-gray-300 data-[active=false]:hidden"></div>
+    <div id="date-overview__calendar__day__color-slice" class="date-overview__calendar__day__color-slice"></div>
 </template>
 
 <template id="template--date-overview__calendar__day--empty">
-    <button id="date-overview__calendar__day--empty" type="button" class="relative bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10 cursor-default">
-        <time template-day class="mx-auto flex h-9 w-9 items-center justify-center rounded-full"></time>
+    <button id="date-overview__calendar__day--empty" type="button" class="date-overview__calendar__day --empty">
+        <time template-day></time>
     </button>
 </template>
 
 <template id="template--date-overview__calendar__day--other-month">
-    <button id="date-overview__calendar__day--other-month" type="button" class="relative bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10 cursor-default">
-        <time template-day class="mx-auto flex h-9 w-9 items-center justify-center rounded-full"></time>
+    <button id="date-overview__calendar__day--other-month" type="button" class="date-overview__calendar__day --other-month">
+        <time template-day></time>
     </button>
 </template>
