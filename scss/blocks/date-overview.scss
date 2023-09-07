@@ -1,3 +1,6 @@
+// FUTURE: Improve scss and use more vars
+// TODO: Responsive styling
+
 $shadow--calendar: 2px 2px 12px 0px rgba(0, 0, 0, 0.06);
 $transition: all 200ms ease-in-out;
 
@@ -163,6 +166,10 @@ button {
 			&[data-active='false'] {
 				display: none;
 			}
+		}
+
+		&[data-active='false'] {
+			pointer-events: none;
 		}
 	}
 }
