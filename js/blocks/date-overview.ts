@@ -1,5 +1,4 @@
 // TODO: Seperate the weekdays on courses
-// TODO: Remove the filter on lite item when filtered by product
 
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
@@ -726,13 +725,15 @@ class DateOverviewList {
 	}
 	// Render a single date item
 	renderListItem(item: MonthListItem) {
+		console.log('renderListItem', item.element);
 		// TODO: Add two modes: show group or show weekday for courses
 
-		// Append existing element
-		if (item.element) {
-			this.container.appendChild(item.element);
-			return;
-		}
+		// FUTURE: Add function to hide or show the filtr button. This is needed when the list is filtered by product
+		// // Append existing element
+		// if (item.element) {
+		// 	this.container.appendChild(item.element);
+		// 	return;
+		// }
 
 		if (!item.product) throw new Error('No product found');
 
@@ -790,21 +791,30 @@ class DateOverviewList {
 		const filterButton = element.querySelector('[template-filter-button]') as HTMLElement;
 		if (!filterButton) throw new Error('No filter button found');
 
-		// Add event listener
-		filterButton.addEventListener('click', () => {
-			if (!item.product) throw new Error('No product ID found');
+		console.log('this.filter', this.filter);
+		// Remove filter button when is filtered by product
+		if (this.filter?.type === 'product') {
+			const filterButton = element.querySelector('[template-filter-button]') as HTMLElement;
+			if (!filterButton) throw new Error('No filter button found');
+			filterButton.remove();
+		} else {
+			// else: Add event listener
+			filterButton.addEventListener('click', () => {
+				if (!item.product) throw new Error('No product ID found');
 
-			this.setFilter({
-				type: 'product',
-				productId: item.product.ID,
+				this.setFilter({
+					type: 'product',
+					productId: item.product.ID,
+				});
+
+				// Trigger onFilterProduct event
+				this.onFilterProductCallback(item.product.ID, item.product.category);
 			});
-
-			// Trigger onFilterProduct event
-			this.onFilterProductCallback(item.product.ID, item.product.category);
-		});
+		}
 	}
 	// Render a month label
 	renderListMonth(year: number, month: number) {
+		console.log('renderListMonth', year, month);
 		const template = document.querySelector(
 			'#template--date-overview__list__month'
 		) as HTMLTemplateElement;
