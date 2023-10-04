@@ -16,8 +16,7 @@ if (function_exists('acf_add_options_page')) {
 }
 
 // Pagination for paged posts, Page 1, Page 2, Page 3, with Next and Previous Links, No plugin
-function atelierwp_pagination()
-{
+function atelierwp_pagination() {
     global $wp_query;
     $big = 999999999;
     echo paginate_links(array(
@@ -35,15 +34,13 @@ function atelierwp_index($length) // Create 20 Word Callback for Index page Exce
 }
 
 // Create 40 Word Callback for Custom Post Excerpts, call using html5wp_excerpt('html5wp_custom_post');
-function atelierwp_custom_post($length)
-{
+function atelierwp_custom_post($length) {
     return 40;
 }
 
 
 // Create the Custom Excerpts callback
-function atelierwp_excerpt($length_callback = '', $more_callback = '')
-{
+function atelierwp_excerpt($length_callback = '', $more_callback = '') {
     global $post;
     if (function_exists($length_callback)) {
         add_filter('excerpt_length', $length_callback);
@@ -59,18 +56,16 @@ function atelierwp_excerpt($length_callback = '', $more_callback = '')
 }
 
 // Custom View Article link to Post
-function atelier_blank_view_article($more)
-{
+function atelier_blank_view_article($more) {
     global $post;
     return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'atelier') . '</a>';
 }
 
 // Disable SEO for development
-function custom_noindex_setting()
-{
+function custom_noindex_setting() {
     $site_url = get_site_url();
 
-    if (strpos($site_url, 'dev.atelier-delatron.de') !== false) {
+    if (stripos($site_url, 'dev') !== false) {
         update_option('blog_public', 'no');
     } else {
         update_option('blog_public', 'yes');
