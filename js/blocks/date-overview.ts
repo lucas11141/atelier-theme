@@ -652,9 +652,6 @@ class DateOverviewList {
 	/*------------------------------------*/
 	// Display all dates by month
 	renderMonthDatesList(year: number, month: number) {
-		this.currentYear = year;
-		this.currentMonth = month;
-
 		const monthList = this.monthLists.find(
 			(monthList) => monthList.year === year && monthList.month === month
 		)?.items as MonthListItem[];
@@ -846,6 +843,9 @@ class DateOverviewList {
 	/* Public functions */
 	/*------------------------------------*/
 	public showMonth(year: number, month: number) {
+		this.currentYear = year;
+		this.currentMonth = month;
+
 		if (!this.filter) {
 			this.renderMonthDatesList(this.currentYear, this.currentMonth);
 			return;
@@ -853,8 +853,8 @@ class DateOverviewList {
 
 		if (this.filter.type === 'category') {
 			this.renderMonthCategoryDatesList(
-				this.filter.year,
-				this.filter.month,
+				this.currentYear,
+				this.currentMonth,
 				this.filter.category
 			);
 			return;
