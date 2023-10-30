@@ -359,23 +359,25 @@ button {
 			}
 		}
 
-		&::after {
+		&:after {
 			content: '';
-			width: calc(100% + 16px);
-			height: calc(100% + 16px);
+			width: calc(100% + 14px);
+			height: calc(100% + 14px);
 			border: solid 3px currentColor;
-			border-radius: 23px;
+			border-radius: 22px;
 			@include pos-center();
 			pointer-events: none;
 			opacity: 0;
 		}
 
 		// Animation: one time scale up
-		&.--highlight::after {
-			animation: scale-up 4s ease-in-out 1;
+		&.--highlight {
+			&:after {
+				animation: show-border 4s ease-in-out 1;
+			}
 		}
 
-		@keyframes scale-up {
+		@keyframes show-border {
 			0% {
 				opacity: 0;
 			}

@@ -873,12 +873,11 @@ class DateOverviewList {
 		this.showMonth(this.currentYear, this.currentMonth);
 	}
 	public scrollToItem(date: string) {
-		// BUG: Use unique ID to highlight item
 		const monthList = this.getCurrentMonthList();
 		monthList.forEach((item) => {
 			if (item.date === date) {
 				// Actually scroll to item
-				scrollView(item.element, 'center', 100);
+				scrollView(item.element, 'center');
 
 				// Add highlight class
 				item.element?.classList.add('--highlight');
