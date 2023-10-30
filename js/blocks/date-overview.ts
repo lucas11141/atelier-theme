@@ -1,4 +1,4 @@
-// TODO: Seperate the weekdays on courses
+// TODO: Hide past dates
 
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
@@ -113,10 +113,10 @@ class DateOverview {
 			this.selector.showProduct('');
 		});
 
-		this.list.onFilterProduct((productId, productCategory) => {
-			this.calendar.setFilter({ type: 'product', productId });
+		this.list.onFilterProduct((productId, productCategory, courseTimeId) => {
+			this.calendar.setFilter({ type: 'product', productId, courseTimeId: courseTimeId }); // TODO: activate/deactivate color slices based on courseTimeId
 			this.filter.setFilter(productCategory);
-			this.selector.showProduct(productId);
+			this.selector.showProduct(productId, productCategory, courseTimeId, this.dates.data); // BUG: this.dates.data is undefined
 		});
 
 		this.selector.onSelect((productId, productCategory) => {
@@ -124,6 +124,10 @@ class DateOverview {
 			this.calendar.setFilter({ type: 'product', productId });
 			this.filter.setFilter(productCategory);
 			this.selector.showProduct(productId);
+		});
+
+		this.selector.onSelectCourseTime((productId, courseTimeId) => {
+			this.list.setFilter({ type: 'product', productId, courseTimeId });
 		});
 	}
 
@@ -585,7 +589,11 @@ class DateOverviewList {
 	dates: DateResponse[];
 
 	// Event listeners
-	private onFilterProductCallback: (productId: number, productCategory: Category) => void;
+	private onFilterProductCallback: (
+		productId: number,
+		productCategory: Category,
+		courseTimeId?: number
+	) => void;
 
 	constructor(container) {
 		this.container = container;
@@ -685,13 +693,24 @@ class DateOverviewList {
 		});
 	}
 	// Display all dates of a product in month sections
-	renderProductDatesList(productId: number) {
-		// TODO: Add two modes: show group or show weekday for courses
-
+	renderProductDatesList(productId: number, courseTimeId?: number) {
 		// Create MonthList object for all dates of the product
 		const productDates: MonthList[] = [];
 		this.monthLists.forEach((monthList) => {
-			const monthDates = monthList.items.filter((item) => item.product?.ID === productId);
+			let monthDates: MonthListItem[] = [];
+
+			// Filter by productId. When courseTimeId is given, filter by courseTimeId too
+			if (!courseTimeId) {
+				monthDates = monthList.items.filter((item) => item.product?.ID === productId);
+			} else {
+				monthDates = monthList.items.filter(
+					(item) =>
+						item.product?.ID === productId &&
+						item.product?.courseTimeId === courseTimeId
+				);
+			}
+
+			// Add monthList to productDates
 			productDates.push({
 				year: monthList.year,
 				month: monthList.month,
@@ -794,10 +813,15 @@ class DateOverviewList {
 				this.setFilter({
 					type: 'product',
 					productId: item.product.ID,
+					courseTimeId: item.product.courseTimeId,
 				});
 
 				// Trigger onFilterProduct event
-				this.onFilterProductCallback(item.product.ID, item.product.category);
+				this.onFilterProductCallback(
+					item.product.ID,
+					item.product.category,
+					item.product.courseTimeId
+				);
 			});
 		}
 	}
@@ -861,9 +885,17 @@ class DateOverviewList {
 		}
 
 		if (this.filter.type === 'product') {
-			this.renderProductDatesList(this.filter.productId);
+			this.renderProductDatesList(this.filter.productId, this.filter.courseTimeId);
 			return;
 		}
+		// if (this.filter.type === 'courseTime') {
+		// 	console.log(
+		// 		'show courseTime of productId:',
+		// 		this.filter.productId,
+		// 		this.filter.courseTimeId
+		// 	);
+		// 	this.renderProductDatesList(this.filter.productId, this.filter.courseTimeId);
+		// }
 	}
 	public setFilter(filter: Filter) {
 		// Reset filter when filter is null
@@ -893,7 +925,9 @@ class DateOverviewList {
 	/*------------------------------------*/
 	/* Event listeners */
 	/*------------------------------------*/
-	public onFilterProduct(callback: (productId: number, productCategory: Category) => void) {
+	public onFilterProduct(
+		callback: (productId: number, productCategory: Category, courseTimeId?: number) => void
+	) {
 		this.onFilterProductCallback = callback;
 	}
 }
@@ -1005,6 +1039,7 @@ class DateOverviewSelector {
 
 	// Event listeners
 	private onSelectCallback: (productId: number, productCategory: Category) => void;
+	private onSelectCourseTimeCallback: (productId: number, courseTimeId: number) => void;
 
 	constructor(container) {
 		this.container = container;
@@ -1037,6 +1072,8 @@ class DateOverviewSelector {
 			if (this.onSelectCallback) this.onSelectCallback(productId, productCategory);
 
 			this.selected = productId;
+
+			// TODO: Render the weekday selector when product is a course
 		});
 	}
 	fillSelectorData(dates: DateResponse[]) {
@@ -1061,7 +1098,6 @@ class DateOverviewSelector {
 	/* Render functions */
 	/*------------------------------------*/
 	renderOptions() {
-		console;
 		this.products.forEach((product) => {
 			this.renderOption(product);
 		});
@@ -1093,18 +1129,83 @@ class DateOverviewSelector {
 	}
 
 	/*------------------------------------*/
+	/* Weekday selector functions */
+	/*------------------------------------*/
+	renderWeekdayOptions(courseTimes: ProductType[] = [], courseTimeId?: number) {
+		// Adjust structure to other classes (list and calendar)
+		const weekdaysContainer = document.querySelector('.weekdays') as HTMLElement;
+		weekdaysContainer.innerHTML = '';
+
+		if (courseTimes.length <= 1) return;
+
+		courseTimes.forEach((courseTime) => {
+			// Append new button to container
+			const button = document.createElement('button');
+			button.role = 'button';
+			button.innerHTML = courseTime.weekday.label;
+			weekdaysContainer.appendChild(button);
+
+			// Add active class if courseTimeId matches
+			if (courseTimeId === courseTime.courseTimeId) button.classList.add('--active');
+
+			button.addEventListener('click', () => {
+				const productId = courseTime.ID;
+
+				// Set active class to clicked button
+				weekdaysContainer.querySelectorAll('button').forEach((button) => {
+					button.classList.remove('--active');
+				});
+				button.classList.add('--active');
+
+				// Trigger onSelectCourseTime event
+				this.onSelectCourseTimeCallback(productId, courseTime.courseTimeId as number);
+			});
+		});
+	}
+
+	/*------------------------------------*/
 	/* Public functions */
 	/*------------------------------------*/
-	public showProduct(productId: number | '') {
+	public showProduct(
+		productId: number | '',
+		productCategory: Category,
+		courseTimeId: number,
+		dates: DateResponse[]
+	) {
 		this.select.value = productId.toString();
 		this.renderOptionLabel(productId);
+
+		const courseTimeIds: number[] = [];
+		const courseTimes: ProductType[] = [];
+
+		if (productCategory === 'course-child' || productCategory === 'course-adult') {
+			// Get all dates that match the product ID
+			const productDates = dates.filter((date) => date.product.ID === productId);
+
+			// get all used values of courseTimeId
+			productDates.forEach((date) => {
+				if (!date.product.courseTimeId) throw new Error('No courseTimeId found');
+				if (!courseTimeIds.includes(date.product.courseTimeId)) {
+					courseTimeIds.push(date.product.courseTimeId);
+					courseTimes.push(date.product);
+				}
+			});
+		}
+
+		this.renderWeekdayOptions(courseTimes, courseTimeId);
 	}
 
 	/*------------------------------------*/
 	/* Event listeners */
 	/*------------------------------------*/
-	public onSelect(callback: (productId: number, productCategory: Category) => void) {
+	public onSelect(
+		callback: (productId: number, productCategory: Category, courseTimeId: number) => void
+	) {
 		this.onSelectCallback = callback;
+	}
+
+	public onSelectCourseTime(callback: (productId: number, courseTimeId: number) => void) {
+		this.onSelectCourseTimeCallback = callback;
 	}
 }
 
@@ -1134,6 +1235,7 @@ type Filter =
 	| {
 			type: 'product';
 			productId: number;
+			courseTimeId?: number;
 	  }
 	| {
 			type: 'category';
@@ -1189,7 +1291,10 @@ type ProductType = {
 		value: string;
 		label: string;
 	};
+	courseTimeId?: number;
+	weekday?: number;
 };
+
 type DateResponse = {
 	date: string;
 	product: ProductType;
@@ -1197,3 +1302,18 @@ type DateResponse = {
 };
 
 type CategoryFilter = Category | null;
+
+// type CourseTimes = {
+// 	product: ProductType
+// }[]
+
+// type Weekdays = {
+// 	[weekday: number]: {
+// 		[courseTimeId: number]: {
+// 			[productId: number]: {
+// 				title: string;
+// 				category: Category;
+// 			};
+// 		};
+// 	};
+// };

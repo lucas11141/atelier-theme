@@ -132,11 +132,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
                 </select>
             </label>
 
-            <!-- <div class="weekdays">
-                <button role="button">Montag</button>
-                <button role="button">Mittwoch</button>
-                <button role="button">freitag</button>
-            </div> -->
+            <div class="weekdays"></div>
         </div>
 
         <div id="date-overview__filter" class="date-overview__filter">

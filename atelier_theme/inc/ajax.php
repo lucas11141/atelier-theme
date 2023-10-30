@@ -4,8 +4,7 @@
 \* ------------------------------------*/
 
 // Add ajaxurl to frontend
-function myplugin_ajaxurl()
-{
+function myplugin_ajaxurl() {
     echo '<script type="text/javascript">
     var ajaxurl = "' . admin_url('admin-ajax.php') . '";
     </script>';
@@ -13,8 +12,7 @@ function myplugin_ajaxurl()
 add_action('wp_head', 'myplugin_ajaxurl');
 
 // Get the calendar grid for the given month and year
-function get_date_overview_product_dates()
-{
+function get_date_overview_product_dates() {
     $productId = $_POST['productId'];
 
     // fetch product from wordpress api
@@ -81,8 +79,7 @@ add_action('wp_ajax_get_date_overview_product_dates', 'get_date_overview_product
 add_action('wp_ajax_nopriv_get_date_overview_product_dates', 'get_date_overview_product_dates');
 
 // Get the calendar grid for the given month and year
-function render_date_overview_calender_items()
-{
+function render_date_overview_calender_items() {
     $year = $_POST['year'];
     $month = $_POST['month'];
 
@@ -97,8 +94,7 @@ add_action('wp_ajax_render_date_overview_calender_items', 'render_date_overview_
 add_action('wp_ajax_nopriv_render_date_overview_calender_items', 'render_date_overview_calender_items');
 
 // Get the calendar grid for the given month and year
-function render_date_overview_calender_items_2()
-{
+function render_date_overview_calender_items_2() {
     $year = $_POST['year'];
     $month = $_POST['month'];
 
@@ -113,8 +109,7 @@ add_action('wp_ajax_render_date_overview_calender_items_2', 'render_date_overvie
 add_action('wp_ajax_nopriv_render_date_overview_calender_items_2', 'render_date_overview_calender_items_2');
 
 
-function date_overview_get_product_dates()
-{
+function date_overview_get_product_dates() {
     $productId = $_POST['productId'];
     $year = $_POST['year'];
     $month = $_POST['month'];
@@ -163,7 +158,9 @@ function date_overview_get_product_dates()
                     'endtime' =>  get_field('endtime', 'course_time_' . $timeId),
                     'title' => $course->post_title,
                     'category' => $course->post_type . '-' . get_field('group', $course->ID)['value'],
-                    'group' => get_field('group', $course->ID)
+                    'group' => get_field('group', $course->ID),
+                    'courseTimeId' => $timeId,
+                    'weekday' => get_field('weekday', 'course_time_' . $timeId)
                 )
             );
         }

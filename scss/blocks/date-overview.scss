@@ -478,11 +478,25 @@ button {
 		background-color: #f9fafb;
 
 		button {
+			border: solid 2px green;
 			padding: 0.625rem 1rem;
 			background-color: currentColor;
-			color: #ffffff;
+			// color: #ffffff;
 			flex-grow: 1;
 			border-radius: 0.375rem;
+
+			&:hover {
+				background-color: green;
+				color: white;
+			}
+
+			&.--active {
+				scale: 1.2;
+			}
+		}
+
+		&:empty {
+			display: none;
 		}
 	}
 }
