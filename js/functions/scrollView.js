@@ -1,13 +1,11 @@
-function scrollView(element, align, margin = 0) {
+export default function scrollView(element, align = 'top', margin = 0) {
 	const screenElementHeightDelta = window.innerHeight - element.offsetHeight;
 
-	console.log(margin);
-
-	if (align === "center") {
+	if (align === 'center') {
 		if (screenElementHeightDelta < margin * 2) {
 			// align top with margin when screen is to small
 			window.scrollTo({
-				behavior: "smooth",
+				behavior: 'smooth',
 				top:
 					element.getBoundingClientRect().top -
 					document.body.getBoundingClientRect().top -
@@ -15,20 +13,19 @@ function scrollView(element, align, margin = 0) {
 			});
 		} else {
 			// align element in center
-			element.scrollIntoView({ behavior: "smooth", block: "center" });
+			element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		}
-	} else if (align === "top") {
+	} else if (align === 'top') {
 		window.scrollTo({
-			behavior: "smooth",
+			behavior: 'smooth',
 			top:
 				element.getBoundingClientRect().top -
 				document.body.getBoundingClientRect().top -
 				margin,
 		});
-	} else if (align === "bottom") {
+	} else if (align === 'bottom') {
 		const rect = element.getBoundingClientRect();
-		const scrollTop =
-			window.pageYOffset || document.documentElement.scrollTop;
+		const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 		const offsetTop = rect.top + scrollTop;
 		const wHeight = window.innerHeight;
 		const elHeight = rect.height;
@@ -36,7 +33,7 @@ function scrollView(element, align, margin = 0) {
 		console.log(elHeight);
 		console.log(offsetTop);
 		window.scrollTo({
-			behavior: "smooth",
+			behavior: 'smooth',
 			top: scollOffset,
 		});
 	}
