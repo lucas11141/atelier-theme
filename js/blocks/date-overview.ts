@@ -5,6 +5,7 @@ const $ = window.jQuery; // Use jquery from wordpress
 
 import { Navigation } from 'swiper/modules';
 import Swiper from 'swiper';
+import scrollView from '../functions/scrollView';
 
 Swiper.use([Navigation]);
 
@@ -872,14 +873,19 @@ class DateOverviewList {
 		this.showMonth(this.currentYear, this.currentMonth);
 	}
 	public scrollToItem(date: string) {
-		// TODO: Add short animation to catch attention
-
+		// BUG: Use unique ID to highlight item
 		const monthList = this.getCurrentMonthList();
 		monthList.forEach((item) => {
 			if (item.date === date) {
-				item.element?.scrollIntoView({
-					behavior: 'smooth',
-				});
+				// Actually scroll to item
+				scrollView(item.element, 'center', 100);
+
+				// Add highlight class
+				item.element?.classList.add('--highlight');
+				setTimeout(() => {
+					item.element?.classList.remove('--highlight');
+				}, 5000);
+
 				return;
 			}
 		});

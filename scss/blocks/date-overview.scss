@@ -281,7 +281,7 @@ button {
 		border-radius: 16px;
 		border: 1px solid #e5e7eb;
 		box-shadow: $shadow--calendar;
-		overflow: hidden;
+		position: relative;
 
 		.date {
 			padding: 20px;
@@ -294,6 +294,7 @@ button {
 			border-right: 1px solid #e5e7eb;
 			text-transform: uppercase;
 			line-height: 1;
+			border-radius: 16px 0 0 16px;
 
 			.day {
 				color: $main;
@@ -355,6 +356,37 @@ button {
 					color: currentColor;
 					background: currentColor;
 				}
+			}
+		}
+
+		&::after {
+			content: '';
+			width: calc(100% + 16px);
+			height: calc(100% + 16px);
+			border: solid 3px currentColor;
+			border-radius: 23px;
+			@include pos-center();
+			pointer-events: none;
+			opacity: 0;
+		}
+
+		// Animation: one time scale up
+		&.--highlight::after {
+			animation: scale-up 4s ease-in-out 1;
+		}
+
+		@keyframes scale-up {
+			0% {
+				opacity: 0;
+			}
+			10% {
+				opacity: 1;
+			}
+			80% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0;
 			}
 		}
 	}
