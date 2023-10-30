@@ -116,14 +116,14 @@ class DateOverview {
 		this.list.onFilterProduct((productId, productCategory, courseTimeId) => {
 			this.calendar.setFilter({ type: 'product', productId, courseTimeId: courseTimeId }); // TODO: activate/deactivate color slices based on courseTimeId
 			this.filter.setFilter(productCategory);
-			this.selector.showProduct(productId, productCategory, courseTimeId, this.dates.data); // BUG: this.dates.data is undefined
+			this.selector.showProduct(productId, courseTimeId);
 		});
 
-		this.selector.onSelect((productId, productCategory) => {
-			this.list.setFilter({ type: 'product', productId });
+		this.selector.onSelect((productId, productCategory, courseTimeId) => {
+			this.list.setFilter({ type: 'product', productId, courseTimeId });
 			this.calendar.setFilter({ type: 'product', productId });
 			this.filter.setFilter(productCategory);
-			this.selector.showProduct(productId);
+			this.selector.showProduct(productId, courseTimeId);
 		});
 
 		this.selector.onSelectCourseTime((productId, courseTimeId) => {
@@ -1028,6 +1028,7 @@ class DateOverviewSelector {
 	selectorOptions: SelectorOption[] = [];
 
 	// Without default values
+	dates: DateResponse[];
 	container: HTMLElement;
 	products: ProductType[];
 	select: HTMLSelectElement;
@@ -1038,7 +1039,11 @@ class DateOverviewSelector {
 	selected: number;
 
 	// Event listeners
-	private onSelectCallback: (productId: number, productCategory: Category) => void;
+	private onSelectCallback: (
+		productId: number,
+		productCategory: Category,
+		courseTimeId: number
+	) => void;
 	private onSelectCourseTimeCallback: (productId: number, courseTimeId: number) => void;
 
 	constructor(container) {
@@ -1067,16 +1072,20 @@ class DateOverviewSelector {
 			const target = e.currentTarget as HTMLSelectElement;
 			const productId = Number(target.value);
 			const productCategory = target.selectedOptions[0].dataset.productCategory as Category;
+			const courseTimeId =
+				Number(target.selectedOptions[0].dataset.courseTimeId as string) ?? undefined;
+			console.log('selected courseTimeid', courseTimeId);
 
 			// Trigger onSelect event
-			if (this.onSelectCallback) this.onSelectCallback(productId, productCategory);
+			if (this.onSelectCallback)
+				this.onSelectCallback(productId, productCategory, courseTimeId);
 
 			this.selected = productId;
-
-			// TODO: Render the weekday selector when product is a course
 		});
 	}
 	fillSelectorData(dates: DateResponse[]) {
+		this.dates = dates;
+
 		// Create array of all products without duplicates
 		const products = dates.map((date) => date.product);
 		const uniqueProducts = products.filter(
@@ -1112,6 +1121,7 @@ class DateOverviewSelector {
 		if (!option) throw new Error('No option found');
 
 		option.dataset.productCategory = product.category;
+		option.dataset.courseTimeId = product.courseTimeId?.toString() ?? '';
 	}
 	renderOptionLabel(productId: number | '') {
 		if (productId === '' || productId === 0) {
@@ -1146,7 +1156,11 @@ class DateOverviewSelector {
 			weekdaysContainer.appendChild(button);
 
 			// Add active class if courseTimeId matches
-			if (courseTimeId === courseTime.courseTimeId) button.classList.add('--active');
+			console.log(courseTimeId, courseTime.courseTimeId);
+			if (courseTimeId === courseTime.courseTimeId) {
+				console.log('active');
+				button.classList.add('--active');
+			}
 
 			button.addEventListener('click', () => {
 				const productId = courseTime.ID;
@@ -1166,21 +1180,20 @@ class DateOverviewSelector {
 	/*------------------------------------*/
 	/* Public functions */
 	/*------------------------------------*/
-	public showProduct(
-		productId: number | '',
-		productCategory: Category,
-		courseTimeId: number,
-		dates: DateResponse[]
-	) {
+	public showProduct(productId: number | '', courseTimeId: number | undefined = undefined) {
 		this.select.value = productId.toString();
 		this.renderOptionLabel(productId);
 
 		const courseTimeIds: number[] = [];
 		const courseTimes: ProductType[] = [];
 
+		// Get productCategory of the product with productId
+		const productCategory = this.dates.find((date) => date.product.ID === productId)?.product
+			.category as Category;
+
 		if (productCategory === 'course-child' || productCategory === 'course-adult') {
 			// Get all dates that match the product ID
-			const productDates = dates.filter((date) => date.product.ID === productId);
+			const productDates = this.dates.filter((date) => date.product.ID === productId);
 
 			// get all used values of courseTimeId
 			productDates.forEach((date) => {
