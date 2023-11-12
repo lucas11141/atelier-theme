@@ -9,6 +9,13 @@ import scrollView from '../functions/scrollView';
 
 Swiper.use([Navigation]);
 
+const categoryTranslation = {
+	'course-child': 'Kurs für Kinder',
+	'course-adult': 'Kurs für Erwachsene',
+	workshop: 'Workshop',
+	'holiday-workshop': 'Ferienworkshop',
+};
+
 class DateOverview {
 	fetchedOnce: boolean = false;
 	allDates: {
@@ -520,7 +527,6 @@ class DateOverviewCalendar {
 				// Filter by product
 				if (filter?.type === 'product') {
 					const productIds: number[] = [];
-					console.log('filter', this.filter);
 					item.products?.forEach((product) => {
 						productIds.push(product.ID);
 					});
@@ -815,8 +821,25 @@ class DateOverviewList {
 
 		const category = element.querySelector('[template-category]') as HTMLElement;
 		if (!category) throw new Error('No category found');
-		// add formatted day from this.currentMonth using Intl.DateTimeFormat
-		category.innerHTML = item.product.category;
+
+		// Set category
+		// TODO: Show different value for courses when weekday is selected
+		if (item.product.category === 'course-child' || item.product.category === 'course-adult') {
+			category.innerHTML = item.product.group.label;
+		} else {
+			category.innerHTML = categoryTranslation[item.product.category];
+		}
+
+		// Show weekday if is filtered by course or specific course time
+		if (
+			(this.filter?.type === 'product' &&
+				this.filter.courseTimeId === item.product.courseTimeId) ||
+			(this.filter?.type === 'category' &&
+				this.filter.category === item.product.category &&
+				item.product.weekday !== undefined)
+		) {
+			category.innerHTML = `${item.product.weekday?.label}`;
+		}
 
 		// TODO: Add booking URL
 		// const bookingButton = item.querySelector(
