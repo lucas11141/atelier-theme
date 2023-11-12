@@ -1148,8 +1148,26 @@ class DateOverviewSelector {
 	/* Render functions */
 	/*------------------------------------*/
 	renderOptions() {
+		this.select.innerHTML = '';
+
+		// Get all possible categories for the optgroups
+		const categories: Category[] = [];
 		this.products.forEach((product) => {
-			this.renderOption(product);
+			if (!categories.includes(product.category)) {
+				categories.push(product.category);
+			}
+		});
+
+		// Create an optgroup for each category and fill it with the products
+		categories.forEach((category) => {
+			this.select.innerHTML += `<optgroup label="${categoryTranslation[category]}">`;
+
+			this.products.forEach((product) => {
+				if (product.category !== category) return; // Skip product if category does not match
+				this.renderOption(product);
+			});
+
+			this.select.innerHTML += `</optgroup>`;
 		});
 	}
 	renderOption(product: ProductType) {
@@ -1175,7 +1193,7 @@ class DateOverviewSelector {
 		if (!product) throw new Error('No product found');
 
 		this.productTitle.innerHTML = product.title;
-		this.productCategory.innerHTML = product.category;
+		this.productCategory.innerHTML = categoryTranslation[product.category];
 		this.productCategory.style.backgroundColor = `var(--color-${product.category})`;
 	}
 
