@@ -393,6 +393,13 @@ class DateOverviewCalendar {
 		const element = this.daysContainer.lastElementChild as HTMLElement;
 		item.element = element;
 
+		// Add class .--past when date is in the past
+		const today = new Date();
+		const itemDate = new Date(item.date);
+		if (itemDate < today) {
+			item.element.classList.add('--past');
+		}
+
 		// select by template-month attribute
 		const day = element.querySelector('[template-day]') as HTMLElement;
 		if (!day) throw new Error('No day found');
@@ -760,6 +767,11 @@ class DateOverviewList {
 		// 	this.container.appendChild(item.element);
 		// 	return;
 		// }
+
+		// Do not render Item if date is in the past
+		const today = new Date();
+		const itemDate = new Date(item.date);
+		if (itemDate < today) return;
 
 		if (!item.product) throw new Error('No product found');
 

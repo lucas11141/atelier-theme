@@ -157,6 +157,13 @@ button {
 			cursor: default;
 		}
 
+		// Hide the color slice for the past days
+		&.--past {
+			.date-overview__calendar__day__color-slice {
+				display: none;
+			}
+		}
+
 		&__color-slice {
 			height: 100%;
 			width: 1px;
@@ -168,6 +175,8 @@ button {
 			}
 		}
 
+		// Disable pointer events for past and inactive days
+		&.--past,
 		&[data-active='false'] {
 			pointer-events: none;
 		}
