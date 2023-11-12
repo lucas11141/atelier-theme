@@ -1075,7 +1075,7 @@ class DateOverviewSelector {
 	select: HTMLSelectElement;
 	productTitle: HTMLElement;
 	productCategory: HTMLElement;
-	productImage: HTMLElement;
+	productImage: HTMLImageElement;
 	label: HTMLElement;
 	selected: number;
 
@@ -1095,7 +1095,9 @@ class DateOverviewSelector {
 		this.productCategory = this.container.querySelector(
 			'[template-product-category]'
 		) as HTMLElement;
-		this.productImage = this.container.querySelector('[template-product-image]') as HTMLElement;
+		this.productImage = this.container.querySelector(
+			'[template-product-image]'
+		) as HTMLImageElement;
 
 		// Error handling
 		if (!this.productTitle || !this.productCategory || !this.productImage)
@@ -1192,6 +1194,9 @@ class DateOverviewSelector {
 		const product = this.products.find((product) => product.ID === productId);
 		if (!product) throw new Error('No product found');
 
+		console.log(product);
+
+		this.productImage.src = product.thumbnail;
 		this.productTitle.innerHTML = product.title;
 		this.productCategory.innerHTML = categoryTranslation[product.category];
 		this.productCategory.style.backgroundColor = `var(--color-${product.category})`;

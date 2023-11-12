@@ -161,7 +161,8 @@ function date_overview_get_product_dates() {
                     'group' => get_field('group', $course->ID),
                     'courseTimeId' => $timeId,
                     'weekday' => get_field('weekday', 'course_time_' . $timeId),
-                    'bookingUrl' => BOOK_URL . '/?productId=' . $course->ID . '&courseTime=' . $timeId
+                    'bookingUrl' => BOOK_URL . '/?productId=' . $course->ID . '&courseTime=' . $timeId,
+                    'thumbnail' => get_the_post_thumbnail_url($course->ID, 'thumbnail')
                 )
             );
         }
@@ -218,7 +219,8 @@ function date_overview_get_product_dates() {
                     'title' => get_the_title($workshopId),
                     'category' => get_post_type($workshopId),
                     'group' => get_field('group', $workshopId),
-                    'bookingUrl' => BOOK_URL . '/?productId=' . $workshopId . '&workshopDate=' . $dateId
+                    'bookingUrl' => BOOK_URL . '/?productId=' . $workshopId . '&workshopDate=' . $dateId,
+                    'thumbnail' => get_the_post_thumbnail_url($course->ID, 'thumbnail')
                 )
             );
         }
@@ -275,7 +277,8 @@ function date_overview_get_product_dates() {
                     'title' => get_the_title($workshopId),
                     'category' => get_post_type($workshopId),
                     'group' => get_field('group', $workshopId),
-                    'bookingUrl' => BOOK_URL . '/?productId=' . $workshopId . '&workshopDate=' . $dateId
+                    'bookingUrl' => BOOK_URL . '/?productId=' . $workshopId . '&workshopDate=' . $dateId,
+                    'thumbnail' => get_the_post_thumbnail_url($course->ID, 'thumbnail')
                 )
             );
         }

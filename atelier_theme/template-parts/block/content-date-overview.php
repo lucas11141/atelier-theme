@@ -115,7 +115,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
     <div class="date-overview__content">
         <div id="date-overview__selector" class="date-overview__selector">
             <label>
-                <div template-product-image class="image"></div>
+                <img template-product-image class="image"></img>
 
                 <div class="text">
                     <p template-product-title class="title">Aquarellkurs</p>
