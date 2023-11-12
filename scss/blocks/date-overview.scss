@@ -478,20 +478,26 @@ button {
 		background-color: #f9fafb;
 
 		button {
-			border: solid 2px green;
+			flex: 1;
+			border: solid 2px currentColor;
 			padding: 0.625rem 1rem;
-			background-color: currentColor;
-			// color: #ffffff;
-			flex-grow: 1;
 			border-radius: 0.375rem;
+			background: transparent;
+			transition: $transition;
 
-			&:hover {
-				background-color: green;
-				color: white;
+			span {
+				font-weight: 600;
+				color: currentColor;
+				transition: $transition;
 			}
 
+			&:hover,
 			&.--active {
-				scale: 1.2;
+				background: currentColor;
+
+				span {
+					color: white;
+				}
 			}
 		}
 

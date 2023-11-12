@@ -127,6 +127,7 @@ class DateOverview {
 		});
 
 		this.selector.onSelectCourseTime((productId, courseTimeId) => {
+			this.calendar.setFilter({ type: 'product', productId, courseTimeId });
 			this.list.setFilter({ type: 'product', productId, courseTimeId });
 		});
 	}
@@ -465,6 +466,9 @@ class DateOverviewCalendar {
 				slice.dataset.productId = product.ID.toString();
 				slice.dataset.productCategory = product.category;
 
+				if (product.courseTimeId)
+					slice.dataset.courseTimeId = product.courseTimeId.toString();
+
 				slice.style.backgroundColor = `var(--color-${product.category})`;
 			});
 		}
@@ -509,6 +513,7 @@ class DateOverviewCalendar {
 				// Filter by product
 				if (filter?.type === 'product') {
 					const productIds: number[] = [];
+					console.log('filter', this.filter);
 					item.products?.forEach((product) => {
 						productIds.push(product.ID);
 					});
@@ -534,14 +539,26 @@ class DateOverviewCalendar {
 
 					// Filter by product
 					if (filter?.type === 'product') {
+						let isActive = false;
+
+						// Check if productId matches
 						const productId = Number(slice.dataset.productId);
-						slice.dataset.active = (productId === filter.productId).toString(); // Activate slice if productId matches
+						isActive = productId === filter.productId;
+
+						// Check if courseTimeId matches
+						if (isActive) {
+							const courseTimeId = Number(slice.dataset.courseTimeId);
+							isActive = courseTimeId === filter.courseTimeId;
+						}
+
+						// Activate slice if productId matches
+						slice.dataset.active = isActive.toString();
 					}
 				});
 			});
 		});
 
-		// Show the first month with the filtedes product
+		// Show the first month with the filtered product
 		if (filter?.type === 'product') {
 			if (filter.productId !== 0) {
 				// Get month of the first monthGrid with the given productId
@@ -888,14 +905,6 @@ class DateOverviewList {
 			this.renderProductDatesList(this.filter.productId, this.filter.courseTimeId);
 			return;
 		}
-		// if (this.filter.type === 'courseTime') {
-		// 	console.log(
-		// 		'show courseTime of productId:',
-		// 		this.filter.productId,
-		// 		this.filter.courseTimeId
-		// 	);
-		// 	this.renderProductDatesList(this.filter.productId, this.filter.courseTimeId);
-		// }
 	}
 	public setFilter(filter: Filter) {
 		// Reset filter when filter is null
@@ -1149,10 +1158,12 @@ class DateOverviewSelector {
 		if (courseTimes.length <= 1) return;
 
 		courseTimes.forEach((courseTime) => {
-			// Append new button to container
 			const button = document.createElement('button');
-			button.role = 'button';
-			button.innerHTML = courseTime.weekday.label;
+			const span = document.createElement('span');
+			span.textContent = courseTime.weekday.label;
+			button.appendChild(span);
+			button.setAttribute('role', 'button');
+			button.style.color = `var(--color-${courseTime.category})`;
 			weekdaysContainer.appendChild(button);
 
 			// Add active class if courseTimeId matches
