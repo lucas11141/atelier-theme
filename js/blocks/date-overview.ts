@@ -1,3 +1,5 @@
+// FUTURE: Show button at the end of the list to show dates of next month when available
+
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
 
@@ -121,7 +123,7 @@ class DateOverview {
 		});
 
 		this.list.onFilterProduct((productId, productCategory, courseTimeId) => {
-			this.calendar.setFilter({ type: 'product', productId, courseTimeId: courseTimeId }); // TODO: activate/deactivate color slices based on courseTimeId
+			this.calendar.setFilter({ type: 'product', productId, courseTimeId: courseTimeId });
 			this.filter.setFilter(productCategory);
 			this.selector.showProduct(productId, courseTimeId);
 			this.setUrlParams(productId, productCategory, courseTimeId);
@@ -392,7 +394,7 @@ class DateOverviewCalendar {
 		if (!this.monthLabelSlider) throw new Error('No monthLabelSlider found');
 	}
 	public fillGridData(dates: DateResponse[]) {
-		// FUTURE: Minimoze forEach calls
+		// FUTURE: Minimize forEach calls
 
 		// fill newDates with dates
 		dates.forEach((date) => {
@@ -719,7 +721,7 @@ class DateOverviewList {
 		}
 	}
 	public fillListData(dates: DateResponse[]) {
-		// FUTURE: Minimoze forEach calls
+		// FUTURE: Minimize forEach calls
 
 		// fill newDates with dates
 		dates.forEach((date) => {
@@ -831,13 +833,6 @@ class DateOverviewList {
 	}
 	// Render a single date item
 	renderListItem(item: MonthListItem) {
-		// FUTURE: Add function to hide or show the filtr button. This is needed when the list is filtered by product
-		// // Append existing element
-		// if (item.element) {
-		// 	this.container.appendChild(item.element);
-		// 	return;
-		// }
-
 		// Do not render Item if date is in the past
 		const today = new Date();
 		const itemDate = new Date(item.date);
@@ -887,7 +882,6 @@ class DateOverviewList {
 		if (!category) throw new Error('No category found');
 
 		// Set category
-		// TODO: Show different value for courses when weekday is selected
 		if (item.product.category === 'course-child' || item.product.category === 'course-adult') {
 			category.innerHTML = item.product.group.label;
 		} else {
