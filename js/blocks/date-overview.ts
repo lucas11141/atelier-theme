@@ -1,5 +1,3 @@
-// TODO: Save filters in URL
-
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
 
@@ -118,12 +116,15 @@ class DateOverview {
 			}
 
 			this.selector.showProduct('');
+			console.log(category);
+			this.setUrlParams(null, category, null);
 		});
 
 		this.list.onFilterProduct((productId, productCategory, courseTimeId) => {
 			this.calendar.setFilter({ type: 'product', productId, courseTimeId: courseTimeId }); // TODO: activate/deactivate color slices based on courseTimeId
 			this.filter.setFilter(productCategory);
 			this.selector.showProduct(productId, courseTimeId);
+			this.setUrlParams(productId, productCategory, courseTimeId);
 		});
 
 		this.selector.onSelect((productId, productCategory, courseTimeId) => {
@@ -131,11 +132,13 @@ class DateOverview {
 			this.calendar.setFilter({ type: 'product', productId });
 			this.filter.setFilter(productCategory);
 			this.selector.showProduct(productId, courseTimeId);
+			this.setUrlParams(productId, productCategory, courseTimeId);
 		});
 
 		this.selector.onSelectCourseTime((productId, courseTimeId) => {
 			this.calendar.setFilter({ type: 'product', productId, courseTimeId });
 			this.list.setFilter({ type: 'product', productId, courseTimeId });
+			this.setUrlParams(productId, null, courseTimeId);
 		});
 	}
 
@@ -166,8 +169,69 @@ class DateOverview {
 				thisClone.list.showMonth(year, month);
 
 				thisClone.fetchedOnce = true;
+
+				// Set filter by url params
+				thisClone.setFilterByUrlParams();
 			},
 		});
+	}
+
+	setFilterByUrlParams() {
+		const productId = Number(new URL(window.location.href).searchParams.get('productId'));
+		const productCategory = new URL(window.location.href).searchParams.get(
+			'productCategory'
+		) as Category;
+		const courseTimeId = Number(new URL(window.location.href).searchParams.get('courseTimeId'));
+
+		if (productId) {
+			this.list.setFilter({ type: 'product', productId, courseTimeId });
+			this.calendar.setFilter({ type: 'product', productId, courseTimeId });
+			this.selector.showProduct(productId, courseTimeId);
+			this.filter.setFilter(productCategory);
+		} else if (productCategory) {
+			this.filter.setFilter(productCategory);
+			this.calendar.setFilter({
+				type: 'category',
+				year: this.currentYear,
+				month: this.currentMonth,
+				category: productCategory,
+			});
+			this.list.setFilter({
+				type: 'category',
+				year: this.currentYear,
+				month: this.currentMonth,
+				category: productCategory,
+			});
+		}
+	}
+
+	setUrlParams(
+		productId: number | null | undefined,
+		productCategory: Category | null | undefined,
+		courseTimeId: number | null | undefined
+	) {
+		// Save filter in URL when filter is not null (Examply: url?productCategory=workshop&productId=123) and delete parameters when values are null
+		const url = new URL(window.location.href);
+
+		if (!productId) {
+			url.searchParams.delete('productId');
+		} else {
+			url.searchParams.set('productId', productId.toString());
+		}
+
+		if (!productCategory) {
+			url.searchParams.delete('productCategory');
+		} else {
+			url.searchParams.set('productCategory', productCategory);
+		}
+
+		if (!courseTimeId) {
+			url.searchParams.delete('courseTimeId');
+		} else {
+			url.searchParams.set('courseTimeId', courseTimeId.toString());
+		}
+
+		window.history.pushState({}, '', url.toString());
 	}
 }
 
