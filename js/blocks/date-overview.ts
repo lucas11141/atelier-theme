@@ -1,4 +1,4 @@
-// TODO: Hide past dates
+// TODO: Save filters in URL
 
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
@@ -841,13 +841,10 @@ class DateOverviewList {
 			category.innerHTML = `${item.product.weekday?.label}`;
 		}
 
-		// TODO: Add booking URL
-		// const bookingButton = item.querySelector(
-		// 	"[template-booking-button]"
-		// ) as HTMLLinkElement;
-		// if (!bookingButton) throw new Error("No booking button found");
-		// // add formatted day from this.currentMonth using Intl.DateTimeFormat
-		// bookingButton.href = date.product.;
+		// Set bookung url
+		const bookingButton = element.querySelector('[template-booking-button]') as HTMLLinkElement;
+		if (!bookingButton) throw new Error('No booking button found');
+		bookingButton.href = item.product.bookingUrl;
 
 		const filterButton = element.querySelector('[template-filter-button]') as HTMLElement;
 		if (!filterButton) throw new Error('No filter button found');
@@ -1350,6 +1347,7 @@ type ProductType = {
 		value: string;
 		label: string;
 	};
+	bookingUrl: string;
 	courseTimeId?: number;
 	weekday?: number;
 };

@@ -160,7 +160,8 @@ function date_overview_get_product_dates() {
                     'category' => $course->post_type . '-' . get_field('group', $course->ID)['value'],
                     'group' => get_field('group', $course->ID),
                     'courseTimeId' => $timeId,
-                    'weekday' => get_field('weekday', 'course_time_' . $timeId)
+                    'weekday' => get_field('weekday', 'course_time_' . $timeId),
+                    'bookingUrl' => BOOK_URL . '/?productId=' . $course->ID . '&courseTime=' . $timeId
                 )
             );
         }
@@ -216,7 +217,8 @@ function date_overview_get_product_dates() {
                     'endtime' =>  $dateField['endtime'],
                     'title' => get_the_title($workshopId),
                     'category' => get_post_type($workshopId),
-                    'group' => get_field('group', $workshopId)
+                    'group' => get_field('group', $workshopId),
+                    'bookingUrl' => BOOK_URL . '/?productId=' . $workshopId . '&workshopDate=' . $dateId
                 )
             );
         }
@@ -272,7 +274,8 @@ function date_overview_get_product_dates() {
                     'endtime' =>  $dateField['endtime'],
                     'title' => get_the_title($workshopId),
                     'category' => get_post_type($workshopId),
-                    'group' => get_field('group', $workshopId)
+                    'group' => get_field('group', $workshopId),
+                    'bookingUrl' => BOOK_URL . '/?productId=' . $workshopId . '&workshopDate=' . $dateId
                 )
             );
         }
