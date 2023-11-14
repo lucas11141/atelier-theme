@@ -31,6 +31,7 @@ class DateOverview {
 	selector: DateOverviewSelector;
 	currentYear: number;
 	currentMonth: number;
+	isInitial: boolean = true;
 
 	constructor(
 		calendarElement: HTMLElement,
@@ -38,21 +39,30 @@ class DateOverview {
 		filterElement: HTMLElement,
 		selectorElement: HTMLElement
 	) {
-		this.calendar = new DateOverviewCalendar(calendarElement);
-		this.list = new DateOverviewList(listElement);
+		this.currentYear = new Date().getFullYear();
+		this.currentMonth = new Date().getMonth() + 1;
+
+		this.calendar = new DateOverviewCalendar(
+			calendarElement,
+			this.currentYear,
+			this.currentMonth
+		);
+		this.list = new DateOverviewList(listElement, this.currentYear, this.currentMonth);
 		this.filter = new DateOverviewFilter(filterElement);
 		this.selector = new DateOverviewSelector(selectorElement);
 
 		this.initEventListeners();
 
 		// Set current month
-		this.showMonth(new Date().getFullYear(), new Date().getMonth() + 1);
+		this.showMonth(this.currentYear, this.currentMonth);
 	}
 
 	showMonth(year: number, month: number) {
 		// return if month is already set
-		if (this.currentYear === year && this.currentMonth === month)
+		if (this.currentYear === year && this.currentMonth === month && !this.isInitial)
 			throw new Error('Month is already set');
+
+		this.isInitial = false;
 
 		// Set current month
 		this.currentYear = year;
@@ -141,6 +151,16 @@ class DateOverview {
 			this.calendar.setFilter({ type: 'product', productId, courseTimeId });
 			this.list.setFilter({ type: 'product', productId, courseTimeId });
 			this.setUrlParams(productId, null, courseTimeId);
+		});
+
+		this.calendar.onUpdateCurrentMonth((year, month) => {
+			this.currentMonth = month;
+			this.currentYear = year;
+		});
+
+		this.list.onUpdateCurrentMonth((year, month) => {
+			this.currentMonth = month;
+			this.currentYear = year;
 		});
 	}
 
@@ -241,8 +261,8 @@ class DateOverview {
 /* Calendar view */
 /*------------------------------------*/
 class DateOverviewCalendar {
-	currentYear: number = new Date().getFullYear();
-	currentMonth: number = new Date().getMonth() + 1;
+	currentYear: number;
+	currentMonth: number;
 	monthGrids: MonthGrid[] = [];
 	filter: Filter = null;
 
@@ -257,9 +277,13 @@ class DateOverviewCalendar {
 	private onSelectCallback: (date: string) => void;
 	private onNextCallback: () => void;
 	private onPrevCallback: () => void;
+	private onUpdateCurrentMonthCallback: (year: number, month: number) => void;
 
-	constructor(container) {
+	constructor(container, currentYear: number, currentMonth: number) {
 		this.container = container;
+		this.currentYear = currentYear;
+		this.currentMonth = currentMonth;
+
 		this.daysContainer = this.container.querySelector(
 			'#date-overview__calendar__days'
 		) as HTMLElement;
@@ -420,8 +444,7 @@ class DateOverviewCalendar {
 	/* Render functions */
 	/*------------------------------------*/
 	renderGridItems(year: number, month: number) {
-		this.currentYear = year;
-		this.currentMonth = month;
+		this.updateCurrentMonth(year, month);
 
 		const monthGrid = this.monthGrids.find(
 			(monthGrid) => monthGrid.year === year && monthGrid.month === month
@@ -560,15 +583,27 @@ class DateOverviewCalendar {
 	}
 
 	/*------------------------------------*/
+	/* Update current month */
+	/*------------------------------------*/
+	updateCurrentMonth(year: number, month: number) {
+		this.currentYear = year;
+		this.currentMonth = month;
+
+		// Trigger onUpdateCurrentMonth event
+		if (this.onUpdateCurrentMonthCallback) this.onUpdateCurrentMonthCallback(year, month);
+	}
+
+	/*------------------------------------*/
 	/* Public functions */
 	/*------------------------------------*/
 	public showMonth(year: number, month: number) {
+		this.updateCurrentMonth(year, month);
 		this.renderGridItems(year, month);
 
 		const monthIndex = this.monthGrids.findIndex(
 			(monthGrid) => monthGrid.year === year && monthGrid.month === month
 		);
-		// TODO: Update this.currentYear and this.currentMonth and pass it to parent DateOverview object
+
 		this.monthLabelSlider.slideTo(monthIndex);
 	}
 	public setFilter(filter: Filter) {
@@ -685,14 +720,17 @@ class DateOverviewCalendar {
 	public onPrev(callback: () => void) {
 		this.onPrevCallback = callback;
 	}
+	public onUpdateCurrentMonth(callback: (year: number, month: number) => void) {
+		this.onUpdateCurrentMonthCallback = callback;
+	}
 }
 
 /*------------------------------------*/
 /* List view */
 /*------------------------------------*/
 class DateOverviewList {
-	currentYear: number = new Date().getFullYear();
-	currentMonth: number = new Date().getMonth() + 1;
+	currentYear: number;
+	currentMonth: number;
 	monthLists: MonthList[] = [];
 	filter: Filter = null;
 
@@ -706,9 +744,12 @@ class DateOverviewList {
 		productCategory: Category,
 		courseTimeId?: number
 	) => void;
+	private onUpdateCurrentMonthCallback: (year: number, month: number) => void;
 
-	constructor(container) {
+	constructor(container, currentYear: number, currentMonth: number) {
 		this.container = container;
+		this.currentYear = currentYear;
+		this.currentMonth = currentMonth;
 
 		this.generareEmptyMonthLists(this.currentYear, this.currentMonth);
 	}
@@ -988,11 +1029,21 @@ class DateOverviewList {
 	}
 
 	/*------------------------------------*/
+	/* Update current month */
+	/*------------------------------------*/
+	updateCurrentMonth(year: number, month: number) {
+		this.currentYear = year;
+		this.currentMonth = month;
+
+		// Trigger onUpdateCurrentMonth event
+		if (this.onUpdateCurrentMonthCallback) this.onUpdateCurrentMonthCallback(year, month);
+	}
+
+	/*------------------------------------*/
 	/* Public functions */
 	/*------------------------------------*/
 	public showMonth(year: number, month: number) {
-		this.currentYear = year;
-		this.currentMonth = month;
+		this.updateCurrentMonth(year, month);
 
 		if (!this.filter) {
 			this.renderMonthDatesList(this.currentYear, this.currentMonth);
@@ -1045,6 +1096,9 @@ class DateOverviewList {
 		callback: (productId: number, productCategory: Category, courseTimeId?: number) => void
 	) {
 		this.onFilterProductCallback = callback;
+	}
+	public onUpdateCurrentMonth(callback: (year: number, month: number) => void) {
+		this.onUpdateCurrentMonthCallback = callback;
 	}
 }
 
@@ -1329,7 +1383,6 @@ class DateOverviewSelector {
 	/* Public functions */
 	/*------------------------------------*/
 	public showProduct(productId: number | '', courseTimeId: number | undefined = undefined) {
-		console.log('selector.showProduct');
 		this.select.value = productId.toString();
 		this.renderOptionLabel(productId);
 
