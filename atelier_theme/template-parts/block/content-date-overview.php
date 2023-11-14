@@ -115,11 +115,13 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
     <div class="date-overview__content">
         <div id="date-overview__selector" class="date-overview__selector">
             <label>
-                <img template-product-image class="image"></img>
+                <div class="image">
+                    <img template-product-image></img>
+                </div>
 
                 <div class="text">
-                    <p template-product-title class="title">Aquarellkurs</p>
-                    <span template-product-category class="category">Kurs für Erwachsene</span>
+                    <p template-product-title class="title"></p>
+                    <span template-product-category class="category"></span>
                 </div>
 
                 <svg class="icon" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,6 +135,15 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
             </label>
 
             <div class="weekdays"></div>
+
+            <span class="cta">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 11C8.76142 11 11 8.76142 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11Z" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6 8V6" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6 4H6.005" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Wähle ein Kunstangebot
+            </span>
         </div>
 
         <div id="date-overview__filter" class="date-overview__filter">

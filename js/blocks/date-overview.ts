@@ -1,4 +1,5 @@
 // FUTURE: Show button at the end of the list to show dates of next month when available
+// TODO: Add times to list items
 
 // @ts-ignore
 const $ = window.jQuery; // Use jquery from wordpress
@@ -118,20 +119,19 @@ class DateOverview {
 			}
 
 			this.selector.showProduct('');
-			console.log(category);
 			this.setUrlParams(null, category, null);
 		});
 
 		this.list.onFilterProduct((productId, productCategory, courseTimeId) => {
-			this.calendar.setFilter({ type: 'product', productId, courseTimeId: courseTimeId });
+			this.calendar.setFilter({ type: 'product', productId, productCategory, courseTimeId });
 			this.filter.setFilter(productCategory);
 			this.selector.showProduct(productId, courseTimeId);
 			this.setUrlParams(productId, productCategory, courseTimeId);
 		});
 
 		this.selector.onSelect((productId, productCategory, courseTimeId) => {
-			this.list.setFilter({ type: 'product', productId, courseTimeId });
-			this.calendar.setFilter({ type: 'product', productId });
+			this.list.setFilter({ type: 'product', productId, productCategory, courseTimeId });
+			this.calendar.setFilter({ type: 'product', productId, productCategory, courseTimeId });
 			this.filter.setFilter(productCategory);
 			this.selector.showProduct(productId, courseTimeId);
 			this.setUrlParams(productId, productCategory, courseTimeId);
@@ -186,8 +186,8 @@ class DateOverview {
 		const courseTimeId = Number(new URL(window.location.href).searchParams.get('courseTimeId'));
 
 		if (productId) {
-			this.list.setFilter({ type: 'product', productId, courseTimeId });
-			this.calendar.setFilter({ type: 'product', productId, courseTimeId });
+			this.list.setFilter({ type: 'product', productId, productCategory, courseTimeId });
+			this.calendar.setFilter({ type: 'product', productId, productCategory, courseTimeId });
 			this.selector.showProduct(productId, courseTimeId);
 			this.filter.setFilter(productCategory);
 		} else if (productCategory) {
@@ -473,6 +473,11 @@ class DateOverviewCalendar {
 			item.element.classList.add('--past');
 		}
 
+		// Add class .--today when date is today
+		if (itemDate.toISOString().split('T')[0] === today.toISOString().split('T')[0]) {
+			item.element.classList.add('--today');
+		}
+
 		// select by template-month attribute
 		const day = element.querySelector('[template-day]') as HTMLElement;
 		if (!day) throw new Error('No day found');
@@ -563,6 +568,7 @@ class DateOverviewCalendar {
 		const monthIndex = this.monthGrids.findIndex(
 			(monthGrid) => monthGrid.year === year && monthGrid.month === month
 		);
+		// TODO: Update this.currentYear and this.currentMonth and pass it to parent DateOverview object
 		this.monthLabelSlider.slideTo(monthIndex);
 	}
 	public setFilter(filter: Filter) {
@@ -631,6 +637,15 @@ class DateOverviewCalendar {
 						}
 
 						// Activate slice if productId matches
+						if (
+							filter.productCategory === 'workshop' ||
+							filter.productCategory === 'holiday_workshop'
+						) {
+							const productCategory = slice.dataset.productCategory;
+							if (productCategory === filter.productCategory) isActive = true;
+						}
+
+						// Activate slice if productId matches
 						slice.dataset.active = isActive.toString();
 					}
 				});
@@ -643,7 +658,8 @@ class DateOverviewCalendar {
 				// Get month of the first monthGrid with the given productId
 				const firstMonth = this.monthGrids.find((monthGrid) => {
 					const monthGridItem = monthGrid.items.find((item) => {
-						if (!item.products) return false;
+						if (!item.products || !item.currentMonth) return false;
+						// @ts-ignore
 						return item.products.find((product) => product.ID === filter.productId);
 					});
 
@@ -920,6 +936,7 @@ class DateOverviewList {
 				this.setFilter({
 					type: 'product',
 					productId: item.product.ID,
+					productCategory: item.product.category,
 					courseTimeId: item.product.courseTimeId,
 				});
 
@@ -1097,7 +1114,7 @@ class DateOverviewFilter {
 	public setFilter(category: CategoryFilter) {
 		// Set button states
 		this.buttons.forEach((button) => {
-			if (category === null) {
+			if (category === null || category === '') {
 				this.setButtonState(button, 'unselected');
 			} else {
 				if (button.dataset.category === category) {
@@ -1162,6 +1179,7 @@ class DateOverviewSelector {
 			throw new Error('No product title, category or image found');
 		if (!this.select || !this.label) throw new Error('No select or label element found');
 
+		this.renderOptionLabel(0);
 		this.initEventListeners();
 	}
 
@@ -1175,7 +1193,6 @@ class DateOverviewSelector {
 			const productCategory = target.selectedOptions[0].dataset.productCategory as Category;
 			const courseTimeId =
 				Number(target.selectedOptions[0].dataset.courseTimeId as string) ?? undefined;
-			console.log('selected courseTimeid', courseTimeId);
 
 			// Trigger onSelect event
 			if (this.onSelectCallback)
@@ -1209,6 +1226,16 @@ class DateOverviewSelector {
 	/*------------------------------------*/
 	renderOptions() {
 		this.select.innerHTML = '';
+
+		const empty = {
+			ID: 0,
+			title: 'Kein Produkt ausgewählt',
+			category: '',
+		};
+
+		// Render empty option
+		// @ts-ignore
+		this.renderOption(empty);
 
 		// Get all possible categories for the optgroups
 		const categories: Category[] = [];
@@ -1246,13 +1273,12 @@ class DateOverviewSelector {
 		if (productId === '' || productId === 0) {
 			this.productTitle.innerHTML = 'Kein Produkt ausgewählt';
 			this.productCategory.innerHTML = '';
+			this.productImage.src = '';
 			return;
 		}
 
 		const product = this.products.find((product) => product.ID === productId);
 		if (!product) throw new Error('No product found');
-
-		console.log(product);
 
 		this.productImage.src = product.thumbnail;
 		this.productTitle.innerHTML = product.title;
@@ -1280,9 +1306,7 @@ class DateOverviewSelector {
 			weekdaysContainer.appendChild(button);
 
 			// Add active class if courseTimeId matches
-			console.log(courseTimeId, courseTime.courseTimeId);
 			if (courseTimeId === courseTime.courseTimeId) {
-				console.log('active');
 				button.classList.add('--active');
 			}
 
@@ -1305,6 +1329,7 @@ class DateOverviewSelector {
 	/* Public functions */
 	/*------------------------------------*/
 	public showProduct(productId: number | '', courseTimeId: number | undefined = undefined) {
+		console.log('selector.showProduct');
 		this.select.value = productId.toString();
 		this.renderOptionLabel(productId);
 
@@ -1372,6 +1397,7 @@ type Filter =
 	| {
 			type: 'product';
 			productId: number;
+			productCategory: Category | '';
 			courseTimeId?: number;
 	  }
 	| {
@@ -1429,6 +1455,7 @@ type ProductType = {
 		label: string;
 	};
 	bookingUrl: string;
+	thumbnail: string;
 	courseTimeId?: number;
 	weekday?: number;
 };
@@ -1439,7 +1466,7 @@ type DateResponse = {
 	listElement?: HTMLElement;
 };
 
-type CategoryFilter = Category | null;
+type CategoryFilter = Category | null | '';
 
 // type CourseTimes = {
 // 	product: ProductType
