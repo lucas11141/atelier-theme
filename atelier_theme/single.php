@@ -157,8 +157,7 @@
                 // $baseprice_hour = get_field("baseprice_hour");
                 // $price_person = get_field("price_person");
 
-                function render_fact($title, $value, $icon)
-                {
+                function render_fact($title, $value, $icon) {
                     global $color;
                     if (!$title || !$value) return;
                 ?>
@@ -439,9 +438,10 @@
                                             // get all dates that are published
                                             $dates = get_field('dates');
 
+                                            // Filter by published an future dates
                                             if (!empty($dates)) {
                                                 $dates = array_filter($dates, function ($dateId) {
-                                                    return get_post_status($dateId) === 'publish';
+                                                    return get_post_status($dateId) === 'publish' && strtotime(get_field('date_1', $dateId)['date']) >= strtotime('today');
                                                 });
                                             }
 
