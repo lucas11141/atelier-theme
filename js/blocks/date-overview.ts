@@ -83,7 +83,6 @@ class DateOverview {
 		});
 
 		this.calendar.onNext(() => {
-			// fetch data via ajax
 			let year = this.currentYear;
 			let month = this.currentMonth + 1;
 
@@ -157,11 +156,6 @@ class DateOverview {
 			this.currentMonth = month;
 			this.currentYear = year;
 		});
-
-		this.list.onUpdateCurrentMonth((year, month) => {
-			this.currentMonth = month;
-			this.currentYear = year;
-		});
 	}
 
 	async fetchDates(year: number, month: number) {
@@ -194,6 +188,12 @@ class DateOverview {
 
 				// Set filter by url params
 				thisClone.setFilterByUrlParams();
+
+				// get all elements with class .--sceleton and remove the class
+				const skeletonElements = document.querySelectorAll('.--sceleton');
+				skeletonElements.forEach((element) => {
+					element.classList.remove('--sceleton');
+				});
 			},
 		});
 	}
@@ -676,8 +676,9 @@ class DateOverviewCalendar {
 							filter.productCategory === 'workshop' ||
 							filter.productCategory === 'holiday_workshop'
 						) {
-							const productCategory = slice.dataset.productCategory;
-							if (productCategory === filter.productCategory) isActive = true;
+							if (productId === filter.productId) isActive = true;
+							// const productCategory = slice.dataset.productCategory;
+							// if (productCategory === filter.productCategory) isActive = true;
 						}
 
 						// Activate slice if productId matches
@@ -744,7 +745,6 @@ class DateOverviewList {
 		productCategory: Category,
 		courseTimeId?: number
 	) => void;
-	private onUpdateCurrentMonthCallback: (year: number, month: number) => void;
 
 	constructor(container, currentYear: number, currentMonth: number) {
 		this.container = container;
@@ -1034,9 +1034,6 @@ class DateOverviewList {
 	updateCurrentMonth(year: number, month: number) {
 		this.currentYear = year;
 		this.currentMonth = month;
-
-		// Trigger onUpdateCurrentMonth event
-		if (this.onUpdateCurrentMonthCallback) this.onUpdateCurrentMonthCallback(year, month);
 	}
 
 	/*------------------------------------*/
@@ -1096,9 +1093,6 @@ class DateOverviewList {
 		callback: (productId: number, productCategory: Category, courseTimeId?: number) => void
 	) {
 		this.onFilterProductCallback = callback;
-	}
-	public onUpdateCurrentMonth(callback: (year: number, month: number) => void) {
-		this.onUpdateCurrentMonthCallback = callback;
 	}
 }
 

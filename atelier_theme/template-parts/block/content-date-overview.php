@@ -1,6 +1,5 @@
 <?php
-// TODO: when clicking on next month, load dates of next month. When clicking back the dates are still there
-
+// FUTURE: Add loading skeleton
 /*------------------------------------*/
 /* Block name: 	Terminübersicht
 /*------------------------------------*/
@@ -44,14 +43,10 @@ $filterButtonLabels = array(
     ),
 );
 
-// TODO: Create array with better structure for filters
-
 $target_month = date('n'); // Aktueller Monat
 $target_year = date('Y'); // Aktuelles Jahr
 
 $calendarGrid = getCalendarGrid($target_year, $target_month);
-
-// TODO: sepeare calenderGrid and datesList?
 ?>
 
 <div id="<?php echo $id; ?>" class="hero-rounded">
@@ -74,7 +69,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
             <?php endif; ?>
         </div>
 
-        <div id="date-overview__calendar" class="date-overview__calendar">
+        <div id="date-overview__calendar" class="date-overview__calendar --sceleton">
 
             <!-- Month controls -->
             <button type="button" id="calendar__prev" class="date-overview__calendar__prev" data-active="false">
@@ -102,7 +97,43 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
             <?php endforeach; ?>
 
             <!-- Days -->
-            <div id="date-overview__calendar__days" class="date-overview__calendar__days"></div>
+            <div id="date-overview__calendar__days" class="date-overview__calendar__days">
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+                <button class="date-overview__calendar__day"></button>
+            </div>
         </div>
 
     </div>
@@ -114,7 +145,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 <div class="inner">
     <div class="date-overview__content">
         <div id="date-overview__selector" class="date-overview__selector">
-            <label>
+            <label class="--sceleton">
                 <div class="image">
                     <img template-product-image></img>
                 </div>
@@ -162,7 +193,39 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
             <?php endforeach; ?>
         </div>
 
-        <div id="date-overview__list" class="date-overview__list"></div>
+        <div id="date-overview__list" class="date-overview__list">
+            <div class="date-overview__list__item --sceleton">
+                <div class="date"></div>
+                <div class="content"></div>
+            </div>
+            <div class="date-overview__list__item --sceleton">
+                <div class="date"></div>
+                <div class="content"></div>
+            </div>
+            <div class="date-overview__list__item --sceleton">
+                <div class="date"></div>
+                <div class="content"></div>
+            </div>
+            <div class="date-overview__list__item --sceleton">
+                <div class="date"></div>
+                <div class="content"></div>
+            </div>
+            <div class="date-overview__list__item --sceleton">
+                <div class="date"></div>
+                <div class="content"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="date-overview__fallback">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-monitor">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        <p>
+            Die Terminübersicht ist aktuell nur auf größeren Bildschirmen verfügbar. Bitte besuche diese Seite auf einem Desktop-Computer oder verkleinere die Skalierung deines Browsers, um auf die Terminübersicht zuzugreifen.
+        </p>
     </div>
 </div>
 

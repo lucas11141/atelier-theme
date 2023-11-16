@@ -19,6 +19,15 @@ button {
 	&__text {
 		margin: 40px 0 150px;
 	}
+
+	/*------------------------------------*/
+	/* Responsive
+	/*------------------------------------*/
+	@media only screen and (max-width: $screen) {
+		.hero-rounded__content {
+			min-height: unset;
+		}
+	}
 }
 
 .date-overview__calendar {
@@ -411,6 +420,15 @@ button {
 				opacity: 0;
 			}
 		}
+
+		&.--sceleton {
+			margin-top: 0;
+			height: 82px;
+
+			& + .--sceleton {
+				margin-top: 16px;
+			}
+		}
 	}
 }
 
@@ -502,6 +520,17 @@ button {
 			opacity: 0;
 			cursor: pointer;
 		}
+
+		&.--sceleton {
+			.image,
+			.text {
+				opacity: 0;
+			}
+
+			.icon {
+				opacity: 20%;
+			}
+		}
 	}
 
 	.weekdays {
@@ -568,6 +597,43 @@ button {
 	display: grid;
 	grid-template-columns: 1fr 490px;
 	grid-gap: 48px $gap;
+
+	@media only screen and (max-width: $screen) {
+		display: none;
+	}
+}
+
+.date-overview__fallback {
+	margin: -40px auto;
+	color: $main;
+	width: 100%;
+	background-color: white;
+	box-shadow: $shadow--calendar;
+	border-radius: 25px;
+	@include flex-center();
+	flex-direction: column;
+	gap: 20px;
+	padding: 50px 25px;
+	text-align: center;
+
+	svg {
+		width: 64px;
+		height: auto;
+		stroke-width: 1.2;
+		stroke: $main;
+	}
+
+	p {
+		font-weight: 600;
+	}
+
+	@media only screen and (min-width: $screen) {
+		display: none;
+	}
+
+	@media only screen and (max-width: $tablet) {
+		padding: 30px 20px;
+	}
 }
 
 /*------------------------------------*/
@@ -580,5 +646,36 @@ button {
 	.date-overview__selector,
 	.date-overview__content {
 		display: none;
+	}
+}
+
+.--sceleton {
+	position: relative;
+	overflow: hidden;
+
+	&:before {
+		content: '';
+		height: 100%;
+		width: 300px;
+		background: linear-gradient(
+			to right,
+			rgba(0, 0, 0, 0) 0,
+			rgba(0, 0, 0, 8%) 150px,
+			rgba(0, 0, 1, 0) 300px
+		);
+		position: absolute;
+		top: 0;
+		left: -300px;
+		animation: pulse 1.5s linear 0.5s infinite;
+
+		// move the gradient
+		@keyframes pulse {
+			0% {
+				left: -300px;
+			}
+			100% {
+				left: 150%;
+			}
+		}
 	}
 }
