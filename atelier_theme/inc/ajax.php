@@ -161,7 +161,7 @@ function date_overview_get_product_dates() {
                     'group' => get_field('group', $course->ID),
                     'courseTimeId' => $timeId,
                     'weekday' => get_field('weekday', 'course_time_' . $timeId),
-                    'bookingUrl' => BOOK_URL . '/?productId=' . $course->ID . '&courseTime=' . $timeId,
+                    'bookingUrl' => BOOK_URL . '/?productId=' . $course->ID . '&courseTime=' . $timeId . '&startDate=' . $dateId,
                     'thumbnail' => get_the_post_thumbnail_url($course->ID, 'thumbnail')
                 )
             );

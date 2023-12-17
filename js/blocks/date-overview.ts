@@ -1338,6 +1338,7 @@ class DateOverviewSelector {
 	/* Weekday selector functions */
 	/*------------------------------------*/
 	renderWeekdayOptions(courseTimes: ProductType[] = [], courseTimeId?: number) {
+		console.log('courseTimes', courseTimes);
 		// Adjust structure to other classes (list and calendar)
 		const weekdaysContainer = document.querySelector('.weekdays') as HTMLElement;
 		weekdaysContainer.innerHTML = '';
