@@ -58,12 +58,13 @@ defined('ABSPATH') || exit;
 
 
 <!-- <div class="cart__flex"> -->
-<form class="woocommerce-cart-form checkout-split" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
+<form class="cart woocommerce-cart-form checkout-split" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
+
+	<?php do_action('woocommerce_before_cart'); ?>
 
 	<div class="left">
 		<div class="container">
 
-			<?php do_action('woocommerce_before_cart'); ?>
 
 			<?php do_action('woocommerce_before_cart_table'); ?>
 

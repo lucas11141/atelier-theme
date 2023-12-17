@@ -260,18 +260,18 @@ jQuery(document).ready(function ($) {
 	}
 
 	//Accordeon
-	$('.accordeon__item .accordeon__header').click(function (e) {
+	$('.accordeon__item .accordeon__header').on('click', function (e) {
 		$(this).parent('.accordeon__item').toggleClass('accordeon__item--opened');
-		$accordion_content = $(this).parent('.accordeon__item').find('.accordeon__content');
-		$('.accordeon__content').not($accordion_content).slideUp(200);
+		const accordion_content = $(this).parent('.accordeon__item').find('.accordeon__content');
+		$('.accordeon__content').not(accordion_content).slideUp(200);
 		$('.accordeon__item')
 			.find('.accordeon__content')
-			.not($accordion_content)
+			.not(accordion_content)
 			.parent('.accordeon__item')
 			.removeClass('accordeon__item--opened');
-		$accordion_content.stop(true, true).slideToggle(200);
+		accordion_content.stop(true, true).slideToggle(200);
 
-		target = e.currentTarget.parentElement;
+		const target = e.currentTarget.parentElement;
 		if (target.classList.contains('accordeon__item--opened')) {
 			setTimeout(function () {
 				if (window.innerHeight < target.offsetHeight + 100) {
@@ -378,23 +378,23 @@ jQuery(document).ready(function ($) {
 		})();
 	}
 
-	if (document.querySelector('.kasse')) {
-		const noticesWrapper = document.querySelector('.woocommerce-notices-wrapper');
+	// if (document.querySelector('.kasse')) {
+	// 	const noticesWrapper = document.querySelector('.woocommerce-notices-wrapper');
 
-		// create a new instance of 'MutationObserver' named 'observer',
-		// passing it a callback function
-		observer = new MutationObserver(function (mutationsList, observer) {
-			$('.left .container').prepend(noticesWrapper);
-		});
+	// 	// create a new instance of 'MutationObserver' named 'observer',
+	// 	// passing it a callback function
+	// 	observer = new MutationObserver(function (mutationsList, observer) {
+	// 		$('.left .container').prepend(noticesWrapper);
+	// 	});
 
-		// call 'observe' on that MutationObserver instance,
-		// passing it the element to observe, and the options object
-		observer.observe(noticesWrapper, {
-			characterData: false,
-			childList: true,
-			attributes: false,
-		});
-	}
+	// 	// call 'observe' on that MutationObserver instance,
+	// 	// passing it the element to observe, and the options object
+	// 	observer.observe(noticesWrapper, {
+	// 		characterData: false,
+	// 		childList: true,
+	// 		attributes: false,
+	// 	});
+	// }
 
 	$('input, textarea, select').on('keyup change', function () {
 		$(this).parent('p').removeClass('--error');
@@ -551,11 +551,12 @@ jQuery(document).ready(function ($) {
 		$('tr.subtotal').prev('tr').addClass('pre__subtotal');
 	}
 
-	if (document.querySelector('.checkout_coupon')) {
-		setTimeout(function () {
-			document.querySelector('.checkout_coupon').style.display = 'block';
-		}, 1000);
-	}
+	// if (document.querySelector('.checkout_coupon')) {
+	// 	setTimeout(function () {
+	// 		console.log('test', document.querySelector('.checkout_coupon'));
+	// 		document.querySelector('.checkout_coupon').style.display = 'block';
+	// 	}, 1000);
+	// }
 
 	// Open popups
 	const popupButtons = document.querySelectorAll('a.--open__popup');
@@ -625,9 +626,22 @@ jQuery(document).ready(function ($) {
 				total = subtotal + shipping;
 			}
 			total = `${total}`.substring(0, 5).replace('.', ',');
+			// always habe following format 0,00
+			if (total.length === 1) {
+				total = total + ',00';
+			}
+			if (total.length === 2) {
+				total = total + ',00';
+			}
+			if (total.length === 3) {
+				total = total + ',00';
+			}
+			if (total.length === 4) {
+				total = total + '0';
+			}
 			document.querySelector(
 				'.order-total bdi'
-			).innerHTML = `${total}<span class="woocommerce-Price-currencySymbol">€</span>`;
+			).innerHTML = `${total} <span class="woocommerce-Price-currencySymbol">€</span>`;
 
 			newElement = null;
 			newElement = document.createElement('div');
