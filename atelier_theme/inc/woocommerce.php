@@ -1,6 +1,23 @@
 <?php
-function woocommerce_support()
-{
+add_action('woocommerce_cart_totals_after_order_total', 'woocommerce_atelier_display_shipping_in_checkout_notice');
+function woocommerce_atelier_display_shipping_in_checkout_notice() {
+?>
+    <tr class="order-total-shipping-in-checkout-notice">
+        <td colspan="2"><?php _e('Die Versandmethode kann im nächsten Schritt angepasst werden.', 'atelier'); ?></td>
+    </tr>
+    <script>
+        jQuery(document).ready(function($) {
+            // Move the new element to the correct location (sibling of .shipping__total)
+            $('.order-total-shipping-in-checkout-notice').insertAfter('.shipping__total');
+        });
+    </script>
+    <?php
+}
+
+
+
+
+function woocommerce_support() {
     add_theme_support("woocommerce");
     //add_theme_support( "wc-product-gallery-zoom" );
     //add_theme_support( "wc- product-gallery-lightbox" );
@@ -16,8 +33,7 @@ add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_loop_category', 5);
 add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_loop_short_description', 15);
 // Shop Item adding category
-function woocommerce_atelier_loop_category()
-{
+function woocommerce_atelier_loop_category() {
     global $post;
     $terms = get_the_terms($post->ID, 'product_cat');
     if ($terms && !is_wp_error($terms)) :
@@ -27,14 +43,13 @@ function woocommerce_atelier_loop_category()
             $cat_links[] = $term->name;
         }
         $on_cat = join(" ", $cat_links);
-?>
+    ?>
         <span class="product__category">
             <?php echo $on_cat; ?>
         </span>
     <?php endif;
 }
-function woocommerce_atelier_loop_short_description()
-{
+function woocommerce_atelier_loop_short_description() {
     global $post;
     $short_description = get_field("short_description", $post->id);
     if ($short_description) : ?>
@@ -57,8 +72,7 @@ remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_lo
 
 // add image to category banner
 add_action('atelier_category_banner', 'woocommerce_atelier_category_thumbnail', 5);
-function woocommerce_atelier_category_thumbnail()
-{
+function woocommerce_atelier_category_thumbnail() {
     // verify that this is a product category page
     if (is_product_category()) {
         global $wp_query;
@@ -83,16 +97,14 @@ function woocommerce_atelier_category_thumbnail()
 
 
 // Change number of related products
-function woo_related_products_limit()
-{
+function woo_related_products_limit() {
     global $product;
 
     $args['posts_per_page'] = 6;
     return $args;
 }
 add_filter('woocommerce_output_related_products_args', 'jk_related_products_args');
-function jk_related_products_args($args)
-{
+function jk_related_products_args($args) {
     $args['posts_per_page'] = 6; // 4 related products
     $args['columns'] = 1; // arranged in 2 columns
     return $args;
@@ -111,8 +123,7 @@ remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_di
 
 
 add_filter('woocommerce_product_tabs', 'woo_remove_product_tabs', 98);
-function woo_remove_product_tabs($tabs)
-{
+function woo_remove_product_tabs($tabs) {
     unset($tabs['additional_information']);
     return $tabs;
 }
@@ -135,8 +146,7 @@ add_filter('woocommerce_get_image_size_gallery_thumbnail', function ($size) {
 
 // Nav Cart Icon - Update Count
 add_filter('woocommerce_add_to_cart_fragments', 'atelier_add_to_cart_fragment');
-function atelier_add_to_cart_fragment($fragments)
-{
+function atelier_add_to_cart_fragment($fragments) {
     global $woocommerce;
     $fragments['.nav__cart__quantity'] = '<div class="nav__cart__quantity"><span>' .  $woocommerce->cart->cart_contents_count . '</span></div>';
     return $fragments;
@@ -149,8 +159,7 @@ function atelier_add_to_cart_fragment($fragments)
 
 // Breadcrumb Settings
 add_filter('woocommerce_breadcrumb_defaults', 'atelier_breadcrumbs_settings');
-function atelier_breadcrumbs_settings()
-{
+function atelier_breadcrumbs_settings() {
     return array(
         'delimiter'   => ' <span>&#47;</span> ',
         'wrap_before' => '<nav class="woocommerce-breadcrumb" itemprop="breadcrumb">',
@@ -161,8 +170,7 @@ function atelier_breadcrumbs_settings()
     );
 }
 add_filter('woocommerce_breadcrumb_home_url', 'atelier_custom_breadrumb_home_url');
-function atelier_custom_breadrumb_home_url()
-{
+function atelier_custom_breadrumb_home_url() {
     return 'http://kunstausdertuete.de/shop';
 }
 
@@ -178,8 +186,7 @@ add_action('woocommerce_single_product_summary', 'atelier_custom_field_bulletpoi
 add_action('woocommerce_single_product_summary', 'atelier_custom_field_quote', 46);
 add_action('woocommerce_single_product_summary', 'atelier_custom_field_accordeon', 47);
 
-function atelier_custom_field_short_description()
-{
+function atelier_custom_field_short_description() {
     global $product;
     $short_description = get_field("short_description", $product->get_id());
     // $short_description = get_the_excerpt( $product->get_id() );
@@ -190,15 +197,13 @@ function atelier_custom_field_short_description()
     }
 }
 
-function atelier_custom_field_delivery_info()
-{
+function atelier_custom_field_delivery_info() {
     ?>
     <p class="delivery__info"><?php echo get_field("versandinformationen_kurz", "options"); ?></p>
     <?php
 }
 
-function atelier_custom_field_quote()
-{
+function atelier_custom_field_quote() {
     $spruch_aktivieren = get_field('spruch_aktivieren');
     $spruch_uberschrift = get_field('spruch_uberschrift');
     $spruch = get_field('spruch');
@@ -210,8 +215,7 @@ function atelier_custom_field_quote()
     <?php endif;
 }
 
-function atelier_custom_field_bulletpoints()
-{
+function atelier_custom_field_bulletpoints() {
     global $product;
     $uberschrift = get_field('uberschrift');
     if (!empty($uberschrift) || have_rows('stichpunkte')) : ?>
@@ -239,8 +243,7 @@ function atelier_custom_field_bulletpoints()
     endif;
 }
 
-function atelier_custom_field_accordeon()
-{ ?>
+function atelier_custom_field_accordeon() { ?>
     <div class="accordeon">
         <?php global $product; ?>
 
@@ -364,8 +367,7 @@ function atelier_custom_field_accordeon()
 
 
         //Warenkorb - Item Mengenauswahl als Select Input
-        function woocommerce_quantity_input($args = array(), $product = null, $echo = true)
-        {
+        function woocommerce_quantity_input($args = array(), $product = null, $echo = true) {
 
             if (is_null($product)) {
                 $product = $GLOBALS['product'];
@@ -420,8 +422,7 @@ function atelier_custom_field_accordeon()
 
 
         add_filter('woocommerce_product_variation_title_include_attributes', 'custom_product_variation_title', 10, 2);
-        function custom_product_variation_title($should_include_attributes, $product)
-        {
+        function custom_product_variation_title($should_include_attributes, $product) {
             $should_include_attributes = false;
             return $should_include_attributes;
         }
@@ -433,8 +434,7 @@ function atelier_custom_field_accordeon()
 
 
         add_filter('woocommerce_account_menu_items', 'remove_my_account_links');
-        function remove_my_account_links($menu_links)
-        {
+        function remove_my_account_links($menu_links) {
             // unset( $menu_links['dashboard'] ); // Remove Logout link
             unset($menu_links['customer-logout']); // Remove Logout link
             return $menu_links;
@@ -445,8 +445,7 @@ function atelier_custom_field_accordeon()
 
 
         // Unterkategorien am Anfang der Kategorieseiten
-        function atelier_product_subcategories($args = array())
-        {
+        function atelier_product_subcategories($args = array()) {
             $parentid = get_queried_object_id();
             $args = array(
                 'parent' => $parentid
@@ -469,8 +468,7 @@ function atelier_custom_field_accordeon()
 
 
         // Unterkategorien am Ende der Kategorieseiten
-        function tutsplus_product_subcategories($args = array())
-        {
+        function tutsplus_product_subcategories($args = array()) {
             if (is_product_category()) {
                 $parentid = get_queried_object_id();
                 $args = array(
@@ -508,11 +506,13 @@ function atelier_custom_field_accordeon()
 
 
 
-        function cw_discount()
-        {
+        function cw_discount() {
             global $woocommerce;
             $cw_discount = 0;
             $cart = WC()->cart;
+
+            // Get id of the selected shipping method
+            $isLocalPickup = WC()->session->get('chosen_shipping_methods')[0] == 'local_pickup:14';
 
             foreach ($woocommerce->cart->get_cart() as $cw_cart_key => $values) {
                 $_product = $values['data'];
@@ -527,7 +527,7 @@ function atelier_custom_field_accordeon()
         <span class="total__savings"><?= get_template_part('template-parts/icon', '', array('icon' => 'tag', 'color' => 'red')); ?>Deine Ersparnis<?php echo wc_price($cw_discount + $woocommerce->cart->discount_cart); ?></span>
     <?php endif; ?>
 
-    <?php if ($cart->get_shipping_total() == 0) : ?>
+    <?php if ($cart->get_shipping_total() == 0 && !$isLocalPickup) : ?>
         <span class="total__savings"><?= get_template_part('template-parts/icon', '', array('icon' => 'tag', 'color' => 'red')); ?>Kostenloser Versand<?php echo wc_price($cart->get_shipping_total()); ?></span>
     <?php endif;
         }
@@ -535,8 +535,7 @@ function atelier_custom_field_accordeon()
 
 
 
-        function acf_filter_rest_api_preload_paths($preload_paths)
-        {
+        function acf_filter_rest_api_preload_paths($preload_paths) {
             if (!get_the_ID()) {
                 return $preload_paths;
             }
@@ -571,8 +570,7 @@ function atelier_custom_field_accordeon()
          * Updated to support WooCommerce 2.6 Shipping Zones
          */
 
-        function hide_shipping_when_free_is_available($rates, $package)
-        {
+        function hide_shipping_when_free_is_available($rates, $package) {
             $new_rates = array();
             foreach ($rates as $rate_id => $rate) {
                 // Only modify rates if free_shipping is present.
@@ -604,8 +602,7 @@ function atelier_custom_field_accordeon()
 
 
         add_action('woocommerce_before_shop_loop_item_title', 'neueFunktion', 20);
-        function neueFunktion()
-        {
+        function neueFunktion() {
             global $product;
 
             $attachment_ids = $product->get_gallery_image_ids();
@@ -629,8 +626,7 @@ function atelier_custom_field_accordeon()
 
 
         // Display Product Badges
-        function woocommerce_atelier_product_badges($product_id, $position = 'archive')
-        {
+        function woocommerce_atelier_product_badges($product_id, $position = 'archive') {
             $product = wc_get_product($product_id);
             $terms = wp_get_post_terms($product_id, 'product_badge');
 
@@ -693,8 +689,7 @@ function atelier_custom_field_accordeon()
 
 
         add_filter('woocommerce_cart_item_subtotal', 'show_coupon_item_subtotal_discount', 100, 3);
-        function show_coupon_item_subtotal_discount($subtotal, $cart_item, $cart_item_key)
-        {
+        function show_coupon_item_subtotal_discount($subtotal, $cart_item, $cart_item_key) {
             //Check if sale price is not empty
 
             //Get product object
@@ -776,8 +771,7 @@ function atelier_custom_field_accordeon()
 
 
         // Get Woocommerce variation price based on product ID
-        function get_variation_price_by_id($product_id, $variation_id)
-        {
+        function get_variation_price_by_id($product_id, $variation_id) {
             $currency_symbol = get_woocommerce_currency_symbol();
             $product = new WC_Product_Variable($product_id);
             $variations = $product->get_available_variations();
@@ -808,8 +802,7 @@ function atelier_custom_field_accordeon()
 
 
         remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
-        function wvnderlab_single_title()
-        {
+        function wvnderlab_single_title() {
             global $post;
             $category = get_the_terms($post->ID, 'product_cat');
             $category = $category[0]->name;
@@ -829,8 +822,7 @@ function atelier_custom_field_accordeon()
 
 
         // Benutzerdefinierter Bestellstatus
-        function register_shipment_arrival_order_status()
-        {
+        function register_shipment_arrival_order_status() {
             register_post_status('wc-arrival-shipment', array(
                 'label'                     => 'Point of Sale',
                 'public'                    => true,
@@ -841,8 +833,7 @@ function atelier_custom_field_accordeon()
             ));
         }
         add_action('init', 'register_shipment_arrival_order_status');
-        function add_awaiting_shipment_to_order_statuses($order_statuses)
-        {
+        function add_awaiting_shipment_to_order_statuses($order_statuses) {
             $new_order_statuses = array();
             foreach ($order_statuses as $key => $status) {
                 $new_order_statuses[$key] = $status;
