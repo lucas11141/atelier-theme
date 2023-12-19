@@ -1,12 +1,7 @@
-// @prepros-prepend "options/variables.js";
-// @prepros-prepend "lib/jquery.magnific-popup.min.js";
-// @prepros-prepend "lib/mc-calendar.min.js";
-// @prepros-prepend "lib/slick.min.js";
-// @prepros-prepend "lib/js.cookie-2.2.1.min.js";
-// @prepros-prepend "scripts/websiteMode.js";
-// @prepros-prepend "functions/scrollView.js";
+import $ from 'jquery';
+import slick from 'slick-carousel';
 
-jQuery(document).ready(function ($) {
+export default function settings() {
 	function onElementLoad(selector, execution) {
 		const observer = new MutationObserver((mutations) => {
 			if (document.querySelectorAll(selector).length > 0) {
@@ -680,13 +675,4 @@ jQuery(document).ready(function ($) {
 	if (document.querySelector('.shipping__total th')) {
 		document.querySelector('.shipping__total th').prepend(newElement);
 	}
-});
-
-// @prepros-append "blocks/booking-reminder.js";
-// @prepros-append "blocks/productfilter.js";
-// @prepros-append "blocks/kontakt-hero-banner.js";
-// @prepros-append "pages/archive.js";
-// @prepros-append "lib/lightbox.js";
-// @prepros-append "scripts/brevo.js";
-// @prepros-append "scripts/contactform7.js";
-// @prepros-append "scripts/newsletterPopup.js";
+}

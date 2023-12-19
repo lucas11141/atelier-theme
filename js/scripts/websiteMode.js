@@ -1,14 +1,13 @@
-jQuery(document).ready(function ($) {
-	const websiteMode =
-		document.querySelector("#website-mode").dataset.websiteMode;
+export default function websiteMode() {
+	const websiteMode = document.querySelector('#website-mode').dataset.websiteMode;
 
-	if (websiteMode === "shop") {
+	if (websiteMode === 'shop') {
 		// add url parameter websiteMode to all links
-		document.querySelectorAll(".nav--law a").forEach((link) => {
-			if (link.href.indexOf("?") > -1) {
-				link.href += "&websiteMode=" + websiteMode;
+		document.querySelectorAll('.nav--law a').forEach((link) => {
+			if (link.href.indexOf('?') > -1) {
+				link.href += '&websiteMode=' + websiteMode;
 			} else {
-				link.href += "?websiteMode=" + websiteMode;
+				link.href += '?websiteMode=' + websiteMode;
 			}
 		});
 	}
@@ -22,4 +21,4 @@ jQuery(document).ready(function ($) {
 	window.dataLayer.push({
 		content_group: websiteMode,
 	});
-});
+}

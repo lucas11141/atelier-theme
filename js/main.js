@@ -1,0 +1,42 @@
+import bookingReminder from './blocks/booking-reminder';
+import brevo from './scripts/brevo';
+import contactForm7 from './scripts/contactform7';
+import kontaktHeroBanner from './blocks/kontakt-hero-banner';
+import lightbox from './lib/lightbox';
+import newsletterPopup from './scripts/newsletterPopup';
+import productFilter from './blocks/productfilter';
+import settings from './scripts/settings';
+import websiteMode from './scripts/websiteMode';
+
+// @prepros-prepend "lib/jquery.magnific-popup.min.js";
+// @prepros-prepend "lib/mc-calendar.min.js";
+
+(function ($) {
+	$(function () {
+		/*------------------------------------*/
+		/* Prepend */
+		/*------------------------------------*/
+		websiteMode();
+
+		/*------------------------------------*/
+		/* scripts.js */
+		/*------------------------------------*/
+		settings();
+
+		/*------------------------------------*/
+		/* Append */
+		/*------------------------------------*/
+		// Blocks
+		productFilter();
+		kontaktHeroBanner();
+		bookingReminder();
+
+		// Lib
+		lightbox();
+
+		// Scripts
+		brevo();
+		contactForm7();
+		newsletterPopup();
+	});
+})(jQuery);
