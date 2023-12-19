@@ -56,7 +56,7 @@
 		"prefix": "se",
 		"body": [
 			"/*------------------------------------*/",
-			"/* \t${1:Section Name}",
+			"/* ${1:Section Name} */",
 			"/*------------------------------------*/"
 		],
 		"description": "Nutzte diese Snippet um eine neue Section zu kommentieren."
