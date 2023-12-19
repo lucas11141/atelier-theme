@@ -162,9 +162,13 @@
 
 				tbody {
 					tr {
-						padding-bottom: 10px;
+						padding-bottom: 30px;
 						@include flex-column();
 						position: relative;
+
+						&:last-of-type {
+							padding-bottom: 0;
+						}
 
 						.label {
 							span {
@@ -246,14 +250,13 @@
 								}
 							}
 
-							.reset_variations {
-								position: absolute;
-								top: calc(100% + 6px);
-							}
-
 							.swatch-color .text {
 								display: none;
 							}
+						}
+
+						.reset_variations {
+							margin-top: 20px;
 						}
 					}
 				}
