@@ -400,14 +400,19 @@ jQuery(document).ready(function ($) {
 		$(this).parent('p').removeClass('--error');
 	});
 
-	//Do the First state
+	/*------------------------------------*/
+	/* Tab controls */
+	/*------------------------------------*/
+
+	// Hide all inactive tabs on load
 	let tabName = $('.tab__link.--active').attr('data-tabID');
 	$('.tab__content').hide();
 	$('.tab__content#' + tabName).show();
 
-	//Tab Control Function
-	$('.tab__link').on('click', () => {
-		tabName = $(this).attr('data-tabID');
+	// Click function
+	$('.tab__link').on('click', function () {
+		tabName = $(this).data('tabid');
+		console.log('tabName', tabName, $(this));
 		//Hide the Actives
 		$('.tab__content').hide();
 		$('.tab__link').removeClass('--active');
@@ -415,6 +420,10 @@ jQuery(document).ready(function ($) {
 		$(this).addClass('--active');
 		$('.tab__content#' + tabName).show();
 	});
+
+	/*------------------------------------*/
+	/* */
+	/*------------------------------------*/
 
 	let selectedName = $('.swatch.selected').parent().find('.swatch__tooltip').text();
 	$('.variations .label label').append('<span></span>');
