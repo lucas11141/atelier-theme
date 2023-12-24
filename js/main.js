@@ -1,3 +1,5 @@
+import 'swiper/css/bundle';
+
 import bookingReminder from './blocks/booking-reminder';
 import brevo from './scripts/brevo';
 import contactForm7 from './scripts/contactform7';
@@ -7,6 +9,7 @@ import newsletterPopup from './scripts/newsletterPopup';
 import productFilter from './blocks/productfilter';
 import settings from './scripts/settings';
 import websiteMode from './scripts/websiteMode';
+import wooSingle from './woo/woo-single';
 
 // @prepros-prepend "lib/jquery.magnific-popup.min.js";
 // @prepros-prepend "lib/mc-calendar.min.js";
@@ -27,6 +30,7 @@ import websiteMode from './scripts/websiteMode';
 		/* Append */
 		/*------------------------------------*/
 		// Blocks
+		wooSingle();
 		productFilter();
 		kontaktHeroBanner();
 		bookingReminder();

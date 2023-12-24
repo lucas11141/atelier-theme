@@ -1,6 +1,111 @@
+/*------------------------------------*/
+/* New */
+/*------------------------------------*/
+// Flexbox Configurator
+@mixin flex($variant: '', $gap: 0px) {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: $gap;
+	@if $variant == 'row' {
+		flex-direction: row;
+	}
+	@if $variant == 'column' {
+		flex-direction: column;
+	}
+	@if $variant == 'center' {
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+// Absolute position
+@mixin pos($variant: '') {
+	position: absolute;
+	@if $variant == 'center' {
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+	@if $variant == 'cover' {
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		object-fit: cover;
+	}
+}
+
+// Breakpoints
+@mixin bp-higher($variable) {
+	@media (min-width: ($variable + 1px)) {
+		@content;
+	}
+}
+@mixin bp-lower($variable) {
+	@media (max-width: $variable) {
+		@content;
+	}
+}
+
+// Centered background image
+@mixin background-image($image) {
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-image: $image;
+}
+
+@mixin checkbox {
+	display: flex !important;
+	position: relative;
+	cursor: pointer;
+
+	input[type='checkbox'] {
+		display: none;
+	}
+
+	&:before {
+		content: '';
+		display: block;
+		margin-top: 2px;
+		margin-right: 10px;
+		height: 20px;
+		width: 20px;
+		min-width: 20px;
+		background-color: white;
+		background-size: 12px;
+		background-position: center;
+		background-repeat: no-repeat;
+		border-radius: 5px;
+		border: solid $inputgray 2px;
+	}
+
+	span {
+		padding-top: 0 !important;
+		font-weight: 500 !important;
+		color: $text;
+	}
+
+	&:has(input:checked) {
+		&:before {
+			background-color: $accent;
+			border-color: darken($accent, 10%);
+			background-image: url('../img/shop/checkbox_checkmark.svg');
+		}
+
+		&:hover {
+			&:before {
+				border-color: darken($accent, 5%);
+			}
+		}
+	}
+}
+
 /*------------------------------------*\
     Flexbox
 \*------------------------------------*/
+
 @mixin flex-row {
 	display: flex;
 	flex-direction: row;
@@ -29,12 +134,10 @@
 
 @mixin grid-width($columns: 3) {
 	width: calc(
-		((#{$inner} - (5 * #{$gap-new})) / 6 * #{$columns}) +
-			((#{$columns} - 1) * #{$gap-new})
+		((#{$inner} - (5 * #{$gap-new})) / 6 * #{$columns}) + ((#{$columns} - 1) * #{$gap-new})
 	);
 	max-width: calc(
-		((#{$inner} - (5 * #{$gap-new})) / 6 * #{$columns}) +
-			((#{$columns} - 1) * #{$gap-new})
+		((#{$inner} - (5 * #{$gap-new})) / 6 * #{$columns}) + ((#{$columns} - 1) * #{$gap-new})
 	);
 }
 
@@ -80,19 +183,14 @@
 }
 
 @mixin dashed-border($color, $position) {
-	background-image: linear-gradient(
-		to right,
-		$color 0,
-		$color 8px,
-		transparent 8px
-	);
+	background-image: linear-gradient(to right, $color 0, $color 8px, transparent 8px);
 	background-position: $position;
 	background-size: 16px 1px;
 	background-repeat: repeat-x;
 }
 
 @mixin font-gooddog {
-	font-family: "gooddog-new";
+	font-family: 'gooddog-new';
 	font-weight: 400;
 	text-transform: uppercase;
 	-webkit-text-stroke: 0.3px $main;
@@ -121,7 +219,7 @@
 	position: relative;
 
 	&::after {
-		content: "";
+		content: '';
 		height: 500%;
 		width: 200px;
 		background-image: linear-gradient(

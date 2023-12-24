@@ -41,12 +41,17 @@ body {
 	@include fluid-type(15px, 16px);
 	line-height: 1.5;
 	color: $text;
-	overflow-x: hidden;
 	box-sizing: border-box;
 	&.body--noscroll {
 		height: 100vh;
 		overflow: hidden;
 	}
+
+	overflow: hidden;
+	// // TODO: Fix the overflow on single page
+	// :not(.single-product) {
+	// 	overflow-x: hidden;
+	// }
 }
 #main {
 	padding: 85px 0 15px;

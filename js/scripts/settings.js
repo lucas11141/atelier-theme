@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { scrollOffset } from '../options/variables';
 import slick from 'slick-carousel';
 
 export default function settings() {
@@ -304,17 +305,17 @@ export default function settings() {
 	// document.querySelectorAll('.woocommerce-breadcrumb a:last-of-type')[-0].scrollIntoView()
 
 	const termDescription = $('.term-description');
-	if (termDescription) {
+	if (termDescription && termDescription.text().length > 100) {
 		termDescription.addClass('--hide-text');
 		termDescription.append('<a class="show-more">Mehr lesen</a>');
-		termDescription.find('.show-more').click(() => {
+		termDescription.find('.show-more').on('click', () => {
 			termDescription.removeClass('--hide-text');
 		});
 	}
 
 	// Cart
 	if ($('.cart').length > 0 || $('.checkout').length > 0) {
-		scrollOffset = 265;
+		// scrollOffset = 265; // TODO: Fix this
 	}
 	//Warenkorb Neu laden bei Gutscheincode anpassungen
 	jQuery(document.body).on('applied_coupon_in_checkout removed_coupon_in_checkout', function () {
@@ -518,37 +519,6 @@ export default function settings() {
 				},
 			],
 		});
-	});
-
-	$('.woocommerce-product-gallery').each(function () {
-		// Add required DOM Structure
-		// $(this).append('<div class="slider__controls"></div>')
-		// $(this).find('.slider__controls').append('<div class="slider__arrows"></div>')
-
-		// Init slider
-		$(this)
-			.find('.woocommerce-product-gallery__wrapper')
-			.slick({
-				autoplay: false,
-				speed: 200,
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				draggable: true,
-				mobileFirst: true,
-
-				arrows: false,
-				// arrows: true,
-				// appendArrows: $(this).find('.slider__arrows'),
-				dots: true,
-				// appendDots: $(this).find('.slider__controls'),
-
-				responsive: [
-					{
-						breakpoint: 768,
-						settings: 'unslick',
-					},
-				],
-			});
 	});
 
 	if (document.querySelector('tr.subtotal')) {

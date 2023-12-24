@@ -131,6 +131,9 @@ $max-vw: $ft-max-vp;
 	}
 }
 
+// Others
+$transition: all 0.5s ease-in-out;
+
 // lib
 @import 'lib/swiper-bundle.min';
 @import 'lib/slick';
@@ -151,17 +154,22 @@ $max-vw: $ft-max-vp;
 @import 'layout/popups';
 @import 'layout/lightbox';
 @import 'layout/hero-rounded';
+@import 'layout/slider';
 
 // shop
 @import 'shop/shop';
 @import 'shop/archive';
-@import 'shop/single';
 @import 'shop/category';
 @import 'shop/cart-checkout';
 @import 'shop/cart';
 @import 'shop/checkout';
 @import 'shop/order';
 @import 'shop/account';
+
+// woocommerce
+@import 'woo/woo-global';
+@import 'woo/woo-archive';
+@import 'woo/woo-single';
 
 // templarte parts
 @import 'template-parts/icon-feather';

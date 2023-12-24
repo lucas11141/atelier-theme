@@ -1,9 +1,12 @@
-// Scroll Offset
-var scrollOffset = 150
-if(window.innerWidth < 850) {
-	scrollOffset = 120
-}
+const defaultSwiperPagination = {
+	el: '.slider__pagination',
+	clickable: true,
+	clickableClass: '--clickable',
+	bulletClass: 'slider__pagination__bullet',
+	bulletActiveClass: '--active',
+};
 
-export {
-	scrollOffset
-}
+// Scroll Offset
+const scrollOffset = window.innerWidth < 850 ? 120 : 150;
+
+export { scrollOffset, defaultSwiperPagination };

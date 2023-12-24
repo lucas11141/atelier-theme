@@ -179,70 +179,10 @@ form:not(.woocommerce-form-login):not(.woocommerce-form-register):not(.woocommer
 	}
 }
 
-.input__checkbox {
-	padding-left: 0 !important;
-	padding-right: 0 !important;
-	display: inline-flex;
-	position: relative;
-	cursor: pointer;
-
-	input {
-		height: unset;
-		width: 0;
-
-		&::after {
-			content: '';
-			display: block;
-			height: 20px;
-			width: 20px;
-			background-color: white;
-			background-size: 12px;
-			background-position: center;
-			background-repeat: no-repeat;
-			border-radius: 5px;
-			border: solid $inputgray 2px;
-			position: absolute;
-			top: 2px;
-			left: 0;
-			transition: all 200ms;
-			cursor: pointer;
-		}
-
-		&:hover::after {
-			background-color: $lightgray;
-		}
-
-		&:checked {
-			&::after {
-				background-color: $accent;
-				border-color: darken($accent, 10%);
-				background-image: url('../img/shop/checkbox_checkmark.svg');
-			}
-
-			&:hover::after {
-				background-color: darken($accent, 5%);
-			}
-		}
-	}
-
-	span {
-		padding-left: 30px !important;
-		@include fluid-type(15px, 16px);
-
-		a {
-			color: $accent;
-
-			&:hover {
-				text-decoration: underline;
-			}
-		}
-	}
-}
-
 // Checkbox Field
 .checkbox,
 .wpcf7-acceptance label {
-	@extend .input__checkbox;
+	@include checkbox;
 }
 
 // Radio Field

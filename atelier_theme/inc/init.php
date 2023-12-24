@@ -23,3 +23,8 @@ require get_template_directory() . '/inc/ajax.php'; // ajax
 foreach (glob(get_template_directory() . '/inc/utils/*.php') as $filename) {
     require $filename;
 }
+
+// require all files in the /woo folder
+foreach (glob(get_template_directory() . '/inc/woo/*.php') as $file) {
+    require_once $file;
+}
