@@ -28,6 +28,7 @@ $color-input-blue: #0275ff;
 	@include flex('column');
 	align-items: stretch;
 	gap: 15px;
+
 	li {
 		display: flex;
 		background-color: white;
@@ -35,28 +36,34 @@ $color-input-blue: #0275ff;
 		border-radius: 10px;
 		padding: 16px 18px;
 		border: solid transparent 2px;
+
 		&,
 		* {
 			cursor: pointer;
 		}
+
 		input {
 			transform: translateY(3px);
 			accent-color: #01ad01;
 		}
+
 		label {
 			display: inline-flex;
 			justify-content: space-between;
 			padding-left: 12px;
 			width: calc(100% - 18px);
 			font-weight: 700;
+
 			.amount {
 				font-weight: 400;
 			}
 		}
+
 		&:has(input:checked) {
 			border-color: $accent;
 		}
 	}
+
 	@media only screen and (max-width: $desktop) {
 		li {
 			padding: 17px 22px 17px 18px;
@@ -119,9 +126,11 @@ body.woocommerce-pay {
 		margin-left: var(--padding-outside);
 		margin-right: var(--padding-inside);
 	}
+
 	.left {
 		margin-bottom: 150px;
 	}
+
 	.right {
 		padding: 50px var(--padding-outside) 150px var(--padding-inside);
 	}
@@ -198,6 +207,7 @@ body.woocommerce-pay {
 			}
 		}
 	}
+
 	@media only screen and (max-width: $desktop) {
 		.left {
 			margin-bottom: var(--section-gap);
@@ -297,11 +307,13 @@ $table-padding: 25px;
 @media only screen and (max-width: $desktop) {
 	$table-padding: 22px;
 }
+
 .shop_table {
 	width: 100%;
 	background-color: white;
 	border-radius: 15px;
 	@include drop-shadow-shop();
+
 	.shop_table__icon {
 		display: inline-block;
 		margin-right: 10px;
@@ -312,13 +324,16 @@ $table-padding: 25px;
 		background-position: center;
 		background-size: 100%;
 		transform: translateY(3px);
+
 		&--discount {
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cg id='Gruppe_2988' data-name='Gruppe 2988' transform='translate(-1054 -599)'%3E%3Crect id='Rechteck_2191' data-name='Rechteck 2191' width='16' height='16' transform='translate(1054 599)' fill='none'/%3E%3Cg id='Icon_feather-gift' data-name='Icon feather-gift' transform='translate(1055 600)'%3E%3Cpath id='Pfad_1183' data-name='Pfad 1183' d='M16.912,18v6.82H6V18' transform='translate(-4.636 -11.18)' fill='none' stroke='%2355d045' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3Cpath id='Pfad_1184' data-name='Pfad 1184' d='M3,10.5H16.64v3.41H3Z' transform='translate(-3 -7.09)' fill='none' stroke='%2355d045' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3Cpath id='Pfad_1185' data-name='Pfad 1185' d='M18,20.73V10.5' transform='translate(-11.18 -7.09)' fill='none' stroke='%2355d045' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3Cpath id='Pfad_1186' data-name='Pfad 1186' d='M12.274,6.41H9.2A1.7,1.7,0,0,1,9.2,3C11.592,3,12.274,6.41,12.274,6.41Z' transform='translate(-5.454 -3)' fill='none' stroke='%2355d045' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3Cpath id='Pfad_1187' data-name='Pfad 1187' d='M18,6.41h3.069a1.7,1.7,0,1,0,0-3.41C18.682,3,18,6.41,18,6.41Z' transform='translate(-11.18 -3)' fill='none' stroke='%2355d045' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
 		}
+
 		&--shipping {
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16.017' viewBox='0 0 16 16.017'%3E%3Cg id='Gruppe_2987' data-name='Gruppe 2987' transform='translate(-1054 -619)'%3E%3Crect id='Rechteck_2192' data-name='Rechteck 2192' width='16' height='16' transform='translate(1054 619)' fill='none'/%3E%3Cg id='Icon_feather-package' data-name='Icon feather-package' transform='translate(1055.627 620)'%3E%3Cpath id='Pfad_1177' data-name='Pfad 1177' d='M17.645,10l-6.4-3.688' transform='translate(-8.052 -4.746)' fill='none' stroke='%2355d045' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3Cpath id='Pfad_1178' data-name='Pfad 1178' d='M17.291,12.95V7.265a1.421,1.421,0,0,0-.711-1.229L11.606,3.193a1.421,1.421,0,0,0-1.421,0L5.211,6.036A1.421,1.421,0,0,0,4.5,7.265V12.95a1.421,1.421,0,0,0,.711,1.229l4.974,2.842a1.421,1.421,0,0,0,1.421,0l4.974-2.842A1.421,1.421,0,0,0,17.291,12.95Z' transform='translate(-4.5 -3.003)' fill='none' stroke='%2355d045' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3Cpath id='Pfad_1179' data-name='Pfad 1179' d='M4.905,10.44l6.2,3.588,6.2-3.588' transform='translate(-4.713 -6.917)' fill='none' stroke='%2355d045' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3Cpath id='Pfad_1180' data-name='Pfad 1180' d='M18,25.163V18' transform='translate(-11.605 -10.896)' fill='none' stroke='%2355d045' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
 		}
 	}
+
 	tfoot {
 		tr {
 			th,
@@ -327,12 +342,14 @@ $table-padding: 25px;
 				width: 50%;
 				font-weight: 400;
 			}
+
 			th {
 				padding-right: 10px;
 				width: 100%;
 				display: flex;
 				text-align: left;
 			}
+
 			td {
 				padding-left: 10px;
 				text-align: right;
@@ -353,10 +370,12 @@ $table-padding: 25px;
 					padding-bottom: $table-padding;
 					font-weight: 700;
 				}
+
 				.amount {
 					font-weight: 700;
 				}
 			}
+
 			&.tr--border-top {
 				@include dashed-border($linegray, top);
 			}
@@ -368,6 +387,7 @@ $table-padding: 25px;
 					font-weight: 700;
 				}
 			}
+
 			&.cart-discount {
 				.icon--remove-coupon {
 					display: inline-block;
@@ -380,12 +400,15 @@ $table-padding: 25px;
 					background-position: center;
 					transform: translateY(3px);
 					@include transition();
+
 					&:hover {
 						background-image: url("data:image/svg+xml,%3Csvg id='Gruppe_2092' data-name='Gruppe 2092' xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E%3Cg id='Ellipse_9103' data-name='Ellipse 9103' fill='%23c3241b' stroke='%23c3241b' stroke-width='2'%3E%3Ccircle cx='9' cy='9' r='9' stroke='none'/%3E%3Ccircle cx='9' cy='9' r='8' fill='none'/%3E%3C/g%3E%3Cg id='Gruppe_2091' data-name='Gruppe 2091' transform='translate(6.971 6.971)'%3E%3Cline id='Linie_7119' data-name='Linie 7119' x1='4' y2='4' transform='translate(0.03 0.029)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='2'/%3E%3Cline id='Linie_7120' data-name='Linie 7120' x2='4' y2='4' transform='translate(0.03 0.029)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E ");
 					}
 				}
+
 				&.pre__subtotal {
 					@include dashed-border($linegray, bottom);
+
 					th,
 					td {
 						padding-bottom: $table-padding;
@@ -401,6 +424,7 @@ $table-padding: 25px;
 					font-weight: 700;
 				}
 			}
+
 			&.order-total-shipping-in-checkout-notice {
 				@include dashed-border($linegray, bottom);
 
@@ -423,6 +447,7 @@ $table-padding: 25px;
 					padding-bottom: $table-padding;
 					font-weight: 700;
 				}
+
 				.amount {
 					font-weight: 700;
 				}
@@ -432,6 +457,7 @@ $table-padding: 25px;
 			&.order-total-small-business-notice {
 				td {
 					padding: 0 25px 20px;
+
 					p {
 						@include fluid-type(13px, 14px);
 						line-height: 1.5;
@@ -478,10 +504,12 @@ $table-padding: 25px;
 	text-transform: uppercase;
 	color: $red;
 	border: solid 2px $red;
+
 	img {
 		height: 19px !important;
 		margin-right: 10px;
 	}
+
 	span {
 		@include fluid-type(14px, 14px);
 		color: $main;
@@ -490,6 +518,7 @@ $table-padding: 25px;
 		font-weight: 700;
 		color: $red;
 	}
+
 	& + & {
 		margin-top: 12px;
 	}
@@ -501,16 +530,20 @@ $table-padding: 25px;
 	.woocommerce-form__label-for-checkbox {
 		position: relative !important;
 		left: unset !important;
+
 		.custom__checkbox {
 			margin-top: 0;
 		}
 	}
 }
+
 .woocommerce-account-fields {
 	margin-top: 10px;
+
 	.woocommerce-form__label-for-checkbox {
 		position: relative !important;
 	}
+
 	div.create-account {
 		margin-top: 18px;
 	}
@@ -520,6 +553,7 @@ $table-padding: 25px;
 #ship-to-different-address {
 	padding-top: 0;
 }
+
 .shipping_address {
 	padding-top: 25px;
 }
@@ -529,14 +563,17 @@ $table-padding: 25px;
 	.order__not__done__header {
 		max-width: 400px;
 		margin: 20px auto 40px;
+
 		h2,
 		p {
 			text-align: center;
 		}
 	}
+
 	.shop__split {
 		justify-content: center;
 	}
+
 	.split__right {
 	}
 }
@@ -544,6 +581,7 @@ $table-padding: 25px;
 .wc-gzd-checkbox-placeholder-legal {
 	order: 9;
 }
+
 .wc-gzd-order-submit {
 	order: 10;
 }
