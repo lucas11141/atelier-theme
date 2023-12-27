@@ -1,7 +1,7 @@
 .--hover-link:not(.--hover-link-disabled) {
 	display: inline-block;
 	padding-bottom: 3px;
-	@include hover-slide-left();
+	@include hover-slide-left;
 	text-decoration: none;
 	white-space: nowrap;
 	position: relative;
@@ -741,7 +741,7 @@ Quote List
 		padding-top: 60px;
 		background-color: white;
 		border-radius: 25px;
-		@include box-shadow();
+		@include box-shadow;
 		p {
 			padding-top: 20px;
 			@include fluid-type(16px, 17px);
@@ -1671,7 +1671,7 @@ a img.aligncenter {
 }
 
 .--hide-scrollbar {
-	@include hide-scrollbar();
+	@include hide-scrollbar;
 }
 
 .sib-conversations {
@@ -1837,8 +1837,8 @@ a img.aligncenter {
 			background-size: 8px;
 			border: none;
 			position: relative;
-			@include hide-text();
-			@include transition();
+			@include hide-text;
+			@include transition;
 			&.slick-disabled {
 				opacity: 0.2;
 				pointer-events: none;
@@ -1853,7 +1853,7 @@ a img.aligncenter {
 				transform: translateY(-50%);
 				z-index: -1;
 				opacity: 0;
-				@include transition();
+				@include transition;
 			}
 			&:hover {
 				background-position-x: 0;
@@ -1888,8 +1888,8 @@ a img.aligncenter {
 			border: solid 2px $linegray;
 			background-color: transparent;
 			position: relative;
-			@include hide-text();
-			@include transition();
+			@include hide-text;
+			@include transition;
 			&::before {
 				content: '';
 				height: calc(100% - 6px);
@@ -1898,7 +1898,7 @@ a img.aligncenter {
 				border-radius: 10px;
 				opacity: 0;
 				@include pos('center');
-				@include transition();
+				@include transition;
 			}
 		}
 		&:hover button,

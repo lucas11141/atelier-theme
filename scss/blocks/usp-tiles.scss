@@ -8,7 +8,7 @@
 		padding: 65px 40px 45px;
 		width: calc(50% - 25px);
 		border-radius: 25px;
-		@include box-shadow();
+		@include box-shadow;
 		position: relative;
 
 		.circle {

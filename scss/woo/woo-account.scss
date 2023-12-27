@@ -27,7 +27,7 @@
 		p,
 		bdi {
 			padding: 0;
-			@include font-gooddog();
+			@include font-gooddog;
 			@include fluid-type(18px, 20px);
 			color: $accent;
 			line-height: 1.5;
@@ -133,7 +133,7 @@
 	.account__content {
 		h2 {
 			@extend h3;
-			@include font-gooddog();
+			@include font-gooddog;
 			padding: 0 0 20px;
 		}
 	}
@@ -156,7 +156,7 @@
 			padding: 30px;
 			width: 100%;
 			background-color: white;
-			@include dropshadow();
+			@include dropshadow;
 			border-radius: 25px;
 
 			.item__header {
@@ -261,11 +261,11 @@
 				@include flex-item-width(3, $gap);
 				background-color: white;
 				border-radius: 15px;
-				@include dropshadow();
+				@include dropshadow;
 
 				h3 {
 					@extend h4;
-					@include font-gooddog();
+					@include font-gooddog;
 					padding: 0;
 				}
 
@@ -324,7 +324,7 @@
 					min-width: 320px;
 					background-color: white;
 					border: none;
-					@include dropshadow();
+					@include dropshadow;
 
 					.title {
 						@include flex('row');

@@ -86,7 +86,7 @@ $archive-gap: 20px;
 
 			.page-title {
 				padding: 10px 0 0;
-				@include font-gooddog();
+				@include font-gooddog;
 				-webkit-text-stroke-color: white;
 				line-break: anywhere;
 				color: white;

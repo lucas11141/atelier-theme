@@ -71,7 +71,7 @@
 		margin-right: $gap-new;
 		background-color: white;
 		border-radius: 20px;
-		@include box-shadow();
+		@include box-shadow;
 		overflow: hidden;
 		position: relative;
 		aspect-ratio: 0.685;

@@ -8,7 +8,7 @@
 	background-color: $main;
 	position: relative;
 	overflow: hidden;
-	@include dark();
+	@include dark;
 
 	* {
 		font-family: $main-font;
@@ -126,7 +126,7 @@
 					padding: 0 0 18px;
 					color: white;
 					position: relative;
-					@include transition();
+					@include transition;
 					-webkit-text-stroke-color: white;
 					@include fluid-type(18px, 20px);
 
@@ -165,7 +165,7 @@
 							line-height: 1.2em;
 							white-space: normal;
 							position: relative;
-							@include transition();
+							@include transition;
 
 							&:after {
 								background-color: white !important;

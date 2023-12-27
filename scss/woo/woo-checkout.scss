@@ -224,7 +224,7 @@
 		.accordeon__item {
 			background-color: white;
 			border-color: transparent;
-			@include drop-shadow-shop();
+			@include drop-shadow-shop;
 
 			.accordeon__content {
 				padding-top: 5px;
@@ -296,7 +296,7 @@
 	// Versand
 	.shipping__methods {
 		.woocommerce-shipping-methods {
-			@include element-select-list();
+			@include element-select-list;
 		}
 	}
 
@@ -318,7 +318,7 @@
 
 		//
 		.methods {
-			@include element-select-list();
+			@include element-select-list;
 
 			label[for='payment_method_woocommerce_payments'] {
 				padding-left: 0 !important;
@@ -449,7 +449,7 @@
 			background-color: #f3f3f3;
 			border: solid 1px $linegray;
 			border-radius: 50px;
-			@include loading();
+			@include loading;
 
 			&:nth-of-type(2)::after {
 				animation-delay: 150ms;

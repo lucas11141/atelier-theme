@@ -306,7 +306,7 @@
 
 // Mobile Dropdown
 .header__dropdown__mobile {
-	@include hide-scrollbar();
+	@include hide-scrollbar;
 	.dropdown__links {
 		width: 100%;
 		ul:not(.submenu) {
@@ -320,7 +320,7 @@
 				width: 100%;
 				background-color: white;
 				// box-shadow: 3px 3px 20px rgba(black, 10%);
-				@include dropshadow();
+				@include dropshadow;
 				border-radius: 15px;
 				overflow: hidden;
 				a.main-link {
@@ -407,7 +407,7 @@
 						height: 12px;
 						margin-left: 10px;
 						transform: translateY(-1px) rotate(90deg);
-						@include transition();
+						@include transition;
 					}
 					&.--opened {
 						a.main-link div p img {
@@ -538,7 +538,7 @@
 
 .header--shop {
 	.title__arrow {
-		@include font-gooddog();
+		@include font-gooddog;
 	}
 	.dropdown__links ul:not(.submenu) li.dropdown__links__item a.main-link {
 		.title__arrow {

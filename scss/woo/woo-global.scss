@@ -1,7 +1,7 @@
 // Mobile Dropdown im Shop
 .show--shop .header__dropdown__mobile {
 	.title__arrow {
-		@include font-gooddog();
+		@include font-gooddog;
 		font-size: 18px !important;
 		font-weight: 400 !important;
 	}
@@ -27,7 +27,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 	h2,
 	h3,
 	h4 {
-		@include font-gooddog();
+		@include font-gooddog;
 	}
 
 	h1,
@@ -200,7 +200,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 	line-height: 1.4em;
 	cursor: default;
 	overflow-x: scroll;
-	@include hide-scrollbar();
+	@include hide-scrollbar;
 
 	&,
 	a,
@@ -230,7 +230,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 			top: calc(100% - 1px);
 			left: 50%;
 			transform: translateX(-50%);
-			@include transition();
+			@include transition;
 		}
 
 		&:hover,
@@ -421,7 +421,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 			border-radius: 0;
 			border: none;
 			border-bottom: solid 4px $accent;
-			@include drop-shadow-shop();
+			@include drop-shadow-shop;
 			position: relative;
 
 			li {
@@ -492,7 +492,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 .price {
 	@include flex('row');
 	gap: 8px;
-	@include font-gooddog();
+	@include font-gooddog;
 	@include fluid-type(17px, 20px);
 	padding-top: 0;
 	line-height: 1em;
@@ -653,7 +653,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		@include flex('column');
 
 		&.woocommerce-loop-product__link {
-			@include transition();
+			@include transition;
 		}
 	}
 
@@ -667,7 +667,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 	}
 
 	.woocommerce-loop-product__title {
-		@include font-gooddog();
+		@include font-gooddog;
 		// @include fluid-type(18px, 20px);
 		font-size: 20px !important;
 		line-height: 1.2em;
@@ -691,7 +691,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		position: absolute;
 		right: 22px;
 		bottom: 20px;
-		@include transition();
+		@include transition;
 
 		.price-from {
 			display: none;
@@ -702,7 +702,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 			color: $main;
 
 			bdi {
-				@include font-gooddog();
+				@include font-gooddog;
 			}
 		}
 
@@ -735,7 +735,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		bottom: 20px;
 		opacity: 0;
 		pointer-events: none;
-		@include transition();
+		@include transition;
 		filter: none;
 		right: 50%;
 		transform: translateX(50%);
@@ -794,7 +794,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 	.product__category,
 	.woocommerce-loop-product__title,
 	.product__description {
-		@include transition();
+		@include transition;
 	}
 
 	// hide germanized extras
@@ -832,7 +832,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 	width: 400px;
 	flex: auto;
 	list-style-type: none;
-	@include dropshadow();
+	@include dropshadow;
 	background-color: white;
 	border-radius: 15px;
 	position: relative;
@@ -851,7 +851,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		left: 0;
 		top: 0;
 		opacity: 0;
-		@include transition();
+		@include transition;
 	}
 
 	&::before {
@@ -862,7 +862,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		background-color: $accent;
 		@include pos('center');
 		z-index: -1;
-		@include transition();
+		@include transition;
 	}
 
 	&.outofstock {

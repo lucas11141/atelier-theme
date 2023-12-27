@@ -135,7 +135,7 @@
 				padding: 50px;
 				background-color: white;
 				border-radius: 25px;
-				@include box-shadow();
+				@include box-shadow;
 				position: relative;
 
 				h6 {
@@ -192,7 +192,7 @@
 		align-items: center;
 		background-color: white;
 		border-radius: 15px;
-		@include box-shadow();
+		@include box-shadow;
 		position: relative;
 		overflow: hidden;
 
@@ -244,7 +244,7 @@
 			align-items: center;
 			background-color: white;
 			border-radius: 15px;
-			@include box-shadow();
+			@include box-shadow;
 			div {
 				@include flex('column');
 				row-gap: 3px;

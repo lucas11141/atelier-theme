@@ -58,7 +58,7 @@
 			align-items: flex-end;
 
 			.amount bdi {
-				@include font-gooddog();
+				@include font-gooddog;
 			}
 
 			del {
@@ -73,7 +73,7 @@
 		.woocommerce-Price-amount,
 		.product__name,
 		.product__name a {
-			@include font-gooddog();
+			@include font-gooddog;
 			@include fluid-type(20px, 22px);
 			color: $main;
 			text-transform: uppercase;
@@ -131,7 +131,7 @@
 			line-height: 1.3;
 
 			.amount bdi {
-				@include font-gooddog();
+				@include font-gooddog;
 			}
 
 			del {
@@ -263,7 +263,7 @@
 				background-size: 17px;
 				background-position: center;
 				background-repeat: no-repeat;
-				@include transition();
+				@include transition;
 
 				&:hover {
 					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cg id='Gruppe_2989' data-name='Gruppe 2989' transform='translate(-5062 -13543)'%3E%3Crect id='Rechteck_2193' data-name='Rechteck 2193' width='16' height='16' transform='translate(5062 13543)' fill='none'/%3E%3Cg id='Icon_feather-trash-2' data-name='Icon feather-trash-2' transform='translate(5059.369 13541)'%3E%3Cpath id='Pfad_1208' data-name='Pfad 1208' d='M4.5,9H17.005' transform='translate(0 -3.221)' fill='none' stroke='%23c3241b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3Cpath id='Pfad_1209' data-name='Pfad 1209' d='M17.226,5.779v9.726a1.389,1.389,0,0,1-1.389,1.389H8.889A1.389,1.389,0,0,1,7.5,15.505V5.779m2.084,0V4.389A1.389,1.389,0,0,1,10.974,3h2.779a1.389,1.389,0,0,1,1.389,1.389V5.779' transform='translate(-1.611)' fill='none' stroke='%23c3241b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3Crect id='Rechteck_2194' data-name='Rechteck 2194' width='10' height='10.5' transform='translate(5.631 6)' fill='%23c3241b'/%3E%3Cpath id='Pfad_1210' data-name='Pfad 1210' d='M15,16.5v4.168' transform='translate(-5.637 -7.247)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3Cpath id='Pfad_1211' data-name='Pfad 1211' d='M21,16.5v4.168' transform='translate(-8.858 -7.247)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E ");
@@ -303,7 +303,7 @@
 
 				.product__total {
 					display: block;
-					@include font-gooddog();
+					@include font-gooddog;
 				}
 			}
 
@@ -333,7 +333,7 @@
 .woocommerce-cart {
 	.cart__items {
 		.amount bdi {
-			@include font-gooddog();
+			@include font-gooddog;
 		}
 
 		.quantity {
@@ -345,7 +345,7 @@
 }
 
 .woocommerce-shipping-methods {
-	@include element-select-list();
+	@include element-select-list;
 }
 
 // Warenkorb rechte Seite Content

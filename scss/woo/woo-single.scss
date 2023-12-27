@@ -130,7 +130,7 @@ body.single-product {
 
 		// Produkttitel
 		.product_title {
-			@include font-gooddog();
+			@include font-gooddog;
 			padding: 0;
 		}
 
@@ -151,7 +151,7 @@ body.single-product {
 			gap: 6px;
 
 			bdi {
-				@include font-gooddog();
+				@include font-gooddog;
 				@include fluid-type(18px, 24px);
 			}
 

@@ -302,8 +302,8 @@
 			position: relative;
 			cursor: pointer;
 			overflow: hidden;
-			@include transition();
-			@include click-bounce();
+			@include transition;
+			@include click-bounce;
 
 			&::before,
 			&::after {
@@ -313,7 +313,7 @@
 				position: absolute;
 				background-repeat: no-repeat;
 				background-position: center;
-				@include transition();
+				@include transition;
 			}
 
 			&::before {
@@ -416,7 +416,7 @@
 				transform: translateX(-50%);
 				opacity: 50%;
 				cursor: pointer;
-				@include transition();
+				@include transition;
 
 				.feather {
 					width: 13px;
@@ -487,7 +487,7 @@
 		justify-content: flex-start;
 		align-items: stretch;
 		border-radius: 25px;
-		@include box-shadow();
+		@include box-shadow;
 
 		&.--disabled {
 			order: 1;
@@ -735,7 +735,7 @@
 		padding: 80px 50px;
 		@include flex('center');
 		border-radius: 25px;
-		@include box-shadow();
+		@include box-shadow;
 		background: white;
 
 		h2 {

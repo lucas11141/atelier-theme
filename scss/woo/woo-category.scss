@@ -10,7 +10,7 @@
 		column-gap: 80px;
 
 		h2 {
-			@include font-gooddog();
+			@include font-gooddog;
 			line-height: 1.1em;
 			color: white;
 			position: relative;
@@ -56,7 +56,7 @@
 
 				h4 {
 					padding: 19px 25px 17px;
-					@include font-gooddog();
+					@include font-gooddog;
 					@include fluid-type(20px, 24px);
 				}
 			}
