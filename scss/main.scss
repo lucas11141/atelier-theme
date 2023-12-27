@@ -135,14 +135,12 @@ $max-vw: $ft-max-vp;
 $transition: all 0.5s ease-in-out;
 
 // lib
+@import 'lib/mixins';
 @import 'lib/swiper-bundle.min';
 @import 'lib/slick';
 @import 'lib/hamburger';
 @import 'lib/reset';
 @import 'lib/mc-calendar.min';
-
-// functions
-@import 'functions/functions';
 
 //layout
 @import 'layout/fonts';
