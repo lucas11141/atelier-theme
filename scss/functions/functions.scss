@@ -103,6 +103,17 @@
 }
 
 /*------------------------------------*\
+    Global Shop Functions
+\*------------------------------------*/
+@mixin shadow-box {
+	box-shadow: 0px;
+}
+
+@mixin drop-shadow-shop {
+	box-shadow: 2px 2px 30px rgba(black, 8%);
+}
+
+/*------------------------------------*\
     Flexbox
 \*------------------------------------*/
 

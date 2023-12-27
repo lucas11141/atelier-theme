@@ -33,6 +33,8 @@
 	text-rendering: optimizeLegibility;
 }
 html {
+	max-width: 100vw;
+	overflow-x: hidden;
 	font-size: 100%;
 	font-weight: 500;
 }

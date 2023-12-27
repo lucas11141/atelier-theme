@@ -1,26 +1,3 @@
-.show--atelier {
-	display: block;
-}
-.show--shop {
-	display: none;
-}
-
-html {
-	max-width: 100vw;
-	overflow-x: hidden;
-}
-
-/*------------------------------------*\
-    Global Shop Functions
-\*------------------------------------*/
-@mixin shadow-box {
-	box-shadow: 0px;
-}
-
-@mixin drop-shadow-shop {
-	box-shadow: 2px 2px 30px rgba(black, 8%);
-}
-
 // Mobile Dropdown im Shop
 .show--shop .header__dropdown__mobile {
 	.title__arrow {
@@ -43,19 +20,7 @@ html {
 }
 
 //SHOP
-body:has(#website-mode[data-website-mode='shop']) {
-	// .woocommerce,
-	// .shop,
-	// .woocommerce-page,
-	// .kunsttuete {
-
-	.show--atelier:not(.--hidden-on-load) {
-		display: none !important;
-	}
-	.show--shop:not(.--hidden-on-load) {
-		display: block !important;
-	}
-
+body:has(#gtm-values[data-website-mode='shop']) {
 	h1,
 	h2,
 	h3,
@@ -127,7 +92,9 @@ body:has(#website-mode[data-website-mode='shop']) {
 	}
 }
 
-/* ---- Shop Aufteilung: links/rechts ----*/
+/*------------------------------------*/
+/* Shop split: left/right */
+/*------------------------------------*/
 .shop__split {
 	column-gap: 6%;
 	.split__left {
@@ -138,25 +105,27 @@ body:has(#website-mode[data-website-mode='shop']) {
 		min-width: 340px;
 	}
 }
+
 .shop__split {
-	@include flex-row();
-	.product__image_left {
-		flex: auto;
-	}
+	@include flex-row;
+
 	.split__left {
 		h2 {
 			margin: 50px 0 25px;
 			padding: 0;
 			font-weight: 800;
 		}
+
 		.split__left__header {
 			@include flex-row();
 			align-items: baseline;
 			margin: 0 0 40px;
+
 			h2 {
 				margin: 0;
 				@include fluid-type(24px, 32px);
 			}
+
 			.cart__productcount {
 				display: inline-block;
 				@include fluid-type(13px, 14px);
@@ -166,6 +135,7 @@ body:has(#website-mode[data-website-mode='shop']) {
 			}
 		}
 	}
+
 	.split__right {
 		@include flex-column();
 		align-items: stretch;
@@ -184,6 +154,8 @@ body:has(#website-mode[data-website-mode='shop']) {
 		}
 	}
 }
+
+// Responsive
 @media only screen and (max-width: $tablet) {
 	.shop__split {
 		flex-direction: column;
@@ -195,15 +167,11 @@ body:has(#website-mode[data-website-mode='shop']) {
 			min-width: unset;
 		}
 	}
-
-	.woocommerce-cart {
-		.shop__split {
-			row-gap: 50px;
-		}
-	}
 }
 
-// Breadcrumb
+/*------------------------------------*/
+/* Breadcrumbs */
+/*------------------------------------*/
 .woocommerce-breadcrumb {
 	@include flex-row();
 	justify-content: flex-start;
@@ -213,11 +181,13 @@ body:has(#website-mode[data-website-mode='shop']) {
 	cursor: default;
 	overflow-x: scroll;
 	@include hide-scrollbar();
+
 	&,
 	a,
 	span {
 		@include fluid-type(11px, 12px);
 	}
+
 	a {
 		padding: 4px 0;
 		color: $main;
@@ -248,6 +218,7 @@ body:has(#website-mode[data-website-mode='shop']) {
 			}
 		}
 	}
+
 	span {
 		// margin: 0 5px;
 		font-weight: 900;
@@ -260,20 +231,25 @@ body:has(#website-mode[data-website-mode='shop']) {
 		}
 	}
 }
+
 .shop-hero-banner {
 	.woocommerce-breadcrumb {
 		padding-top: 0;
+
 		span,
 		a {
 			color: white;
 		}
+
 		a:last-of-type {
 			color: $accent;
 		}
 	}
 }
 
-// Search
+/*------------------------------------*/
+/* Search */
+/*------------------------------------*/
 .search {
 	display: none;
 }
@@ -975,5 +951,25 @@ body.woocommerce {
 		// 		}
 		// 	}
 		// }
+	}
+}
+
+/*------------------------------------*/
+/* Utility classes for showing contents on specific website mode */
+/*------------------------------------*/
+.show--atelier {
+	display: block;
+}
+
+.show--shop {
+	display: none;
+}
+
+body:has(#gtm-values[data-website-mode='shop']) {
+	.show--atelier:not(.--hidden-on-load) {
+		display: none !important;
+	}
+	.show--shop:not(.--hidden-on-load) {
+		display: block !important;
 	}
 }

@@ -1,0 +1,8 @@
+// Responsive
+@media only screen and (max-width: $tablet) {
+	.woocommerce-cart {
+		.shop__split {
+			row-gap: 50px;
+		}
+	}
+}
