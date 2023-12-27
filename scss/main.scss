@@ -156,8 +156,10 @@ $transition: all 0.5s ease-in-out;
 @import 'layout/hero-rounded';
 @import 'layout/slider';
 
+// woocommerce
+@import 'woo/woo-global';
+
 // shop
-@import 'shop/shop';
 @import 'shop/archive';
 @import 'shop/category';
 @import 'shop/cart-checkout';
@@ -167,7 +169,6 @@ $transition: all 0.5s ease-in-out;
 @import 'shop/account';
 
 // woocommerce
-@import 'woo/woo-global';
 @import 'woo/woo-archive';
 @import 'woo/woo-single';
 
