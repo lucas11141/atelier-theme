@@ -156,20 +156,14 @@ $transition: all 0.5s ease-in-out;
 
 // woocommerce
 @import 'woo/woo-global';
-
-// shop
-@import 'shop/archive';
-@import 'shop/category';
-@import 'shop/cart-checkout';
-@import 'shop/cart';
-@import 'shop/checkout';
-@import 'shop/order';
-@import 'shop/account';
-
-// woocommerce
 @import 'woo/woo-archive';
 @import 'woo/woo-single';
+@import 'woo/woo-cart-checkout';
 @import 'woo/woo-cart';
+@import 'woo/woo-checkout';
+@import 'woo/woo-category';
+@import 'woo/woo-order';
+@import 'woo/woo-account';
 
 // templarte parts
 @import 'template-parts/icon-feather';
