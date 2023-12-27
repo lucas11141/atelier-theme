@@ -23,7 +23,7 @@
 		.list {
 			margin: 25px 0 5px;
 			width: 100%;
-			@include flex-row();
+			@include flex('row');
 			justify-content: start;
 			flex-wrap: wrap;
 			gap: 30px;
@@ -120,12 +120,12 @@
 // 	padding: 0;
 // 	.popup__content {
 // 		min-height: 450px;
-// 		@include flex-row();
+// 		@include flex('row');
 // 		align-items: center;
 // 		.popup__text {
 // 			padding: 50px;
 // 			width: 60%;
-// 			@include flex-column();
+// 			@include flex('column');
 // 			h5 {
 // 				padding-top: 0;
 // 			}
@@ -169,7 +169,7 @@
 /* Newsletter  Sign Up */
 .newsletter {
 	@extend .inner;
-	@include flex-row();
+	@include flex('row');
 	gap: 25px 80px;
 	justify-content: center;
 	align-items: center;
@@ -177,7 +177,7 @@
 	.content {
 		flex: auto;
 		max-width: 600px;
-		@include flex-column();
+		@include flex('column');
 		position: relative;
 
 		.decoration {
@@ -243,7 +243,7 @@
 	width: 100%;
 	.sib_signup_box_inside_2,
 	.sib_signup_box_inside_3 {
-		@include flex-row();
+		@include flex('row');
 		gap: 15px 0;
 		justify-content: space-between;
 		align-items: stretch;
@@ -265,7 +265,7 @@
 		p.sib-email-area {
 			width: calc(100% - 175px);
 		}
-		input[type="submit"] {
+		input[type='submit'] {
 			margin-top: 7px;
 			width: 160px;
 		}
@@ -303,7 +303,7 @@
 			p {
 				margin: 0;
 			}
-			input[type="submit"] {
+			input[type='submit'] {
 				margin: 0;
 				width: 100%;
 			}

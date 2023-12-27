@@ -1,11 +1,11 @@
 .media-text {
 	min-height: 550px;
-	@include flex-row();
+	@include flex('row');
 	justify-content: flex-start;
 	align-items: stretch;
 	&__text {
 		padding: 80px 240px 80px $outer-gap;
-		@include flex-column();
+		@include flex('column');
 		justify-content: center;
 		background-color: $main;
 		position: relative;
@@ -46,7 +46,7 @@
 		video {
 			width: 100%;
 			height: 100%;
-			@include pos-center();
+			@include pos('center');
 			object-fit: cover;
 			border-radius: 30px;
 		}

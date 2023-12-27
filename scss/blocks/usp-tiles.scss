@@ -1,6 +1,6 @@
 .usp-tiles {
 	@extend .wrapper;
-	@include flex-row();
+	@include flex('row');
 	flex-wrap: wrap;
 	row-gap: 60px;
 
@@ -23,7 +23,7 @@
 
 			img {
 				height: 32px;
-				@include pos-center();
+				@include pos('center');
 			}
 		}
 

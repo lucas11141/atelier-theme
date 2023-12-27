@@ -1,64 +1,65 @@
 .faq {
-    .faq__header {
-        margin-bottom: 70px;
-        position: relative;
-        h2, h3 {
-            padding: 0;
-            color: $accent;
-            text-align: center;
-        }
-        span {
-            font-size: 140px;
-            color: $accent;
-            opacity: 0.1;
-            font-weight: 800;
-            @include pos-center();
-        }
-        h3 + span {
-            font-size: 110px;
-        }
-    }
-    .faq__accordeon {
-        .accordeon__item {
-            margin-bottom: 0;
-            background-color: transparent;
-            border: none;
-            border-radius: 0;
-            &:not(:last-child) {
-                border-bottom: solid 1px $linegray;
-            }
-            .accordeon__header {
-                column-gap: 20px;
-                padding: 30px 0;
-                h5 {
-                    @include fluid-type(15px, 17px);
-                    font-weight: 700;
-                    text-transform: none;
-                }
-            }
-            .accordeon__content {
-                padding: 0;
-                margin-bottom: 35px;
-                display: none;
-                p {
-                    @include fluid-type(14px, 16px);
-                }
-            }
-        }
-    }
-    @media only screen and (max-width: $desktop) {
-        .faq__header {
-            span {
-                font-size: 110px;
-                font-weight: 700;
-            }
-        }
-        .faq__accordeon {
-            .accordeon__item {
-                .accordeon__header {
-                    padding: 25px 0;
-                }
-            }
-        }
-    }
+	.faq__header {
+		margin-bottom: 70px;
+		position: relative;
+		h2,
+		h3 {
+			padding: 0;
+			color: $accent;
+			text-align: center;
+		}
+		span {
+			font-size: 140px;
+			color: $accent;
+			opacity: 0.1;
+			font-weight: 800;
+			@include pos('center');
+		}
+		h3 + span {
+			font-size: 110px;
+		}
+	}
+	.faq__accordeon {
+		.accordeon__item {
+			margin-bottom: 0;
+			background-color: transparent;
+			border: none;
+			border-radius: 0;
+			&:not(:last-child) {
+				border-bottom: solid 1px $linegray;
+			}
+			.accordeon__header {
+				column-gap: 20px;
+				padding: 30px 0;
+				h5 {
+					@include fluid-type(15px, 17px);
+					font-weight: 700;
+					text-transform: none;
+				}
+			}
+			.accordeon__content {
+				padding: 0;
+				margin-bottom: 35px;
+				display: none;
+				p {
+					@include fluid-type(14px, 16px);
+				}
+			}
+		}
+	}
+	@media only screen and (max-width: $desktop) {
+		.faq__header {
+			span {
+				font-size: 110px;
+				font-weight: 700;
+			}
+		}
+		.faq__accordeon {
+			.accordeon__item {
+				.accordeon__header {
+					padding: 25px 0;
+				}
+			}
+		}
+	}
 }

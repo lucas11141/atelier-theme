@@ -1,11 +1,11 @@
 .usp {
-	@include flex-row();
+	@include flex('row');
 	justify-content: center;
 	gap: $gap-new;
 
 	.usp__item {
 		@include grid-width(2);
-		@include flex-column();
+		@include flex('column');
 		align-items: center;
 		gap: 20px;
 

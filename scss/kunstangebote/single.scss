@@ -23,7 +23,7 @@
 
 			.header__content {
 				margin-bottom: 80px;
-				@include flex-row();
+				@include flex('row');
 				align-items: center;
 				column-gap: 40px;
 
@@ -78,7 +78,7 @@
 
 	.product__split {
 		margin-top: 130px;
-		@include flex-row();
+		@include flex('row');
 		align-items: stretch;
 		column-gap: 60px;
 		.product__split__left {
@@ -110,7 +110,7 @@
 
 	.product__explanation {
 		width: 100%;
-		@include flex-column();
+		@include flex('column');
 
 		* {
 			text-align: center;
@@ -127,7 +127,7 @@
 		}
 
 		.explanation__list {
-			@include flex-column();
+			@include flex('column');
 			align-items: center;
 			row-gap: 20px;
 
@@ -188,7 +188,7 @@
 	.product__title__box {
 		padding: 24px 150px 24px 25px;
 		width: 100%;
-		@include flex-row();
+		@include flex('row');
 		align-items: center;
 		background-color: white;
 		border-radius: 15px;
@@ -197,7 +197,7 @@
 		overflow: hidden;
 
 		div {
-			@include flex-column();
+			@include flex('column');
 			row-gap: 6px;
 		}
 
@@ -232,7 +232,7 @@
 	}
 
 	.facts__list {
-		@include flex-row();
+		@include flex('row');
 		align-items: stretch;
 		flex-wrap: wrap;
 		gap: 20px;
@@ -240,13 +240,13 @@
 		.item {
 			padding: 24px 20px 20px 25px;
 			width: calc(50% - 10px);
-			@include flex-row();
+			@include flex('row');
 			align-items: center;
 			background-color: white;
 			border-radius: 15px;
 			@include box-shadow();
 			div {
-				@include flex-column();
+				@include flex('column');
 				row-gap: 3px;
 				h6 {
 					padding: 0;
@@ -292,7 +292,7 @@
 	.product__info__sticky {
 		// margin-top: 100px;
 		width: 100%;
-		@include flex-column();
+		@include flex('column');
 		align-items: stretch;
 		row-gap: 20px;
 		position: sticky;
@@ -311,7 +311,7 @@
 			padding: 30px;
 			padding-top: 25px;
 			height: 200px;
-			@include flex-column();
+			@include flex('column');
 			justify-content: flex-start;
 			align-items: flex-end;
 			background-color: $main;
@@ -369,13 +369,13 @@
 		}
 		.rest {
 			width: 100%;
-			@include flex-column();
+			@include flex('column');
 			align-items: stretch;
 			row-gap: 20px;
 		}
 		.days {
 			padding: 15px;
-			@include flex-column();
+			@include flex('column');
 			align-items: center;
 			justify-content: center;
 			row-gap: 10px;
@@ -386,7 +386,7 @@
 				//color: var(--product-color);
 			}
 			.days__list {
-				@include flex-row();
+				@include flex('row');
 				justify-content: center;
 				align-items: center;
 				column-gap: 8px;
@@ -412,7 +412,7 @@
 							font-weight: 800;
 							text-transform: uppercase;
 							color: white;
-							@include pos-center();
+							@include pos('center');
 						}
 					}
 				}
@@ -427,7 +427,7 @@
 		@media only screen and (max-width: $desktop) {
 			position: static;
 			margin-top: 0;
-			@include flex-row();
+			@include flex('row');
 			align-items: stretch;
 			gap: 15px;
 
@@ -488,7 +488,7 @@
 			}
 
 			&:after {
-				content: "";
+				content: '';
 				width: 100vw;
 				height: calc(100% + 75px);
 				position: absolute;
@@ -541,7 +541,7 @@
 	.product__date {
 		padding: 20px 23px;
 		width: 100%;
-		@include flex-row();
+		@include flex('row');
 		justify-content: space-between;
 		align-items: center;
 		background-color: white;
@@ -550,7 +550,7 @@
 		position: relative;
 		div {
 			min-height: 37px;
-			@include flex-column();
+			@include flex('column');
 			justify-content: center;
 			row-gap: 4px;
 			h5 {
@@ -636,7 +636,7 @@
 			bottom: -1px;
 		}
 		.book__content {
-			@include flex-row();
+			@include flex('row');
 			justify-content: space-between;
 			align-items: center;
 			column-gap: 100px;
@@ -689,7 +689,7 @@
 				.dates__list {
 					width: 360px;
 					min-width: 320px;
-					@include flex-column();
+					@include flex('column');
 					row-gap: 12px;
 					.date {
 						@extend .product__date;
@@ -706,7 +706,7 @@
 						}
 					}
 					.no__dates__available {
-						@include flex-column();
+						@include flex('column');
 						justify-content: center;
 						align-items: center;
 						height: 120px;

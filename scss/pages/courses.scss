@@ -1,1011 +1,919 @@
 #courses {
-    
-    .main {
-        padding: 100px 0 0;
-    }
-    @media only screen and (max-width: 960px) {
-        .main {
-            padding-top: 80px;
-        }
-    }
-
-
-
-
-    .courses-landing {
-        margin-bottom: 65px;
-        h3 {
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            position: relative;
-            &::after {
-                content: "im Atelier";
-                display: block;
-                font-size: 80px;
-                text-transform: uppercase;
-                color: $accent;
-                white-space: nowrap;
-                font-weight: 800;
-                opacity: 0.2;
-                position: absolute;
-                bottom: -14px;
-                left: -4px;
-            }
-        }
-        p {
-            max-width: 580px;
-        }
-    }
-    @media only screen and (max-width: 960px) {
-        .courses-landing {
-            margin-bottom: 45px;
-            h3 {
-                margin-bottom: 18px;
-                &::after {
-                    font-size: 60px;
-                    bottom: -11px;
-                }
-            }
-        }
-    }
-
-
-
-
-
-
-    .courses-nav {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 100px;
-    }
-    .courses-nav a {
-        width: calc(25% - 15px);
-        height: 370px;
-        border-radius: 35px;
-    }
-    .courses-nav-item {
-        width: 100%;
-        height: 100%;
-        background-color: $accent;
-        border-radius: 35px;
-        position: relative;
-    }
-    .courses-nav-background {
-        height: 100%;
-        width: 100%;
-        border-radius: 35px;
-        object-fit: cover;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        transition: ease-in-out 500ms;
-        pointer-events: none;
-    }
-    .courses-nav h3 {
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: white;
-        writing-mode: tb-rl;
-        transform: rotate(-180deg);
-        position: absolute;
-        left: 25px;
-        bottom: 30px;
-    }
-    .courses-nav-button {
-        height: 40px;
-        position: absolute;
-        bottom: 30px;
-        right: 30px;
-    }
-    .courses-nav-item:hover .courses-nav-background {
-        transform: scale(1.08) rotate(5deg);
-    }
-    .courses-nav-item:hover .courses-nav h3{
-        transform: scale(1) rotate(0deg);
-    }
-    .cni-1 {
-        background-image: linear-gradient(to bottom left, $course-kinder, $course-erwachsene);
-    }
-    .cni-2 {
-        background-image: linear-gradient(to bottom left, $workshop-kinder, $workshop-erwachsene);
-    }
-    .cni-3 {
-        background-image: linear-gradient(to bottom left, $ferienprogramm, $ferienprogramm-dark);
-    }
-    .cni-4 {
-        background-image: linear-gradient(to bottom left, $accent, var(--color-accent-dark));
-    }
-    @media only screen and (max-width: 960px) {
-        .courses-nav {
-            flex-wrap: wrap;
-        }
-        .courses-nav a {
-            width: calc(50% - 8px);
-            height: 275px;
-            border-radius: 25px;
-            margin-bottom: 16px;
-        }
-        .courses-nav-item {
-            border-radius: 25px;
-        }
-        .courses-nav-background {
-            border-radius: 25px;
-        }
-        .courses-nav h3 {
-            letter-spacing: inherit;
-            border: inherit;
-            left: 20px;
-            top: 25px;
-            bottom: 25px;
-            text-align: left;
-        }
-        .courses-nav-button {
-            height: 34px;
-            bottom: 20px;
-            right: 20px;
-        }
-        .courses-nav-item:hover .courses-nav-background {
-            transform: scale(1) rotate(0deg);
-        }
-    }
-
-
-
-
-
-
-    .course-nav-corner {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        align-items: flex-start;
-        position: fixed;
-        top: 137px;
-        left: 70px;
-        z-index: 5;
-    }
-    .course-nav-corner span {
-        font-size: 14px;
-        font-weight: 800;
-        text-transform: uppercase;
-        position: relative;
-        opacity: 0.8;
-        margin: 4px 0px;
-    }
-    .course-nav-corner span::after {
-        content: "";
-        display: none;
-        height: calc(100% - 8px);
-        width: 4px;
-        background-color: $accent;
-        position: absolute;
-        left: -15px;
-        top: 48%;
-        transform: translateY(-50%);
-    }
-    .course-nav-corner span.course-nav-corner-active {
-        font-size: 24px;
-        margin: 12px 0px;
-        opacity: 1;
-    }
-    .course-nav-corner span.course-nav-corner-active::after {
-        display: block;
-    }
-
-
-
-
-
-
-
-
-
-
-
-    .angebote-section {
-        padding-bottom: calc(100px - 4vw);
-        background-color: $lightgray;
-        position: relative;
-    }
-    @media only screen and (max-width: 960px) {
-        .angebote-section {
-            padding-bottom: calc(80px - 4vw);
-        }
-    }
-
-
-
-
-
-
-    .angebot-description {
-        width: 100vw;
-        background-color: white;
-        padding-top: calc(50px + 4vw);
-        padding-bottom: 1px;
-
-        .range-list-item {
-            width: 1000px;
-            max-width: 88vw;
-            border-top: none;
-            padding: 0;
-            margin-bottom: calc(75px - 4vw);
-
-            .range-list-content, .range-list-image {
-                z-index: 1;
-            }
-        }
-        .infos {
-            width: 1000px;
-            max-width: 88vw;
-            margin: auto;
-            margin-top: 40px;
-            margin-bottom: calc(120px - 4vw);
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: flex-start;
-            z-index: 1
-        }
-        .infos-item {
-            flex: 1;
-            padding: 30px 30px 35px 35px;
-            border-radius: 35px;
-            border: solid $linegray 2px;
-            background-color: $lightgray;
-            background-image: linear-gradient(to bottom right, white, $lightgray);
-            position: relative;
-
-            &:first-child {
-                margin-right: 30px;
-            }
-            .paper-structure {
-                border-radius: 35px;
-            }
-            h5 {
-                text-transform: uppercase;
-                font-weight: 500;
-                font-family: proxima-soft, sans-serif;
-
-                span {
-                    font-weight: 800;
-                }
-            }
-            .divide-dots {
-                margin-top: 10px;
-                margin-bottom: 25px;
-
-                div {
-                    background-color: $course-kinder;
-                }
-            }
-            p {
-                line-height: normal;
-            }
-            .link-arrow-underlined {
-                margin-top: 25px;
-                margin-bottom: -5px;
-
-                span::after {
-                    background-image: linear-gradient(to right, $course-kinder, $course-erwachsene);
-                }
-            }
-            .cii-2 {
-                padding-bottom: 80px;
-            }
-        }
-    }
-    #kurse {
-        .angebot-description {
-            .range-list-item {
-                margin-bottom: 0px;
-            }
-        }
-    }
-    @media only screen and (max-width: 960px) {
-        .angebot-description {
-            .range-list-item {
-                margin-bottom: calc(60px - 4vw);
-            }
-            .infos {
-                flex-direction: column;
-                margin-bottom: calc(50px - 4vw);
-            }
-            .infos-item {
-                width: 100%;
-                padding: 40px 35px 45px 35px;
-                margin-bottom: 30px;
-
-                &:last-child {
-                    margin-bottom: 0px;
-                    padding-bottom: 70px;
-                }
-            }
-        }
-    }
-
-
-
-
-
-
-
-
-
-    .angebot-content {
-        width: 100vw;
-        position: relative;
-        background-color: $lightgray;
-        padding-top: calc(70px + 4vw);
-
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .angebot-header {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-            align-items: flex-end;
-
-            h4 {
-                text-transform: uppercase;
-                position: relative;
-
-                &::after {
-                    content: "im Atelier";
-                    display: block;
-                    font-size: 56px;
-                    text-transform: uppercase;
-                    color: $accent;
-                    white-space: nowrap;
-                    font-weight: 800;
-                    opacity: 0.2;
-                    position: absolute;
-                    bottom: -12px;
-                    left: -2px;
-                }
-            }
-            .angebot-filter {
-                max-width: 100%;
-                display: flex;
-                flex-direction: column;
-                flex-wrap: nowrap;
-                justify-content: center;
-                align-items: center;
-        
-                .filter-info {
-                    width: 100%;
-                    margin-bottom: 12px;
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: nowrap;
-                    justify-content: space-between;
-                    align-items: center;
-        
-                    div {
-                        height: 2px;
-                        width: 10px;
-                        background-color: $main;
-                    }
-                    span {
-                        margin: 0px 8px;
-                        font-size: 14px;
-                        text-transform: uppercase;
-                        font-weight: 700;
-                        color: $main;
-                        font-family: proxima-soft, sans-serif;
-                    }
-                    .info-line {
-                        flex: auto;
-                    }
-                }
-                .filter-buttons {
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: nowrap;
-                    position: relative;
-        
-                    a {
-                        padding-left: 55px;
-                        padding-right: 55px;
-            
-                        &:first-child {
-                            margin-right: 15px;
-                        }
-                        &.disabled {
-                            opacity: 0.4;
-                        }
-                    }
-                    span {
-                        font-size: 14px;
-                    }
-                    .filter-reset-button {
-                        display: flex;
-                        flex-direction: row;
-                        flex-wrap: nowrap;
-                        align-items: center;
-                        position: absolute;
-                        top: 50%;
-                        right: -160px;
-                        transform: translateY(-50%);
-                        cursor: pointer;
-                        transition: ease-in-out 200ms;
-                
-                        img {
-                            height: 24px;
-                            transform: rotate(45deg);
-                            border-radius: 50%;
-                            margin-right: 5px;
-                        }
-                        span {
-                            font-size: 14px;
-                            font-weight: 700;
-                            text-transform: uppercase;
-                            white-space: nowrap;
-                        }
-                    }
-                }
-            }
-            .course-item-count {
-                    font-size: 24px;
-                    font-weight: 800;
-                    text-transform: uppercase;
-
-                    .name {
-                        margin-right: 8px;
-                    }
-                    .number {
-                        font-size: 56px;
-                        font-weight: 600;
-                    
-                        &.disabled {
-                            opacity: 0.4;
-                        }
-                    }
-                }
-            }
-        }
-        .course-list-divide { 
-            width: 100%;
-            height: 2px;
-            margin: 50px 0px;
-            background-color: $linegray;
-        }
-        .angebot-list {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            .list-item {
-                width: 100%;
-                background-color: white;
-                border-radius: 35px;
-                margin-bottom: 35px;
-                box-shadow: 0px 3px 20px rgba(0,0,0,0.1);
-                cursor: pointer;
-                display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
-
-                .image {
-                    position: relative;
-                    min-width: 300px;
-                    border-top-left-radius: 35px;
-                    border-bottom-left-radius: 35px;
-
-                    img {
-                        height: 100%;
-                        width: 100%;
-                        border-top-left-radius: 35px;
-                        border-bottom-left-radius: 35px;
-                    }
-                    div {
-                        height: 100%;
-                        width: 100%;
-                        background-image: linear-gradient(to left, white, transparent);
-                        position: absolute;
-                        top: 0px;
-                        left: 0px;
-                        border-top-left-radius: 35px;
-                        border-bottom-left-radius: 35px;
-                    }
-                }
-                .content {
-                    position: relative;
-                    padding: 40px 40px 40px 45px;
-                    display: flex;
-                    flex-direction: column;
-                    flex-wrap: nowrap;
-                    align-items: flex-start;
-            
-                    h4 {
-                        line-height: normal;
-                        text-transform: uppercase;
-                        max-width: calc(100% - 150px);
-                        margin-bottom: 6px;
-                    }
-                    .group {
-                        text-transform: uppercase;
-                        font-weight: 700;
-                        font-size: 14px;
-                    }
-                    .facts {
-                        display: flex;
-                        flex-direction: row;
-                        flex-wrap: nowrap;
-                        column-gap: 15px;
-                        position: absolute;
-                        top: 40px;
-                        right: 40px;
-                        div {
-                            height: 50px;
-                            width: 50px;
-                            border-radius: 50%;
-                            background-color: $main;
-                            @include flex-row();
-                            justify-content: center;
-                            align-items: center;
-                            span {
-                                color: white;
-                                font-family: proxima-soft;
-                                font-size: 14px;
-                                font-weight: 700;
-                                letter-spacing: 0.5px;
-                                text-align: center;
-                                /* transform: translateY(-2px); */
-                            }
-                            overflow: hidden;
-                            position: relative;
-                            &::after {
-                                content: "Std";
-                                display: block;
-                                color: white;
-                                font-size: 30px;
-                                opacity: 0.2;
-                                font-family: 'proxima-soft';
-                                font-weight: 700;
-                                position: absolute;
-                                bottom: -4px;
-                                left: 50%;
-                                transform: translateX(-50%);
-                            }
-                            &.fact--age {
-                                &::after {
-                                    content: "Ab";
-                                }
-                            }
-                        }
-                    }
-                    p {
-                        margin-top: 35px;
-                    }
-                    .button {
-                        margin-top: 50px;
-                    }
-                }
-                &.covid-info {
-                    margin-bottom: 50px;
-                    padding: 45px 45px 50px 45px;
-                    flex-direction: column;
-                    position: relative;
-                    align-items: flex-start;
-
-                    h4 {
-                        text-transform: uppercase;
-                        margin-bottom: 25px;
-                    }
-                    p span {
-                        text-transform: uppercase;
-                        font-weight: 800;
-                    }
-                }
-            }
-            .course-list-show-more {
-                margin-top: 15px;
-                padding: 16px 58px;
-                border: solid white 3px;
-                border-radius: 100px;
-                background-color: white;
-                box-shadow: 0px 3px 20px rgba(0,0,0,0.1);
-                display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
-                align-items: center;
-                transition: ease-in-out 300ms;
-                cursor: pointer;
-
-                img {
-                    margin-right: 8px;
-                }
-                span {
-                    font-family: proxima-soft, sans-serif;
-                    font-size: 14px;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    white-space: nowrap;
-                }
-            }
-            .course-list-empty {
-                width: 100%;
-
-                h4 {
-                    color: $ferienprogramm;
-                    text-transform: uppercase;
-                    margin-bottom: 10px;
-                    width: 100%;
-                }
-                p {
-                    width: 100%;
-                }
-            }
-        }
-    }
-
-    @media only screen and (max-width: 960px) {
-        .angebot-content {
-            padding-top: calc(50px + 4vw);
-            .wrapper {
-            }
-            .angebot-header {
-                align-items: flex-end;
-
-                h4 {
-                    &::after {
-                        font-size: 50px;
-                        bottom: -7px;
-                        content: "Atelier";
-                    }
-                }
-                .angebot-filter {
-                    width: 100%;
-        
-                    .filter-info {
-                        margin-bottom: 15px;
-        
-                        div {
-                        }
-                        span {
-                        }
-                        .info-line {
-                        }
-                    }
-                    .filter-buttons {
-                        width: 100%;
-        
-                        &.course-list-filter-button-disabled {
-                        }
-                        a {
-                            padding-left: 0px;
-                            padding-right: 0px;
-                            flex: auto;
-                            font-size: 13px;
-                            &:first-child {
-                                margin-right: 15px;
-                            }
-                        }
-                        span {
-                        }
-                        .filter-reset-button {
-                            top: -25px;
-                            right: 0px;
-                            background-color: $lightgray;
-                            padding-left: 10px;
-        
-                            img {
-                            }
-                            span {
-                            }
-                        }
-                    }
-                }
-                .course-item-count {
-                    display: none;
-                }
-            }
-            .course-list-divide { 
-                margin: 35px 0px;
-            }
-            .angebot-list {
-                .list-item {
-                    flex-direction: column;
-
-                    .image {
-                        width: 100%;
-                        height: 220px;
-                        border-bottom-left-radius: 0px;
-                        border-top-right-radius: 35px;
-
-                        img {
-                            object-fit: cover;
-                            border-bottom-left-radius: 0px;
-                            border-top-right-radius: 35px;
-                        }
-                        div {
-                            background-image: radial-gradient(ellipse 120% 100% at 100% 0%, transparent, white 100%, white);
-                            background-image: radial-gradient(ellipse 110% 100% at 120% 0%, transparent, white 100%, white);
-                            border-bottom-left-radius: 0px;
-                            border-top-right-radius: 35px;
-                        }
-                    }
-                    .content {
-                        padding: 30px;
-                        padding-top: 0px;
-                        margin-top: -100px;
-                        margin-top: -180px;
-
-                        h4 {
-                            max-width: calc(100% - 65px);
-                            margin-bottom: 0px;
-                        }
-                        .group {
-                            font-size: 14px;
-                        }
-                        .facts {
-                            position: initial;
-                            margin-top: 55px;
-
-                            img {
-                                height: 46px;
-                                width: 46px;
-
-                                &:last-child {
-                                }
-                            }
-                        }
-                        p {
-                            margin-top: 25px;
-                        }
-                        .button {
-                            margin-top: 25px;
-                            padding: 15px 0px;
-                            width: 100%;
-                        }
-                    }
-                    &.covid-info {
-                        h4 {
-                        }
-                        p span {
-                        }
-                    }
-                }
-                .course-list-show-more {
-                    margin-top: 0px;
-                    padding: 14px 45px;
-
-                    img {
-                        height: 22px;
-                    }
-                    span {
-                        font-size: 13px;
-                    }
-                }
-                .course-list-empty {
-                    h4 {
-                    }
-                    p {
-                    }
-                }
-            }
-        }
-    }
-    @media only screen and (max-width: 960px) {
-        .covid-info {
-            padding: 45px 35px 50px 35px;
-            margin-bottom: 35px;
-        } 
-    }
-
-
-    .course-list-show-more:hover {
-        border-color: $main;
-    }
-
-    .course-list-show-more.unlimited img  {
-        transform: rotate(45deg);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    .cic-courses-kinder {
-        color: $course-kinder;
-    }
-    .cic-courses-erwachsene {
-        color: $course-erwachsene;
-    }
-    .cic-workshops-kinder {
-        color: $workshop-kinder;
-    }
-    .cic-workshops-erwachsene {
-        color: $workshop-erwachsene;
-    }
-    .cic-birthdays {
-        color: $accent;
-    }
-    .cic-ferienprogramm-kinder {
-        color: $ferienprogramm;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    .angebote-map .course-map {
-        margin-top: 40px;
-        margin-bottom: 140px;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    .angebote-courses .covid-info .field-badge {
-        background-image: linear-gradient(to top right, $course-kinder, $course-erwachsene);
-    }
-    .angebote-workshops .covid-info .field-badge {
-        background-image: linear-gradient(to top right, $workshop-kinder, $workshop-erwachsene);
-    }
-    .angebote-ferienprogramm .covid-info .field-badge {
-        background-color: var(--color-warning);
-    }
-
-
-
-
-
-
-    .discount-info {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
-    }
-    .ferienprogramm-discount-list {
-        margin: 15px auto 40px auto;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
-    }
-    .ferienprogramm-discount-item {
-        border-right: solid $lightgray 2px;
-        padding: 0px 50px;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
-    }
-    .ferienprogramm-discount-item:first-child {
-        padding-left: 0px;
-    }
-    .ferienprogramm-discount-item:last-child {
-        padding-right: 0px;
-        border-right: none;
-    }
-    .ferienprogramm-discount-item img {
-        height: 57px;
-        margin-bottom: 20px;
-    }
-    .ferienprogramm-discount-item div {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        align-items: center;
-    }
-    .ferienprogramm-discount-item * {
-        text-transform: uppercase;
-        font-weight: 800;
-    }
-    .fd-text {
-        font-size: 12px;
-        white-space: nowrap;
-    }
-    .fd-condition {
-        font-size: 20px;
-        color: red;
-        white-space: nowrap;
-    }
-    .discount-info .disclaimer-small {
-        margin-top: 25px;
-        max-width: 800px;
-        margin-bottom: -15px;
-    }
-    @media only screen and (max-width: 960px) {
-        .ferienprogramm-discount-item {
-            padding: 0px 30px;
-        }
-        .ferienprogramm-discount-item img {
-            height: 50px;
-        }
-        .fd-text {
-            font-size: 11px;
-        }
-        .fd-condition {
-            font-size: 18px;
-        }
-    }
-    @media only screen and (max-width: 670px) {
-        .ferienprogramm-discount-list {
-            margin: -10px auto 15px auto;
-            flex-direction: column;
-        }
-        .ferienprogramm-discount-item {
-            padding: 25px 0px;
-            border-right: none;
-            flex-direction: row;
-        }
-        .ferienprogramm-discount-item img {
-            height: 42px;
-            margin-bottom: 0px;
-        }
-        .ferienprogramm-discount-item div {
-            align-items: flex-start;
-            margin-left: 20px;
-        }
-    }
-    /*@media only screen and (max-width: 750px) {
+	.main {
+		padding: 100px 0 0;
+	}
+	@media only screen and (max-width: 960px) {
+		.main {
+			padding-top: 80px;
+		}
+	}
+
+	.courses-landing {
+		margin-bottom: 65px;
+		h3 {
+			margin-bottom: 20px;
+			text-transform: uppercase;
+			position: relative;
+			&::after {
+				content: 'im Atelier';
+				display: block;
+				font-size: 80px;
+				text-transform: uppercase;
+				color: $accent;
+				white-space: nowrap;
+				font-weight: 800;
+				opacity: 0.2;
+				position: absolute;
+				bottom: -14px;
+				left: -4px;
+			}
+		}
+		p {
+			max-width: 580px;
+		}
+	}
+	@media only screen and (max-width: 960px) {
+		.courses-landing {
+			margin-bottom: 45px;
+			h3 {
+				margin-bottom: 18px;
+				&::after {
+					font-size: 60px;
+					bottom: -11px;
+				}
+			}
+		}
+	}
+
+	.courses-nav {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 100px;
+	}
+	.courses-nav a {
+		width: calc(25% - 15px);
+		height: 370px;
+		border-radius: 35px;
+	}
+	.courses-nav-item {
+		width: 100%;
+		height: 100%;
+		background-color: $accent;
+		border-radius: 35px;
+		position: relative;
+	}
+	.courses-nav-background {
+		height: 100%;
+		width: 100%;
+		border-radius: 35px;
+		object-fit: cover;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		transition: ease-in-out 500ms;
+		pointer-events: none;
+	}
+	.courses-nav h3 {
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		color: white;
+		writing-mode: tb-rl;
+		transform: rotate(-180deg);
+		position: absolute;
+		left: 25px;
+		bottom: 30px;
+	}
+	.courses-nav-button {
+		height: 40px;
+		position: absolute;
+		bottom: 30px;
+		right: 30px;
+	}
+	.courses-nav-item:hover .courses-nav-background {
+		transform: scale(1.08) rotate(5deg);
+	}
+	.courses-nav-item:hover .courses-nav h3 {
+		transform: scale(1) rotate(0deg);
+	}
+	.cni-1 {
+		background-image: linear-gradient(to bottom left, $course-kinder, $course-erwachsene);
+	}
+	.cni-2 {
+		background-image: linear-gradient(to bottom left, $workshop-kinder, $workshop-erwachsene);
+	}
+	.cni-3 {
+		background-image: linear-gradient(to bottom left, $ferienprogramm, $ferienprogramm-dark);
+	}
+	.cni-4 {
+		background-image: linear-gradient(to bottom left, $accent, var(--color-accent-dark));
+	}
+	@media only screen and (max-width: 960px) {
+		.courses-nav {
+			flex-wrap: wrap;
+		}
+		.courses-nav a {
+			width: calc(50% - 8px);
+			height: 275px;
+			border-radius: 25px;
+			margin-bottom: 16px;
+		}
+		.courses-nav-item {
+			border-radius: 25px;
+		}
+		.courses-nav-background {
+			border-radius: 25px;
+		}
+		.courses-nav h3 {
+			letter-spacing: inherit;
+			border: inherit;
+			left: 20px;
+			top: 25px;
+			bottom: 25px;
+			text-align: left;
+		}
+		.courses-nav-button {
+			height: 34px;
+			bottom: 20px;
+			right: 20px;
+		}
+		.courses-nav-item:hover .courses-nav-background {
+			transform: scale(1) rotate(0deg);
+		}
+	}
+
+	.course-nav-corner {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+		align-items: flex-start;
+		position: fixed;
+		top: 137px;
+		left: 70px;
+		z-index: 5;
+	}
+	.course-nav-corner span {
+		font-size: 14px;
+		font-weight: 800;
+		text-transform: uppercase;
+		position: relative;
+		opacity: 0.8;
+		margin: 4px 0px;
+	}
+	.course-nav-corner span::after {
+		content: '';
+		display: none;
+		height: calc(100% - 8px);
+		width: 4px;
+		background-color: $accent;
+		position: absolute;
+		left: -15px;
+		top: 48%;
+		transform: translateY(-50%);
+	}
+	.course-nav-corner span.course-nav-corner-active {
+		font-size: 24px;
+		margin: 12px 0px;
+		opacity: 1;
+	}
+	.course-nav-corner span.course-nav-corner-active::after {
+		display: block;
+	}
+
+	.angebote-section {
+		padding-bottom: calc(100px - 4vw);
+		background-color: $lightgray;
+		position: relative;
+	}
+	@media only screen and (max-width: 960px) {
+		.angebote-section {
+			padding-bottom: calc(80px - 4vw);
+		}
+	}
+
+	.angebot-description {
+		width: 100vw;
+		background-color: white;
+		padding-top: calc(50px + 4vw);
+		padding-bottom: 1px;
+
+		.range-list-item {
+			width: 1000px;
+			max-width: 88vw;
+			border-top: none;
+			padding: 0;
+			margin-bottom: calc(75px - 4vw);
+
+			.range-list-content,
+			.range-list-image {
+				z-index: 1;
+			}
+		}
+		.infos {
+			width: 1000px;
+			max-width: 88vw;
+			margin: auto;
+			margin-top: 40px;
+			margin-bottom: calc(120px - 4vw);
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-start;
+			z-index: 1;
+		}
+		.infos-item {
+			flex: 1;
+			padding: 30px 30px 35px 35px;
+			border-radius: 35px;
+			border: solid $linegray 2px;
+			background-color: $lightgray;
+			background-image: linear-gradient(to bottom right, white, $lightgray);
+			position: relative;
+
+			&:first-child {
+				margin-right: 30px;
+			}
+			.paper-structure {
+				border-radius: 35px;
+			}
+			h5 {
+				text-transform: uppercase;
+				font-weight: 500;
+				font-family: proxima-soft, sans-serif;
+
+				span {
+					font-weight: 800;
+				}
+			}
+			.divide-dots {
+				margin-top: 10px;
+				margin-bottom: 25px;
+
+				div {
+					background-color: $course-kinder;
+				}
+			}
+			p {
+				line-height: normal;
+			}
+			.link-arrow-underlined {
+				margin-top: 25px;
+				margin-bottom: -5px;
+
+				span::after {
+					background-image: linear-gradient(to right, $course-kinder, $course-erwachsene);
+				}
+			}
+			.cii-2 {
+				padding-bottom: 80px;
+			}
+		}
+	}
+	#kurse {
+		.angebot-description {
+			.range-list-item {
+				margin-bottom: 0px;
+			}
+		}
+	}
+	@media only screen and (max-width: 960px) {
+		.angebot-description {
+			.range-list-item {
+				margin-bottom: calc(60px - 4vw);
+			}
+			.infos {
+				flex-direction: column;
+				margin-bottom: calc(50px - 4vw);
+			}
+			.infos-item {
+				width: 100%;
+				padding: 40px 35px 45px 35px;
+				margin-bottom: 30px;
+
+				&:last-child {
+					margin-bottom: 0px;
+					padding-bottom: 70px;
+				}
+			}
+		}
+	}
+
+	.angebot-content {
+		width: 100vw;
+		position: relative;
+		background-color: $lightgray;
+		padding-top: calc(70px + 4vw);
+
+		.wrapper {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		.angebot-header {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			justify-content: space-between;
+			align-items: flex-end;
+
+			h4 {
+				text-transform: uppercase;
+				position: relative;
+
+				&::after {
+					content: 'im Atelier';
+					display: block;
+					font-size: 56px;
+					text-transform: uppercase;
+					color: $accent;
+					white-space: nowrap;
+					font-weight: 800;
+					opacity: 0.2;
+					position: absolute;
+					bottom: -12px;
+					left: -2px;
+				}
+			}
+			.angebot-filter {
+				max-width: 100%;
+				display: flex;
+				flex-direction: column;
+				flex-wrap: nowrap;
+				justify-content: center;
+				align-items: center;
+
+				.filter-info {
+					width: 100%;
+					margin-bottom: 12px;
+					display: flex;
+					flex-direction: row;
+					flex-wrap: nowrap;
+					justify-content: space-between;
+					align-items: center;
+
+					div {
+						height: 2px;
+						width: 10px;
+						background-color: $main;
+					}
+					span {
+						margin: 0px 8px;
+						font-size: 14px;
+						text-transform: uppercase;
+						font-weight: 700;
+						color: $main;
+						font-family: proxima-soft, sans-serif;
+					}
+					.info-line {
+						flex: auto;
+					}
+				}
+				.filter-buttons {
+					display: flex;
+					flex-direction: row;
+					flex-wrap: nowrap;
+					position: relative;
+
+					a {
+						padding-left: 55px;
+						padding-right: 55px;
+
+						&:first-child {
+							margin-right: 15px;
+						}
+						&.disabled {
+							opacity: 0.4;
+						}
+					}
+					span {
+						font-size: 14px;
+					}
+					.filter-reset-button {
+						display: flex;
+						flex-direction: row;
+						flex-wrap: nowrap;
+						align-items: center;
+						position: absolute;
+						top: 50%;
+						right: -160px;
+						transform: translateY(-50%);
+						cursor: pointer;
+						transition: ease-in-out 200ms;
+
+						img {
+							height: 24px;
+							transform: rotate(45deg);
+							border-radius: 50%;
+							margin-right: 5px;
+						}
+						span {
+							font-size: 14px;
+							font-weight: 700;
+							text-transform: uppercase;
+							white-space: nowrap;
+						}
+					}
+				}
+			}
+			.course-item-count {
+				font-size: 24px;
+				font-weight: 800;
+				text-transform: uppercase;
+
+				.name {
+					margin-right: 8px;
+				}
+				.number {
+					font-size: 56px;
+					font-weight: 600;
+
+					&.disabled {
+						opacity: 0.4;
+					}
+				}
+			}
+		}
+	}
+	.course-list-divide {
+		width: 100%;
+		height: 2px;
+		margin: 50px 0px;
+		background-color: $linegray;
+	}
+	.angebot-list {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.list-item {
+			width: 100%;
+			background-color: white;
+			border-radius: 35px;
+			margin-bottom: 35px;
+			box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+			cursor: pointer;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+
+			.image {
+				position: relative;
+				min-width: 300px;
+				border-top-left-radius: 35px;
+				border-bottom-left-radius: 35px;
+
+				img {
+					height: 100%;
+					width: 100%;
+					border-top-left-radius: 35px;
+					border-bottom-left-radius: 35px;
+				}
+				div {
+					height: 100%;
+					width: 100%;
+					background-image: linear-gradient(to left, white, transparent);
+					position: absolute;
+					top: 0px;
+					left: 0px;
+					border-top-left-radius: 35px;
+					border-bottom-left-radius: 35px;
+				}
+			}
+			.content {
+				position: relative;
+				padding: 40px 40px 40px 45px;
+				display: flex;
+				flex-direction: column;
+				flex-wrap: nowrap;
+				align-items: flex-start;
+
+				h4 {
+					line-height: normal;
+					text-transform: uppercase;
+					max-width: calc(100% - 150px);
+					margin-bottom: 6px;
+				}
+				.group {
+					text-transform: uppercase;
+					font-weight: 700;
+					font-size: 14px;
+				}
+				.facts {
+					display: flex;
+					flex-direction: row;
+					flex-wrap: nowrap;
+					column-gap: 15px;
+					position: absolute;
+					top: 40px;
+					right: 40px;
+					div {
+						height: 50px;
+						width: 50px;
+						border-radius: 50%;
+						background-color: $main;
+						@include flex('row');
+						justify-content: center;
+						align-items: center;
+						span {
+							color: white;
+							font-family: proxima-soft;
+							font-size: 14px;
+							font-weight: 700;
+							letter-spacing: 0.5px;
+							text-align: center;
+							/* transform: translateY(-2px); */
+						}
+						overflow: hidden;
+						position: relative;
+						&::after {
+							content: 'Std';
+							display: block;
+							color: white;
+							font-size: 30px;
+							opacity: 0.2;
+							font-family: 'proxima-soft';
+							font-weight: 700;
+							position: absolute;
+							bottom: -4px;
+							left: 50%;
+							transform: translateX(-50%);
+						}
+						&.fact--age {
+							&::after {
+								content: 'Ab';
+							}
+						}
+					}
+				}
+				p {
+					margin-top: 35px;
+				}
+				.button {
+					margin-top: 50px;
+				}
+			}
+			&.covid-info {
+				margin-bottom: 50px;
+				padding: 45px 45px 50px 45px;
+				flex-direction: column;
+				position: relative;
+				align-items: flex-start;
+
+				h4 {
+					text-transform: uppercase;
+					margin-bottom: 25px;
+				}
+				p span {
+					text-transform: uppercase;
+					font-weight: 800;
+				}
+			}
+		}
+		.course-list-show-more {
+			margin-top: 15px;
+			padding: 16px 58px;
+			border: solid white 3px;
+			border-radius: 100px;
+			background-color: white;
+			box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			align-items: center;
+			transition: ease-in-out 300ms;
+			cursor: pointer;
+
+			img {
+				margin-right: 8px;
+			}
+			span {
+				font-family: proxima-soft, sans-serif;
+				font-size: 14px;
+				font-weight: 700;
+				text-transform: uppercase;
+				white-space: nowrap;
+			}
+		}
+		.course-list-empty {
+			width: 100%;
+
+			h4 {
+				color: $ferienprogramm;
+				text-transform: uppercase;
+				margin-bottom: 10px;
+				width: 100%;
+			}
+			p {
+				width: 100%;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 960px) {
+	.angebot-content {
+		padding-top: calc(50px + 4vw);
+		.wrapper {
+		}
+		.angebot-header {
+			align-items: flex-end;
+
+			h4 {
+				&::after {
+					font-size: 50px;
+					bottom: -7px;
+					content: 'Atelier';
+				}
+			}
+			.angebot-filter {
+				width: 100%;
+
+				.filter-info {
+					margin-bottom: 15px;
+
+					div {
+					}
+					span {
+					}
+					.info-line {
+					}
+				}
+				.filter-buttons {
+					width: 100%;
+
+					&.course-list-filter-button-disabled {
+					}
+					a {
+						padding-left: 0px;
+						padding-right: 0px;
+						flex: auto;
+						font-size: 13px;
+						&:first-child {
+							margin-right: 15px;
+						}
+					}
+					span {
+					}
+					.filter-reset-button {
+						top: -25px;
+						right: 0px;
+						background-color: $lightgray;
+						padding-left: 10px;
+
+						img {
+						}
+						span {
+						}
+					}
+				}
+			}
+			.course-item-count {
+				display: none;
+			}
+		}
+		.course-list-divide {
+			margin: 35px 0px;
+		}
+		.angebot-list {
+			.list-item {
+				flex-direction: column;
+
+				.image {
+					width: 100%;
+					height: 220px;
+					border-bottom-left-radius: 0px;
+					border-top-right-radius: 35px;
+
+					img {
+						object-fit: cover;
+						border-bottom-left-radius: 0px;
+						border-top-right-radius: 35px;
+					}
+					div {
+						background-image: radial-gradient(
+							ellipse 120% 100% at 100% 0%,
+							transparent,
+							white 100%,
+							white
+						);
+						background-image: radial-gradient(
+							ellipse 110% 100% at 120% 0%,
+							transparent,
+							white 100%,
+							white
+						);
+						border-bottom-left-radius: 0px;
+						border-top-right-radius: 35px;
+					}
+				}
+				.content {
+					padding: 30px;
+					padding-top: 0px;
+					margin-top: -100px;
+					margin-top: -180px;
+
+					h4 {
+						max-width: calc(100% - 65px);
+						margin-bottom: 0px;
+					}
+					.group {
+						font-size: 14px;
+					}
+					.facts {
+						position: initial;
+						margin-top: 55px;
+
+						img {
+							height: 46px;
+							width: 46px;
+
+							&:last-child {
+							}
+						}
+					}
+					p {
+						margin-top: 25px;
+					}
+					.button {
+						margin-top: 25px;
+						padding: 15px 0px;
+						width: 100%;
+					}
+				}
+				&.covid-info {
+					h4 {
+					}
+					p span {
+					}
+				}
+			}
+			.course-list-show-more {
+				margin-top: 0px;
+				padding: 14px 45px;
+
+				img {
+					height: 22px;
+				}
+				span {
+					font-size: 13px;
+				}
+			}
+			.course-list-empty {
+				h4 {
+				}
+				p {
+				}
+			}
+		}
+	}
+}
+@media only screen and (max-width: 960px) {
+	.covid-info {
+		padding: 45px 35px 50px 35px;
+		margin-bottom: 35px;
+	}
+}
+
+.course-list-show-more:hover {
+	border-color: $main;
+}
+
+.course-list-show-more.unlimited img {
+	transform: rotate(45deg);
+}
+
+.cic-courses-kinder {
+	color: $course-kinder;
+}
+.cic-courses-erwachsene {
+	color: $course-erwachsene;
+}
+.cic-workshops-kinder {
+	color: $workshop-kinder;
+}
+.cic-workshops-erwachsene {
+	color: $workshop-erwachsene;
+}
+.cic-birthdays {
+	color: $accent;
+}
+.cic-ferienprogramm-kinder {
+	color: $ferienprogramm;
+}
+
+.angebote-map .course-map {
+	margin-top: 40px;
+	margin-bottom: 140px;
+}
+
+.angebote-courses .covid-info .field-badge {
+	background-image: linear-gradient(to top right, $course-kinder, $course-erwachsene);
+}
+.angebote-workshops .covid-info .field-badge {
+	background-image: linear-gradient(to top right, $workshop-kinder, $workshop-erwachsene);
+}
+.angebote-ferienprogramm .covid-info .field-badge {
+	background-color: var(--color-warning);
+}
+
+.discount-info {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+.ferienprogramm-discount-list {
+	margin: 15px auto 40px auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+.ferienprogramm-discount-item {
+	border-right: solid $lightgray 2px;
+	padding: 0px 50px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+.ferienprogramm-discount-item:first-child {
+	padding-left: 0px;
+}
+.ferienprogramm-discount-item:last-child {
+	padding-right: 0px;
+	border-right: none;
+}
+.ferienprogramm-discount-item img {
+	height: 57px;
+	margin-bottom: 20px;
+}
+.ferienprogramm-discount-item div {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+}
+.ferienprogramm-discount-item * {
+	text-transform: uppercase;
+	font-weight: 800;
+}
+.fd-text {
+	font-size: 12px;
+	white-space: nowrap;
+}
+.fd-condition {
+	font-size: 20px;
+	color: red;
+	white-space: nowrap;
+}
+.discount-info .disclaimer-small {
+	margin-top: 25px;
+	max-width: 800px;
+	margin-bottom: -15px;
+}
+@media only screen and (max-width: 960px) {
+	.ferienprogramm-discount-item {
+		padding: 0px 30px;
+	}
+	.ferienprogramm-discount-item img {
+		height: 50px;
+	}
+	.fd-text {
+		font-size: 11px;
+	}
+	.fd-condition {
+		font-size: 18px;
+	}
+}
+@media only screen and (max-width: 670px) {
+	.ferienprogramm-discount-list {
+		margin: -10px auto 15px auto;
+		flex-direction: column;
+	}
+	.ferienprogramm-discount-item {
+		padding: 25px 0px;
+		border-right: none;
+		flex-direction: row;
+	}
+	.ferienprogramm-discount-item img {
+		height: 42px;
+		margin-bottom: 0px;
+	}
+	.ferienprogramm-discount-item div {
+		align-items: flex-start;
+		margin-left: 20px;
+	}
+}
+/*@media only screen and (max-width: 750px) {
         .ferienprogramm-discount-list {
             margin: 15px auto 40px auto;
             flex-direction: column;
@@ -1017,112 +925,94 @@
         }
     }*/
 
+.disclaimer-small {
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	color: $main;
+	opacity: 0.25;
+}
 
+.field-badge {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	background-color: $accent;
+	position: absolute;
+	top: -20px;
+	left: 25px;
+}
+.field-badge span {
+	font-family: proxima-soft, sans-serif;
+	font-size: 25px;
+	font-weight: 800;
+	color: white;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
 
-    .disclaimer-small {
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 20px;
-        text-align: center;
-        color: $main;
-        opacity: 0.25;
-    }
+.section-newsletter {
+	background-color: white;
+	padding-top: calc(110px + 4vw);
+	padding-bottom: 110px;
 
+	.newsletter {
+		margin: auto;
+	}
+}
 
+.angebote-courses {
+	.header-accent span::after {
+		background-image: linear-gradient(to right, $course-kinder, $course-erwachsene);
+	}
+	.angebot-header h4::after {
+		color: $course-kinder;
+	}
+}
 
-    .field-badge {
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
-        background-color: $accent;
-        position: absolute;
-        top: -20px;
-        left: 25px;
-    }
-    .field-badge span {
-        font-family: proxima-soft, sans-serif;
-        font-size: 25px;
-        font-weight: 800;
-        color: white;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+.angebote-workshops {
+	.header-accent span::after {
+		background-image: linear-gradient(to right, $workshop-kinder, $workshop-erwachsene);
+	}
+	.angebot-header h4::after {
+		color: $workshop-kinder;
+	}
+}
+.angebote-birthdays {
+	.header-accent span::after {
+		background-image: linear-gradient(to right, $accent, var(--color-accent-dark));
+	}
+	.angebot-header h4::after {
+		color: $accent;
+	}
+}
+.angebote-ferienprogramm {
+	.header-accent span::after {
+		background-image: linear-gradient(to right, $ferienprogramm, $ferienprogramm-dark);
+	}
+	.angebot-header h4::after {
+		color: $ferienprogramm;
+	}
+}
 
-
-
-
-
-
-
-    .section-newsletter {
-        background-color: white;
-        padding-top: calc(110px + 4vw);
-        padding-bottom: 110px;
-
-        .newsletter {
-            margin: auto;
-        }
-    }
-
-
-
-
-
-
-
-
-    .angebote-courses {
-        .header-accent span::after {
-            background-image: linear-gradient(to right, $course-kinder, $course-erwachsene);
-        }
-        .angebot-header h4::after {
-            color: $course-kinder;
-        }
-    }
-
-    .angebote-workshops {
-        .header-accent span::after {
-            background-image: linear-gradient(to right, $workshop-kinder, $workshop-erwachsene);
-        }
-        .angebot-header h4::after {
-            color: $workshop-kinder;
-        }
-    }
-    .angebote-birthdays {
-        .header-accent span::after {
-            background-image: linear-gradient(to right, $accent, var(--color-accent-dark));
-        }
-        .angebot-header h4::after {
-            color: $accent;
-        }
-    }
-    .angebote-ferienprogramm {
-        .header-accent span::after {
-            background-image: linear-gradient(to right, $ferienprogramm, $ferienprogramm-dark);
-        }
-        .angebot-header h4::after {
-            color: $ferienprogramm;
-        }
-    }
-
-
-    .course-kinder .group {
-        color: $course-kinder;
-    }
-    .course-erwachsene .group {
-        color: $course-erwachsene;
-    }
-    .workshop-kinder .group {
-        color: $workshop-kinder;
-    }
-    .workshop-erwachsene .group {
-        color: $workshop-erwachsene;
-    }
-    .birthday .group {
-        color: $accent;
-    }
-    .ferienprogramm-kinder .group {
-        color: $ferienprogramm;
-    }
+.course-kinder .group {
+	color: $course-kinder;
+}
+.course-erwachsene .group {
+	color: $course-erwachsene;
+}
+.workshop-kinder .group {
+	color: $workshop-kinder;
+}
+.workshop-erwachsene .group {
+	color: $workshop-erwachsene;
+}
+.birthday .group {
+	color: $accent;
+}
+.ferienprogramm-kinder .group {
+	color: $ferienprogramm;
+}

@@ -119,7 +119,7 @@ body.single-product {
 
 		.badge-tooltip {
 			margin-bottom: 20px;
-			@include flex-row();
+			@include flex('row');
 			align-items: center;
 			gap: 10px;
 
@@ -202,7 +202,7 @@ body.single-product {
 			}
 
 			.value {
-				@include flex-row();
+				@include flex('row');
 				align-items: center;
 				column-gap: 8px;
 
@@ -235,7 +235,7 @@ body.single-product {
 			tbody {
 				tr {
 					padding-bottom: 30px;
-					@include flex-column();
+					@include flex('column');
 					position: relative;
 
 					&:last-of-type {
@@ -249,7 +249,7 @@ body.single-product {
 					}
 
 					.value {
-						@include flex-column();
+						@include flex('column');
 						margin-top: 15px;
 
 						.variation-selector {
@@ -257,7 +257,7 @@ body.single-product {
 						}
 
 						.tawcvs-swatches {
-							@include flex-row();
+							@include flex('row');
 							flex-wrap: wrap;
 							justify-content: flex-start;
 							column-gap: 15px;
@@ -337,11 +337,11 @@ body.single-product {
 		// Add to cart Button
 		form.cart:not(.variations_form),
 		.woocommerce-variation-add-to-cart {
-			@include flex-row();
+			@include flex('row');
 			align-items: stretch;
 
 			.quantity {
-				@include flex-column();
+				@include flex('column');
 				font-size: 16px;
 				min-width: 60px;
 
@@ -423,7 +423,7 @@ body.single-product {
 
 		// Stichpunkte
 		.product__bulletpoints {
-			@include flex-column();
+			@include flex('column');
 			margin-top: 45px;
 
 			h4 {
@@ -436,7 +436,7 @@ body.single-product {
 
 				li {
 					padding: 12px 0;
-					@include flex-row();
+					@include flex('row');
 					justify-content: flex-start;
 					gap: 10px;
 					border-top: solid $linegray 1px;

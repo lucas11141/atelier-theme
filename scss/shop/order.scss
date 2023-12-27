@@ -1,7 +1,7 @@
 //
 .account--order-single {
 	.container {
-		@include flex-column();
+		@include flex('column');
 		align-items: stretch;
 		gap: 60px;
 		@media only screen and (max-width: $desktop) {
@@ -49,13 +49,13 @@
 			.labels {
 				margin-bottom: 10px;
 				width: 100%;
-				@include flex-row();
+				@include flex('row');
 				justify-content: space-between;
 				span {
 					position: relative;
 					color: $darkgray;
 					&::after {
-						content: "";
+						content: '';
 						height: 9px;
 						width: 9px;
 						border-radius: 50%;
@@ -174,13 +174,13 @@
 		}
 		.tracking-header {
 			padding-bottom: 20px;
-			@include flex-row();
+			@include flex('row');
 			flex-direction: row-reverse;
 			@include dashed-border($linegray, bottom);
 			.tracking_number_wrap {
 				margin: 0;
 				padding: 0;
-				@include flex-row();
+				@include flex('row');
 				flex-direction: row-reverse;
 				align-items: center;
 				gap: 15px;
@@ -194,7 +194,7 @@
 				.tracking_number_div {
 					margin: 0;
 					li {
-						@include flex-column();
+						@include flex('column');
 						align-items: flex-end;
 					}
 					strong {
@@ -213,7 +213,7 @@
 				-webkit-text-stroke-color: $accent;
 				position: relative;
 				&::after {
-					content: "status";
+					content: 'status';
 					padding: 0;
 					color: $main;
 					font-family: $main-font;
@@ -328,7 +328,7 @@
 				}
 				li {
 					&::before {
-						content: "";
+						content: '';
 						height: 8px;
 						width: 8px;
 						background-color: $accent;
@@ -417,7 +417,7 @@
 	// comments
 	.commentlist {
 		padding: 25px 27px;
-		@include flex-column();
+		@include flex('column');
 		gap: 20px;
 		background-color: white;
 		border-radius: 15px;
@@ -435,7 +435,7 @@
 	// buttons
 	.order__controls {
 		width: 100%;
-		@include flex-column();
+		@include flex('column');
 		align-items: stretch;
 		gap: 12px;
 		.button {
@@ -454,25 +454,25 @@
 	// table
 	.shop_table tfoot {
 		tr:nth-of-type(1),
-		tr[data-row="discount_subtotal"] {
+		tr[data-row='discount_subtotal'] {
 			@extend .tr--bold;
 			th,
 			td {
 				padding-bottom: 9px;
 			}
 		}
-		tr[data-row="discount_subtotal"] {
+		tr[data-row='discount_subtotal'] {
 			@extend .tr--border-top;
 		}
-		tr[data-row="cart_subtotal"],
-		tr[data-row="discount"],
-		tr[data-row="shipping"] {
+		tr[data-row='cart_subtotal'],
+		tr[data-row='discount'],
+		tr[data-row='shipping'] {
 			th,
 			td {
 				padding-bottom: 27px;
 			}
 		}
-		tr[data-row="order_total"] {
+		tr[data-row='order_total'] {
 			@extend .tr--border-top;
 			@extend .tr--bold;
 			th,
@@ -480,8 +480,8 @@
 				padding-bottom: 27px;
 			}
 		}
-		&:has(tr[data-row="discount"]) {
-			tr[data-row="cart_subtotal"] {
+		&:has(tr[data-row='discount']) {
+			tr[data-row='cart_subtotal'] {
 				th,
 				td {
 					padding-bottom: 9px;
@@ -504,7 +504,7 @@
 	.order__payment {
 		&__content {
 			padding: 25px 27px;
-			@include flex-column();
+			@include flex('column');
 			gap: 20px;
 			border-radius: 15px;
 			background-color: white;
@@ -520,8 +520,8 @@
 		display: none !important;
 	}
 
-	&:has(.shop_table tr[data-row="shipping"]) {
-		.shop_table tr[data-row="cart_subtotal"] {
+	&:has(.shop_table tr[data-row='shipping']) {
+		.shop_table tr[data-row='cart_subtotal'] {
 			td,
 			th {
 				padding-bottom: 7px;
@@ -529,7 +529,7 @@
 		}
 	}
 	&:has(.order__payment) {
-		.shop_table tr[data-row="payment_method"] {
+		.shop_table tr[data-row='payment_method'] {
 			display: none;
 		}
 	}
@@ -537,7 +537,7 @@
 
 .woocommerce-order-overview,
 .order__overview {
-	@include flex-row();
+	@include flex('row');
 	justify-content: flex-start;
 	column-gap: 20px;
 	padding-left: 0;
@@ -574,7 +574,7 @@
 	@extend .gray__block;
 }
 .addresses {
-	@include flex-row();
+	@include flex('row');
 	column-gap: 20px;
 	.col-1,
 	.col-2 {

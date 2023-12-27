@@ -2,10 +2,10 @@
 	width: 100%;
 	overflow: hidden;
 
-	@include flex-row();
+	@include flex('row');
 
 	.wrapper {
-		@include flex-row();
+		@include flex('row');
 		justify-content: flex-end;
 		align-items: center;
 		column-gap: 75px;

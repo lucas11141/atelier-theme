@@ -1,13 +1,13 @@
 .headline__button {
-    @include flex-row();
-    align-items: flex-end;
-    column-gap: 100px;
-    @media only screen and (max-width: $desktop) {
-        column-gap: 50px;
-    }
-    @media only screen and (max-width: $tablet) {
-        flex-direction: column;
-        align-items: flex-start;
-        row-gap: 25px;
-    }
+	@include flex('row');
+	align-items: flex-end;
+	column-gap: 100px;
+	@media only screen and (max-width: $desktop) {
+		column-gap: 50px;
+	}
+	@media only screen and (max-width: $tablet) {
+		flex-direction: column;
+		align-items: flex-start;
+		row-gap: 25px;
+	}
 }

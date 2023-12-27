@@ -29,12 +29,7 @@ $archive-gap: 20px;
 .shop-hero-banner--archive {
 	border-bottom: solid 5px $accent;
 	background-color: transparent !important;
-	background-image: linear-gradient(
-		to right,
-		#001e34 0%,
-		#001e34 50%,
-		rgba(0, 30, 52, 0.8) 100%
-	);
+	background-image: linear-gradient(to right, #001e34 0%, #001e34 50%, rgba(0, 30, 52, 0.8) 100%);
 	.shop-hero-banner__background-image {
 		background-color: $main;
 		width: 50%;
@@ -58,7 +53,7 @@ $archive-gap: 20px;
 	}
 	.shop-hero-banner__content {
 		// margin: -20px auto;
-		@include flex-row();
+		@include flex('row');
 		justify-content: flex-start;
 		align-items: stretch;
 		gap: 70px;
@@ -72,11 +67,11 @@ $archive-gap: 20px;
 				width: 100%;
 				border-radius: 25px;
 				object-fit: cover;
-				@include pos-center();
+				@include pos('center');
 			}
 		}
 		.category__header__content {
-			@include flex-column();
+			@include flex('column');
 			justify-content: center;
 			#main {
 				padding: 0;
@@ -228,7 +223,7 @@ $archive-gap: 20px;
 		margin-top: 20px;
 		padding-top: 30px;
 		// padding-left: 0;
-		@include flex-row();
+		@include flex('row');
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		align-items: stretch;
@@ -302,7 +297,7 @@ $archive-gap: 20px;
 .woocommerce-pagination {
 	margin-top: 60px;
 	ul.page-numbers {
-		@include flex-row();
+		@include flex('row');
 		justify-content: flex-end;
 		column-gap: 6px;
 		li {
@@ -345,11 +340,11 @@ $archive-gap: 20px;
 				}
 				&.prev {
 					margin-right: 8px;
-					background-image: url("../img/shop/arrow_prev_page.svg");
+					background-image: url('../img/shop/arrow_prev_page.svg');
 				}
 				&.next {
 					margin-left: 8px;
-					background-image: url("../img/shop/arrow_next_page.svg");
+					background-image: url('../img/shop/arrow_next_page.svg');
 				}
 				&.dots {
 					width: 20px;

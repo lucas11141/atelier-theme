@@ -1,7 +1,7 @@
 // order facts
 .order__facts {
 	padding: 0;
-	@include flex-row();
+	@include flex('row');
 	justify-content: flex-start;
 	align-items: center;
 	gap: 30px;
@@ -46,9 +46,9 @@
 		.header__buttons {
 			margin-top: 25px;
 			width: 100%;
-			@include flex-row();
+			@include flex('row');
 			.account__navigation {
-				@include flex-row();
+				@include flex('row');
 				flex-wrap: wrap;
 				column-gap: 15px;
 				row-gap: 12px;
@@ -69,7 +69,7 @@
 		.account__logout {
 			padding-top: 16px;
 			padding-bottom: 16px;
-			@include flex-row();
+			@include flex('row');
 			align-items: baseline;
 			column-gap: 8px;
 			img {
@@ -134,7 +134,7 @@
 
 	//
 	.account__list {
-		@include flex-column();
+		@include flex('column');
 		row-gap: 35px;
 		.list__item {
 			padding: 30px;
@@ -143,7 +143,7 @@
 			@include dropshadow();
 			border-radius: 25px;
 			.item__header {
-				@include flex-row();
+				@include flex('row');
 				align-items: center;
 				& + .item__content {
 					margin-top: 25px;
@@ -161,10 +161,10 @@
 				}
 				.order__actions {
 					width: 230px;
-					@include flex-row();
+					@include flex('row');
 					gap: 10px;
 					.button {
-						@include flex-row();
+						@include flex('row');
 						justify-content: center;
 						flex: 1;
 						padding-left: 0;
@@ -180,13 +180,13 @@
 			}
 			.item__content {
 				padding-top: 25px;
-				@include flex-row();
+				@include flex('row');
 				justify-content: space-between;
 				align-items: center;
 				column-gap: 100px;
 				.order__first__product {
 					width: fit-content;
-					@include flex-row();
+					@include flex('row');
 					justify-content: flex-start;
 					align-items: center;
 					column-gap: 25px;
@@ -222,7 +222,7 @@
 	//
 	.account__content--dashboard {
 		.dashboard__links {
-			@include flex-row();
+			@include flex('row');
 			flex-wrap: wrap;
 			gap: $gap;
 			.dashboard__item {
@@ -285,7 +285,7 @@
 					border: none;
 					@include dropshadow();
 					.title {
-						@include flex-row();
+						@include flex('row');
 						h5 {
 							@include fluid-type(14px, 15px);
 							color: $main;
@@ -313,7 +313,7 @@
 			}
 			.woocommerce-address-fields {
 				.woocommerce-address-fields__field-wrapper {
-					@include flex-row();
+					@include flex('row');
 					justify-content: space-between;
 					align-items: flex-end;
 					flex-wrap: wrap;
@@ -328,7 +328,7 @@
 		}
 		.edit-account,
 		fieldset {
-			@include flex-row();
+			@include flex('row');
 			justify-content: space-between;
 			align-items: flex-end;
 			flex-wrap: wrap;
@@ -363,7 +363,7 @@
 	.nav__tabs {
 		margin: 0 auto 35px;
 		ul {
-			@include flex-row();
+			@include flex('row');
 			justify-content: center;
 			.tab__link {
 				padding: 12px 12px;
@@ -390,7 +390,7 @@
 		.woocommerce-form-login,
 		.woocommerce-form-register {
 			margin-top: 20px;
-			@include flex-column();
+			@include flex('column');
 			row-gap: 20px;
 			span[for='username'],
 			span[for='password'],
@@ -400,7 +400,7 @@
 			}
 			.form-row {
 				width: 100%;
-				@include flex-column();
+				@include flex('column');
 				align-items: stretch;
 			}
 			.woocommerce-form__label-for-checkbox,

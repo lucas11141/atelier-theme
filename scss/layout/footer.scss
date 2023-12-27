@@ -32,7 +32,7 @@
 		.list {
 			margin: 25px 0 5px;
 			width: 100%;
-			@include flex-row();
+			@include flex('row');
 			justify-content: start;
 			flex-wrap: wrap;
 			gap: 30px;
@@ -96,13 +96,13 @@
 	}
 
 	.footer__content {
-		@include flex-row();
+		@include flex('row');
 		gap: 70px $gap;
 		margin: 0 0 100px;
 
 		.footer__links {
 			flex: auto;
-			@include flex-row();
+			@include flex('row');
 			justify-content: flex-start;
 			flex-wrap: wrap;
 			gap: 50px $gap;
@@ -117,7 +117,7 @@
 
 			li.level-0 {
 				@include flex-item-width(3, $gap);
-				@include flex-column();
+				@include flex('column');
 				list-style: none;
 
 				& > a {
@@ -131,7 +131,7 @@
 					@include fluid-type(18px, 20px);
 
 					&::after {
-						content: "";
+						content: '';
 						height: 3px;
 						width: 50px;
 						background-color: $accent;
@@ -144,7 +144,7 @@
 						opacity: 60%;
 					}
 
-					&[href="#"] {
+					&[href='#'] {
 						pointer-events: none;
 					}
 				}
@@ -152,7 +152,7 @@
 				& > ul {
 					padding: 0;
 					width: 100%;
-					@include flex-column();
+					@include flex('column');
 					gap: 8px;
 
 					li.level-1 {
@@ -192,7 +192,7 @@
 	.footer__contact {
 		width: 280px;
 		min-height: 280px;
-		@include flex-column();
+		@include flex('column');
 		gap: 16px;
 
 		.contact__header {
@@ -214,7 +214,7 @@
 
 	.footer__buttons {
 		margin-bottom: 200px;
-		@include flex-row();
+		@include flex('row');
 
 		.button {
 			img {
@@ -343,7 +343,7 @@
 					position: relative;
 
 					&::after {
-						content: "";
+						content: '';
 						height: 3px;
 						width: 50px;
 						background-color: $accent;

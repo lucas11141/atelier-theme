@@ -1,56 +1,55 @@
 .bild__text {
-    @include flex-row();
-    align-items: center;
-    column-gap: 80px;
-    &.text-bild {
-        flex-direction: row-reverse;
-    }
-    .bild__text__image {
-        width: 400px;
-        max-width: 42vw;
-        border-radius: 15px;
-    }
-    .bild__text__content {
-        @include flex-column();
-        height: fit-content;
-        max-width: 520px;
-        h5:first-of-type {
-            padding: 0;
-        }
-        .button {
-            margin-top: 35px;
-        }
-    }
-    @media only screen and (max-width: $screen) {
-        column-gap: 6vw;    
-    }
-    @media only screen and (max-width: $desktop) {
-        column-gap: 6vw;
-    }
-    @media only screen and (max-width: $tablet) {
-        flex-direction: column;
-        row-gap: 35px;
-        &.text-bild {
-            flex-direction: column;
-        }
-        .bild__text__image {
-            height: 80vw;
-            width: 100%;
-            max-width: unset;
-            max-height: 500px;
-            // object-fit: cover;
-            // object-position: 100% 20%;
-            object-fit: contain;
-            object-position: center;
-        }
-        .bild__text__content {
-            max-width: unset;
-            .button {
-                margin-top: 25px;
-            }
-        }
-    }
-    @media only screen and (max-width: $mobile) {
-
-    }
+	@include flex('row');
+	align-items: center;
+	column-gap: 80px;
+	&.text-bild {
+		flex-direction: row-reverse;
+	}
+	.bild__text__image {
+		width: 400px;
+		max-width: 42vw;
+		border-radius: 15px;
+	}
+	.bild__text__content {
+		@include flex('column');
+		height: fit-content;
+		max-width: 520px;
+		h5:first-of-type {
+			padding: 0;
+		}
+		.button {
+			margin-top: 35px;
+		}
+	}
+	@media only screen and (max-width: $screen) {
+		column-gap: 6vw;
+	}
+	@media only screen and (max-width: $desktop) {
+		column-gap: 6vw;
+	}
+	@media only screen and (max-width: $tablet) {
+		flex-direction: column;
+		row-gap: 35px;
+		&.text-bild {
+			flex-direction: column;
+		}
+		.bild__text__image {
+			height: 80vw;
+			width: 100%;
+			max-width: unset;
+			max-height: 500px;
+			// object-fit: cover;
+			// object-position: 100% 20%;
+			object-fit: contain;
+			object-position: center;
+		}
+		.bild__text__content {
+			max-width: unset;
+			.button {
+				margin-top: 25px;
+			}
+		}
+	}
+	@media only screen and (max-width: $mobile) {
+	}
 }

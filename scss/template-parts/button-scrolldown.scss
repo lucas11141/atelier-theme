@@ -7,7 +7,7 @@ Scroll Down Button
 	font-weight: 800;
 	text-transform: uppercase;
 	transition: 300ms all $ease_standard;
-	@include flex-row();
+	@include flex('row');
 	gap: 12px;
 	align-items: center;
 
@@ -20,7 +20,7 @@ Scroll Down Button
 		position: relative;
 
 		svg {
-			@include pos-center();
+			@include pos('center');
 		}
 	}
 

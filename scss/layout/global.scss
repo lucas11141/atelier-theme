@@ -350,7 +350,7 @@ strong {
 Buttons Styling
 \*------------------------------------*/
 .button {
-	@include flex-row();
+	@include flex('row');
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -651,7 +651,7 @@ Buttons Styling
 Link Button
 \*------------------------------------*/
 .button__link {
-	@include flex-row();
+	@include flex('row');
 	align-items: center;
 	.button {
 	}
@@ -734,7 +734,7 @@ Link Button
 Quote List
 \*------------------------------------*/
 .quote__list {
-	@include flex-column();
+	@include flex('column');
 	row-gap: 50px;
 	.list__item {
 		padding: 50px;
@@ -762,7 +762,7 @@ Quote List
 		}
 		.item__infos {
 			margin-top: 50px;
-			@include flex-row();
+			@include flex('row');
 			justify-content: flex-start;
 			align-items: center;
 			column-gap: 20px;
@@ -938,7 +938,7 @@ Abstände
 	padding: 5px;
 	padding-right: 15px;
 	width: fit-content;
-	@include flex-row();
+	@include flex('row');
 	align-items: center;
 	column-gap: 10px;
 	background-color: $lightgray;
@@ -956,7 +956,7 @@ Abstände
 			@include fluid-type(16px, 18px);
 			font-weight: 800;
 			color: white;
-			@include pos-center();
+			@include pos('center');
 		}
 	}
 	p {
@@ -1027,12 +1027,12 @@ Abstände
 }
 
 .links__list {
-	@include flex-column();
+	@include flex('column');
 	row-gap: 20px;
 	li {
 		list-style-type: none;
 		a {
-			@include flex-row();
+			@include flex('row');
 			column-gap: 15px;
 			align-items: center;
 			transition: all 300ms $ease_standard;
@@ -1054,7 +1054,7 @@ Abstände
 
 /* ---- Akkordeon ----*/
 .accordeon {
-	@include flex-column();
+	@include flex('column');
 	align-items: stretch;
 	gap: 15px;
 
@@ -1069,7 +1069,7 @@ Abstände
 		}
 
 		.accordeon__header {
-			@include flex-row();
+			@include flex('row');
 			align-items: center;
 			cursor: pointer;
 			padding: 25px;
@@ -1200,7 +1200,7 @@ Abstände
 				.content__logotext {
 					padding: 30px 30px 25px;
 					width: 100%;
-					@include flex-column();
+					@include flex('column');
 					justify-content: center;
 					row-gap: 22px;
 					background-image: url(../img/elements/kunsttute_material_wave.svg);
@@ -1231,7 +1231,7 @@ Abstände
 .error__404 {
 	margin: 300px auto;
 	max-width: 600px;
-	@include flex-column();
+	@include flex('column');
 	align-items: center;
 	position: relative;
 	* {
@@ -1655,7 +1655,7 @@ a img.aligncenter {
     -
 \*------------------------------------*/
 .nav--law {
-	@include flex-row();
+	@include flex('row');
 	flex-direction: row !important;
 	gap: 6px;
 	li {
@@ -1818,12 +1818,12 @@ a img.aligncenter {
 .slider__controls {
 	@extend .inner;
 	margin: 25px auto 0;
-	@include flex-row();
+	@include flex('row');
 	justify-content: space-between;
 	align-items: center;
 }
 .slider__arrows {
-	@include flex-row();
+	@include flex('row');
 	.slick-arrow {
 		&.slick-prev,
 		&.slick-next {
@@ -1873,7 +1873,7 @@ a img.aligncenter {
 }
 .slick-dots {
 	height: 15px;
-	@include flex-row();
+	@include flex('row');
 	column-gap: 6px;
 	padding: 0;
 	width: fit-content;
@@ -1897,7 +1897,7 @@ a img.aligncenter {
 				background-color: $accent;
 				border-radius: 10px;
 				opacity: 0;
-				@include pos-center();
+				@include pos('center');
 				@include transition();
 			}
 		}
@@ -1953,14 +1953,14 @@ a img.aligncenter {
     Borlabs Content Blocker (Google Maps)
 \*------------------------------------*/
 .BorlabsCookie._brlbs-cb-googlemaps .bl-content-blocker {
-	@include pos-cover();
-	@include flex-center();
+	@include pos('cover');
+	@include flex('center');
 	background-color: $lightgray;
 	border: solid 1px $linegray;
 	&__content {
 		width: $wrapper-width;
 		max-width: 600px;
-		@include flex-column();
+		@include flex('column');
 		align-items: center;
 		* {
 			text-align: center;

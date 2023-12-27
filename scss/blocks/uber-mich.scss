@@ -43,7 +43,7 @@
 		.bild__text__image {
 			width: 100%;
 			height: unset;
-			@include flex-row();
+			@include flex('row');
 			align-items: center;
 			justify-content: center;
 			column-gap: 30px;

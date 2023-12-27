@@ -11,7 +11,7 @@
 		}
 
 		.banner__quote {
-			@include flex-column();
+			@include flex('column');
 			align-items: center;
 
 			p {
@@ -35,7 +35,7 @@
 
 		.banner__text__image {
 			margin-top: 50px;
-			@include flex-row();
+			@include flex('row');
 			justify-content: space-between;
 
 			.banner__text {
@@ -53,7 +53,7 @@
 				position: relative;
 
 				&::after {
-					content: "Frauke Delatron";
+					content: 'Frauke Delatron';
 					font-size: 18px;
 					font-weight: 800;
 					position: absolute;
@@ -68,13 +68,13 @@
 				}
 
 				.portrait__white {
-					@include pos-center();
+					@include pos('center');
 					transform: translate(-50%, -50%) scale(1.07);
 					z-index: 1;
 				}
 
 				.portrait__border {
-					@include pos-center();
+					@include pos('center');
 					transform: translate(-50%, -50%) scale(1.1);
 					z-index: -1;
 				}

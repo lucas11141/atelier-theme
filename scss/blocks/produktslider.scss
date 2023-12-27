@@ -1,7 +1,7 @@
 .produktslider {
 	&__header {
 		margin-bottom: 40px;
-		@include flex-row();
+		@include flex('row');
 		justify-content: space-between;
 		align-items: flex-end;
 		.button {
@@ -29,7 +29,7 @@
 		position: relative;
 
 		.slider {
-			@include flex-row();
+			@include flex('row');
 			margin: auto;
 			position: static !important;
 			width: 1000px;
@@ -56,7 +56,7 @@
 	@extend .wrapper;
 	margin: auto;
 	.slick-track {
-		@include flex-row();
+		@include flex('row');
 		justify-content: flex-start;
 		align-items: stretch;
 	}

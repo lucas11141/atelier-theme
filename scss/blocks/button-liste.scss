@@ -1,5 +1,5 @@
 .buttons__list {
-	@include flex-row();
+	@include flex('row');
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	column-gap: 20px;

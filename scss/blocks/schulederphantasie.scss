@@ -1,40 +1,47 @@
 .schulederphantasie {
-    * {
-        padding: 0;
-    }
-    width: 800px;
-    margin: 0 auto;
-    padding: 0px 40px 45px 40px;
-    border-radius: 25px;
-    background-color: $lightgray;
-    @include flex-column();
-    align-items: center;
-    .image { 
-        margin: auto;
-        width: 450px;
-        height: 62px;
-        max-width: 100%;
-        transform: translateY(-50%);
-        object-fit: contain;
-        object-position: center;
-    }
-    p {
-        margin-bottom: 15px;
-        text-align: center;
-    }
-    .link-arrow-underlined {
-        &::after {
-            background: linear-gradient(to right, #de1e86 0%, #e95000 25%, #ffc700 50%, #008a75 75%, #00a6ec 100%);
-        }
-    }
+	* {
+		padding: 0;
+	}
+	width: 800px;
+	margin: 0 auto;
+	padding: 0px 40px 45px 40px;
+	border-radius: 25px;
+	background-color: $lightgray;
+	@include flex('column');
+	align-items: center;
+	.image {
+		margin: auto;
+		width: 450px;
+		height: 62px;
+		max-width: 100%;
+		transform: translateY(-50%);
+		object-fit: contain;
+		object-position: center;
+	}
+	p {
+		margin-bottom: 15px;
+		text-align: center;
+	}
+	.link-arrow-underlined {
+		&::after {
+			background: linear-gradient(
+				to right,
+				#de1e86 0%,
+				#e95000 25%,
+				#ffc700 50%,
+				#008a75 75%,
+				#00a6ec 100%
+			);
+		}
+	}
 }
 @media only screen and (max-width: $desktop) {
-    .schulederphantasie {
-        padding: 0px 40px 40px 40px;
+	.schulederphantasie {
+		padding: 0px 40px 40px 40px;
 
-        .image {
-            width: 380px;
-            height: 52px;
-        }
-    }
+		.image {
+			width: 380px;
+			height: 52px;
+		}
+	}
 }

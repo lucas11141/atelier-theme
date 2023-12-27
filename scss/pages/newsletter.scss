@@ -1,5 +1,5 @@
 .page__newsletter {
-	@include flex-row();
+	@include flex('row');
 	align-items: stretch;
 	column-gap: 100px;
 	.newsletter__img {
@@ -28,7 +28,7 @@
 	}
 	.newsletter__content {
 		padding: 80px calc((100vw - 1000px) / 2) 80px 0;
-		@include flex-column();
+		@include flex('column');
 		justify-content: center;
 		.logo {
 			width: 90px;
@@ -39,7 +39,7 @@
 	}
 	.newsletter__success {
 		padding: 80px calc((100vw - 1000px) / 2) 80px 0;
-		@include flex-column();
+		@include flex('column');
 		justify-content: center;
 		.process__step {
 			padding: 30px 0 39px 40px;
@@ -55,7 +55,7 @@
 	}
 	.newsletter__process {
 		margin-top: 50px;
-		@include flex-row();
+		@include flex('row');
 		justify-content: flex-start;
 		column-gap: 50px;
 	}
@@ -85,11 +85,11 @@
 				}
 			}
 		}
-		input[type="submit"] {
+		input[type='submit'] {
 			margin-top: 10px;
 		}
 		.sib_signup_box_inside_1 {
-			@include flex-column();
+			@include flex('column');
 			align-items: stretch;
 			row-gap: 20px;
 		}

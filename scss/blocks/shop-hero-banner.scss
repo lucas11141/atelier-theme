@@ -26,7 +26,7 @@
 		}
 	}
 	&__image-text {
-		@include flex-row();
+		@include flex('row');
 		justify-content: space-between;
 		align-items: center;
 	}
@@ -34,7 +34,7 @@
 		width: 480px;
 		&__item {
 			width: 480px;
-			@include flex-column();
+			@include flex('column');
 			gap: 60px;
 			.tag,
 			h1,
@@ -274,7 +274,7 @@
 	overflow: hidden;
 	pointer-events: none;
 	div {
-		@include flex-row();
+		@include flex('row');
 		justify-content: flex-start;
 		align-items: baseline;
 		gap: 30px;

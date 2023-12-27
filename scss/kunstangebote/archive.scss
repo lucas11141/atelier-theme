@@ -37,7 +37,7 @@
 
 			.header__image {
 				width: 760px;
-				mask-image: url("../img/website/angebotsseite/header_image_mask.png");
+				mask-image: url('../img/website/angebotsseite/header_image_mask.png');
 				mask-repeat: no-repeat;
 				mask-size: contain;
 				position: absolute;
@@ -168,7 +168,7 @@
 
 	.ferienprogramm__discount {
 		margin-top: 90px;
-		@include flex-column();
+		@include flex('column');
 		align-items: center;
 		* {
 			text-align: center;
@@ -178,13 +178,13 @@
 		}
 		.discount__list {
 			margin: 55px 0 45px;
-			@include flex-row();
+			@include flex('row');
 			justify-content: center;
 			flex-wrap: wrap;
 			column-gap: 80px;
 			row-gap: 30px;
 			.discount__item {
-				@include flex-column();
+				@include flex('column');
 				justify-content: center;
 				align-items: center;
 				* {
@@ -201,7 +201,7 @@
 						font-weight: 900;
 					}
 					&::after {
-						content: "%";
+						content: '%';
 						@include fluid-type(65px, 75px);
 						font-weight: 900;
 						line-height: 1;
@@ -259,7 +259,7 @@
 			font-size: 40px;
 			font-weight: 600;
 			color: var(--product-color-1);
-			@include pos-center();
+			@include pos('center');
 			transform: translate(-50%, calc(-50% - 5px));
 		}
 
@@ -284,7 +284,7 @@
 	.products__filter {
 		@extend .wrapper;
 		max-width: 700px;
-		@include flex-row();
+		@include flex('row');
 		align-items: center;
 		gap: 50px;
 
@@ -307,7 +307,7 @@
 
 			&::before,
 			&::after {
-				content: "";
+				content: '';
 				display: block;
 				background-size: contain;
 				position: absolute;
@@ -391,11 +391,7 @@
 			.products__count {
 				border-color: transparent;
 				background-image: linear-gradient(white, white),
-					linear-gradient(
-						to right,
-						var(--product-color-1),
-						var(--product-color-2)
-					);
+					linear-gradient(to right, var(--product-color-1), var(--product-color-2));
 				background-origin: border-box;
 				background-clip: content-box, border-box;
 
@@ -411,7 +407,7 @@
 			}
 
 			.filter__reset {
-				@include flex-row();
+				@include flex('row');
 				align-items: center;
 				gap: 5px;
 				position: absolute;
@@ -477,7 +473,7 @@
 
 	.product-list {
 		@extend .wrapper;
-		@include flex-column();
+		@include flex('column');
 		align-items: stretch;
 		gap: 35px;
 
@@ -487,7 +483,7 @@
 	}
 
 	.product__item {
-		@include flex-row();
+		@include flex('row');
 		justify-content: flex-start;
 		align-items: stretch;
 		border-radius: 25px;
@@ -526,7 +522,7 @@
 		.product__content {
 			padding: 45px 40px 45px 50px;
 			position: relative;
-			@include flex-column();
+			@include flex('column');
 			justify-content: flex-start;
 
 			h3,
@@ -620,7 +616,7 @@
 				}
 
 				&::before {
-					content: "";
+					content: '';
 					height: 100%;
 					width: 100%;
 					background-image: radial-gradient(
@@ -737,7 +733,7 @@
 
 	.no-products {
 		padding: 80px 50px;
-		@include flex-center();
+		@include flex('center');
 		border-radius: 25px;
 		@include box-shadow();
 		background: white;
@@ -753,7 +749,7 @@
 	.border__box {
 		@extend .wrapper;
 		padding: 50px;
-		@include flex-column();
+		@include flex('column');
 		align-items: center;
 		border-radius: 25px;
 		border: solid var(--product-color-1) 4px;

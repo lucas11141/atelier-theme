@@ -1,23 +1,6 @@
 /*------------------------------------*/
 /* New */
 /*------------------------------------*/
-// Flexbox Configurator
-@mixin flex($variant: '', $gap: 0px) {
-	display: flex;
-	justify-content: flex-start;
-	align-items: flex-start;
-	gap: $gap;
-	@if $variant == 'row' {
-		flex-direction: row;
-	}
-	@if $variant == 'column' {
-		flex-direction: column;
-	}
-	@if $variant == 'center' {
-		justify-content: center;
-		align-items: center;
-	}
-}
 
 // Absolute position
 @mixin pos($variant: '') {
@@ -102,9 +85,9 @@
 	}
 }
 
-/*------------------------------------*\
-    Global Shop Functions
-\*------------------------------------*/
+/*------------------------------------*/
+/* Global shop functions */
+/*------------------------------------*/
 @mixin shadow-box {
 	box-shadow: 0px;
 }
@@ -113,32 +96,33 @@
 	box-shadow: 2px 2px 30px rgba(black, 8%);
 }
 
-/*------------------------------------*\
-    Flexbox
-\*------------------------------------*/
-
-@mixin flex-row {
+/*------------------------------------*/
+/*  Flexbox Configurator */
+/*------------------------------------*/
+@mixin flex($variant: '', $gap: 0px) {
 	display: flex;
-	flex-direction: row;
 	flex-wrap: nowrap;
 	align-items: flex-start;
 	justify-content: space-between;
+	gap: $gap;
+
+	@if $variant == 'row' {
+		flex-direction: row;
+	}
+
+	@if $variant == 'column' {
+		flex-direction: column;
+	}
+
+	@if $variant == 'center' {
+		justify-content: center;
+		align-items: center;
+	}
 }
 
-@mixin flex-column {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	align-items: flex-start;
-	justify-content: space-between;
-}
-
-@mixin flex-center {
-	@include flex-row();
-	justify-content: center;
-	align-items: center;
-}
-
+/*------------------------------------*/
+/* Section Name */
+/*------------------------------------*/
 @mixin flex-item-width($column-count, $gap) {
 	width: calc((100% - ((#{$column-count} - 1) * #{$gap})) / #{$column-count});
 }
@@ -152,26 +136,30 @@
 	);
 }
 
-/*------------------------------------*\
-    Position
-\*------------------------------------*/
-@mixin pos-center {
+/*------------------------------------*/
+/* Position */
+/*------------------------------------*/
+@mixin pos($variant: '') {
 	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-}
-@mixin pos-cover() {
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
+
+	@if $variant == 'center' {
+		left: 50%;
+		top: 50%;
+		translate: -50% -50%;
+	}
+
+	@if $variant == 'cover' {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		top: 0;
+		left: 0;
+	}
 }
 
-/*------------------------------------*\
-    Sonstiges
-\*------------------------------------*/
+/*------------------------------------*/
+/* Misc */
+/*------------------------------------*/
 @mixin box-shadow {
 	box-shadow: $shadow_stardard;
 }

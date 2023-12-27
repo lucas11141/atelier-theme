@@ -26,13 +26,13 @@
 		transform: translate(50%, -50%) !important;
 
 		&::before {
-			content: "";
+			content: '';
 			height: 16px;
 			aspect-ratio: 1;
 			background-image: url(../img/elements/cross_dark.svg);
 			background-size: contain;
 			background-repeat: no-repeat;
-			@include pos-center();
+			@include pos('center');
 			pointer-events: none;
 		}
 	}
@@ -59,7 +59,7 @@
 		background-color: white;
 		border-radius: 25px;
 		overflow-y: scroll;
-		@include pos-center();
+		@include pos('center');
 		.popup__close {
 			padding: 0;
 			height: 60px;
@@ -125,7 +125,7 @@
 
 .popup__pricelist {
 	.popup__content {
-		@include flex-row();
+		@include flex('row');
 		align-items: stretch;
 		.pricelist__description {
 			max-width: 360px;
@@ -134,7 +134,7 @@
 				padding: 0;
 			}
 			a {
-				@include flex-row();
+				@include flex('row');
 				column-gap: 10px;
 				justify-content: flex-end;
 				align-items: center;
@@ -163,7 +163,7 @@
 			}
 			.prices__list {
 				margin-top: 20px;
-				@include flex-row();
+				@include flex('row');
 				column-gap: 15px;
 				div {
 					padding: 15px 18px 10px 15px;

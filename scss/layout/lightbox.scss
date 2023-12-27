@@ -74,7 +74,7 @@
 
 .gallery__meta {
 	padding: 18px 20px;
-	@include flex-row();
+	@include flex('row');
 	column-gap: 20px;
 	background-color: white;
 	border-radius: 15px;

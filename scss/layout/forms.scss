@@ -206,7 +206,7 @@ $form-column-gap: 18px;
 .woocommerce-EditAccountForm {
 	&,
 	fieldset {
-		@include flex-row();
+		@include flex('row');
 		flex-wrap: wrap;
 		row-gap: $form-row-gap;
 		padding: 0px;
@@ -224,14 +224,14 @@ $form-column-gap: 18px;
 
 // Split Form
 .form__split {
-	@include flex-row();
+	@include flex('row');
 	flex-wrap: wrap;
 	justify-content: space-between;
 	width: calc(50% - (#{$form-column-gap} / 2));
 
 	p {
 		width: 100%;
-		@include flex-row();
+		@include flex('row');
 		flex-wrap: wrap;
 		row-gap: $form-row-gap;
 	}
@@ -318,7 +318,7 @@ textarea {
 // Single Input Formular
 .form--one__line {
 	width: 100%;
-	@include flex-row();
+	@include flex('row');
 	align-items: stretch;
 	.form-row {
 		margin: 0;
@@ -368,7 +368,7 @@ textarea {
 			font-size: 16px;
 			color: white;
 			position: relative;
-			@include pos-center();
+			@include pos('center');
 		}
 		&:hover {
 			background-size: 1300%;
@@ -451,7 +451,7 @@ textarea {
 
 .checkboxes {
 	margin: 10px 0 25px;
-	@include flex-column();
+	@include flex('column');
 	gap: 10px;
 }
 
