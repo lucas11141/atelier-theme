@@ -1,5 +1,5 @@
 export default function websiteMode() {
-	const websiteMode = document.querySelector('#website-mode').dataset.websiteMode;
+	const websiteMode = document.querySelector('#gtm-values').dataset.websiteMode;
 
 	if (websiteMode === 'shop') {
 		// add url parameter websiteMode to all links
@@ -11,14 +11,4 @@ export default function websiteMode() {
 			}
 		});
 	}
-
-	/*------------------------------------*/
-	/* 	Google Analytics
-    /*------------------------------------*/
-
-	// add content group to tag manager data layer
-	window.dataLayer = window.dataLayer || [];
-	window.dataLayer.push({
-		content_group: websiteMode,
-	});
 }

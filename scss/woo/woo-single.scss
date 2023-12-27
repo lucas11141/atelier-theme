@@ -10,7 +10,7 @@ body.single-product {
 	}
 
 	.site-main {
-		padding-top: 0 !important;
+		padding-top: 50px !important;
 
 		.woocommerce-breadcrumb {
 			display: none;
@@ -574,6 +574,10 @@ body.single-product {
 		// TODO: Move to global scope
 		.shop-hero-banner {
 			padding-bottom: 15px;
+		}
+
+		.site-main {
+			padding-top: 0 !important;
 		}
 
 		.woocommerce-notices-wrapper {

@@ -71,7 +71,8 @@ if (is_404()) $headerHiddenOnLoad = false;
 
     <?php get_template_part('template-parts/booking-reminder') ?>
 
-    <div id='website-mode' data-website-mode="<?= $websiteMode ?>"></div>
+    <!-- Google Tag Manager -->
+    <div id="gtm-values" data-website-mode="<?= $websiteMode ?>" data-traffic-type="<?= current_user_can('administrator') || ENV === 'development' ? 'internal' : 'external' ?>"></div>
 
     <header class="header <?= $headerHiddenOnLoad ? '--hidden-on-load' : '' ?> <?= is_page("Kunstangebote") ? "--hidden" : ''; ?> header--<?= $websiteMode ?>" data-show-offset="<?= $header_hidden_offset ?>">
 

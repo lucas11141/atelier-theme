@@ -1,16 +1,16 @@
 <?php
 function atelier_styles() {
-    wp_register_style('normalize', get_template_directory_uri() . '/assets/css/normalize.min.css', array(), '1.2.0_build-5', 'all');
+    wp_register_style('normalize', get_template_directory_uri() . '/assets/css/normalize.min.css', array(), '1.3.0', 'all');
     wp_enqueue_style('normalize'); // Enqueue it!
 
-    wp_register_style('atelierstyle', get_template_directory_uri() . '/assets/css/main.css', array(), '1.2.0_build-5', 'all');
+    wp_register_style('atelierstyle', get_template_directory_uri() . '/assets/css/main.css', array(), '1.3.0', 'all');
     wp_enqueue_style('atelierstyle'); // Enqueue it!
 }
 
 function atelier_header_scripts() {
     if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
 
-        wp_register_script('atelierscripts', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.2.0_build-5'); // Custom scripts
+        wp_register_script('atelierscripts', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.3.0'); // Custom scripts
         wp_enqueue_script('atelierscripts'); // Enqueue it!
     }
 }

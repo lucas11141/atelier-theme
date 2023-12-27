@@ -237,6 +237,8 @@
 		}
 	}
 	@media only screen and (max-width: $tablet) {
+		padding-bottom: 60px;
+
 		&__image-text {
 			gap: 50px;
 		}
@@ -252,6 +254,8 @@
 		}
 	}
 	@media only screen and (max-width: $mobile) {
+		padding-bottom: 30px;
+
 		&__text {
 			width: 100%;
 			max-width: unset;
