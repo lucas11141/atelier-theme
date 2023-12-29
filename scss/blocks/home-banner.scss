@@ -59,7 +59,7 @@
 					position: absolute;
 					left: 50%;
 					bottom: -60px;
-					transform: translateX(-50%);
+					translate: -50% 0;
 				}
 
 				.portrait__image {
@@ -69,13 +69,13 @@
 
 				.portrait__white {
 					@include pos('center');
-					transform: translate(-50%, -50%) scale(1.07);
+					scale: 1.07;
 					z-index: 1;
 				}
 
 				.portrait__border {
 					@include pos('center');
-					transform: translate(-50%, -50%) scale(1.1);
+					scale: 1.1;
 					z-index: -1;
 				}
 			}

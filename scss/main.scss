@@ -11,15 +11,15 @@ Author URI: https://youtube.com/followandrew
 // vars
 @import 'vars';
 
-// // lib
+// lib
 @import 'lib/functions';
 @import 'lib/mixins';
-
-@import 'lib/swiper-bundle.min';
-@import 'lib/slick';
 @import 'lib/hamburger';
-@import 'lib/reset';
-@import 'lib/mc-calendar.min';
+@import 'lib/print';
+@import 'lib/wordpress';
+
+// TODO: Remove slick and replace with swiper
+@import 'lib/slick';
 
 // layout
 @import 'layout/fonts';
