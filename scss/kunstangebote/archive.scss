@@ -114,7 +114,7 @@
 
 			a {
 				color: var(--product-color-1);
-				@extend .--hover-link;
+				@include hover-link;
 
 				&::after {
 					background-color: var(--product-color-1) !important;
@@ -248,7 +248,7 @@
 	}
 
 	.products__count {
-		@extend .wrapper;
+		@include inner;
 		height: 96px;
 		width: 96px;
 		border-radius: 50%;
@@ -282,7 +282,7 @@
 	}
 
 	.products__filter {
-		@extend .wrapper;
+		@include inner;
 		max-width: 700px;
 		@include flex('row');
 		align-items: center;
@@ -302,7 +302,7 @@
 			position: relative;
 			cursor: pointer;
 			overflow: hidden;
-			@include transition;
+			transition: $transition;
 			@include click-bounce;
 
 			&::before,
@@ -313,7 +313,7 @@
 				position: absolute;
 				background-repeat: no-repeat;
 				background-position: center;
-				@include transition;
+				transition: $transition;
 			}
 
 			&::before {
@@ -416,7 +416,7 @@
 				transform: translateX(-50%);
 				opacity: 50%;
 				cursor: pointer;
-				@include transition;
+				transition: $transition;
 
 				.feather {
 					width: 13px;
@@ -472,7 +472,7 @@
 	}
 
 	.product-list {
-		@extend .wrapper;
+		@include inner;
 		@include flex('column');
 		align-items: stretch;
 		gap: 35px;
@@ -533,7 +533,7 @@
 			}
 
 			h2 {
-				@extend h3;
+				@include h3;
 			}
 
 			h6 {
@@ -740,14 +740,14 @@
 
 		h2 {
 			padding: 0;
-			@extend h3;
+			@include h3;
 			text-align: center;
 			text-transform: none;
 		}
 	}
 
 	.border__box {
-		@extend .wrapper;
+		@include inner;
 		padding: 50px;
 		@include flex('column');
 		align-items: center;

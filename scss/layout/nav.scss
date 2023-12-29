@@ -102,7 +102,7 @@
 				top: 0;
 				left: 0;
 				z-index: -1;
-				@include transition;
+				transition: $transition;
 
 				// Paper structure
 				&::after {
@@ -311,7 +311,7 @@
 	margin-left: 15px;
 	margin-right: 6px;
 	position: relative;
-	@include transition;
+	transition: $transition;
 	.nav__cart__quantity {
 		height: 18px;
 		width: 20px;
@@ -321,7 +321,7 @@
 		top: -6px;
 		right: -8px;
 		z-index: 1;
-		@include transition;
+		transition: $transition;
 		span {
 			color: white;
 			font-size: 11px;
@@ -331,7 +331,7 @@
 			left: 52%;
 			top: 50%;
 			transform: translate(-50%, -50%);
-			@include transition;
+			transition: $transition;
 		}
 	}
 	.nav__cart__icon {
@@ -365,7 +365,7 @@
 				content: unset;
 			}
 			a {
-				@extend .button;
+				@include button;
 				@include button-config($accent, white);
 				@include flex('row');
 				padding: 11px 28px 11px 19px;

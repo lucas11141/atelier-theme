@@ -43,7 +43,7 @@
 		}
 
 		p {
-			@extend h5;
+			@include h5;
 			padding-top: 1px;
 			color: white;
 		}

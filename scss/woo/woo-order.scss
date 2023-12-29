@@ -177,7 +177,7 @@
 
 	// shipping information
 	.shipment_heading {
-		@extend h4;
+		@include h4;
 		@include font-gooddog;
 		padding: 50px 0 20px !important;
 

@@ -132,7 +132,7 @@
 	//
 	.account__content {
 		h2 {
-			@extend h3;
+			@include h3;
 			@include font-gooddog;
 			padding: 0 0 20px;
 		}
@@ -264,7 +264,7 @@
 				@include dropshadow;
 
 				h3 {
-					@extend h4;
+					@include h4;
 					@include font-gooddog;
 					padding: 0;
 				}
@@ -393,7 +393,7 @@
 				margin-top: 30px;
 
 				legend {
-					@extend h5;
+					@include h5;
 				}
 			}
 
@@ -460,7 +460,7 @@
 			span[for='password'],
 			label[for='reg_email'],
 			label[for='reg_password'] {
-				@extend .input__label;
+				@include label;
 			}
 
 			.form-row {

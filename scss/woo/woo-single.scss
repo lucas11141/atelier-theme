@@ -82,7 +82,7 @@ body.single-product {
 				border-radius: 12px;
 				padding: 10px;
 				cursor: pointer;
-				@include transition;
+				transition: $transition;
 
 				img {
 					width: 100%;
@@ -165,7 +165,7 @@ body.single-product {
 
 			& + .out-of-stock,
 			& + .variations_form .out-of-stock {
-				@extend .button;
+				@include button;
 				background-color: $lightgray;
 				border: solid 1px $linegray;
 				color: $darkgray;

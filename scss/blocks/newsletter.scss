@@ -168,7 +168,7 @@
 
 /* Newsletter  Sign Up */
 .newsletter {
-	@extend .inner;
+	@include inner;
 	@include flex('row');
 	gap: 25px 80px;
 	justify-content: center;

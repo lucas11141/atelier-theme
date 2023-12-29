@@ -20,7 +20,7 @@
 	}
 
 	.footer__newsletter {
-		@extend .inner;
+		@include inner;
 		margin: -20px auto 120px;
 
 		h6 {
@@ -121,12 +121,12 @@
 				list-style: none;
 
 				& > a {
-					@extend h4;
+					@include h4;
 					margin-bottom: 35px;
 					padding: 0 0 18px;
 					color: white;
 					position: relative;
-					@include transition;
+					transition: $transition;
 					-webkit-text-stroke-color: white;
 					@include fluid-type(18px, 20px);
 
@@ -165,7 +165,7 @@
 							line-height: 1.2em;
 							white-space: normal;
 							position: relative;
-							@include transition;
+							transition: $transition;
 
 							&:after {
 								background-color: white !important;

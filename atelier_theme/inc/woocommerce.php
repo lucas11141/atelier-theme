@@ -477,7 +477,7 @@ function atelier_custom_field_accordeon() { ?>
                 $terms = get_terms('product_cat', $args);
                 if ($terms) {
         ?>
-            <div class="wrapper--ignore shop__category__suggestions">
+            <div class="wrapper --ignore shop__category__suggestions">
                 <?php get_template_part('template-parts/paper'); ?>
                 <div class="wrapper">
                     <h2>Mehr<br><?php echo single_cat_title('', false); ?><br>entdecken

@@ -1,27 +1,3 @@
-.--hover-link:not(.--hover-link-disabled) {
-	display: inline-block;
-	padding-bottom: 3px;
-	@include hover-slide-left;
-	text-decoration: none;
-	white-space: nowrap;
-	position: relative;
-	&::after {
-		content: '';
-		height: 1.5px;
-		width: 0;
-		background-color: $main;
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		transition: all 300ms $ease_standard;
-	}
-	&:hover {
-		&::after {
-			width: 100%;
-		}
-	}
-}
-
 /*------------------------------------*\
     GLOBALS.SCSS
 \*------------------------------------*/
@@ -39,11 +15,9 @@ html {
 	font-weight: 500;
 }
 body {
-	font-family: $main-font;
-	@include fluid-type(15px, 16px);
-	line-height: 1.5;
-	color: $text;
+	@include text;
 	box-sizing: border-box;
+
 	&.body--noscroll {
 		height: 100vh;
 		overflow: hidden;
@@ -144,464 +118,10 @@ body {
 }
 
 /*------------------------------------*\
-    Formatierung
-\*------------------------------------*/
-* {
-	font-family: $main-font;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: $main-font;
-	font-weight: 800;
-	text-transform: uppercase;
-	line-height: 1.125;
-	letter-spacing: inherit;
-	color: $text;
-	margin: 0px;
-	padding: 15px 0px 0px;
-	display: block;
-}
-h1 {
-	@include fluid-type(28px, 32px);
-	b,
-	strong {
-		font-weight: 500;
-	}
-}
-h2 {
-	@include fluid-type(24px, 32px);
-	b,
-	strong {
-		font-weight: 500;
-	}
-}
-h3 {
-	@include fluid-type(20px, 24px);
-	b,
-	strong {
-		font-weight: 500;
-	}
-}
-h4 {
-	@include fluid-type(17px, 20px);
-	b,
-	strong {
-		font-weight: 500;
-	}
-}
-h5 {
-	@include fluid-type(15px, 16px);
-	b,
-	strong {
-		font-weight: 500;
-	}
-}
-h6 {
-	@include fluid-type(14px, 14px);
-	color: $accent;
-	b,
-	strong {
-		font-weight: 500;
-	}
-}
-
-h2 + h5 {
-	padding-top: 8px;
-}
-h5 + h1,
-h5 + h2 {
-	padding-top: 15px;
-}
-h4 + h6 {
-	padding-top: 8px;
-}
-h6 + h4,
-h6 + h3 {
-	padding-top: 8px;
-}
-@media only screen and (max-width: $tablet) {
-	h5 + h2 {
-		padding-top: 8px;
-	}
-	h2 + h5 {
-		padding-top: 6px;
-	}
-}
-
-.text--small {
-	@include fluid-type(13px, 14px);
-	color: $darkgray;
-	line-height: 1.6;
-}
-p + p {
-	padding-top: 18px;
-}
-p + .button {
-	margin-top: 35px;
-}
-p + .two-buttons,
-p + .two-buttons-vertical {
-	padding-top: 35px;
-}
-@media only screen and (max-width: $tablet) {
-	p + p {
-		padding-top: 15px;
-	}
-	p + .button {
-		margin-top: 25px;
-	}
-	p + .buttons,
-	p + .two-buttons-vertical {
-		padding-top: 25px;
-	}
-}
-
-h2 + p,
-h3 + p,
-h4 + p,
-h6 + p {
-	padding-top: 25px;
-}
-h1 + h6,
-h2 + h6,
-h3 + h6,
-h1 > h6,
-h2 > h6,
-h3 > h6,
-h6 + h2 {
-	padding-top: 8px;
-}
-@media only screen and (max-width: $desktop) {
-	p + .button {
-		margin-top: 30px;
-	}
-	p + .two-buttons,
-	p + .two-buttons-vertical {
-		padding-top: 30px;
-	}
-	h6 + p {
-		padding-top: 25px;
-	}
-}
-
-.h1 {
-	@extend h1;
-}
-.h2 {
-	@extend h2;
-}
-.h3 {
-	@extend h3;
-}
-.h4 {
-	@extend h4;
-}
-.h5 {
-	@extend h5;
-}
-.h6 {
-	@extend h6;
-}
-
-ul {
-	list-style-position: inside;
-}
-
-.link {
-	@include fluid-type(13px, 14px);
-	font-weight: 700;
-	position: relative;
-	&::after {
-		content: '';
-		display: block;
-		height: 1.5px;
-		width: 0;
-		background: $accent;
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		transition: $ease_standard 200ms;
-	}
-	img {
-		margin-left: 8px;
-		vertical-align: unset;
-	}
-	&:hover::after {
-		width: 100%;
-	}
-}
-b,
-strong {
-	font-weight: 800;
-	font-weight: 700;
-}
-.text--small--accent {
-	@include fluid-type(11px, 12px);
-	font-weight: 800;
-	color: $accent;
-	text-transform: uppercase;
-}
-
-/*------------------------------------*\
 Buttons Styling
 \*------------------------------------*/
 .button {
-	@include flex('row');
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	column-gap: 12px;
-	padding: 18px 50px;
-	border: none;
-	border-radius: 10px;
-	transition: ease-in-out 200ms;
-	cursor: pointer;
-
-	&::after {
-		content: unset;
-	}
-
-	&,
-	span {
-		font-family: $main-font;
-		@include fluid-type(14px, 15px);
-		color: white;
-		font-weight: 800;
-		line-height: 1em;
-		letter-spacing: 0.3px;
-		text-align: center;
-		white-space: nowrap;
-		text-transform: uppercase;
-		text-decoration: none;
-	}
-
-	// Equal height with and without icon
-	span {
-		height: 20px;
-		line-height: 1.3;
-	}
-
-	/* Hover Effect*/
-	background-position: 50% 50%;
-	background-repeat: no-repeat;
-	background-size: 0%;
-	transition: cubic-bezier(0.5, 0, 0.5, 1) 300ms background-size;
-
-	&:hover,
-	&:focus,
-	&:active {
-		transform: none;
-		background-size: 1020%;
-	}
-
-	span {
-		transition: cubic-bezier(0.5, 0, 0.5, 1) 300ms color;
-	}
-	img {
-		transition: cubic-bezier(0.5, 0, 0.5, 1) 300ms filter;
-	}
-	&:disabled,
-	&[disabled],
-	&.--disabled {
-		transition: none;
-		pointer-events: none;
-		cursor: default;
-		opacity: 60%;
-
-		&::before {
-			transition: none;
-		}
-	}
-
-	// Responsive
-	@media only screen and (max-width: $desktop) {
-		padding: 15px 40px;
-	}
-
-	@media only screen and (max-width: $mobile) {
-		&:not(.popup__close) {
-			width: 100%;
-		}
-	}
-}
-
-/* Button Variations */
-.button {
-	&--fixed {
-		width: 100%;
-	}
-	&--small {
-		padding: 16px 35px;
-		span {
-			font-size: 14px;
-		}
-		@media only screen and (max-width: $desktop) {
-			padding: 13px 32px;
-
-			span,
-			.button-text {
-				font-size: 13px;
-			}
-		}
-	}
-	&--mini {
-		padding: 14px 20px;
-		&,
-		span {
-			font-size: 14px;
-			font-weight: 700;
-			text-transform: none;
-		}
-	}
-	&--fixed {
-		padding-left: 0px;
-		padding-right: 0px;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: center;
-		align-items: center;
-	}
-	&--shop {
-		border-radius: 10px;
-		span {
-			font-style: normal;
-			font-family: proxima-soft, sans-serif;
-		}
-	}
-}
-
-/* Button Colors */
-@mixin button-config($background-color, $font-color, $border-color: '') {
-	background-color: $background-color;
-
-	span {
-		color: $font-color;
-	}
-	$background-color-dark: darken($background-color, 10%);
-	$background-color-light: lighten($background-color, 10%);
-	background-image: radial-gradient(
-		circle,
-		$background-color-dark 0%,
-		$background-color-dark 10%,
-		transparent 10%
-	);
-	&:focus,
-	&:active {
-		background-color: #274358;
-		background-color: $background-color-light;
-		background-image: radial-gradient(
-			circle,
-			$background-color-light 0%,
-			$background-color-light 10%,
-			transparent 10%
-		);
-	}
-	// &[disabled],
-	// &.--disabled {
-	// 	background-color: lighten($background-color, 30%);
-	// }
-}
-@mixin button-config-transparent($font-color) {
-	background-color: transparent;
-	span {
-		color: $font-color;
-	}
-	background-image: radial-gradient(circle, $font-color 0%, $font-color 10%, transparent 10%);
-}
-.button {
-	@include button-config($accent, white);
-	transition: all 300ms ease-in-out;
-
-	&.--color {
-		&-main {
-			@include button-config($main, white);
-		}
-		&-main-light {
-			@include button-config($main-light, white);
-			background-image: radial-gradient(
-				circle,
-				lighten($main-light, 6%) 0%,
-				lighten($main-light, 6%) 10%,
-				transparent 10%
-			);
-		}
-		&-accent,
-		&-green {
-			@include button-config($accent, white);
-		}
-		&-white {
-			@include button-config(white, $main);
-			.feather {
-				stroke: $main;
-				stroke-width: 2.5;
-			}
-		}
-		&-gray {
-			@include button-config($gray, $main);
-			border: solid 1px $linegray;
-		}
-		&-transparent {
-			@include button-config-transparent($main);
-			border: solid 2.5px $main;
-
-			span {
-				margin: -2.5px;
-			}
-
-			&:hover {
-				span {
-					color: white;
-				}
-			}
-
-			&-white {
-				@include button-config-transparent(white);
-				border: solid 2px white;
-
-				span {
-					color: white;
-				}
-
-				&:hover {
-					span {
-						color: $main;
-					}
-				}
-			}
-		}
-		&-red {
-			@include button-config($red, white);
-		}
-		&-course-child,
-		&-blue {
-			@include button-config($course-kinder, white);
-		}
-		&-course-adult,
-		&-purple {
-			@include button-config($course-erwachsene, white);
-		}
-		&-orange {
-			@include button-config($workshop-kinder, white);
-		}
-		// &-red {
-		//     @include button-config($workshop-erwachsene, white);
-		// }
-		&-yellow {
-			@include button-config($ferienprogramm, white);
-		}
-		&-pink {
-			@include button-config($kunstevent, white);
-		}
-		&-current {
-			// background-color: currentColor;
-			@include button-config-transparent(currentColor);
-		}
-	}
+	@include button;
 }
 
 /* Multiple Buttons */
@@ -653,8 +173,7 @@ Link Button
 .button__link {
 	@include flex('row');
 	align-items: center;
-	.button {
-	}
+
 	.link {
 		margin-left: 20px;
 	}
@@ -664,70 +183,7 @@ Link Button
 \*------------------------------------*/
 .button-link,
 .button--back {
-	padding: 6px 0;
-	display: inline-flex;
-	align-items: center;
-	gap: 10px;
-	text-decoration: none;
-	transition: all $ease_standard 300ms;
-	cursor: pointer;
-
-	span {
-		@include fluid-type(13px, 14px);
-		font-weight: 700;
-		line-height: 1.2;
-	}
-
-	// Direction variants
-	&.--direction-left {
-		.arrow {
-			rotate: 180deg;
-			order: -1;
-		}
-	}
-
-	// Color variants
-	&.--color {
-		&-green .arrow path {
-			fill: $accent;
-		}
-		&-blue .arrow path {
-			fill: $course-kinder;
-		}
-		&-purple .arrow path {
-			fill: $course-erwachsene;
-		}
-		&-orange .arrow path {
-			fill: $workshop-kinder;
-		}
-		&-red .arrow path {
-			fill: $workshop-erwachsene;
-		}
-		&-yellow .arrow path {
-			fill: $ferienprogramm;
-		}
-		&-pink .arrow path {
-			fill: $kunstevent;
-		}
-	}
-
-	// Animations
-	&:hover {
-		transform: translateX(3px);
-
-		&.--direction-left {
-			transform: translateX(-3px);
-		}
-	}
-
-	// Responsive
-	@media only screen and (max-width: $tablet) {
-		padding: 6px 0;
-
-		svg {
-			width: 7px;
-		}
-	}
+	@include button-link;
 }
 
 /*------------------------------------*\
@@ -1135,7 +591,7 @@ Abstände
 			padding: 25px;
 			padding-top: 0 !important;
 			display: none;
-			@extend p;
+			@include text;
 
 			&,
 			p {
@@ -1338,24 +794,7 @@ hr {
 .inner,
 .wrapper,
 .wp-block-group {
-	width: $wrapper-width;
-	max-width: $screen;
-	margin: 0 auto;
-	position: relative;
-	&--half {
-		@extend .wrapper;
-		max-width: 500px;
-	}
-	&--ignore {
-		width: 100vw;
-		margin-top: 100px;
-		margin-left: calc(-1 * (100vw - 1000px) / 2);
-		@media only screen and (max-width: 1040px) {
-			margin-left: -20px;
-			padding-left: 20px;
-			padding-right: 20px;
-		}
-	}
+	@include inner;
 }
 .wrapper--big {
 	width: calc(100% - 50px);
@@ -1658,11 +1097,13 @@ a img.aligncenter {
 	@include flex('row');
 	flex-direction: row !important;
 	gap: 6px;
+
 	li {
 		width: calc(50% - 6px) !important;
+
 		a {
-			@extend .button;
-			@extend .button--mini;
+			@include button;
+			@extend .--size-mini;
 			@extend .--color-main-light;
 			display: flex;
 			justify-content: center;
@@ -1816,7 +1257,7 @@ a img.aligncenter {
     Slider
 \*------------------------------------*/
 .slider__controls {
-	@extend .inner;
+	@include inner;
 	margin: 25px auto 0;
 	@include flex('row');
 	justify-content: space-between;
@@ -1838,7 +1279,7 @@ a img.aligncenter {
 			border: none;
 			position: relative;
 			@include hide-text;
-			@include transition;
+			transition: $transition;
 			&.slick-disabled {
 				opacity: 0.2;
 				pointer-events: none;
@@ -1853,7 +1294,7 @@ a img.aligncenter {
 				transform: translateY(-50%);
 				z-index: -1;
 				opacity: 0;
-				@include transition;
+				transition: $transition;
 			}
 			&:hover {
 				background-position-x: 0;
@@ -1889,7 +1330,7 @@ a img.aligncenter {
 			background-color: transparent;
 			position: relative;
 			@include hide-text;
-			@include transition;
+			transition: $transition;
 			&::before {
 				content: '';
 				height: calc(100% - 6px);
@@ -1898,7 +1339,7 @@ a img.aligncenter {
 				border-radius: 10px;
 				opacity: 0;
 				@include pos('center');
-				@include transition;
+				transition: $transition;
 			}
 		}
 		&:hover button,
@@ -1970,9 +1411,9 @@ a img.aligncenter {
 			font-weight: 600;
 		}
 		.button {
-			@extend .button;
+			@include button;
 			@extend .--color-main;
-			@extend .button--small;
+			@extend .--size-small;
 			margin: 20px 0 22px !important;
 		}
 	}

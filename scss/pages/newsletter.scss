@@ -70,9 +70,10 @@
 		margin-top: 40px;
 		width: 520px;
 		p:not(.new__checkbox) {
-			@extend .input__field;
+			@include input;
+
 			label {
-				@extend .input__label;
+				@include label;
 			}
 		}
 		.new__checkbox {

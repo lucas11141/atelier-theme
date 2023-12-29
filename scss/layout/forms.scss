@@ -65,59 +65,8 @@ select {
 	}
 }
 
-// Input Feld Template
-.input__field {
-	padding-top: 7px !important;
-	position: relative;
-	&.--half {
-		width: calc(50% - 10px);
-	}
-	&.--active {
-		input,
-		select,
-		textarea {
-			border-color: $main;
-		}
-	}
-	&.--error {
-		input,
-		select,
-		textarea {
-			border-color: $red;
-		}
-	}
-	@media only screen and (max-width: $tablet) {
-		&.--half {
-			width: 100%;
-		}
-	}
-}
-
-// Label Template
-.input__label {
-	@include fluid-type(13px, 14px);
-	font-weight: 700;
-	line-height: 1em;
-	letter-spacing: 0.2px;
-	color: $accent;
-	padding: 0px 6px;
-	background-color: white;
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 14px;
-	z-index: 1;
-	.required {
-		display: inline;
-		padding: 0;
-		border: none;
-		text-decoration: none;
-		position: static;
-	}
-}
-
 .standard__form .labeltext {
-	@extend .input__label;
+	@include label;
 }
 
 // Input Label
@@ -126,7 +75,7 @@ form:not(.woocommerce-form-login):not(.woocommerce-form-register):not(.woocommer
 	)
 	.form-row {
 	label:not(.woocommerce-form__label-for-checkbox) {
-		@extend .input__label;
+		@include label;
 	}
 }
 
@@ -336,11 +285,11 @@ textarea {
 		}
 	}
 	p.form-input {
-		@extend .input__field;
+		@include input;
 		width: unset;
 		flex: auto;
 		.label-name {
-			@extend .input__label;
+			@include label;
 		}
 		input::placeholder {
 			color: transparent;
@@ -484,7 +433,7 @@ textarea {
 }
 
 .wpcf7-submit {
-	@extend .button;
+	@include button;
 	@extend .--color-main;
 	margin: 0;
 	width: 100%;
@@ -643,7 +592,7 @@ textarea {
 		}
 
 		.submit {
-			@extend .button;
+			@include button;
 			padding: 0 25px;
 			height: 100%;
 			text-transform: none;

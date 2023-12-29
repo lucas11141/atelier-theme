@@ -1,24 +1,548 @@
 /*------------------------------------*/
-/* New */
+/* Layout */
 /*------------------------------------*/
+@mixin inner {
+	width: calc(100vw - 2 * $outergap);
+	max-width: $screen;
+	margin: 0 auto;
+	position: relative;
+	@include remove-spacing-first;
 
-// Absolute position
-@mixin pos($variant: '') {
-	position: absolute;
-	@if $variant == 'center' {
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
+	&.--half {
+		max-width: 500px;
 	}
-	@if $variant == 'cover' {
-		height: 100%;
-		width: 100%;
-		top: 0;
-		left: 0;
-		object-fit: cover;
+
+	&.--ignore {
+		width: 100vw;
+		margin-top: 100px;
+		margin-left: calc(-1 * (100vw - 1000px) / 2);
+
+		@include bp-lower(1040px) {
+			margin-left: -20px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
 	}
 }
 
+/*------------------------------------*/
+/* Text */
+/*------------------------------------*/
+@mixin fluid-type($min-font-size, $max-font-size) {
+	$u3: unit($min-font-size);
+	$u4: unit($max-font-size);
+
+	@if $u3 == $u4 {
+		& {
+			font-size: $min-font-size;
+
+			@media screen and (min-width: $min-vw) {
+				font-size: calc(
+					#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+						((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+				);
+			}
+
+			@media screen and (min-width: $max-vw) {
+				font-size: $max-font-size;
+			}
+		}
+	}
+}
+
+@mixin text {
+	@include fluid-type(15px, 16px);
+	font-family: $main-font;
+	line-height: 1.5;
+	color: $text;
+
+	&.--size-small {
+		@include fluid-type(13px, 14px);
+		color: $darkgray;
+		line-height: 1.6;
+	}
+}
+
+@mixin heading {
+	font-family: $main-font;
+	font-weight: 800;
+	text-transform: uppercase;
+	line-height: 1.125;
+	letter-spacing: inherit;
+	color: $text;
+	margin: 0px;
+	padding: 15px 0px 0px;
+	display: block;
+
+	b,
+	strong {
+		font-weight: 500;
+	}
+}
+
+@mixin h1 {
+	@include heading;
+	@include fluid-type(28px, 32px);
+}
+
+@mixin h2 {
+	@include heading;
+	@include fluid-type(24px, 32px);
+}
+
+@mixin h3 {
+	@include heading;
+	@include fluid-type(20px, 24px);
+}
+
+@mixin h4 {
+	@include heading;
+	@include fluid-type(17px, 20px);
+}
+
+@mixin h5 {
+	@include heading;
+	@include fluid-type(15px, 16px);
+}
+
+@mixin h6 {
+	@include heading;
+	@include fluid-type(14px, 14px);
+	color: $accent;
+}
+
+/*------------------------------------*/
+/* Forms */
+/*------------------------------------*/
+@mixin label {
+	@include fluid-type(13px, 14px);
+	font-weight: 700;
+	line-height: 1em;
+	letter-spacing: 0.2px;
+	color: $accent;
+	padding: 0px 6px;
+	background-color: white;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 14px;
+	z-index: 1;
+
+	.required {
+		display: inline;
+		padding: 0;
+		border: none;
+		text-decoration: none;
+		position: static;
+	}
+}
+
+@mixin input {
+	padding-top: 7px !important;
+	position: relative;
+
+	&.--half {
+		width: calc(50% - 10px);
+	}
+
+	&.--active {
+		input,
+		select,
+		textarea {
+			border-color: $main;
+		}
+	}
+
+	&.--error {
+		input,
+		select,
+		textarea {
+			border-color: $red;
+		}
+	}
+
+	@media only screen and (max-width: $tablet) {
+		&.--half {
+			width: 100%;
+		}
+	}
+}
+
+/*------------------------------------*/
+/* Buttons / Links */
+/*------------------------------------*/
+/* Button Colors */
+@mixin button-config($background-color, $font-color, $border-color: '') {
+	background-color: $background-color;
+
+	span {
+		color: $font-color;
+	}
+	$background-color-dark: darken($background-color, 10%);
+	$background-color-light: lighten($background-color, 10%);
+	background-image: radial-gradient(
+		circle,
+		$background-color-dark 0%,
+		$background-color-dark 10%,
+		transparent 10%
+	);
+	&:focus,
+	&:active {
+		background-color: #274358;
+		background-color: $background-color-light;
+		background-image: radial-gradient(
+			circle,
+			$background-color-light 0%,
+			$background-color-light 10%,
+			transparent 10%
+		);
+	}
+}
+
+@mixin button-config-transparent($font-color) {
+	background-color: transparent;
+	span {
+		color: $font-color;
+	}
+	background-image: radial-gradient(circle, $font-color 0%, $font-color 10%, transparent 10%);
+}
+
+@mixin button {
+	@include flex('row');
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	column-gap: 12px;
+	padding: 18px 50px;
+	border: none;
+	border-radius: 10px;
+	transition: ease-in-out 200ms;
+	cursor: pointer;
+
+	&::after {
+		content: unset;
+	}
+
+	&,
+	span {
+		font-family: $main-font;
+		@include fluid-type(14px, 15px);
+		color: white;
+		font-weight: 800;
+		line-height: 1em;
+		letter-spacing: 0.3px;
+		text-align: center;
+		white-space: nowrap;
+		text-transform: uppercase;
+		text-decoration: none;
+	}
+
+	// Equal height with and without icon
+	span {
+		height: 20px;
+		line-height: 1.3;
+	}
+
+	/* Hover Effect*/
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 0%;
+	transition: cubic-bezier(0.5, 0, 0.5, 1) 300ms background-size;
+
+	&:hover,
+	&:focus,
+	&:active {
+		transform: none;
+		background-size: 1020%;
+	}
+
+	span {
+		transition: cubic-bezier(0.5, 0, 0.5, 1) 300ms color;
+	}
+
+	img {
+		transition: cubic-bezier(0.5, 0, 0.5, 1) 300ms filter;
+	}
+
+	&:disabled,
+	&[disabled],
+	&.--disabled {
+		transition: none;
+		pointer-events: none;
+		cursor: default;
+		opacity: 60%;
+
+		&::before {
+			transition: none;
+		}
+	}
+
+	// Responsive
+	@media only screen and (max-width: $desktop) {
+		padding: 15px 40px;
+	}
+
+	@media only screen and (max-width: $mobile) {
+		&:not(.popup__close) {
+			width: 100%;
+		}
+	}
+
+	/* Button Variations */
+	&.--size-small,
+	&.button--small {
+		padding: 16px 35px;
+
+		span {
+			font-size: 14px;
+		}
+
+		@media only screen and (max-width: $desktop) {
+			padding: 13px 32px;
+
+			span,
+			.button-text {
+				font-size: 13px;
+			}
+		}
+	}
+
+	&.--size-mini,
+	&.button--mini {
+		padding: 14px 20px;
+
+		&,
+		span {
+			font-size: 14px;
+			font-weight: 700;
+			text-transform: none;
+		}
+	}
+
+	&.--fixed,
+	&.button--fixed {
+		width: 100%;
+		padding-left: 0px;
+		padding-right: 0px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&.--shop,
+	&.button--shop {
+		border-radius: 10px;
+
+		span {
+			font-style: normal;
+			font-family: proxima-soft, sans-serif;
+		}
+	}
+
+	// Colors
+	@include button-config($accent, white);
+	transition: all 300ms ease-in-out;
+
+	&.--color {
+		&-main {
+			@include button-config($main, white);
+		}
+
+		&-main-light {
+			@include button-config($main-light, white);
+			background-image: radial-gradient(
+				circle,
+				lighten($main-light, 6%) 0%,
+				lighten($main-light, 6%) 10%,
+				transparent 10%
+			);
+		}
+
+		&-accent,
+		&-green {
+			@include button-config($accent, white);
+		}
+
+		&-white {
+			@include button-config(white, $main);
+			.feather {
+				stroke: $main;
+				stroke-width: 2.5;
+			}
+		}
+
+		&-gray {
+			@include button-config($gray, $main);
+			border: solid 1px $linegray;
+		}
+
+		&-transparent {
+			@include button-config-transparent($main);
+			border: solid 2.5px $main;
+
+			span {
+				margin: -2.5px;
+			}
+
+			&:hover {
+				span {
+					color: white;
+				}
+			}
+
+			&-white {
+				@include button-config-transparent(white);
+				border: solid 2px white;
+
+				span {
+					color: white;
+				}
+
+				&:hover {
+					span {
+						color: $main;
+					}
+				}
+			}
+		}
+
+		&-red {
+			@include button-config($red, white);
+		}
+
+		&-course-child,
+		&-blue {
+			@include button-config($course-kinder, white);
+		}
+
+		&-course-adult,
+		&-purple {
+			@include button-config($course-erwachsene, white);
+		}
+
+		&-orange {
+			@include button-config($workshop-kinder, white);
+		}
+
+		&-yellow {
+			@include button-config($ferienprogramm, white);
+		}
+
+		&-pink {
+			@include button-config($kunstevent, white);
+		}
+
+		&-current {
+			// background-color: currentColor;
+			@include button-config-transparent(currentColor);
+		}
+	}
+}
+
+@mixin button-link {
+	padding: 6px 0;
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	text-decoration: none;
+	transition: all $ease_standard 300ms;
+	cursor: pointer;
+
+	span {
+		@include fluid-type(13px, 14px);
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	// Direction variants
+	&.--direction-left {
+		.arrow {
+			rotate: 180deg;
+			order: -1;
+		}
+	}
+
+	// Color variants
+	&.--color {
+		&-green .arrow path {
+			fill: $accent;
+		}
+
+		&-blue .arrow path {
+			fill: $course-kinder;
+		}
+
+		&-purple .arrow path {
+			fill: $course-erwachsene;
+		}
+
+		&-orange .arrow path {
+			fill: $workshop-kinder;
+		}
+
+		&-red .arrow path {
+			fill: $workshop-erwachsene;
+		}
+
+		&-yellow .arrow path {
+			fill: $ferienprogramm;
+		}
+
+		&-pink .arrow path {
+			fill: $kunstevent;
+		}
+	}
+
+	// Animations
+	&:hover {
+		transform: translateX(3px);
+
+		&.--direction-left {
+			transform: translateX(-3px);
+		}
+	}
+
+	// Responsive
+	@media only screen and (max-width: $tablet) {
+		padding: 6px 0;
+
+		svg {
+			width: 7px;
+		}
+	}
+}
+
+@mixin hover-link {
+	display: inline-block;
+	padding-bottom: 3px;
+	@include hover-slide-left;
+	text-decoration: none;
+	white-space: nowrap;
+	position: relative;
+
+	&::after {
+		content: '';
+		height: 1.5px;
+		width: 0;
+		background-color: $main;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		transition: all 300ms $ease_standard;
+	}
+
+	&:hover {
+		&::after {
+			width: 100%;
+		}
+	}
+}
+
+/*------------------------------------*/
+/* New */
+/*------------------------------------*/
 // Breakpoints
 @mixin bp-higher($variable) {
 	@media (min-width: ($variable + 1px)) {
@@ -177,10 +701,6 @@
 	}
 }
 
-@mixin transition {
-	transition: all 300ms $ease_standard;
-}
-
 @mixin dashed-border($color, $position) {
 	background-image: linear-gradient(to right, $color 0, $color 8px, transparent 8px);
 	background-position: $position;
@@ -209,11 +729,11 @@
 	}
 }
 
-@mixin dropshadow() {
+@mixin dropshadow {
 	box-shadow: 2px 2px 30px rgba(black, 8%);
 }
 
-@mixin loading() {
+@mixin loading {
 	overflow: hidden;
 	position: relative;
 
@@ -244,19 +764,26 @@
 	}
 }
 
-@mixin click-bounce() {
+@mixin click-bounce {
 	&:active {
 		transition-duration: 30ms;
 		transform: scale(0.98);
 	}
 }
 
-@mixin dark() {
+@mixin dark {
 	:is(h1, h2, h3, h4, h5, h6) {
 		font-weight: 700;
 	}
 
 	* {
 		color: white;
+	}
+}
+
+@mixin remove-spacing-first {
+	> *:is(h1, h2, h3, h4, h5, h6, p, a, ul):not(.button):first-child {
+		margin-top: 0;
+		padding-top: 0;
 	}
 }

@@ -5,7 +5,7 @@
 	position: relative;
 
 	&__content {
-		@extend .wrapper;
+		@include inner;
 		z-index: 1;
 	}
 

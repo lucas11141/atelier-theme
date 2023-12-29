@@ -90,7 +90,7 @@
 				position: absolute;
 				top: 50%;
 				transform: translateY(-50%);
-				@include transition;
+				transition: $transition;
 				cursor: pointer;
 				&:hover {
 					width: 35px;
@@ -125,7 +125,7 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		cursor: pointer;
-		@include transition;
+		transition: $transition;
 		svg {
 			height: 100%;
 			width: 100%;

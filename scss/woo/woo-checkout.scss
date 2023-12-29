@@ -63,16 +63,16 @@
 		border-radius: 10px;
 
 		p:first-of-type {
-			// padding-top: 20px;
-			@extend .text--small;
+			@include text;
+			@extend .--size-small;
 		}
 
 		.form-row-first,
 		.form-row-last {
-			@extend .input__field;
+			@include input;
 
 			label {
-				@extend .input__label;
+				@include label;
 			}
 		}
 
@@ -83,7 +83,7 @@
 			align-items: center;
 
 			.woocommerce-form__label-for-checkbox {
-				@extend .new__checkbox;
+				@include checkbox;
 
 				input {
 					height: 0;
@@ -132,7 +132,7 @@
 		.woocommerce-shipping-fields__field-wrapper,
 		.woocommerce-additional-fields__field-wrapper {
 			label:not(.checkbox) {
-				@extend .input__label;
+				@include label;
 			}
 		}
 
@@ -152,7 +152,7 @@
 				}
 
 				label {
-					@extend .input__label;
+					@include label;
 				}
 
 				.woocommerce-password-strength {
@@ -186,7 +186,8 @@
 				.woocommerce-password-hint {
 					padding-top: 15px;
 					display: inline-block;
-					@extend .text--small;
+					@include text;
+					@extend .--size-small;
 				}
 			}
 		}
@@ -365,7 +366,8 @@
 			}
 
 			.woocommerce-privacy-policy-text p {
-				@extend .text--small;
+				@include text;
+				@extend .--size-small;
 				text-align: center;
 			}
 		}

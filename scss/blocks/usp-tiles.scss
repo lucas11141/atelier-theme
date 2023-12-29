@@ -1,5 +1,5 @@
 .usp-tiles {
-	@extend .wrapper;
+	@include inner;
 	@include flex('row');
 	flex-wrap: wrap;
 	row-gap: 60px;

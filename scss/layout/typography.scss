@@ -1,0 +1,159 @@
+// *,
+html {
+	font-family: $main-font;
+}
+
+/*------------------------------------*/
+/* Text */
+/*------------------------------------*/
+
+/*------------------------------------*/
+/* Headings */
+/*------------------------------------*/
+h1,
+.h1 {
+	@include h1;
+}
+
+h2,
+.h2 {
+	@include h2;
+}
+
+h3,
+.h3 {
+	@include h3;
+}
+
+h4,
+.h4 {
+	@include h4;
+}
+
+h5,
+.h5 {
+	@include h5;
+}
+
+h6,
+.h6 {
+	@include h6;
+}
+
+/*------------------------------------*/
+/* Old */
+/*------------------------------------*/
+ul {
+	list-style-position: inside;
+}
+
+.link {
+	@include fluid-type(13px, 14px);
+	font-weight: 700;
+	position: relative;
+	&::after {
+		content: '';
+		display: block;
+		height: 1.5px;
+		width: 0;
+		background: $accent;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		transition: $ease_standard 200ms;
+	}
+	img {
+		margin-left: 8px;
+		vertical-align: unset;
+	}
+	&:hover::after {
+		width: 100%;
+	}
+}
+b,
+strong {
+	font-weight: 800;
+	font-weight: 700;
+}
+.text--small--accent {
+	@include fluid-type(11px, 12px);
+	font-weight: 800;
+	color: $accent;
+	text-transform: uppercase;
+}
+
+h2 + h5 {
+	padding-top: 8px;
+}
+h5 + h1,
+h5 + h2 {
+	padding-top: 15px;
+}
+h4 + h6 {
+	padding-top: 8px;
+}
+h6 + h4,
+h6 + h3 {
+	padding-top: 8px;
+}
+@media only screen and (max-width: $tablet) {
+	h5 + h2 {
+		padding-top: 8px;
+	}
+	h2 + h5 {
+		padding-top: 6px;
+	}
+}
+
+p + p {
+	padding-top: 18px;
+}
+p + .button {
+	margin-top: 35px;
+}
+p + .two-buttons,
+p + .two-buttons-vertical {
+	padding-top: 35px;
+}
+@media only screen and (max-width: $tablet) {
+	p + p {
+		padding-top: 15px;
+	}
+	p + .button {
+		margin-top: 25px;
+	}
+	p + .buttons,
+	p + .two-buttons-vertical {
+		padding-top: 25px;
+	}
+}
+
+h2 + p,
+h3 + p,
+h4 + p,
+h6 + p {
+	padding-top: 25px;
+}
+
+h1 + h6,
+h2 + h6,
+h3 + h6,
+h1 > h6,
+h2 > h6,
+h3 > h6,
+h6 + h2 {
+	padding-top: 8px;
+}
+
+@media only screen and (max-width: $desktop) {
+	p + .button {
+		margin-top: 30px;
+	}
+	p + .two-buttons,
+	p + .two-buttons-vertical {
+		padding-top: 30px;
+	}
+	h6 + p {
+		padding-top: 25px;
+	}
+}

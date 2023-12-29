@@ -53,7 +53,7 @@
 
 .produktslider .slider__container,
 .related .products {
-	@extend .wrapper;
+	@include inner;
 	margin: auto;
 	.slick-track {
 		@include flex('row');

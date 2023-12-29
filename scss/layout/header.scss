@@ -206,7 +206,7 @@
 		}
 		position: relative;
 		ul {
-			@extend .wrapper;
+			@include inner;
 			@include flex('column');
 			row-gap: 15px;
 			padding: 0;
@@ -407,7 +407,7 @@
 						height: 12px;
 						margin-left: 10px;
 						transform: translateY(-1px) rotate(90deg);
-						@include transition;
+						transition: $transition;
 					}
 					&.--opened {
 						a.main-link div p img {

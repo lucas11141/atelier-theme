@@ -26,7 +26,7 @@ $slider__pagination-gap: 6px;
 			border-radius: 10px;
 			opacity: 0;
 			@include pos('center');
-			@include transition;
+			transition: $transition;
 		}
 
 		&:hover {
@@ -93,7 +93,7 @@ $slider__pagination-gap: 6px;
 	background-size: 8px;
 	border: none;
 	position: relative;
-	@include transition;
+	transition: $transition;
 
 	&::before,
 	&::after {
@@ -108,7 +108,7 @@ $slider__pagination-gap: 6px;
 		transform: translateY(-50%);
 		z-index: -1;
 		opacity: 0;
-		@include transition;
+		transition: $transition;
 	}
 
 	&:hover {

@@ -8,141 +8,20 @@ Author: Andrew Wilson
 Author URI: https://youtube.com/followandrew
 */
 
-:root {
-	--color-main: #001e34;
-	--color-course-child: #3fcad6;
-	--color-course-adult: #4b42db;
-	--color-workshop: #de332a;
-	--color-holiday_workshop: #d8d12b;
-}
+// vars
+@import 'vars';
 
-// colors
-$main: #001e34;
-$main-light: #152f43;
-$main--light: #687785;
-$main--lighten: lighten($main, 5%);
-$second: #55d045;
-$accent: $second;
-$accent-dark: #44ad36;
-$accent--darken: darken($accent, 8%);
-$text: var(--color-main);
-$text--soft: #a0a6ac;
-$red: rgb(218, 15, 15);
-$red: #c3241b;
-$dark-red: #c3241b;
-$warning: red;
-$darkgray: #b2b2b2;
-$lightgray: #fcfcfc;
-$lightgray--darken: darken($lightgray, 5%);
-$gray: #f7f7f7;
-// $linegray: #E3E3E3;
-$linegray: #e8eaeb;
-$inputgray: $linegray;
-$backgroundgray: #fafafa;
-$course-kinder: #3fcad6;
-$course-kinder-dark: darken($course-kinder, 10%);
-$course-erwachsene: #4b42db;
-$course-erwachsene-dark: darken($course-erwachsene, 10%);
-$workshop-kinder: #fa6305;
-$workshop-kinder-dark: darken($workshop-kinder, 10%);
-$workshop-erwachsene: #de332a;
-$workshop-erwachsene-dark: darken($workshop-erwachsene, 10%);
-$ferienprogramm: #d8d12b;
-$ferienprogramm-dark: darken($ferienprogramm, 10%);
-$kunstevent: #b23cdf;
-$kunstevent-dark: darken($kunstevent, 10%);
-
-// fonts
-$main-font: 'Proxima-Soft', sans-serif;
-$second-font: 'gooddog-new', serif;
-
-// layout
-$screen: 1000px;
-$screen-outer: $screen + 50px;
-$desktop: 850px;
-$tablet: 768px;
-$mobile: 520px;
-
-// spaces
-$space-negative: -100px;
-$space-ultralarge: 250px;
-$space-extralarge: 150px;
-$space-large: 120px;
-$space-medium: 60px;
-$space-small: 30px;
-$space-extrasmall: 20px;
-
-// gaps
-$gap: 25px;
-$gap-new: 20px;
-@media only screen and (max-width: $tablet) {
-	$gap-new: 20px;
-}
-
-// inner
-$inner: $screen;
-@media only screen and (max-width: 1000px) {
-	$inner: calc(100% - 50px);
-}
-
-// outer
-$outer-gap: calc((100vw - #{$screen}) / 2);
-@media only screen and (max-width: 1050px) {
-	$outer-gap: 25px;
-}
-
-$wrapper-width: calc(100vw - 50px);
-$wrapper-gap: calc((100vw - #{$wrapper-width}) / 2);
-
-$breakpoint-mobile: 600px;
-$shadow_stardard: 0px 0px 20px rgba(0, 0, 0, 0.1);
-$shadow_stardard: 6px 6px 30px rgba(black, 10%);
-$ease_standard: cubic-bezier(0.5, 0, 0.5, 1);
-
-$page-padding-bottom: 150px;
-
-//Fluid Type Breakpoints
-$ft-min-vp: $tablet;
-$ft-max-vp: $desktop;
-
-$min-vw: $ft-min-vp;
-$max-vw: $ft-max-vp;
-
-@function strip-unit($value) {
-	@return $value / ($value * 0 + 1);
-}
-@mixin fluid-type($min-font-size, $max-font-size) {
-	$u3: unit($min-font-size);
-	$u4: unit($max-font-size);
-	@if $u3 == $u4 {
-		& {
-			/*  font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})) !important; */
-			font-size: $min-font-size;
-			@media screen and (min-width: $min-vw) {
-				font-size: calc(
-					#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
-						((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
-				);
-			}
-			@media screen and (min-width: $max-vw) {
-				font-size: $max-font-size;
-			}
-		}
-	}
-}
-
-// Others
-$transition: all 0.5s ease-in-out;
-
-// lib
+// // lib
+@import 'lib/functions';
 @import 'lib/mixins';
+
 @import 'lib/swiper-bundle.min';
 @import 'lib/slick';
 @import 'lib/hamburger';
 @import 'lib/reset';
 @import 'lib/mc-calendar.min';
 
-//layout
+// layout
 @import 'layout/fonts';
 @import 'layout/global';
 @import 'layout/header';
@@ -153,6 +32,7 @@ $transition: all 0.5s ease-in-out;
 @import 'layout/lightbox';
 @import 'layout/hero-rounded';
 @import 'layout/slider';
+@import 'layout/typography';
 
 // woocommerce
 @import 'woo/woo-global';
@@ -170,7 +50,7 @@ $transition: all 0.5s ease-in-out;
 @import 'template-parts/button-scrolldown';
 @import 'template-parts/booking-reminder';
 
-//blocks
+// blocks
 @import 'blocks/drei-schritte';
 @import 'blocks/schulederphantasie';
 @import 'blocks/newsletter';
@@ -198,11 +78,11 @@ $transition: all 0.5s ease-in-out;
 @import 'blocks/hero-banner';
 @import 'blocks/date-overview';
 
-//shop blocks
+// shop blocks
 @import 'blocks/shop-hero-banner';
 @import 'blocks/shop-product-banner';
 
-//pages
+// pages
 @import 'pages/home';
 @import 'pages/courses';
 @import 'pages/coursepage';
@@ -211,6 +91,6 @@ $transition: all 0.5s ease-in-out;
 @import 'pages/galerie';
 @import 'pages/newsletter';
 
-//website
+// website
 @import 'kunstangebote/archive';
 @import 'kunstangebote/single';

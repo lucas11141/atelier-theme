@@ -1,3 +1,5 @@
+// TODO: Save all form stylings in this file
+
 // Mobile Dropdown im Shop
 .show--shop .header__dropdown__mobile {
 	.title__arrow {
@@ -230,7 +232,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 			top: calc(100% - 1px);
 			left: 50%;
 			transform: translateX(-50%);
-			@include transition;
+			transition: $transition;
 		}
 
 		&:hover,
@@ -653,7 +655,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		@include flex('column');
 
 		&.woocommerce-loop-product__link {
-			@include transition;
+			transition: $transition;
 		}
 	}
 
@@ -691,7 +693,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		position: absolute;
 		right: 22px;
 		bottom: 20px;
-		@include transition;
+		transition: $transition;
 
 		.price-from {
 			display: none;
@@ -735,7 +737,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		bottom: 20px;
 		opacity: 0;
 		pointer-events: none;
-		@include transition;
+		transition: $transition;
 		filter: none;
 		right: 50%;
 		transform: translateX(50%);
@@ -794,7 +796,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 	.product__category,
 	.woocommerce-loop-product__title,
 	.product__description {
-		@include transition;
+		transition: $transition;
 	}
 
 	// hide germanized extras
@@ -851,7 +853,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		left: 0;
 		top: 0;
 		opacity: 0;
-		@include transition;
+		transition: $transition;
 	}
 
 	&::before {
@@ -862,7 +864,7 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		background-color: $accent;
 		@include pos('center');
 		z-index: -1;
-		@include transition;
+		transition: $transition;
 	}
 
 	&.outofstock {
