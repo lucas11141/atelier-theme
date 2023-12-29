@@ -84,35 +84,4 @@ export default function wooSingle() {
 			mainSlider.slideTo(pswp.currIndex, 0, false);
 		});
 	});
-
-	// $('.woocommerce-product-gallery').each(function () {
-	// 	// Add required DOM Structure
-	// 	// $(this).append('<div class="slider__controls"></div>')
-	// 	// $(this).find('.slider__controls').append('<div class="slider__arrows"></div>')
-
-	// 	// Init slider
-	// 	$(this)
-	// 		.find('.woocommerce-product-gallery__wrapper')
-	// 		.slick({
-	// 			autoplay: false,
-	// 			speed: 200,
-	// 			slidesToShow: 1,
-	// 			slidesToScroll: 1,
-	// 			draggable: true,
-	// 			mobileFirst: true,
-
-	// 			arrows: false,
-	// 			// arrows: true,
-	// 			// appendArrows: $(this).find('.slider__arrows'),
-	// 			dots: true,
-	// 			// appendDots: $(this).find('.slider__controls'),
-
-	// 			responsive: [
-	// 				{
-	// 					breakpoint: 768,
-	// 					settings: 'unslick',
-	// 				},
-	// 			],
-	// 		});
-	// });
 }

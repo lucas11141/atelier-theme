@@ -7,7 +7,9 @@ import kontaktHeroBanner from './blocks/kontakt-hero-banner';
 import lightbox from './lib/lightbox';
 import newsletterPopup from './scripts/newsletterPopup';
 import productFilter from './blocks/productfilter';
+import produktslider from './blocks/produktslider';
 import settings from './scripts/settings';
+import shopHeroBanner from './blocks/shopHeroBanner';
 import websiteMode from './scripts/websiteMode';
 import wooSingle from './woo/woo-single';
 
@@ -34,6 +36,8 @@ import wooSingle from './woo/woo-single';
 		productFilter();
 		kontaktHeroBanner();
 		bookingReminder();
+		produktslider();
+		shopHeroBanner();
 
 		// Lib
 		lightbox();

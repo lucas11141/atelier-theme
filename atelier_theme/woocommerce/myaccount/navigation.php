@@ -33,7 +33,7 @@ $username = $current_user->display_name;
 <header class="shop-hero-banner shop-hero-banner--small show-header-on-offset">
 
     <?php get_template_part('template-parts/paper'); ?>
-    <div class="shop-hero-banner__decoration">
+    <div class="decoration">
         <div class="wrapper">
             <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
             <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">

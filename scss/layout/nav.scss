@@ -312,6 +312,7 @@
 	margin-right: 6px;
 	position: relative;
 	transition: $transition;
+
 	.nav__cart__quantity {
 		height: 18px;
 		width: 20px;
@@ -322,6 +323,7 @@
 		right: -8px;
 		z-index: 1;
 		transition: $transition;
+
 		span {
 			color: white;
 			font-size: 11px;
@@ -361,9 +363,11 @@
 	ul {
 		li.nav__toggle__site {
 			padding: 0;
+
 			&::after {
 				content: unset;
 			}
+
 			a {
 				@include button;
 				@include button-config($accent, white);
@@ -372,7 +376,7 @@
 				align-items: center;
 				column-gap: 6px;
 				border-radius: 8px;
-				font-size: 12px;
+				font-size: 12px !important;
 				font-weight: 800;
 				color: white;
 				text-transform: uppercase;
@@ -396,6 +400,7 @@
 					transform: translate(-50%, -50%);
 				}
 			}
+
 			@media only screen and (max-width: $desktop) {
 				margin: 0;
 

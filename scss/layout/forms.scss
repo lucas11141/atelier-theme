@@ -269,9 +269,11 @@ textarea {
 	width: 100%;
 	@include flex('row');
 	align-items: stretch;
+
 	.form-row {
 		margin: 0;
 		padding-top: 7px !important;
+
 		.label-name {
 			font-weight: 700;
 			font-size: 14px;
@@ -280,23 +282,26 @@ textarea {
 			top: 0;
 			left: 10px;
 		}
+
 		.label-error {
 			display: none;
 		}
 	}
+
 	p.form-input {
 		@include input;
 		width: unset;
 		flex: auto;
+
 		.label-name {
 			@include label;
 		}
+
 		input::placeholder {
 			color: transparent;
 		}
 	}
-	button {
-	}
+
 	button {
 		margin: 7px 0 0 12px !important;
 		padding: 0;
@@ -308,9 +313,10 @@ textarea {
 		color: transparent;
 		font-size: 0;
 		position: relative;
+
 		&::after {
 			content: 'GO';
-			padding-top: 27px;
+			padding-top: 30px;
 			height: 100%;
 			width: 100%;
 			text-indent: 0;
@@ -319,10 +325,12 @@ textarea {
 			position: relative;
 			@include pos('center');
 		}
+
 		&:hover {
 			background-size: 1300%;
 		}
 	}
+
 	@media only screen and (max-width: $mobile) {
 		.button {
 			padding: 0 20px;

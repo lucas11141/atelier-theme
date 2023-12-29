@@ -4,6 +4,7 @@
 $slider__pagination-gap: 6px;
 
 .slider__pagination {
+	width: auto !important;
 	@include flex('row');
 	justify-content: center;
 	gap: $slider__pagination-gap;
@@ -131,4 +132,16 @@ $slider__pagination-gap: 6px;
 		opacity: 0.2;
 		pointer-events: none;
 	}
+}
+
+.slider__controls {
+	@include flex('row');
+	justify-content: space-between;
+	align-items: center;
+	gap: $gap;
+	margin-top: $space-small;
+}
+
+.slider__buttons {
+	@include flex('row');
 }

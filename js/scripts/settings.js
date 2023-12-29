@@ -31,72 +31,6 @@ export default function settings() {
 		$('.checkout-split .left .container').prepend($('.woocommerce-thankyou-order-received'));
 	}
 
-	class ShopHeroSlider {
-		constructor(textSliderClass, imageSliderClass) {
-			this.textSlider = $(textSliderClass).slick({
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				dots: false,
-				arrows: false,
-				fade: true,
-				cssEase: 'linear',
-				adaptiveHeight: true,
-				draggable: false,
-				responsive: [
-					{
-						breakpoint: 520,
-						settings: {
-							adaptiveHeight: false,
-						},
-					},
-				],
-			});
-			this.imageSlider = $(imageSliderClass).slick({
-				infinite: true,
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				dots: false,
-				arrows: true,
-				prevArrow: $('.hero__slider__button--prev'),
-				nextArrow: $('.hero__slider__button--next'),
-				asNavFor: '.shop-hero-banner__text',
-			});
-
-			this.sliderLength = this.imageSlider.slick('getSlick').slideCount;
-			this.processBar = document.querySelector('.process-button .process');
-			this.processButton = document.querySelector('.process-button');
-			this.isPaused = false;
-
-			this.declareEventListeners();
-		}
-
-		declareEventListeners() {
-			this.processButton.addEventListener('click', () => {
-				if (this.isPaused) {
-					this.imageSlider.slick('slickPlay');
-					this.processButton.classList.remove('--paused');
-					this.isPaused = false;
-				} else {
-					this.imageSlider.slick('slickPause');
-					this.processButton.classList.add('--paused');
-					this.isPaused = true;
-				}
-			});
-			this.textSlider.on('beforeChange', () => {
-				this.processButton.classList.remove('--filled');
-				setTimeout(() => {
-					this.processButton.classList.add('--filled');
-				}, 1);
-			});
-			this.processBar.addEventListener('animationend', () => {
-				this.imageSlider.slick('slickNext');
-			});
-		}
-	}
-	if (document.querySelector('.shop-hero-banner .hero__slider')) {
-		const shopHeroSlider = new ShopHeroSlider('.shop-hero-banner__text', '.hero__slider');
-	}
-
 	//
 	let dropdownIsOpened = false;
 	$('.hamburger').click(function () {
@@ -472,52 +406,6 @@ export default function settings() {
 
 		item.addEventListener('touchmove', (e) => {
 			e.preventDefault();
-		});
-	});
-
-	$('.related').append('<div class="slider__controls"></div>');
-
-	//slider
-	$('.slider, .related .products').each(function () {
-		const controls = $(this).next('.slider__controls');
-		controls.append('<div class="slider__arrows"></div>');
-		$(this).slick({
-			autoplay: false,
-			speed: 500,
-			slidesToShow: 3,
-			slidesToScroll: 1,
-			swipeToSlide: true,
-			variableWidth: true,
-			infinite: false,
-			// lazyLoad: 'progressive',
-			lazyLoad: 'ondemand',
-			waitForAnimate: true,
-
-			arrows: true,
-			appendArrows: controls.find('.slider__arrows'),
-			dots: true,
-			appendDots: controls,
-
-			draggable: true,
-			touchMove: true,
-			touchThreshold: 180,
-
-			responsive: [
-				{
-					breakpoint: 850,
-					settings: {
-						slidesToShow: 2,
-					},
-				},
-				{
-					breakpoint: 520,
-					settings: {
-						touchThreshold: 250,
-						slidesToShow: 1,
-					},
-					// settings: "unslick"
-				},
-			],
 		});
 	});
 

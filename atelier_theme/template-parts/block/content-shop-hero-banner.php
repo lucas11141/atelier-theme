@@ -1,13 +1,12 @@
 <?php
-
-/**
- * Block Name: Shop Hero Banner
- *
- */
+/*------------------------------------*/
+/* ACF Block: Shop Hero Banner */
+/*------------------------------------*/
 
 // get fields
 $uberschrift_h1 = get_field('uberschrift_h1');
 $ankundigung = get_field('ankundigung');
+$slides = get_field('slides');
 
 $id = $block["id"];
 ?>
@@ -16,7 +15,7 @@ $id = $block["id"];
 
     <?php get_template_part('template-parts/paper'); ?>
 
-    <div class="shop-hero-banner__decoration">
+    <div class="decoration">
         <div class="wrapper">
             <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
             <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
@@ -36,54 +35,61 @@ $id = $block["id"];
 
     <?php else : ?>
 
-        <div class="shop-hero-banner__image-text wrapper">
-            <?php if (have_rows('slides')) : ?>
-                <div class="shop-hero-banner__text">
-                    <?php while (have_rows('slides')) : the_row();
-                        $text = get_sub_field('text');
-                        $tag = $text['tag'];
-                        $uberschrift_h2 = $text['uberschrift_h2'];
-                        $uberschrift_h5 = $text['uberschrift_h5'];
-                        $uberschrift_h1_aktivieren = $text['uberschrift_h1_aktivieren'];
-                        $beschreibung = $text['beschreibung'];
-                        $button = $text['button'];
-                        $bild = get_sub_field('bild');
-                    ?>
-                        <div class="shop-hero-banner__text__item">
-                            <div>
-                                <?php get_template_part('template-parts/tag', '', array('tagname' => $tag, 'color' => 'white')); ?>
-                                <?php if ($uberschrift_h1_aktivieren) : ?>
-                                    <h1><?= $uberschrift_h2 ?></h1>
-                                <?php else : ?>
-                                    <h2><?= $uberschrift_h2 ?></h2>
-                                <?php endif; ?>
-                                <h5><?= $uberschrift_h5 ?></h5>
-                            </div>
-                            <div>
-                                <p><?= $beschreibung ?></p>
-                                <a class="button" href="<?= $button['url']; ?>"><span><?= $button['title']; ?></span></a>
-                            </div>
-                        </div>
-                    <?php endwhile; ?>
-                </div>
-            <?php endif; ?>
+        <?php if (!empty($slides)) : ?>
+            <div class="content-split">
 
-            <?php if (have_rows('slides')) : ?>
-                <div class="shop-hero-banner__image">
-                    <div class="hero__slider">
-                        <?php while (have_rows('slides')) : the_row();
-                            $bild = get_sub_field('bild');
-                        ?>
-                            <div class="hero__slider__item">
-                                <img src="<?= $bild['sizes']['medium'] ?>" alt="<?= $bild['alt'] ?>">
-                            </div>
-                        <?php endwhile; ?>
+                <div class="text-slider">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+
+                            <?php foreach ($slides as $slide) :
+                                $text = $slide['text'];
+                                $tag = $text['tag'];
+                                $uberschrift_h2 = $text['uberschrift_h2'];
+                                $uberschrift_h5 = $text['uberschrift_h5'];
+                                $uberschrift_h1_aktivieren = $text['uberschrift_h1_aktivieren'];
+                                $beschreibung = $text['beschreibung'];
+                                $button = $text['button']; ?>
+
+                                <div class="swiper-slide">
+                                    <?php get_template_part('template-parts/tag', '', array('tagname' => $tag, 'color' => 'white')); ?>
+                                    <?php if ($uberschrift_h1_aktivieren) : ?>
+                                        <h1><?= $uberschrift_h2 ?></h1>
+                                    <?php else : ?>
+                                        <h2><?= $uberschrift_h2 ?></h2>
+                                    <?php endif; ?>
+                                    <h5><?= $uberschrift_h5 ?></h5>
+                                    <p><?= $beschreibung ?></p>
+                                    <a class="button" href="<?= $button['url']; ?>"><span><?= $button['title']; ?></span></a>
+                                </div>
+
+                            <?php endforeach; ?>
+                        </div>
                     </div>
-                    <button type="button" class="hero__slider__button hero__slider__button--prev" aria-label="Vorheriger Slide"></button>
-                    <button type="button" class="hero__slider__button hero__slider__button--next" aria-label="Nächster Slide"></button>
                 </div>
-            <?php endif; ?>
-        </div>
+
+                <div class="image-slider">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+
+                            <?php foreach ($slides as $slide) :
+                                $bild = $slide['bild']; ?>
+
+                                <div class="swiper-slide">
+                                    <img src="<?= $bild['sizes']['medium'] ?>" alt="<?= $bild['alt'] ?>">
+                                </div>
+
+                            <?php endforeach; ?>
+                        </div>
+
+                    </div>
+
+                    <button type="button" class="--prev" aria-label="Vorheriger Slide"></button>
+                    <button type="button" class="--next" aria-label="Nächster Slide"></button>
+                </div>
+
+            </div>
+        <?php endif; ?>
 
     <?php endif; ?>
 

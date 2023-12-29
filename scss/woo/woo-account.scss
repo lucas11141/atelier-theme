@@ -9,11 +9,12 @@
 	.order__fact {
 		h6 {
 			padding: 0 0 10px;
-			color: $main;
+			color: $main !important;
 		}
 
 		p,
 		bdi {
+			margin: 0;
 			padding: 0;
 			@include fluid-type(14px, 15px);
 		}
@@ -78,8 +79,6 @@
 		}
 
 		.account__logout {
-			padding-top: 16px;
-			padding-bottom: 16px;
 			@include flex('row');
 			align-items: baseline;
 			column-gap: 8px;
@@ -548,5 +547,59 @@
 
 	&.strong {
 		color: $accent;
+	}
+}
+
+/*------------------------------------*/
+/* Woocommerce: Edit address page */
+/*------------------------------------*/
+body.woocommerce-edit-address {
+	.addresses {
+		@include flex('row');
+		column-gap: 20px;
+
+		.col-1,
+		.col-2 {
+			width: calc(50% - 10px);
+			flex: auto;
+			background-color: $lightgray;
+			border: solid 1px $linegray;
+			border-radius: 15px;
+			padding: 25px;
+
+			* {
+				font-size: 16px;
+			}
+
+			h2 {
+				font-weight: 800;
+				padding-bottom: 15px;
+			}
+
+			address {
+				position: relative;
+
+				p {
+					padding: 0;
+					/* padding-left: 30px;
+					background-image: url(../img/icons/icon_phone_green.svg);
+					background-size: 10px;
+					background-position: 0 50%;
+					background-repeat: no-repeat; */
+					position: absolute;
+					left: 50%;
+					top: 0;
+					&:nth-of-type(2) {
+						top: 24px;
+					}
+					// &.woocommerce-customer-details--phone {
+
+					// }
+					// &.woocommerce-customer-details--email {
+
+					// }
+				}
+			}
+		}
 	}
 }

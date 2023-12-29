@@ -63,6 +63,11 @@
 	}
 }
 
+@mixin text-soft {
+	@include fluid-type(13px, 14px);
+	color: $text--soft;
+}
+
 @mixin heading {
 	font-family: $main-font;
 	font-weight: 800;
@@ -207,6 +212,7 @@
 	background-image: radial-gradient(circle, $font-color 0%, $font-color 10%, transparent 10%);
 }
 
+// TODO: Simplify buttons
 @mixin button {
 	@include flex('row');
 	display: inline-flex;
@@ -214,7 +220,7 @@
 	align-items: center;
 	column-gap: 12px;
 	padding: 18px 50px;
-	border: none;
+	border: solid 2px transparent;
 	border-radius: 10px;
 	transition: ease-in-out 200ms;
 	cursor: pointer;
@@ -309,13 +315,25 @@
 
 	&.--size-mini,
 	&.button--mini {
-		padding: 14px 20px;
+		padding: 11px 20px;
 
 		&,
 		span {
 			font-size: 14px;
 			font-weight: 700;
 			text-transform: none;
+		}
+	}
+
+	&.--size-tiny {
+		padding: 11px 20px;
+		border-radius: 8px;
+
+		&,
+		a,
+		span {
+			font-size: 14px;
+			@include fluid-type(11px, 12px);
 		}
 	}
 
@@ -786,4 +804,15 @@
 		margin-top: 0;
 		padding-top: 0;
 	}
+}
+
+@mixin box {
+	padding: 25px 27px;
+	border-radius: 15px;
+	background-color: white;
+	@include dropshadow;
+}
+
+@mixin box-padding {
+	padding: 25px 27px;
 }

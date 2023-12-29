@@ -1,7 +1,12 @@
-//
-.account--order-single {
-	.container {
+/*------------------------------------*/
+/* Woocommerce: View Order */
+/*------------------------------------*/
+body.woocommerce-view-order {
+	// TODO: Make this general
+	.left,
+	.right {
 		@include flex('column');
+		justify-content: start;
 		align-items: stretch;
 		gap: 60px;
 
@@ -10,17 +15,9 @@
 		}
 	}
 
-	/*------------------------------------*\
-    Split left
-\   *------------------------------------*/
-
-	.woocommerce-thankyou-order-received {
-		margin-bottom: -20px;
-		padding: 0;
-	}
-	.woocommerce-order-overview {
-		display: none;
-	}
+	/*------------------------------------*/
+	/* Split left */
+	/*------------------------------------*/
 
 	// order header
 	.order__header {
@@ -29,13 +26,12 @@
 
 	// order status
 	.order__status {
-		padding: 25px 27px;
-		border-radius: 15px;
-		background-color: white;
-		@include dropshadow;
+		@include box;
+		padding: 0;
 
 		.order__facts {
-			padding-bottom: 20px;
+			@include box-padding;
+			padding-bottom: 16px;
 			width: 100%;
 			justify-content: space-between;
 			@include dashed-border($linegray, bottom);
@@ -49,10 +45,11 @@
 		}
 
 		&__timeline {
-			margin-top: 20px;
+			@include box-padding;
+			padding-top: 22px;
 
 			.labels {
-				margin-bottom: 10px;
+				margin-bottom: 15px;
 				width: 100%;
 				@include flex('row');
 				justify-content: space-between;
@@ -67,10 +64,10 @@
 						width: 9px;
 						border-radius: 50%;
 						background-color: $linegray;
-						border: solid 5px white;
+						border: solid 6px white;
 						box-sizing: content-box;
 						position: absolute;
-						top: calc(100% + 2px);
+						top: calc(100% + 7px);
 					}
 
 					&:nth-of-type(1)::after {
@@ -104,7 +101,8 @@
 		}
 
 		&__description {
-			padding-top: 25px;
+			@include box-padding;
+			padding-top: 5px;
 
 			&:empty {
 				padding: 0;
@@ -445,40 +443,38 @@
 
 	// products list
 	.order__cart {
-		.order__products {
-			padding: 25px 27px;
-			border-radius: 15px;
-			background-color: white;
-			@include dropshadow;
+		@include box;
 
-			.cart__item:not(:last-of-type) {
-				margin-bottom: 18px;
-				padding-bottom: 18px;
-			}
+		.cart__item:not(:last-of-type) {
+			margin-bottom: 18px;
+			padding-bottom: 18px;
+		}
 
-			.product__name__price * {
-				@include fluid-type(18px, 20px);
-			}
+		.product__name__price * {
+			@include fluid-type(18px, 20px);
+		}
 
-			.product__image {
-				height: 100px;
-				width: 100px;
-				min-width: 100px;
-			}
+		.product__image {
+			height: 100px;
+			width: 100px;
+			min-width: 100px;
 		}
 	}
 
 	// customer information
-	.order__infos {
-		.order__facts {
-			padding: 25px 27px;
-			gap: 30px;
-			background-color: white;
-			border-radius: 15px;
-			@include dropshadow;
+	.order__addresses {
+		@include box;
+		@include flex('row');
+		flex-wrap: wrap;
+		gap: $gap;
 
-			.order__fact {
-				width: calc(50% - 15px);
+		li {
+			min-width: 160px;
+			flex: 1;
+			@include remove-spacing-first;
+
+			p {
+				padding-top: 10px;
 			}
 		}
 	}
@@ -498,9 +494,9 @@
 		}
 	}
 
-	/*------------------------------------*\
-    Split right
-\   *------------------------------------*/
+	/*------------------------------------*/
+	/* Split right */
+	/*------------------------------------*/
 
 	// buttons
 	.order__controls {
@@ -579,17 +575,12 @@
 
 	// payment method
 	.order__payment {
-		&__content {
-			padding: 25px 27px;
-			@include flex('column');
-			gap: 20px;
-			border-radius: 15px;
-			background-color: white;
-			@include dropshadow;
+		@include box;
+		@include flex('column');
+		gap: $gap;
 
-			p {
-				padding: 0;
-			}
+		p {
+			padding: 0;
 		}
 	}
 
@@ -614,6 +605,10 @@
 	}
 }
 
+/*------------------------------------*/
+/* Woocommerce: Review Ordner */
+/*------------------------------------*/
+// TODO: Test this code by creating a new order
 .woocommerce-order-overview,
 .order__overview {
 	@include flex('row');
@@ -648,64 +643,6 @@
 		}
 	}
 }
-
-.woocommerce-order-details {
-	margin-top: 20px;
-}
-
-.woocommerce-customer-details {
-	@extend .gray__block;
-}
-
-.addresses {
-	@include flex('row');
-	column-gap: 20px;
-
-	.col-1,
-	.col-2 {
-		width: calc(50% - 10px);
-		flex: auto;
-		background-color: $lightgray;
-		border: solid 1px $linegray;
-		border-radius: 15px;
-		padding: 25px;
-
-		* {
-			font-size: 16px;
-		}
-
-		h2 {
-			font-weight: 800;
-			padding-bottom: 15px;
-		}
-
-		address {
-			position: relative;
-
-			p {
-				padding: 0;
-				/* padding-left: 30px;
-                background-image: url(../img/icons/icon_phone_green.svg);
-                background-size: 10px;
-                background-position: 0 50%;
-                background-repeat: no-repeat; */
-				position: absolute;
-				left: 50%;
-				top: 0;
-				&:nth-of-type(2) {
-					top: 24px;
-				}
-				// &.woocommerce-customer-details--phone {
-
-				// }
-				// &.woocommerce-customer-details--email {
-
-				// }
-			}
-		}
-	}
-}
-
 .woocommerce-thankyou-order-received {
 	padding: 0 0 35px;
 

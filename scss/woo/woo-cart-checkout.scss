@@ -1,26 +1,4 @@
-$checkout-wrapper-width: 1000px;
 $color-input-blue: #0275ff;
-
-:root {
-	--padding-outside: calc((100vw - #{$checkout-wrapper-width}) / 2);
-	--padding-inside: 50px;
-	--section-gap: 60px;
-
-	@media only screen and (max-width: 1100px) {
-		--padding-outside: #{$wrapper-gap};
-		--padding-inside: 35px;
-	}
-
-	@media only screen and (max-width: 920px) {
-		--padding-inside: 25px;
-	}
-
-	@media only screen and (max-width: $desktop) {
-		--padding-outside: #{$gap};
-		--padding-inside: #{$gap};
-		--section-gap: 40px;
-	}
-}
 
 @mixin element-select-list {
 	margin: 0;
@@ -429,13 +407,12 @@ $table-padding: 25px;
 				@include dashed-border($linegray, bottom);
 
 				td {
+					@include text-soft;
 					padding-bottom: $table-padding;
 					padding-left: 25px;
 					border: solid 1 $linegray;
 					border-radius: 6px;
-					@include fluid-type(13px, 14px);
 					text-align: left;
-					color: $text--soft;
 				}
 			}
 
@@ -466,6 +443,11 @@ $table-padding: 25px;
 				}
 			}
 		}
+	}
+
+	.shipped_via {
+		display: inline-block;
+		padding-top: 8px;
 	}
 }
 

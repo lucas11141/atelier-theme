@@ -108,6 +108,71 @@ body:has(#gtm-values[data-website-mode='shop']) {
 }
 
 /*------------------------------------*/
+/* Split grid */
+/*------------------------------------*/
+:root {
+	--padding-outside: calc((100vw - #{$screen}) / 2);
+	--padding-inside: 50px;
+	--section-gap: 60px;
+
+	@media only screen and (max-width: 1100px) {
+		--padding-outside: #{$wrapper-gap};
+		--padding-inside: 35px;
+	}
+
+	@media only screen and (max-width: 920px) {
+		--padding-inside: 25px;
+	}
+
+	@media only screen and (max-width: $desktop) {
+		--padding-outside: #{$gap};
+		--padding-inside: #{$gap};
+		--section-gap: 40px;
+	}
+}
+
+.split-grid {
+	display: grid;
+	grid-template-columns: 54% 46%;
+	grid-template-areas: 'left right';
+
+	.left {
+		grid-area: 'left';
+		padding: 50px var(--padding-inside) 100px var(--padding-outside);
+	}
+
+	.right {
+		grid-area: 'right';
+		padding: 50px var(--padding-outside) 100px var(--padding-inside);
+		background-color: $lightgray;
+		border-left: solid 2px $linegray;
+	}
+
+	.left,
+	.right {
+		h4 {
+			padding: 0 0 20px;
+		}
+	}
+
+	@include bp-lower($tablet) {
+		grid-template-columns: 100%;
+		grid-template-areas: 'left' 'right';
+
+		.left,
+		.right {
+			padding-top: $outergap;
+			padding-bottom: $outergap;
+		}
+
+		.right {
+			border-left: none;
+			border-top: solid 2px $lightgray;
+		}
+	}
+}
+
+/*------------------------------------*/
 /* Shop split: left/right */
 /*------------------------------------*/
 .shop__split {
@@ -650,6 +715,8 @@ body:has(#gtm-values[data-website-mode='shop']) {
 
 .loop__product__content {
 	padding: 20px 22px;
+	background-color: white;
+	border-radius: 0 0 15px 15px;
 
 	a {
 		@include flex('column');
