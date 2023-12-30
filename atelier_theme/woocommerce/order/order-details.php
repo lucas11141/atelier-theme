@@ -55,19 +55,29 @@ $status = $order->get_status();
 $status_title = esc_html(wc_get_order_status_name($status));
 
 if ($status === 'pending') {
-	$status_class = '--step-payment';
-	$status_description = '';
+	$status_description = 'Deine Bestellung ist noch nicht bezahlt. Bitte bezahle, damit wir die Bestellung weiter bearbeiten können.';
 }
 
 if ($status === 'processing') {
-	$status_class = '--step-progress';
 	$status_description = 'Deine Bestellung wurde bezahlt und kann jetzt bearbeitet werden.';
 }
 
 if ($status === 'completed') {
 	$tracking_items = ast_get_tracking_items($order_id);
-	$status_class = '--step-sending';
 	$status_description = 'Deine Bestellung wurde versendet und ist auf dem Weg zu Dir.';
+}
+
+if ($status === 'on-hold') {
+	$status_description = 'Deine Bestellung ist in Bearbeitung, wird aber noch durch andere Faktoren (z.B. Feiertage) verzögert.';
+}
+
+if ($status === 'arrival-shipment') {
+	$status_title = "Einkauf vor Ort";
+	$status_description = 'Diese Bestellung wurde vor Ort getätigt.';
+}
+
+if ($status === 'refunded') {
+	$status_description = 'Deine Bestellung wurde storniert und das Geld wurde zurückerstattet.';
 }
 ?>
 
@@ -102,7 +112,7 @@ if ($status === 'completed') {
 		</div>
 
 		<!-- Order Status -->
-		<div class="order__status <?= $status_class ?>">
+		<div class="order__status --status-<?= $status ?>">
 			<ul class="order__facts">
 				<li class="order__fact">
 					<h6>Status</h6>
@@ -118,17 +128,25 @@ if ($status === 'completed') {
 
 			<div class="order__status__timeline">
 				<div class="labels">
+					<span>Bestellung</span>
 					<span>Bezahlung</span>
-					<span>Bearbeitung</span>
-					<span>Versand</span>
+					<span>Lieferung</span>
 				</div>
 				<div class="timeline">
-					<div></div>
+					<div class="timeline-process"></div>
 				</div>
 			</div>
 
 			<p class="order__status__description"><?= $status_description ?></p>
 		</div>
+
+		<!-- Shipping Infos -->
+		<?php if (true || !empty($tracking_items)) : ?>
+			<div class="shipping__status">
+				<h4>Sendungen</h4>
+			</div>
+		<?php endif; ?>
+
 
 		<!-- Order Cart -->
 		<?php do_action('woocommerce_order_details_before_order_table', $order); ?>

@@ -1,7 +1,19 @@
 /*------------------------------------*/
 /* Woocommerce: View Order */
 /*------------------------------------*/
+
+// Hode tracking details before moving them to the right place
+.woocommerce-MyAccount-content {
+	> .tracking-detail {
+		display: none !important;
+	}
+}
+
 body.woocommerce-view-order {
+	#main {
+		padding: 0;
+	}
+
 	// TODO: Make this general
 	.left,
 	.right {
@@ -35,6 +47,10 @@ body.woocommerce-view-order {
 			width: 100%;
 			justify-content: space-between;
 			@include dashed-border($linegray, bottom);
+
+			.order-status {
+				color: $accent;
+			}
 
 			.order__fact:nth-of-type(2) {
 				p,
@@ -118,326 +134,82 @@ body.woocommerce-view-order {
 			}
 		}
 
-		&.--step-payment {
-			.order__fact:nth-of-type(1) {
-				p {
+		&.--status {
+			&-pending {
+				.order-status {
+					color: $red;
+					-webkit-text-stroke-color: $red;
+				}
+
+				.order__status__timeline {
+					.labels span:nth-of-type(1) {
+						@extend .label--active;
+					}
+
+					.timeline-process {
+						width: calc(100% / 4 * 1);
+					}
+				}
+			}
+
+			&-processing {
+				.order__status__timeline {
+					.labels span:nth-of-type(1),
+					.labels span:nth-of-type(2) {
+						@extend .label--active;
+					}
+
+					.timeline div {
+						width: calc(100% / 4 * 3);
+					}
+				}
+			}
+
+			&-on-hold {
+				.order-status {
+					color: $workshop-kinder;
+					-webkit-text-stroke-color: $workshop-kinder;
+				}
+
+				.order__status__timeline {
+					.labels span:nth-of-type(1),
+					.labels span:nth-of-type(2) {
+						@extend .label--active;
+					}
+
+					.timeline div {
+						width: calc(100% / 4 * 3);
+					}
+				}
+			}
+
+			&-completed,
+			&-arrival-shipment {
+				.order__status__timeline {
+					.labels span:nth-of-type(1),
+					.labels span:nth-of-type(2),
+					.labels span:nth-of-type(3) {
+						@extend .label--active;
+					}
+
+					.timeline div {
+						width: calc(100% / 4 * 4);
+					}
+				}
+			}
+
+			&-cancelled {
+				.order-status {
 					color: $red;
 					-webkit-text-stroke-color: $red;
 				}
 			}
-
-			.order__status__timeline {
-				.labels span:nth-of-type(1) {
-					@extend .label--active;
-
-					&::after {
-						background-color: $red;
-					}
-				}
-
-				.timeline div {
-					width: 0;
-				}
-			}
-		}
-
-		&.--step-progress {
-			.order__status__timeline {
-				.labels span:nth-of-type(1),
-				.labels span:nth-of-type(2) {
-					@extend .label--active;
-				}
-
-				.timeline div {
-					width: 50%;
-				}
-			}
-		}
-
-		&.--step-sending {
-			.order__status__timeline {
-				.labels span:nth-of-type(1),
-				.labels span:nth-of-type(2),
-				.labels span:nth-of-type(3) {
-					@extend .label--active;
-				}
-
-				.timeline div {
-					width: 100%;
-				}
-			}
 		}
 	}
 
-	.button--tracking {
-		margin-top: -40px;
-	}
-
-	// shipping information
-	.shipment_heading {
-		@include h4;
-		@include font-gooddog;
-		padding: 50px 0 20px !important;
-
-		&:first-of-type {
-			padding-top: 0 !important;
-		}
-	}
-
-	.tracking-detail {
-		margin: 0 auto !important;
-		padding: 25px 27px !important;
-		background: white !important;
-		border-radius: 15px;
-		border: none !important;
-		@include dropshadow;
-
-		& + .tracking-detail {
-			margin-top: 20px !important;
-		}
-
-		.shipment-content {
-			margin: 0;
-		}
-
-		.tracking-header {
-			padding-bottom: 20px;
-			@include flex('row');
-			flex-direction: row-reverse;
-			@include dashed-border($linegray, bottom);
-
-			.tracking_number_wrap {
-				margin: 0;
-				padding: 0;
-				@include flex('row');
-				flex-direction: row-reverse;
-				align-items: center;
-				gap: 15px;
-				border: none;
-
-				.provider_image_div {
-					margin: 0;
-
-					.provider_image {
-						width: 50px;
-					}
-				}
-
-				.tracking_number_div {
-					margin: 0;
-
-					li {
-						@include flex('column');
-						align-items: flex-end;
-					}
-
-					strong {
-						margin: 0;
-					}
-
-					a:hover {
-						text-decoration: underline;
-					}
-				}
-			}
-
-			.shipment_status_heading {
-				padding-top: 24px;
-				@include font-gooddog;
-				@include fluid-type(18px, 20px);
-				color: $accent;
-				-webkit-text-stroke-color: $accent;
-				position: relative;
-
-				&::after {
-					content: 'status';
-					padding: 0;
-					color: $main;
-					font-family: $main-font;
-					@include fluid-type(12px, 13px);
-					font-weight: 800;
-					text-transform: uppercase;
-					position: absolute;
-					top: 0;
-					left: 0;
-				}
-
-				&::before {
-					content: unset !important;
-				}
-			}
-		}
-
-		.progress {
-			margin: 35px 0;
-			height: 4px;
-			background-color: $linegray;
-
-			.progress-bar {
-				background-color: $accent;
-			}
-
-			.progress-icon {
-				height: 36px !important;
-				width: 36px !important;
-				top: 50% !important;
-				transform: translateY(-50%) !important;
-
-				&.icon1 {
-					content: url(../img/icons/shipping_icon_pre_transit.svg) !important;
-				}
-				&.icon2 {
-					content: url(../img/icons/shipping_icon_in_transit.svg) !important;
-				}
-				&.icon3 {
-					content: url(../img/icons/shipping_icon_out_for_delivery.svg) !important;
-				}
-				&.icon4 {
-					content: url(../img/icons/shipping_icon_delivered.svg) !important;
-				}
-			}
-			&.pre_transit {
-				.progress-bar {
-					width: 25% !important;
-				}
-
-				.icon1 {
-					content: url(../img/icons/shipping_icon_pre_transit_active.svg) !important;
-				}
-			}
-			&.in_transit {
-				.progress-bar {
-					width: 50% !important;
-				}
-
-				.icon1 {
-					content: url(../img/icons/shipping_icon_pre_transit_active.svg) !important;
-				}
-				.icon2 {
-					content: url(../img/icons/shipping_icon_in_transit_active.svg) !important;
-				}
-			}
-
-			&.out_for_delivery {
-				.progress-bar {
-					width: 75% !important;
-				}
-
-				.icon1 {
-					content: url(../img/icons/shipping_icon_pre_transit_active.svg) !important;
-				}
-				.icon2 {
-					content: url(../img/icons/shipping_icon_in_transit_active.svg) !important;
-				}
-				.icon3 {
-					content: url(../img/icons/shipping_icon_out_for_delivery_active.svg) !important;
-				}
-			}
-
-			&.delivered {
-				.progress-bar {
-					width: 100% !important;
-				}
-
-				.icon1 {
-					content: url(../img/icons/shipping_icon_pre_transit_active.svg) !important;
-				}
-				.icon2 {
-					content: url(../img/icons/shipping_icon_in_transit_active.svg) !important;
-				}
-				.icon3 {
-					content: url(../img/icons/shipping_icon_out_for_delivery_active.svg) !important;
-				}
-				.icon4 {
-					content: url(../img/icons/shipping_icon_delivered_active.svg) !important;
-				}
-			}
-		}
-
-		.shipment_progress_heading_div {
-			display: none !important;
-
-			.shipment_progress_label {
-				padding: 5px 10px;
-				font-weight: 700;
-				color: $main;
-
-				&.checked {
-					border-bottom: solid 2px $accent;
-				}
-			}
-		}
-
-		.tracking-details {
-			margin-top: 15px;
-
-			ul.timeline {
-				padding: 0 0 0 8px !important;
-
-				&::before {
-					width: 4px;
-					background-color: $linegray;
-					left: 4px;
-					border-radius: 2px;
-				}
-
-				li {
-					&::before {
-						content: '';
-						height: 8px;
-						width: 8px;
-						background-color: $accent;
-						background-color: $linegray;
-						border: solid 5px white;
-						border-radius: 50%;
-						box-sizing: content-box;
-						left: -3px;
-						transform: translateY(1px);
-					}
-					strong {
-					}
-
-					p {
-					}
-				}
-
-				&.new-details {
-					padding-top: 5px !important;
-					&::before {
-						top: 0;
-					}
-				}
-
-				&.old-details {
-					&::before {
-						top: -10px;
-						height: calc(100% + 10px);
-					}
-				}
-			}
-		}
-
-		.view_hide_old_details_div {
-			margin-top: 10px;
-
-			a {
-				color: $accent;
-				font-weight: 700;
-			}
-		}
-
-		.trackship_branding {
-			display: none !important;
-		}
-	}
-
-	.shipping__status:not(:has(.tracking-detail)) {
-		display: none;
-	}
-
-	&:has(.tracking-detail) {
-		.order__status {
-			@extend .--step-sending;
+	.shipping__status {
+		&:not(:has(.tracking-detail)) {
+			display: none;
 		}
 	}
 
@@ -509,11 +281,15 @@ body.woocommerce-view-order {
 			&.pay {
 				@extend .--color-red;
 			}
-			&.view {
+
+			&.view,
+			&.ast_track,
+			&.ast_multi_track {
 				display: none;
 			}
 		}
 
+		&:empty,
 		&:not(:has(.button:nth-of-type(2))) {
 			display: none;
 		}
@@ -649,6 +425,47 @@ body.woocommerce-view-order {
 	& + .order__header {
 		.view {
 			display: none;
+		}
+	}
+}
+
+/*------------------------------------*/
+/* Order facts */
+/*------------------------------------*/
+.order__facts {
+	padding: 0;
+	@include flex('row');
+	justify-content: flex-start;
+	align-items: center;
+	gap: 30px;
+
+	.order__fact {
+		h6 {
+			padding: 0 0 10px;
+			color: $main !important;
+		}
+
+		p,
+		bdi {
+			margin: 0;
+			padding: 0;
+			@include fluid-type(14px, 15px);
+		}
+	}
+
+	&:not(.--proxima) .order__fact {
+		h6 {
+			padding-bottom: 6px;
+		}
+
+		p,
+		bdi {
+			padding: 0;
+			@include font-gooddog;
+			@include fluid-type(18px, 20px);
+			color: $accent;
+			line-height: 1.5;
+			-webkit-text-stroke-color: $accent;
 		}
 	}
 }

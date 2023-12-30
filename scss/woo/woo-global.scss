@@ -136,20 +136,20 @@ body:has(#gtm-values[data-website-mode='shop']) {
 	grid-template-columns: 54% 46%;
 	grid-template-areas: 'left right';
 
-	.left {
+	> .left {
 		grid-area: 'left';
 		padding: 50px var(--padding-inside) 100px var(--padding-outside);
 	}
 
-	.right {
+	> .right {
 		grid-area: 'right';
 		padding: 50px var(--padding-outside) 100px var(--padding-inside);
 		background-color: $lightgray;
 		border-left: solid 2px $linegray;
 	}
 
-	.left,
-	.right {
+	> .left,
+	> .right {
 		h4 {
 			padding: 0 0 20px;
 		}
@@ -159,13 +159,13 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		grid-template-columns: 100%;
 		grid-template-areas: 'left' 'right';
 
-		.left,
-		.right {
+		> .left,
+		> .right {
 			padding-top: $outergap;
 			padding-bottom: $outergap;
 		}
 
-		.right {
+		> .right {
 			border-left: none;
 			border-top: solid 2px $lightgray;
 		}

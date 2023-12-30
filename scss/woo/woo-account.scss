@@ -1,48 +1,11 @@
-// order facts
-.order__facts {
-	padding: 0;
-	@include flex('row');
-	justify-content: flex-start;
-	align-items: center;
-	gap: 30px;
-
-	.order__fact {
-		h6 {
-			padding: 0 0 10px;
-			color: $main !important;
-		}
-
-		p,
-		bdi {
-			margin: 0;
-			padding: 0;
-			@include fluid-type(14px, 15px);
-		}
-	}
-
-	&:not(.--proxima) .order__fact {
-		h6 {
-			padding-bottom: 6px;
-		}
-
-		p,
-		bdi {
-			padding: 0;
-			@include font-gooddog;
-			@include fluid-type(18px, 20px);
-			color: $accent;
-			line-height: 1.5;
-			-webkit-text-stroke-color: $accent;
-		}
-	}
-}
-
-.woocommerce-account {
-	#main {
-		padding-top: 0;
-	}
-
+/*------------------------------------*/
+/* Account - General */
+/*------------------------------------*/
+body.woocommerce-account {
+	// Reset default body spacings
+	#main,
 	.woocommerce {
+		padding-top: 0;
 		margin: 0;
 	}
 
@@ -97,56 +60,165 @@
 		}
 	}
 
-	@media only screen and (max-width: $desktop) {
-		.shop-hero-banner {
-			.header__buttons {
-				.account__navigation {
-					justify-content: space-between;
-					gap: 12px;
-
-					.button {
-						width: calc(50% - 6px);
-					}
-
-					.account__logout {
-						display: flex !important;
-						justify-content: center;
-					}
-				}
-			}
-
-			.account__logout {
-				display: none;
-			}
-		}
-	}
-
-	//
-	.woocommerce-notices-wrapper + h2,
-	.fluid_section,
-	.shipment-header {
-		display: none;
-	}
-
-	//
+	// Account Content
 	.account__content {
 		h2 {
 			@include h3;
 			@include font-gooddog;
 			padding: 0 0 20px;
 		}
+
+		&--dashboard,
+		&--orders,
+		&--downloads,
+		&--addresses,
+		&--account {
+			padding: 50px 0 $space-large;
+		}
+
+		&--dashboard {
+			.dashboard__links {
+				@include flex('row');
+				flex-wrap: wrap;
+				gap: $gap;
+
+				.dashboard__item {
+					padding: 28px 30px;
+					@include flex-item-width(3, $gap);
+					background-color: white;
+					border-radius: 15px;
+					@include dropshadow;
+
+					h3 {
+						@include h4;
+						@include font-gooddog;
+						padding: 0;
+					}
+
+					&.--size-big {
+						height: 360px;
+					}
+
+					&.--contact {
+						background-color: $main;
+
+						h3 {
+							color: white;
+							-webkit-text-stroke-color: white;
+						}
+					}
+
+					&.--logout {
+						background-color: $red;
+
+						h3 {
+							color: white;
+							-webkit-text-stroke-color: white;
+						}
+					}
+				}
+			}
+		}
+
+		&--addresses {
+			.addresses__list {
+				p {
+					padding: 0 0 30px;
+				}
+
+				.woocommerce-Addresses {
+					flex-wrap: wrap;
+					row-gap: 15px;
+
+					.woocommerce-Address {
+						min-width: 320px;
+						background-color: white;
+						border: none;
+						@include dropshadow;
+
+						.title {
+							@include flex('row');
+
+							h5 {
+								@include fluid-type(14px, 15px);
+								color: $main;
+								padding: 0 0 15px;
+							}
+
+							a {
+								transform: translateY(-3px);
+								color: $accent;
+								@include fluid-type(14px, 15px);
+								font-weight: 700;
+
+								&:hover {
+									text-decoration: underline;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.form__edit__address h3 {
+				padding: 0 0 10px;
+			}
+
+			.form__edit__address {
+				h4 {
+					padding: 20px 0;
+				}
+
+				.woocommerce-address-fields {
+					.woocommerce-address-fields__field-wrapper {
+						@include flex('row');
+						justify-content: space-between;
+						align-items: flex-end;
+						flex-wrap: wrap;
+					}
+
+					& > p {
+						padding-top: 35px;
+					}
+				}
+
+				.form-row {
+					width: calc(50% - 10px);
+				}
+			}
+
+			.edit-account,
+			fieldset {
+				@include flex('row');
+				justify-content: space-between;
+				align-items: flex-end;
+				flex-wrap: wrap;
+
+				.form-row {
+					width: calc(50% - 10px);
+				}
+
+				fieldset {
+					width: 100%;
+					margin-top: 30px;
+
+					legend {
+						@include h5;
+					}
+				}
+
+				.clear {
+					display: none;
+
+					& + .form-row {
+						width: 100%;
+					}
+				}
+			}
+		}
 	}
 
-	//
-	.account__content--dashboard,
-	.account__content--orders,
-	.account__content--downloads,
-	.account__content--addresses,
-	.account__content--account {
-		padding: 50px 0 $space-large;
-	}
-
-	//
+	// Lists
 	.account__list {
 		@include flex('column');
 		row-gap: 35px;
@@ -248,52 +320,39 @@
 		}
 	}
 
-	//
-	.account__content--dashboard {
-		.dashboard__links {
-			@include flex('row');
-			flex-wrap: wrap;
-			gap: $gap;
+	// Hide elements
+	.woocommerce-notices-wrapper + h2,
+	.fluid_section,
+	.shipment-header {
+		display: none;
+	}
 
-			.dashboard__item {
-				padding: 28px 30px;
-				@include flex-item-width(3, $gap);
-				background-color: white;
-				border-radius: 15px;
-				@include dropshadow;
+	/*------------------------------------*/
+	/* Responsive */
+	/*------------------------------------*/
+	@include bp-lower($desktop) {
+		.shop-hero-banner {
+			.header__buttons {
+				.account__navigation {
+					justify-content: space-between;
+					gap: 12px;
 
-				h3 {
-					@include h4;
-					@include font-gooddog;
-					padding: 0;
-				}
-
-				&.--size-big {
-					height: 360px;
-				}
-
-				&.--contact {
-					background-color: $main;
-
-					h3 {
-						color: white;
-						-webkit-text-stroke-color: white;
+					.button {
+						width: calc(50% - 6px);
 					}
-				}
 
-				&.--logout {
-					background-color: $red;
-
-					h3 {
-						color: white;
-						-webkit-text-stroke-color: white;
+					.account__logout {
+						display: flex !important;
+						justify-content: center;
 					}
 				}
 			}
-		}
-	}
 
-	@media only screen and (max-width: $desktop) {
+			.account__logout {
+				display: none;
+			}
+		}
+
 		.account__content--dashboard {
 			.dashboard__links {
 				flex-direction: column;
@@ -306,107 +365,7 @@
 				}
 			}
 		}
-	}
 
-	//
-	.account__content--addresses {
-		.addresses__list {
-			p {
-				padding: 0 0 30px;
-			}
-
-			.woocommerce-Addresses {
-				flex-wrap: wrap;
-				row-gap: 15px;
-
-				.woocommerce-Address {
-					min-width: 320px;
-					background-color: white;
-					border: none;
-					@include dropshadow;
-
-					.title {
-						@include flex('row');
-
-						h5 {
-							@include fluid-type(14px, 15px);
-							color: $main;
-							padding: 0 0 15px;
-						}
-
-						a {
-							transform: translateY(-3px);
-							color: $accent;
-							@include fluid-type(14px, 15px);
-							font-weight: 700;
-
-							&:hover {
-								text-decoration: underline;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		.form__edit__address h3 {
-			padding: 0 0 10px;
-		}
-
-		.form__edit__address {
-			h4 {
-				padding: 20px 0;
-			}
-
-			.woocommerce-address-fields {
-				.woocommerce-address-fields__field-wrapper {
-					@include flex('row');
-					justify-content: space-between;
-					align-items: flex-end;
-					flex-wrap: wrap;
-				}
-
-				& > p {
-					padding-top: 35px;
-				}
-			}
-
-			.form-row {
-				width: calc(50% - 10px);
-			}
-		}
-
-		.edit-account,
-		fieldset {
-			@include flex('row');
-			justify-content: space-between;
-			align-items: flex-end;
-			flex-wrap: wrap;
-
-			.form-row {
-				width: calc(50% - 10px);
-			}
-
-			fieldset {
-				width: 100%;
-				margin-top: 30px;
-
-				legend {
-					@include h5;
-				}
-			}
-
-			.clear {
-				display: none;
-
-				& + .form-row {
-					width: 100%;
-				}
-			}
-		}
-	}
-
-	@media only screen and (max-width: $desktop) {
 		.account__content--addresses .addresses__list .woocommerce-Addresses .woocommerce-Address {
 			width: 100%;
 			min-width: unset;
@@ -414,6 +373,68 @@
 	}
 }
 
+/*------------------------------------*/
+/* Account - Dashboard */
+/*------------------------------------*/
+
+/*------------------------------------*/
+/* Account - Orders */
+/*------------------------------------*/
+
+/*------------------------------------*/
+/* Account - Downloads */
+/*------------------------------------*/
+
+/*------------------------------------*/
+/* Account - Adresses */
+/*------------------------------------*/
+body.woocommerce-edit-address {
+	.addresses {
+		@include flex('row');
+		column-gap: 20px;
+
+		.col-1,
+		.col-2 {
+			width: calc(50% - 10px);
+			flex: auto;
+			background-color: $lightgray;
+			border: solid 1px $linegray;
+			border-radius: 15px;
+			padding: 25px;
+
+			* {
+				font-size: 16px;
+			}
+
+			h2 {
+				font-weight: 800;
+				padding-bottom: 15px;
+			}
+
+			address {
+				position: relative;
+
+				p {
+					padding: 0;
+					position: absolute;
+					left: 50%;
+					top: 0;
+					&:nth-of-type(2) {
+						top: 24px;
+					}
+				}
+			}
+		}
+	}
+}
+
+/*------------------------------------*/
+/* Account - Details */
+/*------------------------------------*/
+
+/*------------------------------------*/
+/* Login / Registration */
+/*------------------------------------*/
 .page__login {
 	margin: $space-small auto $space-medium;
 
@@ -547,59 +568,5 @@
 
 	&.strong {
 		color: $accent;
-	}
-}
-
-/*------------------------------------*/
-/* Woocommerce: Edit address page */
-/*------------------------------------*/
-body.woocommerce-edit-address {
-	.addresses {
-		@include flex('row');
-		column-gap: 20px;
-
-		.col-1,
-		.col-2 {
-			width: calc(50% - 10px);
-			flex: auto;
-			background-color: $lightgray;
-			border: solid 1px $linegray;
-			border-radius: 15px;
-			padding: 25px;
-
-			* {
-				font-size: 16px;
-			}
-
-			h2 {
-				font-weight: 800;
-				padding-bottom: 15px;
-			}
-
-			address {
-				position: relative;
-
-				p {
-					padding: 0;
-					/* padding-left: 30px;
-					background-image: url(../img/icons/icon_phone_green.svg);
-					background-size: 10px;
-					background-position: 0 50%;
-					background-repeat: no-repeat; */
-					position: absolute;
-					left: 50%;
-					top: 0;
-					&:nth-of-type(2) {
-						top: 24px;
-					}
-					// &.woocommerce-customer-details--phone {
-
-					// }
-					// &.woocommerce-customer-details--email {
-
-					// }
-				}
-			}
-		}
 	}
 }

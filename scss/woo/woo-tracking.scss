@@ -1,0 +1,307 @@
+/*------------------------------------*/
+/* trackShip */
+/*------------------------------------*/
+
+// Nesting of styles to avoid conflicts
+body.page {
+	.order_track_form {
+		@include box;
+		padding: 0;
+	}
+
+	.col.tracking-detail {
+		display: block !important;
+		background: white !important;
+		border: none !important;
+
+		@include box;
+		padding: 0;
+		overflow: hidden;
+
+		& + .tracking-detail {
+			margin-top: 20px !important;
+		}
+
+		.shipment-content {
+			margin: 0;
+		}
+
+		// Header
+		.tracking-header {
+			@include box-padding;
+			padding-bottom: 20px;
+			@include flex('row');
+			flex-direction: row-reverse;
+			@include dashed-border($linegray, bottom);
+
+			.shipment_status_heading {
+				margin: 0;
+				padding-top: 20px;
+				@include font-gooddog;
+				@include fluid-type(18px, 20px);
+				color: $accent !important;
+				-webkit-text-stroke-color: $accent;
+				position: relative;
+
+				&::after {
+					content: 'status';
+					padding: 0;
+					color: $main;
+					font-family: $main-font;
+					@include fluid-type(12px, 13px);
+					font-weight: 800;
+					text-transform: uppercase;
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+
+				&::before {
+					content: unset !important;
+				}
+			}
+
+			.tracking_number_wrap {
+				margin: 0;
+				padding: 0;
+				border: none !important;
+
+				div {
+					gap: 15px;
+
+					&:has(.wc_order_id) {
+						display: none;
+					}
+				}
+
+				.provider_image_div {
+					margin: 0;
+					order: 1;
+
+					.provider_image {
+						width: 50px;
+					}
+				}
+
+				.tracking_number_div {
+					margin: 0;
+
+					.tracking_page_provider_name {
+						@include text;
+					}
+
+					li {
+						@include flex('column');
+						align-items: flex-end;
+					}
+
+					strong {
+						margin: 0;
+					}
+
+					a:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+
+		// Progress
+		.tracker-progress-bar {
+			margin: 39px 27px;
+
+			.progress {
+				margin: 35px 0;
+				height: 4px;
+				background-color: $linegray;
+
+				.progress-bar {
+					background-color: $accent;
+				}
+
+				.progress-icon {
+					height: 36px !important;
+					width: 36px !important;
+					top: 50% !important;
+					transform: translateY(-50%) !important;
+
+					&.icon1 {
+						content: url(../img/icons/shipping_icon_pre_transit.svg) !important;
+					}
+					&.icon2 {
+						content: url(../img/icons/shipping_icon_in_transit.svg) !important;
+					}
+					&.icon3 {
+						content: url(../img/icons/shipping_icon_out_for_delivery.svg) !important;
+					}
+					&.icon4 {
+						content: url(../img/icons/shipping_icon_delivered.svg) !important;
+					}
+				}
+				&.pre_transit {
+					.progress-bar {
+						width: 25% !important;
+					}
+
+					.icon1 {
+						content: url(../img/icons/shipping_icon_pre_transit_active.svg) !important;
+					}
+				}
+				&.in_transit {
+					.progress-bar {
+						width: 50% !important;
+					}
+
+					.icon1 {
+						content: url(../img/icons/shipping_icon_pre_transit_active.svg) !important;
+					}
+					.icon2 {
+						content: url(../img/icons/shipping_icon_in_transit_active.svg) !important;
+					}
+				}
+
+				&.out_for_delivery {
+					.progress-bar {
+						width: 75% !important;
+					}
+
+					.icon1 {
+						content: url(../img/icons/shipping_icon_pre_transit_active.svg) !important;
+					}
+					.icon2 {
+						content: url(../img/icons/shipping_icon_in_transit_active.svg) !important;
+					}
+					.icon3 {
+						content: url(../img/icons/shipping_icon_out_for_delivery_active.svg) !important;
+					}
+				}
+
+				&.delivered {
+					.progress-bar {
+						width: 100% !important;
+					}
+
+					.icon1 {
+						content: url(../img/icons/shipping_icon_pre_transit_active.svg) !important;
+					}
+					.icon2 {
+						content: url(../img/icons/shipping_icon_in_transit_active.svg) !important;
+					}
+					.icon3 {
+						content: url(../img/icons/shipping_icon_out_for_delivery_active.svg) !important;
+					}
+					.icon4 {
+						content: url(../img/icons/shipping_icon_delivered_active.svg) !important;
+					}
+				}
+			}
+		}
+
+		// Tabs
+		.tracking_event_tab_view {
+			.heading_panel {
+				@include text;
+				@include flex('row');
+				align-items: center;
+				padding: 22px 27px;
+				background-color: white !important;
+				background-image: linear-gradient(
+					to right,
+					#e8eaeb 0,
+					#e8eaeb 8px,
+					transparent 8px
+				) !important;
+				background-position: top !important;
+				background-size: 16px 1px !important;
+				background-repeat: repeat-x !important;
+				border: none !important;
+
+				.accordian-arrow {
+					margin: 0 !important;
+					width: 14px !important;
+					height: 14px !important;
+					@include background-image(
+						url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.99997 1V11M11 6H0.999985' stroke='black' style='stroke:black;stroke-opacity:1;' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A")
+					);
+					border: none !important;
+					transform: none !important;
+					transition: $transition;
+					transition-duration: 500ms;
+
+					&.down {
+						background-image: url("data:image/svg+xml,%3Csvg width='12' height='2' viewBox='0 0 12 2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 1H0.999985' stroke='black' style='stroke:black;stroke-opacity:1;' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A");
+						transform: rotate(180deg) !important;
+					}
+				}
+			}
+
+			.content_panel {
+				padding-bottom: 22px;
+				background: transparent !important;
+
+				&.tracking-details {
+					margin: 0 27px;
+
+					ul.timeline {
+						padding: 0 0 0 8px !important;
+
+						&::before {
+							width: 4px;
+							background-color: $linegray;
+							left: 4px;
+							border-radius: 2px;
+						}
+
+						li {
+							&::before {
+								content: '';
+								height: 8px;
+								width: 8px;
+								background-color: $accent;
+								background-color: $linegray;
+								border: solid 5px white;
+								border-radius: 50%;
+								box-sizing: content-box;
+								left: -3px;
+								transform: translateY(1px);
+							}
+							strong {
+							}
+
+							p {
+							}
+						}
+
+						&.new-details {
+							padding-top: 5px !important;
+							&::before {
+								top: 0;
+							}
+						}
+
+						&.old-details {
+							&::before {
+								top: -10px;
+								height: calc(100% + 10px);
+							}
+						}
+					}
+
+					.view_hide_old_details_div {
+						margin-top: 10px;
+
+						a {
+							color: $accent;
+							font-weight: 700;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// Remove branding
+	.trackship_branding {
+		display: none !important;
+	}
+}
