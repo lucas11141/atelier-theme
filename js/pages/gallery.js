@@ -1,30 +1,35 @@
-// @prepros-prepend "../lib/swiper-bundle.min.js";
+// TODO: Improve the gallery and add a PhotoSwipe lightbox
+import { Navigation, Pagination } from 'swiper/bundle';
 
-jQuery(document).ready(function ($) {
-	const swiperAusstellung = new Swiper(".galerie__ausstellung .swiper", {
-		slidesPerView: "auto",
-		loop: false,
-		autoplay: {
-			delay: 10000,
-		},
-		pagination: {
-			el: ".swiper-pagination",
-			clickable: true,
-			dynamicBullets: true,
-			dynamicMainBullets: 3,
-		},
-		navigation: {
-			nextEl: ".swiper__next",
-			prevEl: ".swiper__prev",
-		},
-		on: {
-			afterInit: function () {
-				setTimeout(function () {
-					const ausstellungElement = document.querySelector(
-						".galerie__ausstellung"
-					);
-					const styling = document.createElement("style");
-					styling.innerText = `
+import Swiper from 'swiper';
+
+(function ($) {
+	$(function () {
+		// Install modules
+		Swiper.use([Navigation, Pagination]);
+
+		const swiperAusstellung = new Swiper('.galerie__ausstellung .swiper', {
+			slidesPerView: 'auto',
+			loop: false,
+			autoplay: {
+				delay: 10000,
+			},
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+				dynamicBullets: true,
+				dynamicMainBullets: 3,
+			},
+			navigation: {
+				nextEl: '.swiper__next',
+				prevEl: '.swiper__prev',
+			},
+			on: {
+				afterInit: function () {
+					setTimeout(function () {
+						const ausstellungElement = document.querySelector('.galerie__ausstellung');
+						const styling = document.createElement('style');
+						styling.innerText = `
 						.galerie__ausstellung .swiper-slide-active { height: 600px !important; width: 660px !important; padding-right:60px !important; }
 						.galerie__ausstellung.right .swiper-slide-active { padding-right:40px !important; }
 						.galerie__ausstellung.right .swiper-slide-prev { padding-right:60px !important; width:260px !important; }
@@ -39,9 +44,10 @@ jQuery(document).ready(function ($) {
 						@media only screen and (max-width: 680px) {
 							.galerie__ausstellung .swiper-slide-active { width:calc(100vw - (2 * 15px) - 20px) !important; height:calc(100vw - (2 * 15px) - 20px - 20px) !important; }
 						}`;
-					ausstellungElement.append(styling);
-				}, 1000);
+						ausstellungElement.append(styling);
+					}, 1000);
+				},
 			},
-		},
+		});
 	});
-});
+})(jQuery);

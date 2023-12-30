@@ -58,12 +58,8 @@ if (is_404()) $headerHiddenOnLoad = false;
 
     <?php wp_head(); ?>
 
-    <?php if (is_page('buchung')) : ?>
-        <script type="text/javascript" src="<?= get_template_directory_uri() ?>/js/pages/booking.js" defer></script>
-    <?php endif; ?>
-
     <?php if (is_page('galerie')) : ?>
-        <script type="text/javascript" src="<?= get_template_directory_uri() ?>/js/pages/gallery.js" defer></script>
+        <script type="text/javascript" src="<?= get_template_directory_uri() ?>/assets/js/gallery.js" defer></script>
     <?php endif; ?>
 </head>
 
