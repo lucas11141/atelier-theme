@@ -1,0 +1,13 @@
+{
+	"name": "date-overview",
+	"title": "Terminübersicht",
+	"category": "inhaltselemente",
+	"keywords": ["termin", "übersicht"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "date-overview.php"
+	},
+	"supports": {
+		"anchor": true
+	}
+}

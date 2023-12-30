@@ -1,12 +1,9 @@
 <?php
+/*------------------------------------*/
+/* Block name: Seitenanfang  */
+/*------------------------------------*/
 
-/**
- * Seitenanfang
- * 
- */
-
-
-$id = $block['id'];
+$id = $block['anchor'] ?? $block['id'];
 // Load custom field values.
 
 // Define notification message shown when editing.
