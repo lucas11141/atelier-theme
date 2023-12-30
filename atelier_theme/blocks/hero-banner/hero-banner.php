@@ -1,11 +1,11 @@
 <?php
 /*------------------------------------*/
-/* Block name: Shop Hero Banner
+/* Block name: Shop Hero Banner */
 /*------------------------------------*/
 
 global $websiteMode;
 
-$id = $block["id"];
+$id = $block['anchor'] ?? $block['id'];
 
 // ACF fields
 $uberschrift_h1 = get_field('uberschrift_h1');

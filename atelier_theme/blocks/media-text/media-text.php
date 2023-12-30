@@ -1,14 +1,11 @@
 <?php
+/*------------------------------------*/
+/* Block Name: Media & Text */
+/*------------------------------------*/
 
-/**
- * Block Name: Media & Text
- *
- */
+$id = $block['anchor'] ?? $block['id'];
 
-
-// get fields
-$id = $block['id'];
-
+// ACF Fields
 $text = get_field('text');
 $tag = $text['tag'];
 $uberschrift_h5 = $text['uberschrift_h5'];
@@ -31,7 +28,6 @@ if ($produkt) {
 ?>
 
 <div class="media-text" id="<?= $id ?>">
-
 
     <div class="media-text__text">
         <div class="media-text__text__content">

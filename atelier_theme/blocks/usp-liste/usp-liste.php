@@ -1,12 +1,9 @@
 <?php
+/*------------------------------------*/
+/* Block Name: USP Liste */
+/*------------------------------------*/
 
-/**
- * Block Name: USP Liste
- *
- */
-
-// get fields
-$id = $block['id'];
+$id = $block['anchor'] ?? $block['id'];
 
 $items = [];
 if (have_rows('usp')) :

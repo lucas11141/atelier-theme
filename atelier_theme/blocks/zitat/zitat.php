@@ -1,21 +1,17 @@
 <?php
-/**
- * Block Name: 3 Schritte
- *
- */
+/*------------------------------------*/
+/* Block name: Zitat */
+/*------------------------------------*/
 
-// get fields
+$id = $block['anchor'] ?? $block['id'];
+
+// ACF Fields
 $vorname = get_field('vorname');
 $nachname = get_field('nachname');
 $beruf = get_field('beruf');
 $zitat = get_field('zitat');
 $bild = get_field('bild');
-
-
-$id = $block['id'];
-
 ?>
-
 
 <div id="<?php echo $id; ?>" class="zitat">
 
@@ -26,7 +22,7 @@ $id = $block['id'];
                 <span class="text"><?php echo $nachname; ?></span>
                 <span class="job"><?php echo $beruf; ?></span>
             </div>
-            <?php if( !empty( $bild ) ): ?>
+            <?php if (!empty($bild)) : ?>
                 <img class="zitat__portrait _vp-mobile" src="<?php echo esc_url($bild['url']); ?>" alt="<?php echo esc_attr($bild['alt']); ?>" />
             <?php endif; ?>
         </div>
@@ -36,7 +32,7 @@ $id = $block['id'];
             <span class="q2">"</span>
         </div>
     </div>
-    <?php if( !empty( $bild ) ): ?>
+    <?php if (!empty($bild)) : ?>
         <img class="zitat__portrait _vp-desktop" src="<?php echo esc_url($bild['url']); ?>" alt="<?php echo esc_attr($bild['alt']); ?>" />
     <?php endif; ?>
 

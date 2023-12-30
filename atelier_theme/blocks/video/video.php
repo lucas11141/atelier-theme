@@ -1,19 +1,17 @@
 <?php
-/**
- * Block Name: Video
- *
- */
+/*------------------------------------*/
+/* Block Name: Video */
+/*------------------------------------*/
 
-// get fields
+$id = $block['anchor'] ?? $block['id'];
+
+// ACF Fields
 $video = get_field("video");
-
-$id = $block['id'];
 ?>
-
 
 <div id="<?php echo $id; ?>" class="video wrapper">
 
-    <?php if( $video ): ?>
+    <?php if ($video) : ?>
         <video src="<?php echo $video['url']; ?>" autoplay muted loop></video>
     <?php endif; ?>
 

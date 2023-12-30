@@ -1,9 +1,11 @@
 <?php
+/*------------------------------------*/
+/* Block Name: Kunstangebot Item */
+/*------------------------------------*/
 
-/**
- * Block Name: Kunstangebot Item
- *
- */
+$id = $block['anchor'] ?? $block['id'];
+
+// ACF Fields
 $reihenfolge = get_field("reihenfolge");
 
 $bild = get_field("bild");
@@ -26,12 +28,6 @@ $button_2 = get_field("button_2");
 $button_2_aktivieren = $button_2["zweiten_button_aktivieren"];
 $button_2_link = $button_2["link"];
 $button_2_farbe = $button_2["farbe"];
-
-// get fields
-$id = $block["id"];
-if (!empty($block["anchor"])) {
-    $id = $block['anchor'];
-}
 ?>
 
 

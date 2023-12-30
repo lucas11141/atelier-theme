@@ -1,12 +1,9 @@
 <?php
+/*------------------------------------*/
+/* Block Name: USP Kacheln */
+/*------------------------------------*/
 
-/**
- * Block Name: USP Kacheln
- *
- */
-
-// get fields
-$id = $block['id'];
+$id = $block['anchor'] ?? $block['id'];
 
 $items = [];
 if (have_rows('tiles')) :

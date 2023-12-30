@@ -1,13 +1,9 @@
 <?php
+/*------------------------------------*/
+/* Block Name: USP */
+/*------------------------------------*/
 
-/**
- * Block Name: USP
- *
- */
-
-
-// get fields
-$id = $block['id'];
+$id = $block['anchor'] ?? $block['id'];
 ?>
 
 <div class="usp inner" id="<?= $id ?>">

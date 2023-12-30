@@ -1,11 +1,11 @@
 <?php
+/*------------------------------------*/
+/* Block Name: Home Banner */
+/*------------------------------------*/
 
-/**
- * Block Name: Home Banner
- *
- */
+$id = $block['anchor'] ?? $block['id'];
 
-// get fields
+// ACF Fields
 $quote = get_field("quote");
 $author = get_field("author");
 $headline_h1 = get_field("headline_h1");
@@ -13,11 +13,7 @@ $headline_h6 = get_field("headline_h6");
 $button_1 = get_field("button_1");
 $button_2 = get_field("button_2");
 $button_3 = get_field("button_3");
-
-$id = $block["id"];
 ?>
-
-
 
 <div id="<?php echo $id; ?>" class="home__banner">
 

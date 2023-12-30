@@ -1,17 +1,13 @@
 <?php
+/*------------------------------------*/
+/* Block name: Testimonials */
+/*------------------------------------*/
 
-/**
- * Block Name: Bild & Text
- *
- */
-
-// get fields
+// ACF Fields
 $headline_h2 = get_field("headline_h2");
 $button = get_field("button");
-$id = $block["id"];
+$id = $block['anchor'] ?? $block['id'];
 ?>
-
-
 
 <div id="<?php echo $id; ?>" class="testimonials">
 

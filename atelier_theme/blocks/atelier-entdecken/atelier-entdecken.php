@@ -1,21 +1,16 @@
 <?php
+/*------------------------------------*/
+/* Block name: Atelier Entdecken */
+/*------------------------------------*/
 
-/**
- * Block Name: Atelier Entdecken
- *
- */
+$id = $block['anchor'] ?? $block['id'];
 
-// get fields
+// ACF Fields
 $uberschrift_h6 = get_field("uberschrift_h6");
 $uberschrift_h2 = get_field("uberschrift_h2");
 $text = get_field("text");
-// $buttons
 $button = get_field("button");
-
-$id = $block["id"];
 ?>
-
-
 
 <div id="<?php echo $id; ?>" class="discover__atelier">
 

@@ -1,19 +1,17 @@
 <?php
+/*------------------------------------*/
+/* Block Name: Produktslider */
+/*------------------------------------*/
 
-/**
- * Block Name: Produktslider
- *
- */
+$id = $block['anchor'] ?? $block['id'];
 
-// get fields
+// ACF Fields
 $uberschrift_h5 = get_field('uberschrift_h5');
 $uberschrift_h2 = get_field('uberschrift_h2');
 $inhalte = get_field('inhalte');
 $inhal = get_field('inhal');
 $button = get_field('button');
 $auswahl = get_field('auswahl');
-
-$id = $block['id'];
 ?>
 
 <div id="<?php echo $id; ?>" class="produktslider">

@@ -1,10 +1,9 @@
 <?php
-// FUTURE: Add loading skeleton
 /*------------------------------------*/
-/* Block name: 	Terminübersicht
+/* Block name: 	Terminübersicht */
 /*------------------------------------*/
 
-$id = $anchor['id'] ?? $block['id'];
+$id = $block['anchor'] ?? $block['id'];
 
 // ACF Fields
 $uberschrift_h1 = get_field("uberschrift_h1");

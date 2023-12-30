@@ -15,7 +15,7 @@ $button_farbe = $button['farbe'];
 $button_2 = get_field("zweiter_button");
 $button_2_link = $button_2['link'];
 
-$id = $block['id'];
+$id = $block['anchor'] ?? $block['id'];
 
 // create align class ("alignwide") from block setting ("wide")
 $align_class = $block['align'] ? 'align' . $block['align'] : '';

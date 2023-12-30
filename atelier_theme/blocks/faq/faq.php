@@ -1,17 +1,16 @@
 <?php
-/**
- * Block Name: Kontakt Hero Banner
- *
- */
+/*------------------------------------*/
+/* Block Name: Kontakt Hero Banner */
+/*------------------------------------*/
 
-// get fields
+$id = $block['anchor'] ?? $block['id'];
+
+// ACF Fields
 $faq_aktivieren = get_field("faq_aktivieren");
-
-$id = $block["id"];
 ?>
 
-<?php if( $faq_aktivieren ) : ?>
-    <?php if( have_rows( "faq", "options" ) ): ?>
+<?php if ($faq_aktivieren) : ?>
+    <?php if (have_rows("faq", "options")) : ?>
 
 
         <div class="faq" id="<?= $id ?>">
@@ -22,10 +21,10 @@ $id = $block["id"];
                 </div>
 
                 <div class="faq__accordeon accordeon accordeon--closed">
-                    <?php while( have_rows( "faq", "options" ) ) : the_row();
-                        $question = get_sub_field( "frage" );
-                        $answer = get_sub_field( "antwort" );
-                        ?>
+                    <?php while (have_rows("faq", "options")) : the_row();
+                        $question = get_sub_field("frage");
+                        $answer = get_sub_field("antwort");
+                    ?>
                         <div class="accordeon__item">
                             <dt class="accordeon__header">
                                 <h5><?= $question ?></h5>
@@ -42,7 +41,7 @@ $id = $block["id"];
                         </div>
                     <?php endwhile; ?>
                 </div>
-                
+
             </div>
         </div>
 

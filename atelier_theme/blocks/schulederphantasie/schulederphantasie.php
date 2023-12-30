@@ -1,20 +1,16 @@
 <?php
+/*------------------------------------*/
+/* Block Name: Schule der P>hantasie */
+/*------------------------------------*/
 
-/**
- * Block Name: Schule der P>hantasie
- *
- */
+$id = $block['anchor'] ?? $block['id'];
 
-// get fields
+// ACF Fields
 $text = get_field('text');
 $link = get_field('link');
 
-$id = $block['id'];
-
-
 // create align class ("alignwide") from block setting ("wide")
 $align_class = $block['align'] ? 'align' . $block['align'] : '';
-
 ?>
 
 <div id="<?php echo $id; ?>" class="schulederphantasie">

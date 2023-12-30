@@ -1,15 +1,13 @@
 <?php
-/**
- * Block Name: Headline & Button
- *
- */
+/*------------------------------------*/
+/* Block Name: Headline & Button */
+/*------------------------------------*/
 
-// get fields
+// ACF Fields
 $headline_h6 = get_field("headline_h6");
 $headline_h2 = get_field("headline_h2");
 $button = get_field("button");
 ?>
-
 
 <div class="headline__button">
     <div>

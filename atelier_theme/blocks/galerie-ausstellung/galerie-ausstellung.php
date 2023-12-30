@@ -1,20 +1,15 @@
 <?php
+/*------------------------------------*/
+/* Block Name: Galerie Ausstellung */
+/*------------------------------------*/
 
-/**
- * Block Name: Galerie Ausstellung
- *
- */
+$id = $block['anchor'] ?? $block['id'];
 
-// get fields
+// ACF Fields
 $ausrichtung = get_field("ausrichtung");
 $images = get_field('galerie');
 $uberschrift_h6 = get_field("uberschrift_h6");
 $uberschrift_h2 = get_field("uberschrift_h2");
-
-$id = $block["id"];
-if (!empty($block["anchor"])) {
-    $id = $block['anchor'];
-}
 ?>
 
 <div id="<?php echo $id; ?>" class="galerie__ausstellung <?= $ausrichtung ?>">

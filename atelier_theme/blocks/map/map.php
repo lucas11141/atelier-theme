@@ -1,13 +1,9 @@
 <?php
+/*------------------------------------*/
+/* Block Name: Map */
+/*------------------------------------*/
 
-/**
- * Block Name: Map
- *
- */
-
-
-// get fields
-$id = $block['id'];
+$id = $block['anchor'] ?? $block['id'];
 ?>
 
 <?php if (get_field("karte_aktivieren")) : ?>
@@ -32,8 +28,6 @@ $id = $block['id'];
         </div>
 
     </div>
-
-
 
     <script>
         function initMap() {

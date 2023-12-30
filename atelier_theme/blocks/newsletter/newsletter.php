@@ -1,9 +1,9 @@
 <?php
 /*------------------------------------*/
-/* 	Block Nanme: Newsletter
+/* Block Nanme: Newsletter */
 /*------------------------------------*/
 
-$id = $block['id'];
+$id = $block['anchor'] ?? $block['id'];
 
 // ACF fields
 $uberschrift_h5 = get_field('uberschrift_h5');

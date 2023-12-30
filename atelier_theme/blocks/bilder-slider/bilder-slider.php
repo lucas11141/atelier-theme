@@ -1,30 +1,23 @@
 <?php
-/**
- * Block Name: Bilder Slider
- *
- */
+/*------------------------------------*/
+/* Block Name: Bilder Slider */
+/*------------------------------------*/
 
-// get fields
+$id = $block['anchor'] ?? $block['id'];
+
+// ACF Fields
 $images = get_field('galerie');
-
-$id = $block["id"];
 ?>
 
 <div id="<?php echo $id; ?>" class="bilder__slider">
 
     <div class="continuous">
-    <!-- <div class="swiper"> -->
+        <?php if ($images) : ?>
+            <?php foreach ($images as $image) : ?>
 
-        <!-- <div class="swiper-wrapper"> -->
-            <?php if( $images ): ?>
-                <?php foreach( $images as $image ): ?>
-                    <!-- <div class="swiper-slide"> -->
-                        <img src="<?= $image["url"]; ?>" alt="<?= $image['alt'] ?>">
-                    <!-- </div> -->
-                <?php endforeach; ?>
-            <?php endif; ?>
-        <!-- </div> -->
-
+                <img src="<?= $image["url"]; ?>" alt="<?= $image['alt'] ?>">
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
 </div>

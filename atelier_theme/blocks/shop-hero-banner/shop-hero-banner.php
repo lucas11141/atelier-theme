@@ -3,12 +3,12 @@
 /* ACF Block: Shop Hero Banner */
 /*------------------------------------*/
 
-// get fields
+$id = $block['anchor'] ?? $block['id'];
+
+// ACF Fields
 $uberschrift_h1 = get_field('uberschrift_h1');
 $ankundigung = get_field('ankundigung');
 $slides = get_field('slides');
-
-$id = $block["id"];
 ?>
 
 <div class="shop-hero-banner show-header-on-offset" id="<?= $id ?>">

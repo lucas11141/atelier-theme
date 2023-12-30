@@ -1,22 +1,18 @@
 <?php
+/*------------------------------------*/
+/* Block name: Bild & Text Rund */
+/*------------------------------------*/
 
-/**
- * Block Name: Bild & Text Rund
- *
- */
+$id = $block['anchor'] ?? $block['id'];
 
-// get fields
+// ACF Fields
 $reihenfolge = get_field("reihenfolge");
 $bild = get_field("bild");
 $inhalt = get_field("inhalt");
 
 $text = $inhalt["text"];
 $button = $inhalt["button"];
-
-$id = $block["id"];
 ?>
-
-
 
 <div id="<?php echo $id; ?>" class="bild__text <?php echo esc_attr($reihenfolge); ?> wrapper">
 
@@ -39,9 +35,6 @@ $id = $block["id"];
     </div>
 
 </div>
-
-
-
 
 <div class="list__item item--1" id="<?= $courses["anchor"] ?>">
 

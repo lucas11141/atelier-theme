@@ -1,16 +1,15 @@
 <?php
+/*------------------------------------*/
+/* Block Name: Über mich */
+/*------------------------------------*/
 
-/**
- * Block Name: Über mich
- *
- */
+$id = $block['anchor'] ?? $block['id'];
 
-// get fields
+// ACF Fields
 $bild = get_field("bild");
 $name = get_field("name");
 $titel = get_field("titel");
 $zitat = get_field("zitat");
-$id = $block["id"];
 ?>
 
 <div id="<?php echo $id; ?>" class="uber__mich bild__text wrapper">

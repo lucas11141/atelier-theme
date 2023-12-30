@@ -1,13 +1,13 @@
 <?php
 /*------------------------------------*/
-/* Block name: Konakt Hero Banner
+/* Block name: Konakt Hero Banner */
 /*------------------------------------*/
+
+$id = $block['anchor'] ?? $block['id'];
 
 $websitMode = $_COOKIE['websiteMode'];
 
-$id = $block["id"];
-
-// get fields
+// ACF Fields
 $uberschrift_h1 = get_field("uberschrift_h1");
 $uberschrift_h5 = get_field("uberschrift_h5");
 $bild = get_field("bild");
