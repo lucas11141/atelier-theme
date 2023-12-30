@@ -1,6 +1,6 @@
 <?php
 /*------------------------------------*/
-/* Block name: Button */
+/* Block name: Banner */
 /*------------------------------------*/
 
 $id = $block['anchor'] ?? $block['id'];

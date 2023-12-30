@@ -11,6 +11,7 @@ import produktslider from './blocks/produktslider';
 import settings from './scripts/settings';
 import shopHeroBanner from './blocks/shopHeroBanner';
 import websiteMode from './scripts/websiteMode';
+import wooCheckout from './woo/woo-checkout';
 import wooSingle from './woo/woo-single';
 
 // @prepros-prepend "lib/jquery.magnific-popup.min.js";
@@ -33,6 +34,7 @@ import wooSingle from './woo/woo-single';
 		/*------------------------------------*/
 		// Blocks
 		wooSingle();
+		wooCheckout();
 		productFilter();
 		kontaktHeroBanner();
 		bookingReminder();

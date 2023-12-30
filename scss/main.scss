@@ -1,24 +1,14 @@
-/*
-Theme Name: FollowAndrew
-Text Domain: FollowAndrew
-Version: 1.0
-Description: Fancy left sidebar theme
-Tags: left-sidebar, responsive, fancy
-Author: Andrew Wilson
-Author URI: https://youtube.com/followandrew
-*/
-
-// vars
+// Vars
 @import 'vars';
 
-// lib
+// Lib
 @import 'lib/functions';
 @import 'lib/mixins';
 @import 'lib/hamburger';
 @import 'lib/print';
 @import 'lib/wordpress';
 
-// layout
+// Layout
 @import 'layout/fonts';
 @import 'layout/global';
 @import 'layout/header';
@@ -31,7 +21,7 @@ Author URI: https://youtube.com/followandrew
 @import 'layout/slider';
 @import 'layout/typography';
 
-// woocommerce
+// Woocommerce
 @import 'woo/woo-global';
 @import 'woo/woo-archive';
 @import 'woo/woo-single';
@@ -42,52 +32,48 @@ Author URI: https://youtube.com/followandrew
 @import 'woo/woo-order';
 @import 'woo/woo-account';
 
-// templarte parts
+// Templarte parts
 @import 'template-parts/icon-feather';
 @import 'template-parts/button-scrolldown';
 @import 'template-parts/booking-reminder';
 
-// blocks
-@import 'blocks/drei-schritte';
-@import 'blocks/schulederphantasie';
-@import 'blocks/newsletter';
-@import 'blocks/zitat';
-@import 'blocks/atelier-entdecken';
-@import 'blocks/bild-text';
-@import 'blocks/produktslider';
-@import 'blocks/video';
-@import 'blocks/button-liste';
-@import 'blocks/buttons-list';
+// Blocks
+// abstand
 @import 'blocks/angebote-liste';
-@import 'blocks/kunstangebot';
-@import 'blocks/home-banner';
-@import 'blocks/testimonials';
-@import 'blocks/usp';
-@import 'blocks/usp-tiles';
-@import 'blocks/headline-button';
-@import 'blocks/map';
-@import 'blocks/uber-mich';
+@import 'blocks/atelier-entdecken';
+@import 'blocks/banner';
+@import 'blocks/bild-text';
+// bild-text-round
 @import 'blocks/bilder-slider';
-@import 'blocks/galerie-ausstellung';
-@import 'blocks/kontakt-hero-banner';
-@import 'blocks/faq';
-@import 'blocks/media-text';
-@import 'blocks/hero-banner';
+// buttton
+@import 'blocks/button-liste';
 @import 'blocks/date-overview';
-
-// shop blocks
+@import 'blocks/drei-schritte';
+@import 'blocks/faq';
+@import 'blocks/galerie-ausstellung';
+@import 'blocks/headline-button';
+@import 'blocks/hero-banner';
+@import 'blocks/home-banner';
+@import 'blocks/kontakt-hero-banner';
+@import 'blocks/kunstangebot';
+@import 'blocks/map';
+@import 'blocks/media-text';
+@import 'blocks/newsletter';
+@import 'blocks/page-start';
+@import 'blocks/produktslider';
+@import 'blocks/schulederphantasie';
 @import 'blocks/shop-hero-banner';
-@import 'blocks/shop-product-banner';
+@import 'blocks/testimonials';
+@import 'blocks/uber-mich';
+@import 'blocks/usp';
+// usp-liste
+@import 'blocks/usp-tiles';
+@import 'blocks/video';
+@import 'blocks/zitat';
 
-// pages
-@import 'pages/home';
-@import 'pages/courses';
-@import 'pages/coursepage';
-@import 'pages/checkout';
-@import 'pages/kunsttuete';
-@import 'pages/galerie';
-@import 'pages/newsletter';
+// Templates
+@import 'templates/newsletter';
 
-// website
+// Website
 @import 'kunstangebote/archive';
 @import 'kunstangebote/single';
