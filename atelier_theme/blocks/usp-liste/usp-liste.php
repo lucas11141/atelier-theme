@@ -17,6 +17,6 @@ if (have_rows('usp')) :
         );
     endwhile;
 
-    get_template_part('template-parts/usp-tiles', '', array('items' => $items));
+    get_template_part('components/usp-tiles', '', array('items' => $items));
 
 endif;

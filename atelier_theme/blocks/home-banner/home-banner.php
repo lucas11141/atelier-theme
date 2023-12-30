@@ -19,7 +19,7 @@ $button_3 = get_field("button_3");
 
     <div class="banner__content">
 
-        <?php get_template_part('template-parts/header-bar', '', array('type' => 'atelier', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
+        <?php get_template_part('components/header-bar', '', array('type' => 'atelier', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
         <div class="wrapper">
             <div class="banner__quote">
@@ -63,7 +63,7 @@ $button_3 = get_field("button_3");
     </div>
 
     <div class="wrapper">
-        <?php get_template_part('template-parts/button-scrolldown', '', array('href' => '#Kurse')); ?>
+        <?php get_template_part('components/button-scrolldown', '', array('href' => '#Kurse')); ?>
     </div>
 
 </div>

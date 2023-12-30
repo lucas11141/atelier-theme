@@ -31,7 +31,7 @@ if ($produkt) {
 
     <div class="media-text__text">
         <div class="media-text__text__content">
-            <?php get_template_part('template-parts/paper'); ?>
+            <?php get_template_part('components/paper'); ?>
 
             <?php if ($tag) : ?>
                 <span class="tag --color-white"><?= $tag ?></span>
@@ -50,7 +50,7 @@ if ($produkt) {
             <?php endif ?>
 
             <?php if ($button) : ?>
-                <?php get_template_part('template-parts/button', '', array('button' => $button, 'color' => 'accent')); ?>
+                <?php get_template_part('components/button', '', array('button' => $button, 'color' => 'accent')); ?>
             <?php endif ?>
         </div>
     </div>

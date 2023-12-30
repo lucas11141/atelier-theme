@@ -20,7 +20,7 @@ $hintergrund = get_field("hintergrund");
         <span class="restricted-block-notification"><b><?php echo esc_html($notification); ?></b></span>
     <?php endif; ?>
 
-    <?php get_template_part('template-parts/header-bar', '', array('type' => 'atelier', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
+    <?php get_template_part('components/header-bar', '', array('type' => 'atelier', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
     <style>
         .page__start .--wrapper-page-start {
@@ -42,7 +42,7 @@ $hintergrund = get_field("hintergrund");
         <img class="background__image" src="<?= $hintergrund["url"] ?>" alt="<?= $hintergrund["alt"] ?>">
     <?php endif; ?>
 
-    <?php get_template_part('template-parts/paper'); ?>
+    <?php get_template_part('components/paper'); ?>
 
     <img class="background__circle" src="<?= get_template_directory_uri() ?>/assets/img/website/kontakt/kontakt_background_circle.svg" alt="">
 </div>

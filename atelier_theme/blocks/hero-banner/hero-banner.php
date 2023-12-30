@@ -14,7 +14,7 @@ $ankundigung = get_field('ankundigung');
 
 <div class="hero-banner show-header-on-offset <?= $ankundigung ? '--remove-border' : '' ?>" id="<?= $id ?>">
 
-    <?php get_template_part('template-parts/paper'); ?>
+    <?php get_template_part('components/paper'); ?>
 
     <div class="decoration">
         <div class="wrapper">
@@ -26,7 +26,7 @@ $ankundigung = get_field('ankundigung');
         </div>
     </div>
 
-    <?php get_template_part('template-parts/header-bar', '', array('type' => $websiteMode, 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
+    <?php get_template_part('components/header-bar', '', array('type' => $websiteMode, 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
     <?php if ($uberschrift_h1) : ?>
 
@@ -51,7 +51,7 @@ $ankundigung = get_field('ankundigung');
                     ?>
                         <div class="shop-hero-banner__text__item">
                             <div>
-                                <?php get_template_part('template-parts/tag', '', array('tagname' => $tag, 'color' => 'white')); ?>
+                                <?php get_template_part('components/tag', '', array('tagname' => $tag, 'color' => 'white')); ?>
                                 <?php if ($uberschrift_h1_aktivieren) : ?>
                                     <h1><?= $uberschrift_h2 ?></h1>
                                 <?php else : ?>

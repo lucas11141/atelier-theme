@@ -15,7 +15,7 @@
 
 			<footer class="footer footer--desktop">
 
-				<?php get_template_part('template-parts/paper'); ?>
+				<?php get_template_part('components/paper'); ?>
 
 				<div class="footer__newsletter">
 					<?php if ($preheader) : ?>
@@ -60,19 +60,19 @@
 							<ul class="links__list">
 								<li>
 									<a href="https://www.google.com/maps?client=safari&rls=en&q=atelier+delatron&oe=UTF-8&um=1&ie=UTF-8&sa=X&ved=2ahUKEwiUtZjd1Jr3AhXlRfEDHVjzBnAQ_AUoAXoECAEQAw" target="_blank">
-										<?php get_template_part('template-parts/icon', '', array('icon' => 'map_pin', 'color' => 'white',  'size' => 'small', 'alt' => 'Stecknadel Icon')); ?>
+										<?php get_template_part('components/icon', '', array('icon' => 'map_pin', 'color' => 'white',  'size' => 'small', 'alt' => 'Stecknadel Icon')); ?>
 										<span>Burgstallstr. 6, 1OG<br>90587 Obermichelbach</span>
 									</a>
 								</li>
 								<li>
 									<a href="tel:0173-3958815">
-										<?php get_template_part('template-parts/icon', '', array('icon' => 'phone', 'color' => 'white', 'size' => 'small', 'alt' => 'Telefon Icon')); ?>
+										<?php get_template_part('components/icon', '', array('icon' => 'phone', 'color' => 'white', 'size' => 'small', 'alt' => 'Telefon Icon')); ?>
 										<span>0173-3958815</span>
 									</a>
 								</li>
 								<li>
 									<a href="mailto:info@atelier-delatron.de">
-										<?php get_template_part('template-parts/icon', '', array('icon' => 'mail', 'color' => 'white', 'size' => 'small', 'alt' => 'E-Mail Icon')); ?>
+										<?php get_template_part('components/icon', '', array('icon' => 'mail', 'color' => 'white', 'size' => 'small', 'alt' => 'E-Mail Icon')); ?>
 										<span>info@atelier-delatron.de</span>
 									</a>
 								</li>
@@ -107,7 +107,7 @@
 
 			<footer class="footer footer--mobile">
 
-				<?php get_template_part('template-parts/paper'); ?>
+				<?php get_template_part('components/paper'); ?>
 
 				<div class="footer__newsletter">
 					<?php if ($preheader) : ?>
@@ -155,19 +155,19 @@
 							<ul class="links__list">
 								<li>
 									<a href="https://www.google.com/maps?client=safari&rls=en&q=atelier+delatron&oe=UTF-8&um=1&ie=UTF-8&sa=X&ved=2ahUKEwiUtZjd1Jr3AhXlRfEDHVjzBnAQ_AUoAXoECAEQAw" target="_blank">
-										<?php get_template_part('template-parts/icon', '', array('icon' => 'map_pin', 'color' => 'white',  'size' => 'small', 'alt' => 'Stecknadel Icon')); ?>
+										<?php get_template_part('components/icon', '', array('icon' => 'map_pin', 'color' => 'white',  'size' => 'small', 'alt' => 'Stecknadel Icon')); ?>
 										<span>Burgstallstr. 6, 1OG<br>90587 Obermichelbach</span>
 									</a>
 								</li>
 								<li>
 									<a href="tel:0173-3958815">
-										<?php get_template_part('template-parts/icon', '', array('icon' => 'phone', 'color' => 'white', 'size' => 'small', 'alt' => 'Telefon Icon')); ?>
+										<?php get_template_part('components/icon', '', array('icon' => 'phone', 'color' => 'white', 'size' => 'small', 'alt' => 'Telefon Icon')); ?>
 										<span>0173-3958815</span>
 									</a>
 								</li>
 								<li>
 									<a href="mailto:info@atelier-delatron.de">
-										<?php get_template_part('template-parts/icon', '', array('icon' => 'mail', 'color' => 'white', 'size' => 'small', 'alt' => 'E-Mail Icon')); ?>
+										<?php get_template_part('components/icon', '', array('icon' => 'mail', 'color' => 'white', 'size' => 'small', 'alt' => 'E-Mail Icon')); ?>
 										<span>info@atelier-delatron.de</span>
 									</a>
 								</li>
@@ -230,7 +230,7 @@
 					<?php endif; ?>
 
 					<img class="decoration" src="<?php echo get_template_directory_uri(); ?>/assets/img/elements/newsletter_decoration_popup.svg" alt="">
-					<?php get_template_part('template-parts/paper'); ?>
+					<?php get_template_part('components/paper'); ?>
 				</div>
 
 			</dialog>

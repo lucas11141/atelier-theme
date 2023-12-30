@@ -11,7 +11,7 @@ if ($button) :
 ?>
     <a class="button --color-<?php echo $color; ?> <?= $class ?>" href="<?php echo $link_url; ?>" target="<?php echo $link_target; ?>" <?= $disabled ? 'disabled' : '' ?>>
         <?php if ($icon) : ?>
-            <?php get_template_part('template-parts/icon', 'feather', array('icon' => $icon, 'color' => 'white', 'size' => 'small')) ?>
+            <?php get_template_part('components/icon', 'feather', array('icon' => $icon, 'color' => 'white', 'size' => 'small')) ?>
         <?php endif; ?>
 
         <span><?php echo $link_title; ?></span>

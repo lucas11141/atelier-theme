@@ -65,14 +65,14 @@ if (is_404()) $headerHiddenOnLoad = false;
 
 <body <?php body_class(); ?>>
 
-    <?php get_template_part('template-parts/booking-reminder') ?>
+    <?php get_template_part('components/booking-reminder') ?>
 
     <!-- Google Tag Manager -->
     <div id="gtm-values" data-website-mode="<?= $websiteMode ?>" data-traffic-type="<?= current_user_can('administrator') || ENV === 'development' ? 'internal' : 'external' ?>"></div>
 
     <header class="header <?= $headerHiddenOnLoad ? '--hidden-on-load' : '' ?> <?= is_page("Kunstangebote") ? "--hidden" : ''; ?> header--<?= $websiteMode ?>" data-show-offset="<?= $header_hidden_offset ?>">
 
-        <?php get_template_part('template-parts/header-bar', '', array('type' => $websiteMode, 'nav' => true)); ?>
+        <?php get_template_part('components/header-bar', '', array('type' => $websiteMode, 'nav' => true)); ?>
 
         <div class="header__dropdown header__dropdown__mobile" style="display:none;">
 

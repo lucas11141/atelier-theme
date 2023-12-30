@@ -32,7 +32,7 @@ $username = $current_user->display_name;
 
 <header class="shop-hero-banner shop-hero-banner--small show-header-on-offset">
 
-    <?php get_template_part('template-parts/paper'); ?>
+    <?php get_template_part('components/paper'); ?>
     <div class="decoration">
         <div class="wrapper">
             <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
@@ -49,7 +49,7 @@ $username = $current_user->display_name;
         <?php endif; ?>
     </div>
 
-    <?php get_template_part('template-parts/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
+    <?php get_template_part('components/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
     <div class="shop-hero-banner__content wrapper">
         <div class="shop-hero-banner--account__header">
@@ -65,12 +65,12 @@ $username = $current_user->display_name;
                     <?php endforeach; ?>
                     <a class="account__logout button button--mini --color-red  " href="<?php echo wc_logout_url(); ?>">
                         <span>Abmelden</span>
-                        <?php get_template_part('template-parts/icon', '', array('icon' => 'logout', 'color' => 'white', 'size' => 'small', 'alt' => 'Aus Konto ausloggen')); ?>
+                        <?php get_template_part('components/icon', '', array('icon' => 'logout', 'color' => 'white', 'size' => 'small', 'alt' => 'Aus Konto ausloggen')); ?>
                     </a>
                 </nav>
                 <a class="account__logout button button--mini --color-red  " href="<?php echo wc_logout_url(); ?>">
                     <span>Abmelden</span>
-                    <?php get_template_part('template-parts/icon', '', array('icon' => 'logout', 'color' => 'white', 'size' => 'small', 'alt' => 'Aus Konto ausloggen')); ?>
+                    <?php get_template_part('components/icon', '', array('icon' => 'logout', 'color' => 'white', 'size' => 'small', 'alt' => 'Aus Konto ausloggen')); ?>
                 </a>
             </div>
 

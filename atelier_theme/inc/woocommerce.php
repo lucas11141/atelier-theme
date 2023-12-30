@@ -478,7 +478,7 @@ function atelier_custom_field_accordeon() { ?>
                 if ($terms) {
         ?>
             <div class="wrapper --ignore shop__category__suggestions">
-                <?php get_template_part('template-parts/paper'); ?>
+                <?php get_template_part('components/paper'); ?>
                 <div class="wrapper">
                     <h2>Mehr<br><?php echo single_cat_title('', false); ?><br>entdecken
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/img/shop/more_categories_background.svg" alt="">
@@ -524,11 +524,11 @@ function atelier_custom_field_accordeon() { ?>
                 }
             }
             if ($cw_discount > 0 || count(WC()->cart->get_applied_coupons()) > 0) : ?>
-        <span class="total__savings"><?= get_template_part('template-parts/icon', '', array('icon' => 'tag', 'color' => 'red')); ?>Deine Ersparnis<?php echo wc_price($cw_discount + $woocommerce->cart->discount_cart); ?></span>
+        <span class="total__savings"><?= get_template_part('components/icon', '', array('icon' => 'tag', 'color' => 'red')); ?>Deine Ersparnis<?php echo wc_price($cw_discount + $woocommerce->cart->discount_cart); ?></span>
     <?php endif; ?>
 
     <?php if ($cart->get_shipping_total() == 0 && !$isLocalPickup) : ?>
-        <span class="total__savings"><?= get_template_part('template-parts/icon', '', array('icon' => 'tag', 'color' => 'red')); ?>Kostenloser Versand<?php echo wc_price($cart->get_shipping_total()); ?></span>
+        <span class="total__savings"><?= get_template_part('components/icon', '', array('icon' => 'tag', 'color' => 'red')); ?>Kostenloser Versand<?php echo wc_price($cart->get_shipping_total()); ?></span>
     <?php endif;
         }
 
@@ -643,7 +643,7 @@ function atelier_custom_field_accordeon() { ?>
 
     <?php if ($product->is_featured()) : ?>
         <span class="product__badge --featured">
-            <?php get_template_part('template-parts/icon', '', array('icon' => 'star', 'color' => 'white',  'size' => 'small')); ?>
+            <?php get_template_part('components/icon', '', array('icon' => 'star', 'color' => 'white',  'size' => 'small')); ?>
             Besonders beliebt
         </span>
         <?php return; ?>
@@ -651,7 +651,7 @@ function atelier_custom_field_accordeon() { ?>
 
     <?php if ($product->is_on_sale()) : ?>
         <span class="product__badge --onsale">
-            <?php get_template_part('template-parts/icon', '', array('icon' => 'tag', 'color' => 'white',  'size' => 'small')); ?>
+            <?php get_template_part('components/icon', '', array('icon' => 'tag', 'color' => 'white',  'size' => 'small')); ?>
             Im Angebot
         </span>
         <?php return; ?>
@@ -662,12 +662,12 @@ function atelier_custom_field_accordeon() { ?>
     <?php if ($position === 'product' || ($position === 'archive' && $badge_in_archive)) : ?>
         <div class="badge-tooltip">
             <span class="product__badge" style="background-color:<?= $badge_color; ?>">
-                <?php get_template_part('template-parts/icon', '', array('url' => $badge_icon['url'], 'alt' => $badge_icon['alt'], 'size' => 'small')); ?>
+                <?php get_template_part('components/icon', '', array('url' => $badge_icon['url'], 'alt' => $badge_icon['alt'], 'size' => 'small')); ?>
                 <?= $badge_name ?>
             </span>
             <?php if ($badge_tooltip && $position == 'product') : ?>
                 <div class="tooltip">
-                    <?php get_template_part('template-parts/icon', '', array('icon' => 'info')); ?>
+                    <?php get_template_part('components/icon', '', array('icon' => 'info')); ?>
                     <span><?= $badge_tooltip ?></span>
                 </div>
             <?php endif; ?>

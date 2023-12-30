@@ -78,7 +78,7 @@ $the_query = new WP_Query($args);
 
 
                 <div class="two-buttons">
-                    <?php get_template_part('template-parts/button', '', array(
+                    <?php get_template_part('components/button', '', array(
                         'button' => array(
                             'url' => get_permalink(),
                             'title' => 'Weitere Infos',

@@ -27,7 +27,7 @@ $auswahl = get_field('auswahl');
                 <?php endif; ?>
             </div>
             <?php if (!empty($button)) : ?>
-                <?php get_template_part('template-parts/button', '', array('button' => $button)); ?>
+                <?php get_template_part('components/button', '', array('button' => $button)); ?>
             <?php endif; ?>
         </div>
     <?php endif; ?>

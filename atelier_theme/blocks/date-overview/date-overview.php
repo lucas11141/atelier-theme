@@ -50,7 +50,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 
 <div id="<?php echo $id; ?>" class="hero-rounded">
 
-    <?php get_template_part('template-parts/header-bar', '', array('type' => $websitMode, 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
+    <?php get_template_part('components/header-bar', '', array('type' => $websitMode, 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
     <div class="hero-rounded__content">
 
@@ -137,7 +137,7 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 
     </div>
 
-    <?php get_template_part('template-parts/paper'); ?>
+    <?php get_template_part('components/paper'); ?>
     <div class="hero-rounded__circle--new"></div>
 </div>
 

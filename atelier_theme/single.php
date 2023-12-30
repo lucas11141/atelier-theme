@@ -173,11 +173,11 @@
 
                     <div id="<?php echo $id; ?>" class="page__start product__header --background-image">
 
-                        <?php get_template_part('template-parts/header-bar', '', array('type' => 'atelier', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
+                        <?php get_template_part('components/header-bar', '', array('type' => 'atelier', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
                         <div class="wrapper">
 
-                            <?php get_template_part('template-parts/button', 'link', array('color' => $color, 'direction' => 'left', 'button' => array('url' => $archive_link, 'title' => $archive_button_title ?? 'Zurück'))) ?>
+                            <?php get_template_part('components/button', 'link', array('color' => $color, 'direction' => 'left', 'button' => array('url' => $archive_link, 'title' => $archive_button_title ?? 'Zurück'))) ?>
 
                             <div class="header__content">
                                 <div class="header__text">
@@ -205,7 +205,7 @@
                                     <?php endif; ?>
 
                                     <div class="two-buttons">
-                                        <?php get_template_part('template-parts/button', '', array('icon' => 'pen-tool', 'button' => array('url' => '#services', 'title' => 'So läuft`s ab'), 'color' => 'white')) ?>
+                                        <?php get_template_part('components/button', '', array('icon' => 'pen-tool', 'button' => array('url' => '#services', 'title' => 'So läuft`s ab'), 'color' => 'white')) ?>
                                         <?php get_booking_button($postId, $hasDates); ?>
                                     </div>
 
@@ -227,7 +227,7 @@
                             <img class="background__image" src="<?= $thumbnail['url'] ?>" alt="">
                         <?php endif; ?>
 
-                        <?php get_template_part('template-parts/paper'); ?>
+                        <?php get_template_part('components/paper'); ?>
                         <img class="background__circle" src="<?= get_template_directory_uri() ?>/assets/img/website/kontakt/kontakt_background_circle_<?= $color ?>.svg" alt="">
                     </div>
 
@@ -366,7 +366,7 @@
                                     </div>
                                     <div class="rest">
                                         <?php if ($postType == 'course' ||  $postType == 'birthday' || $postType == 'event') : ?>
-                                            <?php get_template_part('template-parts/kunstangebot/available-days', '', array('days' => $weekdays)); ?>
+                                            <?php get_template_part('components/kunstangebot/available-days', '', array('days' => $weekdays)); ?>
                                         <?php endif; ?>
 
                                         <?php get_booking_button($postId, $hasDates); ?>

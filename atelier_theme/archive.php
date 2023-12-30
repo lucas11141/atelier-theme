@@ -16,7 +16,7 @@
         <!-- Hero banner -->
         <div class="page__start category__header">
 
-            <?php get_template_part('template-parts/header-bar', '', array('type' => 'atelier', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
+            <?php get_template_part('components/header-bar', '', array('type' => 'atelier', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
             <div class="wrapper header__content">
 
@@ -34,7 +34,7 @@
                 }
                 ?>
 
-                <?php get_template_part('template-parts/button', 'link', array('color' => $color, 'direction' => 'left', 'button' => array('title' => 'Zurück zur Übersicht', 'url' => get_site_url() . '/#' . $postType))); ?>
+                <?php get_template_part('components/button', 'link', array('color' => $color, 'direction' => 'left', 'button' => array('title' => 'Zurück zur Übersicht', 'url' => get_site_url() . '/#' . $postType))); ?>
 
                 <div class="header__text">
 
@@ -59,11 +59,11 @@
 
                     <?php if ($post_count > 0) : ?>
                         <?php if ($postType !== 'course') : ?>
-                            <?php get_template_part('template-parts/button', '', array('color' => $color, 'button' => array('title' => $plural . ' entdecken', 'url' => '#list'))); ?>
+                            <?php get_template_part('components/button', '', array('color' => $color, 'button' => array('title' => $plural . ' entdecken', 'url' => '#list'))); ?>
                         <?php else : ?>
                             <div class="two-buttons">
-                                <?php get_template_part('template-parts/button', '', array('color' => 'blue', 'class' => 'button--filter --child', 'button' => array('title' => 'Für Kinder', 'url' => '#list'))); ?>
-                                <?php get_template_part('template-parts/button', '', array('color' => 'purple', 'class' => 'button--filter --adult', 'button' => array('title' => 'Für Erwachsene', 'url' => '#list'))); ?>
+                                <?php get_template_part('components/button', '', array('color' => 'blue', 'class' => 'button--filter --child', 'button' => array('title' => 'Für Kinder', 'url' => '#list'))); ?>
+                                <?php get_template_part('components/button', '', array('color' => 'purple', 'class' => 'button--filter --adult', 'button' => array('title' => 'Für Erwachsene', 'url' => '#list'))); ?>
                             </div>
                         <?php endif; ?>
                     <?php endif; ?>
@@ -79,7 +79,7 @@
             </div>
 
 
-            <?php get_template_part('template-parts/paper'); ?>
+            <?php get_template_part('components/paper'); ?>
             <img class="background__circle" src="<?= get_template_directory_uri() ?>/assets/img/website/kontakt/kontakt_background_circle.svg" alt="">
 
         </div>
@@ -104,7 +104,7 @@
                 );
             endwhile; ?>
 
-            <?php get_template_part('template-parts/usp-tiles', '', array('items' => $items)) ?>
+            <?php get_template_part('components/usp-tiles', '', array('items' => $items)) ?>
             <div class="space-large"></div>
         <?php endif; ?>
 
@@ -114,7 +114,7 @@
             <?php if ($postType !== 'course') : ?>
 
                 <!-- Anzahl der Ergebnisse -->
-                <?php get_template_part('template-parts/kunstangebot/product-count', '', array('label' => $post_count > 1 ? $plural : translateString($postType), 'value' => $post_count)); ?>
+                <?php get_template_part('components/kunstangebot/product-count', '', array('label' => $post_count > 1 ? $plural : translateString($postType), 'value' => $post_count)); ?>
 
             <?php else : ?>
 
@@ -123,10 +123,10 @@
                     <div class="filter__button button--filter --child">Kinder</div>
 
                     <div class="filter__count">
-                        <?php get_template_part('template-parts/kunstangebot/product-count', '', array('label' => $post_count > 1 ? $plural : translateString($postType), 'value' => $post_count)); ?>
+                        <?php get_template_part('components/kunstangebot/product-count', '', array('label' => $post_count > 1 ? $plural : translateString($postType), 'value' => $post_count)); ?>
 
                         <div class="filter__reset --hidden">
-                            <?php get_template_part('template-parts/icon-feather', '', array('icon' => 'trash')); ?>
+                            <?php get_template_part('components/icon-feather', '', array('icon' => 'trash')); ?>
                             <span>Filter löschen</span>
                         </div>
                     </div>

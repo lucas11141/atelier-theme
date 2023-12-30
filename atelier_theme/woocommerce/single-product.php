@@ -25,7 +25,7 @@ get_header('shop'); ?>
 
 <header class="shop-hero-banner shop-hero-banner--small show-header-on-offset">
 
-	<?php get_template_part('template-parts/paper'); ?>
+	<?php get_template_part('components/paper'); ?>
 	<div class="decoration">
 		<div class="wrapper">
 			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
@@ -42,7 +42,7 @@ get_header('shop'); ?>
 		<?php endif; ?>
 	</div>
 
-	<?php get_template_part('template-parts/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
+	<?php get_template_part('components/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
 	<div class="shop-hero-banner__content wrapper">
 		<div class="shop-hero-banner--account__header">

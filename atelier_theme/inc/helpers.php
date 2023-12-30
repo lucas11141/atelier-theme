@@ -1,17 +1,14 @@
 <?php
-function d(...$vars)
-{
+function d(...$vars) {
     echo '<pre>', var_dump(...$vars), '</pre>';
 }
 
-function dd(...$vars)
-{
+function dd(...$vars) {
     echo '<pre>', var_dump(...$vars), '</pre>';
     die();
 }
 
-function substrwords($text, $maxchar, $end = '...')
-{
+function substrwords($text, $maxchar, $end = '...') {
     if (!$text) return;
 
     if (strlen($text) > $maxchar || $text == '') {
@@ -34,8 +31,7 @@ function substrwords($text, $maxchar, $end = '...')
     return $output;
 }
 
-function translateString($string)
-{
+function translateString($string) {
     $translations = array(
         'adult' => 'Erwachsene',
         'child' => 'Kinder',
@@ -49,22 +45,19 @@ function translateString($string)
     return $translations[$string] ?? $string;
 }
 
-function translateReadableDateToGerman($str)
-{
+function translateReadableDateToGerman($str) {
     $searchVal = array("March", "May", "June", "July", "October", "December", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
     $replaceVal = array("März", "Mai", "Juni", "Juli", "Oktober", "Dezember", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag");
     return str_replace($searchVal, $replaceVal, $str);
 }
 
-function get_paper_structure()
-{
+function get_paper_structure() {
     $template_directory_uri = get_template_directory_uri();
     return "<img class='paper-structure' src='{$template_directory_uri}/assets/img/elements/paper_structure_500x.jpg' alt=''>";
     // src="https://atelier-delatron.de/wp-content/themes/atelier_theme/assets/img/paper_structure.webp"
 }
 
-function load_product_colors($postType, $group = 'child'): string
-{
+function load_product_colors($postType, $group = 'child'): string {
     $color = "";
     if ($postType == 'course') : ?>
         <?php if ($group !== 'adult') :
@@ -131,8 +124,7 @@ function load_product_colors($postType, $group = 'child'): string
         }
 
 
-        function product_has_dates($postId)
-        {
+        function product_has_dates($postId) {
             $postType = get_post_type($postId);
             $hasDates = false;
 
@@ -165,8 +157,7 @@ function load_product_colors($postType, $group = 'child'): string
             return $hasDates;
         }
 
-        function get_course_dates(int $timeId)
-        {
+        function get_course_dates(int $timeId) {
             // Check if course_time has dates in the future
             $dates = get_field('dates', 'course_time_' . $timeId);
 
@@ -193,8 +184,7 @@ function load_product_colors($postType, $group = 'child'): string
             return $dates;
         }
 
-        function get_booking_button($postId, $hasDates = false)
-        {
+        function get_booking_button($postId, $hasDates = false) {
             global $color;
             $buttonColor = $color;
             $postType = get_post_type($postId);
@@ -211,7 +201,7 @@ function load_product_colors($postType, $group = 'child'): string
                     $postType = get_post_type($postId);
                     $group = get_field('group', $postId);
 
-                    get_template_part('template-parts/button', '', array(
+                    get_template_part('components/button', '', array(
                         'button' => array(
                             'url' => $booking_link,
                             'title' => 'Buchung ab ' . $bookable_from,
@@ -223,7 +213,7 @@ function load_product_colors($postType, $group = 'child'): string
                     return;
                 }
 
-                get_template_part('template-parts/button', '', array(
+                get_template_part('components/button', '', array(
                     'button' => array(
                         'url' => $booking_link,
                         'title' => 'Jetzt Buchen',
@@ -235,7 +225,7 @@ function load_product_colors($postType, $group = 'child'): string
                 return;
             }
 
-            get_template_part('template-parts/button', '', array(
+            get_template_part('components/button', '', array(
                 'button' => array(
                     'url' => '#',
                     'title' => 'Keine Termine',
@@ -246,8 +236,7 @@ function load_product_colors($postType, $group = 'child'): string
             ));
         }
 
-        function is_booking_scheduled(): bool
-        {
+        function is_booking_scheduled(): bool {
             $blocked = get_field('booking_scheduled', 'holiday_workshop_options');
             $bookable_from = get_field('bookable_from', 'holiday_workshop_options');
 
@@ -261,8 +250,7 @@ function load_product_colors($postType, $group = 'child'): string
             return $blocked;
         }
 
-        function get_booking_schedule_date(): string
-        {
+        function get_booking_schedule_date(): string {
             $bookable_from = get_field('bookable_from', 'holiday_workshop_options');
             $bookable_from = date('d.m.Y', strtotime($bookable_from));
             return $bookable_from;

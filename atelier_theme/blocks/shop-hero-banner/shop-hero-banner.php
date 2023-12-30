@@ -13,7 +13,7 @@ $slides = get_field('slides');
 
 <div class="shop-hero-banner show-header-on-offset" id="<?= $id ?>">
 
-    <?php get_template_part('template-parts/paper'); ?>
+    <?php get_template_part('components/paper'); ?>
 
     <div class="decoration">
         <div class="wrapper">
@@ -25,7 +25,7 @@ $slides = get_field('slides');
         </div>
     </div>
 
-    <?php get_template_part('template-parts/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
+    <?php get_template_part('components/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
     <?php if ($uberschrift_h1) : ?>
 
@@ -52,7 +52,7 @@ $slides = get_field('slides');
                                 $button = $text['button']; ?>
 
                                 <div class="swiper-slide">
-                                    <?php get_template_part('template-parts/tag', '', array('tagname' => $tag, 'color' => 'white')); ?>
+                                    <?php get_template_part('components/tag', '', array('tagname' => $tag, 'color' => 'white')); ?>
                                     <?php if ($uberschrift_h1_aktivieren) : ?>
                                         <h1><?= $uberschrift_h2 ?></h1>
                                     <?php else : ?>
