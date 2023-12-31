@@ -66,14 +66,14 @@ $auswahl = get_field('auswahl');
                             <li class="swiper-slide product product-list__item">
 
                                 <a href="<?= $permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" aria-label="Produkt '<?= $title ?>' ansehen">
-                                    <img class="attachment-woocommerce_thumbnail" src="<?= $image_main; ?>" alt="">
-                                    <img class="hover-image" src="<?= $image_zoom; ?>" alt="">
+                                    <img class="product-image attachment-woocommerce_thumbnail" src="<?= $image_main; ?>" alt="">
+                                    <img class="product-image product-image--hover hover-image" src="<?= $image_zoom; ?>" alt="">
                                 </a>
 
-                                <div class="loop__product__content">
+                                <div class="product__text">
                                     <a href="<?= $permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" aria-label="Produkt '<?= $title ?>' ansehen">
                                         <span class="product__category"><?= $category ?></span>
-                                        <h3 class="woocommerce-loop-product__title"><?= $title ?></h3>
+                                        <h3 class="product__title"><?= $title ?></h3>
                                         <p class="product__description"><?= $short_description ?></p>
                                         <?php woocommerce_atelier_product_badges($post->ID); ?>
 
@@ -113,21 +113,13 @@ $auswahl = get_field('auswahl');
                         $link = get_term_link($inhalt);
                         $name = $term->name;
                         $thumbnail_id = get_term_meta($inhalt, 'thumbnail_id', true);
-                        // $attr = apply_filters( 'wp_get_attachment_image_attributes', array('alt'), $inhalt, 'medium' );
                         $bild = wp_get_attachment_image_url($thumbnail_id, 'medium');
-                        // d(wp_get_attachment_image( $thumbnail_id, 'medium' ));
                     ?>
 
                         <a class="swiper-slide category-slide" href="<?php echo $link; ?>" aria-label="Alle Produkte der Kategorie '<?= $name ?>' ansehen">
                             <div class="slider__item">
-                                <?php // echo wp_get_attachment_image( $thumbnail_id, 'medium', false, array('sizes'=>'medium') ); 
-                                ?>
                                 <img class="item__background" src="<?= $bild ?>" alt="">
-
-                                <div class="item__title">
-                                    <h3><?php echo $name; ?></h3>
-                                </div>
-
+                                <h3 class="item__title"><?php echo $name; ?></h3>
                                 <div class="item__gradient"></div>
                             </div>
                         </a>

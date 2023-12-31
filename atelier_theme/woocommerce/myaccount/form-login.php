@@ -63,7 +63,7 @@ if (!defined('ABSPATH')) {
 
 <?php if ('yes' === get_option('woocommerce_enable_myaccount_registration')) : ?>
 
-	<div class="wrapper --half page__login" id="customer_login">
+	<div class="wrapper --small page--login" id="customer_login">
 
 	<?php endif; ?>
 

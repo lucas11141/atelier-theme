@@ -38,6 +38,7 @@
 					color: $accent;
 					text-transform: uppercase;
 				}
+				.woocommerce-loop-product__title,
 				.product__title {
 					@include fluid-type(20px, 22px);
 					@include font-gooddog;

@@ -598,6 +598,14 @@ function atelier_custom_field_accordeon() { ?>
 
 
 
+        // add class to product image container
+        add_filter('woocommerce_single_product_image_thumbnail_html', 'add_class_to_product_image_container', 10, 2);
+        function add_class_to_product_image_container($html, $attachment_id) {
+            $html = str_replace('attachment-woocommerce_thumbnail', 'attachment-woocommerce_thumbnail --tesryfsdfdsfsdf', $html);
+            return $html;
+        }
+
+
 
 
 
@@ -610,10 +618,6 @@ function atelier_custom_field_accordeon() { ?>
             $image_link = wp_get_attachment_image_url($attachment_ids[0], 'medium');
 
             echo '<img class="hover-image" src="' . $image_link . '" alt="">';
-
-            // foreach( $attachment_ids as $attachment_id ) {
-            //     echo $image_link = wp_get_attachment_url( $attachment_id );
-            // }
         }
 
 

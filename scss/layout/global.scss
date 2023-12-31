@@ -20,6 +20,7 @@ html {
 	font-weight: 500;
 }
 body {
+	margin: 0;
 	@include text;
 	box-sizing: border-box;
 
@@ -326,10 +327,6 @@ Abstände
 	.--mobile-space-extrasmall {
 		margin-bottom: $space-extrasmall !important;
 	}
-}
-
-.wrapper {
-	width: calc(100vw - 40px);
 }
 
 .woocommerce:not(body),

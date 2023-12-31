@@ -376,14 +376,20 @@ body.woocommerce-account {
 /*------------------------------------*/
 /* Account - Dashboard */
 /*------------------------------------*/
+body.konto {
+}
 
 /*------------------------------------*/
 /* Account - Orders */
 /*------------------------------------*/
+body.woocommerce-orders {
+}
 
 /*------------------------------------*/
 /* Account - Downloads */
 /*------------------------------------*/
+body.woocommerce-downloads {
+}
 
 /*------------------------------------*/
 /* Account - Adresses */
@@ -431,11 +437,13 @@ body.woocommerce-edit-address {
 /*------------------------------------*/
 /* Account - Details */
 /*------------------------------------*/
+body.woocommerce-edit-account {
+}
 
 /*------------------------------------*/
 /* Login / Registration */
 /*------------------------------------*/
-.page__login {
+.page--login {
 	margin: $space-small auto $space-medium;
 
 	.nav__tabs {
@@ -465,6 +473,7 @@ body.woocommerce-edit-address {
 			}
 		}
 	}
+
 	.tab__content {
 		h2 + p {
 			padding-top: 15px;
@@ -529,44 +538,44 @@ body.woocommerce-edit-address {
 			}
 		}
 
-		.lost_password {
-			margin: auto;
-			padding: 0;
-			font-weight: 700;
-			color: $accent;
-			text-align: center;
-		}
-
 		.woocommerce-privacy-policy-text + p {
 			padding-top: 0;
 		}
 	}
-}
 
-.lost_reset_password {
-	h2 + p {
-		padding-bottom: 25px;
+	.lost_reset_password {
+		h2 + p {
+			padding-bottom: 25px;
+		}
+
+		button {
+			margin-top: 25px;
+		}
 	}
 
-	button {
-		margin-top: 25px;
+	.woocommerce-password-strength {
+		padding: 10px 0;
+		font-weight: 700;
+
+		&.bad,
+		&.short {
+			color: red;
+		}
+
+		&.good {
+			color: orange;
+		}
+
+		&.strong {
+			color: $accent;
+		}
 	}
 }
 
-.woocommerce-password-strength {
-	padding: 10px 0;
+.lost_password {
+	margin: auto;
+	padding: 0;
 	font-weight: 700;
-
-	&.bad,
-	&.short {
-		color: red;
-	}
-
-	&.good {
-		color: orange;
-	}
-
-	&.strong {
-		color: $accent;
-	}
+	color: $accent;
+	text-align: center;
 }

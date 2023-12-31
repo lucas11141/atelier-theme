@@ -37,14 +37,14 @@ $products = $args['products'];
                         <li class="swiper-slide product product-list__item">
 
                             <a href="<?= $permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" aria-label="Produkt '<?= $title ?>' ansehen">
-                                <img class="attachment-woocommerce_thumbnail" src="<?= $image_main; ?>" alt="">
-                                <img class="hover-image" src="<?= $image_zoom; ?>" alt="">
+                                <img class="product-image attachment-woocommerce_thumbnail" src="<?= $image_main; ?>" alt="">
+                                <img class="product-image product-image--hover hover-image" src="<?= $image_zoom; ?>" alt="">
                             </a>
 
-                            <div class="loop__product__content">
+                            <div class="product__text">
                                 <a href="<?= $permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link" aria-label="Produkt '<?= $title ?>' ansehen">
                                     <span class="product__category"><?= $category ?></span>
-                                    <h3 class="woocommerce-loop-product__title"><?= $title ?></h3>
+                                    <h3 class="product__title"><?= $title ?></h3>
                                     <p class="product__description"><?= $short_description ?></p>
                                     <?php woocommerce_atelier_product_badges($productId); ?>
 

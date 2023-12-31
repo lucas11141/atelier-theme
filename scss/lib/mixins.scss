@@ -8,7 +8,7 @@
 	position: relative;
 	@include remove-spacing-first;
 
-	&.--half {
+	&.--small {
 		max-width: 500px;
 	}
 
@@ -28,23 +28,40 @@
 /*------------------------------------*/
 /* Text */
 /*------------------------------------*/
-@mixin fluid-type($min-font-size, $max-font-size) {
+@mixin fluid-type($min-font-size, $max-font-size, $important: false) {
 	$u3: unit($min-font-size);
 	$u4: unit($max-font-size);
 
 	@if $u3 == $u4 {
 		& {
-			font-size: $min-font-size;
+			@if $important {
+				font-size: $min-font-size !important;
+			} @else {
+				font-size: $min-font-size;
+			}
 
 			@media screen and (min-width: $min-vw) {
-				font-size: calc(
-					#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
-						((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
-				);
+				@if $important {
+					font-size: calc(
+						#{$min-font-size} +
+							#{strip-unit($max-font-size - $min-font-size)} *
+							((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+					) !important;
+				} @else {
+					font-size: calc(
+						#{$min-font-size} +
+							#{strip-unit($max-font-size - $min-font-size)} *
+							((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+					);
+				}
 			}
 
 			@media screen and (min-width: $max-vw) {
-				font-size: $max-font-size;
+				@if $important {
+					font-size: $max-font-size !important;
+				} @else {
+					font-size: $max-font-size;
+				}
 			}
 		}
 	}
@@ -85,35 +102,77 @@
 	}
 }
 
-@mixin h1 {
+@mixin heading-shop {
+	font-family: 'gooddog-new';
+	font-weight: 400;
+	text-transform: uppercase;
+	-webkit-text-stroke: 0.3px $main;
+
+	@media only screen and (max-width: $tablet) {
+		-webkit-text-stroke: unset !important;
+		-webkit-text-stroke-width: 0px !important;
+	}
+}
+
+@mixin h1() {
 	@include heading;
 	@include fluid-type(28px, 32px);
+
+	body:has(#gtm-values[data-website-mode='shop']) & {
+		@include heading-shop;
+		@include fluid-type(28px, 36px);
+	}
 }
 
 @mixin h2 {
 	@include heading;
 	@include fluid-type(24px, 32px);
+
+	body:has(#gtm-values[data-website-mode='shop']) & {
+		@include heading-shop;
+		@include fluid-type(28px, 36px);
+	}
 }
 
 @mixin h3 {
 	@include heading;
 	@include fluid-type(20px, 24px);
+
+	body:has(#gtm-values[data-website-mode='shop']) & {
+		@include heading-shop;
+		@include fluid-type(21px, 24px);
+	}
 }
 
 @mixin h4 {
 	@include heading;
 	@include fluid-type(17px, 20px);
+
+	body:has(#gtm-values[data-website-mode='shop']) & {
+		@include heading-shop;
+		@include fluid-type(19px, 21px);
+	}
 }
 
 @mixin h5 {
 	@include heading;
 	@include fluid-type(15px, 16px);
+
+	body:has(#gtm-values[data-website-mode='shop']) & {
+		color: $accent; // TODO: Color by default?
+		// @include fluid-type(13px, 15px);
+	}
 }
 
 @mixin h6 {
 	@include heading;
 	@include fluid-type(14px, 14px);
 	color: $accent;
+
+	// body:has(#gtm-values[data-website-mode='shop']) & {
+	// 	color: $accent;
+	// 	@include fluid-type(12px, 13px);
+	// }
 }
 
 /*------------------------------------*/
@@ -610,6 +669,15 @@
 		padding-top: 0 !important;
 		font-weight: 500 !important;
 		color: $text;
+
+		a {
+			color: $accent;
+			text-decoration: underline;
+
+			&:hover {
+				color: $accent--darken;
+			}
+		}
 	}
 
 	&:has(input:checked) {
@@ -806,11 +874,13 @@
 	}
 }
 
+// TODO: Apply border to all similar items
 @mixin box {
 	padding: 25px 27px;
 	border-radius: 15px;
 	background-color: white;
 	@include dropshadow;
+	// border: solid 1px $box-border;
 }
 
 @mixin box-padding {

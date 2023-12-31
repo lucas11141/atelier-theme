@@ -59,7 +59,7 @@ do_action('woocommerce_before_lost_password_form');
 
 </header>
 
-<div class="wrapper --half page__login">
+<div class="wrapper --small page--login">
 
 	<form method="post" class="woocommerce-ResetPassword lost_reset_password">
 

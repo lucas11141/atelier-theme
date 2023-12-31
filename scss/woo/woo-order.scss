@@ -14,7 +14,7 @@ body.woocommerce-view-order {
 		padding: 0;
 	}
 
-	// TODO: Make this general
+	// TODO: Make this general (1/2)
 	.left,
 	.right {
 		@include flex('column');

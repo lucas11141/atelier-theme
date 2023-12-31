@@ -11,7 +11,7 @@ export default function produktslider() {
 	productSliderElements.forEach((sliderElement) => {
 		// Main slider
 		const slider = new Swiper(sliderElement, {
-			slidesPerView: 3,
+			slidesPerView: 'auto',
 			spaceBetween: 20,
 
 			// Modules
@@ -25,6 +25,16 @@ export default function produktslider() {
 			navigation: {
 				nextEl: sliderElement.querySelector('.slider__button.--next'),
 				prevEl: sliderElement.querySelector('.slider__button.--prev'),
+			},
+
+			// Responsive
+			breakpoints: {
+				520: {
+					slidesPerView: 2,
+				},
+				720: {
+					slidesPerView: 3,
+				},
 			},
 		});
 	});

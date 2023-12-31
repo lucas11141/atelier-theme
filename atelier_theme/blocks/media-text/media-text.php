@@ -67,10 +67,10 @@ if ($produkt) {
         <?php if ($produkt_aktivieren) : ?>
             <div class="media-text__product">
                 <div class="product__content">
-                    <div class="loop__product__content">
+                    <div class="product__text">
                         <a href="<?= $product_permalink ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                             <span class="product__category"><?= $product_category ?></span>
-                            <h3 class="woocommerce-loop-product__title"><?= $product_title ?></h3>
+                            <h3 class="product__title"><?= $product_title ?></h3>
                             <p class="product__description"><?= $product_short_description ?></p>
                             <span class="price"><span class="woocommerce-Price-amount amount"><bdi><?= $product_price ?>&nbsp;<span class="woocommerce-Price-currencySymbol">€</span></bdi></span></span>
                         </a>

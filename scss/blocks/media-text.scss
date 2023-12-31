@@ -74,7 +74,8 @@
 			opacity: 0;
 			pointer-events: none;
 			transition: $transition;
-			.woocommerce-loop-product__title:hover {
+			.woocommerce-loop-product__title:hover,
+			.product__title:hover {
 				text-decoration: underline;
 			}
 		}

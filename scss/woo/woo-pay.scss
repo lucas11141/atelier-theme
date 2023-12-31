@@ -1,0 +1,39 @@
+/*------------------------------------*/
+/* Woocommerce: Payment */
+/*------------------------------------*/
+body.woocommerce-order-pay .woocommerce {
+	form#order_review {
+		display: contents;
+	}
+
+	.left {
+		margin-top: calc(var(--section-gap) - 10px);
+	}
+
+	.right {
+		.woocommerce-checkout-payment {
+			display: block;
+
+			.payment__methods {
+				display: none;
+			}
+		}
+	}
+
+	.cart__item {
+		.product__image {
+			height: 100px;
+			width: 100px;
+			min-width: 100px;
+		}
+
+		.product__infos {
+			justify-content: center;
+		}
+	}
+
+	// Paypal
+	.ppc-button-wrapper {
+		margin-top: 45px;
+	}
+}

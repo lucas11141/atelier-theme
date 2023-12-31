@@ -7,7 +7,10 @@ export default function shopHeroBanner() {
 	Swiper.use([Autoplay, Navigation, Thumbnail]);
 
 	const shopHeroBannerBlocks = document.querySelectorAll('.shop-hero-banner');
+
 	shopHeroBannerBlocks?.forEach((block) => {
+		if (!document.querySelector('.content-split')) return;
+
 		let isPlaying = true;
 
 		const processBar = block.querySelector('.process-button .process');
