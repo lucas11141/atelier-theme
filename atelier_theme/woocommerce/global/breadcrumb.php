@@ -23,14 +23,14 @@ if (!defined('ABSPATH')) {
 
 if (!empty($breadcrumb)) {
 
-	echo '<ul class="woocommerce-breadcrumb" itemscope="" itemtype="https://schema.org/BreadcrumbList">';
+	echo $wrap_before;
 
 	$count = count($breadcrumb);
 	$index = 1;
 
 	foreach ($breadcrumb as $key => $crumb) {
 
-		echo '<li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">';
+		echo $before;
 
 		if (!empty($crumb[1]) && sizeof($breadcrumb) !== $key + 1) {
 			echo '<a href="' . esc_url($crumb[1]) . '">' . esc_html($crumb[0]) . '</a>';
@@ -42,11 +42,13 @@ if (!empty($breadcrumb)) {
 		echo '<meta itemprop="name" content="' . esc_html($crumb[0]) . '">';
 
 		if (sizeof($breadcrumb) !== $key + 1) {
-			echo "<svg class='seperator' width='5' height='9' viewBox='0 0 5 9' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M0.970001 1.39999L3.97 4.39999L0.970001 7.39999' stroke='white' style='stroke:white;stroke-opacity:1;' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>";
+			echo $delimiter;
 		}
 
-		echo '</li>';
+		echo $after;
 	}
 
-	echo '</ul>';
+	echo $test;
+
+	echo $wrap_after;
 }

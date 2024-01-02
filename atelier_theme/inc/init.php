@@ -8,7 +8,6 @@ require get_template_directory() . '/inc/blocks.php'; //
 require get_template_directory() . '/inc/custom-post-type.php'; //
 require get_template_directory() . '/inc/api.php'; // API functions
 require get_template_directory() . '/inc/dates.php'; // Dates admin list
-require get_template_directory() . '/inc/woocommerce.php'; //
 require get_template_directory() . '/inc/acf.php'; //
 require get_template_directory() . '/inc/admin-list.php'; //
 // require get_template_directory() . '/inc/shortcode.php'; //
