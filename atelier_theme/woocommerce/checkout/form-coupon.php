@@ -13,7 +13,7 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.4.4
+ * @version 7.0.1
  */
 
 defined('ABSPATH') || exit;
@@ -28,8 +28,6 @@ if (!wc_coupons_enabled()) { // @codingStandardsIgnoreLine.
 </div>
 
 <form class="checkout_coupon woocommerce-form-coupon" method="post">
-
-	<!-- <p><?php esc_html_e('If you have a coupon code, please apply it below.', 'woocommerce'); ?></p> -->
 
 	<div class="form--one__line">
 		<p class="form-input">

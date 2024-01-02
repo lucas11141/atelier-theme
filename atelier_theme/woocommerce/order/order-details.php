@@ -13,7 +13,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 4.6.0
+ * @version 7.8.0
  */
 
 defined('ABSPATH') || exit;
@@ -45,39 +45,25 @@ $payment_method_names = array(
 	'ppcp-gateway' => 'Paypal',
 );
 $payment_method_title = $order->get_payment_method_title();
-
 $payment_date = $order->get_date_paid();
-
 $notes = $order->get_customer_order_notes();
-
 $actions = wc_get_account_orders_actions($order);
 
 $status = $order->get_status();
 $status_title = esc_html(wc_get_order_status_name($status));
-
 if ($status === 'pending') {
 	$status_description = 'Deine Bestellung ist noch nicht bezahlt. Bitte bezahle, damit wir die Bestellung weiter bearbeiten können.';
-}
-
-if ($status === 'processing') {
+} else if ($status === 'processing') {
 	$status_description = 'Deine Bestellung wurde bezahlt und kann jetzt bearbeitet werden.';
-}
-
-if ($status === 'completed') {
+} else if ($status === 'completed') {
 	$tracking_items = ast_get_tracking_items($order_id);
 	$status_description = 'Deine Bestellung wurde versendet und ist auf dem Weg zu Dir.';
-}
-
-if ($status === 'on-hold') {
+} else if ($status === 'on-hold') {
 	$status_description = 'Deine Bestellung ist in Bearbeitung, wird aber noch durch andere Faktoren (z.B. Feiertage) verzögert.';
-}
-
-if ($status === 'arrival-shipment') {
+} else if ($status === 'arrival-shipment') {
 	$status_title = "Einkauf vor Ort";
 	$status_description = 'Diese Bestellung wurde vor Ort getätigt.';
-}
-
-if ($status === 'refunded') {
+} else if ($status === 'refunded') {
 	$status_description = 'Deine Bestellung wurde storniert und das Geld wurde zurückerstattet.';
 }
 ?>
@@ -172,111 +158,56 @@ if ($status === 'refunded') {
 		<!-- Order Cart -->
 		<?php do_action('woocommerce_order_details_before_order_table', $order); ?>
 		<div>
-			<h4>Warenkorb</h4>
+			<h4><?php esc_html_e('Order details', 'woocommerce'); ?></h4>
+			<h6 class="cart__productcount"><?php echo $order->get_item_count(); ?> Artikel</h6>
+
 			<div class="order__cart">
 				<?php $order = wc_get_order($order_id); ?>
-				<!-- <h3 class="woocommerce-order-details__title"><strong><?php esc_html_e('Order details', 'woocommerce'); ?></strong></h3>
-				<h6 class="cart__productcount"><?php echo $order->get_item_count(); ?> Artikel</h6> -->
 				<div class="cart__items">
 
-					<?php do_action('woocommerce_order_details_before_order_table_items', $order); ?>
+					<?php
+					do_action('woocommerce_order_details_before_order_table_items', $order);
 
-					<?php foreach ($order->get_items() as $item_key => $item) :
-						// Item ID is directly accessible from the $item_key in the foreach loop or
-						$item_id = $item->get_id();
-
+					foreach ($order_items as $item_id => $item) {
 						$product = $item->get_product();
-						$thumbnail = $product->get_image(array(36, 36));
-						$product_permalink = $product->get_permalink();
-						$quantity = $item->get_quantity();
+
+						wc_get_template(
+							'order/order-details-item.php',
+							array(
+								'order'              => $order,
+								'item_id'            => $item_id,
+								'item'               => $item,
+								'show_purchase_note' => $show_purchase_note,
+								'purchase_note'      => $product ? $product->get_purchase_note() : '',
+								'product'            => $product,
+							)
+						);
+					}
+
+					do_action('woocommerce_order_details_after_order_table_items', $order);
 					?>
-
-						<div class="cart__item //order__item">
-
-							<div class="product__image">
-								<?php
-								$thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $product->get_image(), $item, $item_key);
-								if (!$product_permalink) :
-									echo $thumbnail; // PHPCS: XSS ok.
-								else :
-									printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail); // PHPCS: XSS ok.
-								endif;
-								?>
-							</div>
-
-							<div class="product__infos">
-
-								<span class="product__category"><?php echo wc_get_product_category_list($item['product_id']); ?></span>
-
-
-								<div class="product__name__price">
-
-									<span class="product__name" data-title="<?php esc_attr_e('Product', 'woocommerce'); ?>">
-										<?php
-										if (!$product_permalink) :
-											echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $product->get_name(), $item, $item_key) . '&nbsp;');
-										else :
-											echo wp_kses_post(apply_filters('woocommerce_cart_item_name', sprintf('<a href="%s">%s</a>', esc_url($product_permalink), $product->get_name()), $item, $item_key));
-										endif;
-										do_action('woocommerce_after_cart_item_name', $item, $item_key);
-										?>
-									</span>
-
-									<span class="product__price" data-title="<?php esc_attr_e('Price', 'woocommerce'); ?>">
-										<?php echo apply_filters('woocommerce_cart_item_price', WC()->cart->get_product_subtotal($product, $quantity), $item, $item_key); // PHPCS: XSS ok. 
-										?>
-									</span>
-
-								</div>
-
-
-								<?php if ($product->is_type('variation')) :
-									// Get the variation attributes
-									$variation_attributes = $product->get_variation_attributes();
-									// Loop through each selected attributes
-									foreach ($variation_attributes as $attribute_taxonomy => $term_slug) :
-										// Get product attribute name or taxonomy
-										$taxonomy = str_replace('attribute_', '', $attribute_taxonomy);
-										// The label name from the product attribute
-										$attribute_name = wc_attribute_label($taxonomy, $product);
-										// The term name (or value) from this attribute
-										if (taxonomy_exists($taxonomy)) :
-											$attribute_value = get_term_by('slug', $term_slug, $taxonomy)->name;
-										else :
-											$attribute_value = $term_slug; // For custom product attributes
-										endif;
-									endforeach; ?>
-									<span class="product__variation"><?php echo $attribute_name; ?>:&nbsp;<span><?php echo $attribute_value; ?></span></span>
-								<?php endif; ?>
-
-
-								<span class="product__quantity">Menge:&nbsp;<span><?php echo $quantity; ?></span></span>
-
-							</div>
-						</div>
-
-					<?php endforeach; ?>
-
-					<?php do_action('woocommerce_order_details_after_order_table_items', $order); ?>
-
 				</div>
 			</div>
 		</div>
 
-		<!-- Adresses -->
-		<div>
-			<h4>Weitere Informationen</h4>
-			<ul class="order__addresses">
-				<li>
-					<h6>Lieferadresse</h6>
-					<p><?= $order->get_formatted_shipping_address(); ?></p>
-				</li>
-				<li>
-					<h6>Rechnungsadresse</h6>
-					<p><?= $order->get_formatted_billing_address(); ?></p>
-				</li>
-			</ul>
-		</div>
+		<!-- Customer details -->
+		<?php if ($show_customer_details) : ?>
+			<div>
+				<h4>Weitere Informationen</h4>
+				<ul class="order__addresses">
+					<li>
+						<h6>Lieferadresse</h6>
+						<p><?= $order->get_formatted_shipping_address(); ?></p>
+					</li>
+					<li>
+						<h6>Rechnungsadresse</h6>
+						<p><?= $order->get_formatted_billing_address(); ?></p>
+					</li>
+				</ul>
+				<?php // wc_get_template('order/order-details-customer.php', array('order' => $order)); 
+				?>
+			</div>
+		<?php endif; ?>
 
 		<!-- Notes -->
 		<?php if ($notes) : ?>

@@ -1,5 +1,5 @@
 <?php
-
+// TODO: Optimise this code
 /**
  * Orders
  *
@@ -15,7 +15,7 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.7.0
+ * @version 7.8.0
  */
 
 defined('ABSPATH') || exit;
@@ -32,10 +32,8 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
 			<?php foreach ($customer_orders->orders as $customer_order) :
 				$order = wc_get_order($customer_order); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 				$data = $order->get_data();
+				$actions = wc_get_account_orders_actions($order);
 
-				setlocale(LC_TIME, 'de_DE');
-				$date = strftime('%d. %B %Y', strtotime($data['date_created']->date('d. F Y')));
-				$number = $order->get_order_number();
 				$currency = $data['currency'];
 				$total = $order->get_formatted_order_total();
 				$item_count = $order->get_item_count() - $order->get_item_count_refunded() - 1;
@@ -59,41 +57,44 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
 					$shipping_address .= "<br>" . $shipping['address_2'];
 				}
 				$shipping_address .= "<br>" . $shipping['postcode'] . " " . $shipping['city'];
-
 			?>
 
-				<div class="list__item">
+				<div class="list__item order <?php echo esc_attr($order->get_status()); ?>">
 
 					<div class="item__header">
 						<ul class="order__facts">
 							<li class="order__fact">
-								<h6>Status</h6>
+								<h6><?= __('Status', 'atelier') ?></h6>
 								<p class="order-status"><?php echo esc_html(wc_get_order_status_name($order->get_status())); ?></p>
 							</li>
+
 							<li class="order__fact">
-								<h6>Bestelldatum</h6>
-								<p class="order-date"><?php echo $date; ?></p>
+								<h6><?= __('Bestelldatum', 'atelier') ?></h6>
+								<p>
+									<time datetime="<?php echo esc_attr($order->get_date_created()->date('c')); ?>"><?php echo esc_html(wc_format_datetime($order->get_date_created())); ?></time>
+								</p>
 							</li>
+
 							<li class="order__fact">
-								<h6>Bestellnummer</h6>
-								<p class="order-number"># <?php echo $number; ?></p>
+								<h6><?= __('Bestellnummer', 'atelier') ?></h6>
+								<p class="order-number"><?php echo esc_html(_x('#', 'hash before order number', 'woocommerce') . $order->get_order_number()); ?></p>
 							</li>
+
 							<li class="order__fact">
-								<h6>Summe</h6>
-								<p class="order-total"><?php echo $total; ?></p>
+								<h6><?= __('Summe', 'atelier') ?></h6>
+								<p class="order-total"><?php echo wp_kses_post(sprintf(_n('%1$s for %2$s item', '%1$s for %2$s items', $item_count, 'woocommerce'), $order->get_formatted_order_total(), $item_count)); ?></p>
 							</li>
 						</ul>
-						<div class="order__actions">
-							<?php
-							$actions = wc_get_account_orders_actions($order);
-							if (!empty($actions)) : ?>
+
+						<?php if (!empty($actions)) : ?>
+							<div class="order__actions">
 								<?php foreach ($actions as $key => $action) : ?>
 									<a class="button button--mini woocommerce-button button --color-main <?php echo sanitize_html_class($key); ?>" href="<?php echo $action['url']; ?>">
 										<span><?php echo esc_html($action['name']); ?></span>
 									</a>
 								<?php endforeach; ?>
-							<?php endif; ?>
-						</div>
+							</div>
+						<?php endif; ?>
 					</div>
 
 					<div class="item__content">
@@ -123,7 +124,6 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
 			<?php endforeach; ?>
 		</div>
 
-
 		<?php do_action('woocommerce_before_account_orders_pagination'); ?>
 
 		<?php if (1 < $customer_orders->max_num_pages) : ?>
@@ -141,10 +141,10 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
 	</div>
 
 <?php else : ?>
-	<div class="woocommerce-message woocommerce-message--info woocommerce-Message woocommerce-Message--info woocommerce-info">
-		<a class="woocommerce-Button button" href="<?php echo esc_url(apply_filters('woocommerce_return_to_shop_redirect', wc_get_page_permalink('shop'))); ?>"><?php esc_html_e('Browse products', 'woocommerce'); ?></a>
-		<?php esc_html_e('No order has been made yet.', 'woocommerce'); ?>
-	</div>
+
+	<?php wc_print_notice(esc_html__('No order has been made yet.', 'woocommerce') . ' <a class="woocommerce-Button button' . esc_attr($wp_button_class) . '" href="' . esc_url(apply_filters('woocommerce_return_to_shop_redirect', wc_get_page_permalink('shop'))) . '">' . esc_html__('Browse products', 'woocommerce') . '</a>', 'notice'); // phpcs:ignore WooCommerce.Commenting.CommentHooks.MissingHookComment 
+	?>
+
 <?php endif; ?>
 
 <?php do_action('woocommerce_after_account_orders', $has_orders); ?>

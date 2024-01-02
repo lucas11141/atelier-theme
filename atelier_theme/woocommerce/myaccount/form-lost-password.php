@@ -13,7 +13,7 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.5.2
+ * @version 7.0.1
  */
 
 defined('ABSPATH') || exit;
@@ -21,49 +21,12 @@ defined('ABSPATH') || exit;
 do_action('woocommerce_before_lost_password_form');
 ?>
 
-<header class="shop-hero-banner shop-hero-banner--small show-header-on-offset">
+<?php get_template_part('components/shop/hero-banner', NULL, array('title' => 'Mein Konto')); ?>
 
-	<?php get_template_part('components/paper'); ?>
-	<div class="decoration">
-		<div class="wrapper">
-			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-			<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
-		</div>
-	</div>
-
-	<div class="shop-hero-banner__background-image">
-		<?php if ($image) : ?>
-			<img src="<?php echo $image; ?>" alt="">
-		<?php endif; ?>
-	</div>
-
-	<?php get_template_part('components/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
-
-	<div class="shop-hero-banner__content wrapper">
-
-		<?php if ($image) : ?>
-			<div class="category__header__thumbnail">
-				<img src="<?php echo $image; ?>" alt="" />
-			</div>
-		<?php endif; ?>
-
-		<div class="category__header__content">
-
-			<h1>Konto</h1>
-
-		</div>
-	</div>
-
-</header>
-
-<div class="wrapper --small page--login">
-
+<div class="inner --small page--login">
 	<form method="post" class="woocommerce-ResetPassword lost_reset_password">
 
-		<h2><strong>Passwort vergessen?</strong></h2>
+		<h2><?= __('Passwort zurücksetzen', 'atelier') ?></h2>
 
 		<p><?php echo apply_filters('woocommerce_lost_password_message', esc_html__('Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'woocommerce')); ?></p><?php // @codingStandardsIgnoreLine 
 																																																											?>
@@ -79,13 +42,12 @@ do_action('woocommerce_before_lost_password_form');
 
 		<p class="woocommerce-form-row form-row">
 			<input type="hidden" name="wc_reset_password" value="true" />
-			<button type="submit" class="woocommerce-Button button --color-main  " value="<?php esc_attr_e('Reset password', 'woocommerce'); ?>"><?php esc_html_e('Reset password', 'woocommerce'); ?></button>
+			<button type="submit" class="woocommerce-Button button --color-main<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>" value="<?php esc_attr_e('Reset password', 'woocommerce'); ?>"><?php esc_html_e('Reset password', 'woocommerce'); ?></button>
 		</p>
 
 		<?php wp_nonce_field('lost_password', 'woocommerce-lost-password-nonce'); ?>
 
 	</form>
-
 </div>
 
 <?php

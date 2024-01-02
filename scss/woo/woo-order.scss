@@ -361,11 +361,6 @@ body.woocommerce-view-order {
 		}
 	}
 
-	// woocommerce-customer-details
-	.woocommerce-customer-details {
-		display: none !important;
-	}
-
 	&:has(.shop_table tr[data-row='shipping']) {
 		.shop_table tr[data-row='cart_subtotal'] {
 			td,
