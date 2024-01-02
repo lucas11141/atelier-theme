@@ -48,8 +48,9 @@ $payment_method_title = $order->get_payment_method_title();
 
 $payment_date = $order->get_date_paid();
 
+$notes = $order->get_customer_order_notes();
 
-
+$actions = wc_get_account_orders_actions($order);
 
 $status = $order->get_status();
 $status_title = esc_html(wc_get_order_status_name($status));
@@ -83,31 +84,51 @@ if ($status === 'refunded') {
 
 <div class="account--order-single split-grid">
 	<div class="left">
+		<!-- <?php get_template_part('components/button', 'link', array('button' => array('url' => esc_url($orders_link), 'title' => __('Zurück zur "Bestellungen"', 'atelier')), 'direction' => 'left')); ?> -->
+
 		<!-- Order Header -->
+		<!-- TODO: Style order headers -->
 		<div class="order__header">
-			<?php
-			$notes = $order->get_customer_order_notes();
+			<?php if (!empty($actions)) : ?>
+				<div class="order__actions">
+					<?php foreach ($actions as $key => $action) : ?>
+						<a class="button button--mini woocommerce-button button <?php echo sanitize_html_class($key); ?>" href="<?php echo $action['url']; ?>">
+							<span><?php echo esc_html($action['name']); ?></span>
+						</a>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
 
-			$data = $order->get_data();
-
-			$date = strftime('%d. %B %Y', strtotime($data['date_created']->date('d. F Y')));
-			$number = $order->get_order_number();
-			$total = $order->get_formatted_order_total();
-			$status = $data["status"];
-			?>
 			<ul class="order__facts">
 				<li class="order__fact">
-					<h6>Bestellung vom</h6>
-					<p class="order-date"><?php echo $date; ?></p>
+					<h6><?php esc_html_e('Bestellnummer', 'atelier'); ?></h6>
+					<p class="order-number"><?= $order->get_order_number(); ?></p>
 				</li>
+
 				<li class="order__fact">
-					<h6>Bestellnummer</h6>
-					<p class="order-number"># <?php echo $number; ?></p>
+					<h6><?php esc_html_e('Bestellung vom', 'atelier'); ?></h6>
+					<p class="order-date"><?= wc_format_datetime($order->get_date_created()); ?></p>
 				</li>
+
+				<?php if (is_user_logged_in() && $order->get_user_id() === get_current_user_id() && $order->get_billing_email()) : ?>
+					<li class="order__fact">
+						<h6><?php esc_html_e('E-Mail-Adresse', 'atelier'); ?></h6>
+						<p class="order-date"><?= $order->get_billing_email(); ?></p>
+					</li>
+				<?php endif; ?>
+
 				<li class="order__fact">
-					<h6>Summe</h6>
-					<p class="order-total"><?php echo $total; ?></p>
+					<h6><?php esc_html_e('Summe', 'atelier'); ?></h6>
+					<p class="order-total"><?= $order->get_formatted_order_total(); ?></p>
 				</li>
+
+				<?php if ($order->get_payment_method_title()) : ?>
+					<li class="order__fact">
+						<h6><?php esc_html_e('Zahlungsmethode', 'atelier'); ?></h6>
+						<p class="order-total"><?= wp_kses_post($order->get_payment_method_title()); ?></p>
+					</li>
+
+				<?php endif; ?>
 			</ul>
 		</div>
 
@@ -284,18 +305,6 @@ if ($status === 'refunded') {
 	</div>
 
 	<div class="right">
-		<?php
-		$actions = wc_get_account_orders_actions($order);
-		if (!empty($actions)) : ?>
-			<div class="order__controls">
-				<?php foreach ($actions as $key => $action) : ?>
-					<a class="button woocommerce-button <?php echo sanitize_html_class($key); ?>" href="<?php echo $action['url']; ?>">
-						<span><?php echo esc_html($action['name']); ?></span>
-					</a>
-				<?php endforeach; ?>
-			</div>
-		<?php endif; ?>
-
 		<div>
 			<h4>Bestellübersicht</h4>
 			<table class="woocommerce-table woocommerce-table--order-details shop_table order_details">

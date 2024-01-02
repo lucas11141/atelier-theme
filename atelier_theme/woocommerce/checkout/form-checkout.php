@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-<?php get_template_part('components/shop-hero-banner'); ?>
+<?php get_template_part('components/shop/payment-hero-banner', NULL, array('step' => 'checkout')); ?>
 
 <!-- Coupon code -->
 <div class="checkout__discount">

@@ -216,81 +216,69 @@ body:has(#gtm-values[data-website-mode='shop']) {
 /*------------------------------------*/
 /* Breadcrumbs */
 /*------------------------------------*/
+$breadcrumb-gap: 10px;
+
 .woocommerce-breadcrumb {
 	@include flex('row');
 	justify-content: flex-start;
 	align-items: center;
-	gap: 5px;
+	gap: $breadcrumb-gap;
 	line-height: 1.4em;
 	cursor: default;
 	overflow-x: scroll;
 	@include hide-scrollbar;
 
-	&,
-	a,
-	span {
-		@include fluid-type(11px, 12px);
-	}
+	li {
+		@include flex('row');
+		align-items: center;
+		gap: $breadcrumb-gap;
 
-	a {
-		padding: 4px 0;
-		color: $main;
-		font-weight: 800;
-		text-transform: uppercase;
-		position: relative;
-		cursor: pointer;
-
-		&:nth-last-child(2) {
-			color: $accent;
+		a,
+		span {
+			padding: 0;
+			@include fluid-type(11px, 12px);
+			color: white;
+			font-weight: 700;
+			// text-transform: uppercase;
 		}
 
-		&::after {
-			content: '';
-			width: 0;
-			height: 2px;
-			border-radius: 3px;
-			background-color: $accent;
-			position: absolute;
-			top: calc(100% - 1px);
-			left: 50%;
-			transform: translateX(-50%);
-			transition: $transition;
-		}
+		a {
+			position: relative;
+			cursor: pointer;
 
-		&:hover,
-		&:focus,
-		&:active {
+			&:nth-last-child(2) {
+				color: $accent;
+			}
+
 			&::after {
-				width: 100%;
+				content: '';
+				width: 0;
+				height: 2px;
+				border-radius: 3px;
+				background-color: $accent;
+				position: absolute;
+				top: calc(100% - 1px);
+				left: 50%;
+				transform: translateX(-50%);
+				transition: $transition;
+			}
+
+			&:hover,
+			&:focus,
+			&:active {
+				&::after {
+					width: 100%;
+				}
 			}
 		}
-	}
 
-	span {
-		// margin: 0 5px;
-		font-weight: 900;
-		color: #001e34;
-		// -webkit-text-stroke: 1px #001e34;
-		transform: translateY(-0.6px);
-		display: inline-block;
-
-		&:last-child {
-			display: none;
-		}
-	}
-}
-
-.shop-hero-banner {
-	.woocommerce-breadcrumb {
-		padding-top: 0;
-
-		span,
-		a {
-			color: white;
+		span {
+			font-weight: 500;
+			opacity: 60%;
 		}
 
-		a:last-of-type {
-			color: $accent;
+		.seperator {
+			opacity: 60%;
 		}
 	}
 }
@@ -322,34 +310,12 @@ body:has(#gtm-values[data-website-mode='shop']) {
 	}
 }
 
-.woocommerce-error {
-	margin-top: 10px;
-	padding: 10px 15px;
-	border-radius: 10px;
-	border: solid 2px $dark-red;
-
-	li {
-		color: $dark-red;
-		@include fluid-type(13px, 14px);
-		font-weight: 700;
-		list-style: none;
-
-		a {
-			display: none;
-		}
-	}
-
-	& + .woocommerce-message {
-		margin-top: 15px;
-	}
-}
-
 .woocommerce-message,
-.woocommerce-info {
+.woocommerce-info,
+.woocommerce-notice {
 	@include flex('row');
 	flex-direction: row;
 	align-items: center;
-	// margin-top: 10px;
 	padding: 12px 25px 12px 20px;
 	background-color: $lightgray;
 	border: solid 1px $linegray;
@@ -360,6 +326,12 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		border-radius: 10px;
 		font-size: 14px;
 		font-weight: 500;
+	}
+
+	a {
+		display: inline;
+		color: $red;
+		text-decoration: underline;
 	}
 
 	p:first-child {
@@ -383,6 +355,29 @@ body:has(#gtm-values[data-website-mode='shop']) {
 		&:hover {
 			background-size: 0;
 		}
+	}
+}
+
+.woocommerce-error,
+.woocommerce-notice--error {
+	margin-top: 10px;
+	padding: 10px 15px;
+	border-radius: 10px;
+	border: solid 2px $dark-red;
+
+	li {
+		color: $dark-red;
+		@include fluid-type(13px, 14px);
+		font-weight: 700;
+		list-style: none;
+
+		a {
+			display: none;
+		}
+	}
+
+	& + .woocommerce-message {
+		margin-top: 15px;
 	}
 }
 

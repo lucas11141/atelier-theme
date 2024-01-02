@@ -26,8 +26,8 @@ export default function wooSingle() {
 			watchSlidesProgress: true,
 		});
 
-		// Return if the slider is not found
-		if (!thumbsSlider) return;
+		// // Return if the slider is not found
+		// if (!thumbsSlider) return;
 
 		// Main slider
 		const mainSliderElement = galleryElement.querySelector('.main-slider');
@@ -41,9 +41,11 @@ export default function wooSingle() {
 
 			pagination: defaultSwiperPagination,
 
-			thumbs: {
-				swiper: thumbsSlider,
-			},
+			thumbs: thumbsSliderElement
+				? {
+						swiper: thumbsSlider,
+				  }
+				: undefined,
 		});
 
 		/*------------------------------------*/

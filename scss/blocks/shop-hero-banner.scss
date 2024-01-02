@@ -6,13 +6,22 @@
 	background-color: $main;
 	position: relative;
 
-	h1 {
-		color: white;
-	}
-
 	.header-bar {
 		.nav ul li .sub-menu:before {
 			content: unset;
+		}
+	}
+
+	.content {
+		@include inner;
+
+		h1 {
+			padding: 0;
+			color: white;
+		}
+
+		.woocommerce-breadcrumb {
+			margin-top: 6px;
 		}
 	}
 
@@ -180,6 +189,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		pointer-events: none;
+		user-select: none;
 
 		.wrapper {
 			position: relative;
@@ -216,6 +226,7 @@
 		}
 	}
 
+	// TODO: Make small default and change size for big variant
 	&--small {
 		padding-bottom: 25px;
 		border-bottom: solid 5px $accent;

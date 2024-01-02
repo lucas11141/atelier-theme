@@ -21,7 +21,7 @@ defined('ABSPATH') || exit;
 $totals = $order->get_order_item_totals(); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 ?>
 
-<?php get_template_part('components/shop-hero-banner'); ?>
+<?php get_template_part('components/shop/payment-hero-banner', NULL, array('step' => 'payment')); ?>
 
 <div class="left">
 	<div class="cart__items cart__list">

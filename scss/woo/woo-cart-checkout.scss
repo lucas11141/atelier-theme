@@ -180,6 +180,12 @@ body.woocommerce-cart .woocommerce {
 		margin-top: calc(var(--section-gap) - 10px);
 	}
 
+	.right {
+		@include flex('column');
+		align-items: stretch;
+		gap: var(--section-gap);
+	}
+
 	.woocommerce-notices-wrapper {
 		grid-row: 2;
 
@@ -231,61 +237,6 @@ body.woocommerce-checkout .woocommerce {
 /*------------------------------------*/
 body.woocommerce-pay .woocommerce {
 	@include bp-lower($desktop) {
-	}
-}
-
-/*------------------------------------*/
-/* Non layout general */
-/*------------------------------------*/
-body.woocommerce-cart .woocommerce,
-body.woocommerce-checkout .woocommerce,
-body.woocommerce-pay .woocommerce {
-	// Modify breadcrumb in Hero Banner
-	.shop-hero-banner .woocommerce-breadcrumb {
-		padding-top: 6px;
-
-		.item,
-		.divider {
-			color: white;
-		}
-
-		.divider {
-			opacity: 60%;
-			background-image: url("data:image/svg+xml,%3Csvg width='5' height='9' viewBox='0 0 5 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.970001 1.39999L3.97 4.39999L0.970001 7.39999' stroke='white' style='stroke:white;stroke-opacity:1;' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
-			color: transparent;
-			background-repeat: no-repeat;
-			background-position: center 55%;
-			width: 10px;
-			position: none;
-			user-select: none;
-		}
-
-		.item {
-			font-weight: 800;
-			text-transform: uppercase;
-
-			&.--current {
-				color: $accent;
-			}
-
-			&:not(a):not(.--current) {
-				opacity: 60%;
-				font-weight: 600;
-			}
-		}
-
-		a.item + .divider {
-			opacity: 100%;
-		}
-	}
-
-	.woocommerce-error,
-	.woocommerce-message {
-		a {
-			display: inline;
-			color: $red;
-			text-decoration: underline;
-		}
 	}
 }
 

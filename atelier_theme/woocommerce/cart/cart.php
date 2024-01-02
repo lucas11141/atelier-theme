@@ -19,7 +19,7 @@
 defined('ABSPATH') || exit;
 ?>
 
-<?php get_template_part('components/shop-hero-banner'); ?>
+<?php get_template_part('components/shop/payment-hero-banner', NULL, array('step' => 'cart')); ?>
 
 <!-- <div class="cart__flex"> -->
 <form class="cart woocommerce-cart-form checkout-split" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
@@ -232,7 +232,6 @@ defined('ABSPATH') || exit;
 			</div>
 		<?php } ?>
 
-		<!-- <button type="submit" class="button" name="update_cart" value="<?php esc_attr_e('Update cart', 'woocommerce'); ?>"><?php esc_html_e('Update cart', 'woocommerce'); ?></button> -->
 		<?php do_action('woocommerce_cart_actions'); ?>
 		<?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
 
@@ -241,17 +240,15 @@ defined('ABSPATH') || exit;
 
 		<?php do_action('woocommerce_before_cart_collaterals'); ?>
 
-		<div class="cart-collaterals">
-			<?php
-			/**
-			 * Cart collaterals hook.
-			 *
-			 * @hooked woocommerce_cross_sell_display
-			 * @hooked woocommerce_cart_totals - 10
-			 */
-			do_action('woocommerce_cart_collaterals');
-			?>
-		</div>
+		<?php
+		/**
+		 * Cart collaterals hook.
+		 *
+		 * @hooked woocommerce_cross_sell_display
+		 * @hooked woocommerce_cart_totals - 10
+		 */
+		do_action('woocommerce_cart_collaterals');
+		?>
 
 		<?php do_action('woocommerce_after_cart'); ?>
 	</div>

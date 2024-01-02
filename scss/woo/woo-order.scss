@@ -9,6 +9,7 @@
 	}
 }
 
+body.woocommerce-order-received,
 body.woocommerce-view-order {
 	#main {
 		padding: 0;
@@ -384,6 +385,27 @@ body.woocommerce-view-order {
 /*------------------------------------*/
 /* Woocommerce: Review Ordner */
 /*------------------------------------*/
+body.woocommerce-order-received .woocommerce {
+	.woocommerce-order,
+	.account--order-single {
+		display: contents;
+	}
+
+	.woocommerce-notice,
+	.woocommerce-thankyou-order-received,
+	ul.woocommerce-thankyou-order-details {
+		@include grid-split('left');
+	}
+
+	.left {
+		padding: 0;
+	}
+}
+
+/*------------------------------------*/
+/* Section Name */
+/*------------------------------------*/
+
 // TODO: Test this code by creating a new order
 .woocommerce-order-overview,
 .order__overview {
@@ -419,15 +441,16 @@ body.woocommerce-view-order {
 		}
 	}
 }
-.woocommerce-thankyou-order-received {
-	padding: 0 0 35px;
 
-	& + .order__header {
-		.view {
-			display: none;
-		}
-	}
-}
+// .woocommerce-thankyou-order-received {
+// 	padding: 0 0 35px;
+
+// 	& + .order__header {
+// 		.view {
+// 			display: none;
+// 		}
+// 	}
+// }
 
 /*------------------------------------*/
 /* Order facts */
@@ -437,6 +460,7 @@ body.woocommerce-view-order {
 	@include flex('row');
 	justify-content: flex-start;
 	align-items: center;
+	flex-wrap: wrap;
 	gap: 30px;
 
 	.order__fact {

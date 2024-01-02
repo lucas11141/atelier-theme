@@ -2,28 +2,32 @@
 /* Woocommerce: Cart */
 /*------------------------------------*/
 body.woocommerce-cart .woocommerce {
-	.button--update-cart {
-		margin-top: 35px;
-		&:disabled {
-			opacity: 15%;
+	/*------------------------------------*/
+	/* Left side */
+	/*------------------------------------*/
+	.left {
+		.button--update-cart {
+			margin-top: 35px;
+			&:disabled {
+				opacity: 15%;
+			}
 		}
 	}
 
-	.woocommerce-shipping-methods {
-		@include element-select-list;
-	}
-
-	// Warenkorb rechte Seite Content
-	.cart-collaterals {
-		// Gutschein
-		.checkout_coupon {
+	/*------------------------------------*/
+	/* Right side */
+	/*------------------------------------*/
+	.right {
+		// Shipping
+		.woocommerce-shipping-methods {
+			@include element-select-list;
 		}
-		// Versand
+		// TODO: Show shipping methods in cart?
 		.shipping__methods {
 			display: none;
 		}
 
-		// Paypal
+		// Paypal widget
 		.ppc-button-wrapper {
 			margin-top: 52px;
 			position: relative;
