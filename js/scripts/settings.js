@@ -188,25 +188,25 @@ export default function settings() {
 			.removeClass('accordeon__item--opened');
 		accordion_content.stop(true, true).slideToggle(200);
 
-		const target = e.currentTarget.parentElement;
-		if (target.classList.contains('accordeon__item--opened')) {
-			setTimeout(function () {
-				if (window.innerHeight < target.offsetHeight + 100) {
-					window.scrollTo({
-						behavior: 'smooth',
-						top:
-							target.getBoundingClientRect().top -
-							document.body.getBoundingClientRect().top -
-							115,
-					});
-				} else {
-					target.scrollIntoView({
-						behavior: 'smooth',
-						block: 'center',
-					});
-				}
-			}, 200);
-		}
+		// const target = e.currentTarget.parentElement;
+		// if (target.classList.contains('accordeon__item--opened')) {
+		// 	setTimeout(function () {
+		// 		if (window.innerHeight < target.offsetHeight + 100) {
+		// 			window.scrollTo({
+		// 				behavior: 'smooth',
+		// 				top:
+		// 					target.getBoundingClientRect().top -
+		// 					document.body.getBoundingClientRect().top -
+		// 					115,
+		// 			});
+		// 		} else {
+		// 			target.scrollIntoView({
+		// 				behavior: 'smooth',
+		// 				block: 'center',
+		// 			});
+		// 		}
+		// 	}, 200);
+		// }
 	});
 
 	//Erstes Item bei Laden der Seite geöffnet
