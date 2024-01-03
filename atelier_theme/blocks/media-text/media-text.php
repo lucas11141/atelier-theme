@@ -57,7 +57,7 @@ if ($produkt) {
 
     <div class="media-text__media">
         <?php if ($bild) : ?>
-            <img src="<?= $bild['sizes']['medium_large'] ?>" alt="<?= $bild['alt'] ?>">
+            <img src="<?= $bild['sizes']['large'] ?>" alt="<?= $bild['alt'] ?>">
         <?php endif ?>
 
         <?php if ($video) : ?>

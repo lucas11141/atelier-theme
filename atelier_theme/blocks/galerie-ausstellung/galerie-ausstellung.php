@@ -34,8 +34,8 @@ $uberschrift_h2 = get_field("uberschrift_h2");
                 <?php foreach ($images as $image) :
                     $title = $image["title"];
                     $caption = $image["caption"];
-                    $url_lightbox = $image['sizes']['gallery-lightbox'];
-                    $url_preview = $image['sizes']['gallery-slider'];
+                    $url_lightbox = $image['sizes']['large'];
+                    $url_preview = $image['sizes']['large'];
                 ?>
                     <div class="swiper-slide <?php if ($first_slide === true) {
                                                     echo "swiper-slide-activekk";

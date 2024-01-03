@@ -20,7 +20,7 @@ $produkte = get_field('produkte');
             // image
             $thumbnailId = get_term_meta($id, 'thumbnail_id', true);
             $image = wp_get_attachment_url($thumbnailId);
-            $image = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'gallery-slider')[0];
+            $image = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'large')[0];
 
             $category;
             $title = $produkt->post_title;

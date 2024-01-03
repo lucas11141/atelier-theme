@@ -8,6 +8,20 @@ function woocommerce_support() {
     add_theme_support("woocommerce");
 }
 
+// Custom image sizes
+function atelier_woocommerce_custom_image_sizes() {
+    remove_image_size('woocommerce_thumbnail');
+    remove_image_size('woocommerce_single');
+    remove_image_size('woocommerce_gallery_thumbnail');
+    remove_image_size('1536x1536');
+    remove_image_size('2048x2048');
+
+    add_image_size('woocommerce_single', 640, 800, false);
+    add_image_size('woocommerce_thumbnail', 350, 410, false);
+    add_image_size('woocommerce_miniature', 120, 150, false);
+}
+
+
 // Breadcrumb Settings - More adjustments habe been made here
 // LINK atelier_theme/woocommerce/global/breadcrumb.php
 function atelier_breadcrumbs_settings() {
@@ -24,15 +38,6 @@ function atelier_breadcrumbs_settings() {
 // Change breadcrumb home url
 function atelier_custom_breadrumb_home_url() {
     return site_url() . '/shop';
-}
-
-// Custom gallery thumbnail size
-function atelier_custom_gallery_thumbnail_size($size) {
-    return array(
-        'width' => 520,
-        'height' => 520,
-        'crop' => 0,
-    );
 }
 
 // Custom order status
@@ -62,15 +67,16 @@ function add_awaiting_shipment_to_order_statuses($order_statuses) {
 /*------------------------------------*/
 /* Hooks */
 /*------------------------------------*/
+
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb');
 
 add_filter('woocommerce_enqueue_styles', '__return_empty_array'); // Remove woocommerce styles
 add_filter('woocommerce_breadcrumb_defaults', 'atelier_breadcrumbs_settings');
-add_filter('woocommerce_get_image_size_gallery_thumbnail', 'atelier_custom_gallery_thumbnail_size');
 add_filter('woocommerce_breadcrumb_home_url', 'atelier_custom_breadrumb_home_url');
 add_filter('wc_order_statuses', 'add_awaiting_shipment_to_order_statuses');
 
 add_action("after_setup_theme", "woocommerce_support");
+add_action('after_setup_theme', 'atelier_woocommerce_custom_image_sizes');
 add_action('init', 'register_shipment_arrival_order_status');
 
 /*------------------------------------*/

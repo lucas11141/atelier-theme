@@ -162,26 +162,21 @@ body.single-product {
 			.price-from {
 				display: none;
 			}
+		}
 
-			& + .out-of-stock,
-			& + .variations_form .out-of-stock {
-				@include button;
-				background-color: $lightgray;
-				border: solid 1px $linegray;
-				color: $darkgray;
-				font-weight: 700;
-				cursor: auto;
+		.out-of-stock,
+		.variations_form .out-of-stock {
+			@include button;
+			background: $lightgray;
+			border-color: $linegray;
+			color: darkgray !important;
+			font-weight: 700 !important;
+			cursor: auto;
+		}
 
-				&:hover {
-					background-size: 0;
-					color: $darkgray;
-				}
-			}
-
-			& + .variations_form .out-of-stock {
-				white-space: pre-wrap;
-				line-height: 1.2em;
-			}
+		.variations_form .out-of-stock {
+			white-space: pre-wrap;
+			line-height: 1.2em;
 		}
 
 		// Variationen
@@ -424,8 +419,9 @@ body.single-product {
 
 		// Stichpunkte
 		.product__bulletpoints {
-			@include flex('column');
 			margin-top: 45px;
+			@include flex('column');
+			align-items: stretch;
 
 			h4 {
 				padding: 0;

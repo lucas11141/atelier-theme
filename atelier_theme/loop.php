@@ -50,7 +50,7 @@ $the_query = new WP_Query($args);
 
             <div class="product__image">
                 <?php
-                the_post_thumbnail('gallery-slider');
+                the_post_thumbnail('large');
                 ?>
                 <img class="border__right" src="<?= get_template_directory_uri() ?>/assets/img/website/border_round_right_white.svg" alt="">
                 <div class="product__time">

@@ -453,15 +453,6 @@ function atelier_custom_field_accordeon() { ?>
 
 
 
-        // add class to product image container
-        add_filter('woocommerce_single_product_image_thumbnail_html', 'add_class_to_product_image_container', 10, 2);
-        function add_class_to_product_image_container($html, $attachment_id) {
-            $html = str_replace('attachment-woocommerce_thumbnail', 'attachment-woocommerce_thumbnail --tesryfsdfdsfsdf', $html);
-            return $html;
-        }
-
-
-
 
 
         add_action('woocommerce_before_shop_loop_item_title', 'neueFunktion', 20);
