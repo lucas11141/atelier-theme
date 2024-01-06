@@ -388,7 +388,7 @@ function atelier_custom_field_accordeon() { ?>
 
     <?php if ($cart->get_shipping_total() == 0 && !$isLocalPickup) : ?>
         <span class="total__savings"><?= get_template_part('components/icon', '', array('icon' => 'tag', 'color' => 'red')); ?>Kostenloser Versand<?php echo wc_price($cart->get_shipping_total()); ?></span>
-    <?php endif;
+<?php endif;
         }
 
 
@@ -479,69 +479,7 @@ function atelier_custom_field_accordeon() { ?>
 
 
 
-        // Display Product Badges
-        function woocommerce_atelier_product_badges($product_id, $position = 'archive') {
-            $product = wc_get_product($product_id);
-            d($product);
-            $terms = wp_get_post_terms($product_id, 'product_badge');
 
-            // Überspringen, wenn kein Badge vorhanden
-            // if (empty($terms)) return;
-
-            $badge = wp_get_post_terms($product_id, 'product_badge')[0];
-            $badge_name = $badge->name;
-            $badge_icon = get_field('icon', $badge);
-            $badge_color = get_field('farbe', $badge);
-            $badge_tooltip = $badge->description;
-            $badge_in_archive = get_field('badge_in_archive', $product_id);
-
-            // check if the product is on sale 
-            $isOnSale = $product->is_on_sale();
-            d($isOnSale);
-    ?>
-
-    <span class="product__badge --onsale">
-        <?php get_template_part('components/icon', '', array('icon' => 'tag', 'color' => 'white',  'size' => 'small')); ?>
-        Im Angebot
-    </span>
-
-    <?php return; ?>
-
-    <?php if ($product->is_featured()) : ?>
-        <span class="product__badge --featured">
-            <?php get_template_part('components/icon', '', array('icon' => 'star', 'color' => 'white',  'size' => 'small')); ?>
-            Besonders beliebt
-        </span>
-        <?php return; ?>
-    <?php endif; ?>
-
-    <?php if ($product->is_on_sale()) : ?>
-        <span class="product__badge --onsale">
-            <?php get_template_part('components/icon', '', array('icon' => 'tag', 'color' => 'white',  'size' => 'small')); ?>
-            Im Angebot
-        </span>
-        <?php return; ?>
-    <?php endif; ?>
-
-    <?php if (!$badge) return; ?>
-
-    <?php if ($position === 'product' || ($position === 'archive' && $badge_in_archive)) : ?>
-        <div class="badge-tooltip">
-            <span class="product__badge" style="background-color:<?= $badge_color; ?>">
-                <?php get_template_part('components/icon', '', array('url' => $badge_icon['url'], 'alt' => $badge_icon['alt'], 'size' => 'small')); ?>
-                <?= $badge_name ?>
-            </span>
-            <?php if ($badge_tooltip && $position == 'product') : ?>
-                <div class="tooltip">
-                    <?php get_template_part('components/icon', '', array('icon' => 'info')); ?>
-                    <span><?= $badge_tooltip ?></span>
-                </div>
-            <?php endif; ?>
-        </div>
-<?php endif;
-        }
-
-        add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_product_badges', 20);
 
         /*------------------------------------*/
         /* Hooks */
@@ -554,6 +492,7 @@ function atelier_custom_field_accordeon() { ?>
         remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 
         add_action('woocommerce_before_single_product_summary', 'at_woo_product_gallery', 20);
+        add_action('woocommerce_single_product_summary', 'woocommerce_atelier_product_badge', 2);
         add_action('woocommerce_single_product_summary', 'wvnderlab_single_title', 5);
         add_action('woocommerce_single_product_summary', 'atelier_custom_field_short_description', 8);
         // add_action('woocommerce_single_product_summary', 'atelier_woocommerce_single_chips', 10);

@@ -21,7 +21,6 @@ function atelier_woocommerce_custom_image_sizes() {
     add_image_size('woocommerce_miniature', 120, 150, false);
 }
 
-
 // Breadcrumb Settings - More adjustments habe been made here
 // LINK atelier_theme/woocommerce/global/breadcrumb.php
 function atelier_breadcrumbs_settings() {
@@ -63,6 +62,59 @@ function add_awaiting_shipment_to_order_statuses($order_statuses) {
     }
     return $new_order_statuses;
 }
+
+// Display Product Badges
+function woocommerce_atelier_product_badge($product_id) {
+    if (empty($product_id) || !isset($product_id)) {
+        global $post;
+        $product_id = $post->ID;
+    }
+
+    // Get product data
+    $product = wc_get_product($product_id);
+
+    // Überspringen, wenn kein Badge vorhanden
+    // if (empty($terms)) return;
+
+    // Product is sold out
+    if (!$product->is_in_stock()) {
+        get_template_part('components/shop/badge', NULL, array('label' => "Ausverkauft", 'class' => '--soldout', 'icon' => array('icon' => 'cart', 'color' => 'white',  'size' => 'small')));
+        return;
+    }
+
+    // Product on sale
+    if ($product->is_on_sale()) {
+        get_template_part('components/shop/badge', NULL, array('label' => "Im Angebot", 'class' => '--onsale', 'icon' => array('icon' => 'tag', 'color' => 'white',  'size' => 'small')));
+        return;
+    }
+
+    // Featured product
+    if ($product->is_featured()) {
+        get_template_part('components/shop/badge', NULL, array('label' => "Besonders beliebt", 'class' => '--featured', 'icon' => array('icon' => 'star', 'color' => 'white',  'size' => 'small')));
+        return;
+    }
+
+    // check if current page is a product archive page
+    $isArchive = is_shop() || is_product_category() || is_product_tag();
+
+    // Custom badge
+    $badge = wp_get_post_terms($product_id, 'product_badge')[0];
+    $badge_name = $badge->name;
+    $badge_icon = get_field('icon', $badge);
+    $badge_color = get_field('farbe', $badge);
+    $badge_tooltip = $badge->description;
+
+    // disable tooltip when on archive page
+    if ($isArchive) $badge_tooltip = false;
+
+    // Do not display badge in archive when option is not checked
+    $badge_in_archive = get_field('badge_in_archive', $product_id);
+    if ($isArchive && !$badge_in_archive) return;
+
+    get_template_part('components/shop/badge', NULL, array('label' => $badge_name, 'color' => $badge_color, 'tooltip' => $badge_tooltip, 'icon' => array('url' => $badge_icon['url'], 'color' => 'white',  'size' => 'small')));
+    return;
+}
+
 
 /*------------------------------------*/
 /* Hooks */
