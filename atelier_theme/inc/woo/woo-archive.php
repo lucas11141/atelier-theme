@@ -23,7 +23,7 @@ function woocommerce_atelier_loop_category() {
 // Add short description to loop item
 function woocommerce_atelier_loop_short_description() {
     global $post;
-    $short_description = get_field("short_description", $post->id);
+    $short_description = get_field("short_description", $post->ID);
 
     if (!$short_description) return; // Return if no short description
 
@@ -52,3 +52,4 @@ function woocommerce_atelier_products_filter() {
 add_action('woocommerce_before_shop_loop', 'woocommerce_atelier_products_filter', 5);
 add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_loop_category', 5);
 add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_loop_short_description', 15);
+add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_product_badge', 20);
