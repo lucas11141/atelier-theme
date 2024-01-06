@@ -52,8 +52,6 @@ if (empty($product) || !$product->is_visible()) {
 		 */
 		do_action('woocommerce_shop_loop_item_title');
 
-		woocommerce_atelier_product_badges($post->ID);
-
 		/**
 		 * Hook: woocommerce_after_shop_loop_item_title.
 		 *

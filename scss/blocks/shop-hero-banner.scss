@@ -1,12 +1,16 @@
 /*------------------------------------*/
 /* ACF Block: Shop Hero Banner */
 /*------------------------------------*/
+
 .shop-hero-banner {
-	padding: 1px 0 100px;
+	padding: 1px 0 25px;
 	background-color: $main;
+	border-bottom: solid 5px $accent;
 	position: relative;
 
 	.header-bar {
+		margin-bottom: 25px;
+
 		.nav ul li .sub-menu:before {
 			content: unset;
 		}
@@ -180,6 +184,22 @@
 		}
 	}
 
+	.background-image {
+		background-color: $main;
+		width: 50%;
+		height: 100%;
+		position: absolute;
+		left: 50%;
+		top: 0;
+		z-index: -2;
+
+		img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+		}
+	}
+
 	// Winter decoration
 	.decoration {
 		width: 100%;
@@ -223,16 +243,6 @@
 					top: 230px;
 				}
 			}
-		}
-	}
-
-	// TODO: Make small default and change size for big variant
-	&--small {
-		padding-bottom: 25px;
-		border-bottom: solid 5px $accent;
-
-		.header-bar {
-			margin-bottom: 25px;
 		}
 	}
 

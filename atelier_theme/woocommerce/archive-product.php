@@ -28,30 +28,27 @@ $image = wp_get_attachment_url($thumbnail_id);
 // }
 ?>
 
+<?php
+/**
+ * Hook: woocommerce_before_main_content.
+ *
+ * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+ * @hooked woocommerce_breadcrumb - 20
+ * @hooked WC_Structured_Data::generate_website_data() - 30
+ */
+do_action('woocommerce_before_main_content');
+?>
+
 <div class="page--archive">
 
 	<header class="shop-hero-banner shop-hero-banner--archive show-header-on-offset">
-
-		<?php get_template_part('components/paper'); ?>
-		<div class="decoration">
-			<div class="wrapper">
-				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
-			</div>
-		</div>
-
-		<div class="shop-hero-banner__background-image">
-			<?php if ($image) : ?>
-				<img src="<?php echo $image; ?>" alt="">
-			<?php endif; ?>
-		</div>
-
 		<?php get_template_part('components/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
-		<div class="shop-hero-banner__content wrapper">
+		<div class="inner">
+			<?php woocommerce_breadcrumb(); ?>
+		</div>
+
+		<div class="content">
 
 			<?php if ($image) : ?>
 				<div class="category__header__thumbnail">
@@ -60,17 +57,6 @@ $image = wp_get_attachment_url($thumbnail_id);
 			<?php endif; ?>
 
 			<div class="category__header__content">
-
-				<?php
-				/**
-				 * Hook: woocommerce_before_main_content.
-				 *
-				 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-				 * @hooked woocommerce_breadcrumb - 20
-				 * @hooked WC_Structured_Data::generate_website_data() - 30
-				 */
-				do_action('woocommerce_before_main_content');
-				?>
 
 				<?php if (apply_filters('woocommerce_show_page_title', true)) : ?>
 					<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
@@ -84,9 +70,26 @@ $image = wp_get_attachment_url($thumbnail_id);
 				 */
 				do_action('woocommerce_archive_description');
 				?>
+
 			</div>
 		</div>
 
+		<div class="background-image">
+			<?php if ($image) : ?>
+				<img src="<?php echo $image; ?>" alt="">
+			<?php endif; ?>
+		</div>
+
+		<?php get_template_part('components/paper'); ?>
+		<div class="decoration">
+			<div class="wrapper">
+				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
+				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
+				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
+				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
+				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
+			</div>
+		</div>
 	</header>
 
 	<div class="wrapper">

@@ -15,6 +15,8 @@ require get_template_directory() . '/inc/misc.php'; //
 require get_template_directory() . '/inc/contactform7.php'; //
 require get_template_directory() . '/inc/cron.php'; // Cron functions
 require get_template_directory() . '/inc/ajax.php'; // ajax
+require get_template_directory() . '/inc/widgets.php'; // Widgets
+
 
 // import all files from /inc/utils
 foreach (glob(get_template_directory() . '/inc/utils/*.php') as $filename) {

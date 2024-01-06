@@ -75,7 +75,8 @@ $auswahl = get_field('auswahl');
                                         <span class="product__category"><?= $category ?></span>
                                         <h3 class="product__title"><?= $title ?></h3>
                                         <p class="product__description"><?= $short_description ?></p>
-                                        <?php woocommerce_atelier_product_badges($post->ID); ?>
+                                        <?php //woocommerce_atelier_product_badges($post->ID); 
+                                        ?>
 
                                         <?php if (!$product->is_on_sale()) : ?>
                                             <span class="price"><span class="woocommerce-Price-amount amount"><bdi><?= $price ?>&nbsp;<span class="woocommerce-Price-currencySymbol">€</span></bdi></span></span>

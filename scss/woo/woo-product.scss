@@ -60,7 +60,7 @@
 
 		// Category
 		.product__category {
-			@include fluid-type(9px, 10px);
+			@include fluid-type(10px, 12px);
 			font-weight: 800;
 			color: $accent;
 			text-transform: uppercase;

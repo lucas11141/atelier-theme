@@ -30,11 +30,25 @@ function woocommerce_atelier_loop_short_description() {
     echo '<p class="product__description">' . $short_description . '</p>';
 }
 
+// insert custom html on product archive page
+function woocommerce_atelier_products_filter() {
+    echo '<button class="button filters-slideover__button">Filtern</button>';
+    echo '<div class="filters-slideover">';
+    echo '<div class="filters-slideover__header"><h3>Filtern und Sortieren</h3><a class="filters-slideover__close"></a></div>';
+
+    if (!function_exists('dynamic_sidebar') || !dynamic_sidebar('product-filters'));
+
+    echo '<div class="filters-slideover__confirm">
+        <a class="button --color-main">Anwenden</a>
+    </div>';
+
+    echo '</div>';
+    echo '<div class="filters-slideover__backdrop"></div>';
+}
 
 /*------------------------------------*/
 /* Hooks */
 /*------------------------------------*/
-// remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5); // remove rating
-
+add_action('woocommerce_before_shop_loop', 'woocommerce_atelier_products_filter', 5);
 add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_loop_category', 5);
 add_action('woocommerce_shop_loop_item_title', 'woocommerce_atelier_loop_short_description', 15);

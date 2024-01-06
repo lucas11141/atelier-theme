@@ -54,7 +54,7 @@ if (post_password_required()) {
 		<div class="split__right">
 			<div class="summary entry-summary">
 				<?php
-				woocommerce_atelier_product_badges($post->ID, 'product');
+				// woocommerce_atelier_product_badges($post->ID, 'product');
 				/**
 				 * Hook: woocommerce_single_product_summary.
 				 *

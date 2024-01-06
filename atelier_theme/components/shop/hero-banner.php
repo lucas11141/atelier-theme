@@ -3,13 +3,7 @@ $title = $args['title'] ?? null;
 $image = $args['image'] ?? null;
 ?>
 
-<header class="shop-hero-banner shop-hero-banner--small show-header-on-offset">
-
-    <div class="background-image shop-hero-banner__background-image">
-        <?php if (!empty($image)) : ?>
-            <img src="<?php echo $image; ?>" alt="">
-        <?php endif; ?>
-    </div>
+<header class="shop-hero-banner show-header-on-offset">
 
     <?php get_template_part('components/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
@@ -18,6 +12,12 @@ $image = $args['image'] ?? null;
             <h1><?php echo $title; ?></h1>
         <?php endif; ?>
         <?php woocommerce_breadcrumb(); ?>
+    </div>
+
+    <div class="background-image">
+        <?php if (!empty($image)) : ?>
+            <img src="<?php echo $image; ?>" alt="">
+        <?php endif; ?>
     </div>
 
     <?php get_template_part('components/paper'); ?>
