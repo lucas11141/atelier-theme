@@ -4,17 +4,17 @@ $_ENV = include ($_SERVER['DOCUMENT_ROOT'] . '/config/env.php') ?? false;
 // if (WP_DEBUG) d($_ENV);
 
 /*------------------------------------*/
-/* 	Define website mode depending on page
+/* Website mode  */
 /*------------------------------------*/
+$setWebsiteMode = 'atelier';
+
+// Set website mode depending on ACF field
+if (get_field('seitenkategorie')) $setWebsiteMode = get_field('seitenkategorie');
+
+// Define website mode depending on page
 if (is_page('shop') || is_woocommerce() || is_shop() || is_product_category() || is_product_tag() || is_product() || is_cart() || is_checkout() || is_account_page() || is_page('sendungsverfolgung')) {
     $setWebsiteMode = 'shop';
-} else {
-    $setWebsiteMode = 'atelier';
 }
-
-// // override websiteMode with ACF field
-// $seitenkategorie = get_field('seitenkategorie');
-// if(isset($seitenkategorie)) $setWebsiteMode = $seitenkategorie;
 
 // override websiteMode with URL parameter
 if (isset($_GET['websiteMode'])) $setWebsiteMode = $_GET['websiteMode'];

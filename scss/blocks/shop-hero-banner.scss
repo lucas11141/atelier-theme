@@ -16,13 +16,13 @@
 		}
 	}
 
+	h1 {
+		padding: 0;
+		color: white;
+	}
+
 	.content {
 		@include inner;
-
-		h1 {
-			padding: 0;
-			color: white;
-		}
 
 		.woocommerce-breadcrumb {
 			margin-top: 6px;

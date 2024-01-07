@@ -11,26 +11,15 @@ $ankundigung = get_field('ankundigung');
 $slides = get_field('slides');
 ?>
 
-<div class="shop-hero-banner shop-hero-banner--large show-header-on-offset" id="<?= $id ?>">
-
-    <?php get_template_part('components/paper'); ?>
-
-    <div class="decoration">
-        <div class="wrapper">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
-        </div>
-    </div>
+<div class="shop-hero-banner shop-hero-banner show-header-on-offset" id="<?= $id ?>">
 
     <?php get_template_part('components/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
     <?php if ($uberschrift_h1) : ?>
 
-        <div class="shop-hero-banner__content wrapper">
+        <div class="content">
             <h1><?= $uberschrift_h1 ?></h1>
+            <?php woocommerce_breadcrumb(); ?>
         </div>
 
     <?php else : ?>
@@ -102,6 +91,18 @@ $slides = get_field('slides');
             </svg>
         </div>
     <?php endif; ?>
+
+    <?php get_template_part('components/paper'); ?>
+
+    <div class="decoration">
+        <div class="wrapper">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
+            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
+        </div>
+    </div>
 
 </div>
 
