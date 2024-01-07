@@ -22,7 +22,7 @@ body.woocommerce-cart .woocommerce {
 		.woocommerce-shipping-methods {
 			@include element-select-list;
 		}
-		// TODO: Show shipping methods in cart?
+
 		.shipping__methods {
 			display: none;
 		}
