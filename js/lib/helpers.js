@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 // Disable scroll
 export function disableScroll() {
 	// Get the current page scroll position
