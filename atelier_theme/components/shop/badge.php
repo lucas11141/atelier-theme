@@ -4,6 +4,7 @@ $class = $args['class'];
 $icon = $args['icon'];
 $tooltip = $args['tooltip'];
 $color = $args['color'];
+$hideOnArchive = $args['hideOnArchive'];
 
 // Set color style when color is given
 if ($color) $colorStyle = 'background-color:' . $color;
@@ -13,7 +14,7 @@ if ($color) $colorStyle = 'background-color:' . $color;
     <div class="badge-tooltip">
     <?php endif; ?>
 
-    <span class="product__badge" style="<?= $colorStyle; ?>">
+    <span class="product__badge <?= $hideOnArchive ? '--hide-on-archive' : '' ?>" style="<?= $colorStyle; ?>">
         <?php get_template_part('components/icon', '', $icon); ?>
         <?php //get_template_part('components/icon', '', array('url' => $badge_icon['url'], 'alt' => $badge_icon['alt'], 'size' => 'small')); 
         ?>

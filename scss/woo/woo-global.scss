@@ -539,16 +539,17 @@ $breadcrumb-gap: 10px;
 
 // NEW Product Badges
 .product__badge {
-	padding: 0 16px 0px 13px;
+	// TODO Make two sizes for badges
+	padding: 0 11px 0px 9px;
 	width: fit-content;
-	height: 34px;
+	height: 28px;
 	@include flex('row');
 	align-items: center;
-	gap: 8px;
+	gap: 5px;
 	background-color: $main;
 	border-radius: 8px;
 	color: white;
-	@include fluid-type(10px, 12px);
+	@include fluid-type(8px, 9px);
 	font-weight: 700;
 	line-height: 100%;
 	letter-spacing: 0.3px;
@@ -565,19 +566,20 @@ $breadcrumb-gap: 10px;
 		margin: 0 !important;
 		object-fit: contain !important;
 		display: none;
+		height: 12px !important;
 	}
 
-	@include bp-lower($mobile) {
-		padding: 0 13px 0px 10px;
-		height: 30px;
-		border-radius: 6px;
-		top: 8px;
-		left: 8px;
+	// @include bp-lower($mobile) {
+	// 	padding: 0 13px 0px 10px;
+	// 	height: 30px;
+	// 	border-radius: 6px;
+	// 	top: 8px;
+	// 	left: 8px;
 
-		.icon {
-			height: 14px !important;
-		}
-	}
+	// 	.icon {
+	// 		height: 14px !important;
+	// 	}
+	// }
 }
 
 // TODO: Remove this if not needed

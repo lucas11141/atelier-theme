@@ -14,7 +14,7 @@ $button = get_field('button');
 $auswahl = get_field('auswahl');
 ?>
 
-<div id="<?php echo $id; ?>" class="produktslider">
+<div id="<?php echo $id; ?>" class="produktslider --hide-badges">
 
     <?php if ($uberschrift_h5 || $uberschrift_h2 || $button) : ?>
         <div class="produktslider__header inner">

@@ -111,8 +111,33 @@ function woocommerce_atelier_product_badge($product_id) {
     $badge_in_archive = get_field('badge_in_archive', $product_id);
     if ($isArchive && !$badge_in_archive) return;
 
-    get_template_part('components/shop/badge', NULL, array('label' => $badge_name, 'color' => $badge_color, 'tooltip' => $badge_tooltip, 'icon' => array('url' => $badge_icon['url'], 'color' => 'white',  'size' => 'small')));
+    get_template_part('components/shop/badge', NULL, array('label' => $badge_name, 'color' => $badge_color, 'tooltip' => $badge_tooltip, 'icon' => array('url' => $badge_icon['url'], 'color' => 'white',  'size' => 'small'), 'hideOnArchive' => !$badge_in_archive));
     return;
+}
+
+// Add the category before the product name in the Open Graph meta data
+function custom_display_category_before_og_title($og_title) {
+    global $product;
+
+    if (!$product) return $og_title;
+
+    // Get product categories
+    $categories = get_the_terms($product->get_id(), 'product_cat');
+
+    // Check if product has categories
+    if ($categories && !is_wp_error($categories)) {
+        // Get category names
+        $category_names = array();
+        foreach ($categories as $category) {
+            $category_name = get_field('singular_name', $category->taxonomy . '_' . $category->term_id) ?? $category->name;
+            $category_names[] = $category_name;
+        }
+
+        // Add the categories before the Open Graph title
+        $og_title = implode(', ', $category_names) . ' - ' . $og_title;
+    }
+
+    return $og_title;
 }
 
 
@@ -126,6 +151,7 @@ add_filter('woocommerce_enqueue_styles', '__return_empty_array'); // Remove wooc
 add_filter('woocommerce_breadcrumb_defaults', 'atelier_breadcrumbs_settings');
 add_filter('woocommerce_breadcrumb_home_url', 'atelier_custom_breadrumb_home_url');
 add_filter('wc_order_statuses', 'add_awaiting_shipment_to_order_statuses');
+add_filter('wpseo_opengraph_title', 'custom_display_category_before_og_title', 10);
 
 add_action("after_setup_theme", "woocommerce_support");
 add_action('after_setup_theme', 'atelier_woocommerce_custom_image_sizes');

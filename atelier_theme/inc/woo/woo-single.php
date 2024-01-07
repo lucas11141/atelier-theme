@@ -6,11 +6,12 @@
 // Custom product title
 function wvnderlab_single_title() {
     global $post;
-    $category = get_the_terms($post->ID, 'product_cat');
-    $category = $category[0]->name;
+    $categories = get_the_terms($post->ID, 'product_cat');
+    $category = $categories[0];
+    $category_name = get_field('singular_name', $category->taxonomy . '_' . $category->term_id) ?? $category->name;
     $product = wc_get_product($post->ID);
 
-    echo '<h1 class="product_title entry-title"><span style="font-size:0;">' . $category . ' </span>' . $product->get_title() . '</h1>';
+    echo '<h1 class="product_title entry-title"><span style="font-size:0;">' . $category_name . ' </span>' . $product->get_title() . '</h1>';
 }
 
 // function atelier_woocommerce_single_chips() {

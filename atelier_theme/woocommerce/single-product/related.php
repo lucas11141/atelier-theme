@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
 
 if ($related_products) : ?>
 
-	<section class="produktslider related products">
+	<section class="produktslider related products --hide-badges">
 
 		<?php
 		$heading = apply_filters('woocommerce_product_related_products_heading', __('Related products', 'woocommerce'));
