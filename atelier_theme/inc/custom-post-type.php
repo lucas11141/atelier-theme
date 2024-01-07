@@ -107,7 +107,7 @@ function create_post_types_kunstangebote() {
                 'not_found_in_trash' => __('Keine Kurse im Papierkorb gefunden', 'atelier')
             ),
             'public' => true,
-            'has_archive' => true,
+            'has_archive' => false,
             'supports' => array(
                 'title',
                 'thumbnail'
