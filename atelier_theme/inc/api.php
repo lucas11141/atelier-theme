@@ -1,9 +1,7 @@
 <?php
-function add_custom_api()
-{
+function add_custom_api() {
     // wordpress rest api callback function
-    function findAllKunstangebote($request)
-    {
+    function findAllKunstangebote($request) {
         // query all posts of type course, workshop, birthday, event, holiday_workshop
         $args = array(
             'post_type' => array('course', 'workshop', 'birthday', 'event', 'holiday_workshop'),
@@ -25,8 +23,7 @@ function add_custom_api()
     ));
 
     //
-    function findKunstangebot($request)
-    {
+    function findKunstangebot($request) {
         $postId = $request->get_param('postId');
         $postId = intval($postId);
 
@@ -184,20 +181,6 @@ function add_custom_api()
     register_rest_route('wp/v2', '/kunstangebot/(?P<postId>\d+)', array(
         'methods' => 'GET',
         'callback' => 'findKunstangebot',
-    ));
-
-    //
-    function get_course_times($request)
-    {
-        $postId = $request->get_param('postId');
-
-        // TODO Finde alle Termine für den Kurs
-
-        wp_send_json(array('message' => 'Not implemented'), 501);
-    }
-    register_rest_route('wp/v2', '/course/(?P<postId>\d+)/times', array(
-        'methods' => 'GET',
-        'callback' => 'get_course_times',
     ));
 }
 

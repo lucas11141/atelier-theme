@@ -172,8 +172,6 @@ function date_overview_get_product_dates() {
     /* Workshops
     /* ------------------------------------ */
 
-    // TODO: Make shure to correctly display workshops with multiple dates
-
     // Query dates
     $workshopDateIds = get_posts(array(
         'post_type' => 'workshop_date',
@@ -229,8 +227,6 @@ function date_overview_get_product_dates() {
     /* ------------------------------------ */
     /* Holiday Workshops
     /* ------------------------------------ */
-
-    // TODO: Make shure to correctly display workshops with multiple dates
 
     // Query dates
     $holidayWorkshopDateIds = get_posts(array(

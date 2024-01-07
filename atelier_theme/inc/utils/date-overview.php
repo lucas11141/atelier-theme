@@ -1,6 +1,5 @@
 <?php
-function getCalendarGrid($year, $month)
-{
+function getCalendarGrid($year, $month) {
     /* ------------------------------------ */
     /* Courses
     /* ------------------------------------ */
@@ -52,8 +51,6 @@ function getCalendarGrid($year, $month)
     /* ------------------------------------ */
     /* Workshops
     /* ------------------------------------ */
-
-    // TODO: Make shure to correctly display workshops with multiple dates
 
     // Query dates
     $workshopDateIds = get_posts(array(
@@ -108,8 +105,6 @@ function getCalendarGrid($year, $month)
     /* ------------------------------------ */
     /* Holiday Workshops
     /* ------------------------------------ */
-
-    // TODO: Make shure to correctly display workshops with multiple dates
 
     // Query dates
     $holidayWorkshopDateIds = get_posts(array(
@@ -197,8 +192,7 @@ function getCalendarGrid($year, $month)
     return $calenderGrid;
 }
 
-function generateCalendarGrid($year = null, $month = null)
-{
+function generateCalendarGrid($year = null, $month = null) {
     // Falls Jahr oder Monat nicht angegeben sind, verwende das aktuelle Datum
     if ($year === null || $month === null) {
         $today = new DateTime();
@@ -246,8 +240,7 @@ function generateCalendarGrid($year = null, $month = null)
     return $calendarGrid;
 }
 
-function getDateOverviewCalendarDays($calendarGrid, $year, $month)
-{
+function getDateOverviewCalendarDays($calendarGrid, $year, $month) {
     // TODO: globalize colors
     $colors = [
         'course-child' => 'text-cyan-400',
@@ -314,8 +307,7 @@ function getDateOverviewCalendarDays($calendarGrid, $year, $month)
     echo $content;
 }
 
-function getDateOverviewDaysList($calendarGrid, $year, $month)
-{
+function getDateOverviewDaysList($calendarGrid, $year, $month) {
     // TODO: globalize colors
     $colors = [
         'course-child' => 'text-cyan-400',

@@ -1,5 +1,4 @@
 <?php
-// TODO: Use args to display cart/checkout/confirmation
 $step = $args['step'] ?? null;
 $image = $args['image'] ?? null;
 
@@ -73,65 +72,3 @@ $steps = array(
     </div>
 
 </header>
-
-
-<!-- <ul class="breadcrumb" itemscope="" itemtype="https://schema.org/BreadcrumbList">
-    <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-        <svg viewBox="0 0 100 100" class="breadcrumb-item-separator breadcrumb-item-separator--left">
-            <use xlink:href="#chevron-left"></use>
-        </svg>
-        <a class="breadcrumb-item-link" itemtype="https://schema.org/Thing" href="https://eu.puma.com/de/de/home" itemprop="item">
-            Home
-        </a>
-        <div class="breadcrumb-item-separator breadcrumb-item-separator--right">
-            <span class="breadcrumb-item-separator-dot"></span>
-        </div>
-        <meta itemprop="position" content="1">
-        <meta itemprop="name" content="Home">
-    </li>
-    <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-        <svg viewBox="0 0 100 100" class="breadcrumb-item-separator breadcrumb-item-separator--left">
-            <use xlink:href="#chevron-left"></use>
-        </svg>
-        <a class="breadcrumb-item-link" itemtype="https://schema.org/Thing" href="https://eu.puma.com/de/de/kinder" itemprop="item">
-            Kinder
-        </a>
-        <div class="breadcrumb-item-separator breadcrumb-item-separator--right">
-            <span class="breadcrumb-item-separator-dot"></span>
-        </div>
-        <meta itemprop="position" content="2">
-        <meta itemprop="name" content="Kinder">
-    </li>
-    <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-        <svg viewBox="0 0 100 100" class="breadcrumb-item-separator breadcrumb-item-separator--left">
-            <use xlink:href="#chevron-left"></use>
-        </svg>
-        <a class="breadcrumb-item-link" itemtype="https://schema.org/Thing" href="https://eu.puma.com/de/de/kinder/jungen" itemprop="item">
-            Jungen
-        </a>
-        <div class="breadcrumb-item-separator breadcrumb-item-separator--right">
-            <span class="breadcrumb-item-separator-dot"></span>
-        </div>
-        <meta itemprop="position" content="3">
-        <meta itemprop="name" content="Jungen">
-    </li>
-    <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-        <svg viewBox="0 0 100 100" class="breadcrumb-item-separator breadcrumb-item-separator--left">
-            <use xlink:href="#chevron-left"></use>
-        </svg>
-        <a class="breadcrumb-item-link" itemtype="https://schema.org/Thing" href="https://eu.puma.com/de/de/kinder/jungen/bekleidung" itemprop="item">
-            Bekleidung
-        </a>
-        <div class="breadcrumb-item-separator breadcrumb-item-separator--right">
-            <span class="breadcrumb-item-separator-dot"></span>
-        </div>
-        <meta itemprop="position" content="4">
-        <meta itemprop="name" content="Bekleidung">
-    </li>
-    <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-        Borussia Dortmund 23/24 Heimspieltrikot Kleinkinder
-        <meta itemprop="item" content="https://eu.puma.com/de/de/pd/borussia-dortmund-23%2F24-heimspieltrikot-kleinkinder/770610.html">
-        <meta itemprop="position" content="5">
-        <meta itemprop="name" content="Borussia Dortmund 23/24 Heimspieltrikot Kleinkinder">
-    </li>
-</ul> -->
