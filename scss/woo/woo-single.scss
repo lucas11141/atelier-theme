@@ -113,6 +113,10 @@ body.single-product {
 		// Badge
 		.product__badge {
 			margin-bottom: 20px;
+			padding: 0 16px 0px 13px;
+			height: 34px;
+			@include fluid-type(10px, 12px);
+			gap: 8px;
 			position: relative;
 			top: unset;
 			left: unset;

@@ -539,7 +539,6 @@ $breadcrumb-gap: 10px;
 
 // NEW Product Badges
 .product__badge {
-	// TODO Make two sizes for badges
 	padding: 0 11px 0px 9px;
 	width: fit-content;
 	height: 28px;
@@ -561,6 +560,7 @@ $breadcrumb-gap: 10px;
 	z-index: 1;
 	transition: all $ease_standard 300ms;
 
+	// FIXME - This code is not working
 	.icon {
 		transform: translateY(-1px);
 		margin: 0 !important;
@@ -569,17 +569,14 @@ $breadcrumb-gap: 10px;
 		height: 12px !important;
 	}
 
-	// @include bp-lower($mobile) {
-	// 	padding: 0 13px 0px 10px;
-	// 	height: 30px;
-	// 	border-radius: 6px;
-	// 	top: 8px;
-	// 	left: 8px;
+	@include bp-lower($mobile) {
+		top: 8px;
+		left: 8px;
 
-	// 	.icon {
-	// 		height: 14px !important;
-	// 	}
-	// }
+		.icon {
+			height: 10px !important;
+		}
+	}
 }
 
 // TODO: Remove this if not needed
