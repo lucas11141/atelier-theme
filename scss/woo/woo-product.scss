@@ -71,7 +71,7 @@ li.product,
 		.woocommerce-loop-product__title,
 		.product__title {
 			@include font-gooddog;
-			@include fluid-type(19px, 20px, true);
+			@include fluid-type(17px, 18px, true);
 			color: $main;
 		}
 
@@ -288,6 +288,16 @@ li.product,
 				padding-top: 5px;
 				padding-right: 0;
 			}
+		}
+	}
+}
+
+.--hide-badges {
+	li.product,
+	.products .product,
+	.product-list__item {
+		.product__badge.--hide-on-archive {
+			display: none;
 		}
 	}
 }
