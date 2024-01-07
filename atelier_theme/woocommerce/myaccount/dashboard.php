@@ -29,51 +29,10 @@ $allowed_html = array(
 );
 ?>
 
+<!-- TODO: Update this view -->
 <div class="wrapper">
 
-	<div class="account__content account__content--dashboard">
-		<div class="dashboard__links">
-			<a class="dashboard__item --size-big" href="<?= esc_url(wc_get_endpoint_url('orders')) ?>">
-				<h3>Bestellungen</h3>
-			</a>
-			<a class="dashboard__item --size-big" href="<?= esc_url(wc_get_endpoint_url('edit-address')) ?>">
-				<h3>Adressen</h3>
-			</a>
-			<a class="dashboard__item --size-big" href="<?= esc_url(wc_get_endpoint_url('edit-account')) ?>">
-				<h3>Konto-Details</h3>
-			</a>
-			<a class="dashboard__item --size-small" href="<?= esc_url(wc_get_endpoint_url('downloads')) ?>">
-				<h3>Downloads</h3>
-			</a>
-			<a class="dashboard__item --size-small --contact" href="<?= get_permalink(get_page_by_path('kontakt-shop')); ?>">
-				<h3>Kontakt</h3>
-			</a>
-			<a class="dashboard__item --size-small --logout" href="<?= esc_url(wc_logout_url()) ?>">
-				<h3>Abmelden</h3>
-			</a>
-		</div>
-	</div>
-
-	<!-- TODO: Use this buttons instead of the links above -->
-	<!-- <div class="header__buttons">
-                <nav class="account__navigation">
-				<?php foreach (wc_get_account_menu_items() as $endpoint => $label) : ?>
-                        <a class="button button--mini --color-transparent-white   <?php echo wc_get_account_menu_item_classes($endpoint); ?>" href="<?php echo esc_url(wc_get_account_endpoint_url($endpoint)); ?>">
-                            <span><?php echo esc_html($label); ?></span>
-                        </a>
-                    <?php endforeach; ?>
-                    <a class="account__logout button button--mini --color-red  " href="<?php echo wc_logout_url(); ?>">
-                        <span>Abmelden</span>
-                        <?php get_template_part('components/icon', '', array('icon' => 'logout', 'color' => 'white', 'size' => 'small', 'alt' => 'Aus Konto ausloggen')); ?>
-                    </a>
-                </nav>
-                <a class="account__logout button button--mini --color-red  " href="<?php echo wc_logout_url(); ?>">
-                    <span>Abmelden</span>
-                    <?php get_template_part('components/icon', '', array('icon' => 'logout', 'color' => 'white', 'size' => 'small', 'alt' => 'Aus Konto ausloggen')); ?>
-                </a>
-            </div> -->
-
-	<!-- <p>
+	<p>
 		<?php
 		printf(
 			/* translators: 1: user display name 2: logout url */
@@ -99,7 +58,23 @@ $allowed_html = array(
 			esc_url(wc_get_endpoint_url('edit-account'))
 		);
 		?>
-	</p> -->
+	</p>
+
+	<div class="account__content account__content--dashboard">
+		<div class="dashboard__links">
+			<?php foreach (wc_get_account_menu_items() as $endpoint => $label) : ?>
+				<a class="dashboard__item --size-big <?php echo wc_get_account_menu_item_classes($endpoint); ?>" href="<?php echo esc_url(wc_get_account_endpoint_url($endpoint)); ?>">
+					<h3><?php echo esc_html($label); ?></h3>
+				</a>
+			<?php endforeach; ?>
+			<a class="dashboard__item --size-small --contact" href="<?= get_permalink(get_page_by_path('kontakt-shop')); ?>">
+				<h3>Kontakt</h3>
+			</a>
+			<a class="dashboard__item --size-small --logout" href="<?= esc_url(wc_logout_url()) ?>">
+				<h3>Abmelden</h3>
+			</a>
+		</div>
+	</div>
 
 	<?php
 	/**
