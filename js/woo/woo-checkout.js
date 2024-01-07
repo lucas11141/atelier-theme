@@ -1,4 +1,3 @@
-// TODO: Fix the decimals for shipping
 import $ from 'jquery';
 
 export default function wooCheckout() {
@@ -29,25 +28,21 @@ export default function wooCheckout() {
 			const subtotal = parseFloat(subtotalEl.childNodes[0].nodeValue.replace(',', '.'));
 			const shipping = parseFloat(amount.replace(',', '.'));
 			let total;
+
 			if (isNaN(shipping)) {
 				total = subtotal;
 			} else {
 				total = subtotal + shipping;
 			}
-			total = `${total}`.substring(0, 5).replace('.', ',');
-			// always habe following format 0,00
-			if (total.length === 1) {
-				total = total + ',00';
-			}
-			if (total.length === 2) {
-				total = total + ',00';
-			}
-			if (total.length === 3) {
-				total = total + ',00';
-			}
-			if (total.length === 4) {
-				total = total + '0';
-			}
+
+			// Round the number to two decimal places
+			total = Math.round(total * 100) / 100;
+			// Use the toLocaleString method to handle the decimal separators
+			total = total.toLocaleString('de-DE', {
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			});
+
 			document.querySelector(
 				'.order-total bdi'
 			).innerHTML = `${total} <span class="woocommerce-Price-currencySymbol">€</span>`;
