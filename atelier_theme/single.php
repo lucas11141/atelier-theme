@@ -43,8 +43,8 @@
 
                 // Buchung
                 $state = get_field("state");
-                $isBookable = $state === 'active';
-                $isBookable = true; // TODO: Richtigen Wert einsetzen
+                $state === 'active';
+                $isBookable = true;
                 $booking_button_title = $isBookable ? translateString($postType) . ' ' . $booking['verb'] : 'Termine ansehen';
 
                 // Preise
