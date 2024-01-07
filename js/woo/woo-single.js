@@ -86,4 +86,24 @@ export default function wooSingle() {
 			mainSlider.slideTo(pswp.currIndex, 0, false);
 		});
 	});
+
+	/*------------------------------------*/
+	/* Variation swatches */
+	/*------------------------------------*/
+	let selectedName = $('.swatch.selected').parent().find('.swatch__tooltip').text();
+	$('.variations .label label').append('<span></span>');
+	updateVariationTooltip();
+
+	function updateVariationTooltip() {
+		setTimeout(function () {
+			$('.variations .label span').html('');
+			$('.swatch.selected').each(function () {
+				selectedName = $(this).parent().find('.swatch__tooltip').text();
+				$('.variations .label span').html(selectedName);
+			});
+		}, 50);
+	}
+
+	$('.reset_variations').on('click', updateVariationTooltip);
+	$('.swatch').on('click', updateVariationTooltip);
 }

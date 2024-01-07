@@ -1,5 +1,13 @@
 export default function wooArchive() {
-	console.log('Woo Archive');
+	// Truncate term description
+	const termDescription = $('.term-description');
+	if (termDescription && termDescription.text().length > 100) {
+		termDescription.addClass('--hide-text');
+		termDescription.append('<a class="show-more">Mehr lesen</a>');
+		termDescription.find('.show-more').on('click', () => {
+			termDescription.removeClass('--hide-text');
+		});
+	}
 
 	const filterSlideOver = document.querySelector('.filters-slideover');
 
@@ -33,15 +41,4 @@ export default function wooArchive() {
 		filterSlideOver.classList.remove('--open');
 		filterSlideOverBackdrop.classList.remove('--open');
 	});
-
-	// // switch tag type of all .wpc-term-item-content-wrapper from div to label
-	// const termItemContentWrappers = document.querySelectorAll('.wpc-term-item-content-wrapper');
-	// termItemContentWrappers.forEach((div) => {
-	// 	const classList = div.classList;
-	// 	const label = document.createElement('label');
-	// 	label.innerHTML = div.innerHTML;
-	// 	label.classList = classList;
-
-	// 	div.parentNode.replaceChild(label, div);
-	// });
 }
