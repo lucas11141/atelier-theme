@@ -11,3 +11,4 @@ js/blocks/date-overview.js
 atelier_theme/assets/css/tailwind.css
 atelier_theme/assets/js/date-overview.js
 /css
+*.js.map

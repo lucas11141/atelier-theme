@@ -7,6 +7,7 @@
 		"mode": "edit",
 		"renderTemplate": "date-overview.php"
 	},
+	"script": "block-script-date-overview",
 	"supports": {
 		"anchor": true
 	}

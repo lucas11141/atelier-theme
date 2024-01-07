@@ -15,14 +15,24 @@ function atelier_header_scripts() {
     }
 }
 
+// Register ACF Block scripts
+function atelier_block_scripts() {
+    wp_register_script('block-script-date-overview', get_template_directory_uri() . '/assets/js/date-overview.js', array(), '1.3.0-beta2', true);
+}
+
 //Remove Gutenberg Block Library CSS from loading on the frontend
 function wp_remove_wp_block_library_css() {
     wp_dequeue_style('wp-block-library');
     wp_dequeue_style('wp-block-library-theme');
     wp_dequeue_style('wc-block-style'); // Remove WooCommerce block CSS
 }
-add_action('wp_enqueue_scripts', 'wp_remove_wp_block_library_css', 100);
+
+/*------------------------------------*/
+/* Hooks */
+/*------------------------------------*/
 remove_filter('render_block', 'wp_render_layout_support_flag', 10, 2);
 
 add_action('init', 'atelier_header_scripts');
+add_action('init', 'atelier_block_scripts');
+add_action('wp_enqueue_scripts', 'wp_remove_wp_block_library_css', 100);
 add_action('wp_enqueue_scripts', 'atelier_styles');
