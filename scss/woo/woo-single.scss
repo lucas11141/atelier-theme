@@ -573,11 +573,6 @@ body.single-product {
 	}
 
 	@include bp-lower($tablet) {
-		// TODO: Move to global scope
-		.shop-hero-banner {
-			padding-bottom: 15px;
-		}
-
 		.site-main {
 			padding-top: 0 !important;
 		}
