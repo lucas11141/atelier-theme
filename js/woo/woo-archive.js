@@ -2,6 +2,9 @@ export default function wooArchive() {
 	console.log('Woo Archive');
 
 	const filterSlideOver = document.querySelector('.filters-slideover');
+
+	if (!filterSlideOver) return;
+
 	const filterSlideOverBackdrop = document.querySelector('.filters-slideover__backdrop');
 	const filterButtons = document.querySelectorAll('.filters-slideover__button');
 	const filterConfirmButton = document.querySelector('.filters-slideover__confirm .button');
