@@ -13,12 +13,14 @@ p {
 	font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
 }
+
 html {
 	max-width: 100vw;
 	overflow-x: hidden;
 	font-size: 100%;
 	font-weight: 500;
 }
+
 body {
 	margin: 0;
 	@include text;
@@ -35,6 +37,7 @@ body {
 	// 	overflow-x: hidden;
 	// }
 }
+
 #main {
 	padding: 85px 0 15px;
 
@@ -42,11 +45,13 @@ body {
 		padding-top: 0;
 	}
 }
+
 .hidden {
 	opacity: 0;
 	pointer-events: none;
 	cursor: inherit;
 }
+
 .paper-structure,
 .paper__structure {
 	mix-blend-mode: color-burn;
@@ -64,15 +69,18 @@ body {
 		mix-blend-mode: darken;
 	}
 }
+
 ::-moz-selection {
 	/* Code for Firefox */
 	color: white;
 	background: $accent;
 }
+
 ::selection {
 	color: white;
 	background: $accent;
 }
+
 @media only screen and (max-width: $desktop) {
 	#main {
 		padding: 56px 0 10px;
@@ -88,9 +96,11 @@ body {
 		display: flex !important;
 	}
 }
+
 ._vp-mobile {
 	display: none !important;
 }
+
 @media only screen and (max-width: $desktop) {
 	._vp-desktop {
 		display: none !important;
@@ -99,6 +109,7 @@ body {
 			display: none !important;
 		}
 	}
+
 	._vp-mobile {
 		display: block !important;
 
@@ -107,11 +118,13 @@ body {
 		}
 	}
 }
+
 .show--desktop {
 	@media only screen and (max-width: $tablet) {
 		display: none !important;
 	}
 }
+
 .show--mobile {
 	@media only screen and (min-width: $tablet) {
 		display: none !important;
@@ -137,13 +150,16 @@ Buttons Styling
 	flex-wrap: nowrap;
 	column-gap: 20px;
 	row-gap: 15px;
+
 	@media only screen and (max-width: $desktop) {
 		column-gap: 22px;
 	}
+
 	@media only screen and (max-width: 610px) {
 		flex-wrap: wrap;
 		width: 100%;
 		max-width: 100%;
+
 		a {
 			width: 100%;
 		}
@@ -162,8 +178,10 @@ Buttons Styling
 			margin-top: 0px;
 		}
 	}
+
 	@media only screen and (max-width: $desktop) {
 		align-items: stretch;
+
 		.button {
 			margin-top: 8px;
 			&:first-child {
@@ -198,19 +216,23 @@ Quote List
 .quote__list {
 	@include flex('column');
 	row-gap: 50px;
+
 	.list__item {
 		padding: 50px;
 		padding-top: 60px;
 		background-color: white;
 		border-radius: 25px;
 		@include box-shadow;
+
 		p {
 			padding-top: 20px;
 			@include fluid-type(16px, 17px);
 			line-height: 1.9;
+
 			&:first-child {
 				padding-top: 0;
 				position: relative;
+
 				&::after {
 					content: url(../img/website/testimonial_quote_top.svg);
 					height: 44px;
@@ -222,29 +244,36 @@ Quote List
 				}
 			}
 		}
+
 		.item__infos {
 			margin-top: 50px;
 			@include flex('row');
 			justify-content: flex-start;
 			align-items: center;
 			column-gap: 20px;
+
 			img {
 				height: 44px;
 				opacity: 0.15;
 			}
+
 			h5 {
 				padding: 0;
 			}
+
 			h6 {
 				padding-top: 6px;
 			}
 		}
 	}
+
 	@media only screen and (max-width: $desktop) {
 		row-gap: 20px;
+
 		.list__item {
 			padding: 30px;
 			padding-top: 40px;
+
 			.item__infos {
 				margin-top: 25px;
 			}
@@ -255,6 +284,7 @@ Quote List
 /*------------------------------------*\
 Abstände
 \*------------------------------------*/
+// TODO - Use css variables for responsive spacing
 .space-ultralarge,
 .space-extralarge,
 .space-large,
@@ -285,6 +315,7 @@ Abstände
 .space-extrasmall {
 	height: $space-extrasmall;
 }
+
 @media only screen and (max-width: $tablet) {
 	.space-negative {
 		height: 0.6 * $space-negative;
@@ -308,6 +339,7 @@ Abstände
 		height: 0.8 * $space-extrasmall;
 	}
 }
+
 @media only screen and (max-width: $desktop) {
 	.--mobile-space-ultralarge {
 		margin-bottom: $space-ultralarge !important;
@@ -348,9 +380,11 @@ Abstände
 	background: radial-gradient(closest-corner, rgba(#001e34, 0.9), rgba(#001e34, 0.95));
 	position: relative;
 	overflow: hidden;
+
 	*:not(h6) {
 		color: white;
 	}
+
 	&::before {
 		content: '';
 		background-image: url(../img/website/border_round_top_white.svg);
@@ -363,6 +397,7 @@ Abstände
 		top: -1px;
 		left: -2px;
 	}
+
 	&::after {
 		content: '';
 		background-image: url(../img/website/border_round_reverse_bottom_white.svg);
@@ -375,6 +410,7 @@ Abstände
 		bottom: -1px;
 		left: -2px;
 	}
+
 	.background__image {
 		width: 100%;
 		height: 100%;
@@ -384,6 +420,7 @@ Abstände
 		left: 0;
 		z-index: -1;
 	}
+
 	@media only screen and (max-width: $desktop) {
 		padding-top: calc(60px + 3.3vw);
 		padding-bottom: 100px;
@@ -402,6 +439,7 @@ Abstände
 	background-color: $lightgray;
 	border-radius: 50px;
 	border: solid 1px $linegray;
+
 	div {
 		height: 26px;
 		width: 26px;
@@ -409,6 +447,7 @@ Abstände
 		border-radius: 50%;
 		background-color: $main;
 		position: relative;
+
 		&::after {
 			content: '!';
 			@include fluid-type(16px, 18px);
@@ -417,26 +456,31 @@ Abstände
 			@include pos('center');
 		}
 	}
+
 	p {
 		@include fluid-type(14px, 15px);
 		font-weight: 700 !important;
 		color: $main !important;
 		margin: 0 !important;
 	}
+
 	& + h1,
 	& + h2,
 	& + h3 {
 		margin-top: 30px;
 	}
+
 	@media only screen and (max-width: $desktop) {
 		padding: 4px;
 		padding-right: 15px;
 		column-gap: 8px;
+
 		div {
 			height: 24px;
 			width: 24px;
 			min-width: 24px;
 		}
+
 		& + h1,
 		& + h2,
 		& + h3 {
@@ -448,11 +492,13 @@ Abstände
 /* Video */
 .video {
 	position: relative;
+
 	video {
 		width: 100%;
 		height: 100%;
 		pointer-events: none;
 	}
+
 	.videoControls {
 		position: absolute;
 		bottom: 25px;
@@ -465,6 +511,7 @@ Abstände
 	&:hover .videoControls {
 		opacity: 1;
 	}
+
 	.videoButton {
 		width: 45px;
 		height: 45px;
@@ -479,6 +526,7 @@ Abstände
 			height: 100%;
 		}
 	}
+
 	.videoButtonHidden {
 		display: none;
 	}
@@ -487,22 +535,27 @@ Abstände
 .links__list {
 	@include flex('column');
 	row-gap: 20px;
+
 	li {
 		list-style-type: none;
+
 		a {
 			@include flex('row');
 			column-gap: 15px;
 			align-items: center;
 			transition: all 300ms $ease_standard;
+
 			&:hover {
 				transform: translateX(-3px);
 			}
+
 			span {
 				@include fluid-type(14px, 15px);
 				font-weight: 600;
 				line-height: 1.2;
 				white-space: nowrap;
 			}
+
 			img {
 				height: 20px;
 			}
@@ -522,6 +575,7 @@ Abstände
 		border: solid $linegray 1px;
 		padding: 0 !important;
 		overflow: hidden;
+
 		&:last-child {
 			margin-bottom: 0;
 		}
@@ -617,9 +671,11 @@ Abstände
 				}
 			}
 		}
+
 		&.accordeo--first__opened .accordeon__content {
 			display: block;
 		}
+
 		&.accordeon__item--opened {
 			.accordeon__header {
 				.button__plusminus {
@@ -627,16 +683,20 @@ Abstände
 				}
 			}
 		}
+
 		&.accordeon--lieferumfang {
 			background-image: linear-gradient(to top right, darken($accent, 10%), $accent);
 			border: none;
+
 			* {
 				color: white;
 			}
+
 			.accordeon__header {
 				h5 {
 					color: white;
 				}
+
 				.button__plusminus {
 					&,
 					&::before {
@@ -644,17 +704,19 @@ Abstände
 					}
 				}
 			}
+
 			.accordeon__content {
 				padding-bottom: 220px;
 				position: relative;
+
 				h5 {
 					padding: 35px 0 15px;
 				}
+
 				li {
 					list-style-image: url(../img/elements/arrow_bulletpoint.svg);
 				}
-				.content__logotext {
-				}
+
 				.content__logotext {
 					padding: 30px 30px 25px;
 					width: 100%;
@@ -668,9 +730,11 @@ Abstände
 					left: 0;
 					bottom: 0;
 					border-radius: 0 0 15px 15px;
+
 					img {
 						width: 100px;
 					}
+
 					p {
 						font-family: $second-font;
 						font-size: 16px;
@@ -681,6 +745,7 @@ Abstände
 			}
 		}
 	}
+
 	@media only screen and (max-width: $mobile) {
 		gap: 12px;
 	}
@@ -692,15 +757,19 @@ Abstände
 	@include flex('column');
 	align-items: center;
 	position: relative;
+
 	* {
 		text-align: center;
 	}
+
 	h5 {
 		color: $accent;
 	}
+
 	p {
 		padding-top: 35px;
 	}
+
 	.background__number {
 		font-size: 600px;
 		font-weight: 700;
@@ -712,12 +781,14 @@ Abstände
 		transform: translate(-50%, -50%);
 		pointer-events: none !important;
 	}
+
 	@media only screen and (max-width: $desktop) {
 		margin: 240px auto;
 		.background__number {
 			font-size: 400px;
 		}
 	}
+
 	@media only screen and (max-width: $mobile) {
 		margin: 180px auto;
 		.background__number {
@@ -729,58 +800,68 @@ Abstände
 /*------------------------------------*\
 Clear
 \*------------------------------------*/
-.clear:before,
-.clear:after {
-	content: ' ';
-	display: table;
-}
-.clear:after {
-	clear: both;
-}
 .clear {
 	*zoom: 1;
+
+	&:before,
+	&:after {
+		content: ' ';
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
 }
+
 img {
 	max-width: 100%;
 	height: auto;
 	vertical-align: bottom;
 }
+
 .wp-block-image {
 	padding-top: 15px;
 }
+
 a,
 .a {
 	color: $main;
 	text-decoration: none;
-	&:hover {
-	}
+
 	&:focus,
 	&:hover,
 	&:active {
 		outline: 0;
 	}
 }
+
 input:focus {
 	outline: 0;
 }
+
 .text-left,
 .alignleft,
 .has-text-align-left {
 	text-align: left !important;
 }
+
 .text-center,
 .aligncenter,
 .has-text-align-center {
 	text-align: center !important;
 }
+
 .text-right,
 .alignright,
 .has-text-align-right {
 	text-align: right !important;
 }
+
 .blocksatz {
 	text-align: justify !important;
 }
+
 hr {
 	margin: 40px 0;
 	border-color: $lightgray;
@@ -793,67 +874,77 @@ hr {
 	padding: 0px;
 	display: block;
 }
+
 .inner,
 .wrapper,
 .wp-block-group {
 	@include inner;
 }
+
 .wrapper--big {
 	width: calc(100% - 50px);
 }
+
 .wp-block-group {
 	.inner.resetInner,
 	.wp-block-group {
 		width: 100%;
 	}
 }
+
 .gridrow {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	width: 100%;
 	margin: 0px auto;
+
 	.col + .col {
 		margin-left: 4.1%;
 	}
 }
+
 .wp-block-columns {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	width: 100%;
 	margin: 0px auto;
+
 	.wp-block-column + .wp-block-column {
 		margin-left: 4.1%;
 	}
 }
+
 /* reverseCol */
 .reverseCol {
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: reverse;
-	-ms-flex-direction: row-reverse;
 	flex-direction: row-reverse;
+
 	.col,
 	.wp-block-column {
 		margin-left: 4.1%;
 	}
+
 	.col + .col,
 	.wp-block-column + .wp-block-column {
 		margin-left: 0px;
 	}
 }
+
 /* align middle */
 .align-center {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
 }
+
 @media all and (max-width: $tablet) {
 	/* reverseCol */
 	.reverseCol .col,
 	.reverseCol .wp-block-column {
 		margin-left: 0px;
 	}
+
 	.reverseCol .col + .col,
 	.reverseCol .wp-block-column + .wp-block-column {
 		margin-left: 0px;
@@ -867,6 +958,7 @@ hr {
 .cc-window {
 	-webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
 	.cc-message {
 		padding: 15px;
 		margin: 0px !important;
@@ -874,10 +966,12 @@ hr {
 		line-height: 160%;
 	}
 }
+
 .cc-highlight .cc-btn:first-child:focus,
 .cc-highlight .cc-btn:first-child:hover {
 	text-decoration: none;
 }
+
 .cc-compliance > .cc-btn {
 	display: flex;
 	align-items: center;
@@ -892,11 +986,13 @@ hr {
 	color: #fff;
 	text-shadow: none;
 }
+
 ::-webkit-selection {
 	background: $main;
 	color: #fff;
 	text-shadow: none;
 }
+
 ::-moz-selection {
 	background: $main;
 	color: #fff;
@@ -909,60 +1005,75 @@ hr {
 .alignnone {
 	margin: 5px 20px 20px 0;
 }
+
 .aligncenter,
 div.aligncenter {
 	display: block;
 	margin: 0px auto;
 }
+
 .alignright {
 	float: right;
 	margin: 5px 0 20px 20px;
 }
+
 .alignleft {
 	float: left;
 	margin: 5px 20px 20px 0;
 }
-a img.alignright {
-	float: right;
-	margin: 5px 0 20px 20px;
+
+a img {
+	&.alignright {
+		float: right;
+		margin: 5px 0 20px 20px;
+	}
+
+	&.alignnone {
+		// margin:5px 20px 20px 0;
+		margin: 0 0 35px;
+	}
+
+	&.alignleft {
+		float: left;
+		margin: 5px 20px 20px 0;
+	}
+
+	&.aligncenter {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
-a img.alignnone {
-	// margin:5px 20px 20px 0;
-	margin: 0 0 35px;
-}
-a img.alignleft {
-	float: left;
-	margin: 5px 20px 20px 0;
-}
-a img.aligncenter {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
+
 .wp-caption {
 	background: #fff;
 	border: 1px solid #f0f0f0;
 	max-width: 96%;
 	padding: 5px 3px 10px;
 	text-align: center;
+
+	img {
+		border: 0 none;
+		height: auto;
+		margin: 0;
+		max-width: 98.5%;
+		padding: 0;
+		width: auto;
+	}
 }
+
 .wp-caption.alignnone {
 	margin: 5px 20px 20px 0;
 }
+
 .wp-caption.alignleft {
 	margin: 5px 20px 20px 0;
 }
+
 .wp-caption.alignright {
 	margin: 5px 0 20px 20px;
 }
-.wp-caption img {
-	border: 0 none;
-	height: auto;
-	margin: 0;
-	max-width: 98.5%;
-	padding: 0;
-	width: auto;
-}
+
 .wp-caption .wp-caption-text,
 .gallery-caption {
 	font-size: 11px;
@@ -981,45 +1092,56 @@ a img.aligncenter {
 		box-shadow: none !important;
 		text-shadow: none !important;
 	}
+
 	a,
 	a:visited {
 		text-decoration: underline;
 	}
+
 	a[href]:after {
 		content: ' (' attr(href) ')';
 	}
+
 	abbr[title]:after {
 		content: ' (' attr(title) ')';
 	}
+
 	.ir a:after,
 	a[href^='javascript:']:after,
 	a[href^='#']:after {
 		content: '';
 	}
+
 	pre,
 	blockquote {
 		border: 1px solid #999;
 		page-break-inside: avoid;
 	}
+
 	thead {
 		display: table-header-group;
 	}
+
 	tr,
 	img {
 		page-break-inside: avoid;
 	}
+
 	img {
 		max-width: 100% !important;
 	}
+
 	@page {
 		margin: 0.5cm;
 	}
+
 	p,
 	h2,
 	h3 {
 		orphans: 3;
 		widows: 3;
 	}
+
 	h2,
 	h3 {
 		page-break-after: avoid;
@@ -1172,8 +1294,6 @@ a img.aligncenter {
 
 	span {
 		padding: 7px 10px;
-		// width: fit-content;
-		// max-width: 300px;
 		width: 300px;
 		background-color: $main;
 		color: white;
@@ -1194,7 +1314,6 @@ a img.aligncenter {
 		color: $main;
 		border-radius: 8px;
 		transition: $ease_standard 200ms all;
-
 		border-radius: 20px;
 		line-height: 1.45;
 		font-weight: 700;
@@ -1205,6 +1324,7 @@ a img.aligncenter {
 		&:has(span) {
 			cursor: auto;
 		}
+
 		&::after {
 			content: '';
 			width: 0;
@@ -1218,14 +1338,15 @@ a img.aligncenter {
 			transform: translateX(-50%);
 		}
 	}
+
 	&:hover {
 		span {
 			opacity: 1;
 			pointer-events: all;
+
 			&::before {
 				content: '';
 				width: calc(100% + 4px);
-				// height: calc(100% + 12px);
 				position: absolute;
 				top: 0;
 				left: 50%;
@@ -1236,9 +1357,11 @@ a img.aligncenter {
 			}
 		}
 	}
+
 	&.--visible {
 		display: inline-flex;
 	}
+
 	&--delayed {
 		&:hover {
 			span {
@@ -1271,12 +1394,15 @@ a img.aligncenter {
 	h2 {
 		padding-top: 80px;
 	}
+
 	h3 {
 		padding-top: 50px;
 	}
+
 	h4 {
 		padding-top: 30px;
 	}
+
 	h1,
 	h2,
 	h3,
@@ -1295,18 +1421,22 @@ a img.aligncenter {
 	@include flex('center');
 	background-color: $lightgray;
 	border: solid 1px $linegray;
+
 	&__content {
 		width: $wrapper-width;
 		max-width: 600px;
 		@include flex('column');
 		align-items: center;
+
 		* {
 			text-align: center;
 		}
+
 		p a {
 			color: $accent;
 			font-weight: 600;
 		}
+
 		.button {
 			@include button;
 			@extend .--color-main;
@@ -1319,10 +1449,6 @@ a img.aligncenter {
 .background__number {
 	pointer-events: none;
 }
-
-// iframe[title="reCAPTCHA"] {
-// 	display: none !important;
-// }
 
 .grecaptcha-badge {
 	display: none !important;

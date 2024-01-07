@@ -25,7 +25,6 @@ $darkgray: #b2b2b2;
 $lightgray: #fcfcfc;
 $lightgray--darken: darken($lightgray, 5%);
 $gray: #f7f7f7;
-// $linegray: #E3E3E3;
 $linegray: #e8eaeb;
 $inputgray: $linegray;
 $backgroundgray: #fafafa;
@@ -93,7 +92,7 @@ $ease_standard: cubic-bezier(0.5, 0, 0.5, 1);
 
 $page-padding-bottom: 150px;
 
-//Fluid Type Breakpoints
+// Fluid Type Breakpoints
 $ft-min-vp: $tablet;
 $ft-max-vp: $desktop;
 

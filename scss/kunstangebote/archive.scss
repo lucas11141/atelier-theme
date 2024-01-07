@@ -459,16 +459,6 @@
 				padding-bottom: 20px;
 			}
 		}
-
-		// @media only screen and (max-width: 450px) {
-		// 	.filter__button {
-		// 		width: 100%;
-		// 		&:first-child {
-		// 			margin-right: 0;
-		// 			margin-bottom: 10px;
-		// 		}
-		// 	}
-		// }
 	}
 
 	.product-list {
@@ -494,7 +484,6 @@
 		}
 
 		.product__image {
-			// height: 330px;
 			width: 330px;
 			min-width: 330px;
 			object-fit: cover;

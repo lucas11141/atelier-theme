@@ -20,10 +20,6 @@ body.post-type-archive-product {
 		}
 	}
 
-	// .woocommerce-info {
-	// 	margin-top: 40px;
-	// }
-
 	// Hero Banner
 	.shop-hero-banner--archive {
 		padding-bottom: 50px;
@@ -136,20 +132,6 @@ body.post-type-archive-product {
 
 				.category__header__thumbnail {
 					display: none;
-					// min-width: unset;
-					// min-height: 60vw;
-					// height: 220px;
-					// width: 100%;
-					// position: relative;
-					// img {
-					//     height: 100%;
-					//     width: 100%;
-					//     object-fit: cover;
-					//     position: absolute;
-					//     left: 0;
-					//     top: 0;
-					//     transform: none;
-					// }
 				}
 
 				.category__header__content {
@@ -400,7 +382,6 @@ body.post-type-archive-product {
 			bottom: 0;
 			background: rgba(0, 0, 0, 0.5);
 			z-index: 400;
-			// cursor: e-resize;
 			cursor: pointer;
 			transition: $transition;
 
@@ -529,9 +510,6 @@ body.post-type-archive-product {
 			&:has(.wpc-filters-ul-list li .wpc-help-tip) {
 				display: none;
 			}
-			// &:has(.wpc-filters-ul-list li:first-child.wpc-label-item) {
-			// 	display: none;
-			// }
 		}
 
 		// Admin only button

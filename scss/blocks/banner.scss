@@ -1,7 +1,7 @@
 .shop-product-banner {
-	// max-width: 1300px;
 	@include flex('row');
 	justify-content: space-between;
+
 	&__item {
 		width: calc((100% - (3 * 20px)) / 4);
 		aspect-ratio: 3 / 4;
@@ -9,12 +9,14 @@
 		@include dropshadow;
 		border-radius: 25px;
 		position: relative;
+
 		.item__image {
 			height: 100%;
 			width: 100%;
 			border-radius: 25px;
 			object-fit: cover;
 		}
+
 		.item__info {
 			width: 100%;
 			background-color: $main;
@@ -26,27 +28,33 @@
 			max-height: 0px;
 			overflow: hidden;
 			transition: $transition;
+
 			.info__content {
 				padding: 22px 25px;
 				@include flex('column');
+
 				* {
 					color: white;
 				}
+
 				.product__category {
 					@include fluid-type(11px, 12px);
 					font-weight: 700;
 					color: $accent;
 					text-transform: uppercase;
 				}
+
 				.woocommerce-loop-product__title,
 				.product__title {
 					@include fluid-type(20px, 22px);
 					@include font-gooddog;
 				}
+
 				.product__price {
 					@include fluid-type(15px, 16px);
 					@include font-gooddog;
 				}
+
 				.price-button {
 					margin-top: 15px;
 					width: 100%;
@@ -71,7 +79,9 @@
 				transform: scale(1.1);
 			}
 		}
+
 		animation: breathing 10s $ease_standard infinite alternate;
+
 		&:nth-of-type(1) {
 			animation-delay: 5s;
 		}
@@ -88,6 +98,7 @@
 		// Hover
 		&:hover {
 			animation-play-state: paused;
+
 			.item__info {
 				max-height: 136px;
 				border-top: solid 3px $accent;
@@ -95,110 +106,3 @@
 		}
 	}
 }
-
-// .banner {
-//     margin: auto;
-//     //height: 520px;
-//     width: $wrapper-width;
-//     padding-top: 37%;
-//     max-width: 1400px;
-//     position: relative;
-//     .banner__image__container {
-//         height: 100%;
-//         width: 100%;
-//         @include flex('row');
-//         column-gap: 3%;
-//         position: absolute;
-//         left: 0;
-//         top: 0;
-//         img {
-//             border-radius: 25px;
-//             max-width: calc(25% - 2.25%);
-//             animation: breathing 10s $ease_standard infinite alternate;
-//             &:nth-of-type(1),
-//             &:nth-of-type(3) {
-//                 margin-top: 0;
-//                 margin-bottom: auto;
-//             }
-//             &:nth-of-type(2),
-//             &:nth-of-type(4) {
-//                 margin-top: auto;
-//                 margin-bottom: 0;
-//             }
-//             &:nth-of-type(1) {
-//                 animation-delay: 5s;
-//             }
-//             &:nth-of-type(2) {
-//                 animation-delay: 0s;
-//             }
-//             &:nth-of-type(3) {
-//                 animation-delay: 7s;
-//             }
-//             &:nth-of-type(4) {
-//                 animation-delay: 3s;
-//             }
-//         }
-//         @keyframes breathing {
-//             0% {
-//                 transform: scale(1);
-//             }
-//             100% {
-//                 transform: scale(1.1);
-//             }
-//         }
-//     }
-//     @media only screen and (min-width: (1400px + 40px)) {
-//         padding-top: 533px;
-//     }
-//     @media only screen and (max-width: $tablet) {
-//         margin-top: -20px;
-//         margin-bottom: -60px;
-//         //padding-top: 120vw;
-//         padding-top: calc( #{$wrapper-width} * 1.12 );
-//         .banner__image__container {
-//             flex-direction: column;
-//             flex-wrap: wrap;
-//             //column-gap: 5vw;
-//             //row-gap: 5vw;
-//             column-gap: calc( #{$wrapper-width} * 0.05 );
-//             row-gap: calc( #{$wrapper-width} * 0.05  );
-//             img {
-//                 margin: 0;
-//                 //min-height: 57.5vw;
-//                 min-height: unset;
-//                 max-height: calc( ( ( #{$wrapper-width} * 1.12 ) / 2 ) - ( #{$wrapper-width} * 0.025 ) );
-//                 max-width: unset;
-//                 //width: calc(50% - 2.5vw);
-//                 width: calc( ( #{$wrapper-width} / 2 ) - ( #{$wrapper-width} * 0.025 ) );
-//                 border-radius: 5vw;
-//                 &:nth-of-type(1),
-//                 &:nth-of-type(2),
-//                 &:nth-of-type(3),
-//                 &:nth-of-type(4) {
-//                     margin: 0;
-//                 }
-//                 &:nth-of-type(3),
-//                 &:nth-of-type(4) {
-//                     transform: translateY(-25px);
-//                     animation: breathing-shifted 10s $ease_standard infinite alternate;
-//                 }
-//             }
-//             @keyframes breathing {
-//                 0% {
-//                     transform: scale(1);
-//                 }
-//                 100% {
-//                     transform: scale(1.05);
-//                 }
-//             }
-//             @keyframes breathing-shifted {
-//                 0% {
-//                     transform: scale(1) translateY(-25px);
-//                 }
-//                 100% {
-//                     transform: scale(1.05) translateY(-25px);
-//                 }
-//             }
-//         }
-//     }
-// }

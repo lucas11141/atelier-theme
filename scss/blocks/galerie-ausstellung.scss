@@ -8,6 +8,7 @@
 	max-width: $wrapper-width;
 	height: 8px;
 	pointer-events: all !important;
+
 	.swiper-pagination-bullet {
 		margin: 0 !important;
 		height: 8px;
@@ -18,15 +19,11 @@
 		color: transparent;
 		border: none;
 		transition: all ease-in-out 200ms;
+
 		&.swiper-pagination-bullet-active {
 			width: 60px;
 			background-color: $accent;
 		}
-		// &:hover:not(.slick-active) {
-		//     button {
-		//         transform: scaleX(1.1);
-		//     }
-		// }
 	}
 }
 
@@ -40,9 +37,11 @@
 			transform: translateX(-50%);
 			z-index: 2;
 			pointer-events: none;
+
 			.galerie__title {
 				margin-top: 50px;
 				pointer-events: all;
+
 				p {
 					.count {
 						padding: 3px 7px;
@@ -50,6 +49,7 @@
 						border-radius: 8px;
 						font-weight: 800;
 					}
+
 					.text {
 						font-weight: 800;
 						text-transform: uppercase;
@@ -58,6 +58,7 @@
 					}
 				}
 			}
+
 			.swiper__buttons {
 				@include flex('row');
 				justify-content: flex-start;
@@ -67,48 +68,55 @@
 				pointer-events: all;
 			}
 		}
+
 		.galerie__pagination {
 			margin-top: 40px;
+
 			.swiper-pagination-bullets-dynamic {
 				column-gap: 0;
 				bottom: 0 !important;
 				left: 0 !important;
 				transform: none !important;
+
 				.swiper-pagination-bullet {
 					margin: 0 2px !important;
 					height: 4px;
 					width: 4px;
 					min-width: 4px;
 					transform: none;
+
 					&.swiper-pagination-bullet-active-prev-prev,
 					&.swiper-pagination-bullet-active-next-next {
 						margin: 0 4px !important;
 						height: 6px;
 						min-width: 15px;
 					}
+
 					&.swiper-pagination-bullet-active-prev,
 					&.swiper-pagination-bullet-active-next {
 						margin: 0 4px !important;
 						height: 8px;
 						min-width: 25px;
 					}
+
 					&.swiper-pagination-bullet-active-main {
 						margin: 0 4px !important;
 						height: 8px;
 						min-width: 25px;
-						&.swiper-pagination-bullet-active {
-						}
 					}
 				}
 			}
 		}
+
 		.swiper-wrapper {
 			padding-left: calc((100vw - #{$screen}) / 2);
 			height: 600px;
 			align-items: flex-end;
+
 			.swiper-slide:last-child {
 				margin-right: 100vw;
 			}
+
 			.swiper-slide {
 				padding-right: 40px;
 				height: 210px;
@@ -117,6 +125,7 @@
 				position: relative;
 				cursor: pointer;
 				transition: all 300ms $ease_standard;
+
 				.image__img {
 					height: 100%;
 					width: 100%;
@@ -125,28 +134,35 @@
 					border: none;
 					object-fit: cover;
 				}
+
 				.gallery__meta {
 					opacity: 0;
 				}
+
 				&:hover .gallery__meta {
 					.icon--one,
 					.icon--two {
 						opacity: 1;
 					}
+
 					.icon--one {
 						top: 9px;
 						right: 9px;
 					}
+
 					.icon--two {
 						bottom: 9px;
 						left: 9px;
 					}
 				}
+
 				&.swiper-slide-active {
 					opacity: 1;
+
 					.image__img {
 						box-shadow: $shadow_stardard;
 					}
+
 					.gallery__meta {
 						opacity: 1;
 						pointer-events: none;
@@ -155,44 +171,50 @@
 			}
 		}
 	}
+
 	&.right {
 		.swiper {
 			.galerie__texts {
 				padding-left: 0;
-				// padding-right: calc( ((100vw - #{$screen}) / 2) + 380px);
 				padding-right: 660px;
 			}
+
 			.swiper-wrapper {
 				padding-left: calc(((100vw - #{$screen}) / 2) + 380px);
 			}
+
 			.swiper-pagination {
 				justify-content: flex-end;
 			}
 		}
 	}
+
 	@media only screen and (max-width: ($screen + 30px)) {
 		.swiper {
 			.galerie__texts {
 				padding-left: calc(100vw - 330px);
 			}
+
 			.swiper-wrapper {
 				padding-left: $wrapper-gap;
 			}
 		}
+
 		&.right {
 			.swiper {
 				.galerie__texts {
 					padding-right: calc(100vw - 330px);
 				}
+
 				.swiper-wrapper {
 					padding-left: calc(
 						(#{$wrapper-gap} * 2) + ((100vw - #{$wrapper-gap}) - (100vw - 330px))
 					);
-					// padding-left: calc( (#{$wrapper-gap} * 3) - 330px );
 				}
 			}
 		}
 	}
+
 	@media only screen and (max-width: $desktop) {
 		.swiper {
 			.galerie__texts {
@@ -202,6 +224,7 @@
 				left: unset;
 				transform: none;
 				position: relative;
+
 				.swiper__buttons {
 					column-gap: 6px;
 					position: absolute;
@@ -209,24 +232,29 @@
 					bottom: -8px;
 				}
 			}
+
 			.swiper-wrapper {
 				padding-left: $wrapper-gap;
 				height: calc(100vw - (2 * 15px) - 20px - 20px);
 				max-height: 600px;
+
 				.swiper-slide {
 					padding-right: 20px;
 				}
 			}
 		}
+
 		&.right {
 			.swiper {
 				.galerie__texts {
 					padding-right: 0;
 				}
+
 				.swiper-wrapper {
 					padding-left: 15px;
 					height: calc(100vw - (2 * 15px) - 20px - 20px);
 				}
+
 				.swiper-pagination {
 					justify-content: flex-start;
 				}

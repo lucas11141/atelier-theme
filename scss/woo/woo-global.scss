@@ -23,7 +23,7 @@
 	}
 }
 
-//SHOP
+// Shop
 body:has(#gtm-values[data-website-mode='shop']) {
 	h2 + h5 {
 		padding-top: 8px;
@@ -239,7 +239,6 @@ $breadcrumb-gap: 10px;
 			@include fluid-type(11px, 12px);
 			color: white;
 			font-weight: 700;
-			// text-transform: uppercase;
 		}
 
 		a {
@@ -613,140 +612,15 @@ $breadcrumb-gap: 10px;
 }
 
 body.woocommerce {
-	// .sidebar {
-	// 	display: none;
-	// }
-
 	.woocommerce form,
 	.woocommerce fieldset,
 	.woocommerce-billing-fields__field-wrapper,
 	.woocommerce-shipping-fields__field-wrapper,
 	.woocommerce-additional-fields__field-wrapper,
 	.woocommerce-address-fields__field-wrapper {
-		// @include flex('row');
-		// flex-wrap: wrap;
-		// gap: 12px var(--gap);
-
-		// .form-row {
-		// 	label {
-		// 		@include label;
-		// 	}
-
-		// 	span em {
-		// 		display: inline-block;
-		// 		padding-top: 12px;
-		// 		@include fluid-type(12px, 16px);
-		// 		letter-spacing: normal;
-		// 	}
-
-		// 	&.woocommerce-invalid {
-		// 		input {
-		// 			outline: 1px solid $main;
-		// 		}
-		// 	}
-
-		// 	& + fieldset {
-		// 		margin-top: 20px;
-		// 	}
-		// }
-
-		// .form-row,
-		// .woocommerce-form-row {
-		// 	padding: 0 !important;
-		// 	flex: 5;
-		// 	min-width: calc(50% - $gap);
-
-		// 	&-wide,
-		// 	&--wide {
-		// 		flex: 10;
-		// 		min-width: 100%;
-		// 	}
-
-		// 	&#billing_postcode_field,
-		// 	&#shipping_postcode_field {
-		// 		flex: 3;
-		// 		min-width: calc(30% - $gap);
-		// 	}
-
-		// 	&#billing_city_field,
-		// 	&#shipping_city_field {
-		// 		flex: 7;
-		// 		min-width: calc(70% - $gap);
-		// 	}
-
-		// 	// &#billing_first_name_field,
-		// 	// &#billing_last_name_field,
-		// 	// &#billing_company_field,
-		// 	// &#billing_country_field,
-		// 	// &#shipping_first_name_field,
-		// 	// &#shipping_last_name_field,
-		// 	// &#shipping_company_field,
-		// 	// &#shipping_country_field {
-		// 	// 	flex: 5;
-		// 	// 	min-width: calc(50% - $gap);
-		// 	// }
-		// }
-
-		// .clear {
-		// 	display: none !important;
-		// }
-
-		// input:not([type='checkbox'], [type='radio']),
-		// textarea {
-		// 	@include input;
-		// }
-
-		// button {
-		// 	@include button;
-		// }
-
-		// select {
-		// 	@include select;
-		// }
-
 		.woocommerce-form__label-for-checkbox {
 			@include checkbox;
-
-			// span {
-			// 	@include text;
-			// 	@extend .--size-small;
-			// }
 		}
-
-		/*------------------------------------*/
-		/* Responsive */
-		/*------------------------------------*/
-		// @include bp-lower($tablet) {
-		// 	.form-row,
-		// 	.woocommerce-form-row {
-		// 		min-width: 100%;
-		// 		width: 100%;
-
-		// 		&#billing_first_name_field,
-		// 		&#billing_last_name_field,
-		// 		&#billing_company_field,
-		// 		&#billing_country_field,
-		// 		&#shipping_first_name_field,
-		// 		&#shipping_last_name_field,
-		// 		&#shipping_company_field,
-		// 		&#shipping_country_field {
-		// 			width: 100%;
-		// 			flex: auto;
-		// 		}
-
-		// 		&#billing_postcode_field,
-		// 		&#shipping_postcode_field {
-		// 			width: 100%;
-		// 			flex: auto;
-		// 		}
-
-		// 		&#billing_city_field,
-		// 		&#shipping_city_field {
-		// 			width: 100%;
-		// 			flex: auto;
-		// 		}
-		// 	}
-		// }
 	}
 }
 

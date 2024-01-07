@@ -1,16 +1,19 @@
 .angebote__list {
 	@include flex('column');
 	row-gap: 100px;
+
 	.list__item {
 		width: 100%;
 		@include flex('row');
 		justify-content: flex-end;
 		align-items: center;
 		column-gap: 75px;
+
 		.item__image {
 			width: 400px;
 			min-width: 400px;
 			position: relative;
+
 			.image {
 				height: calc(100% - 4px);
 				width: calc(100% - 4px);
@@ -21,15 +24,19 @@
 				z-index: -1;
 			}
 		}
+
 		.item__content {
 			min-width: 360px;
 			position: relative;
+
 			h2 {
 				padding: 0;
 			}
+
 			.two-buttons-vertical {
 				align-items: flex-start;
 			}
+
 			.background__number {
 				padding: 0;
 				font-size: 500px;
@@ -43,34 +50,40 @@
 				pointer-events: none;
 			}
 		}
+
 		&.item--2,
 		&.item--4 {
 			flex-direction: row-reverse;
 		}
+
 		&.item--1 {
 			.background__number,
 			h6 {
 				color: $course-kinder;
 			}
 		}
+
 		&.item--2 {
 			.background__number,
 			h6 {
 				color: $workshop-erwachsene;
 			}
 		}
+
 		&.item--3 {
 			.background__number,
 			h6 {
 				color: $accent;
 			}
 		}
+
 		&.item--4 {
 			.background__number,
 			h6 {
 				color: $kunstevent;
 			}
 		}
+
 		&.item--5 {
 			.background__number,
 			h6 {
@@ -78,23 +91,28 @@
 			}
 		}
 	}
-	@media only screen and (max-width: $screen) {
-	}
+
 	@media only screen and (max-width: $desktop) {
 		row-gap: 100px;
+
 		.list__item {
 			column-gap: 50px;
 		}
 	}
+
 	@media only screen and (max-width: $tablet) {
 		row-gap: 40px;
+
 		.list__item {
 			column-gap: 40px;
+
 			.item__image {
 				min-width: 350px;
 			}
+
 			.item__content {
 				min-width: 340px;
+
 				.background__number {
 					font-size: 350px;
 					right: -20px;
@@ -102,26 +120,30 @@
 			}
 		}
 	}
+
 	@media only screen and (max-width: $mobile) {
 		row-gap: 80px;
+
 		.list__item {
 			height: unset;
 			flex-direction: column;
 			row-gap: 40px;
+
 			.item__image {
 				min-width: unset;
 				width: 100%;
 				max-width: 240px;
-				// margin-left: auto;
-				// transform: translate(100px, 100px) rotate(0deg);
+
 				.image__mask {
 					width: 100%;
 				}
 			}
+
 			.item__content {
 				min-width: unset;
 				width: 100%;
 			}
+
 			&.item--2,
 			&.item--4 {
 				flex-direction: column;

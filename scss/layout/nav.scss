@@ -4,9 +4,11 @@
 .open-nav {
 	display: none;
 }
+
 .nav {
 	@include flex('row');
 	align-items: center;
+
 	ul {
 		list-style-type: none;
 		margin: 0;
@@ -88,6 +90,7 @@
 					display: none;
 				}
 			}
+
 			.sub-menu {
 				width: 100vw;
 				padding: calc(var(--header-bar-height) + 80px) calc((100vw - #{$screen}) / 2) 80px;
@@ -130,32 +133,40 @@
 				li::before {
 					pointer-events: all;
 				}
+
 				li {
 					@include flex-item-width(3, $gap);
 					padding: 0;
+
 					* {
 						white-space: normal;
 						color: white;
 					}
+
 					&::before,
 					&::after {
 						content: unset;
 					}
+
 					a {
 						padding: 0 0 18px;
 						font-size: 20px;
 						position: relative;
+
 						&:first-child {
 							@include font-gooddog;
 							@include fluid-type(22px, 24px);
 						}
+
 						.menu-item-description {
 							font-size: 14px;
 							text-transform: none;
 						}
+
 						&::before {
 							content: unset;
 						}
+
 						&::after {
 							content: '';
 							display: block;
@@ -166,16 +177,18 @@
 							left: 0;
 							bottom: 0;
 						}
+
 						&:hover {
 							opacity: 60%;
 						}
 					}
+
 					.sub-menu {
 						transform: translateY(0);
 						opacity: 100%;
-						// pointer-events: all !important;
 						border-bottom: none;
 					}
+
 					.sub-menu {
 						margin-top: 35px;
 						padding: 0;
@@ -186,42 +199,50 @@
 						background-color: transparent;
 						background-image: none;
 						position: static;
+
 						&::before {
 							content: unset;
 						}
+
 						&::after {
 							content: unset;
 						}
+
 						li {
 							width: 100%;
 							max-width: unset;
 						}
+
 						li {
 							a {
-								// width: min-content;
 								padding: 6px 0;
 								font-family: $main-font;
 								font-size: 16px;
 								font-weight: 600;
 								text-transform: none;
 								line-height: 1.2em;
+
 								&::before {
 									display: none;
 									bottom: -7px;
 									left: 0;
 									transform: none;
 								}
+
 								&::after {
 									content: unset;
 								}
+
 								&:hover {
 									&::before {
 										width: 100%;
 									}
+
 									opacity: 60%;
 								}
 							}
 						}
+
 						.menu-item-description {
 							display: none;
 						}
@@ -229,7 +250,6 @@
 				}
 			}
 
-			//
 			&:hover a,
 			a:hover,
 			&.current-menu-item > a,
@@ -305,16 +325,19 @@
 	padding: 8px 12px 8px 15px;
 	border-radius: 8px;
 	background-color: $lightgray;
+
 	span {
 		font-size: 12px;
 		font-weight: 700;
 		line-height: 165%;
 		text-transform: none;
 	}
+
 	img {
 		height: 18px;
 	}
 }
+
 .nav__cart__link {
 	display: block;
 	height: 25px;
@@ -347,6 +370,7 @@
 			transition: $transition;
 		}
 	}
+
 	.nav__cart__icon {
 		height: 18px;
 		position: absolute;
@@ -354,21 +378,26 @@
 		top: 50%;
 		transform: translate(-50%, -50%);
 	}
+
 	& + ul {
 		margin-left: 10px;
 	}
+
 	&:hover {
 		transform: scale(1.1);
 	}
 }
+
 .header-bar.--color-white .nav__cart__link {
 	.nav__cart__quantity {
 		background-color: white;
+
 		span {
 			color: $main;
 		}
 	}
 }
+
 .nav,
 .dropdown__nav {
 	ul {
@@ -428,12 +457,15 @@
 	&.--underline-blue > a::before {
 		background-color: $course-kinder !important;
 	}
+
 	&.--underline-red > a::before {
 		background-color: $workshop-erwachsene !important;
 	}
+
 	&.--underline-pink > a::before {
 		background-color: $kunstevent !important;
 	}
+
 	&.--underline-yellow > a::before {
 		background-color: $ferienprogramm !important;
 	}

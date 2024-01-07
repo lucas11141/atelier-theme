@@ -7,6 +7,7 @@
 		h6 {
 			color: var(--product-color);
 		}
+
 		.button.--color-accent {
 			background-color: var(--product-color);
 		}
@@ -49,6 +50,7 @@
 				}
 			}
 		}
+
 		@media only screen and (max-width: $desktop) {
 			padding-bottom: 310px;
 			margin-bottom: -330px;
@@ -61,6 +63,7 @@
 				}
 			}
 		}
+
 		@media only screen and (max-width: $tablet) {
 			.wrapper {
 				.button--back {
@@ -81,24 +84,30 @@
 		@include flex('row');
 		align-items: stretch;
 		column-gap: 60px;
+
 		.product__split__left {
 			width: 1px;
 			flex: auto;
 		}
+
 		.product__split__right {
 			min-width: 260px;
 			max-width: 260px;
 		}
+
 		@media only screen and (max-width: $screen) {
 			column-gap: 20px;
 		}
+
 		@media only screen and (max-width: $desktop) {
 			margin-bottom: 60px;
 			flex-direction: column-reverse;
 			row-gap: 50px;
+
 			.product__split__left {
 				width: 100%;
 			}
+
 			.product__split__right {
 				min-width: unset;
 				max-width: unset;
@@ -168,11 +177,12 @@
 				}
 			}
 		}
+
 		@media only screen and (max-width: $desktop) {
 			margin-top: 50px;
 		}
+
 		@media only screen and (max-width: $tablet) {
-			// padding: 0 20px;
 			.explanation__list {
 				row-gap: 15px;
 				.list__item {
@@ -245,13 +255,16 @@
 			background-color: white;
 			border-radius: 15px;
 			@include box-shadow;
+
 			div {
 				@include flex('column');
 				row-gap: 3px;
+
 				h6 {
 					padding: 0;
 					text-align: left;
 				}
+
 				span {
 					display: inline-block;
 					@include fluid-type(16px, 18px);
@@ -259,6 +272,7 @@
 					text-align: left;
 				}
 			}
+
 			img {
 				opacity: 25%;
 				transform: translateY(-2px);
@@ -290,7 +304,6 @@
 	}
 
 	.product__info__sticky {
-		// margin-top: 100px;
 		width: 100%;
 		@include flex('column');
 		align-items: stretch;
@@ -298,15 +311,18 @@
 		position: sticky;
 		position: -webkit-sticky;
 		top: 130px;
+
 		.price,
 		.days,
 		.button {
 			box-shadow: 0px 1px 6px rgba(black, 0.1);
 		}
+
 		.price,
 		.days {
 			border-radius: 15px;
 		}
+
 		.price {
 			padding: 30px;
 			padding-top: 25px;
@@ -367,12 +383,14 @@
 				bottom: -5px;
 			}
 		}
+
 		.rest {
 			width: 100%;
 			@include flex('column');
 			align-items: stretch;
 			row-gap: 20px;
 		}
+
 		.days {
 			padding: 15px;
 			@include flex('column');
@@ -380,11 +398,12 @@
 			justify-content: center;
 			row-gap: 10px;
 			background-color: white;
+
 			.days__title {
 				font-weight: 800;
 				text-transform: uppercase;
-				//color: var(--product-color);
 			}
+
 			.days__list {
 				@include flex('row');
 				justify-content: center;
@@ -418,6 +437,7 @@
 				}
 			}
 		}
+
 		.button__pricelist {
 			margin-top: -10px;
 			background-color: white;
@@ -505,7 +525,6 @@
 			}
 		}
 
-		// @media only screen and (max-width: $mobile) {
 		@media only screen and (max-width: 460px) {
 			width: calc(100% + 20px);
 			translate: -10px -10px;
@@ -529,11 +548,6 @@
 
 			.rest {
 				display: none;
-				// width: 100%;
-
-				// .days {
-				// 	display: none;
-				// }
 			}
 		}
 	}
@@ -548,17 +562,21 @@
 		border-radius: 10px;
 		border: solid 2px transparent;
 		position: relative;
+
 		div {
 			min-height: 37px;
 			@include flex('column');
 			justify-content: center;
 			row-gap: 4px;
+
 			h5 {
 				padding: 0;
 			}
+
 			h6 {
 				padding: 0;
 			}
+
 			span {
 				height: 21px;
 				&:last-child {
@@ -566,30 +584,38 @@
 				}
 			}
 		}
+
 		span {
 			opacity: 0.6;
 		}
+
 		&:not(.--disabled):hover {
 			border-color: var(--product-color);
 		}
+
 		&.--selected {
 			background-color: $main;
 			border-color: transparent;
+
 			div {
 				h5 {
 					color: white;
 				}
+
 				h6 {
 					color: var(--accent-color);
 				}
 			}
+
 			span {
 				color: white;
 			}
+
 			&:hover {
 				border-color: transparent;
 			}
 		}
+
 		img {
 			width: 27px;
 			position: absolute;
@@ -598,16 +624,19 @@
 			transform: translateY(-50%);
 			opacity: 0;
 			pointer-events: none;
+
 			&.--visible {
 				opacity: 1;
 			}
 		}
+
 		&,
 		img,
 		span {
 			transition: 300ms $ease_standard;
 			transition-property: border-color, opacity;
 		}
+
 		&.--disabled {
 			cursor: unset;
 			pointer-events: none;
@@ -619,6 +648,7 @@
 		padding: calc(120px + 2.6vw) 0;
 		background-color: $main;
 		position: relative;
+
 		.border__top,
 		.border__bottom {
 			width: 100%;
@@ -629,28 +659,34 @@
 			bottom: -1px;
 			pointer-events: none;
 		}
+
 		.border__top {
 			top: -1px;
 		}
+
 		.border__bottom {
 			bottom: -1px;
 		}
+
 		.book__content {
 			@include flex('row');
 			justify-content: space-between;
 			align-items: center;
 			column-gap: 100px;
+
 			.book__info {
 				h2 {
 					padding: 0;
 					line-height: 1.3;
 					color: white;
+
 					img {
 						margin-right: 4px;
 						height: 22px;
 						vertical-align: baseline;
 					}
 				}
+
 				h4 {
 					color: var(--product-color);
 				}
@@ -660,11 +696,14 @@
 					color: white;
 				}
 			}
+
 			.arrow__right {
 				height: 110px;
 			}
+
 			.book__dates {
 				position: relative;
+
 				.headline {
 					padding: 0;
 					width: min-content;
@@ -676,6 +715,7 @@
 					top: -40px;
 					transform: translateX(-50%);
 				}
+
 				.info__badge {
 					position: absolute;
 					left: 50%;
@@ -686,25 +726,31 @@
 						white-space: nowrap;
 					}
 				}
+
 				.dates__list {
 					width: 360px;
 					min-width: 320px;
 					@include flex('column');
 					row-gap: 12px;
+
 					.date {
 						@extend .product__date;
+
 						&.--disabled {
 							opacity: 75%;
 						}
+
 						&:not(.--disabled):hover {
 							img {
 								opacity: 1;
 							}
+
 							span {
 								opacity: 0;
 							}
 						}
 					}
+
 					.no__dates__available {
 						@include flex('column');
 						justify-content: center;
@@ -724,32 +770,41 @@
 				}
 			}
 		}
+
 		@media only screen and (max-width: $screen) {
 			.book__content {
 				column-gap: 6vw;
 			}
 		}
+
 		@media only screen and (max-width: $desktop) {
 			margin-top: 2.6vw;
 		}
+
 		@media only screen and (max-width: $tablet) {
 			padding: calc(60px + 2.6vw) 0 calc(80px + 2.6vw);
+
 			.book__content {
 				flex-direction: column;
+
 				.book__info {
 					* {
 						text-align: center;
 						max-width: 500px;
 					}
 				}
+
 				.arrow__right {
 					transform: rotate(90deg);
 				}
+
 				.book__dates {
 					width: 100%;
+
 					.headline {
 						display: none;
 					}
+
 					.dates__list {
 						margin: auto;
 						min-width: unset;
