@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export default function wooArchive() {
 	// Truncate term description
 	const termDescription = $('.term-description');

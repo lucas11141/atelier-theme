@@ -6,6 +6,7 @@ import 'photoswipe/style.css';
 
 import { Navigation, Pagination } from 'swiper/bundle';
 
+import $ from 'jquery';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import Swiper from 'swiper';

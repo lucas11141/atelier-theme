@@ -18,6 +18,7 @@ import tabs from './scripts/tabs';
 import websiteMode from './scripts/websiteMode';
 import wooArchive from './woo/woo-archive';
 import wooCheckout from './woo/woo-checkout';
+import wooGlobal from './woo/woo-global';
 import wooOrder from './woo/woo-order';
 import wooSingle from './woo/woo-single';
 
