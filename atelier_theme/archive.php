@@ -138,30 +138,38 @@
         <?php endif; ?>
 
         <!-- Ferienprogramm -->
-        <!-- <?php if ($postType == "holiday_workshop") : ?>
+        <?php if ($postType == "holiday_workshop" && get_field('rabattaktion_einblenden', $options)) :
+            $rabattaktion_subline = get_field('rabattaktion_subline', $options);
+            $rabattaktion_uberschrift = get_field('rabattaktion_uberschrift', $options);
+            $rabattaktion_stufen = get_field('rabattaktion_stufen', $options);
+            $rabattaktion_beschreibung = get_field('rabattaktion_beschreibung', $options);
+        ?>
+
             <div class="ferienprogramm__discount wrapper">
-                <h6>Rabattaktion</h6>
-                <h3>Buche mehrere Workshops</h3>
-                <div class="discount__list">
-                    <div class="discount__item">
-                        <h4>-10<span>%</span></h4>
-                        <span class="span">Rabatt ab</span>
-                        <h5>2 Workshops</h5>
+                <h6><?= $rabattaktion_subline ?></h6>
+                <h3><?= $rabattaktion_uberschrift ?></h3>
+
+                <?php if (!empty($rabattaktion_stufen)) : ?>
+                    <div class="discount__list">
+                        <?php foreach ($rabattaktion_stufen as $step) :
+                            $rabatt = $step['rabatt'];
+                            $ab = $step['ab'];
+                        ?>
+
+                            <div class="discount__item">
+                                <h4>-<?= $rabatt ?><span>%</span></h4>
+                                <span class="span"><?= __('Rabatt ab', 'atelier') ?></span>
+                                <h5><?= $ab ?></h5>
+                            </div>
+
+                        <?php endforeach; ?>
                     </div>
-                    <div class="discount__item">
-                        <h4>-15<span>%</span></h4>
-                        <span class="span">Rabatt ab</span>
-                        <h5>3 Workshops</h5>
-                    </div>
-                    <div class="discount__item">
-                        <h4>-20<span>%</span></h4>
-                        <span class="span">Rabatt ab</span>
-                        <h5>4 Workshops</h5>
-                    </div>
-                </div>
-                <p>Der Preisnachlass wird auf alle gebuchten Workshops angewendet. Du bekommst den Preisnachlass beim letzten Workshopbesuch zurückerstattet. Das Angebot gilt nur für die Buchung von Workshops im Rahmen des Ferienprogrammes.</p>
+                <?php endif; ?>
+
+                <p><?= $rabattaktion_beschreibung ?></p>
             </div>
-        <?php endif; ?> -->
+
+        <?php endif; ?>
 
         <div class="space-medium"></div>
 
