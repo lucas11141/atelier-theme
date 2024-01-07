@@ -2,7 +2,6 @@ import Cookies from 'js-cookie';
 
 export default function newsletterPopup() {
 	const popupNewsletter = document.querySelector('.popup--newsletter');
-	console.log(Cookies.get('newsletter_opened'), typeof Cookies.get('newsletter_opened'));
 
 	if (popupNewsletter) {
 		setTimeout(function () {
