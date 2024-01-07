@@ -5,7 +5,6 @@
     <section>
         <?php
         $postType = get_queried_object()->name;
-        $category = $postType; // TODO: Change to $postType
         $options = $postType . '_options';
         $color = load_product_colors($postType);
         $plural = get_field('plural', $options);
