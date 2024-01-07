@@ -48,7 +48,7 @@ $target_year = date('Y'); // Aktuelles Jahr
 $calendarGrid = getCalendarGrid($target_year, $target_month);
 ?>
 
-<div id="<?php echo $id; ?>" class="hero-rounded">
+<div id="<?php echo $id; ?>" class="hero-rounded hero-rounded--date-overview">
 
     <?php get_template_part('components/header-bar', '', array('type' => $websitMode, 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
@@ -214,17 +214,6 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
                 <div class="content"></div>
             </div>
         </div>
-    </div>
-
-    <div class="date-overview__fallback">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-monitor">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-        </svg>
-        <p>
-            Die Terminübersicht ist aktuell nur auf größeren Bildschirmen verfügbar. Bitte besuche diese Seite auf einem Desktop-Computer oder verkleinere die Skalierung deines Browsers, um auf die Terminübersicht zuzugreifen.
-        </p>
     </div>
 </div>
 
