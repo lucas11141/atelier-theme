@@ -249,10 +249,6 @@ export default function settings() {
 		});
 	}
 
-	// Cart
-	if ($('.cart').length > 0 || $('.checkout').length > 0) {
-		// scrollOffset = 265; // TODO: Fix this
-	}
 	//Warenkorb Neu laden bei Gutscheincode anpassungen
 	jQuery(document.body).on('applied_coupon_in_checkout removed_coupon_in_checkout', function () {
 		location.reload();
