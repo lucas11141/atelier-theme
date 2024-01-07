@@ -140,84 +140,25 @@ function custom_display_category_before_og_title($og_title) {
     return $og_title;
 }
 
-
-/*------------------------------------*/
-/* Hooks */
-/*------------------------------------*/
-
-remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb');
-
-add_filter('woocommerce_enqueue_styles', '__return_empty_array'); // Remove woocommerce styles
-add_filter('woocommerce_breadcrumb_defaults', 'atelier_breadcrumbs_settings');
-add_filter('woocommerce_breadcrumb_home_url', 'atelier_custom_breadrumb_home_url');
-add_filter('wc_order_statuses', 'add_awaiting_shipment_to_order_statuses');
-add_filter('wpseo_opengraph_title', 'custom_display_category_before_og_title', 10);
-
-add_action("after_setup_theme", "woocommerce_support");
-add_action('after_setup_theme', 'atelier_woocommerce_custom_image_sizes');
-add_action('init', 'register_shipment_arrival_order_status');
-
-/*------------------------------------*/
-/* REVIEW */
-/*------------------------------------*/
-
-// // add image to category banner
-// add_action('atelier_category_banner', 'woocommerce_atelier_category_thumbnail', 5);
-// function woocommerce_atelier_category_thumbnail() {
-//     // verify that this is a product category page
-//     if (is_product_category()) {
-//         global $wp_query;
-
-//         // get the query object
-//         $cat = $wp_query->get_queried_object();
-
-//         // get the thumbnail id using the queried category term_id
-//         $thumbnail_id = get_term_meta($cat->term_id, 'thumbnail_id', true);
-
-//         // get the image URL
-//         $image = wp_get_attachment_url($thumbnail_id);
-
-//         // print the IMG HTML
-//         echo "<img src='{$image}' alt='' width='762' height='365' />";
-//     }
-// }
-
-add_filter('woocommerce_product_tabs', 'woo_remove_product_tabs', 98);
-function woo_remove_product_tabs($tabs) {
-    unset($tabs['additional_information']);
-    return $tabs;
-}
-
-// Nav Cart Icon - Update Count
-add_filter('woocommerce_add_to_cart_fragments', 'atelier_add_to_cart_fragment');
+// Add current item count to cart button in header
 function atelier_add_to_cart_fragment($fragments) {
     global $woocommerce;
     $fragments['.nav__cart__quantity'] = '<div class="nav__cart__quantity"><span>' .  $woocommerce->cart->cart_contents_count . '</span></div>';
     return $fragments;
 }
 
-// Get Woocommerce variation price based on product ID
-function get_variation_price_by_id($product_id, $variation_id) {
-    $currency_symbol = get_woocommerce_currency_symbol();
-    $product = new WC_Product_Variable($product_id);
-    $variations = $product->get_available_variations();
-    $var_data = [];
-    foreach ($variations as $variation) {
-        if ($variation['variation_id'] == $variation_id) {
-            $display_regular_price = $variation['display_regular_price'] . '<span class="currency">' . $currency_symbol . '</span>';
-            $display_price = $variation['display_price'] . '<span class="currency">' . $currency_symbol . '</span>';
-        }
-    }
+/*------------------------------------*/
+/* Hooks */
+/*------------------------------------*/
+remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb');
 
-    //Check if Regular price is equal with Sale price (Display price)
-    if ($display_regular_price == $display_price) {
-        $display_price = false;
-    }
+add_filter('woocommerce_enqueue_styles', '__return_empty_array'); // Remove woocommerce styles
+add_filter('woocommerce_breadcrumb_defaults', 'atelier_breadcrumbs_settings');
+add_filter('woocommerce_breadcrumb_home_url', 'atelier_custom_breadrumb_home_url');
+add_filter('woocommerce_add_to_cart_fragments', 'atelier_add_to_cart_fragment');
+add_filter('wc_order_statuses', 'add_awaiting_shipment_to_order_statuses');
+add_filter('wpseo_opengraph_title', 'custom_display_category_before_og_title', 10);
 
-    $priceArray = array(
-        'display_regular_price' => $display_regular_price,
-        'display_price' => $display_price
-    );
-    $priceObject = (object)$priceArray;
-    return $priceObject;
-}
+add_action("after_setup_theme", "woocommerce_support");
+add_action('after_setup_theme', 'atelier_woocommerce_custom_image_sizes');
+add_action('init', 'register_shipment_arrival_order_status');
