@@ -159,8 +159,7 @@
 	@include fluid-type(15px, 16px);
 
 	body:has(#gtm-values[data-website-mode='shop']) & {
-		color: $accent; // TODO: Color by default?
-		// @include fluid-type(13px, 15px);
+		color: $accent;
 	}
 }
 
@@ -168,11 +167,6 @@
 	@include heading;
 	@include fluid-type(14px, 14px);
 	color: $accent;
-
-	// body:has(#gtm-values[data-website-mode='shop']) & {
-	// 	color: $accent;
-	// 	@include fluid-type(12px, 13px);
-	// }
 }
 
 /*------------------------------------*/
