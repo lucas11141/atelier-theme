@@ -1426,10 +1426,11 @@ const listElement = document.querySelector('#date-overview__list') as HTMLElemen
 const filterElement = document.querySelector('#date-overview__filter') as HTMLElement;
 const selectorElement = document.querySelector('#date-overview__selector') as HTMLElement;
 
-if (!calendarElement || !listElement || !filterElement || !selectorElement)
-	throw new Error('No calendar, list or filter element found');
-
-new DateOverview(calendarElement, listElement, filterElement, selectorElement);
+if (!calendarElement || !listElement || !filterElement || !selectorElement) {
+	console.error('No calendar, list or filter element found');
+} else {
+	new DateOverview(calendarElement, listElement, filterElement, selectorElement);
+}
 
 /*------------------------------------*/
 /* Type definitions */

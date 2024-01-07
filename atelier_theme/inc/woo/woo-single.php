@@ -14,10 +14,6 @@ function wvnderlab_single_title() {
     echo '<h1 class="product_title entry-title"><span style="font-size:0;">' . $category_name . ' </span>' . $product->get_title() . '</h1>';
 }
 
-// function atelier_woocommerce_single_chips() {
-//     echo do_shortcode('[fe_chips]');
-// }
-
 // Replace product image gallery
 function at_woo_product_gallery() {
     global $product;
@@ -477,15 +473,10 @@ function atelier_custom_field_accordeon() { ?>
 
 
 
-
-
-
-
-
         /*------------------------------------*/
         /* Hooks */
         /*------------------------------------*/
-        remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20); // TODO Use the default gallery and modify it to use swiper and lightbox
+        remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20);
         remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
         remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
         remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
@@ -496,7 +487,6 @@ function atelier_custom_field_accordeon() { ?>
         add_action('woocommerce_single_product_summary', 'woocommerce_atelier_product_badge', 2);
         add_action('woocommerce_single_product_summary', 'wvnderlab_single_title', 5);
         add_action('woocommerce_single_product_summary', 'atelier_custom_field_short_description', 8);
-        // add_action('woocommerce_single_product_summary', 'atelier_woocommerce_single_chips', 10);
         add_action('woocommerce_single_product_summary', 'atelier_custom_field_delivery_info', 35);
         add_action('woocommerce_single_product_summary', 'atelier_custom_field_bulletpoints', 45);
         add_action('woocommerce_single_product_summary', 'atelier_custom_field_quote', 46);

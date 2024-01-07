@@ -1,4 +1,6 @@
 <?php
+// FIXME Update product image when variation is selected
+
 $imageIds = $args['imageIds'] ?? [];
 
 $productImages = array_map(function ($imageId) {
@@ -43,5 +45,4 @@ $productImages = array_map(function ($imageId) {
         <?php endif; ?>
 
     <?php endif; ?>
-
 </div>
