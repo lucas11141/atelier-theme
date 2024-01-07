@@ -20,12 +20,13 @@ export default function settings() {
 
 	//
 	let dropdownIsOpened = false;
+	const hamburgers = document.querySelectorAll('.hamburger');
+
 	$('.hamburger').click(function () {
-		const hamburgers = document.querySelectorAll('.hamburger');
 		hamburgers.forEach((hamburger) => {
 			hamburger.classList.toggle('is-active');
 		});
-		$('.header__dropdown').slideToggle(300);
+		$('.header__dropdown').slideToggle(0);
 		$('.header__dropdown').toggleClass('header__dropdown--opened');
 		$('.header__dropdown').parent().toggleClass('--dropdown-opened');
 		if (dropdownIsOpened) {
@@ -34,6 +35,20 @@ export default function settings() {
 		} else {
 			dropdownIsOpened = true;
 			disableScroll();
+		}
+	});
+
+	// close dropdown on resize when window is bigger than 850px
+	window.addEventListener('resize', () => {
+		if (window.innerWidth > 850) {
+			hamburgers.forEach((hamburger) => {
+				hamburger.classList.remove('is-active');
+			});
+			$('.header__dropdown').slideUp(100);
+			$('.header__dropdown').removeClass('header__dropdown--opened');
+			$('.header__dropdown').parent().removeClass('--dropdown-opened');
+			dropdownIsOpened = false;
+			enableScroll();
 		}
 	});
 
