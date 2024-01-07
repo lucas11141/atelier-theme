@@ -612,31 +612,6 @@ $breadcrumb-gap: 10px;
 	}
 }
 
-// TODO: Remvove this if not needed
-/* ---- Block Right Headers ----*/
-.gray__block {
-	margin-top: 20px;
-	padding: 25px;
-	border-radius: 15px;
-	background-color: $lightgray;
-	border: solid 1px $linegray;
-
-	h5 {
-		padding: 5px 0 25px;
-		color: $main;
-
-		& + * {
-			padding-top: 0;
-			margin-top: 0;
-		}
-	}
-
-	@media only screen and (max-width: $mobile) {
-		margin-top: 15px;
-		padding: 20px;
-	}
-}
-
 body.woocommerce {
 	// .sidebar {
 	// 	display: none;
