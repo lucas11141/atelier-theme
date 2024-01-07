@@ -12,8 +12,9 @@ function woocommerce_atelier_loop_category() {
 
     // only displayed if the product has at least one category
     $cat_links = array();
-    foreach ($terms as $term) {
-        $cat_links[] = $term->name;
+    foreach ($terms as $category) {
+        $category_name = get_field('singular_name', $category->taxonomy . '_' . $category->term_id) ?? $category->name;
+        $cat_links[] = $category_name;
     }
     $on_cat = join(" ", $cat_links);
 
