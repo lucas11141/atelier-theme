@@ -1,5 +1,7 @@
 <?php
 $label = $args['label'];
+if (!$label) return;
+
 $class = $args['class'];
 $icon = $args['icon'];
 $tooltip = $args['tooltip'];
@@ -16,8 +18,6 @@ if ($color) $colorStyle = 'background-color:' . $color;
 
     <span class="product__badge <?= $hideOnArchive ? '--hide-on-archive' : '' ?>" style="<?= $colorStyle; ?>">
         <?php get_template_part('components/icon', '', $icon); ?>
-        <?php //get_template_part('components/icon', '', array('url' => $badge_icon['url'], 'alt' => $badge_icon['alt'], 'size' => 'small')); 
-        ?>
         <?= $label ?>
     </span>
 
