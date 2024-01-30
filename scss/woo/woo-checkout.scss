@@ -47,17 +47,8 @@ body.woocommerce-checkout .woocommerce {
 			margin-top: 0;
 			margin-bottom: 0;
 
-			.woocommerce-info {
-				@include box;
-				margin: 0 0 10px;
-				padding-top: 22px;
-				padding-bottom: 22px;
-			}
-
-			.showlogin {
-				color: $accent;
-				font-weight: 800;
-				text-align: right;
+			.wc-block-components-notice-banner {
+				margin-bottom: 12px;
 			}
 		}
 
@@ -248,14 +239,6 @@ body.woocommerce-checkout .woocommerce {
 			th,
 			td {
 				padding-bottom: $table-padding;
-			}
-		}
-
-		// Gutschein
-		.checkout__coupon {
-			.woocommerce-error {
-				display: block;
-				margin-bottom: 15px !important;
 			}
 		}
 

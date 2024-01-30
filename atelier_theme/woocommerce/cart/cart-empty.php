@@ -18,6 +18,8 @@
 
 defined('ABSPATH') || exit;
 
+get_template_part('components/shop/payment-hero-banner', NULL, array('step' => 'cart'));
+
 /*
  * @hooked wc_empty_cart_message - 10
  */
@@ -25,7 +27,6 @@ do_action('woocommerce_cart_is_empty');
 
 if (wc_get_page_id('shop') > 0) : ?>
 
-	<?php get_template_part('components/shop/payment-hero-banner', NULL, array('step' => 'cart')); ?>
 
 	<?php
 	/**

@@ -9,12 +9,10 @@ export default function wooGlobal() {
 			// Swipe Up
 			item.classList.add('--swipe-up');
 		}
-		if (touchendY > touchstartY) {
-			// Swipe Down
-		}
 	}
 
-	document.querySelectorAll('.woocommerce-message, .woocommerce-error').forEach((item) => {
+	document.querySelectorAll('.wc-block-components-notice-banner').forEach((item) => {
+		// NOTE - Touch events for mobile
 		item.addEventListener('touchstart', (e) => {
 			touchstartY = e.changedTouches[0].screenY;
 		});
@@ -25,6 +23,18 @@ export default function wooGlobal() {
 		});
 
 		item.addEventListener('touchmove', (e) => {
+			e.preventDefault();
+		});
+
+		// NOTE - Mouse events for desktop
+		item.addEventListener('mousedown', (e) => {
+			touchstartY = e.clientY;
+		});
+		item.addEventListener('mouseup', (e) => {
+			touchendY = e.clientY;
+			handleGesture(item);
+		});
+		item.addEventListener('mousemove', (e) => {
 			e.preventDefault();
 		});
 	});

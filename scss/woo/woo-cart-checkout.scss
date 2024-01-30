@@ -103,7 +103,8 @@ body.woocommerce-pay {
 		}
 
 		// Left
-		.woocommerce-notices-wrapper {
+		.woocommerce-notices-wrapper,
+		.wc-empty-cart-message {
 			@include grid-split(left);
 			margin-top: calc(var(--section-gap) - 10px);
 			margin-bottom: 10px;
@@ -143,6 +144,7 @@ body.woocommerce-pay {
 			}
 
 			.woocommerce-notices-wrapper {
+				width: 100%;
 				margin-top: -15px;
 				margin-bottom: 35px;
 			}
@@ -191,6 +193,18 @@ body.woocommerce-cart .woocommerce {
 
 		& + .left {
 			grid-row: 3;
+		}
+
+		&:not(:empty) + .wc-empty-cart-message {
+			margin-top: 2px;
+		}
+	}
+
+	.wc-empty-cart-message {
+		grid-row: 3;
+
+		& + .left {
+			grid-row: 4;
 		}
 	}
 

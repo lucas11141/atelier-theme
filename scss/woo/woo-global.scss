@@ -289,152 +289,134 @@ $breadcrumb-gap: 10px;
 	display: none;
 }
 
-// Woocommerce Notices
-.woocommerce-NoticeGroup,
-.woocommerce-notices-wrapper {
-	width: $wrapper-width;
-	max-width: $screen;
-	margin: 0 auto 35px;
-
-	&:empty {
-		margin: 0;
-	}
-
-	ul:first-child {
-		margin-top: 0;
-	}
-
-	div:not(:first-child) {
-		margin-top: 10px;
-	}
-}
-
-.woocommerce-message,
-.woocommerce-info,
-.woocommerce-notice {
-	@include flex('row');
-	flex-direction: row;
-	align-items: center;
-	padding: 12px 25px 12px 20px;
-	background-color: $lightgray;
-	border: solid 1px $linegray;
-
-	&,
-	p,
-	span {
-		border-radius: 10px;
-		font-size: 14px;
-		font-weight: 500;
-	}
-
-	a {
-		display: inline;
-		color: $red;
-		text-decoration: underline;
-	}
-
-	p:first-child {
-		padding: 0;
-	}
-
-	.button,
-	.restore-item {
-		font-size: 13px;
-		color: #55d045;
-		font-weight: 800;
-		text-transform: uppercase;
-	}
-
-	.button {
-		order: 10;
-		width: unset;
-		padding: 0;
-		background-color: transparent;
-
-		&:hover {
-			background-size: 0;
-		}
-	}
-}
-
-.woocommerce-error,
-.woocommerce-notice--error {
-	margin-top: 10px;
-	padding: 10px 15px;
-	border-radius: 10px;
-	border: solid 2px $dark-red;
-
-	li {
-		color: $dark-red;
-		@include fluid-type(13px, 14px);
-		font-weight: 700;
-		list-style: none;
-
-		a {
-			display: none;
-		}
-	}
-
-	& + .woocommerce-message {
-		margin-top: 15px;
-	}
-}
-
-.woocommerce-form-coupon-toggle {
-	.woocommerce-info {
-		font-size: 14px;
-		padding: 12px 25px 12px 20px;
-		background-color: $lightgray;
-		border: solid 1px $linegray;
-		border-radius: 10px;
-
-		a {
-			font-size: 14px;
-			font-weight: 700;
-			color: $accent-dark;
-			text-decoration: underline;
-		}
-	}
-}
-
-@media only screen and (max-width: $desktop) {
+/*------------------------------------*/
+/* SECTION - Woocommerce messages */
+/*------------------------------------*/
+.woocommerce {
+	// NOTE - Notices wrapper
 	.woocommerce-NoticeGroup,
 	.woocommerce-notices-wrapper {
-		.woocommerce-message {
-			flex-direction: column;
-			gap: 8px;
-			text-align: center;
+		width: $wrapper-width;
+		max-width: $screen;
+		margin: 0 auto 35px;
+		@include flex('column', 12px);
 
-			.button {
-				padding: 5px;
-			}
+		> * {
+			margin: 0;
+		}
+
+		&:empty {
+			margin: 0;
 		}
 	}
 
-	.woocommerce-notices-wrapper {
-		margin: 0 !important;
-		width: 100vw;
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 5;
+	// NOTE - New woocommerce notices (since woocommerce 8.5)
+	.wc-block-components-notice-banner {
+		margin: 0;
+		padding: 14px 16px 14px 14px !important;
+		width: 100%;
+		gap: 10px;
+		background: $lightgray;
+		border: solid 2px $linegray;
+		border-radius: 10px;
+		@include fluid-type(13px, 14px);
+		font-weight: 600;
 
-		div,
-		li {
-			color: $main;
+		> .wc-block-components-notice-banner__content {
+			.button,
+			.restore-item,
+			.showcoupon {
+				@include fluid-type(13px, 14px);
+				color: $main !important;
+				text-decoration: underline;
+				font-weight: 700;
+				opacity: 1;
+				text-transform: none;
+				letter-spacing: inherit;
+				font-size: 14px;
+				line-height: 150%;
+				text-underline-position: inherit;
+
+				&:hover {
+					color: $main--light !important;
+				}
+			}
 		}
 
-		.woocommerce-message,
-		.woocommerce-error {
+		// Info banner
+		&.is-info {
+			border-color: #007cba;
+			color: #007cba;
+			background: #f4f8ff;
+		}
+
+		// Success banner
+		&.is-success {
+			background: #f4fff7;
+			border-color: #4ab866;
+			color: #4ab866;
+		}
+
+		// Error banner
+		&.is-error {
+			background: #fff0f0;
+			border-color: $dark-red;
+			color: $dark-red;
+		}
+	}
+
+	// NOTE - Old woocomnmerce notices
+	.woocommerce-message,
+	.woocommerce-info {
+		@extend .wc-block-components-notice-banner;
+		@extend .is-info;
+	}
+	.woocommerce-error {
+		@extend .wc-block-components-notice-banner;
+		@extend .is-error;
+
+		li {
+			list-style: none;
+		}
+	}
+
+	// SECTION - Responsive
+	@include bp-lower($desktop) {
+		.woocommerce-NoticeGroup,
+		.woocommerce-notices-wrapper {
+			.woocommerce-message {
+				flex-direction: column;
+				gap: 8px;
+				text-align: center;
+
+				.button {
+					padding: 5px;
+				}
+			}
+		}
+
+		.woocommerce-notices-wrapper {
+			margin: 0 !important;
+			width: 100vw;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 5;
+
+			div,
+			li {
+				color: $main;
+			}
+		}
+
+		.wc-block-components-notice-banner {
 			margin: 0;
-			padding: 110px 20px 20px;
+			padding: 110px 20px 20px !important;
 			@include flex('column');
 			align-items: center;
 			row-gap: 10px;
-			background-color: white;
-			background-color: $main;
+			background: $main !important;
 			line-height: 1.5em;
-			color: white;
 			text-align: center;
 			border-radius: 0;
 			border: none;
@@ -442,10 +424,42 @@ $breadcrumb-gap: 10px;
 			@include drop-shadow-shop;
 			position: relative;
 
-			li {
-				color: white;
+			&__content {
+				color: white !important;
 			}
 
+			// Hide the icon
+			svg {
+				display: none;
+			}
+
+			.button {
+				display: none;
+			}
+
+			// NOTE - Paper effect
+			&::after {
+				content: '';
+				height: 100%;
+				width: 100%;
+				background-image: url(https://atelier-delatron.de/wp-content/themes/atelier_theme/img/elements/paper_structure_500x.jpg);
+				background-size: cover;
+				mix-blend-mode: color-burn;
+				position: absolute;
+				top: 0;
+				left: 0;
+				pointer-events: none;
+			}
+
+			// NOTE - Variations
+			&.is-success {
+				border-bottom-color: #4ab866;
+			}
+			&.is-error {
+				border-bottom-color: $dark-red;
+			}
+
+			// NOTE - Slide animation
 			&:not(.--swipe-up) {
 				animation: notices-slide 10s forwards;
 
@@ -464,7 +478,6 @@ $breadcrumb-gap: 10px;
 					}
 				}
 			}
-
 			&.--swipe-up {
 				animation: swipe-out 500ms $ease_standard 0s forwards;
 
@@ -477,34 +490,14 @@ $breadcrumb-gap: 10px;
 					}
 				}
 			}
-
-			&::after {
-				content: '';
-				height: 100%;
-				width: 100%;
-				background-image: url(https://atelier-delatron.de/wp-content/themes/atelier_theme/img/elements/paper_structure_500x.jpg);
-				background-size: cover;
-				mix-blend-mode: color-burn;
-				position: absolute;
-				top: 0;
-				left: 0;
-				pointer-events: none;
-			}
-		}
-
-		.woocommerce-message {
-			border-bottom-color: $accent;
-		}
-
-		.woocommerce-error {
-			border-bottom-color: $red;
-
-			.button {
-				display: none;
-			}
 		}
 	}
+	// !SECTION - Responsive
 }
+
+/*------------------------------------*/
+/* !SECTION - Woocommerce messages */
+/*------------------------------------*/
 
 /*------------------------------------*/
 /* Approced */
