@@ -33,7 +33,7 @@ function woocommerce_atelier_loop_short_description() {
 
 // insert custom html on product archive page
 function woocommerce_atelier_products_filter() {
-    echo '<button class="button filters-slideover__button">Filtern</button>';
+    echo '<button class="button --color-main filters-slideover__button">' . __('Produkte filtern', 'atelier') . '</button>';
     echo '<div class="filters-slideover">';
     echo '<div class="filters-slideover__header"><h3>Filtern und Sortieren</h3><a class="filters-slideover__close"></a></div>';
 
