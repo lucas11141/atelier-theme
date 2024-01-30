@@ -224,13 +224,14 @@ $calendarGrid = getCalendarGrid($target_year, $target_month);
 <template id="template--date-overview__list__item">
     <div id="date-overview__list__item" class="date-overview__list__item">
         <div class="date">
+            <div template-weekday class="month"></div>
             <div template-day class="day"></div>
             <div template-month class="month"></div>
         </div>
         <div class="content">
             <div class="text">
-                <div template-title class="title"></div>
-                <div template-category class="category"></div>
+                <a template-title class="title" target="_blank"></a>
+                <div template-time class="category"></div>
             </div>
             <div class="buttons">
                 <button template-filter-button class="filter" role="button">

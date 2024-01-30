@@ -883,6 +883,21 @@ class DateOverviewList {
 
 			this.renderListMonth(monthList.year, monthList.month);
 
+			// Render empty state when no more upcoming dates in this month
+			const hasUpcomingDates = monthList.items.some((item) => {
+				const today = new Date();
+				const itemDate = new Date(item.date);
+				return itemDate >= today;
+			});
+			if (!hasUpcomingDates) {
+				const div = document.createElement('div');
+				div.classList.add('date-overview__list__empty-state');
+				div.innerHTML = 'In diesem Monat finden keine Termine (mehr) statt.';
+				this.container.appendChild(div);
+				return;
+			}
+
+			// Render the upcoming dates
 			monthList.items.forEach((item) => {
 				this.renderListItem(item);
 			});
@@ -915,6 +930,14 @@ class DateOverviewList {
 
 		element.style.color = `var(--color-${item.product?.category})`;
 
+		// Select by template-weekday attribute
+		const weekday = element.querySelector('[template-weekday]') as HTMLElement;
+		if (!weekday) throw new Error('No weekday found');
+		// add formatted weekday from this.currentMonth using Intl.DateTimeFormat
+		weekday.innerHTML = new Intl.DateTimeFormat('de-DE', {
+			weekday: 'short',
+		}).format(new Date(item.date));
+
 		// select by template-month attribute
 		const month = element.querySelector('[template-month]') as HTMLElement;
 		if (!month) throw new Error('No month found');
@@ -930,31 +953,16 @@ class DateOverviewList {
 			day: 'numeric',
 		}).format(new Date(item.date));
 
-		const title = element.querySelector('[template-title]') as HTMLElement;
+		const title = element.querySelector('[template-title]') as HTMLAnchorElement;
 		if (!title) throw new Error('No title found');
 		// add formatted day from this.currentMonth using Intl.DateTimeFormat
+		title.href = item.product.url;
 		title.innerHTML = item.product.title;
 
-		const category = element.querySelector('[template-category]') as HTMLElement;
-		if (!category) throw new Error('No category found');
-
-		// Set category
-		if (item.product.category === 'course-child' || item.product.category === 'course-adult') {
-			category.innerHTML = item.product.group.label;
-		} else {
-			category.innerHTML = categoryTranslation[item.product.category];
-		}
-
-		// Show weekday if is filtered by course or specific course time
-		if (
-			(this.filter?.type === 'product' &&
-				this.filter.courseTimeId === item.product.courseTimeId) ||
-			(this.filter?.type === 'category' &&
-				this.filter.category === item.product.category &&
-				item.product.weekday !== undefined)
-		) {
-			category.innerHTML = `${item.product.weekday?.label}`;
-		}
+		// NOTE - Time
+		const time = element.querySelector('[template-time]') as HTMLElement;
+		if (!time) throw new Error('No time found');
+		time.innerText = `${item.product.starttime} - ${item.product.endtime} Uhr`;
 
 		// Set bookung url
 		const bookingButton = element.querySelector('[template-booking-button]') as HTMLLinkElement;
@@ -1319,7 +1327,7 @@ class DateOverviewSelector {
 	}
 	renderOptionLabel(productId: number | '') {
 		if (productId === '' || productId === 0) {
-			this.productTitle.innerHTML = 'Kein Produkt ausgewählt';
+			this.productTitle.innerHTML = 'Termine aller Kunstangebote werden angezeigt.';
 			this.productCategory.innerHTML = '';
 			this.productImage.src = '';
 			return;
@@ -1345,9 +1353,19 @@ class DateOverviewSelector {
 		if (courseTimes.length <= 1) return;
 
 		courseTimes.forEach((courseTime) => {
+			console.log(courseTime);
 			const button = document.createElement('button');
 			const span = document.createElement('span');
+
+			if (!courseTime.weekday) throw new Error('No weekday found');
+
+			// Set button label
 			span.textContent = courseTime.weekday.label;
+
+			// Add courseTimeNumber to span if available
+			if (courseTime.courseTimeNumber)
+				span.innerText = span.innerText + ' ' + courseTime.courseTimeNumber;
+
 			button.appendChild(span);
 			button.setAttribute('role', 'button');
 			button.style.color = `var(--color-${courseTime.category})`;
@@ -1494,6 +1512,7 @@ type SelectorOption = {
 // API response
 type ProductType = {
 	ID: number;
+	url: string;
 	starttime: string;
 	endtime: string;
 	title: string;
@@ -1504,6 +1523,7 @@ type ProductType = {
 	};
 	bookingUrl: string;
 	thumbnail: string;
+	courseTimeNumber?: string;
 	courseTimeId?: number;
 	weekday?: number;
 };

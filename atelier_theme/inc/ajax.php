@@ -52,19 +52,22 @@ function date_overview_get_product_dates() {
 
         foreach ($courseTimes as $timeId) {
             $course = get_field('course', 'course_time_' . $timeId)[0];
+            $courseId = $course->ID;
             $courseDates[] = array(
                 'date' => $date,
                 'product' => array(
-                    'ID' => $course->ID,
+                    'ID' => $courseId,
+                    "url" => get_permalink($courseId),
                     'starttime' =>  get_field('starttime', 'course_time_' . $timeId),
                     'endtime' =>  get_field('endtime', 'course_time_' . $timeId),
                     'title' => $course->post_title,
-                    'category' => $course->post_type . '-' . get_field('group', $course->ID)['value'],
-                    'group' => get_field('group', $course->ID),
+                    'category' => $course->post_type . '-' . get_field('group', $courseId)['value'],
+                    'group' => get_field('group', $courseId),
                     'courseTimeId' => $timeId,
+                    'courseTimeNumber' => get_field('nummerierung', 'course_time_' . $timeId),
                     'weekday' => get_field('weekday', 'course_time_' . $timeId),
-                    'bookingUrl' => BOOK_URL . '/?productId=' . $course->ID . '&courseTime=' . $timeId . '&startDate=' . $dateId,
-                    'thumbnail' => get_the_post_thumbnail_url($course->ID, 'thumbnail')
+                    'bookingUrl' => BOOK_URL . '/?productId=' . $courseId . '&courseTime=' . $timeId . '&startDate=' . $dateId,
+                    'thumbnail' => get_the_post_thumbnail_url($courseId, 'thumbnail')
                 )
             );
         }
@@ -114,6 +117,7 @@ function date_overview_get_product_dates() {
                 'date' => $date,
                 'product' => array(
                     'ID' => $workshopId,
+                    'url' => get_permalink($workshopId),
                     'starttime' =>  $dateField['starttime'],
                     'endtime' =>  $dateField['endtime'],
                     'title' => get_the_title($workshopId),
@@ -170,6 +174,7 @@ function date_overview_get_product_dates() {
                 'date' => $date,
                 'product' => array(
                     'ID' => $workshopId,
+                    "url" => get_permalink($workshopId),
                     'starttime' =>  $dateField['starttime'],
                     'endtime' =>  $dateField['endtime'],
                     'title' => get_the_title($workshopId),
