@@ -3,6 +3,10 @@ $step = $args['step'] ?? null;
 $image = $args['image'] ?? null;
 
 $steps = array(
+    'shop' => array(
+        'title' => 'Shop',
+        'link' => esc_url(wc_get_page_permalink('shop'))
+    ),
     'cart' => array(
         'title' => 'Warenkorb',
         'link' => esc_url(wc_get_cart_url())
@@ -20,6 +24,10 @@ $steps = array(
         'link' => 'https://atelier-delatron.shop/bestellung'
     ),
 );
+
+// Remove all steps from $steps after the current step
+$breadcrumbSteps =
+    array_slice($steps, 0, array_search($step, array_keys($steps)) + 1);
 ?>
 
 <header class="shop-hero-banner shop-hero-banner--small show-header-on-offset">
@@ -32,29 +40,22 @@ $steps = array(
         <?php endif; ?>
 
         <ul class="woocommerce-breadcrumb" itemscope="" itemtype="https://schema.org/BreadcrumbList">
-            <?php $index = 1; ?>
-            <?php foreach ($steps as $key => $value) : ?>
+            <?php foreach ($breadcrumbSteps as $key => $item) : ?>
+                <?php if (!$isFinished) : ?>
+                    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+                        <?php if ($key !== $step) : ?>
+                            <a href="<?= $item['link'] ?>"><?= $item['title'] ?></a>
+                            <svg class='seperator' width='5' height='9' viewBox='0 0 5 9' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                                <path d='M0.970001 1.39999L3.97 4.39999L0.970001 7.39999' stroke='white' style='stroke:white;stroke-opacity:1;' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' />
+                            </svg>
+                        <?php else : ?>
+                            <span><?= $item['title'] ?></span>
+                        <?php endif; ?>
 
-                <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-                    <?php if ($key == $step) : ?>
-                        <span class=" --current"><?= $value['title']; ?></span>
-                        <meta itemprop="item" content="<?= $value['link'] ?>">
-                        <?php $currentRendered = true ?>
-                    <?php elseif ($currentRendered) : ?>
-                        <span><?= $value['title'] ?></span>
-                        <meta itemprop="item" content="<?= $value['link'] ?>">
-                    <?php else : ?>
-                        <a href="<?= $value['link']; ?>" itemtype="https://schema.org/Thing" itemprop="item"><?= $value['title']; ?></a>
-                    <?php endif; ?>
-
-                    <meta itemprop="position" content="<?= $index ?>">
-                    <meta itemprop="name" content="<?= $value['title'] ?>">
-                    <svg class='seperator' width='5' height='9' viewBox='0 0 5 9' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                        <path d='M0.970001 1.39999L3.97 4.39999L0.970001 7.39999' stroke='white' style='stroke:white;stroke-opacity:1;' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' />
-                    </svg>
-                </li>
-
-                <?php $i++; ?>
+                        <meta itemprop="position" content="<?= $i + 1 ?>">
+                        <meta itemprop="name" content="<?= $item['title'] ?>">
+                    </li>
+                <?php endif; ?>
             <?php endforeach; ?>
         </ul>
     </div>
