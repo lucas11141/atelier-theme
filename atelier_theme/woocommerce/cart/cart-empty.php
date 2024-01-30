@@ -25,7 +25,7 @@ do_action('woocommerce_cart_is_empty');
 
 if (wc_get_page_id('shop') > 0) : ?>
 
-	<?php get_template_part('components/shop-hero-banner'); ?>
+	<?php get_template_part('components/shop/payment-hero-banner', NULL, array('step' => 'cart')); ?>
 
 	<?php
 	/**
@@ -40,7 +40,6 @@ if (wc_get_page_id('shop') > 0) : ?>
 	);
 	?>
 
-	<!-- <div class="split-grid"> -->
 	<div class="left">
 		<h4>Dein Warenkorb ist noch leer.</h4>
 		<a class="button --color-accent" href="<?php echo get_permalink(woocommerce_get_page_id('shop')); ?>">
@@ -52,6 +51,5 @@ if (wc_get_page_id('shop') > 0) : ?>
 	<div class="right">
 		<div class="placeholder placeholder--large"></div>
 	</div>
-	<!-- </div> -->
 
 <?php endif; ?>
