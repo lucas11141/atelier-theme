@@ -11,7 +11,7 @@ $ankundigung = get_field('ankundigung');
 $slides = get_field('slides');
 ?>
 
-<div class="shop-hero-banner shop-hero-banner show-header-on-offset" id="<?= $id ?>">
+<div class="shop-hero-banner shop-hero-banner--large show-header-on-offset" id="<?= $id ?>">
 
     <?php get_template_part('components/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
