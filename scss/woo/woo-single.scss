@@ -33,6 +33,10 @@ body.single-product {
 	.split__left {
 		position: sticky !important;
 		top: 160px;
+
+		.onsale {
+			display: none;
+		}
 	}
 
 	.product-gallery {

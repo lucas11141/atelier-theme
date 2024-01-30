@@ -125,7 +125,7 @@
 			text-align: center;
 		}
 
-		h3 {
+		.h3 {
 			padding: 60px 0 35px;
 			width: 100%;
 			text-align: center;
@@ -148,7 +148,7 @@
 				position: relative;
 
 				h6 {
-					padding: 0;
+					padding: 0 0 14px;
 
 					img {
 						margin-right: 8px;
@@ -156,12 +156,12 @@
 					}
 				}
 
-				h4 {
-					padding: 14px 0 0;
+				.h4 {
+					padding: 0;
 				}
 
 				p:first-of-type {
-					padding-top: 25px;
+					padding-top: 20px;
 				}
 
 				.background__number {

@@ -300,4 +300,8 @@ li.product,
 			display: none;
 		}
 	}
+
+	.badge-tooltip:has(.--hide-on-archive) {
+		display: none;
+	}
 }

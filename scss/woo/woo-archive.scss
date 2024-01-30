@@ -155,32 +155,23 @@ body.post-type-archive-product {
 	.archive__controls {
 		margin-top: 50px;
 		padding-bottom: 22px;
+		@include flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
 
 		.woocommerce-result-count {
+			width: auto;
 			display: inline-block;
-			padding: 12px 0 0;
 			@include fluid-type(14px, 16px);
 			font-weight: 700;
 		}
 
-		.woocommerce-ordering {
-			float: right;
-			padding: 0;
+		.filters-slideover__button {
+			order: 1;
+		}
 
-			select {
-				padding: 12px 38px 12px 18px;
-				background-color: #f7f7f7;
-				border: solid 1px #e3e3e3;
-				border-radius: 10px;
-				@include fluid-type(14px, 16px);
-				font-weight: 700;
-				position: relative;
-				cursor: pointer;
-
-				&:hover {
-					background-color: $lightgray--darken;
-				}
-			}
+		.woocommerce-notices-wrapper {
+			order: -1;
 		}
 	}
 
@@ -318,6 +309,7 @@ body.post-type-archive-product {
 	.filters-slideover__confirm,
 	.filters-slideover {
 		width: 400px;
+		max-width: 100%;
 		background: white;
 		position: fixed;
 		bottom: 0;
@@ -588,25 +580,6 @@ body.post-type-archive-product {
 	}
 
 	@include bp-lower($tablet) {
-		.archive__controls {
-			margin-top: 21px;
-			padding-bottom: 8px;
-
-			.woocommerce-result-count {
-				padding: 0 0 15px;
-				width: 100%;
-				text-align: center;
-			}
-
-			.woocommerce-ordering {
-				float: unset;
-				margin-bottom: 0;
-				select {
-					padding: 14px 20px;
-				}
-			}
-		}
-
 		.woocommerce-pagination {
 			ul.page-numbers li {
 				span,
@@ -644,6 +617,17 @@ body.post-type-archive-product {
 	}
 
 	@include bp-lower($mobile) {
+		.archive__controls {
+			margin-top: 21px;
+			padding-bottom: 8px;
+
+			.woocommerce-result-count {
+				padding: 0 0 15px;
+				width: 100%;
+				text-align: center;
+			}
+		}
+
 		.products-archive__list {
 			.columns-4,
 			.columns-3,

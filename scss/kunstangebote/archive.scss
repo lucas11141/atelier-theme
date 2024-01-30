@@ -25,7 +25,7 @@
 					padding: 0;
 				}
 
-				h6 {
+				.h6 {
 					padding-top: 10px;
 					color: var(--product-color-2);
 				}
@@ -147,7 +147,7 @@
 					div {
 						background-color: var(--product-color-1);
 					}
-					h6,
+					.h6,
 					a {
 						color: var(--product-color-1);
 					}
@@ -157,7 +157,7 @@
 					div {
 						background-color: var(--product-color-2);
 					}
-					h6,
+					.h6,
 					a {
 						color: var(--product-color-2);
 					}
@@ -173,7 +173,7 @@
 		* {
 			text-align: center;
 		}
-		h6 {
+		.h6 {
 			color: $red;
 		}
 		.discount__list {
@@ -260,7 +260,7 @@
 			font-weight: 600;
 			color: var(--product-color-1);
 			@include pos('center');
-			transform: translate(-50%, calc(-50% - 5px));
+			translate: -50% calc(-50% - 5px);
 		}
 
 		.label {
@@ -273,11 +273,11 @@
 			position: absolute;
 			left: 50%;
 			bottom: -12px;
-			transform: translateX(-50%);
+			translate: -50% 0;
 		}
 
 		@media only screen and (max-width: $tablet) {
-			transform: scale(0.75);
+			scale: 0.75;
 		}
 	}
 
@@ -514,8 +514,10 @@
 			@include flex('column');
 			justify-content: flex-start;
 
+			h2,
 			h3,
-			h6 {
+			h6,
+			.h6 {
 				&:first-child {
 					padding: 0;
 				}
@@ -525,7 +527,8 @@
 				@include h3;
 			}
 
-			h6 {
+			h6,
+			.h6 {
 				padding-top: 10px;
 				color: var(--product-color-1);
 			}
@@ -576,13 +579,13 @@
 		}
 
 		&.--child {
-			h6 {
+			.h6 {
 				color: var(--product-color-1);
 			}
 		}
 
 		&.--adult {
-			h6 {
+			.h6 {
 				color: var(--product-color-2);
 			}
 		}
@@ -751,7 +754,8 @@
 			padding: 0;
 		}
 
-		h6 {
+		h6,
+		.h6 {
 			color: var(--product-color-1);
 		}
 
