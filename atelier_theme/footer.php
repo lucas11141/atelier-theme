@@ -3,8 +3,15 @@
 			<?php
 			global $websiteMode;
 
-			// set link to contact page
-			$contactLink = $websiteMode === 'shop' ? get_permalink(get_page_by_path('kontakt-shop')) : get_permalink(get_page_by_path('kontakt')) . '#allgemein';
+			$contactButton = array(
+				'title' => $websiteMode === 'shop' ? 'Kundensupport' : 'Kontaktformular',
+				'link' => $websiteMode === 'shop' ? get_permalink(get_page_by_path('kundensupport')) : get_permalink(get_page_by_path('kontakt')) . '#allgemein',
+			);
+
+			$switchButton = array(
+				'title' => $websiteMode === 'shop' ? 'Zu den Kunstkursen' : 'Zum Online-Shop',
+				'link' => $websiteMode === 'shop' ? home_url() : get_permalink(get_page_by_path('shop')),
+			);
 
 			$preheader = get_field('preheader', 'options');
 			$uberschrift_h2 = get_field('uberschrift_h2', 'options');
@@ -78,21 +85,8 @@
 								</li>
 							</ul>
 
-							<a class="button button--small --color-white button__contact" href="<?= $contactLink ?>">
-								<span>Zum Kontaktformular</span>
-							</a>
-
-							<?php if ($websiteMode === 'atelier') : ?>
-								<a href="<?= get_permalink(get_page_by_path('shop')) ?>" class="button button--small --color-accent button--toggle-site --to-shop">
-									<span>Zum Online-Shop</span>
-									<img src="<?php echo get_template_directory_uri(); ?>/assets/img/shop/arrow_next_page.svg" alt="">
-								</a>
-							<?php elseif ($websiteMode === 'shop') : ?>
-								<a href="<?= home_url() ?>" class="button button--small --color-accent button--toggle-site --to-atelier">
-									<span>Zu den Kunstkursen</span>
-									<img src="<?php echo get_template_directory_uri(); ?>/assets/img/shop/arrow_next_page.svg" alt="">
-								</a>
-							<?php endif; ?>
+							<?php get_template_part('components/button', NULL, array('button' => $contactButton, 'color' => 'white', 'class' => 'button__contact', 'size' => 'small')); ?>
+							<?php get_template_part('components/button', NULL, array('button' => $switchButton, 'color' => 'accent', 'size' => 'small', 'icon' => 'chevron-right', 'iconPosition' => 'right')); ?>
 						</div>
 
 					</div>
@@ -173,21 +167,8 @@
 								</li>
 							</ul>
 
-							<a class="button --color-transparent-white   button__contact" href="<?= $contactLink ?>">
-								<span>Zum Kontaktformular</span>
-							</a>
-
-							<?php if ($websiteMode === 'atelier') : ?>
-								<a href="<?= get_permalink(get_page_by_path('shop')) ?>" class="button --color-accent button--toggle-site --to-shop">
-									<span>Zum Online-Shop</span>
-									<img src="<?php echo get_template_directory_uri(); ?>/assets/img/shop/arrow_next_page.svg" alt="">
-								</a>
-							<?php elseif ($websiteMode === 'shop') : ?>
-								<a href="<?= home_url() ?>" class="button --color-accent button--toggle-site --to-atelier">
-									<span>Zu den Kunstkursen</span>
-									<img src="<?php echo get_template_directory_uri(); ?>/assets/img/shop/arrow_next_page.svg" alt="">
-								</a>
-							<?php endif; ?>
+							<?php get_template_part('components/button', NULL, array('button' => $contactButton, 'color' => 'white', 'class' => 'button__contact', 'size' => 'small')); ?>
+							<?php get_template_part('components/button', NULL, array('button' => $switchButton, 'color' => 'accent', 'size' => 'small', 'icon' => 'chevron-right', 'iconPosition' => 'right')); ?>
 						</div>
 
 
