@@ -19,6 +19,8 @@ if (is_page('shop') || is_woocommerce() || is_shop() || is_product_category() ||
 // override websiteMode with URL parameter
 if (isset($_GET['websiteMode'])) $setWebsiteMode = $_GET['websiteMode'];
 
+if ($setWebsiteMode === 'auto') $setWebsiteMode = 'atelier'; // TODO - Remove auto mode
+
 global $websiteMode;
 $websiteMode = $setWebsiteMode; // Passe den Wert der globalen Variable an
 
