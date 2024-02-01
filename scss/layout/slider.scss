@@ -1,8 +1,19 @@
 /*------------------------------------*/
 /* Slider */
 /*------------------------------------*/
-$slider__pagination-gap: 6px;
 
+.swiper {
+	// NOTE - Handle layout shift when slider is not initialized yet
+	&:not(.swiper-initialized) {
+		position: relative;
+
+		.swiper-wrapper {
+			display: flex;
+		}
+	}
+}
+
+$slider__pagination-gap: 6px;
 .slider__pagination {
 	width: auto !important;
 	@include flex('row');

@@ -65,7 +65,7 @@ $slides = get_field('slides');
                                 $bild = $slide['bild']; ?>
 
                                 <div class="swiper-slide">
-                                    <img src="<?= $bild['sizes']['medium'] ?>" alt="<?= $bild['alt'] ?>">
+                                    <img src="<?= $bild['sizes']['medium'] ?>" width="350" height="450" alt="<?= $bild['alt'] ?>">
                                 </div>
 
                             <?php endforeach; ?>

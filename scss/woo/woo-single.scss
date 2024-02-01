@@ -73,6 +73,12 @@ body.single-product {
 					}
 				}
 			}
+
+			// NOTE - Handle layout shift when slider is not initialized yet
+			&:not(.swiper-initialized) {
+				aspect-ratio: 4/5;
+				overflow: hidden;
+			}
 		}
 
 		.thumbs-slider {
@@ -97,6 +103,17 @@ body.single-product {
 
 				&.swiper-slide-thumb-active {
 					border-color: $main;
+				}
+			}
+
+			// NOTE - Handle layout shift when slider is not initialized yet
+			&:not(.swiper-initialized) {
+				overflow: hidden;
+
+				.swiper-slide {
+					width: calc((100% - 3 * 15px) / 4);
+					min-width: calc((100% - 3 * 15px) / 4);
+					margin-right: 15px;
 				}
 			}
 		}

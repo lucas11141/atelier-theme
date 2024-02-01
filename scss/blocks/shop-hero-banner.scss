@@ -65,6 +65,16 @@
 					padding-top: 30px;
 				}
 			}
+
+			// NOTE - Handle layout shift when slider is not initialized yet
+			.swiper:not(.swiper-initialized) {
+				overflow: hidden;
+
+				.swiper-slide {
+					width: 100%;
+					min-width: 100%;
+				}
+			}
 		}
 
 		.image-slider {
@@ -79,6 +89,7 @@
 				width: 100%;
 				aspect-ratio: 350 / 450;
 				position: relative;
+				background: $main-light;
 
 				img {
 					@include pos('cover');
@@ -130,6 +141,16 @@
 						width: 25px;
 						background-image: none;
 					}
+				}
+			}
+
+			// NOTE - Handle layout shift when slider is not initialized yet
+			.swiper:not(.swiper-initialized) {
+				overflow: hidden;
+
+				.swiper-slide {
+					width: 100%;
+					min-width: 100%;
 				}
 			}
 		}

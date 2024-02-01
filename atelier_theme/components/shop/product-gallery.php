@@ -20,7 +20,7 @@ $productImages = array_map(function ($imageId) {
                 <?php foreach ($productImages as $image) : ?>
                     <div class="swiper-slide">
                         <a data-pswp-src="<?php echo $image['lightbox'][0] ?>" data-pswp-width="<?php echo $image['lightbox'][1] ?>" data-pswp-height="<?php echo $image['lightbox'][2] ?>">
-                            <img src="<?php echo esc_url($image['slider'][0]); ?>" alt="" />
+                            <img src="<?php echo esc_url($image['slider'][0]); ?>" width="530" height="662" alt="" />
                         </a>
                     </div>
                 <?php endforeach; ?>
@@ -37,7 +37,7 @@ $productImages = array_map(function ($imageId) {
                 <div class="swiper-wrapper">
                     <?php foreach ($productImages as $image) : ?>
                         <div class="swiper-slide">
-                            <img src="<?php echo esc_url($image['thumbnail'][0]); ?>" alt="" />
+                            <img src="<?php echo esc_url($image['thumbnail'][0]); ?>" width="100" height="100" alt="" />
                         </div>
                     <?php endforeach; ?>
                 </div>
