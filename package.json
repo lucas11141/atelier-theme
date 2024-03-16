@@ -1,13 +1,35 @@
 {
-  "devDependencies": {
-    "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.4"
-  },
-  "dependencies": {
-    "jquery": "^3.7.1",
-    "js-cookie": "^3.0.5",
-    "photoswipe": "^5.4.3",
-    "slick-carousel": "^1.8.1",
-    "swiper": "^10.3.1"
-  }
+	"scripts": {
+		"build:js": "webpack",
+		"build:scss": "sass scss/main.scss atelier_theme/assets/css/main.css",
+		"build": "npm run build:js && npm run build:scss",
+		"dev:js": "webpack --watch",
+		"dev:scss": "time sass scss/main.scss atelier_theme/assets/css/main.css --watch",
+		"dev": "npm run dev:js & npm run dev:scss",
+		"lint": "eslint"
+	},
+	"dependencies": {
+		"jquery": "^3.7.1",
+		"js-cookie": "^3.0.5",
+		"photoswipe": "^5.4.3",
+		"slick-carousel": "^1.8.1",
+		"swiper": "^10.3.1"
+	},
+	"devDependencies": {
+		"prettier": "^3.0.3",
+		"prettier-plugin-tailwindcss": "^0.5.4",
+		"@typescript-eslint/eslint-plugin": "^7.1.0",
+		"@typescript-eslint/parser": "^7.1.0",
+		"css-loader": "^6.10.0",
+		"esbuild-loader": "^4.0.3",
+		"eslint": "^8.57.0",
+		"eslint-webpack-plugin": "^4.0.1",
+		"sass": "^1.71.1",
+		"sass-loader": "^14.1.1",
+		"style-loader": "^3.3.4",
+		"ts-loader": "^9.5.1",
+		"typescript": "^5.3.3",
+		"webpack": "^5.90.3",
+		"webpack-cli": "^5.1.4"
+	}
 }
