@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default function wooGlobal() {
+export function wooGlobal() {
 	// Mobile Message swipe up
 	let touchstartY = 0;
 	let touchendY = 0;

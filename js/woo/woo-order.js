@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default function wooOrder() {
+export function wooOrder() {
 	// Move elements to split left
 	if (document.querySelector('.tracking-detail')) {
 		$('.shipping__status').append($('.tracking-detail'));

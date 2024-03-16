@@ -1,8 +1,8 @@
-import { Autoplay, Navigation, Thumbnail } from 'swiper/bundle';
+import { Autoplay, Navigation, Thumbnail } from 'swiper/modules';
 
 import Swiper from 'swiper';
 
-export default function shopHeroBanner() {
+export function shopHeroBanner() {
 	// Install the Swiper modules
 	Swiper.use([Autoplay, Navigation, Thumbnail]);
 

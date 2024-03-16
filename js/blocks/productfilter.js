@@ -1,4 +1,4 @@
-export default function productFilter() {
+export function productFilter() {
 	// Product Filter
 	const productsFilter = document.querySelector('.products__filter');
 

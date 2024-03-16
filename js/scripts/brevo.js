@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default function brevo() {
+export function brevo() {
 	document.addEventListener('wpcf7submit', (e) => {
 		const form = e.target;
 

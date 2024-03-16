@@ -12,7 +12,7 @@ import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import Swiper from 'swiper';
 import { defaultSwiperPagination } from '../options/variables';
 
-export default function wooSingle() {
+export function wooSingle() {
 	// Install the Swiper modules
 	Swiper.use([Pagination, Navigation]);
 

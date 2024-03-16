@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default function wooCheckout() {
+export function wooCheckout() {
 	// Erweitere die Click-Box input zum li Container
 	document.querySelectorAll('.woocommerce-shipping-methods li').forEach((element) => {
 		element.addEventListener('click', (e) => {

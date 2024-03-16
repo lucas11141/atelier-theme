@@ -1,4 +1,4 @@
-export default function contactForm7() {
+export function contactForm7() {
 	// Move the spinner into the submit button wrapper
 	document.querySelectorAll("input[type='submit'].has-spinner").forEach((input) => {
 		// wrap input in div

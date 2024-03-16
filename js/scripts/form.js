@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default function form() {
+export function form() {
 	//Input Border Farbe bei Füllung färben
 	$('input, textarea').each(function () {
 		if ($(this).val() !== '') {

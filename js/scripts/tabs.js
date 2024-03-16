@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default function tabs() {
+export function tabs() {
 	// Hide all inactive tabs on load
 	let tabName = $('.tab__link.--active').attr('data-tabID');
 	$('.tab__content').hide();

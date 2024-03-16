@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import { scrollOffset } from '../options/variables';
 
-export default function settings() {
+export function settings() {
 	// Leichtes Scrollen
 	$('a[href*=\\#]:not([href=\\#])').click(function () {
 		if (

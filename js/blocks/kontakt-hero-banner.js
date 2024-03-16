@@ -1,4 +1,4 @@
-export default function kontaktHeroBanner() {
+export function kontaktHeroBanner() {
 	/*------------------------------------*/
 	/* 	Add options to course select
 	/*------------------------------------*/

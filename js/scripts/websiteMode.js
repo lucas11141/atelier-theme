@@ -1,4 +1,4 @@
-export default function websiteMode() {
+export function websiteMode() {
 	const websiteMode = document.querySelector('#gtm-values').dataset.websiteMode;
 
 	if (websiteMode === 'shop') {

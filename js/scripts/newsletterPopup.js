@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-export default function newsletterPopup() {
+export function newsletterPopup() {
 	const popupNewsletter = document.querySelector('.popup--newsletter');
 
 	if (popupNewsletter) {

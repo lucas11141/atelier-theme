@@ -1,26 +1,27 @@
 import 'swiper/css/bundle';
 
-import accordeon from './scripts/accordeon';
-import bookingReminder from './blocks/booking-reminder';
-import brevo from './scripts/brevo';
-import contactForm7 from './scripts/contactform7';
-import form from './scripts/form';
-import kontaktHeroBanner from './blocks/kontakt-hero-banner';
+import {
+	accordeon,
+	brevo,
+	contactForm7,
+	form,
+	navigation,
+	newsletterPopup,
+	popup,
+	settings,
+	tabs,
+	websiteMode,
+} from './scripts';
+import {
+	bookingReminder,
+	kontaktHeroBanner,
+	productFilter,
+	produktslider,
+	shopHeroBanner,
+} from './blocks';
+import { wooArchive, wooCheckout, wooGlobal, wooOrder, wooSingle } from './woo';
+
 import lightbox from './lib/lightbox';
-import navigation from './scripts/navigation';
-import newsletterPopup from './scripts/newsletterPopup';
-import popup from './scripts/popup';
-import productFilter from './blocks/productfilter';
-import produktslider from './blocks/produktslider';
-import settings from './scripts/settings';
-import shopHeroBanner from './blocks/shopHeroBanner';
-import tabs from './scripts/tabs';
-import websiteMode from './scripts/websiteMode';
-import wooArchive from './woo/woo-archive';
-import wooCheckout from './woo/woo-checkout';
-import wooGlobal from './woo/woo-global';
-import wooOrder from './woo/woo-order';
-import wooSingle from './woo/woo-single';
 
 // @prepros-prepend "lib/jquery.magnific-popup.min.js";
 // @prepros-prepend "lib/mc-calendar.min.js";

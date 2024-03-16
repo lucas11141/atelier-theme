@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default function wooArchive() {
+export function wooArchive() {
 	// Truncate term description
 	const termDescription = $('.term-description');
 	if (termDescription && termDescription.text().length > 100) {

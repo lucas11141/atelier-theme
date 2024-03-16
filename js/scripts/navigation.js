@@ -2,7 +2,7 @@ import { disableScroll, enableScroll } from '../lib/helpers';
 
 import $ from 'jquery';
 
-export default function navigation() {
+export function navigation() {
 	let dropdownIsOpened = false;
 	const hamburgers = document.querySelectorAll('.hamburger');
 

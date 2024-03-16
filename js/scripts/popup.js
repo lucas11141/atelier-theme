@@ -1,6 +1,6 @@
 import { disableScroll, enableScroll } from '../lib/helpers';
 
-export default function popup() {
+export function popup() {
 	// Open popups
 	const popupButtons = document.querySelectorAll('a.--open__popup');
 	const popupButtonsSpan = document.querySelectorAll('a.--open__popup span');

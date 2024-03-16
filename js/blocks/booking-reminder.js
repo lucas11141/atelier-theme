@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 
-export default function bookingReminder() {
+export function bookingReminder() {
 	const bookingReminder = $('.booking-reminder');
 	const urlParams = new URLSearchParams(window.location.search);
 	const bookUncompleted = urlParams.get('book_uncompleted') || Cookies.get('book_uncompleted');
