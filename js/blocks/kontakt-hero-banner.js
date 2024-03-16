@@ -41,7 +41,6 @@ export function kontaktHeroBanner() {
 	const contactBanner = document.querySelector('.kontakt__banner');
 	if (contactBanner) {
 		let currentActive;
-		var hasScrolled = false;
 		const tabButtons = contactBanner.querySelectorAll('.methods__item');
 		const tabContents = document.querySelectorAll('.methods__content');
 
@@ -53,7 +52,7 @@ export function kontaktHeroBanner() {
 			});
 		});
 
-		function openTab(index, scroll = true) {
+		function openTab(index) {
 			// Hide Elements for no Selection
 			tabButtons.forEach((button) => {
 				button.classList.remove('--arrows');
@@ -122,9 +121,6 @@ export function kontaktHeroBanner() {
 			const group = e.target.options[e.target.selectedIndex].dataset.group;
 			showToogleFields('group', group);
 
-			const rows = form.querySelectorAll(
-				'.form__split:first-child label:not(.--hidden)'
-			).length;
 			adjustTextareaHeight(form);
 		});
 	}

@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 export function brevo() {
 	document.addEventListener('wpcf7submit', (e) => {
 		const form = e.target;
@@ -96,31 +94,31 @@ export function brevo() {
 		return params;
 	}
 
-	async function brevoGetContact(params) {
-		const options = {
-			method: 'POST',
-			headers: {
-				accept: 'application/json',
-				'content-type': 'application/json',
-			},
-			body: JSON.stringify(params),
-		};
+	// async function brevoGetContact(params) {
+	// 	const options = {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			accept: 'application/json',
+	// 			'content-type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify(params),
+	// 	};
 
-		return fetch('/wp-content/themes/atelier_theme/functions/brevoGetContact.php', options);
-	}
+	// 	return fetch('/wp-content/themes/atelier_theme/functions/brevoGetContact.php', options);
+	// }
 
-	async function brevoCreateContact(params) {
-		const options = {
-			method: 'POST',
-			headers: {
-				accept: 'application/json',
-				'content-type': 'application/json',
-			},
-			body: JSON.stringify(params),
-		};
+	// async function brevoCreateContact(params) {
+	// 	const options = {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			accept: 'application/json',
+	// 			'content-type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify(params),
+	// 	};
 
-		return fetch('/wp-content/themes/atelier_theme/functions/brevoCreateContact.php', options);
-	}
+	// 	return fetch('/wp-content/themes/atelier_theme/functions/brevoCreateContact.php', options);
+	// }
 
 	async function brevoSendEmail(templateId, params) {
 		// console.log(templateId, params);

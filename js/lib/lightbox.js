@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 export default function lightbox() {
 	class Gallery {
 		constructor(galleryElement) {
@@ -96,85 +94,7 @@ export default function lightbox() {
 	const galleryAusstellungBlocks = document.querySelectorAll('.galerie__ausstellung');
 	if (galleryAusstellungBlocks.length > 0) {
 		galleryAusstellungBlocks.forEach((block) => {
-			const gallery = new Gallery(block);
+			new Gallery(block);
 		});
-	}
-
-	function initGallery(element) {
-		//     const lightboxImages = element.querySelectorAll(".lightbox__image")
-		//     // const currentLighboxImage = element.querySelector(".swiper-slide-active .lightbox__image")
-		//     let imageData = []
-		//     let galleryIndex = 0
-		//     let popupIsOpened = false
-		//     // const thumbnailContainer = document.querySelector(".gallery__thumbnails")
-		//     const popupElement = document.querySelector(".gallery__popup")
-		//     const popupBackground = document.querySelector(".popup__background")
-		//     const popupImage = document.querySelector(".popup__image .image__img")
-		//     const imageMetaTitle = popupElement.querySelector(".meta__text h5")
-		//     const imageMetaCaption = popupElement.querySelector(".meta__text h6")
-		//     let thumbnailImages
-		//     const prevButton = popupElement.querySelector(".button__prev")
-		//     const nextButton = popupElement.querySelector(".button__next")
-		//     // const imageIndicator = document.querySelector(".gallery__indicator")
-		//     // createImages()
-		//     setLightboxData()
-		//     createEventHandlers()
-		//     // Bilder in Array Speichern
-		//     function setLightboxData() {
-		//         lightboxImages.forEach((image, index) => {
-		//             const data = {}
-		//             data["src"] = image.dataset.src
-		//             data["title"] = image.dataset.title
-		//             data["caption"] = image.dataset.caption
-		//             imageData.push(data)
-		//             image.dataset.index = index
-		//         });
-		//         console.log(imageData)
-		//     }
-		//     // Event Listener
-		//     function createEventHandlers() {
-		//         prevButton.addEventListener("click", () => move(-1) )
-		//         nextButton.addEventListener("click", () => move(1) )
-		//         lightboxImages.forEach(image => {
-		//             image.addEventListener("click", (e) => showImage(e) )
-		//         })
-		//         // currentLighboxImage.addEventListener("click", (e) => {
-		//         //     e.target.dataset.index
-		//         // })
-		//         popupBackground.addEventListener("click", () => closePopup())
-		//     }
-		//     //Popup öffnen
-		//     function showImage(event) {
-		//         updateImage(parseInt(event.target.dataset.index))
-		//         if(popupIsOpened === false) {
-		//             popupElement.classList.add("--opened")
-		//             popupIsOpened = true
-		//         }
-		//     }
-		//     //Popup schließen
-		//     function closePopup() {
-		//         popupElement.classList.remove("--opened")
-		//         popupIsOpened = false
-		//     }
-		//     // Bild vor/zurück
-		//     function move(moveIndex) {
-		//         galleryIndex = galleryIndex + moveIndex
-		//         if(galleryIndex > (imageData.length - 1)) {
-		//             galleryIndex = 0;
-		//         } else if(galleryIndex < 0) {
-		//             galleryIndex = imageData.length - 1
-		//         }
-		//         updateImage(galleryIndex)
-		//     }
-		//     // Hauptbild aktualisieren
-		//     function updateImage(index) {
-		//         popupImage.src = imageData[index]["src"]
-		//         imageMetaTitle.innerText = imageData[index]["title"]
-		//         imageMetaCaption.innerText = imageData[index]["caption"]
-		//         galleryIndex = index
-		//         // imageIndicator.innerHTML = `${(parseInt(index) + 1)} / ${images.length}`
-		//         //toggleActive(index)
-		//     }
-		// }
 	}
 }

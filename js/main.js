@@ -75,4 +75,5 @@ import lightbox from './lib/lightbox';
 		contactForm7();
 		newsletterPopup();
 	});
+	// eslint-disable-next-line no-undef
 })(jQuery);

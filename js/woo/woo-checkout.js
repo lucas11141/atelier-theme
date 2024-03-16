@@ -5,7 +5,7 @@ export function wooCheckout() {
 	document.querySelectorAll('.woocommerce-shipping-methods li').forEach((element) => {
 		element.addEventListener('click', (e) => {
 			e.currentTarget.querySelector('input').checked = true;
-			jQuery('body').trigger('update_checkout');
+			$('body').trigger('update_checkout');
 
 			const label = e.currentTarget.querySelector('label').childNodes[0].nodeValue;
 			$('.shipping__total .label').text(label);

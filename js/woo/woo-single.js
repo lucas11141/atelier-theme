@@ -37,11 +37,7 @@ export function wooSingle() {
 
 			pagination: defaultSwiperPagination,
 
-			thumbs: thumbsSliderElement
-				? {
-						swiper: thumbsSlider,
-				  }
-				: undefined,
+			thumbs: thumbsSliderElement ? { swiper: thumbsSlider } : undefined,
 		});
 
 		/*------------------------------------*/
@@ -69,7 +65,7 @@ export function wooSingle() {
 			counter: true,
 			arrowKeys: true,
 			/* ## Options ## */
-			bgOpacity: '0.8' /* deafult: 0.8 */,
+			// bgOpacity: '0.8' /* deafult: 0.8 */,
 			wheelToZoom: true /* deafult: undefined */,
 		};
 

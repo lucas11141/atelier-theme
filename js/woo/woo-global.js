@@ -44,7 +44,7 @@ export function wooGlobal() {
 	}
 
 	//Warenkorb Neu laden bei Gutscheincode anpassungen
-	jQuery(document.body).on('applied_coupon_in_checkout removed_coupon_in_checkout', function () {
+	$(document.body).on('applied_coupon_in_checkout removed_coupon_in_checkout', function () {
 		location.reload();
 	});
 }

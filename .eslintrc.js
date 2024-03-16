@@ -24,5 +24,6 @@ module.exports = {
 	rules: {
 		'no-unused-vars': 'warn',
 		'@typescript-eslint/no-unused-vars': 'off',
+		'no-inner-declarations': 'off', // FIXME
 	},
 };

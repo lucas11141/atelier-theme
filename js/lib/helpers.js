@@ -2,6 +2,9 @@ import $ from 'jquery';
 
 // Disable scroll
 export function disableScroll() {
+	let scrollTop;
+	let scrollLeft;
+
 	// Get the current page scroll position
 	scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 	(scrollLeft = window.pageXOffset || document.documentElement.scrollLeft),

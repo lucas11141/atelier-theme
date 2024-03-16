@@ -5,7 +5,7 @@ export function produktslider() {
 	const productSliderElements = document.querySelectorAll('.produktslider .swiper');
 	productSliderElements.forEach((sliderElement) => {
 		// Main slider
-		const slider = new Swiper(sliderElement, {
+		new Swiper(sliderElement, {
 			slidesPerView: 'auto',
 			spaceBetween: 20,
 

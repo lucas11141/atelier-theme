@@ -4,7 +4,7 @@ export function accordeon() {
 	// TODO - Change to css-only solution
 
 	//Accordeon
-	$('.accordeon__item .accordeon__header').on('click', function (e) {
+	$('.accordeon__item .accordeon__header').on('click', function () {
 		$(this).parent('.accordeon__item').toggleClass('accordeon__item--opened');
 		const accordion_content = $(this).parent('.accordeon__item').find('.accordeon__content');
 		// $('.accordeon__content').not(accordion_content).slideUp(200);
