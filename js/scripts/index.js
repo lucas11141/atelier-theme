@@ -2,6 +2,7 @@ export * from './accordeon';
 export * from './brevo';
 export * from './contactform7';
 export * from './form';
+export * from './initSwiperModules';
 export * from './navigation';
 export * from './newsletterPopup';
 export * from './popup';

@@ -1,12 +1,7 @@
-import { Keyboard, Navigation, Pagination } from 'swiper/bundle';
-
 import Swiper from 'swiper';
 import { defaultSwiperPagination } from '../options/variables';
 
 export function produktslider() {
-	// Install the Swiper modules
-	Swiper.use([Pagination, Navigation, Keyboard]);
-
 	const productSliderElements = document.querySelectorAll('.produktslider .swiper');
 	productSliderElements.forEach((sliderElement) => {
 		// Main slider

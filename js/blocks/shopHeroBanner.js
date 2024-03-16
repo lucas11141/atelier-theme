@@ -1,11 +1,6 @@
-import { Autoplay, Navigation, Thumbnail } from 'swiper/modules';
-
 import Swiper from 'swiper';
 
 export function shopHeroBanner() {
-	// Install the Swiper modules
-	Swiper.use([Autoplay, Navigation, Thumbnail]);
-
 	const shopHeroBannerBlocks = document.querySelectorAll('.shop-hero-banner');
 
 	shopHeroBannerBlocks?.forEach((block) => {

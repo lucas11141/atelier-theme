@@ -5,6 +5,7 @@ import {
 	brevo,
 	contactForm7,
 	form,
+	initSwiperModules,
 	navigation,
 	newsletterPopup,
 	popup,
@@ -36,6 +37,7 @@ import lightbox from './lib/lightbox';
 		/*------------------------------------*/
 		/* scripts.js */
 		/*------------------------------------*/
+		initSwiperModules();
 		settings();
 		navigation();
 		accordeon();

@@ -4,8 +4,6 @@
 
 import 'photoswipe/style.css';
 
-import { Navigation, Pagination } from 'swiper/bundle';
-
 import $ from 'jquery';
 import PhotoSwipe from 'photoswipe';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
@@ -13,9 +11,6 @@ import Swiper from 'swiper';
 import { defaultSwiperPagination } from '../options/variables';
 
 export function wooSingle() {
-	// Install the Swiper modules
-	Swiper.use([Pagination, Navigation]);
-
 	const galleryElements = document.querySelectorAll('.single-product .product-gallery');
 	galleryElements.forEach((galleryElement) => {
 		// Thumbnail slider
