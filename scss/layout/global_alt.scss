@@ -646,65 +646,6 @@ h6 {
 	}
 }
 
-.info-badge {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-items: center;
-	padding: 4px;
-	border-radius: 100px;
-
-	div {
-		height: 30px;
-		width: 30px;
-		min-width: 30px;
-		background-color: white;
-		border-radius: 50%;
-		position: relative;
-		box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-
-		p {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			font-size: 18px;
-			font-family: proxima-soft, sans-serif;
-			font-weight: 800;
-			text-align: center;
-		}
-	}
-	span {
-		font-size: 14px;
-		font-weight: 700;
-		margin-left: 11px;
-		margin-right: 13px;
-		color: white;
-	}
-	&.green {
-		background-color: $accent;
-
-		p {
-			color: $accent;
-		}
-	}
-	&.red {
-		background-color: #ff342c;
-
-		p {
-			color: #ff342c;
-		}
-	}
-	&.grey {
-		background-color: $linegray;
-
-		p,
-		span {
-			color: $main;
-		}
-	}
-}
-
 .field-badge {
 	height: 40px;
 	width: 40px;

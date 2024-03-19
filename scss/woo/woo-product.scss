@@ -101,12 +101,11 @@ li.product,
 			bottom: 20px;
 		}
 
-		.badge-tooltip {
-			display: contents;
-
-			.tooltip {
-				display: none;
-			}
+		.info-badge {
+			position: absolute;
+			top: 12px;
+			left: 12px;
+			z-index: 1;
 		}
 
 		// NOTE: When product has variable price
@@ -338,7 +337,7 @@ li.product,
 		}
 	}
 
-	.badge-tooltip:has(.--hide-on-archive) {
-		display: none;
-	}
+	// .info-badge:has(.--hide-on-archive) {
+	// 	display: none;
+	// }
 }

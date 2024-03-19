@@ -373,68 +373,6 @@ Abstände
 	}
 }
 
-/* Info Badge */
-.info__badge,
-.info-badge {
-	padding: 5px;
-	padding-right: 15px;
-	width: fit-content;
-	@include flex('row');
-	align-items: center;
-	column-gap: 10px;
-	background-color: $lightgray;
-	border-radius: 50px;
-	border: solid 1px $linegray;
-
-	div {
-		height: 26px;
-		width: 26px;
-		min-width: 26px;
-		border-radius: 50%;
-		background-color: $main;
-		position: relative;
-
-		&::after {
-			content: '!';
-			@include fluid-type(16px, 18px);
-			font-weight: 800;
-			color: white;
-			@include pos('center');
-		}
-	}
-
-	p {
-		@include fluid-type(14px, 15px);
-		font-weight: 700 !important;
-		color: $main !important;
-		margin: 0 !important;
-	}
-
-	& + h1,
-	& + h2,
-	& + h3 {
-		margin-top: 30px;
-	}
-
-	@media only screen and (max-width: $desktop) {
-		padding: 4px;
-		padding-right: 15px;
-		column-gap: 8px;
-
-		div {
-			height: 24px;
-			width: 24px;
-			min-width: 24px;
-		}
-
-		& + h1,
-		& + h2,
-		& + h3 {
-			margin-top: 25px;
-		}
-	}
-}
-
 /* Video */
 .video {
 	position: relative;
@@ -1402,6 +1340,73 @@ a img {
 	z-index: 300 !important;
 }
 
+/*------------------------------------*/
+/* Badfes */
+/*------------------------------------*/
 .badge {
 	@include badge;
+}
+
+.info-badge {
+	width: fit-content;
+	@include flex('row');
+	align-items: center;
+	border-radius: 8px;
+	background: currentColor;
+	@include fluid-type(12px, 12px);
+	overflow: clip;
+
+	.label {
+		padding: 8px 10px;
+		display: flex;
+		align-items: center;
+		color: white;
+		font-weight: 700;
+		line-height: 1;
+
+		.feather {
+			margin-right: 6px;
+			width: 15px;
+			height: 15px;
+			stroke-width: 2.5;
+			stroke: white;
+			translate: 0 -0.5px;
+		}
+	}
+
+	.info {
+		padding: 8px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: rgba(255, 255, 255, 0.1);
+		border-left: 1px solid rgb(255, 255, 255, 0.2);
+
+		svg {
+			width: 16px;
+			height: 16px;
+			stroke-width: 2.5;
+			stroke: white;
+		}
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.2);
+		}
+	}
+}
+
+// Tippy toolbox
+.tippy-box[data-theme~='atelier'] {
+	width: 250px;
+	max-width: calc(100vw - 2 * $outergap);
+	border-radius: 8px;
+	border: 1px solid var(--tailwind-orange-200, #fed7aa);
+	background: var(--tailwind-orange-100, #ffedd5);
+
+	.tippy-content {
+		padding: 9px 12px;
+		@include fluid-type(12px, 12px);
+		font-weight: 600;
+		color: var(--tailwind-orange-900, #7c2d12);
+	}
 }

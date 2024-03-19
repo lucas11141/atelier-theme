@@ -1,8 +1,8 @@
 <?php
 $icon = $args['icon'] ?? false;
-$size = $args['size'] ?? 'normal';
-$color = $args['color'] ?? "main";
-$strokeWidth = $args['strokeWidth'] ?? 3.5;
+$size = $args['size'] ?? '';
+$color = $args['color'] ?? '';
+$strokeWidth = $args['strokeWidth'] ?? 3;
 ?>
 
 <svg class="feather --size-<?= $size ?> --color-<?= $color ?>" stroke-width="<?= $strokeWidth ?>">

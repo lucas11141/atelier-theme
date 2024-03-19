@@ -62,7 +62,7 @@ body.single-product {
 
 		.main-slider {
 			border: solid 1px $linegray;
-			border-radius: 35px;
+			border-radius: 25px;
 
 			img {
 				width: 100%;
@@ -142,19 +142,11 @@ body.single-product {
 			}
 		}
 
-		.badge-tooltip {
-			margin-bottom: 20px;
-			@include flex('row');
-			align-items: center;
-			gap: 10px;
+		.info-badge {
 			position: absolute;
 			top: 20px;
 			left: 20px;
 			z-index: 2;
-
-			.product__badge {
-				margin-bottom: 0;
-			}
 		}
 	}
 

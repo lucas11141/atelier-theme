@@ -23,6 +23,7 @@ import {
 import { wooArchive, wooCheckout, wooGlobal, wooOrder, wooSingle } from './woo';
 
 import lightbox from './lib/lightbox';
+import { tooltips } from './scripts/tooltips';
 
 (function ($) {
 	$(function () {
@@ -71,6 +72,7 @@ import lightbox from './lib/lightbox';
 		brevo();
 		contactForm7();
 		newsletterPopup();
+		tooltips();
 	});
 	// eslint-disable-next-line no-undef
 })(jQuery);

@@ -9,22 +9,23 @@ $color = $args['color'];
 $hideOnArchive = $args['hideOnArchive'];
 
 // Set color style when color is given
-if ($color) $colorStyle = 'background-color:' . $color;
+if ($color) $colorStyle = 'color:' . $color;
 ?>
 
-<?php if ($tooltip) : ?>
-    <div class="badge-tooltip">
-    <?php endif; ?>
+<?php if ($label) : ?>
+    <div class="info-badge" style="<?= $colorStyle ?>">
+        <span class="label">
+            <?php if ($icon) : ?>
+                <?php get_template_part('components/icon', 'feather', array('icon' => $icon)); ?>
+            <?php endif; ?>
 
-    <span class="product__badge <?= $hideOnArchive ? '--hide-on-archive' : '' ?>" style="<?= $colorStyle; ?>">
-        <?php get_template_part('components/icon', '', $icon); ?>
-        <?= $label ?>
-    </span>
+            <?= $label ?>
+        </span>
 
-    <?php if ($tooltip) : ?>
-        <div class="tooltip">
-            <?php get_template_part('components/icon', '', array('icon' => 'info')); ?>
-            <span><?= $tooltip ?></span>
-        </div>
+        <?php if ($tooltip) : ?>
+            <i class="info tooltip" data-tippy-content="<?= $tooltip ?>">
+                <?php get_template_part('components/icon', 'feather', array('icon' => 'info')); ?>
+            </i>
+        <?php endif; ?>
     </div>
 <?php endif; ?>
