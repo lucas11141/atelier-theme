@@ -1,23 +1,25 @@
 <?php
+define('THEME_VERSION', '1.4.1-beta7');
+
 function atelier_styles() {
-    wp_register_style('normalize', get_template_directory_uri() . '/assets/css/normalize.min.css', array(), '1.3.0-beta2', 'all');
+    wp_register_style('normalize', get_template_directory_uri() . '/assets/css/normalize.min.css', array(), THEME_VERSION, 'all');
     wp_enqueue_style('normalize'); // Enqueue it!
 
-    wp_register_style('atelierstyle', get_template_directory_uri() . '/assets/css/main.css', array(), '1.3.0-beta2', 'all');
+    wp_register_style('atelierstyle', get_template_directory_uri() . '/assets/css/main.css', array(), THEME_VERSION, 'all');
     wp_enqueue_style('atelierstyle'); // Enqueue it!
 }
 
 function atelier_header_scripts() {
     if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
 
-        wp_register_script('atelierscripts', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.3.0-beta2'); // Custom scripts
+        wp_register_script('atelierscripts', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), THEME_VERSION); // Custom scripts
         wp_enqueue_script('atelierscripts'); // Enqueue it!
     }
 }
 
 // Register ACF Block scripts
 function atelier_block_scripts() {
-    wp_register_script('block-script-date-overview', get_template_directory_uri() . '/assets/js/date-overview.js', array(), '1.3.0-beta2', true);
+    wp_register_script('block-script-date-overview', get_template_directory_uri() . '/assets/js/date-overview.js', array(), THEME_VERSION, true);
 }
 
 //Remove Gutenberg Block Library CSS from loading on the frontend

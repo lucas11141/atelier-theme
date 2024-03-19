@@ -1,13 +1,24 @@
-import $ from 'jquery';
-
 export function wooArchive() {
 	// Truncate term description
-	const termDescription = $('.term-description');
-	if (termDescription && termDescription.text().length > 100) {
-		termDescription.addClass('--hide-text');
-		termDescription.append('<a class="show-more">Mehr lesen</a>');
-		termDescription.find('.show-more').on('click', () => {
-			termDescription.removeClass('--hide-text');
+	const description = document.querySelector('.term-description') as HTMLElement;
+	if (!description) return;
+
+	const text = description.querySelector('p') as HTMLElement;
+	if (!text) return;
+
+	const isClamped = text.offsetHeight < text.scrollHeight;
+
+	// Add show more button if term description is too long
+	if (isClamped) {
+		const showMoreButton = document.createElement('a');
+		showMoreButton.textContent = 'Mehr lesen';
+		showMoreButton.classList.add('show-more');
+
+		description.appendChild(showMoreButton);
+
+		showMoreButton.addEventListener('click', () => {
+			description.classList.add('--show-full');
+			showMoreButton.remove();
 		});
 	}
 

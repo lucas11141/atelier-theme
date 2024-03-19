@@ -24,9 +24,6 @@ import { wooArchive, wooCheckout, wooGlobal, wooOrder, wooSingle } from './woo';
 
 import lightbox from './lib/lightbox';
 
-// @prepros-prepend "lib/jquery.magnific-popup.min.js";
-// @prepros-prepend "lib/mc-calendar.min.js";
-
 (function ($) {
 	$(function () {
 		/*------------------------------------*/

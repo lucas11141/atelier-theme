@@ -1445,7 +1445,7 @@ const filterElement = document.querySelector('#date-overview__filter') as HTMLEl
 const selectorElement = document.querySelector('#date-overview__selector') as HTMLElement;
 
 if (!calendarElement || !listElement || !filterElement || !selectorElement) {
-	console.error('No calendar, list or filter element found');
+	// console.error('No calendar, list or filter element found');
 } else {
 	new DateOverview(calendarElement, listElement, filterElement, selectorElement);
 }

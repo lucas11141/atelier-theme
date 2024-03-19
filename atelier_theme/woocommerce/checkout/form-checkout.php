@@ -60,7 +60,6 @@ if (!defined('ABSPATH')) {
 			<div class="accordeon__item cart__items split__right__block">
 				<div class="accordeon__header">
 					<h5>Warenkorb</h5>
-					<div class="button__plusminus"></div>
 				</div>
 				<div class="accordeon__content">
 

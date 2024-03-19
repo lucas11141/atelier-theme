@@ -287,7 +287,7 @@
 		font-family: $main-font;
 		@include fluid-type(14px, 15px);
 		color: white;
-		font-weight: 800;
+		font-weight: 700;
 		line-height: 1em;
 		letter-spacing: 0.3px;
 		text-align: center;
@@ -338,7 +338,7 @@
 
 	// Responsive
 	@media only screen and (max-width: $desktop) {
-		padding: 13px 38px;
+		padding: 15px 38px;
 	}
 
 	@media only screen and (max-width: $mobile) {
@@ -878,4 +878,38 @@
 
 @mixin box-padding {
 	padding: 25px 27px;
+}
+
+@mixin badge {
+	display: block;
+	padding: 14px 16px 14px 14px;
+	width: 100%;
+	@include flex('row');
+	align-items: baseline;
+	gap: 10px $gap;
+	background: $lightgray;
+	border: solid 1px $linegray;
+	border-radius: 10px;
+	@include fluid-type(13px, 14px);
+	font-weight: 700;
+
+	&.--admin {
+		background: #f7f4ff;
+		border-color: #7b4aff;
+		color: #7b4aff;
+	}
+
+	&.--success {
+		background: #f4fff7;
+		border-color: #4ab866;
+		color: #4ab866;
+	}
+
+	a {
+		text-decoration: underline;
+
+		&:hover {
+			filter: brightness(1.2);
+		}
+	}
 }

@@ -312,15 +312,16 @@ $breadcrumb-gap: 10px;
 
 	// NOTE - New woocommerce notices (since woocommerce 8.5)
 	.wc-block-components-notice-banner {
+		@include badge;
 		margin: 0;
-		padding: 14px 16px 14px 14px !important;
+		// padding: 14px 16px 14px 14px !important;
 		width: 100%;
 		gap: 10px;
-		background: $lightgray;
-		border: solid 2px $linegray;
-		border-radius: 10px;
-		@include fluid-type(13px, 14px);
-		font-weight: 600;
+		// background: $lightgray;
+		// border: solid 2px $linegray;
+		// border-radius: 10px;
+		// @include fluid-type(13px, 14px);
+		// font-weight: 600;
 
 		> .wc-block-components-notice-banner__content {
 			.button,
@@ -411,10 +412,10 @@ $breadcrumb-gap: 10px;
 
 		.wc-block-components-notice-banner {
 			margin: 0;
-			padding: 110px 20px 20px !important;
+			// padding: 110px 20px 20px !important;
 			@include flex('column');
-			align-items: center;
-			row-gap: 10px;
+			// align-items: center;
+			// row-gap: 10px;
 			background: $main !important;
 			line-height: 1.5em;
 			text-align: center;
@@ -506,7 +507,8 @@ $breadcrumb-gap: 10px;
 // Produktpreis
 .price {
 	@include flex('row');
-	gap: 8px;
+	align-items: baseline;
+	gap: 6px;
 	@include font-gooddog;
 	@include fluid-type(18px, 20px);
 	padding-top: 0;

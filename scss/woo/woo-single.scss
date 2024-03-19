@@ -2,6 +2,28 @@
 /* Woocommerce Single Page */
 /*------------------------------------*/
 
+@mixin swatch() {
+}
+
+@mixin focus($type: ring) {
+	&:focus {
+		@content;
+
+		&::after {
+			content: '';
+			display: block;
+			height: calc(100% + 12px);
+			width: calc(100% + 12px);
+			border-radius: 13px;
+			border: solid 2px $accent;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+}
+
 body.single-product {
 	overflow: unset;
 
@@ -36,6 +58,8 @@ body.single-product {
 	}
 
 	.product-gallery {
+		position: relative;
+
 		.main-slider {
 			border: solid 1px $linegray;
 			border-radius: 35px;
@@ -117,6 +141,21 @@ body.single-product {
 				}
 			}
 		}
+
+		.badge-tooltip {
+			margin-bottom: 20px;
+			@include flex('row');
+			align-items: center;
+			gap: 10px;
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			z-index: 2;
+
+			.product__badge {
+				margin-bottom: 0;
+			}
+		}
 	}
 
 	.summary {
@@ -139,17 +178,6 @@ body.single-product {
 			left: unset;
 		}
 
-		.badge-tooltip {
-			margin-bottom: 20px;
-			@include flex('row');
-			align-items: center;
-			gap: 10px;
-
-			.product__badge {
-				margin-bottom: 0;
-			}
-		}
-
 		// Produkttitel
 		.product_title {
 			@include font-gooddog;
@@ -166,7 +194,7 @@ body.single-product {
 		// Preis
 		.price {
 			padding-top: 5px;
-			padding-bottom: 50px;
+			padding-bottom: $space-small;
 			display: flex;
 			flex-direction: row-reverse;
 			justify-content: flex-end;
@@ -204,87 +232,49 @@ body.single-product {
 		// Variationen
 		.variations {
 			padding-bottom: 30px;
-			// margin-bottom: 80px;
+			width: 100%;
 			@include fluid-type(15px, 16px);
-
-			.label {
-				font-weight: 800;
-				text-transform: uppercase;
-				padding-right: 10px;
-
-				span {
-					font-weight: 500;
-					text-transform: none;
-				}
-			}
-
-			.value {
-				@include flex('row');
-				align-items: center;
-				column-gap: 8px;
-
-				select {
-					padding: 4px 8px;
-					background-color: $lightgray;
-					border: solid 2px $linegray;
-					border-radius: 8px;
-					font-weight: 500;
-				}
-
-				a {
-					visibility: visible;
-					display: block;
-					padding: 4px 0 4px 20px;
-					@include fluid-type(12px, 12px);
-					font-weight: 800;
-					white-space: nowrap;
-					background-image: url(../img/shop/icon_bin.svg);
-					background-size: 12px;
-					background-repeat: no-repeat;
-					background-position: left center;
-
-					&:hover {
-						text-decoration: underline;
-					}
-				}
-			}
+			position: relative;
 
 			tbody {
 				tr {
 					padding-bottom: 30px;
 					@include flex('column');
-					position: relative;
+					// position: relative;
 
 					&:last-of-type {
 						padding-bottom: 0;
 					}
 
 					.label {
+						@include fluid-type(14px, 15px);
+						font-weight: 800;
+						text-transform: uppercase;
+						padding-right: 10px;
+
 						span {
-							margin-left: 5px;
+							margin-left: 6px;
+							font-weight: 500;
+							text-transform: none;
 						}
 					}
 
 					.value {
-						@include flex('column');
-						margin-top: 15px;
+						margin-top: 12px;
+						width: 100%;
+						@include flex('row');
+						align-items: center;
+						column-gap: 8px;
 
 						.variation-selector {
 							display: none;
 						}
 
 						.tawcvs-swatches {
-							@include flex('row');
-							flex-wrap: wrap;
-							justify-content: flex-start;
-							column-gap: 15px;
-							row-gap: 15px;
-							margin-left: 2px;
-
-							@media only screen and (max-width: $tablet) {
-								column-gap: 12px;
-								row-gap: 12px;
-							}
+							width: 100%;
+							display: grid;
+							gap: 10px;
+							grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
 
 							.swatch-item-wrapper {
 								position: relative;
@@ -297,7 +287,7 @@ body.single-product {
 									display: flex;
 									align-items: center;
 									justify-content: center;
-									height: 40px;
+									height: 45px;
 									min-width: 40px;
 									padding-left: 10px;
 									padding-right: 10px;
@@ -305,20 +295,22 @@ body.single-product {
 									border: solid $linegray 1px;
 									position: relative;
 									cursor: pointer;
+									@include fluid-type(14px, 15px);
+									font-weight: 600;
+
+									&:hover {
+										background-color: #f8f8f8;
+										border-color: #e0e0e0;
+									}
+
+									@include focus(ring) {
+										background-color: $lightgray;
+									}
 
 									&.selected {
-										&::after {
-											content: '';
-											display: block;
-											height: calc(100% + 10px);
-											width: calc(100% + 10px);
-											border-radius: 12px;
-											border: solid 2px $main;
-											position: absolute;
-											top: 50%;
-											left: 50%;
-											transform: translate(-50%, -50%);
-										}
+										background: $main;
+										border-color: transparent;
+										color: white;
 									}
 
 									&.disabled {
@@ -337,15 +329,55 @@ body.single-product {
 									display: none;
 								}
 							}
+
+							@include bp-lower($tablet) {
+								grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+
+								.swatch-item-wrapper {
+									.swatch {
+										height: 40px;
+									}
+								}
+							}
 						}
 
 						.swatch-color .text {
 							display: none;
 						}
+
+						select {
+							padding: 4px 8px;
+							background-color: $lightgray;
+							border: solid 2px $linegray;
+							border-radius: 8px;
+							font-weight: 500;
+						}
+
+						.reset_variations {
+							display: block !important;
+							padding: 4px 0 4px 22px;
+							font-weight: 700;
+							white-space: nowrap;
+							background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2355D045' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' class='feather feather-trash'%3E%3Cpolyline points='3 6 5 6 21 6'%3E%3C/polyline%3E%3Cpath d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'%3E%3C/path%3E%3C/svg%3E");
+							color: $accent;
+							background-size: 15px;
+							background-repeat: no-repeat;
+							background-position: left 43%;
+							@include fluid-type(14px, 15px);
+							position: absolute;
+							top: -4px;
+							right: 0px;
+							margin: 0px;
+
+							&:hover {
+								filter: brightness(0.85);
+							}
+						}
 					}
 
 					.reset_variations {
 						margin-top: 20px;
+						display: block !important;
 					}
 				}
 			}
@@ -371,7 +403,7 @@ body.single-product {
 					width: 100%;
 					padding: 0 3px 0 12px;
 					background-color: transparent;
-					border: solid 2px black;
+					border: solid 2px $main;
 					font-weight: 700;
 					border-radius: 10px;
 					background-position-x: calc(100% - 10px);
@@ -386,26 +418,31 @@ body.single-product {
 		}
 
 		.woocommerce-variation-add-to-cart {
-			margin-top: 70px;
+			margin-top: $space-small;
 
 			&.woocommerce-variation-add-to-cart-disabled {
 				position: relative;
 
+				* {
+					visibility: hidden;
+				}
+
 				&::after {
 					content: 'Variante wählen';
-					padding-top: 13px;
-					height: 100%;
+					padding-top: 12px;
+					height: calc(100% + 2px);
 					width: 100%;
 					background-color: $lightgray;
 					border: solid 1px $linegray;
 					border-radius: 8px;
 					color: $darkgray;
-					font-size: 15px;
+					font-size: 14px;
 					text-align: center;
 					font-weight: 700;
+					text-transform: uppercase;
 					position: absolute;
 					left: 0;
-					top: 0;
+					top: -1px;
 				}
 			}
 		}
@@ -517,7 +554,7 @@ body.single-product {
 
 		// Akktordeon
 		.accordeon {
-			margin-top: 50px;
+			margin-top: $space-small;
 		}
 	}
 
@@ -531,9 +568,11 @@ body.single-product {
 			gap: 0;
 			border: none;
 
+			.produktslider__header h2,
 			h2.headline {
+				@include fluid-type(20px, 24px, true);
 				margin: auto;
-				padding: 0 0 35px;
+				padding: 0;
 			}
 
 			.product {
@@ -580,10 +619,15 @@ body.single-product {
 				}
 
 				.slider__pagination {
-					padding: 15px 25px;
+					padding: 20px $outergap;
 					justify-content: start;
-					border-bottom: solid 1px lightgray;
-					border-top: solid 1px lightgray;
+					// border-bottom: solid 1px lightgray;
+					// border-top: solid 1px lightgray;
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					z-index: 1;
 				}
 			}
 
@@ -606,7 +650,7 @@ body.single-product {
 
 		.shop__split {
 			flex-direction: column;
-			row-gap: 20px;
+			row-gap: 25px;
 
 			.split__left {
 				margin: 0 0 0 -25px;
@@ -625,7 +669,7 @@ body.single-product {
 		}
 
 		.products-archive__list {
-			margin-top: 70px;
+			margin-top: $space-medium;
 
 			.related,
 			.products {
@@ -635,4 +679,16 @@ body.single-product {
 			}
 		}
 	}
+}
+
+/*------------------------------------*/
+/* NOTE - Admin */
+/*------------------------------------*/
+.admin-edit-link {
+	margin-bottom: 20px;
+}
+
+// FIXME: Move to right place
+.single_variation {
+	display: none !important;
 }

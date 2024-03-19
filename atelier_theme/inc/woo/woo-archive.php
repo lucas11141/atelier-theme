@@ -6,19 +6,29 @@
 // Add product category to loop item
 function woocommerce_atelier_loop_category() {
     global $post;
-    $terms = get_the_terms($post->ID, 'product_cat');
 
+    $terms = get_the_terms($post->ID, 'product_cat');
     if (!$terms || is_wp_error($terms)) return; // Return if no terms
 
-    // only displayed if the product has at least one category
-    $cat_links = array();
-    foreach ($terms as $category) {
-        $category_name = get_field('singular_name', $category->taxonomy . '_' . $category->term_id) ?? $category->name;
-        $cat_links[] = $category_name;
-    }
-    $on_cat = join(" ", $cat_links);
+    $primary_cat_id = get_post_meta($post->ID, '_yoast_wpseo_primary_product_cat', true);
 
-    echo '<span class="product__category">' . $on_cat . '</span>';
+    if ($primary_cat_id) {
+        // NOTE: Display primary category if set
+        $primary_cat = get_term($primary_cat_id, 'product_cat');
+        $cat_string = get_field('singular_name', $primary_cat->taxonomy . '_' . $primary_cat->term_id);
+        if (empty($cat_string)) $cat_string = $primary_cat->name;
+    } else {
+        // NOTE: Display all categories if no primary category set
+        $cat_links = array();
+        foreach ($terms as $category) {
+            $category_name = get_field('singular_name', $category->taxonomy . '_' . $category->term_id) ?? $category->name;
+            if (empty($category_name)) $category_name = $category->name;
+            $cat_links[] = $category_name;
+        }
+        $cat_string = join(" ", $cat_links);
+    }
+
+    echo '<span class="product__category">' . $cat_string . '</span>';
 }
 
 // Add short description to loop item

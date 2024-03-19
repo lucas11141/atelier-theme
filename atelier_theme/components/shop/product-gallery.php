@@ -13,6 +13,8 @@ $productImages = array_map(function ($imageId) {
 ?>
 
 <div class="product-gallery">
+    <?php woocommerce_atelier_product_badge(get_the_ID()) ?>
+
     <?php if (!empty($productImages)) : ?>
 
         <div class="swiper main-slider" id="product-gallery-slider">

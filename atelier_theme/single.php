@@ -550,10 +550,6 @@
                                             <div class="accordeon__item">
                                                 <dt class="accordeon__header">
                                                     <h5><?= $question ?></h5>
-                                                    <div class="button__plusminus">
-                                                        <div></div>
-                                                        <div></div>
-                                                    </div>
                                                 </dt>
                                                 <dd class="accordeon__content">
                                                     <div>

@@ -3,6 +3,16 @@
 /* Woocoommerce single */
 /*------------------------------------*/
 
+// Badge with link to edit the product
+function atelier_edit_link() {
+    // If can edit product
+    if (current_user_can('edit_posts')) {
+        global $post;
+        $edit_link = get_edit_post_link($post->ID);
+        echo '<div class="admin-edit-link badge --admin" target="_blank">Admin-Ansicht<a href="' . $edit_link . '">Produkt bearbeiten</a></div>';
+    }
+}
+
 // Custom product title
 function wvnderlab_single_title() {
     global $post;
@@ -102,69 +112,67 @@ function atelier_custom_field_bulletpoints() {
 function atelier_custom_field_accordeon() { ?>
     <div class="accordeon">
         <?php global $product; ?>
+        <?php $firstAccordeon = true; ?>
 
         <?php if (!empty(get_field("lieferumfang"))) : ?>
-            <div class="accordeon__item accordeon--lieferumfang">
+            <div class="accordeon__item accordeon--lieferumfang <?= $firstAccordeon === true ? 'accordeon__item--opened' : '' ?>">
                 <dt class="accordeon__header">
                     <h5>Lieferumfang</h5>
-                    <div class="button__plusminus">
-                        <div></div>
-                        <div></div>
-                    </div>
                 </dt>
-                <dd class="accordeon__content">
-                    <div>
-                        <?php if (have_rows('lieferumfang')) : ?>
-                            <ul>
-                                <?php while (have_rows('lieferumfang')) : the_row();
-                                    $inhalt = get_sub_field('inhalt');
-                                ?>
-                                    <li><?php echo $inhalt; ?></li>
-                                <?php endwhile; ?>
-                            </ul>
-                        <?php endif; ?>
-                        <?php if (have_rows('weiteres_material')) : ?>
-                            <h5>Weiteres Material</h5>
-                            <ul>
-                                <?php while (have_rows('weiteres_material')) : the_row();
-                                    $inhalt = get_sub_field('inhalt');
-                                ?>
-                                    <li><?php echo $inhalt; ?></li>
-                                <?php endwhile; ?>
-                            </ul>
-                        <?php endif; ?>
-                    </div>
-                    <div class="content__logotext">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo_kunsttuete_hell.svg" alt="Kunsttüte Logo">
-                        <p>Eine ganz neue Möglichkeit seine Kreativität Zuhause auszuleben!</p>
+                <dd class="accordeon__content-new">
+                    <div class="content">
+                        <div>
+                            <?php if (have_rows('lieferumfang')) : ?>
+                                <ul>
+                                    <?php while (have_rows('lieferumfang')) : the_row();
+                                        $inhalt = get_sub_field('inhalt');
+                                    ?>
+                                        <li><?php echo $inhalt; ?></li>
+                                    <?php endwhile; ?>
+                                </ul>
+                            <?php endif; ?>
+                            <?php if (have_rows('weiteres_material')) : ?>
+                                <h5>Weiteres Material</h5>
+                                <ul>
+                                    <?php while (have_rows('weiteres_material')) : the_row();
+                                        $inhalt = get_sub_field('inhalt');
+                                    ?>
+                                        <li><?php echo $inhalt; ?></li>
+                                    <?php endwhile; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </div>
+                        <div class="content__logotext">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo_kunsttuete_hell.svg" alt="Kunsttüte Logo">
+                            <p>Eine ganz neue Möglichkeit seine Kreativität Zuhause auszuleben!</p>
+                        </div>
                     </div>
                 </dd>
             </div>
+            <?php $firstAccordeon = false; ?>
         <?php endif; ?>
 
         <?php if ($product->get_description() !== "") : ?>
-            <div class="accordeon__item">
+            <div class="accordeon__item <?= $firstAccordeon === true ? 'accordeon__item--opened' : '' ?>">
                 <dt class="accordeon__header">
                     <h5>Beschreibung</h5>
-                    <div class="button__plusminus"></div>
                 </dt>
-                <dd class="accordeon__content">
-                    <?= wpautop($product->get_description()); ?>
+                <dd class="accordeon__content-new">
+                    <div class="content">
+                        <?= wpautop($product->get_description()); ?>
+                    </div>
                 </dd>
             </div>
+            <?php $firstAccordeon = false; ?>
         <?php endif; ?>
 
         <?php if ($product->has_dimensions()) : ?>
-            <div class="accordeon__item">
+            <div class="accordeon__item <?= $firstAccordeon === true ? 'accordeon__item--opened' : '' ?>">
                 <dt class="accordeon__header">
                     <h5>Produktgröße<?php /* echo __( 'Dimensions', 'woocommerce' ); */ ?></h5>
-                    <div class="button__plusminus">
-                        <div></div>
-                        <div></div>
-                    </div>
                 </dt>
-                <dd class="accordeon__content">
-                    <div>
+                <dd class="accordeon__content-new">
+                    <div class="content">
                         <ul>
                             <?php
                             $dimensions = $product->get_dimensions(false);
@@ -182,18 +190,21 @@ function atelier_custom_field_accordeon() { ?>
                     </div>
                 </dd>
             </div>
+            <?php $firstAccordeon = false; ?>
         <?php endif; ?>
 
         <?php if (!empty(get_field("versandinformationen_lang", "options"))) : ?>
-            <div class="accordeon__item">
+            <div class="accordeon__item <?= $firstAccordeon === true ? 'accordeon__item--opened' : '' ?>">
                 <dt class="accordeon__header">
                     <h5>Versand & Rückversand</h5>
-                    <div class="button__plusminus"></div>
                 </dt>
-                <dd class="accordeon__content">
-                    <?php echo get_field("versandinformationen_lang", "options") ?>
+                <dd class="accordeon__content-new">
+                    <div class="content">
+                        <?php echo get_field("versandinformationen_lang", "options") ?>
+                    </div>
                 </dd>
             </div>
+            <?php $firstAccordeon = false; ?>
         <?php endif; ?>
 
         <?php if (have_rows('kacheln')) :
@@ -201,17 +212,19 @@ function atelier_custom_field_accordeon() { ?>
                 $uberschrift = get_sub_field('uberschrift');
                 $inhalt = get_sub_field('inhalt'); ?>
 
-                <div class="accordeon__item">
+                <div class="accordeon__item <?= $firstAccordeon === true ? 'accordeon__item--opened' : '' ?>">
                     <dt class="accordeon__header">
                         <h5><?php echo $uberschrift; ?></h5>
-                        <div class="button__plusminus"></div>
                     </dt>
-                    <dd class="accordeon__content">
-                        <?php echo $inhalt; ?>
+                    <dd class="accordeon__content-new">
+                        <div class="content">
+                            <?php echo $inhalt; ?>
+                        </div>
                     </dd>
                 </div>
 
         <?php endwhile;
+            $firstAccordeon = false;
         endif; ?>
 
     </div> <?php
@@ -484,7 +497,8 @@ function atelier_custom_field_accordeon() { ?>
         remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 
         add_action('woocommerce_before_single_product_summary', 'at_woo_product_gallery', 20);
-        add_action('woocommerce_single_product_summary', 'woocommerce_atelier_product_badge', 2);
+        add_action('woocommerce_single_product_summary', 'atelier_edit_link', 0);
+        // add_action('woocommerce_single_product_summary', 'woocommerce_atelier_product_badge', 2);
         add_action('woocommerce_single_product_summary', 'wvnderlab_single_title', 5);
         add_action('woocommerce_single_product_summary', 'atelier_custom_field_short_description', 8);
         add_action('woocommerce_single_product_summary', 'atelier_custom_field_delivery_info', 35);

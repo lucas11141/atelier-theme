@@ -11,7 +11,9 @@ export function wooGlobal() {
 		}
 	}
 
-	document.querySelectorAll('.wc-block-components-notice-banner').forEach((item) => {
+	const noticeBanners = document.querySelectorAll('.wc-block-components-notice-banner');
+
+	noticeBanners?.forEach((item) => {
 		// NOTE - Touch events for mobile
 		item.addEventListener('touchstart', (e) => {
 			touchstartY = e.changedTouches[0].screenY;

@@ -517,7 +517,7 @@ Abstände
 
 	.accordeon__item {
 		background-color: $lightgray;
-		border-radius: 15px;
+		border-radius: 12px;
 		border: solid $linegray 1px;
 		padding: 0 !important;
 		overflow: hidden;
@@ -530,63 +530,27 @@ Abstände
 			@include flex('row');
 			align-items: center;
 			cursor: pointer;
-			padding: 25px;
+			padding: 22px 20px 19px;
 
 			h5 {
+				@include h3;
+				@include fluid-type(16px, 18px, true);
 				padding: 0;
-				font-weight: 800;
+				font-weight: 700;
 				text-transform: uppercase;
 				line-height: 100%;
 				color: $main !important;
 			}
 
-			.button__plusminus {
-				width: 14px;
-				height: 3px;
-				border-radius: 1.5px;
-				background-color: $main;
-				margin: 5.5px 0;
-				position: relative;
-
-				&::before {
-					content: '';
-					display: block;
-					height: 100%;
-					width: 100%;
-					border-radius: 1.5px;
-					background-color: $main;
-					transform: rotate(90deg);
-					transition: ease-in-out 100ms;
-				}
-
-				&.button__plusminus--minus {
-					animation: rotate-left 400ms;
-					&::before {
-						transform: rotate(0);
-					}
-				}
-				&.button__plusminus--plus {
-					animation: rotate-right 400ms;
-					&::before {
-						transform: rotate(90);
-					}
-				}
-				@-webkit-keyframes rotate-left {
-					0% {
-						transform: rotate(0deg);
-					}
-					100% {
-						transform: rotate(-360deg);
-					}
-				}
-				@-webkit-keyframes rotate-right {
-					0% {
-						transform: rotate(0deg);
-					}
-					100% {
-						transform: rotate(360deg);
-					}
-				}
+			&:after {
+				content: '';
+				width: 16px;
+				aspect-ratio: 1;
+				@include background-image(
+					url("data:image/svg+xml,%3Csvg fill='none' height='16' stroke='%23001e34' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m12 5v14'/%3E%3Cpath d='m5 12h14'/%3E%3C/svg%3E")
+				);
+				translate: 0 -2px;
+				transition: $transition;
 			}
 		}
 		.accordeon__content {
@@ -618,15 +582,49 @@ Abstände
 			}
 		}
 
+		//
+		.accordeon__content-new {
+			display: grid;
+			grid-template-rows: 1fr;
+			transition: grid-template-rows 300ms linear;
+
+			.content {
+				padding: 0 20px 16px;
+				@include fluid-type(14px, 15px);
+				overflow: hidden;
+				transition: padding 300ms linear;
+
+				div + div {
+					margin-top: 15px;
+				}
+			}
+		}
+
+		&:not(.accordeon__item--opened) {
+			.accordeon__content-new {
+				grid-template-rows: 0fr;
+
+				.content {
+					padding-top: 0;
+					padding-bottom: 0;
+				}
+			}
+		}
+		//
+
 		&.accordeo--first__opened .accordeon__content {
 			display: block;
 		}
 
 		&.accordeon__item--opened {
 			.accordeon__header {
-				.button__plusminus {
-					@extend .button__plusminus--minus;
+				&:after {
+					rotate: 180deg;
+					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23001E34' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' class='feather feather-minus'%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E");
 				}
+			}
+			.accordeon__content {
+				display: block !important;
 			}
 		}
 
@@ -643,11 +641,8 @@ Abstände
 					color: white;
 				}
 
-				.button__plusminus {
-					&,
-					&::before {
-						background-color: white;
-					}
+				&:after {
+					filter: invert(1);
 				}
 			}
 
@@ -1405,4 +1400,8 @@ a img {
 /*------------------------------------*/
 .brevo-conversations {
 	z-index: 300 !important;
+}
+
+.badge {
+	@include badge;
 }

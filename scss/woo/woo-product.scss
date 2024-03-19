@@ -7,6 +7,7 @@ li.product,
 .products .product,
 .product-list__item {
 	@include box;
+	border: solid 1px $linegray;
 	padding: 0;
 	display: flex !important;
 	flex-direction: column;
@@ -15,6 +16,10 @@ li.product,
 	flex: auto;
 	list-style-type: none;
 	position: relative;
+
+	&:focus {
+		filter: brightness(85%);
+	}
 
 	// Ignore <a> tags in layout
 	.woocommerce-LoopProduct-link {
@@ -30,6 +35,7 @@ li.product,
 		width: 100%;
 		aspect-ratio: 0.857;
 		object-fit: cover;
+		border-bottom: solid 1px #f7f7f7;
 	}
 
 	.hover-image {
@@ -45,11 +51,15 @@ li.product,
 	/*------------------------------------*/
 	.product__text {
 		margin-top: auto;
-		padding: 20px 22px;
-		@include flex('column');
-		gap: 6px;
 		background: white;
 		border-radius: 0 0 15px 15px;
+
+		a.woocommerce-LoopProduct-link {
+			width: 100%;
+			padding: 18px 22px 20px;
+			@include flex('column');
+			gap: 6px;
+		}
 
 		.product__category,
 		.woocommerce-loop-product__title,
@@ -89,6 +99,31 @@ li.product,
 			position: absolute;
 			right: 22px;
 			bottom: 20px;
+		}
+
+		.badge-tooltip {
+			display: contents;
+
+			.tooltip {
+				display: none;
+			}
+		}
+
+		// NOTE: When product has variable price
+		&:has(.price-from) {
+			.product__description {
+				padding-right: 80px;
+			}
+			.price {
+				&:before {
+					text-transform: none;
+					content: 'ab';
+				}
+
+				.price-from {
+					display: none;
+				}
+			}
 		}
 
 		/*------------------------------------*/
@@ -276,7 +311,9 @@ li.product,
 
 	@include bp-lower($mobile) {
 		.product__text {
-			padding: 15px 15px 40px;
+			a.woocommerce-LoopProduct-link {
+				padding: 15px 15px 40px;
+			}
 
 			.price {
 				right: unset;

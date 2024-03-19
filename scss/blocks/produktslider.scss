@@ -104,6 +104,7 @@
 	/*------------------------------------*/
 	@include bp-lower($desktop) {
 		.produktslider__header {
+			margin-bottom: $space-small;
 			align-items: flex-start;
 			flex-direction: column;
 			gap: 15px;

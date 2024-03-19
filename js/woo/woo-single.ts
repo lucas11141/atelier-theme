@@ -14,6 +14,24 @@ import { defaultSwiperPagination } from '../options/variables';
 export function wooSingle() {
 	if (!document.querySelector('.single-product')) return;
 
+	// Set tabindex to 0 for swatches
+	setTimeout(() => {
+		const swatches = document.querySelectorAll(
+			'.tawcvs-swatches .swatch'
+		) as NodeListOf<HTMLElement>;
+		swatches.forEach((swatch) => {
+			swatch.setAttribute('tabindex', '0');
+
+			// Click the swatch if it is focued and white space is pressed
+			swatch.addEventListener('keydown', (e: KeyboardEvent) => {
+				console.log('key', e.key);
+				if (e.key === 'Enter') {
+					swatch.click();
+				}
+			});
+		});
+	}, 1000);
+
 	const galleryElements = document.querySelectorAll('.single-product .product-gallery');
 	galleryElements.forEach((galleryElement) => {
 		/*------------------------------------*/

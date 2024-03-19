@@ -72,35 +72,26 @@ body.post-type-archive-product {
 
 				.term-description {
 					p {
-						padding-top: 30px;
+						padding-top: 20px;
 						@include fluid-type(14px, 16px);
 						line-height: 170%;
 						font-weight: 400;
 						color: white;
 					}
 
-					&.--hide-text {
-						padding-bottom: 26px;
-						position: relative;
-
-						p {
-							max-height: 170px;
-							overflow: hidden;
-						}
-
-						.show-more {
-							display: block;
-							color: $accent;
-							font-weight: 600;
-							position: absolute;
-							font-size: 14px;
-							bottom: 0;
-						}
+					.show-more {
+						display: inline-block;
+						margin-top: 8px;
+						color: $accent;
+						cursor: pointer;
 					}
 
-					&:not(.--hide-text) {
-						.show-more {
-							display: none;
+					&:not(.--show-full) {
+						p {
+							display: -webkit-box;
+							-webkit-line-clamp: 2;
+							-webkit-box-orient: vertical;
+							overflow: hidden;
 						}
 					}
 				}
