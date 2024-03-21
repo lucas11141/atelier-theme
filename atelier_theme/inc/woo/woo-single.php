@@ -212,6 +212,8 @@ function atelier_custom_field_accordeon() { ?>
                 $uberschrift = get_sub_field('uberschrift');
                 $inhalt = get_sub_field('inhalt'); ?>
 
+                <?php if (empty($uberschrift) || empty($inhalt)) continue; ?>
+
                 <div class="accordeon__item <?= $firstAccordeon === true ? 'accordeon__item--opened' : '' ?>">
                     <dt class="accordeon__header">
                         <h5><?php echo $uberschrift; ?></h5>
@@ -498,7 +500,7 @@ function atelier_custom_field_accordeon() { ?>
 
         add_action('woocommerce_before_single_product_summary', 'at_woo_product_gallery', 20);
         add_action('woocommerce_single_product_summary', 'atelier_edit_link', 0);
-        // add_action('woocommerce_single_product_summary', 'woocommerce_atelier_product_badge', 2);
+        add_action('woocommerce_single_product_summary', 'woocommerce_atelier_product_badge', 2);
         add_action('woocommerce_single_product_summary', 'wvnderlab_single_title', 5);
         add_action('woocommerce_single_product_summary', 'atelier_custom_field_short_description', 8);
         add_action('woocommerce_single_product_summary', 'atelier_custom_field_delivery_info', 35);
