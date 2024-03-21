@@ -105,48 +105,38 @@ body.single-product {
 			}
 		}
 
-		.thumbs-slider {
+		.thumbs-list {
 			margin-top: 15px;
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+			gap: 12px;
 
-			.swiper-slide {
+			li {
+				width: 100%;
 				border: solid 1px $linegray;
 				border-radius: 12px;
-				padding: 10px;
+				padding: 4px;
 				cursor: pointer;
 				transition: $transition;
 
 				img {
 					width: 100%;
-					aspect-ratio: 1/1;
+					aspect-ratio: 4/5;
 					object-fit: cover;
+					border-radius: 8px;
 				}
 
-				&:hover {
-					border-color: $accent;
+				&:hover,
+				&.--active {
+					padding: 3px;
+					background-color: #f8f8f8;
+					border-color: #e0e0e0;
 				}
 
-				&.swiper-slide-thumb-active {
+				&.--active {
 					border-color: $main;
 				}
 			}
-
-			// NOTE - Handle layout shift when slider is not initialized yet
-			&:not(.swiper-initialized) {
-				overflow: hidden;
-
-				.swiper-slide {
-					width: calc((100% - 3 * 15px) / 4);
-					min-width: calc((100% - 3 * 15px) / 4);
-					margin-right: 15px;
-				}
-			}
-		}
-
-		.info-badge {
-			position: absolute;
-			top: 20px;
-			left: 20px;
-			z-index: 2;
 		}
 	}
 
@@ -170,10 +160,20 @@ body.single-product {
 			left: unset;
 		}
 
+		.info-badge {
+			margin-right: auto;
+
+			// TODO: Add big size class to main badge
+			.label {
+				@include fluid-type(11px, 12px);
+				padding: 10px 14px;
+			}
+		}
+
 		// Produkttitel
 		.product_title {
 			@include font-gooddog;
-			padding: 0;
+			padding: 20px 0 0;
 		}
 
 		// Kurzbeschreibung
@@ -623,7 +623,7 @@ body.single-product {
 				}
 			}
 
-			.thumbs-slider {
+			.thumbs-list {
 				display: none;
 			}
 		}

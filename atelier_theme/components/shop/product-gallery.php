@@ -13,8 +13,6 @@ $productImages = array_map(function ($imageId) {
 ?>
 
 <div class="product-gallery">
-    <?php woocommerce_atelier_product_badge(get_the_ID()) ?>
-
     <?php if (!empty($productImages)) : ?>
 
         <div class="swiper main-slider" id="product-gallery-slider">
@@ -35,15 +33,13 @@ $productImages = array_map(function ($imageId) {
         </div>
 
         <?php if (count($productImages) > 1) : ?>
-            <div class="swiper thumbs-slider">
-                <div class="swiper-wrapper">
-                    <?php foreach ($productImages as $image) : ?>
-                        <div class="swiper-slide">
-                            <img src="<?php echo esc_url($image['thumbnail'][0]); ?>" width="100" height="100" alt="" />
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
+            <ul class="thumbs-list">
+                <?php foreach ($productImages as $image) : ?>
+                    <li>
+                        <img src="<?php echo esc_url($image['thumbnail'][0]); ?>" width="100" height="100" alt="" />
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         <?php endif; ?>
 
     <?php endif; ?>

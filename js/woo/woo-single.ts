@@ -33,22 +33,10 @@ export function wooSingle() {
 	}, 1000);
 
 	const galleryElements = document.querySelectorAll('.single-product .product-gallery');
-	galleryElements.forEach((galleryElement) => {
+	galleryElements?.forEach((galleryElement) => {
 		/*------------------------------------*/
-		/* NOTE: Init sliders */
+		/* NOTE: Init gallery slider */
 		/*------------------------------------*/
-
-		// Thumbnail slider
-		const thumbsSliderElement = galleryElement.querySelector(
-			'.thumbs-slider'
-		) as HTMLElement | null;
-		if (!thumbsSliderElement) throw new Error('Thumbs slider not found');
-		const thumbsSlider = new Swiper(thumbsSliderElement, {
-			spaceBetween: 15,
-			slidesPerView: 4,
-			freeMode: true,
-			watchSlidesProgress: true,
-		});
 
 		// Main slider
 		const mainSliderElement = galleryElement.querySelector(
@@ -57,6 +45,10 @@ export function wooSingle() {
 		if (!mainSliderElement) throw new Error('Main slider not found');
 		const mainSlider = new Swiper(mainSliderElement, {
 			loop: true,
+			keyboard: {
+				enabled: true,
+				onlyInViewport: true,
+			},
 
 			navigation: {
 				nextEl: mainSliderElement.querySelector('.slider__button.--next'),
@@ -64,9 +56,35 @@ export function wooSingle() {
 			},
 
 			pagination: defaultSwiperPagination,
-
-			thumbs: thumbsSliderElement ? { swiper: thumbsSlider } : undefined,
 		});
+
+		/*------------------------------------*/
+		/* NOTE: Sync the thumbnails */
+		/*------------------------------------*/
+
+		const thumbnails = galleryElement.querySelectorAll('.thumbs-list li');
+		if (thumbnails) {
+			thumbnails?.forEach((thumbnail, index) => {
+				thumbnail.addEventListener('click', () => {
+					mainSlider.slideTo(index);
+					setActiveThumbnail(index);
+				});
+			});
+
+			mainSlider.on('slideChange', () => {
+				setActiveThumbnail(mainSlider.realIndex);
+			});
+
+			const setActiveThumbnail = (index: number) => {
+				// Set .--active class only to the clicked thumbnail
+				thumbnails.forEach((thumb) => {
+					thumb.classList.remove('--active');
+				});
+
+				thumbnails[index].classList.add('--active');
+			};
+			setActiveThumbnail(0);
+		}
 
 		/*------------------------------------*/
 		/* NOTE: Part 2 of 2 PhotoSwipe v5 */
@@ -112,7 +130,9 @@ export function wooSingle() {
 		// List of attributes to watch and change slide on select
 		const enabledAttributes = ['stil'];
 
-		const variationForm = document.querySelector('.variations_form');
+		const variationForm = document.querySelector('.variations_form') as HTMLElement | null;
+		if (!variationForm) return;
+
 		const variations = JSON.parse(variationForm.dataset.product_variations);
 		const variationOptions = variationForm.querySelectorAll('.variations tr');
 
