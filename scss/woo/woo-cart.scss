@@ -79,9 +79,9 @@ body.woocommerce-order-pay .woocommerce {
 		}
 
 		.product__image {
-			height: 120px;
-			width: 120px;
-			min-width: 120px;
+			width: 90px;
+			min-width: 90px;
+			aspect-ratio: 4/5;
 			border-radius: 10px;
 			border: solid 1px $linegray;
 			overflow: hidden;
