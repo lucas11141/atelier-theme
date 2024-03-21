@@ -1,4 +1,4 @@
-export function wooArchive() {
+function clampDesription() {
 	// Truncate term description
 	const description = document.querySelector('.term-description') as HTMLElement;
 	if (!description) return;
@@ -21,7 +21,8 @@ export function wooArchive() {
 			showMoreButton.remove();
 		});
 	}
-
+}
+function filterSlideover() {
 	const filterSlideOver = document.querySelector('.filters-slideover');
 
 	if (!filterSlideOver) return;
@@ -32,6 +33,7 @@ export function wooArchive() {
 	const closeButton = document.querySelector('.filters-slideover__close');
 
 	filterButtons.forEach((button) => {
+		console.log('filterButtons', button);
 		button.addEventListener('click', () => {
 			// filterButtons.forEach(btn => btn.classList.remove('active'));
 			// button.classList.add('active');
@@ -54,4 +56,9 @@ export function wooArchive() {
 		filterSlideOver.classList.remove('--open');
 		filterSlideOverBackdrop.classList.remove('--open');
 	});
+}
+
+export function wooArchive() {
+	clampDesription();
+	filterSlideover();
 }
