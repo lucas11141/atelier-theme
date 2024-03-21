@@ -1348,13 +1348,16 @@ a img {
 }
 
 .info-badge {
+	// width: 100%;
+
+	// .info-badge-content {
+	float: right;
 	width: fit-content;
 	@include flex('row');
 	align-items: center;
 	border-radius: 8px;
 	background: currentColor;
-	@include fluid-type(12px, 12px);
-	overflow: clip;
+	@include fluid-type(11px, 11px);
 
 	.label {
 		padding: 8px 10px;
@@ -1363,6 +1366,7 @@ a img {
 		color: white;
 		font-weight: 700;
 		line-height: 1;
+		text-transform: uppercase;
 
 		.feather {
 			margin-right: 6px;
@@ -1380,6 +1384,7 @@ a img {
 		justify-content: center;
 		align-items: center;
 		background: rgba(255, 255, 255, 0.1);
+		border-radius: 0 8px 8px 0;
 		border-left: 1px solid rgb(255, 255, 255, 0.2);
 
 		svg {
@@ -1393,20 +1398,40 @@ a img {
 			background: rgba(255, 255, 255, 0.2);
 		}
 	}
+	// }
 }
 
 // Tippy toolbox
 .tippy-box[data-theme~='atelier'] {
-	width: 250px;
 	max-width: calc(100vw - 2 * $outergap);
 	border-radius: 8px;
-	border: 1px solid var(--tailwind-orange-200, #fed7aa);
-	background: var(--tailwind-orange-100, #ffedd5);
+	background: linear-gradient(45deg, rgba(255, 255, 255, 85%), rgba(255, 255, 255, 85%));
+	background-color: currentColor;
+	color: inherit;
+
+	&:after {
+		content: '';
+		border-radius: 8px;
+		border: 1px solid currentColor;
+		opacity: 30%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
 
 	.tippy-content {
 		padding: 9px 12px;
 		@include fluid-type(12px, 12px);
 		font-weight: 600;
-		color: var(--tailwind-orange-900, #7c2d12);
+		color: currentColor;
+		filter: brightness(50%) saturate(150%);
+	}
+
+	&[data-placement='bottom-end'] {
+		.tippy-content {
+			text-align: right;
+		}
 	}
 }

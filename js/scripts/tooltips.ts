@@ -4,9 +4,10 @@ import tippy from 'tippy.js';
 
 export function tooltips() {
 	tippy('.tooltip', {
-		// placement: 'bottom-start',
-		placement: 'bottom',
+		placement: 'bottom-end',
 		theme: 'atelier',
 		arrow: false,
+		appendTo: 'parent',
+		maxWidth: 250,
 	});
 }
