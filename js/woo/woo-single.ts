@@ -127,8 +127,10 @@ export function wooSingle() {
 		/* NOTE - Product gallery image swap */
 		/*------------------------------------*/
 
+		// TODO: Seperate image swap and price/label update
+
 		// List of attributes to watch and change slide on select
-		const enabledAttributes = ['stil', 'kleidergroesse'];
+		const enabledAttributes = ['stil'];
 
 		const variationForm = document.querySelector('.variations_form') as HTMLElement | null;
 		if (!variationForm) return;
@@ -314,9 +316,11 @@ export function wooSingle() {
 
 				// Only observe enabled attributes
 				if (!enabledAttributes.includes(attributeName)) return;
+				console.log('attribute enabled', attributeName, selectedValue);
 
 				const selectedVariant = getSelectedVariant();
 				if (!selectedVariant) return;
+				console.log('selectedVariant', selectedVariant);
 
 				// Slide to image
 				slideToVariation(selectedVariant.image.src);
