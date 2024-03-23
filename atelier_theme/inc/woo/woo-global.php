@@ -144,6 +144,60 @@ function atelier_add_to_cart_fragment($fragments) {
 }
 
 /*------------------------------------*/
+/* SECTION - Custom product price */
+/*------------------------------------*/
+
+function atelier_product_price() {
+    $display_price = '';
+
+    // Produktobjekt abrufen
+    $product = wc_get_product(get_the_id());
+
+    // Überprüfen, ob es sich um ein variables Produkt handelt
+    if (is_a($product, 'WC_Product_Variable')) {
+        // Alle verfügbaren Preise der Varianten abrufen
+        $prices = $product->get_variation_prices(true);
+
+        // Den niedrigsten Preis finden
+        $lowest_price = min($prices['price']);
+
+        // Prüfen, ob Varianten teurer als der niedrigste Preis sind
+        $has_higher_price_variants = false;
+        foreach ($prices['price'] as $price) {
+            if ($price > $lowest_price) {
+                $has_higher_price_variants = true;
+                break;
+            }
+        }
+
+        // Preisformatierung für die Ausgabe vorbereiten
+        $formatted_price = wc_price($lowest_price);
+
+        // "Ab"-Kennzeichnung hinzufügen, wenn Varianten teurer sind
+        if ($has_higher_price_variants) {
+            $price_from = '<span class="price-from">' . __('ab', 'wvnderlab') . '</span>';
+            $formatted_price = $price_from . $formatted_price;
+        }
+
+        // Preis im Frontend anzeigen
+        $display_price = $formatted_price;
+    } else {
+        // Wenn das Produkt keine Variable ist, dann nur den normalen Preis anzeigen
+        $display_price = wc_price($product->get_price());
+    }
+
+    echo '<p class="price">' . $display_price . '</p>';
+}
+
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price');
+add_action('woocommerce_single_product_summary', 'atelier_product_price', 10);
+
+remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price');
+add_action('woocommerce_after_shop_loop_item_title', 'atelier_product_price', 10);
+
+// !SECTION
+
+/*------------------------------------*/
 /* Hooks */
 /*------------------------------------*/
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb');

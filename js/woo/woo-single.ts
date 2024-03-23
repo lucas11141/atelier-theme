@@ -189,16 +189,32 @@ export function wooSingle() {
 		function updatePriceLabel() {
 			const selectionPrices = getPriceRange();
 
-			const priceLabel = document.querySelector('.price') as HTMLElement | null;
+			const priceElement = document.querySelector('.price') as HTMLElement | null;
+			if (!priceElement) return;
+
+			const priceLabel = priceElement.querySelector('bdi') as HTMLElement | null;
 			if (!priceLabel) return;
 
-			if (selectionPrices.isPriceRange)
-				priceLabel.innerHTML = `<span class="price-from">From:</span> ${selectionPrices.lowestPrice.toFixed(
-					2
-				)}€`;
-			// priceLabel.innerHTML = `ab ${selectionPrices.lowestPrice.toFixed(2)}€`;
-			else {
-				priceLabel.innerHTML = `${selectionPrices.lowestPrice.toFixed(2)}€`;
+			const priceText = priceLabel.textContent;
+
+			// Regulärer Ausdruck, um die Zahl aus dem Text zu extrahieren
+			const regex = /[\d\.,]+/;
+			let newPrice = selectionPrices.lowestPrice.toFixed(2);
+
+			// Replace . with ,
+			newPrice = newPrice.replace('.', ',');
+
+			// Ersetze die Zahl im Text
+			const updatedPriceText = priceText.replace(regex, newPrice);
+
+			priceLabel.textContent = updatedPriceText;
+
+			// NOTE: Show/hide price range
+			const priceFrom = priceElement.querySelector('.price-from') as HTMLElement | null;
+			if (selectionPrices.isPriceRange) {
+				priceFrom.style.display = 'inline';
+			} else {
+				priceFrom.style.display = 'none';
 			}
 		}
 

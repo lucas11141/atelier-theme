@@ -3,17 +3,6 @@
 	padding: 0;
 }
 
-.price:has(.price-from) {
-	&:before {
-		text-transform: none;
-		content: 'ab';
-	}
-
-	.price-from {
-		display: none;
-	}
-}
-
 li.product,
 .products .product,
 .product-list__item {

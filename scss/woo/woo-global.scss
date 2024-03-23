@@ -514,6 +514,10 @@ $breadcrumb-gap: 10px;
 	padding-top: 0;
 	line-height: 1em;
 
+	.price-from {
+		text-transform: none;
+	}
+
 	del {
 		opacity: 30%;
 	}
