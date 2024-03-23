@@ -242,6 +242,20 @@ export function wooSingle() {
 			}
 		}
 
+		function updateURLParams() {
+			const url = new URL(window.location.href);
+
+			selections.forEach((selection) => {
+				if (!selection.attribute_value) {
+					url.searchParams.delete(selection.attribute_name);
+				} else {
+					url.searchParams.set(selection.attribute_name, selection.attribute_value);
+				}
+			});
+
+			window.history.pushState({}, '', url.toString());
+		}
+
 		function updateSelection(attributeName: string, attributeValue: string) {
 			// Update the selection
 			const attribute = selections.find(
@@ -296,6 +310,7 @@ export function wooSingle() {
 				const selectionPrices = getPriceRange();
 				updatePriceLabel(selectionPrices);
 				updateSelection(attributeName, selectedValue);
+				updateURLParams();
 
 				// Only observe enabled attributes
 				if (!enabledAttributes.includes(attributeName)) return;
