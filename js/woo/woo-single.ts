@@ -128,20 +128,75 @@ export function wooSingle() {
 		/*------------------------------------*/
 
 		// List of attributes to watch and change slide on select
-		const enabledAttributes = ['stil'];
+		const enabledAttributes = ['stil', 'kleidergroesse'];
 
 		const variationForm = document.querySelector('.variations_form') as HTMLElement | null;
 		if (!variationForm) return;
 
 		const variations = JSON.parse(variationForm.dataset.product_variations);
-		const variationOptions = variationForm.querySelectorAll('.variations tr');
+		const variationAttributeContainers = variationForm.querySelectorAll('.variations tr');
 
 		// console.log('variations', variations);
 		const selections: {
 			attribute_name: string;
-			attribute_value: string;
+			attribute_value: string | undefined;
 		}[] = [];
 
+		type SelectionPrices = {
+			lowestPrice: number;
+			highestPrice: number;
+			isPriceRange: boolean;
+		};
+
+		function getPriceRange() {
+			const lowestPrice = variations.reduce((lowestPrice: number, variation) => {
+				const isMatch = selections.every((selection) => {
+					if (!selection.attribute_value) return true;
+					return (
+						variation.attributes[selection.attribute_name] === selection.attribute_value
+					);
+				});
+
+				// Ignore this variation if it does not match the current selection
+				if (!isMatch) return lowestPrice;
+
+				const price = parseFloat(variation.display_price);
+
+				if (price < lowestPrice) {
+					return price;
+				}
+
+				return lowestPrice;
+			}, Infinity);
+
+			const highestPrice = variations.reduce((highestPrice: number, variation) => {
+				const isMatch = selections.every((selection) => {
+					if (!selection.attribute_value) return true;
+					return (
+						variation.attributes[selection.attribute_name] === selection.attribute_value
+					);
+				});
+
+				// Ignore this variation if it does not match the current selection
+				if (!isMatch) return highestPrice;
+
+				const price = parseFloat(variation.display_price);
+
+				if (price > highestPrice) {
+					return price;
+				}
+
+				return highestPrice;
+			}, 0);
+
+			const selectionPrices: SelectionPrices = {
+				lowestPrice,
+				highestPrice,
+				isPriceRange: highestPrice !== lowestPrice,
+			};
+
+			return selectionPrices;
+		}
 		// Get the selected variation
 		function getSelectedVariant() {
 			const enabledSelections = enabledAttributes.map((attributeName) => {
@@ -153,7 +208,8 @@ export function wooSingle() {
 			const selectedVariant = variations.find((variation) => {
 				return enabledSelections.every((selection) => {
 					return (
-						variation.attributes[selection.attribute_name] === selection.attribute_value
+						variation.attributes[selection.attribute_name] ===
+							selection.attribute_value ?? ''
 					);
 				});
 			});
@@ -170,6 +226,20 @@ export function wooSingle() {
 
 			// Scroll to the slide
 			mainSlider.slideTo(slideIndex);
+		}
+
+		function updatePriceLabel(selectionPrices: SelectionPrices) {
+			const priceLabel = document.querySelector('.price') as HTMLElement | null;
+			if (!priceLabel) return;
+
+			if (selectionPrices.isPriceRange)
+				priceLabel.innerHTML = `<span class="price-from">From:</span> ${selectionPrices.lowestPrice.toFixed(
+					2
+				)}€`;
+			// priceLabel.innerHTML = `ab ${selectionPrices.lowestPrice.toFixed(2)}€`;
+			else {
+				priceLabel.innerHTML = `${selectionPrices.lowestPrice.toFixed(2)}€`;
+			}
 		}
 
 		function updateSelection(attributeName: string, attributeValue: string) {
@@ -191,7 +261,7 @@ export function wooSingle() {
 		}
 
 		$('.variations .label label').append('<span></span>');
-		function updateLabel(attributeName: string, attributeValue: string) {
+		function updateLabel(attributeName: string, attributeValue: string | undefined) {
 			// Get label for attribute
 			const label = variationForm.querySelector(
 				`.variations label[for="pa_${attributeName}"]`
@@ -199,13 +269,19 @@ export function wooSingle() {
 			const labelSpan = label?.querySelector('span');
 
 			// first letter to uppercase
+			if (!attributeValue) {
+				labelSpan.innerHTML = '';
+				return;
+			}
+
 			labelSpan.innerHTML = attributeValue.charAt(0).toUpperCase() + attributeValue.slice(1);
 		}
 
-		variationOptions.forEach((option) => {
+		variationAttributeContainers.forEach((option) => {
 			const attribute = option.querySelector('.tawcvs-swatches') as HTMLElement;
 			if (!attribute) throw new Error('Swatches not found');
 			const attributeName = attribute.dataset.attribute_name.replace('attribute_pa_', '');
+
 			let isLoading = false;
 
 			// Observe if class selected has been added to swatch
@@ -213,13 +289,16 @@ export function wooSingle() {
 				if (isLoading) return;
 
 				const selectedSwatch = attribute.querySelector('.swatch.selected') as HTMLElement;
-				const selectedValue = selectedSwatch ? selectedSwatch.dataset.value : '';
+				const selectedValue = selectedSwatch ? selectedSwatch.dataset.value : undefined;
 
 				updateLabel(attributeName, selectedValue);
 
+				const selectionPrices = getPriceRange();
+				updatePriceLabel(selectionPrices);
+				updateSelection(attributeName, selectedValue);
+
 				// Only observe enabled attributes
 				if (!enabledAttributes.includes(attributeName)) return;
-				updateSelection(attributeName, selectedValue);
 
 				const selectedVariant = getSelectedVariant();
 				if (!selectedVariant) return;

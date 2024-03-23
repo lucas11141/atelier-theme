@@ -188,8 +188,8 @@ body.single-product {
 			padding-top: 5px;
 			padding-bottom: $space-small;
 			display: flex;
-			flex-direction: row-reverse;
-			justify-content: flex-end;
+			flex-direction: row;
+			justify-content: flex-start;
 			gap: 6px;
 
 			bdi {
@@ -199,10 +199,6 @@ body.single-product {
 
 			del bdi {
 				@include fluid-type(15px, 16px);
-			}
-
-			.price-from {
-				display: none;
 			}
 		}
 
