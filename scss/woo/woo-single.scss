@@ -200,6 +200,11 @@ body.single-product {
 			color: darkgray !important;
 			font-weight: 700 !important;
 			cursor: auto;
+
+			&:hover,
+			&:active {
+				background: inherit;
+			}
 		}
 
 		.variations_form .out-of-stock {
