@@ -103,6 +103,16 @@ body.post-type-archive-product {
 			}
 		}
 
+		&:has(.background-image img) {
+			.decoration img {
+				&:nth-child(3),
+				&:nth-child(4),
+				&:nth-child(5) {
+					display: none;
+				}
+			}
+		}
+
 		@media only screen and (max-width: $desktop) {
 			.shop-hero-banner__content {
 				gap: 50px;
