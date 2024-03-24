@@ -14,19 +14,10 @@ $ankundigung = get_field('ankundigung');
 
 <div class="hero-banner show-header-on-offset <?= $ankundigung ? '--remove-border' : '' ?>" id="<?= $id ?>">
 
-    <?php get_template_part('components/paper'); ?>
-
-    <div class="decoration">
-        <div class="wrapper">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
-        </div>
-    </div>
-
     <?php get_template_part('components/header-bar', '', array('type' => $websiteMode, 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
+
+    <?php get_template_part('components/paper'); ?>
+    <?php get_template_part('components/shop/hero-banner-decoration'); ?>
 
     <?php if ($uberschrift_h1) : ?>
 

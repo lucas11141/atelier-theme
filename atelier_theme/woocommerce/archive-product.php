@@ -81,15 +81,7 @@ do_action('woocommerce_before_main_content');
 		</div>
 
 		<?php get_template_part('components/paper'); ?>
-		<div class="decoration">
-			<div class="wrapper">
-				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-				<img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
-			</div>
-		</div>
+		<?php get_template_part('components/shop/hero-banner-decoration'); ?>
 	</header>
 
 	<div class="wrapper">

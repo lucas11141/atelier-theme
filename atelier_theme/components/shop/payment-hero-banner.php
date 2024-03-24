@@ -34,6 +34,9 @@ $breadcrumbSteps =
 
     <?php get_template_part('components/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
+    <?php get_template_part('components/paper'); ?>
+    <?php get_template_part('components/shop/hero-banner-decoration'); ?>
+
     <div class="content">
         <?php if (!empty($step)) : ?>
             <h1><?php echo $steps[$step]['title']; ?></h1>
@@ -58,18 +61,6 @@ $breadcrumbSteps =
                 <?php endif; ?>
             <?php endforeach; ?>
         </ul>
-    </div>
-
-    <?php get_template_part('components/paper'); ?>
-
-    <div class="decoration">
-        <div class="wrapper">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_large.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_medium.svg" alt="">
-            <img src="<?= get_template_directory_uri() ?>/assets/img/modules/shop-hero-banner/snowflake_small.svg" alt="">
-        </div>
     </div>
 
 </header>
