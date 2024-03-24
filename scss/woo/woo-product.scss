@@ -31,7 +31,7 @@ li.product,
 	/*------------------------------------*/
 	.attachment-woocommerce_thumbnail,
 	.hover-image {
-		border-radius: 15px 15px 0 0;
+		border-radius: 14px 14px 0 0;
 		width: 100%;
 		aspect-ratio: 0.857;
 		object-fit: cover;
@@ -223,13 +223,16 @@ li.product,
 
 	&::before {
 		content: '';
-		height: calc(100% - 1px);
-		width: calc(100% - 1px);
+		height: 100%;
+		width: 100%;
 		border-radius: 15px;
-		background-color: $accent;
+		border: solid 2px $accent;
+		pointer-events: none;
 		@include pos('center');
 		z-index: -1;
 		transition: $transition;
+		opacity: 0;
+		z-index: 1;
 	}
 
 	/*------------------------------------*/
@@ -292,9 +295,10 @@ li.product,
 			}
 			// Border for hover effect
 			&::before {
-				height: calc(100% + 4px);
-				width: calc(100% + 4px);
-				border-radius: 17px;
+				height: calc(100% + 12px);
+				width: calc(100% + 12px);
+				border-radius: 20px;
+				opacity: 1;
 			}
 		}
 	}
