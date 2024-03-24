@@ -101,10 +101,11 @@ li.product,
 			bottom: 20px;
 		}
 
-		.info-badge {
+		.badge {
+			@extend .--size-small;
 			position: absolute;
-			top: 10px;
-			right: 10px;
+			top: 12px;
+			left: 12px;
 			z-index: 1;
 		}
 
@@ -120,38 +121,38 @@ li.product,
 		/*------------------------------------*/
 
 		.button__loop {
-			padding: 13px 48px 13px 20px;
+			padding: 5px;
+			padding-left: 20px;
 			width: fit-content;
-			background-color: $accent;
-			border-radius: 20px;
+			@include flex('row');
+			align-items: center;
+			gap: 12px;
 			@include fluid-type(12px, 12px);
 			font-weight: 700;
-			color: white;
-			background-image: url(../img/icons/icon_add_to_cart_white.svg);
-			background-size: 18px;
-			background-position: calc(100% - 16px) calc(50% + -0.5px);
-			background-repeat: no-repeat;
+			transition: $transition;
+			border-radius: 100px;
+			filter: none;
 			position: absolute;
-			right: 22px;
-			bottom: 20px;
+			bottom: 30px;
+			left: 50%;
+			translate: -50%;
+			border: none;
+
+			// Hide when product item is not hovered
 			opacity: 0;
 			pointer-events: none;
-			transition: $transition;
-			filter: none;
-			right: 50%;
-			transform: translateX(50%);
-			bottom: 30px;
 
-			&:hover {
-				background-color: $accent--darken;
-			}
-		}
-
-		.product_type_variable,
-		.add_to_cart_button {
-			&,
-			&:hover {
-				color: white !important;
+			&::after {
+				content: '';
+				display: block;
+				width: 32px;
+				aspect-ratio: 1;
+				background-color: $accent;
+				border-radius: 50%;
+				background-image: url(../img/icons/icon_add_to_cart_white.svg);
+				background-size: 18px;
+				background-position: center;
+				background-repeat: no-repeat;
 			}
 		}
 
@@ -326,8 +327,4 @@ li.product,
 			display: none;
 		}
 	}
-
-	// .info-badge:has(.--hide-on-archive) {
-	// 	display: none;
-	// }
 }

@@ -1343,24 +1343,53 @@ a img {
 /*------------------------------------*/
 /* Badfes */
 /*------------------------------------*/
-.badge {
-	@include badge;
+@mixin message {
+	display: block;
+	padding: 14px 16px 14px 14px;
+	width: 100%;
+	@include flex('row');
+	align-items: baseline;
+	gap: 10px $gap;
+	background: $lightgray;
+	border: solid 1px $linegray;
+	border-radius: 10px;
+	@include fluid-type(13px, 14px);
+	font-weight: 700;
+
+	&.--admin {
+		background: #f7f4ff;
+		border-color: #7b4aff;
+		color: #7b4aff;
+	}
+
+	&.--success {
+		background: #f4fff7;
+		border-color: #4ab866;
+		color: #4ab866;
+	}
+
+	a {
+		text-decoration: underline;
+
+		&:hover {
+			filter: brightness(1.2);
+		}
+	}
 }
 
-.info-badge {
-	// width: 100%;
+.message {
+	@include message;
+}
 
-	// .info-badge-content {
-	float: right;
+.badge {
 	width: fit-content;
 	@include flex('row');
 	align-items: center;
 	border-radius: 8px;
 	background: currentColor;
-	@include fluid-type(11px, 11px);
 
-	.label {
-		padding: 8px 10px;
+	.badge-label {
+		padding: 6px;
 		display: flex;
 		align-items: center;
 		color: white;
@@ -1368,29 +1397,26 @@ a img {
 		line-height: 1;
 		text-transform: uppercase;
 
-		.feather {
-			margin-right: 6px;
+		.feather-icon {
 			width: 15px;
 			height: 15px;
-			stroke-width: 2.5;
+			stroke-width: 3;
 			stroke: white;
 			translate: 0 -0.5px;
 		}
 	}
 
-	.info {
-		padding: 8px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+	.badge-info-button {
+		height: inherit;
+		aspect-ratio: 1;
+		display: grid;
+		place-items: center;
 		background: rgba(255, 255, 255, 0.1);
 		border-radius: 0 8px 8px 0;
 		border-left: 1px solid rgb(255, 255, 255, 0.2);
 
 		svg {
-			width: 16px;
-			height: 16px;
-			stroke-width: 2.5;
+			stroke-width: 3;
 			stroke: white;
 		}
 
@@ -1398,7 +1424,51 @@ a img {
 			background: rgba(255, 255, 255, 0.2);
 		}
 	}
-	// }
+
+	// Size variants
+	&.--size {
+		&-small {
+			height: 30px;
+			@include fluid-type(11px, 12px);
+
+			.badge-label {
+				padding-left: 12px;
+				padding-right: 12px;
+				gap: 6px;
+
+				.feather-icon {
+					width: 13px;
+					height: 13px;
+				}
+			}
+
+			.badge-info-button svg {
+				width: 16px;
+				height: 16px;
+			}
+		}
+
+		&-large {
+			height: 36px;
+			@include fluid-type(12px, 13px);
+
+			.badge-label {
+				padding-left: 14px;
+				padding-right: 14px;
+				gap: 8px;
+
+				.feather-icon {
+					width: 15px;
+					height: 15px;
+				}
+			}
+
+			.badge-info-button svg {
+				width: 16px;
+				height: 16px;
+			}
+		}
+	}
 }
 
 // Tippy toolbox

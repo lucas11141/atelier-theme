@@ -160,16 +160,6 @@ body.single-product {
 			left: unset;
 		}
 
-		.info-badge {
-			margin-right: auto;
-
-			// TODO: Add big size class to main badge
-			.label {
-				@include fluid-type(11px, 12px);
-				padding: 10px 14px;
-			}
-		}
-
 		// Produkttitel
 		.product_title {
 			@include font-gooddog;

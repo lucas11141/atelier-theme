@@ -9,7 +9,7 @@ function atelier_edit_link() {
     if (current_user_can('edit_posts')) {
         global $post;
         $edit_link = get_edit_post_link($post->ID);
-        echo '<div class="admin-edit-link badge --admin" target="_blank">Admin-Ansicht<a href="' . $edit_link . '">Produkt bearbeiten</a></div>';
+        echo '<div class="admin-edit-link message --admin" target="_blank">Admin-Ansicht<a href="' . $edit_link . '">Produkt bearbeiten</a></div>';
     }
 }
 

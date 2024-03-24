@@ -73,28 +73,31 @@ function woocommerce_atelier_product_badge($product_id) {
     // Get product data
     $product = wc_get_product($product_id);
 
+    // check if current page is a produt archive page
+    $isArchive = is_shop() || is_product_category() || is_product_tag();
+
+    // Define badge size depending on the context
+    $badgeSize = $isArchive ? 'small' : null;
+
     // Überspringen, wenn kein Badge vorhanden
     // if (empty($terms)) return;
 
     // NOTE: Badges for product states
     // Sold out
     if (!$product->is_in_stock()) {
-        get_template_part('components/shop/badge', NULL, array('label' => "Ausverkauft", 'class' => '--soldout', 'icon' => 'cart'));
+        get_template_part('components/shop/badge', NULL, array('label' => "Nicht vorrätig", 'color' => '', 'class' => '--soldout', 'icon' => 'x-circle', 'size' => $badgeSize));
         return;
     }
     // On sale
     if ($product->is_on_sale()) {
-        get_template_part('components/shop/badge', NULL, array('label' => "Im Angebot", 'class' => '--onsale', 'icon' => 'tag'));
+        get_template_part('components/shop/badge', NULL, array('label' => "Im Angebot", 'color' => '', 'class' => '--onsale', 'icon' => 'percent', 'size' => $badgeSize));
         return;
     }
     // Featured
     if ($product->is_featured()) {
-        get_template_part('components/shop/badge', NULL, array('label' => "Besonders beliebt", 'class' => '--featured', 'icon' => 'star'));
+        get_template_part('components/shop/badge', NULL, array('label' => "Besonders beliebt", 'color' => '#e11d48', 'class' => '--featured', 'icon' => 'heart', 'size' => $badgeSize));
         return;
     }
-
-    // check if current page is a produt archive page
-    $isArchive = is_shop() || is_product_category() || is_product_tag();
 
     // Custom badge
     $badge = wp_get_post_terms($product_id, 'product_badge')[0];
@@ -107,7 +110,7 @@ function woocommerce_atelier_product_badge($product_id) {
     $badge_in_archive = get_field('badge_in_archive', $product_id);
     if ($isArchive && !$badge_in_archive) return;
 
-    get_template_part('components/shop/badge', NULL, array('label' => $badge_name, 'tooltip' => $badge_tooltip, 'icon' => $badge_icon, 'color' => $badge_color));
+    get_template_part('components/shop/badge', NULL, array('label' => $badge_name, 'tooltip' => $badge_tooltip, 'icon' => $badge_icon, 'color' => $badge_color, 'size' => $badgeSize));
     return;
 }
 

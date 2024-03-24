@@ -312,16 +312,10 @@ $breadcrumb-gap: 10px;
 
 	// NOTE - New woocommerce notices (since woocommerce 8.5)
 	.wc-block-components-notice-banner {
-		@include badge;
+		@include message;
 		margin: 0;
-		// padding: 14px 16px 14px 14px !important;
 		width: 100%;
 		gap: 10px;
-		// background: $lightgray;
-		// border: solid 2px $linegray;
-		// border-radius: 10px;
-		// @include fluid-type(13px, 14px);
-		// font-weight: 600;
 
 		> .wc-block-components-notice-banner__content {
 			.button,
