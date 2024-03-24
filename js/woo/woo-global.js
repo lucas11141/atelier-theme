@@ -11,6 +11,18 @@ export function wooGlobal() {
 		}
 	}
 
+	/*------------------------------------*/
+	/* NOTE - Scroll to end of breadcrumb on mobile of overflowing */
+	/*------------------------------------*/
+	const breadcrumbs = document.querySelectorAll('.woocommerce-breadcrumb');
+	breadcrumbs?.forEach((breadcrumb) => {
+		const breadcrumbWidth = breadcrumb.scrollWidth;
+		const breadcrumbOffsetWidth = breadcrumb.offsetWidth;
+		if (breadcrumbWidth > breadcrumbOffsetWidth) {
+			breadcrumb.scrollLeft = breadcrumbWidth;
+		}
+	});
+
 	const noticeBanners = document.querySelectorAll('.wc-block-components-notice-banner');
 
 	noticeBanners?.forEach((item) => {
