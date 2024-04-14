@@ -1,5 +1,8 @@
 <?php
 function add_custom_api() {
+    // // Set timezone to UTC
+    // date_default_timezone_set('Europe/Berlin');
+
     // wordpress rest api callback function
     function findAllKunstangebote($request) {
         // query all posts of type course, workshop, birthday, event, holiday_workshop
@@ -67,7 +70,7 @@ function add_custom_api() {
                 $weekday = get_field('weekday', 'course_time_' . $course_time_id);
 
                 $time = get_field('starttime', 'course_time_' . $course_time_id);
-                $time = strtotime($time);
+                $time = getUtcTimestamp($time);
 
                 // get all dates by term_id of course_times
                 $args = array(
@@ -104,8 +107,8 @@ function add_custom_api() {
                 return array(
                     'id' => $course_time_id,
                     'weekday' => $weekday,
-                    'time' => $time,
-                    'dates' => $dates
+                    'utcTimestamp' => $time,
+                    'dates' => $dates,
                 );
             }, $course_times);
 
@@ -125,6 +128,9 @@ function add_custom_api() {
                     $date_1 = get_field('date_1', $dateId);
                     $date_1['date'] = strtotime($date_1['date']);
 
+                    // Filter out dates that are in the past
+                    if ($date_1['date'] <= strtotime('today')) return null;
+
                     $date_2 = get_field('date_2', $dateId);
                     $date_2['date'] = strtotime($date_2['date']);
 
@@ -138,6 +144,13 @@ function add_custom_api() {
                         'parts' => array($date_1)
                     );
                 }, $dates);
+
+                // remove all false dates
+                $dates = array_filter($dates, function ($date) {
+                    return $date;
+                });
+                // reset array keys
+                $dates = array_values($dates);
             } else {
                 $dates = [];
             }

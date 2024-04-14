@@ -84,7 +84,7 @@ function create_post_type_atelier() {
 
 function create_post_types_kunstangebote() {
     /* ------------------------------------ */
-    /*  Kurse
+    /* Kurse */
     /* ------------------------------------ */
 
     // Registriere den Post Type Kurse
@@ -113,7 +113,7 @@ function create_post_types_kunstangebote() {
                 'thumbnail'
             ), // Go to Dashboard Custom HTML5 Blank post for supports
             'taxonomies' => array(
-                'course_dates'
+                'course_date'
             ),
             'can_export' => true, // Allows export in Tools > Export
             'show_in_rest' => true,
@@ -155,16 +155,17 @@ function create_post_types_kunstangebote() {
             'supports' => array(
                 'editor'
             ),
-            'taxonimies' => array(
+            'taxonomies' => array(
                 'course_time'
             ),
             // Allows export in Tools > Export
             'can_export' => true,
+            "public" => true,
 
             // disable archive, single and seo indexing
-            "public" => false,
             "has_archive" => false,
             "publicly_queryable" => false,
+
         )
     );
 
@@ -198,7 +199,7 @@ function create_post_types_kunstangebote() {
     }
 
     /* ------------------------------------ */
-    /*  Workshops
+    /* NOTE: Workshops */
     /* ------------------------------------ */
 
     // Registriere den Post Type Workshops
@@ -265,16 +266,17 @@ function create_post_types_kunstangebote() {
             ),
             // Allows export in Tools > Export
             'can_export' => true,
+            "public" => true,
 
             // disable archive, single and seo indexing
-            "public" => false,
             "has_archive" => false,
             "publicly_queryable" => false,
+
         )
     );
 
     /* ------------------------------------ */
-    /*  Geburtstage
+    /* NOTE: Geburtstage */
     /* ------------------------------------ */
 
     // Registriere den Post Type Geburtstage
@@ -321,7 +323,7 @@ function create_post_types_kunstangebote() {
     }
 
     /* ------------------------------------ */
-    /*  Kunstevents
+    /* NOTE: Kunstevents */
     /* ------------------------------------ */
 
     // Registriere den Post Type Kunstevents
@@ -368,7 +370,7 @@ function create_post_types_kunstangebote() {
     }
 
     /* ------------------------------------ */
-    /*  Ferienworkshops
+    /* NOTE: Ferienworkshops */
     /* ------------------------------------ */
 
     // Registriere den Post Type Ferienworkshops
@@ -434,13 +436,12 @@ function create_post_types_kunstangebote() {
             ),
             // Allows export in Tools > Export
             'can_export' => true,
+            "public" => true,
 
             // disable archive and seo indexing
-            "public" => false,
             "has_archive" => false,
             "publicly_queryable" => false,
         )
-
     );
 }
 

@@ -51,6 +51,76 @@ function translateReadableDateToGerman($str) {
     return str_replace($searchVal, $replaceVal, $str);
 }
 
+function getUtcTimestamp($str) {
+    // Aktuelle Zeitzone speichern
+    $aktuelle_zeitzone = date_default_timezone_get();
+
+    // Zeitzone für Berlin festlegen
+    date_default_timezone_set('Europe/Berlin');
+
+    // Eingangszeit aus dem CMS
+    $eingangszeit = $str;
+
+    // Aktuelles Datum und Uhrzeit
+    $jetzt = new DateTime();
+
+    // Aktuelle Zeit in Berlin
+    $berlin_zeit = new DateTime($jetzt->format('Y-m-d') . ' ' . $eingangszeit);
+    $berlin_zeit->setTimezone(new DateTimeZone('Europe/Berlin'));
+
+    // Zeitverschiebung zwischen Berlin und GMT 0 im Winter (MEZ)
+    $winter_zeitverschiebung = 1;
+
+    // Überprüfen, ob die aktuelle Zeit Sommerzeit (MESZ) oder Winterzeit (MEZ) ist
+    $sommerzeit = date('I', $jetzt->getTimestamp());
+
+    if ($sommerzeit == 1) {
+        // Sommerzeit (MESZ)
+        $winter_zeitverschiebung = 2;
+    }
+
+    // Zeitverschiebung anwenden, um die Zeit in GMT 0 umzurechnen
+    // $berlin_zeit->modify("-$winter_zeitverschiebung hours");
+
+    // Zeitzone wieder auf die ursprüngliche Einstellung zurücksetzen
+    date_default_timezone_set($aktuelle_zeitzone);
+
+    // Ausgabe der Zeit in GMT 0
+    return $berlin_zeit->getTimestamp();
+}
+
+function adjustTimezone($str) {
+    // Zeitzone für Berlin festlegen
+    // date_default_timezone_set('Europe/Berlin');
+
+    // Eingangszeit aus dem CMS
+    $eingangszeit = $str;
+
+    // Aktuelles Datum und Uhrzeit
+    $jetzt = new DateTime();
+
+    // Aktuelle Zeit in Berlin
+    $berlin_zeit = new DateTime($jetzt->format('Y-m-d') . ' ' . $eingangszeit);
+    $berlin_zeit->setTimezone(new DateTimeZone('Europe/Berlin'));
+
+    // Zeitverschiebung zwischen Berlin und GMT 0 im Winter (MEZ)
+    $winter_zeitverschiebung = 1;
+
+    // Überprüfen, ob die aktuelle Zeit Sommerzeit (MESZ) oder Winterzeit (MEZ) ist
+    $sommerzeit = date('I', $jetzt->getTimestamp());
+
+    if ($sommerzeit == 1) {
+        // Sommerzeit (MESZ)
+        $winter_zeitverschiebung = 2;
+    }
+
+    // Zeitverschiebung anwenden, um die Zeit in GMT 0 umzurechnen
+    $berlin_zeit->modify("-$winter_zeitverschiebung hours");
+
+    // Ausgabe der Zeit in GMT 0
+    return $berlin_zeit->format('H:i');
+}
+
 function get_paper_structure() {
     $template_directory_uri = get_template_directory_uri();
     return "<img class='paper-structure' src='{$template_directory_uri}/assets/img/elements/paper_structure_500x.jpg' alt=''>";
