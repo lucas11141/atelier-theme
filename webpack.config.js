@@ -8,10 +8,13 @@ module.exports = {
 	// devtool: 'source-map', // Activate Sourcemaps
 	mode: 'production', // Production mode minimizes the output
 	stats: 'minimal', // Minimizes the console output to few line per compilation
-	entry: './js/main.js', // The files to be compiled
+	entry: {
+		main: './js/main.js',
+		'date-overview': './js/blocks/date-overview.ts',
+	},
 	output: {
-		filename: 'main.js', // The output file name
-		path: path.resolve(__dirname, 'atelier_theme/assets/js'), // Output directory
+		filename: '[name].js',
+		path: path.resolve(__dirname, 'atelier_theme/assets/js'),
 	},
 	module: {
 		rules: [
