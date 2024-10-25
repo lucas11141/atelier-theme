@@ -1,6 +1,5 @@
 <?php
 $hero_banner_dekoration = get_field('hero_banner_dekoration', 'option');
-$hero_banner_dekoration = 'easter';
 if ($hero_banner_dekoration === 'none') return;
 ?>
 
