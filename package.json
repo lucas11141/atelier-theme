@@ -24,7 +24,7 @@
 		"esbuild-loader": "^4.0.3",
 		"eslint": "^8.57.0",
 		"eslint-webpack-plugin": "^4.0.1",
-		"prettier": "^3.0.3",
+		"prettier": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.5.4",
 		"sass": "^1.71.1",
 		"sass-loader": "^14.1.1",
