@@ -413,15 +413,15 @@
 				position: absolute;
 				top: calc(100% + 18px);
 				left: 50%;
-				transform: translateX(-50%);
-				opacity: 50%;
+				translate: -50% 0;
+				color: $warning;
 				cursor: pointer;
-				transition: $transition;
 
 				.feather {
 					width: 13px;
 					min-width: 13px;
-					stroke: $main;
+					// stroke: $main;
+					stroke: currentColor;
 				}
 
 				span {
@@ -435,6 +435,17 @@
 				&.--hidden {
 					opacity: 0;
 					pointer-events: none;
+				}
+
+				&:hover {
+					color: $dark-red;
+				}
+
+				// Transition: quick on click, slow when user leaves
+				transition: 600ms ease all;
+				&:active {
+					scale: 0.9;
+					transition-duration: 200ms;
 				}
 			}
 		}
