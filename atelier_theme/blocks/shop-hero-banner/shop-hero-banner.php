@@ -53,7 +53,9 @@ $hero_banner_dekoration = get_field('hero_banner_dekoration', 'options');
                                     <?php endif; ?>
                                     <h5><?= $uberschrift_h5 ?></h5>
                                     <p><?= $beschreibung ?></p>
-                                    <a class="button" href="<?= $button['url']; ?>"><span><?= $button['title']; ?></span></a>
+                                    <div class="button-container">
+                                        <a class="button" href="<?= $button['url']; ?>"><span><?= $button['title']; ?></span></a>
+                                    </div>
                                 </div>
 
                             <?php endforeach; ?>
