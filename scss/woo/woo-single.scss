@@ -163,7 +163,10 @@ body.single-product {
 		// Produkttitel
 		.product_title {
 			@include font-gooddog;
-			padding: 20px 0 0;
+			padding: 0;
+		}
+		.badge + .product_title {
+			padding-top: 20px;
 		}
 
 		// Kurzbeschreibung
@@ -594,6 +597,8 @@ body.single-product {
 		}
 
 		.product-gallery {
+			border-bottom: solid 1px $linegray;
+
 			.main-slider {
 				border: none;
 				border-radius: 0;
