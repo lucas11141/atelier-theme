@@ -74,7 +74,9 @@ function atelier_custom_field_quote() {
     if ($spruch_aktivieren && $spruch) : ?>
         <div class="product__quote">
             <h4><?= $spruch_uberschrift ?></h4>
+            <div>
             <blockquote><?= $spruch ?></blockquote>
+            </div>
         </div>
     <?php endif;
 }
