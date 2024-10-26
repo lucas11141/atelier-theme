@@ -42,7 +42,7 @@ body.post-type-archive-product {
 			.category__header__thumbnail {
 				width: 350px;
 				min-width: 350px;
-				min-height: 350px;
+				min-height: 250px;
 				position: relative;
 
 				img {
@@ -63,7 +63,7 @@ body.post-type-archive-product {
 				}
 
 				.page-title {
-					padding: 10px 0 0;
+					padding: 16px 0 0;
 					@include font-gooddog;
 					-webkit-text-stroke-color: white;
 					line-break: anywhere;
@@ -80,25 +80,21 @@ body.post-type-archive-product {
 					}
 
 					.show-more {
-						display: inline-block;
-						margin-top: 8px;
-						color: $accent;
-						cursor: pointer;
+						// display: inline-block;
+						// margin-top: 8px;
+						// color: $accent;
+						// cursor: pointer;
+						display: none;
 					}
 
-					&:not(.--show-full) {
-						p {
-							display: -webkit-box;
-							-webkit-line-clamp: 2;
-							-webkit-box-orient: vertical;
-							overflow: hidden;
-						}
-					}
-				}
-
-				.shop__subcategories {
-					margin-top: 30px;
-					padding: 0;
+					// &:not(.--show-full) {
+					// 	p {
+					// 		display: -webkit-box;
+					// 		-webkit-line-clamp: 2;
+					// 		-webkit-box-orient: vertical;
+					// 		overflow: hidden;
+					// 	}
+					// }
 				}
 			}
 		}
@@ -113,8 +109,8 @@ body.post-type-archive-product {
 			}
 		}
 
-		@media only screen and (max-width: $desktop) {
-			.shop-hero-banner__content {
+		@include bp-lower($desktop) {
+			.content {
 				gap: 50px;
 
 				.category__header__thumbnail {
@@ -124,27 +120,17 @@ body.post-type-archive-product {
 				}
 			}
 		}
-		@media only screen and (max-width: $tablet) {
+
+		@include bp-lower($tablet) {
 			padding-bottom: 50px !important;
 
-			.shop-hero-banner__content {
+			.content {
 				flex-direction: column;
 				align-items: flex-start;
 				gap: 40px;
 
 				.category__header__thumbnail {
 					display: none;
-				}
-
-				.category__header__content {
-					.shop__subcategories {
-						margin-top: 25px;
-						flex-direction: row;
-
-						a {
-							width: fit-content;
-						}
-					}
 				}
 
 				.category__header__thumbnail ~ .category__header__content {
@@ -174,6 +160,15 @@ body.post-type-archive-product {
 
 		.woocommerce-notices-wrapper {
 			order: -1;
+		}
+
+		.shop__subcategories {
+			order: -2;
+			margin-bottom: 32px;
+
+			p {
+				padding: 0 0 16px;
+			}
 		}
 	}
 

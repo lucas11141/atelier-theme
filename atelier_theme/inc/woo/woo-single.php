@@ -75,7 +75,7 @@ function atelier_custom_field_quote() {
         <div class="product__quote">
             <h4><?= $spruch_uberschrift ?></h4>
             <div>
-            <blockquote><?= $spruch ?></blockquote>
+                <blockquote><?= $spruch ?></blockquote>
             </div>
         </div>
     <?php endif;
@@ -324,17 +324,24 @@ function atelier_custom_field_accordeon() { ?>
                 'parent' => $parentid
             );
             $terms = get_terms('product_cat', $args);
-            if ($terms) {
-                echo '<p class="shop__button__list shop__subcategories">';
-                foreach ($terms as $term) { ?>
-            <a class="button  --color-gray   <?php echo $term->slug; ?>" href="<?php echo esc_url(get_term_link($term)); ?>">
-                <span><?php echo $term->name; ?></span>
-            </a>
-        <?php }
-                echo '</p>';
-            }
+            if ($terms) : ?>
+        <div class="shop__button__list shop__subcategories">
+            <p class="h4">Unterkategorien</p>
+            <ul>
+                <?php foreach ($terms as $term) : ?>
+                    <li>
+                        <a class="button  --color-gray   <?php echo $term->slug; ?>" href="<?php echo esc_url(get_term_link($term)); ?>">
+                            <span><?php echo $term->name; ?></span>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php endif;
         }
-        add_action('woocommerce_archive_description', 'atelier_product_subcategories', 20);
+        // add_action('woocommerce_archive_description', 'atelier_product_subcategories', 20);
+        add_action('woocommerce_before_shop_loop', 'atelier_product_subcategories', 100);
+        // add_action('woocommerce_shop_loop', 'atelier_product_subcategories', 20);
 
 
 

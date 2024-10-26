@@ -45,7 +45,6 @@ do_action('woocommerce_before_account_orders', $has_orders); ?>
 				$product   = wc_get_product($product_id);
 				$image_id  = $product->get_image_id();
 				$image_url = wp_get_attachment_image_url($image_id, 'woocommerce_miniature');
-				d($image_url);
 				$product_name = $product->get_name();
 
 				$shipping = $data['shipping'];

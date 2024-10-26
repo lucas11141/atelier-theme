@@ -161,21 +161,61 @@ class DateOverview {
 	async fetchDates(year: number, month: number) {
 		const thisClone = this;
 
+		// Initialize a cache object if it doesn't exist
+		if (!thisClone.dateCache) {
+			thisClone.dateCache = {};
+		}
+
+		// Create a unique cache key based on year and month
+		const cacheKey = `${year}-${month}`;
+
+		// Check if the data is already in the cache
+		if (thisClone.dateCache[cacheKey]) {
+			const cachedDates = thisClone.dateCache[cacheKey];
+
+			// Use the cached data
+			thisClone.dates = cachedDates;
+
+			// Fill calendar and list with cached data
+			thisClone.calendar.fillGridData(cachedDates);
+			thisClone.list.fillListData(cachedDates);
+			thisClone.selector.fillSelectorData(cachedDates);
+
+			// Display month
+			thisClone.calendar.showMonth(year, month);
+			thisClone.list.showMonth(year, month);
+
+			thisClone.fetchedOnce = true;
+
+			// Set filter by url params
+			thisClone.setFilterByUrlParams();
+
+			// get all elements with class .--sceleton and remove the class
+			document.querySelectorAll('.--sceleton').forEach((element) => {
+				element.classList.remove('--sceleton');
+			});
+
+			return;
+		}
+
 		await $.ajax({
 			// @ts-ignore
 			url: ajaxurl,
 			type: 'POST',
 			data: {
-				action: 'date_overview_get_product_dates', // Dies sollte mit dem in add_action definierten Haken übereinstimmen
+				action: 'date_overview_get_product_dates',
 				year: year,
 				month: month,
 			},
 			success: function (response) {
-				thisClone.dates = response;
-
 				const dates: DateResponse[] = response.data;
 
-				// Fill calendar and list with data
+				// Cache the fetched data
+				thisClone.dateCache[cacheKey] = dates;
+
+				thisClone.dates = dates;
+
+				// Fill calendar and list with fetched data
 				thisClone.calendar.fillGridData(dates);
 				thisClone.list.fillListData(dates);
 				thisClone.selector.fillSelectorData(dates);
@@ -190,8 +230,7 @@ class DateOverview {
 				thisClone.setFilterByUrlParams();
 
 				// get all elements with class .--sceleton and remove the class
-				const skeletonElements = document.querySelectorAll('.--sceleton');
-				skeletonElements.forEach((element) => {
+				document.querySelectorAll('.--sceleton').forEach((element) => {
 					element.classList.remove('--sceleton');
 				});
 			},
@@ -957,7 +996,9 @@ class DateOverviewList {
 		if (!title) throw new Error('No title found');
 		// add formatted day from this.currentMonth using Intl.DateTimeFormat
 		title.href = item.product.url;
-		title.innerHTML = item.product.title;
+		let titleString = item.product.title;
+		if (item.product.courseTimeNumber) titleString += ` ${item.product.courseTimeNumber}`;
+		title.innerHTML = titleString;
 
 		// NOTE - Time
 		const time = element.querySelector('[template-time]') as HTMLElement;

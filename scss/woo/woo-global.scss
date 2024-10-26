@@ -575,14 +575,15 @@ $breadcrumb-gap: 10px;
 // TODO: Remove this if not needed
 // Buttons List
 .shop__button__list {
-	@include flex('row');
-	justify-content: flex-start;
-	flex-wrap: wrap;
-	column-gap: 15px;
-	row-gap: 12px;
+	ul {
+		@include flex('row');
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
 
 	.button {
-		padding: 12px 20px;
+		padding: 10px 20px;
 
 		span {
 			@include fluid-type(12px, 14px);
@@ -592,8 +593,10 @@ $breadcrumb-gap: 10px;
 	}
 
 	@media only screen and (max-width: $tablet) {
-		column-gap: 10px;
-		row-gap: 10px;
+		ul {
+			column-gap: 10px;
+			row-gap: 10px;
+		}
 
 		.button {
 			padding: 11px 16px;

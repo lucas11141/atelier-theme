@@ -44,9 +44,6 @@ do_action('woocommerce_before_main_content');
 	<header class="shop-hero-banner shop-hero-banner--archive show-header-on-offset">
 		<?php get_template_part('components/header-bar', '', array('type' => 'shop', 'color' => 'white', 'drop' => false, 'hero' => true)); ?>
 
-		<div class="inner">
-			<?php woocommerce_breadcrumb(); ?>
-		</div>
 
 		<div class="content">
 
@@ -57,6 +54,8 @@ do_action('woocommerce_before_main_content');
 			<?php endif; ?>
 
 			<div class="category__header__content">
+
+				<?php woocommerce_breadcrumb(); ?>
 
 				<?php if (apply_filters('woocommerce_show_page_title', true)) : ?>
 					<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
